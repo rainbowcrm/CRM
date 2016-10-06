@@ -1,0 +1,55 @@
+package com.rainbow.crm.common.finitevalue;
+
+public class FiniteValue {
+	String type ;
+	String  code;
+	String description;
+	boolean isDefault ;
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public boolean isDefault() {
+		return isDefault;
+	}
+	public void setDefault(boolean isDefault) {
+		this.isDefault = isDefault;
+	}
+	public FiniteValue(String type, String code, String description,
+			boolean isDefault) {
+		super();
+		this.type = type;
+		this.code = code;
+		this.description = description;
+		this.isDefault = isDefault;
+	}
+	public FiniteValue() {
+		super();
+	}
+	
+	@Override
+	public String toString() {
+		return code;
+	}
+	
+	public FiniteValue(String code) {
+		this.code = code;
+	}
+	
+	
+
+}

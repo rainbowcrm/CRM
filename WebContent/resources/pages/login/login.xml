@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Page id = "login"  Object = "com.rainbow.crm.login.model.Login" title ="Login | Rainbow CRM"
+Controller = "com.rainbow.crm.login.controller.LoginController">
+<Template type= "General"  name = "loginTemplate"></Template>
+<Forwards>
+<Forward key ="REFRESH">rdscontroller?page=login</Forward>
+</Forwards>
+<Elements>
+<UIForm  Id ="genCC" method = "POST">
+<Section type ="central">
+<Element type = "UIDiv" style = "blueribbon">
+<Element type = "UIErrorList" style = "errorStyle"> </Element>
+<Element type = "UITable" rows = "2" cols = "1">
+<Element type = "UITableRow">
+<Element type ="UITableCol">  
+	<Element label = "Username"  type = "UIText" Id = "txtUsername" property = "Username" />
+</Element>
+</Element>
+<Element type = "UITableRow">
+<Element type ="UITableCol">  
+	<Element label = "Password"  type = "UIPassword" Id = "txtPassword"  property = "Password" />
+</Element>
+</Element>
+<Element type = "UITableRow">
+<Element type ="UITableCol">
+  <Element caption = "Sign In"  type = "UIButton" Id = "btSubmit"   style="button" fixedAction ="FixedAction.ACTION_PLAINSUBMIT"  />
+   <Element caption = "Cancel"  type = "UIButton" Id = "btCancel"   style="button"  fixedAction ="FixedAction.ACTION_PAGEFORWARD" fixedActionParam =  "REFRESH"  />
+</Element>
+</Element>
+<Element type = "UITableRow">
+<Element type ="UITableCol">
+  <Element  type = "UILabel" value = "Forgot Password?" style="link" />
+ </Element>
+</Element>
+</Element>
+</Element>
+</Section>
+<Section type ="copyRightSection"/>
+
+</UIForm>
+</Elements>
+</Page>

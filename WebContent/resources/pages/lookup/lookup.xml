@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Page id = "lookup" title ="Lookup Values | Rainbow CRM"  >
+<Template type= "lookup"  name = "LookupTemplate"></Template>
+<SearchFieldId>txtSearch</SearchFieldId>
+<listFieldId>lstOptions</listFieldId>
+<Elements>
+<UIForm Id ="lookupFrm" method = "POST" >
+<Section type ="querySection">
+<Element label = "" type = "UIText" Id = "txtSearch" property="x"/>
+<Element caption = "Search"  type = "UIButton"    Id = "btnSearch"  style="button" fixedAction ="FixedAction.ACTION_PLAINSUBMIT"  />
+
+</Section>
+<Section type ="ListSection">
+<Element label = "" type = "UINote" value="&lt;br&gt;" />
+<Element label = "" type = "UIList" Id = "lstOptions" size = "10" property="y" style="lookupMultiSelect"/>
+<Element label = "" type = "UINote" value="&lt;br&gt;" />
+<Element label = "" type = "UINote" value="&lt;br&gt;" />
+</Section>
+<Section type ="summarySection">
+ <Element caption = "Close"  type = "UIButton" Id = "btfilterApply"  style="button"  fixedAction ="FixedAction.CLOSELOOKUPDIALOG"   />
+<Element caption = "Cancel"  type = "UIButton" Id = "btfilterClear"    style="button" fixedAction ="FixedAction.CANCELDIALOG"  />
+</Section>
+</UIForm>
+</Elements>
+</Page>

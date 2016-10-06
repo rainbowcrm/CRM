@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans  
+    xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   
+    xmlns:p="http://www.springframework.org/schema/p" 
+    xmlns:jms="http://www.springframework.org/schema/jms"  
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans  
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/jms
+        http://www.springframework.org/schema/jms/spring-jms.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">  
+  
+   <tx:annotation-driven transaction-manager="transactionManager" />
+   
+   <bean id="destination" class="org.apache.activemq.command.ActiveMQQueue">
+   			<constructor-arg value="messageReader" />
+   </bean>
+   
+   <jms:listener-container connection-factory="connectionFactory">
+		<jms:listener destination="messageReader" ref="messageReceiver" />
+	</jms:listener-container>
+	
+   <bean id="messageReceiver" class="com.rainbow.crm.common.messaging.CRMMessageReceiver">
+   </bean>
+     
+    <bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL" value="tcp://localhost:61616"/>
+    </bean>
+    
+      <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="defaultDestination" ref="destination"/>
+    </bean>
+    
+    <bean id="ICategoryService" class="com.rainbow.crm.category.service.CategoryService">
+    </bean>
+    <bean id="IDataLoaderService" class="com.rainbow.framework.setup.service.DataLoaderService">
+    </bean>
+    
+    <bean id="IItemService" class="com.rainbow.crm.item.service.ItemService">
+    </bean>
+    <bean id="IInventoryService" class="com.rainbow.crm.inventory.service.InventoryService">
+    </bean>  
+    <bean id="IDivisionService" class="com.rainbow.crm.division.service.DivisionService">
+    </bean>  
+    <bean id="ICompanyService" class="com.rainbow.crm.company.service.CompanyService">
+    </bean>
+    <bean id="IProductService" class="com.rainbow.crm.product.service.ProductService">
+    </bean>  
+    <bean id="IVendorService" class="com.rainbow.crm.vendor.service.VendorService">
+    </bean>
+    <bean id="IUserService" class="com.rainbow.crm.user.service.UserService">
+    </bean>
+    <bean id="ICustomerService" class="com.rainbow.crm.customer.service.CustomerService">
+    </bean>
+    <bean id="IPurchaseService" class="com.rainbow.crm.purchase.service.PurchaseService">
+    </bean>
+    <bean id="ISalesPeriodService" class="com.rainbow.crm.salesperiod.service.SalesPeriodService">
+    </bean>
+    <bean id="ISalesService" class="com.rainbow.crm.sales.service.SalesService">
+    </bean>
+    <bean id="IWishListService" class="com.rainbow.crm.wishlist.service.WishListService">
+    </bean>
+    <bean id="ISalesLeadService" class="com.rainbow.crm.saleslead.service.SalesLeadService">
+    </bean>
+  
+   <bean id="CategoryDAO" class="com.rainbow.crm.category.dao.CategoryDAO">
+    <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>   
+    
+    <bean id="InventoryDAO" class="com.rainbow.crm.inventory.dao.InventoryDAO">
+    <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean> 
+  
+   <bean id="ProductDAO" class="com.rainbow.crm.product.dao.ProductDAO">
+    <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>  
+    
+     <bean id="ItemDAO" class="com.rainbow.crm.item.dao.ItemDAO">
+    <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>    
+  
+   <bean id="VendorDAO" class="com.rainbow.crm.vendor.dao.VendorDAO">
+    <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+   <bean id="CompanyDAO" class="com.rainbow.crm.company.dao.CompanyDAO">
+    <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean id="CustomerDAO" class="com.rainbow.crm.customer.dao.CustomerDAO">
+    <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+     <bean id="PurchaseDAO" class="com.rainbow.crm.purchase.dao.PurchaseDAO">
+    <property name="sessionFactory" ref="sessionFactory"></property>  
+    </bean>
+     <bean id="SalesPeriodDAO" class="com.rainbow.crm.salesperiod.dao.SalesPeriodDAO">
+    <property name="sessionFactory" ref="sessionFactory"></property>  
+    </bean>
+     <bean id="SalesDAO" class="com.rainbow.crm.sales.dao.SalesDAO">
+    <property name="sessionFactory" ref="sessionFactory"></property>  
+    </bean> 
+   <bean id="WishListDAO" class="com.rainbow.crm.wishlist.dao.WishListDAO">
+    <property name="sessionFactory" ref="sessionFactory"></property>  
+    </bean> 
+  	<bean id="UserDAO" class="com.rainbow.crm.user.dao.UserDAO">
+    <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean id="SalesLeadDAO" class="com.rainbow.crm.saleslead.dao.SalesLeadDAO">
+    <property name="sessionFactory" ref="sessionFactory"></property>  
+    </bean>   
+    
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">  
+        <property name="driverClassName"  value="com.mysql.jdbc.Driver"></property>  
+        <property name="url" value="jdbc:mysql://localhost:3306/CRMSAAS"></property>  
+        <property name="username" value="root"></property>  
+        <property name="password" value="password"></property>  
+       <!--   <property name="defaultAutoCommit" value="false" />  -->
+    </bean>  
+      
+    <bean id="sessionFactory"  class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">  
+        <property name="dataSource" ref="dataSource"></property>  
+          
+        <property name="mappingResources">  
+        <list>  
+        <value>com/rainbow/crm/common/finitevalue/FiniteValue.hbm.xml</value>
+        <value>com/rainbow/crm/user/model/User.hbm.xml</value>
+        <value>com/rainbow/crm/company/model/Company.hbm.xml</value>  
+        <value>com/rainbow/crm/division/model/Division.hbm.xml</value>
+        <value>com/rainbow/crm/category/model/Category.hbm.xml</value>
+        <value>com/rainbow/crm/inventory/model/Inventory.hbm.xml</value>
+        <value>com/rainbow/crm/product/model/Product.hbm.xml</value>
+        <value>com/rainbow/crm/uom/model/UOM.hbm.xml</value>
+        <value>com/rainbow/crm/item/model/Item.hbm.xml</value>
+        <value>com/rainbow/crm/vendor/model/Vendor.hbm.xml</value>
+        <value>com/rainbow/crm/customer/model/Customer.hbm.xml</value>
+        <value>com/rainbow/crm/purchase/model/Purchase.hbm.xml</value>
+        <value>com/rainbow/crm/purchase/model/PurchaseLine.hbm.xml</value>
+        <value>com/rainbow/crm/salesperiod/model/SalesPeriod.hbm.xml</value>
+        <value>com/rainbow/crm/salesperiod/model/SalesPeriodLine.hbm.xml</value>
+        <value>com/rainbow/crm/sales/model/Sales.hbm.xml</value>
+        <value>com/rainbow/crm/sales/model/SalesLine.hbm.xml</value>  
+        <value>com/rainbow/crm/wishlist/model/WishList.hbm.xml</value>
+        <value>com/rainbow/crm/wishlist/model/WishListLine.hbm.xml</value>
+        <value>com/rainbow/crm/saleslead/model/SalesLead.hbm.xml</value>
+        <value>com/rainbow/crm/saleslead/model/SalesLeadLine.hbm.xml</value>  
+        </list>  
+        </property>  
+        
+        <property name="hibernateProperties">  
+            <props>  
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>  
+                <prop key="hibernate.hbm2ddl.auto">update</prop>  
+                <prop key="hibernate.show_sql">true</prop>
+            </props>  
+        </property>  
+    </bean>  
+      
+    <bean id="template" class="org.springframework.orm.hibernate5.HibernateTemplate">  
+    <property name="sessionFactory" ref="sessionFactory"></property>  
+    </bean>  
+   
+    <bean id="transactionInterceptor"
+       class="org.springframework.transaction.interceptor.TransactionInterceptor">
+	<property name="transactionManager" ref="transactionManager" />
+	<property name="transactionAttributes">
+	   <props>
+		<prop key="save">PROPAGATION_REQUIRED</prop>
+	   </props>
+	</property>
+    </bean>
+	
+	
+    <bean id="transactionManager"
+    class="org.springframework.orm.hibernate5.HibernateTransactionManager" 
+    p:sessionFactory-ref="sessionFactory">
+    
+  </bean>
+      
+    </beans>  

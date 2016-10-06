@@ -1,0 +1,22 @@
+package com.rainbow.crm.common;
+
+public class CRMConstants {
+
+	public final static String FV_INDUSTRY_TYPE = "INDUSTRY";
+	public final static String FV_DIVISION_TYPE = "DIVTYPE";
+	public final static String FV_BUSINESS_TYPE = "BUSINESS";
+	public final static String FV_ITEMCLASS_TYPE = "ITEMCLASS";
+	public final static String FV_ROLE_TYPE = "ROLE";
+	public final static String FV_UOM_TYPE = "UOMTYPE";
+	public final static String FV_WISHLIST_REASONTYPE = "WISHREASON";
+	public final static String FV_SALESCYCLE_STATUS = "SLCYCSTS";
+	
+	public final static class SALESCYCLE_STATUS {
+		public final static String INITIATED = "INIT";
+		public final static String ASSIGNED = "ASSGND";
+		public final static String IN_PROGRESS = "INPRG";
+		public final static String NEGOTIATING = "NGTD";
+		public final static String CLOSED = "CLSD";
+		public final static String FAILED = "FLD";
+	}
+}

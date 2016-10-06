@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="30" packages="com.rainbow.crm.logger">
+  <Appenders>
+ 
+    <File name="logFile" fileName="C:/CRM/WS/WebContent/logs/CRM.log">
+	<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+    </File>
+    
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+    </Console>
+   
+  </Appenders>
+
+  <Loggers>
+    <Logger name="com.rainbow" level="debug" additivity="false">
+	    <AppenderRef ref="logFile" />
+	</Logger>
+	<Logger name="org" level="error" additivity="false">
+	    <AppenderRef ref="logFile" />
+	</Logger>
+	<Logger name="com.techtrade" level="error" additivity="false">
+	    <AppenderRef ref="logFile" />
+	</Logger>
+	<Logger name="org" level="debug" additivity="false">
+	    <AppenderRef ref="logFile" />
+	</Logger>
+    <Root level="error" additivity="false">
+      <AppenderRef ref="logFile"/>
+    </Root>
+ 
+  </Loggers>
+</Configuration>

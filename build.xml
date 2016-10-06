@@ -1,0 +1,51 @@
+<project name="RainbowCRM" default="compile" basedir=".">
+
+ <property name="src" location="src"/>
+ <property name="srclib" location="lib"/>
+  <property name="build" location="./WebContent/WEB-INF/classes"/>
+  <property name="destlib" location="./WebContent/WEB-INF/lib"/>
+  <property name="srcconfig" location="src"/>
+  <property name="destconfig" location="./WebContent/WEB-INF/classes"/>
+  <property name="dist" location="dist"/>
+
+  
+
+	<path id="master-classpath">
+	<fileset dir="./lib">
+    <include name="*.jar"/>
+	</fileset>
+	</path>
+	
+
+ <target name="clean" 
+        description="cleean the classes and libs">
+		<delete dir="${build}"/>
+		<delete dir="${destlib}"/>
+		<mkdir dir="${build}"/>
+		<mkdir dir="${destlib}"/>
+ </target>
+
+   <target name="compile" 
+        description="compile the source">
+    <!-- Compile the java code from ${src} into ${build} -->
+    <javac srcdir="${src}" destdir="${build}"  debug="true" >
+	<classpath refid="master-classpath"/>
+	</javac>
+	<copy todir="${destlib}">
+    <fileset dir="${srclib}" excludes="**/*.java"/>
+    </copy>
+	<copy todir="${destlib}">
+    <fileset dir="${srclib}" excludes="**/*.java"/>
+    </copy>
+	<copy todir="${destconfig}">
+    <fileset dir="${srcconfig}" excludes="**/*.java"/>
+    </copy>
+  </target>
+
+
+  
+
+
+  
+
+</project>

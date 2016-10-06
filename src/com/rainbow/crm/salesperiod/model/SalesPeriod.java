@@ -1,0 +1,94 @@
+package com.rainbow.crm.salesperiod.model;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+
+import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
+import com.rainbow.crm.division.model.Division;
+import com.rainbow.crm.vendor.model.Vendor;
+import com.techtrade.rads.framework.annotations.RadsPropertySet;
+
+public class SalesPeriod extends CRMBusinessModelObject{
+
+	Division division;
+	String period;
+	String description;
+	Date fromDate ;
+	Date toDate ;
+	double additionalTarget;
+	double totalTarget;
+	boolean voided;
+	Set<SalesPeriodLine> salesPeriodLines;
+	
+	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
+	public Division getDivision() {
+		return division;
+	}
+	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
+	public void setDivision(Division division) {
+		this.division = division;
+	}
+	
+	@RadsPropertySet(isBK=true)
+	public String getPeriod() {
+		return period;
+	}
+	
+	@RadsPropertySet(isBK=true)
+	public void setPeriod(String period) {
+		this.period = period;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public Date getFromDate() {
+		return fromDate;
+	}
+	public void setFromDate(Date fromDate) {
+		this.fromDate = fromDate;
+	}
+	public Date getToDate() {
+		return toDate;
+	}
+	public void setToDate(Date toDate) {
+		this.toDate = toDate;
+	}
+	public double getTotalTarget() {
+		return totalTarget;
+	}
+	public void setTotalTarget(double totalTarget) {
+		this.totalTarget = totalTarget;
+	}
+	public boolean isVoided() {
+		return voided;
+	}
+	public void setVoided(boolean voided) {
+		this.voided = voided;
+	}
+	public Set<SalesPeriodLine> getSalesPeriodLines() {
+		return salesPeriodLines;
+	}
+	public void setSalesPeriodLines(Set<SalesPeriodLine> salesPeriodLines) {
+		this.salesPeriodLines = salesPeriodLines;
+	}
+	public void addSalesPeriodLine(SalesPeriodLine salesPeriodLine) {
+		if (salesPeriodLines == null )
+			salesPeriodLines = new LinkedHashSet <SalesPeriodLine> ();
+		this.salesPeriodLines.add(salesPeriodLine);
+	}
+	public double getAdditionalTarget() {
+		return additionalTarget;
+	}
+	public void setAdditionalTarget(double additionalTarget) {
+		this.additionalTarget = additionalTarget;
+	}
+	
+		
+}
