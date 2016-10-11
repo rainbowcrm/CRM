@@ -55,6 +55,8 @@
     </bean>
     <bean id="ICustomerService" class="com.rainbow.crm.customer.service.CustomerService">
     </bean>
+    <bean id="IContactService" class="com.rainbow.crm.contact.service.ContactService">
+    </bean>
     <bean id="IPurchaseService" class="com.rainbow.crm.purchase.service.PurchaseService">
     </bean>
     <bean id="ISalesPeriodService" class="com.rainbow.crm.salesperiod.service.SalesPeriodService">
@@ -89,6 +91,9 @@
     <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
     <bean id="CustomerDAO" class="com.rainbow.crm.customer.dao.CustomerDAO">
+    <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean id="ContactDAO" class="com.rainbow.crm.contact.dao.ContactDAO">
     <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
      <bean id="PurchaseDAO" class="com.rainbow.crm.purchase.dao.PurchaseDAO">
@@ -134,6 +139,7 @@
         <value>com/rainbow/crm/item/model/Item.hbm.xml</value>
         <value>com/rainbow/crm/vendor/model/Vendor.hbm.xml</value>
         <value>com/rainbow/crm/customer/model/Customer.hbm.xml</value>
+        <value>com/rainbow/crm/contact/model/Contact.hbm.xml</value>
         <value>com/rainbow/crm/purchase/model/Purchase.hbm.xml</value>
         <value>com/rainbow/crm/purchase/model/PurchaseLine.hbm.xml</value>
         <value>com/rainbow/crm/salesperiod/model/SalesPeriod.hbm.xml</value>

@@ -114,6 +114,7 @@ public  abstract class HibernateDAO  extends ORMDAO{
     		configuration.addClass(WishListLine.class).addResource("com/rainbow/crm/wishlist/model/WishListLine.hbm.xml");
     		configuration.addClass(Sales.class).addResource("com/rainbow/crm/saleslead/model/SalesLead.hbm.xml");
     		configuration.addClass(SalesLine.class).addResource("com/rainbow/crm/saleslead/model/SalesLeadLine.hbm.xml");
+    		configuration.addClass(Customer.class).addResource("com/rainbow/crm/contact/model/Contact.hbm.xml");
     		sessionFactory = configuration.configure().buildSessionFactory();
     		
     		//sessionFactory.getAllClassMetadata().put(key, value)

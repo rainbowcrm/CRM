@@ -1,6 +1,8 @@
 package com.rainbow.crm.common.finitevalue;
 
-public class FiniteValue {
+import com.techtrade.rads.framework.model.abstracts.ModelObject;
+
+public class FiniteValue extends ModelObject{
 	String type ;
 	String  code;
 	String description;

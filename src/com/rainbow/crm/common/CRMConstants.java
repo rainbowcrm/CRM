@@ -10,6 +10,7 @@ public class CRMConstants {
 	public final static String FV_UOM_TYPE = "UOMTYPE";
 	public final static String FV_WISHLIST_REASONTYPE = "WISHREASON";
 	public final static String FV_SALESCYCLE_STATUS = "SLCYCSTS";
+	public final static String FV_CONTACT_TYPE = "CONTTYPE";
 	
 	public final static class SALESCYCLE_STATUS {
 		public final static String INITIATED = "INIT";
