@@ -11,6 +11,11 @@ public class CRMConstants {
 	public final static String FV_WISHLIST_REASONTYPE = "WISHREASON";
 	public final static String FV_SALESCYCLE_STATUS = "SLCYCSTS";
 	public final static String FV_CONTACT_TYPE = "CONTTYPE";
+	public final static String FV_COMMUNICATION_MODE = "COMMMODE";
+	public final static String FV_CONFIDENCE_LEVEL = "CONFLEVEL";
+	public final static String FV_FOLLOWUP_RESULT = "FLPRESULT";
+	public final static String FV_SUCCESS_REASON = "SUCCREAS";
+	public final static String FV_FAILURE_REASON = "FAILREAS";
 	
 	public final static class SALESCYCLE_STATUS {
 		public final static String INITIATED = "INIT";
