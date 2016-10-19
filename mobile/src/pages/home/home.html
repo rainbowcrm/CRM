@@ -1,0 +1,42 @@
+<!--
+  Generated template for the Home page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+    <ion-title>
+      Primus Solutions
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-menu [content]="mycontent">
+  <ion-content>
+    <ion-toolbar>
+      <ion-title>{{menuTitle}}</ion-title>
+    </ion-toolbar>
+    <ion-list *ngIf="isRoot">
+     <ion-item detail-push *ngFor="let menu of rootMenus; let i = index" (click)="displaySubmenu(i, menu)">
+       {{menu}}
+     </ion-item>
+    </ion-list>
+    <ion-list *ngIf="!isRoot">
+      <ion-item (click)="displayMainmenu(i, menu)" class="menu-back">
+       Back
+     </ion-item>
+     <ion-item *ngFor="let menu of submenuList; let i = index" (click)="navigateToPage(i, menu)">
+       {{menu.label}}
+     </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-content padding #mycontent>
+  
+</ion-content>

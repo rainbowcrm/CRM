@@ -1,0 +1,25 @@
+ps-customer-list {
+   .card-md ion-card-header {
+    background: color($colors, secondary);
+    padding: 10px;
+    font-weight: 600;
+    color: color($colors, light);
+    ion-icon{
+        padding-right: 10px;
+    }
+    .align-right{
+        float: right;
+    }
+  }
+
+  .card-md ion-card-header.deleted-customer{
+      background: color($colors, danger); 
+  }
+
+  .card-md ion-card-header + ion-card-content{
+        padding-top: 13px;
+    }
+
+  
+  
+}

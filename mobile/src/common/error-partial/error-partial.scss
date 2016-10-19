@@ -1,0 +1,12 @@
+ps-error {
+    .error{
+        color:color($colors, danger)
+    }
+    .warn{
+        color:color($colors, warn)
+    }
+    .info{
+        color:color($colors, favorite)
+    }
+
+}
