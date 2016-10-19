@@ -9,4 +9,3 @@ Project setup<br>
 5. run "npm install", this will copy all the dependency to node_modules folder<br>
 6. run "ionic serve" from root folder, this should build and run the application in the default browser<br>
 
-<b>NOTE: please do not commit node_modules and www folder. I will include git ignore shortly</b>
