@@ -36,7 +36,7 @@
 </Page>
 <Page id = "contacts" definition ="/resources/pages/contact/contactList.xml" modelclass = "com.rainbow.crm.contact.model.Contact" >
 </Page>
-<Page id = "followups" definition ="/resources/pages/followup/follwupList.xml" modelclass = "com.rainbow.crm.followup.model.Followup" >
+<Page id = "followups" definition ="/resources/pages/followup/followupList.xml" modelclass = "com.rainbow.crm.followup.model.Followup" >
 </Page>
 <Page id = "purchases" definition ="/resources/pages/purchase/purchaseList.xml" modelclass = "com.rainbow.crm.purchase.model.Purchase" >
 </Page>

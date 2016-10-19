@@ -12,7 +12,7 @@
       </id>
       <version name="objectVersion" column="version" type="integer"></version>
       <many-to-one name="lead" column ="SALESLEAD_ID" not-null="false" lazy="false" ></many-to-one>
-      <property name="conversation" column="conversation" type="object"/>
+      <property name="conversation" column="conversation" type="string"/>
       <many-to-one name="confidenceLevel" column ="CONFIDENCE_LEVEL" not-null="false" lazy="false" ></many-to-one>
       <many-to-one name="communicationMode" column ="COMMUNICATION_MODE" not-null="false" lazy="false" ></many-to-one>
       <property name="offeredPrice" column="OFFERED_PRICE" type="double"/>

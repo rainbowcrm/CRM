@@ -18,7 +18,6 @@ public class FollowupDAO extends SpringHibernateDAO {
 		Object obj = session.get(Followup.class, followupID);
 		if (obj != null) {
 			Followup followup =(Followup) obj;
-			followup.setFullName(followup.getFirstName() + " " + followup.getLastName());
 		}
 		closeSession(session,false);
 		return obj;
@@ -33,7 +32,6 @@ public class FollowupDAO extends SpringHibernateDAO {
 		List lst = query.list();
 		if (!Utils.isNullList(lst)) {
 			followup = (Followup) lst.get(0) ;
-			followup.setFullName(followup.getFirstName() + " " + followup.getLastName());
 		}
 		closeSession(session, false);
 		return followup;
@@ -49,7 +47,6 @@ public class FollowupDAO extends SpringHibernateDAO {
 		List lst = query.list();
 		if (!Utils.isNullList(lst)){
 			followup = (Followup) lst.get(0) ;
-			followup.setFullName(followup.getFirstName() + " " + followup.getLastName());
 		}
 		closeSession(session, false);
 		return followup;
