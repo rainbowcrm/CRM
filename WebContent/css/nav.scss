@@ -1,0 +1,44 @@
+@import "./colors.scss";
+
+div.leftnav {
+    position: relative;
+    width: 14%;
+    background: $menu-bg-color;
+    color: $medium-dark;
+    overflow-y: scroll;
+    float: left;
+    height: 100%;
+}
+
+ul{
+  list-style-type: none;
+ }
+ 
+ .menustyle {
+    font-size: 16px;
+    color:$dark;
+   list-style-type: none;
+    text-align:left;
+    display: block;
+    padding: 3px;
+    padding-left: 15px;
+ }
+ 
+.menustyle:hover{
+    cursor: hand;
+    background: $light;
+    color: $dark;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.24);
+ }
+ 
+.menustyleParent {
+    font-size: 16px;
+    color:$dark;
+   list-style-type: none;
+    text-align:left;
+}
+
+
+.menustyleParent:hover{
+    cursor: hand;
+ }

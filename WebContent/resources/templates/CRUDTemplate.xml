@@ -5,7 +5,7 @@
  <Renderers>
  <Renderer>
  <RendererType>HTML</RendererType>
- <StyleSheet>./css/CRUDPage.css</StyleSheet>
+ <StyleSheet>./css/build/CRUDPage.css</StyleSheet>
   <PageStyle>pagestyle</PageStyle>
  </Renderer>
  </Renderers>

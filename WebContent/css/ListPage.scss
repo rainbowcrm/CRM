@@ -1,0 +1,158 @@
+@import "./reset";
+@import "./bootstrap.min";
+@import "./colors.scss";
+@import "./fonts.scss";
+@import "./header.scss";
+@import "./footer.scss";
+@import "./nav.scss";
+
+body {
+    background:  $background-color;
+  	box-sizing: border-box;
+	  font-family: "Oregon LDO Book";
+}
+
+div.pagestyle {
+     position: relative;
+    overflow: auto;
+    width: 86%;
+    float: left;
+}
+
+
+.errorStyle {
+position:relative;
+}
+
+.filterStyle {
+    position: relative;
+    overflow: auto;
+    font-size: 12px;
+    color: $light;
+    margin: 10px;
+    padding: 10px;
+    background-color: $primary-color;
+    background: -webkit-linear-gradient(305deg,$filter-start-color,$filter-stop-color);
+    background: linear-gradient(145deg,$filter-start-color,$filter-stop-color);
+
+    table td{
+      text-align: left;
+   }
+   span{
+     color: $light;
+    font-size: 12px;
+    min-width: 100px;
+    display: inline-block;
+   }
+   #btfilterApply{
+     background: $warn;
+   }
+   #btfilterClear{
+     background: $danger;
+   }
+   #btfilterSave{
+     background: $good;
+   }
+}
+div.detailStyle {
+position:relative;
+overflow:auto;
+max-height: 60%;
+  table{
+        margin: auto;
+        width: 95%;
+        border: 1px solid $medium-dark;
+    }
+  thead.listPageTitle {
+    background: $additional-info-color;
+    color: $light;
+    font-weight:bold;
+    font-size:18px;
+  }
+  th{
+    text-align: right;
+  }
+}
+
+div.summaryStyle{
+   text-align: right;
+    position: relative;
+    width: 86%;
+    height: 40px;
+    margin-top: 10px;
+    float: right;
+    input{
+      background: $primary-color;
+      color: $light;
+    }
+}
+
+
+div.sameline  {
+float:right ;
+position:inherit;
+}
+
+.showinright  {
+float: right;
+}
+
+span.errorStyle {
+ color:$danger;
+ font-size:13px;
+}
+
+table, tr {
+width : 100%;
+text-align: right;
+}
+
+table.errorStyle {
+ text-align: left;
+
+}
+tr.oddRowError {
+ text-align: left;
+ background-color:$dark;
+}
+tr.evenRowError {
+ text-align: left;
+ background-color:$dark;
+}
+
+
+span.listPageTitle {
+font-size:16px;
+}
+
+tr.oddRow{
+background-color:inherit;
+color:$dark;
+}
+
+
+
+tr.evenRow{
+
+background-color:$secondary-color;
+
+}
+
+.button {
+    border: none;
+    padding: 5px 10px;
+    border-radius: 8px;
+	  color: $light;
+}
+
+dialog.dialogstyle  {
+ width:350px;
+ height:300px;
+}
+
+iframe.lookupFrameStyle {
+ left:0%;
+ width:100%;
+ top:0%;
+ height:100%;
+}

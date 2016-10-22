@@ -1,0 +1,23 @@
+@import "./colors.scss";
+
+div.copyRight{
+  position: fixed;
+   bottom: 0%;
+  width: 100%;
+  height: 30px;
+  padding: 10px;
+  line-height: 13px;
+	background: $additional-info-color;
+	text-align: center;
+}
+
+span.copyRight {
+ color:$dark;
+ font-size: 9px;
+}
+
+span.copyRightText {
+ font-family: "Oregon LDO Black";
+	color: $light;
+  font-size: 10px;
+}

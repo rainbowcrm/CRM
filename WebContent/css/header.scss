@@ -1,0 +1,20 @@
+@import "./colors.scss";
+
+div.topBar{
+    position: relative;
+    top: 0px;
+    left: 0px;
+    height: 40px;
+    width: 100%;
+    background: $primary-color;
+    color: $light;
+    text-align: center;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.24);
+}
+
+span.topBar {
+ font-size: 20px ;
+ font-weight:bold;
+ color:$light;
+ line-height: 40px;
+}

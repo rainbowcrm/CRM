@@ -1,0 +1,11 @@
+@mixin fontFace($family,$src) {
+	@font-face {
+		font-family: $family;
+		src: url('#{$src}.ttf') format('truetype'); // IE9 compat
+	}
+}
+@include fontFace("Oregon LDO Black",'./fonts/Oregon LDO Black');
+@include fontFace("Oregon LDO Black Oblique",'./fonts/Oregon LDO Black Oblique');
+@include fontFace("Oregon LDO Book",'./fonts/Oregon LDO Book');
+@include fontFace("Oregon LDO Light",'./fonts/Oregon LDO Light');
+@include fontFace("Oregon LDO Medium",'./fonts/Oregon LDO Medium');

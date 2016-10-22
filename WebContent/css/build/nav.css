@@ -1,0 +1,35 @@
+div.leftnav {
+  position: relative;
+  width: 14%;
+  background: rgba(207, 216, 220, 0.87);
+  color: #444;
+  overflow-y: scroll;
+  float: left;
+  height: 100%; }
+
+ul {
+  list-style-type: none; }
+
+.menustyle {
+  font-size: 16px;
+  color: #222;
+  list-style-type: none;
+  text-align: left;
+  display: block;
+  padding: 3px;
+  padding-left: 15px; }
+
+.menustyle:hover {
+  cursor: hand;
+  background: #f4f4f4;
+  color: #222;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.24); }
+
+.menustyleParent {
+  font-size: 16px;
+  color: #222;
+  list-style-type: none;
+  text-align: left; }
+
+.menustyleParent:hover {
+  cursor: hand; }

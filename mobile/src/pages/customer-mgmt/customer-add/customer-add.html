@@ -100,6 +100,6 @@
       
   </form>
   <div class="button-container">
-  <button ion-button large [disabled]="!customerAddEditForm.form.valid" (click)="addCustomer()">Add Customer</button>
+  <button ion-button [disabled]="!customerAddEditForm.form.valid" (click)="addCustomer()">Add Customer</button>
 </div>
 </ion-content>

@@ -1,31 +1,34 @@
+@CHARSET "ISO-8859-1";
+body {
+     background-color: rgb(230,230,230);
+}
 
 div.pagestyle {
  position:absolute;
  overflow:auto;
- height:90%;
  width:86%;
-left:14%;
-top:5%; 
-}
-
-
-.errorStyle {
-position:relative;
+ top:8%;
 }
 
 .filterStyle {
-position:relative;
+position:absolute;
+ width:86%;
+left:14%;
+top:5%;
 overflow:auto;
 /**background-color:rgb(185,180,206);**/
-background-color:rgb(106,53,0);
+background-color:rgb(106,53,0); 
 font-size: 12px;
 color:white;
 font-family:verdana;
 
-}
+} 
 div.detailStyle {
-position:relative;
-height:75%;
+position:absolute;
+ width:86%;
+height:80%;
+left:14%;
+top:10%;
 overflow:auto;
 }
 
@@ -38,14 +41,14 @@ left:14%;
 /*background-color:rgb(192,192,192); 192,192,192*/
 /*background-color:rgb(106,53,0); Brown*/
 /**background-color:rgb(185,180,206);**/
-background-color:rgb(106,53,0);
+background-color:rgb(106,53,0); 
  }
 
 div.copyRight{
- position:absolute;
- top:97%;
- width:86%;
- left:14%;
+	position:absolute;
+	top:98%;
+	width:86%;
+	left:14%;
 }
 
 div.sameline  {
@@ -54,15 +57,14 @@ position:inherit;
 }
 
 div.topBar {
- position:absolute;
+	position:absolute;
   top:0px;
   left:0px;
   height:4%;
   width:100%;
-  background:#942121;
+  background:Black;
   color:Black;
-  text-align: center;
-}
+}	
 
 div.leftnav {
   position:absolute;
@@ -70,7 +72,7 @@ div.leftnav {
   left:0px;
   bottom:0px;
   width:14%;
-  height:95%;
+  height:100%;
   background:gray;
   color:Black;
    overflow: scroll;
@@ -82,28 +84,23 @@ div.leftnav {
 float: right;
 }
 span {
- color: white;
- font-size: 12px ;
- 
+	color: white;
+	font-size: 12px ;
+	
 }
 
-span.topBar {
- font-size: 20px ;
- font-weight:bold;
- color:black;
-}
 span.copyRight {
- color:black;
- font-size: 9px;
+	color:black;
+	font-size: 9px;
 }
 span.errorStyle {
- color:red;
- font-size:13;
+	color:red;
+	font-size:13;
 }
 
 span.copyRightText {
- color:blue;
- font-size:10;
+	color:blue;
+	font-size:10;
 }
 table, tr {
 width : 100%;
@@ -112,16 +109,17 @@ font-family:Verdana;
 }
 
 table.errorStyle {
- text-align: left;
-
+	text-align: left;
+	width:86%;
+	margin-left:14%;
 }
 tr.oddRowError {
- text-align: left;
- background-color:black;
+	text-align: left;
+	background-color:black;
 }
 tr.evenRowError {
- text-align: left;
- background-color:black;
+	text-align: left;
+	background-color:black;
 }
 
 thead.listPageTitle {
@@ -129,17 +127,17 @@ border-style: 1px solid black;
 background-color: rgb(0,135,0);
 font-weight:bold;
 font-size:18;
- 
+	
 }
 span.listPageTitle {
 border-style: 1px solid black;
 background-color: rgb(0,135,0);
 font-size:16;
- 
+	
 }
 
 tr.oddRow{
-background-color:rgb(0,0,60);
+background-color:rgb(0,0,60); 
 color:white;
 }
 
@@ -160,14 +158,14 @@ background-color:rgb(185,180,206);
     text-decoration: none;
     display: inline-block;
     font-size: 12px;
- border-radius: 8px;
+	border-radius: 8px;
 
 }
 
 TFOOT.summary {
     background-color: yellow;
- font-size:14pt;
- text-align: right;
+	font-size:14pt;
+	text-align: right;
     
 }
 
@@ -177,71 +175,71 @@ li{
  }
  
  ul{
-  list-style-type: none;
+ 	list-style-type: none;
  }
  
  .menustyle {
- 
+	
     font-family: "Verdana";
     font-size: 16px;
- background-color:white;
+	background-color:white;
     color:black;
- list-style-type: none;
+	list-style-type: none;
     align:left;
-    text-align:left;
- display: inline_block;
- border: 1px solid black;
- vertical-align: middle;
- border-radius: 2px;
- background: gray ;
- 
- 
+    text-align:left; 
+	display: inline_block; 
+	border: 1px solid black; 
+	vertical-align: middle; 
+	border-radius: 2px; 
+	background: gray ;
+	
+	
  }
  
 .menustyle:hover{
     font-family: "Verdana";
     font-size: 16px;
     color:Blue;
- background-color:black;
+	background-color:black;
     color:yellow;
- 
+	
  }
  
 .menustyleParent {
  
-  font-family: "Verdana";
+ 	font-family: "Verdana";
     font-size: 16px;
     color:"Blue";
- background-color:white;
+	background-color:white;
     color:black;
- list-style-type: none;
+	list-style-type: none;
     
- display: inline_block;
- border: 1px solid black;
- vertical-align: middle;
- border-radius: 2px;
- background: gray ;
-  
+	display: inline_block; 
+	border: 1px solid black;
+	vertical-align: middle; 
+	border-radius: 2px; 
+	background: gray ;
+	 
  
-}
+} 
 
 
 .menustyleParent:hover{
     font-family: "Verdana";
     font-size: 16px;
- font-style: :Bold;
+	font-style: :Bold;
     background-color:#8080c0;
     color:yellow;
- 
+	
  }
 dialog.dialogstyle  {
- width:350px;
- height:300px;
+	width:350px;
+	height:300px;
 }
 
 iframe.lookupFrameStyle {
- left:0%;
- width:100%;
- top:0%;
- height:100%;
+	left:0%;
+	width:100%;
+	top:0%;
+	height:100%;
 }

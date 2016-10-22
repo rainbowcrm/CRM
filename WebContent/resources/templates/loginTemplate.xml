@@ -4,7 +4,7 @@
   <Renderers>
  <Renderer>
  <RendererType>HTML</RendererType>
- <StyleSheet>./css/login.css</StyleSheet>
+ <StyleSheet>./css/build/login.css</StyleSheet>
  <PageStyle>pagestyle</PageStyle>
  </Renderer>
  </Renderers>
@@ -20,4 +20,5 @@
  </Section>  
  </Sections>
  </Template>
+
  

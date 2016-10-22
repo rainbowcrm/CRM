@@ -27,11 +27,11 @@ export class CustomerListPage {
   getCustomerAddress(customer){
      let customerAddr = [];
      var keys = ["Address1","Address2","City","ZipCode","Landmark"];
-     for(let key in keys){
-         if(customer[key]){
-           customerAddr.push(customer[key])
+     keys.forEach(function(value, key){
+       if(customer[value] && customer[value].length > 0){
+           customerAddr.push(customer[value])
          }
-     }
+     })
      if(customerAddr.length == 0){
      return "no information available";
      }

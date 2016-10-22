@@ -5,7 +5,7 @@
  <Renderers>
  <Renderer>
  <RendererType>HTML</RendererType>
- <StyleSheet>./css/ListPage.css</StyleSheet>
+ <StyleSheet>./css/build/ListPage.css</StyleSheet>
   <PageStyle>pagestyle</PageStyle>
  </Renderer>
  </Renderers>
