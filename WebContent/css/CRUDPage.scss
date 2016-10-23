@@ -51,17 +51,17 @@ div.summaryStyle{
  #btSubmit{
 	 background: $good;
  }
- #btCancel{
+ #btCancel,#btnFilterDelete{
 	 background: $danger;
+ }
+ #btnFetchAll{
+	 background: $primary-color;
+ }
+ #btnFilterClear{
+	 background: $warn;
  }
 }
 
-
-
-input {
-	/*color: white;*/
-	font-size: 12px;
-}
 
 span {
 	color: $light;
@@ -86,20 +86,25 @@ span.bolded {
 }
 
 
-span.titleStyleUnSelected  {
-color:$warn;
-background-color:$light;
-border-color: $good;
+span.titleStyleUnSelected:hover  {
+  background: $light;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.24);
+  color:$dark;
+  cursor: hand;
+}
+
+input#btfilterSave{
+	background: $good;
+}
+
+input[type=file]{
+	display: inline;
 }
 
 
 span.titleStyleSelected  {
-border:4px solid #8080c0;
-color:BLACK;
-background-color:#8080c0;
-font-style:normal;
-font-weight:bold;
-border-color: #8080c0;
+    background: $primary-color;
+    font-weight: bold;
 }
 
 span.highlighted {
@@ -129,11 +134,21 @@ table.CRUDtableContainer {
 		line-height: initial;
 	}
 }
+
 table.uitabstyle{
-	background-color: #8080c0;
+	background-color: $background-inherit;
+	span{
+		color: $dark;
+	}
+	td{
+	   padding: 5px;
+	}
+	span.titleStyleSelected{
+		color: $light;
+	}
 }
 th.uitabstyle{
-	background-color:rgb(192,192,192);
+	background-color:$background-color;
 }
 table, tr {
 width : 100%;
@@ -159,4 +174,23 @@ iframe.lookupFrameStyle {
 	width:100%;
 	top:0%;
 	height:100%;
+}
+
+.outlinedTable{
+  textarea{
+	      height: 50px;
+  }
+  input{
+	    line-height: initial;
+  }
+  td{
+	  vertical-align: middle;
+	      text-align: center;
+  }
+}
+
+.childSectionStyle{
+	span{
+		color: $dark;
+	}
 }

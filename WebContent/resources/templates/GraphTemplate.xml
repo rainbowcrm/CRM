@@ -4,7 +4,7 @@
   <Renderers>
  <Renderer>
  <RendererType>HTML</RendererType>
- <StyleSheet>./css/GraphPage.css</StyleSheet>
+ <StyleSheet>./css/build/GraphPage.css</StyleSheet>
  <PageStyle>pagestyle</PageStyle>
  </Renderer>
  </Renderers>

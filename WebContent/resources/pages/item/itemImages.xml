@@ -78,10 +78,10 @@ Controller = "com.rainbow.crm.item.controller.ItemImageController">
 </Section>
 </CoreSection>
 <Section type= "summary">
-<Element caption = "Delete_All"  type = "UIButton" Id = "btnFilterCleas"  style="button" fixedAction ="FixedAction.ACTION_DELETE"   />
-<Element caption = "Fetch_Images"  type = "UIButton" Id = "btnFilterCleas"  style="button" fixedAction ="FixedAction.ACTION_READ"   />
+<Element caption = "Delete_All"  type = "UIButton" Id = "btnFilterDelete"  style="button" fixedAction ="FixedAction.ACTION_DELETE"   />
+<Element caption = "Fetch_Images"  type = "UIButton" Id = "btnFetchAll"  style="button" fixedAction ="FixedAction.ACTION_READ"   />
 <Element caption = "Submit"  type = "UIButton" Id = "btfilterSave"  style="button" fixedAction ="FixedAction.ACTION_UPDATE"   />
-<Element caption = "Clear"  type = "UIButton" Id = "btnFilterCleas"  style="button" onClickJS ="clearAll();"  />
+<Element caption = "Clear"  type = "UIButton" Id = "btnFilterClear"  style="button" onClickJS ="clearAll();"  />
 </Section> 
 <Section type ="copyRightSection"/>
 </UIForm>

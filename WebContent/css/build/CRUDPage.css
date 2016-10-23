@@ -5605,12 +5605,12 @@ div.summaryStyle {
   left: 14%; }
   div.summaryStyle #btSubmit {
     background: #69BB7B; }
-  div.summaryStyle #btCancel {
+  div.summaryStyle #btCancel, div.summaryStyle #btnFilterDelete {
     background: #f53d3d; }
-
-input {
-  /*color: white;*/
-  font-size: 12px; }
+  div.summaryStyle #btnFetchAll {
+    background: #387ef5; }
+  div.summaryStyle #btnFilterClear {
+    background: #FFA500; }
 
 span {
   color: #f4f4f4;
@@ -5628,18 +5628,21 @@ span.bolded {
   width: 15;
   font-weight: bold; }
 
-span.titleStyleUnSelected {
-  color: #FFA500;
-  background-color: #f4f4f4;
-  border-color: #69BB7B; }
+span.titleStyleUnSelected:hover {
+  background: #f4f4f4;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.24);
+  color: #222;
+  cursor: hand; }
+
+input#btfilterSave {
+  background: #69BB7B; }
+
+input[type=file] {
+  display: inline; }
 
 span.titleStyleSelected {
-  border: 4px solid #8080c0;
-  color: BLACK;
-  background-color: #8080c0;
-  font-style: normal;
-  font-weight: bold;
-  border-color: #8080c0; }
+  background: #387ef5;
+  font-weight: bold; }
 
 span.highlighted {
   font-size: 20px;
@@ -5667,10 +5670,16 @@ table.CRUDtableContainer {
     line-height: initial; }
 
 table.uitabstyle {
-  background-color: #8080c0; }
+  background-color: rgba(255, 255, 255, 0.58); }
+  table.uitabstyle span {
+    color: #222; }
+  table.uitabstyle td {
+    padding: 5px; }
+  table.uitabstyle span.titleStyleSelected {
+    color: #f4f4f4; }
 
 th.uitabstyle {
-  background-color: silver; }
+  background-color: rgba(207, 216, 220, 0.56); }
 
 table, tr {
   width: 100%;
@@ -5691,3 +5700,16 @@ iframe.lookupFrameStyle {
   width: 100%;
   top: 0%;
   height: 100%; }
+
+.outlinedTable textarea {
+  height: 50px; }
+
+.outlinedTable input {
+  line-height: initial; }
+
+.outlinedTable td {
+  vertical-align: middle;
+  text-align: center; }
+
+.childSectionStyle span {
+  color: #222; }
