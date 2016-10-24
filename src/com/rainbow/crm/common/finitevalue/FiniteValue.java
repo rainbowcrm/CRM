@@ -48,6 +48,14 @@ public class FiniteValue extends ModelObject{
 		return code;
 	}
 	
+	public boolean equals(FiniteValue value)  {
+		return value!=null&&value.getCode().equals(this.getCode());
+	}
+	
+	public boolean equals(String code)  {
+		return code!=null&&code.equals(this.getCode());
+	}
+	
 	public FiniteValue(String code) {
 		this.code = code;
 	}

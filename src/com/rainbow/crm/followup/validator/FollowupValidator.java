@@ -2,7 +2,10 @@ package com.rainbow.crm.followup.validator;
 
 import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.item.service.IItemService;
+import com.rainbow.crm.saleslead.model.SalesLead;
+import com.rainbow.crm.saleslead.service.ISalesLeadService;
 import com.rainbow.crm.user.validator.UserErrorCodes;
+import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMValidator;
 import com.rainbow.crm.common.CommonErrorCodes;
@@ -36,6 +39,16 @@ public class FollowupValidator extends CRMValidator {
 		System.out.println("Cust XML=" + followup.toXML());
 		if(followup.getLead()==null) {
 			errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Sales_Lead"))) ;
+		}else {
+			ISalesLeadService leadService =(ISalesLeadService) SpringObjectFactory.INSTANCE.getInstance("ISalesLeadService");
+			SalesLead lead= (SalesLead)leadService.getByBusinessKey(followup.getLead(), context);
+			if (lead == null) {
+				errors.add(getErrorforCode(CommonErrorCodes.FIELD_NOT_VALID,externalize.externalize(context, "Sales_Lead"))) ;
+			}else 
+				followup.setLead(lead);
+			if (lead.getStatus().equals(CRMConstants.SALESCYCLE_STATUS.CLOSED) || lead.getStatus().equals(CRMConstants.SALESCYCLE_STATUS.FAILED)){
+				errors.add(getErrorforCode(CommonErrorCodes.INVALID_STATUS,externalize.externalize(context, "Sales_Lead"))) ;
+			}
 		}
 		if(Utils.isNullString(followup.getSalesAssociate())) {
 			errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "SalesAssociate"))) ;

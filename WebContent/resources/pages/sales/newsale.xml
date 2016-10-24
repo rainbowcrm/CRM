@@ -61,7 +61,7 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 	<Element label = "Email"  type = "UIText" Id = "txtEmail"   property ="Customer.Email" />
 	 <Element label = "Name"  type = "UILookupText"  Id = "txtCustomerName"  isMandatory="true" property ="Customer.FullName" showLookupAsDialog="true" dialogId="dlgComp"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
-	 <lookupType>vendor</lookupType>
+	 <lookupType>customer</lookupType>
 	 <height>300</height>
 	 <width>290</width>
 	</Element>

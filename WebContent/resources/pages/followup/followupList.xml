@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Page id = "contacts" showinFrame ="true" title ="Contacts | Rainbow CRM" Object = "com.rainbow.crm.contact.model.Contact" 
-Controller = "com.rainbow.crm.contact.controller.ContactListController">
+<Page id = "followups" showinFrame ="true" title ="Followup | Rainbow CRM" Object = "com.rainbow.crm.followup.model.Followup" 
+Controller = "com.rainbow.crm.followup.controller.FollowupListController">
 <Template type= "List"  name = "ListTemplate"></Template>
 <Forwards>
 <Forward key ="NEW">rdscontroller?page=newfollowup</Forward>

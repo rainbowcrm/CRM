@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Page id = "newContact" showinFrame ="true" title ="New Contact | Rainbow CRM" Object = "com.rainbow.crm.contact.model.Contact" 
-Controller = "com.rainbow.crm.contact.controller.ContactController">
+<Page id = "newContact" showinFrame ="true" title ="New Contact | Rainbow CRM" Object = "com.rainbow.crm.followup.model.Followup" 
+Controller = "com.rainbow.crm.followup.controller.FollowupController">
 <Template type= "CRUD"  name = "CRUDTemplate"></Template>
 <Forwards>
 <Forward key ="CANCEL">rdscontroller?page=followups</Forward>
@@ -18,9 +18,23 @@ Controller = "com.rainbow.crm.contact.controller.ContactController">
 <Section type ="detail">
 	<Element label = "" type = "UIHidden" Id = "hdnVersion" property ="ObjectVersion" />
 	<Element label = ""  type = "UIHidden" Id = "hdnUserID"  property ="Id" />
-	<Element label = "Sales_Lead"  type = "UIText" Id = "txtName"  isMandatory="true" size="30" property ="Lead.docNumber" />
-	<Element label = "Sales_Associate"  type = "UIText" Id = "txtLName"  isMandatory="true" size="30" property ="salesAssociate" />
-	<Element label = "Finalized"  type = "UICheckBox" Id = "txtAdd2" size="30" property ="finalFollowup" />
+	<Element label = "Sales_Lead"  type = "UILookupText" Id = "txtName"  isMandatory="true" size="30" property ="Lead.docNumber" showLookupAsDialog="true" dialogId="dlgComp"
+ 	dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
+  	<lookupType>saleslead</lookupType>
+	 <height>300</height>
+	 <width>290</width>
+  	</Element>
+	<Element label = "Sales_Associate"  type = "UILookupText" Id = "txtLName"  isMandatory="true" size="30" property ="salesAssociate"  showLookupAsDialog="true" dialogId="dlgUser"
+ 	dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
+ 	<lookupType>user</lookupType>
+	 <height>300</height>
+	 <width>290</width>
+	</Element>
+	<Element label = "Finalized"  type = "UICheckBox" Id = "txtAdd2" size="30" property ="finalFollowup" >
+	<options> 
+	  <option key ="true">  </option>
+	 </options>
+	</Element>
 	<Element label = "Next_Followup"  type = "UIDate" Id = "txtAdd1" size="30" property ="nextFollwup" />
 	<Element label = "Confidence_Level"  type = "UIList" Id = "lstContact"   property ="confidenceLevel.code"  externalise= "true">
 		<options populator =  "getConfidenceLevels"> 
@@ -39,10 +53,10 @@ Controller = "com.rainbow.crm.contact.controller.ContactController">
 		<options populator =  "getAllReasons"> 
 		</options>
 	</Element>
-	<Element label = "comments"  type = "UITextArea" Id = "txtComments"   property ="comments" >
+	<Element label = "Comments"  type = "UITextArea" Id = "txtComments"   property ="comments" >
 	 <rows>5</rows> <cols>30</cols>
 	</Element>
-	<Element label = "conversation"  type = "UITextArea" Id = "txtConversation"   property ="comments" >
+	<Element label = "Conversation"  type = "UITextArea" Id = "txtConversation"   property ="comments" >
 	 <rows>5</rows> <cols>30</cols>
 	</Element>
 </Section>

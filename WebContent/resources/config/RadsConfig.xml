@@ -57,7 +57,7 @@
 </Page>
 <Page id = "newcontact" definition ="/resources/pages/contact/newcontact.xml" modelclass = "com.rainbow.crm.contact.model.Contact" >
 </Page>
-<Page id = "newfollowup" definition ="/resources/pages/folllowup/newfollowup.xml" modelclass = "com.rainbow.crm.followup.model.Followup" >
+<Page id = "newfollowup" definition ="/resources/pages/followup/newfollowup.xml" modelclass = "com.rainbow.crm.followup.model.Followup" >
 </Page>
 <Page id = "newitem" definition ="/resources/pages/item/newItem.xml" modelclass = "com.rainbow.crm.item.model.Item" >
 </Page>
@@ -194,6 +194,15 @@
  lookuppage= "lookup">
 </Lookup>
 <Lookup type ="vendor" lookupservice="com.rainbow.crm.lookups.LookupVendors" 
+ lookuppage= "lookup">
+</Lookup>
+<Lookup type ="customer" lookupservice="com.rainbow.crm.lookups.LookupCustomers" 
+ lookuppage= "lookup">
+</Lookup>
+<Lookup type ="saleslead" lookupservice="com.rainbow.crm.lookups.LookupSalesLeads" 
+ lookuppage= "lookup">
+</Lookup>
+<Lookup type ="user" lookupservice="com.rainbow.crm.lookups.LookupUsers" 
  lookuppage= "lookup">
 </Lookup>
 </Lookups>
