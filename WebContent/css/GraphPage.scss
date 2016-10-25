@@ -5,6 +5,7 @@
 @import "./header.scss";
 @import "./footer.scss";
 @import "./nav.scss";
+@import "./alert-dialog.scss";
 
 body {
     background:  $background-color;
@@ -124,16 +125,4 @@ font-family:Verdana;
     padding: 5px 10px;
     border-radius: 8px;
 	  color: $light;
-}
-
-dialog.dialogstyle  {
-	width:350px;
-	height:300px;
-}
-
-iframe.lookupFrameStyle {
-	left:0%;
-	width:100%;
-	top:0%;
-	height:100%;
 }

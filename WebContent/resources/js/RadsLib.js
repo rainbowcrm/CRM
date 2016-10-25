@@ -61,7 +61,12 @@ function showLookupDialog(id,curControl) {
 	var index  = getCurrentObjectIndex(curControl);  
 	console.log('index=' + index); 
 	clickedCellIndex= index;
-	document.getElementById(id).showModal();  
+	var dialog = document.getElementById(id);  
+	if(!dialog.showModal)
+	{
+		dialogPolyfill.registerDialog(dialog);
+	}
+	dialog.showModal();
 	document.getElementById('idFRM' +id).contentDocument.clickedCellIndex = index;
 	
  }

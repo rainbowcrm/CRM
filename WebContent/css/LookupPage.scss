@@ -1,0 +1,41 @@
+@import "./reset";
+@import "./bootstrap.min";
+@import "./colors.scss";
+@import "./fonts.scss";
+
+body {
+    background:  $popup-color;
+  	box-sizing: border-box;
+	font-family: "Oregon LDO Book";
+}
+
+div.lookupPagesummaryStyle{
+ text-align: right;
+ position:relative;
+ width:100%;
+ padding: 3px 10px;
+ background:$additional-info-color; 
+   #btnSearch{
+       background: $primary-color;
+   }
+   #btfilterApply{
+        background: $good;
+   }
+   #btfilterClear{
+       background: $danger;
+   }
+ }
+ select.lookupMultiSelect {
+	width:100%;
+    overflow-x: hidden;
+    option:nth-child(2n){
+        background: $secondary-color;   
+    }
+}
+
+.button {
+    border: none;
+    padding: 5px 10px;
+    border-radius: 8px;
+	  color: $light;
+}

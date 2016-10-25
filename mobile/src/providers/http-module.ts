@@ -27,7 +27,7 @@ export class HTTPService {
       case "get": return this.http.get(this.url)
                     .map(this.extractData)
                     .catch(this.handleError);
-      case "post": return this.http.post(this.url, data)
+      case "post": return this.http.post(this.url, data, options)
                     .map(this.extractData)
                     .catch(this.handleError);
     }

@@ -3,7 +3,7 @@
  <Renderers>
  <Renderer>
  <RendererType>HTML</RendererType>
- <StyleSheet>./css/LookupPage.css</StyleSheet>
+ <StyleSheet>./css/build/LookupPage.css</StyleSheet>
  </Renderer>
  </Renderers>
   <fixedActionField>hdnFixedAction</fixedActionField>
