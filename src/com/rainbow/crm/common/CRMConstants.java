@@ -25,4 +25,11 @@ public class CRMConstants {
 		public final static String CLOSED = "CLSD";
 		public final static String FAILED = "FLD";
 	}
+	
+	public final static class FOLLOWUP_RESULT {
+		public final static String SOLD = "SOLD";
+		public final static String PENDING = "SLPENDING";
+		public final static String NOSALE = "NOSALE";
+		public final static String PARTSALE = "PARTSALE";
+	}
 }

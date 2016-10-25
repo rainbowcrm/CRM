@@ -111,7 +111,7 @@ INSERT INTO FINITE_VALUES(CODE,TYPE_CODE,DESCRIPTION) VALUES ('COMPET','FAILREAS
 INSERT INTO FINITE_VALUES(CODE,TYPE_CODE,DESCRIPTION) VALUES ('UNIDENT','FAILREAS','Unidentified reason');
 __________________________________________________________________________________________________________________
 23-OCT-16
-Delete from finite_values where type_code = 'CONFLEVEL'
+Delete from finite_values where type_code = 'CONFLEVEL';
 
 INSERT INTO FINITE_VALUES(CODE,TYPE_CODE,DESCRIPTION) VALUES ('HIGHCONF','CONFLEVEL','High');
 INSERT INTO FINITE_VALUES(CODE,TYPE_CODE,DESCRIPTION) VALUES ('UPMEDCONF','CONFLEVEL','Upper-Medium');
@@ -119,3 +119,6 @@ INSERT INTO FINITE_VALUES(CODE,TYPE_CODE,DESCRIPTION) VALUES ('MEDCONF','CONFLEV
 INSERT INTO FINITE_VALUES(CODE,TYPE_CODE,DESCRIPTION) VALUES ('LOWMEDCONF','CONFLEVEL','Lower-Medium');
 INSERT INTO FINITE_VALUES(CODE,TYPE_CODE,DESCRIPTION) VALUES ('LOWCONF','CONFLEVEL','Low');
 __________________________________________________________________________________________________________________
+25-0ct-16
+INSERT INTO METADATA(ENTITY,CLASS_NAME) VALUES('FOLLOWUP','com.rainbow.crm.followup.model.Followup');
+________________________

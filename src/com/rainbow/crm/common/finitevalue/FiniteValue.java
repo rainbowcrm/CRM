@@ -1,5 +1,6 @@
 package com.rainbow.crm.common.finitevalue;
 
+import com.techtrade.rads.framework.annotations.RadsPropertySet;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 
 public class FiniteValue extends ModelObject{
@@ -7,15 +8,18 @@ public class FiniteValue extends ModelObject{
 	String  code;
 	String description;
 	boolean isDefault ;
+
 	public String getType() {
 		return type;
 	}
 	public void setType(String type) {
 		this.type = type;
 	}
+	@RadsPropertySet(isPK=true)
 	public String getCode() {
 		return code;
 	}
+	@RadsPropertySet(isPK=true)
 	public void setCode(String code) {
 		this.code = code;
 	}

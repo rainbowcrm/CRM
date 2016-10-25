@@ -25,9 +25,11 @@ public class Followup extends CRMBusinessModelObject{
 	FiniteValue resultReason ;
 	String comments;
 	
+	@RadsPropertySet(useBKForJSON=true,useBKForXML=true,useBKForMap=true)
 	public SalesLead getLead() {
 		return lead;
 	}
+	@RadsPropertySet(useBKForJSON=true,useBKForXML=true,useBKForMap=true)
 	public void setLead(SalesLead lead) {
 		this.lead = lead;
 	}
@@ -37,15 +39,19 @@ public class Followup extends CRMBusinessModelObject{
 	public void setConversation(String conversation) {
 		this.conversation = conversation;
 	}
+	@RadsPropertySet(usePKForJSON=true,usePKForMap=true,usePKForXML=true)
 	public FiniteValue getConfidenceLevel() {
 		return confidenceLevel;
 	}
+	@RadsPropertySet(usePKForJSON=true,usePKForMap=true,usePKForXML=true)
 	public void setConfidenceLevel(FiniteValue confidenceLevel) {
 		this.confidenceLevel = confidenceLevel;
 	}
+	@RadsPropertySet(usePKForJSON=true,usePKForMap=true,usePKForXML=true)
 	public FiniteValue getCommunicationMode() {
 		return communicationMode;
 	}
+	@RadsPropertySet(usePKForJSON=true,usePKForMap=true,usePKForXML=true)
 	public void setCommunicationMode(FiniteValue communicationMode) {
 		this.communicationMode = communicationMode;
 	}
@@ -73,15 +79,19 @@ public class Followup extends CRMBusinessModelObject{
 	public void setFinalFollowup(boolean finalFollowup) {
 		this.finalFollowup = finalFollowup;
 	}
+	@RadsPropertySet(usePKForJSON=true,usePKForMap=true,usePKForXML=true)
 	public FiniteValue getResult() {
 		return result;
 	}
+	@RadsPropertySet(usePKForJSON=true,usePKForMap=true,usePKForXML=true)
 	public void setResult(FiniteValue result) {
 		this.result = result;
 	}
+	@RadsPropertySet(usePKForJSON=true,usePKForMap=true,usePKForXML=true)
 	public FiniteValue getResultReason() {
 		return resultReason;
 	}
+	@RadsPropertySet(usePKForJSON=true,usePKForMap=true,usePKForXML=true)
 	public void setResultReason(FiniteValue resultReason) {
 		this.resultReason = resultReason;
 	}

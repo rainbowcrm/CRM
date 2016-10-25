@@ -1,18 +1,27 @@
 package com.rainbow.crm.followup.service;
 
+import java.util.Iterator;
 import java.util.List;
+
+
 
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.AbstractService;
+import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.SpringObjectFactory;
+import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
 import com.rainbow.crm.hibernate.ORMDAO;
+import com.rainbow.crm.saleslead.model.SalesLead;
+import com.rainbow.crm.saleslead.model.SalesLeadLine;
+import com.rainbow.crm.saleslead.service.ISalesLeadService;
 import com.rainbow.crm.followup.dao.FollowupDAO;
 import com.rainbow.crm.followup.model.Followup;
 import com.rainbow.crm.followup.validator.FollowupValidator;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
+import com.techtrade.rads.framework.model.transaction.TransactionResult;
 import com.techtrade.rads.framework.utils.Utils;
 
 public class FollowupService extends AbstractService implements IFollowupService{
@@ -53,19 +62,50 @@ public class FollowupService extends AbstractService implements IFollowupService
 		return validator.validateforUpdate(object);
 	}
 
-	/**
+
+	private void updateSalesLead(Followup followup,CRMContext context) {
+		SalesLead lead= followup.getLead();
+		if (followup.isFinalFollowup()) {
+			if (followup.getResult().equals(CRMConstants.FOLLOWUP_RESULT.SOLD) || followup.getResult().equals(CRMConstants.FOLLOWUP_RESULT.PARTSALE)) {
+				lead.setStatus(new FiniteValue(CRMConstants.SALESCYCLE_STATUS.CLOSED));
+				lead.setSalesWon(true);
+			}else 
+				lead.setStatus(new FiniteValue(CRMConstants.SALESCYCLE_STATUS.FAILED));
+		} else {
+			lead.setStatus(new FiniteValue(CRMConstants.SALESCYCLE_STATUS.IN_PROGRESS));
+			if (followup.getOfferedPrice() != null && followup.getOfferedPrice() >0 ) {
+				lead.setStatus(new FiniteValue(CRMConstants.SALESCYCLE_STATUS.NEGOTIATING));
+				if (!Utils.isNullSet(lead.getSalesLeadLines()) &&  lead.getSalesLeadLines().size() == 1) {
+					Iterator<SalesLeadLine> it = lead.getSalesLeadLines().iterator();
+					while(it.hasNext()) {
+						SalesLeadLine line = it.next() ;
+						line.setNegotiatedPrice(followup.getOfferedPrice());
+					}
+				}
+			}
+		}
+		lead.setSalesAssReasonCode(followup.getResultReason().getCode());
+		ISalesLeadService leadService = (ISalesLeadService)SpringObjectFactory.INSTANCE.getInstance("ISalesLeadService");
+		leadService.update(lead, context);
+	}
+	
+	
+
 	@Override
-	public Followup getByCode(int company, String code) {
-		return ((FollowupDAO)getDAO()).findByCode(company, code);
+	public TransactionResult create(CRMModelObject object, CRMContext context) {
+		Followup followup = (Followup) object ;
+		TransactionResult result=  super.create(object, context);
+		updateSalesLead(followup,context);
+		return result; 
 	}
 
 	@Override
-	public Followup getByName(int company, String name) {
-		return ((FollowupDAO)getDAO()).findByName(company, name);
-	}**/
-	
-	
-	
+	public TransactionResult update(CRMModelObject object, CRMContext context) {
+		Followup followup = (Followup) object ;
+		TransactionResult result= super.update(object, context);
+		updateSalesLead(followup,context);
+		return result; 
+	}
 
 	@Override
 	protected ORMDAO getDAO() {
