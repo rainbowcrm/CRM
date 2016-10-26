@@ -16,5 +16,7 @@ public interface ISalesLeadService extends ITransactionService{
 	public int getItemSaleQuantity(Item item, Date from, Date to,Division division ) ;
 	
 	public List<RadsError> startSalesCycle(SalesLead salesLead) ;
+	
+	public List<RadsError> sendEmail(SalesLead salesLead,CRMContext context) ;
 
 }

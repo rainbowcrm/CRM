@@ -32,8 +32,13 @@ public class SalesLeadListController extends CRMListController{
 	public PageResult submit(List<ModelObject> objects, String submitAction) {
 		PageResult result = new PageResult();
 		ISalesLeadService service = (ISalesLeadService) getService();
+
 		for (ModelObject lead : objects) {
-			service.startSalesCycle((SalesLead)lead);
+			if("promote".equals(submitAction))
+				service.startSalesCycle((SalesLead)lead);
+			else
+				service.sendEmail((SalesLead)lead,(CRMContext) getContext());
+				
 		}
 		return result;
 	}

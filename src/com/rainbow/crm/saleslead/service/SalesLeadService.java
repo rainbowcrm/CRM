@@ -4,7 +4,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
+
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +24,7 @@ import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMDBException;
 import com.rainbow.crm.common.CRMValidator;
+import com.rainbow.crm.common.CommonErrorCodes;
 import com.rainbow.crm.common.Externalize;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
@@ -31,6 +40,7 @@ import com.rainbow.crm.hibernate.ORMDAO;
 import com.rainbow.crm.inventory.model.InventoryUpdateObject;
 import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.item.service.IItemService;
+import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.product.validator.ProductValidator;
 import com.rainbow.crm.saleslead.dao.SalesLeadDAO;
 import com.rainbow.crm.saleslead.model.SalesLead;
@@ -224,6 +234,43 @@ public class SalesLeadService extends AbstractService implements ISalesLeadServi
 		getDAO().update(salesLead);
 		return null;
 	}
+
+	@Override
+	public List<RadsError> sendEmail(SalesLead salesLead,CRMContext context) {
+		List<RadsError> errors = new ArrayList<RadsError>();
+		String to = salesLead.getCustomer().getEmail();
+		String from  = "noresponse@primussol.com";
+		String host = "smtp.gmail.com";
+		Properties properties = System.getProperties();
+		properties.put("mail.transport.protocol", "smtp");
+		properties.put("mail.smtp.auth", "true");
+		properties.put("mail.smtp.starttls.enable", "true");
+		properties.put("mail.smtp.host", "smtp.gmail.com");
+		properties.put("mail.smtp.port", "587");
+		
+		Session session = Session.getInstance(properties,
+		        new javax.mail.Authenticator() {
+		            protected PasswordAuthentication getPasswordAuthentication() {
+		                return new PasswordAuthentication("rainbowsourcecode", "tiger1-2");
+		            }
+		        });
+		try {
+			  MimeMessage message = new MimeMessage(session);
+		      message.setFrom(new InternetAddress(from));
+		      message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+	         message.setSubject("This is the Subject Line!");
+	         message.setText("This is actual message");
+	         Transport t = session.getTransport("smtps");
+	         t.connect(host, "rainbowsourcecode", "tiger1-2");
+	         t.sendMessage(message, message.getAllRecipients());
+		}catch(Exception ex){
+			Logwriter.INSTANCE.error(ex);
+			errors.add(new RadsError(String.valueOf(CommonErrorCodes.COULDNOT_SENDEMAIL),"Could not send email"));
+		}
+		return errors;
+
+	}
+	
 	
 	
 	
