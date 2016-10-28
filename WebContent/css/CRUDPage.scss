@@ -94,9 +94,10 @@ span.titleStyleUnSelected:hover  {
   cursor: hand;
 }
 
-input#btfilterSave{
+input#btfilterSave,input#btdwLoad{
 	background: $good;
 }
+
 
 input[type=file]{
 	display: inline;

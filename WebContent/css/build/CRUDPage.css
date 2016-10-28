@@ -5698,7 +5698,7 @@ span.titleStyleUnSelected:hover {
   color: #222;
   cursor: hand; }
 
-input#btfilterSave {
+input#btfilterSave, input#btdwLoad {
   background: #69BB7B; }
 
 input[type=file] {

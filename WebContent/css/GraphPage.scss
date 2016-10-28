@@ -23,10 +23,18 @@ div.pagestyle {
 }
 
 div.detailCRUDStyle {
-position:relative;
-top:5%;
-overflow:auto;
-background-color:rgb(0,0,60); 
+    position: relative;
+    overflow: auto;
+    font-size: 12px;
+    color: $light;
+    margin: 10px;
+    padding: 10px;
+    background-color: $primary-color;
+    background: -webkit-linear-gradient(305deg,$filter-start-color,$filter-stop-color);
+    background: linear-gradient(145deg,$filter-start-color,$filter-stop-color);
+	.button{
+		background-color:$good;
+	}
 }
 
 div.childSectionStyle {
@@ -41,10 +49,22 @@ div.summaryStyle{
 top:90%;
 width:86%;
 left:14%;
-/*background-color:rgb(192,192,192); 192,192,192*/
-/*background-color:rgb(106,53,0); Brown*/
-/**background-color:rgb(185,180,206);**/
 background-color:rgb(106,53,0); 
+ }
+
+ svg{
+	 line{
+		 stroke:$primary-color !important;
+	 }
+	 rect:nth-of-type(2n){
+		 fill: $danger;
+	 }
+	 rect:nth-of-type(2n+1){
+		 fill: $good;
+	 }
+	 text{
+		 fill: $additional-info-color;
+	 }
  }
 
 
@@ -87,7 +107,6 @@ border-color: #8080c0;
 }
 
 span.highlighted {
-    font-family: "Verdana";
     font-size: 20px;
     color:"Black";
 }
@@ -117,7 +136,6 @@ th.uitabstyle{
 table, tr {
 width : 100%;
 text-align: left;
-font-family:Verdana;
 }
 
 .button {

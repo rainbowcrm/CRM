@@ -5647,9 +5647,16 @@ div.pagestyle {
 
 div.detailCRUDStyle {
   position: relative;
-  top: 5%;
   overflow: auto;
-  background-color: #00003c; }
+  font-size: 12px;
+  color: #f4f4f4;
+  margin: 10px;
+  padding: 10px;
+  background-color: #387ef5;
+  background: -webkit-linear-gradient(305deg, #0D47A1, #42A5F5);
+  background: linear-gradient(145deg, #0D47A1, #42A5F5); }
+  div.detailCRUDStyle .button {
+    background-color: #69BB7B; }
 
 div.childSectionStyle {
   position: relative;
@@ -5662,10 +5669,19 @@ div.summaryStyle {
   top: 90%;
   width: 86%;
   left: 14%;
-  /*background-color:rgb(192,192,192); 192,192,192*/
-  /*background-color:rgb(106,53,0); Brown*/
-  /**background-color:rgb(185,180,206);**/
   background-color: #6a3500; }
+
+svg line {
+  stroke: #387ef5 !important; }
+
+svg rect:nth-of-type(2n) {
+  fill: #f53d3d; }
+
+svg rect:nth-of-type(2n+1) {
+  fill: #69BB7B; }
+
+svg text {
+  fill: #263238; }
 
 input {
   font-size: 12px; }
@@ -5698,7 +5714,6 @@ span.titleStyleSelected {
   border-color: #8080c0; }
 
 span.highlighted {
-  font-family: "Verdana";
   font-size: 20px;
   color: "Black"; }
 
@@ -5727,8 +5742,7 @@ th.uitabstyle {
 
 table, tr {
   width: 100%;
-  text-align: left;
-  font-family: Verdana; }
+  text-align: left; }
 
 .button {
   border: none;
