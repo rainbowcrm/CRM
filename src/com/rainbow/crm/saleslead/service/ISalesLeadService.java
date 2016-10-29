@@ -17,6 +17,6 @@ public interface ISalesLeadService extends ITransactionService{
 	
 	public List<RadsError> startSalesCycle(SalesLead salesLead) ;
 	
-	public List<RadsError> sendEmail(SalesLead salesLead,CRMContext context) ;
+	public List<RadsError> sendEmail(SalesLead salesLead,CRMContext context,String realPath) ;
 
 }

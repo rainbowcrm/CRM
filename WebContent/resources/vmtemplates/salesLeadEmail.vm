@@ -1,0 +1,30 @@
+Hello $customerName <br>
+
+ We are pleased to announce the sale of new items
+ 
+ <br> <br>
+ #foreach ($line in $lines)
+    <B>$line.item.name </B> with new price $line.item.retailPrice
+	<br>
+	$line.item.specification from $line.item.manufacturer
+	<br>
+	<img id=\"profileImage1\" src=\"data:image/jpg;base64, $line.imgBytes1Str\">
+	<img id=\"profileImage2\" src=\"data:image/jpg;base64, $line.imgBytes2Str\">
+	<img id=\"profileImage3\" src=\"data:image/jpg;base64, $line.imgBytes3Str\">
+	<br>
+	<br>
+#end
+
+ 
+ Looking forward to see you  <br>
+ $companyName  <br>
+ 
+ Please visit our showroom
+ $address1<br>
+ $address2<br>
+ $city<br>
+ $pin<br> <br>
+ 
+ call us at $storephone or $salesphone for personalized buying experience.
+ 
+ 

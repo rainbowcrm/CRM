@@ -2,19 +2,32 @@ package com.rainbow.crm.saleslead.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMListController;
 import com.rainbow.crm.common.IBusinessService;
 import com.rainbow.crm.common.SpringObjectFactory;
+import com.rainbow.crm.database.LoginSQLs;
 import com.rainbow.crm.saleslead.model.SalesLead;
 import com.rainbow.crm.saleslead.service.ISalesLeadService;
 import com.rainbow.crm.saleslead.validator.SalesLeadValidator;
+import com.techtrade.rads.framework.context.IRadsContext;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
 
 public class SalesLeadListController extends CRMListController{
 
+	String realPath ;
+	
+	@Override
+	public IRadsContext generateContext(HttpServletRequest request,HttpServletResponse response) {
+		realPath = request.getServletContext().getRealPath(".");
+		return LoginSQLs.loggedInUser(request.getSession().getId());
+	}
+	
 	@Override
 	public IBusinessService getService() {
 		ISalesLeadService serv = (ISalesLeadService) SpringObjectFactory.INSTANCE.getInstance("ISalesLeadService");
@@ -37,7 +50,7 @@ public class SalesLeadListController extends CRMListController{
 			if("promote".equals(submitAction))
 				service.startSalesCycle((SalesLead)lead);
 			else
-				service.sendEmail((SalesLead)lead,(CRMContext) getContext());
+				service.sendEmail((SalesLead)lead,(CRMContext) getContext(),realPath);
 				
 		}
 		return result;
