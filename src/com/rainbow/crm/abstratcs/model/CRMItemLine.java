@@ -1,6 +1,7 @@
 package com.rainbow.crm.abstratcs.model;
 
 import java.util.Arrays;
+import java.util.Base64;
 
 import com.rainbow.crm.item.model.Item;
 import com.techtrade.rads.framework.annotations.RadsPropertySet;
@@ -43,13 +44,15 @@ public  class CRMItemLine extends CRMBusinessModelObject {
 		return imgBytes1;
 	}
 	public String getImgBytes1Str() {
-		return Arrays.toString(imgBytes1);
+		Base64.Encoder base64 = Base64.getEncoder();
+		return base64.encodeToString(imgBytes1);
 	}
 	public void setImgBytes1(byte[] imgBytes1) {
 		this.imgBytes1 = imgBytes1;
 	}
 	public String getImgBytes2Str() {
-		return Arrays.toString(imgBytes2);
+		Base64.Encoder base64 = Base64.getEncoder();
+		return base64.encodeToString(imgBytes2);
 	}
 	public byte[] getImgBytes2() {
 		return imgBytes2;
@@ -61,7 +64,8 @@ public  class CRMItemLine extends CRMBusinessModelObject {
 		return imgBytes3;
 	}
 	public String getImgBytes3Str() {
-		return Arrays.toString(imgBytes3);
+		Base64.Encoder base64 = Base64.getEncoder();
+		return base64.encodeToString(imgBytes3);
 	}
 	public void setImgBytes3(byte[] imgBytes3) {
 		this.imgBytes3 = imgBytes3;

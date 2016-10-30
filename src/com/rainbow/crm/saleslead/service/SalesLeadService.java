@@ -1,6 +1,7 @@
 package com.rainbow.crm.saleslead.service;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,11 +10,13 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
+import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.io.IOUtils;
@@ -300,11 +303,22 @@ public class SalesLeadService extends AbstractService implements ISalesLeadServi
 			            }
 			        });
 			 MimeMessage message = new MimeMessage(session);
+			 BodyPart messageBodyPart = new MimeBodyPart();
+			 messageBodyPart.setContent("<img>", "text/html");
 		     message.setFrom(new InternetAddress(from));
 		     message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 	         message.setSubject("Sale!!! Items you were looking for");
 	         loadImages(salesLead, context,realPath);
-	         message.setContent(getMessage(salesLead, context), "text/html; charset=utf-8");
+	         String msg = getMessage(salesLead, context);
+	         /**
+	          * 
+	          */
+	         FileOutputStream fos =new FileOutputStream(realPath +"\\test.html");
+	         fos.write("<HTML><BODY>".getBytes());
+	         fos.write(msg.getBytes());
+	         fos.write("</BODY></HTML>".getBytes());
+	         fos.close(); 
+	         message.setContent(msg, "text/html; charset=utf-8");
 	         Transport t = session.getTransport("smtps");
 	         t.connect(host,authuser, authpwd);
 	         t.sendMessage(message, message.getAllRecipients());

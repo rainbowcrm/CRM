@@ -8,9 +8,11 @@ Hello $customerName <br>
 	<br>
 	$line.item.specification from $line.item.manufacturer
 	<br>
-	<img id=\"profileImage1\" src=\"data:image/jpg;base64, $line.imgBytes1Str\">
-	<img id=\"profileImage2\" src=\"data:image/jpg;base64, $line.imgBytes2Str\">
-	<img id=\"profileImage3\" src=\"data:image/jpg;base64, $line.imgBytes3Str\">
+	#*
+	<img id="profileImage1" src="data:image/jpg;base64, $line.imgBytes1Str"/>
+	<img id="profileImage2" src="data:image/jpg;base64, $line.imgBytes2Str"/>
+	<img id="profileImage3" src="data:image/jpg;base64, $line.imgBytes3Str"/>
+	*#
 	<br>
 	<br>
 #end

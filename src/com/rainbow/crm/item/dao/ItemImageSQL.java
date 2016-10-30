@@ -141,7 +141,7 @@ public class ItemImageSQL {
 				itemImage.setItem(item);
 				itemImage.setFilePath(CRMAppConfig.INSTANCE.getProperty("Image_Path"));
 				itemImage.setFileName(rs.getString(4));
-				itemImage.setSuffix((char)rs.getByte(5));
+				itemImage.setSuffix(rs.getString(5).charAt(0));
 			}
 		}catch(IOException exIO) {
 			Logwriter.INSTANCE.error(exIO);
