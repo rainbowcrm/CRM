@@ -79,6 +79,8 @@
 </Page>
 <Page id = "salesperiodAnalysis" definition ="/resources/pages/salesanalysis/salestargetanalyse.xml" modelclass = "com.rainbow.crm.salesperiod.model.SalesPeriodAnalyzer" >
 </Page>
+<Page id = "productanalysis" definition ="/resources/pages/products/productanalyse.xml" modelclass = "com.rainbow.crm.product.model.ProductAnalyzer" >
+</Page>
 <Page id = "newwishlist" definition ="/resources/pages/wishlist/newwishlist.xml" modelclass = "com.rainbow.crm.wishlist.model.WishList" >
 </Page>
 <Page id = "newsaleslead" definition ="/resources/pages/saleslead/newsaleslead.xml" modelclass = "com.rainbow.crm.saleslead.model.SalesLead" >

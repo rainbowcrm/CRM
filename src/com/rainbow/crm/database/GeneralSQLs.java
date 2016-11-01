@@ -203,5 +203,34 @@ public class GeneralSQLs {
 		return 0;
 		
    }
+   
+   public static Map getItemSoldQtyByProduct(int productId, Date fromDate , Date toDate , int divisionId) {
+	   Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet rs  = null ;
+		Map<Integer,Double> ans = new HashMap<Integer,Double>();
+		try {
+			connection  = ConnectionCreater.getConnection() ;
+			String sql = "Select sum(sllines.qty),sllines.item_id from SALES sales,SALES_LINES sllines,Items items where sales.id = sllines.sales_id  " +
+			" and  sllines.item_id = items.id and  items.product_id= ? and sales.SALES_DATE >= ? and sales.SALES_DATE<= ?  group by   sllines.item_id" ;
+			statement = connection.prepareStatement(sql);
+			//statement.setInt(1, divisionId);
+			statement.setInt(1, productId);
+			statement.setTimestamp(2, new java.sql.Timestamp(fromDate.getTime()));
+			statement.setTimestamp(3, new java.sql.Timestamp(toDate.getTime()));
+			rs = statement.executeQuery() ;
+			while (rs.next()) {
+				Double qty = rs.getDouble(1);
+				Integer itemId = rs.getInt(2);
+				ans.put(itemId, qty);
+			}
+		}catch(SQLException ex) {
+			Logwriter.INSTANCE.error(ex);
+		}finally {
+			ConnectionCreater.close(connection, statement, rs);	
+		}
+		return ans;
+		
+   }
 	
 }

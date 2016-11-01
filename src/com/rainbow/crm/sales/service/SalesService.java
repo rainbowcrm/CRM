@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.transaction.annotation.Propagation;
@@ -29,6 +30,7 @@ import com.rainbow.crm.hibernate.ORMDAO;
 import com.rainbow.crm.inventory.model.InventoryUpdateObject;
 import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.item.service.IItemService;
+import com.rainbow.crm.product.model.Product;
 import com.rainbow.crm.product.validator.ProductValidator;
 import com.rainbow.crm.sales.dao.SalesDAO;
 import com.rainbow.crm.sales.model.Sales;
@@ -221,6 +223,12 @@ public class SalesService extends AbstractService implements ISalesService{
 		//SalesDAO dao = (SalesDAO)getDAO() ;
 		return GeneralSQLs.getItemSoldQty(item.getId(),from,to,division.getId());
 	}
+
+	@Override
+	public Map getItemSoldQtyByProduct(Product product, Date from, Date to) {
+		return GeneralSQLs.getItemSoldQtyByProduct(product.getId(), from, to, -1);
+	}
+	
 	
 	
 	

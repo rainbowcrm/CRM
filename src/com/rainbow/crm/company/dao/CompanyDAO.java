@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.filter.model.CRMFilter;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
@@ -22,6 +23,27 @@ public class CompanyDAO extends SpringHibernateDAO{
 		Object obj = session.get(Company.class, companyId);
 		closeSession(session,false);
 		return obj;
+	}
+	
+	
+	public long getTotalRecordCount( String tableName, CRMContext context ) {
+		Session session = openSession(false) ;
+    	try  {
+    	String queryString = " Select count(*) from " + tableName  ;
+    	Query  query = session.createQuery(queryString);
+    	List lst = query.list();
+    	if(!Utils.isNull(lst)) {
+    	  Object obj = lst.get(0);
+    	  if (obj!=null && obj instanceof Long) {
+    		  return(((Long)obj).longValue());
+    	  } if (obj!=null && obj instanceof Integer) {
+    		  return(((Integer)obj).intValue());
+    	  }
+    	}
+    		return 1;
+    	}finally{
+    		session.close();
+    	}
 	}
 	
 	public Company findByCode(String code) {
