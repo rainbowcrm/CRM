@@ -2,6 +2,7 @@ package com.rainbow.crm.item.model;
 
 import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
+import com.rainbow.crm.common.finitevalue.FiniteValueManager;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.product.model.Product;
 import com.rainbow.crm.uom.model.UOM;
@@ -28,7 +29,7 @@ public class Item  extends CRMBusinessModelObject{
 	String specification;
 	boolean onPromotion;
 	String itemClass; 
-	
+	String itemClassDesc; 
 	
 	public String getCode() {
 		return code;
@@ -161,6 +162,10 @@ public class Item  extends CRMBusinessModelObject{
 	}
 	public void setItemClass(String itemClass) {
 		this.itemClass = itemClass;
+	}
+
+	public String getItemClassDesc() {
+		return FiniteValueManager.INSTANCE.getFiniteValueDesc(itemClass);
 	}
 	
 	

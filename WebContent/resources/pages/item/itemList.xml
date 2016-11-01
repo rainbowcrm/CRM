@@ -14,7 +14,7 @@ Controller = "com.rainbow.crm.item.controller.ItemListController">
 <responseElements>
 <responseElement key = "FilterName" >txtFilterName</responseElement>
 <responseElement key = "Code" >txtCode</responseElement>
-<responseElement key = "Barcode" >txtBarcode</responseElement>
+<responseElement key = "ItemClass" >txtitemClass</responseElement>
 <responseElement key = "Name" >txtItName</responseElement>
 <responseElement key = "Product.Name" >txtProduct</responseElement>
 <responseElement key = "Manufacturer" >txtManu</responseElement>
@@ -43,7 +43,10 @@ Controller = "com.rainbow.crm.item.controller.ItemListController">
    	<Element label = "Item_Code"  type = "UIText" Id = "txtCode"  property ="Code" />
  </FilterNode>
  <FilterNode>
-   	<Element label = "Barcode"  type = "UIText" Id = "txtBarCode"  property ="Barcode" />
+   	<Element label = "Item_Class"  type = "UIList" Id = "txtitemClass"  property ="itemClass" >
+   	<options populator =  "getItemClasses"> 
+	</options>
+	</Element>
  </FilterNode>
  <FilterNode>
 <Element label = "Item"  type = "UILookupText"  Id = "txtItName"  property ="Name" showLookupAsDialog="true" dialogId="dlgIt"
@@ -83,10 +86,13 @@ Controller = "com.rainbow.crm.item.controller.ItemListController">
  <Column title ="Product"  width ="20%" >
   <Element label = ""  type = "UINote" Id = "idProdNote"  property ="Product.Name" />
  </Column>
-  <Column title ="Manufacturer"  width ="20%" >
+ <Column title ="Item_Class"  width ="15%" >
+  <Element label = ""  type = "UINote" Id = "iditClsNote"  property ="itemClassDesc" />
+ </Column>
+  <Column title ="Manufacturer"  width ="15%" >
   <Element label = ""  type = "UINote" Id = "idManuNote"  property ="Manufacturer" />
  </Column>
-  <Column title ="Retail_Price"  width ="20%" >
+  <Column title ="Retail_Price"  width ="10%" >
   <Element label = ""  type = "UINote" Id = "idPriceNote"  property ="RetailPrice" />
  </Column>
   </Columns>

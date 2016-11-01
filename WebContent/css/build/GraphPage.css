@@ -5674,11 +5674,11 @@ div.summaryStyle {
 svg line {
   stroke: #387ef5 !important; }
 
-svg rect:nth-of-type(2n) {
+/* svg rect:nth-of-type(2n) {
   fill: #f53d3d; }
 
 svg rect:nth-of-type(2n+1) {
-  fill: #69BB7B; }
+  fill: #69BB7B; } */
 
 svg text {
   fill: #263238; }

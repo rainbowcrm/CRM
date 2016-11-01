@@ -45,7 +45,8 @@ public class ProductAnalyzerController  extends GeneralController{
 
 	@Override
 	public PageResult read(ModelObject object) {
-		String [] colors = { "Red","Blue" ,"Green" , "Violet" , "Indigo" , "Majenta" ,"Brown" ,"Yellow" , "Orange" } ;
+		String [] colors = { "Red","Blue" ,"Green" , "Violet" , "Indigo" , "Majenta" ,"Brown" ,"Yellow" , "Orange", 
+				"Salmon","Gray","SandyBrown","Ivory","CadetBlue","OrangeRed","SeaGreen"} ;
 		int index = 0;
 		ProductAnalyzer analyzer = (ProductAnalyzer) object;
 		PieChartData pieChartData = new PieChartData();
@@ -65,10 +66,11 @@ public class ProductAnalyzerController  extends GeneralController{
 			Item item = (Item)itemService.getById(itemId);
 			Double qty = (Double) map.get(itemId);
 			pieSliceData.setVolume(qty);
-			pieSliceData.setText(item.getName());
+			pieSliceData.setText(item.getName() + "-" +  qty);
 			pieSliceData.setColor(colors[index ++ ]);
 			pieChartData.addPieSlice(pieSliceData);
 		}
+		pieChartData.setFooterNote(product.getName());
 		analyzer.setSalesData(pieChartData);
 		return new PageResult();
 	}

@@ -1,11 +1,15 @@
 package com.rainbow.crm.item.controller;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMListController;
 import com.rainbow.crm.common.IBusinessService;
 import com.rainbow.crm.common.SpringObjectFactory;
+import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.division.validator.DivisionValidator;
 import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.item.service.IItemService;
@@ -52,6 +56,13 @@ public class ItemListController extends CRMListController {
 		return result;
 	}
 	
+	public Map <String, String > getItemClasses() {
+		Map<String, String> ans = new LinkedHashMap<String, String>() ; 
+		ans.put("null", "---Select one---") ;
+		ans.putAll(GeneralSQLs.getFiniteValues(CRMConstants.FV_ITEMCLASS_TYPE));
+		return ans;
+	}
+
 	
 
 }

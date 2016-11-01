@@ -87,7 +87,7 @@ public class ItemService extends AbstractService implements IItemService {
 		boolean triggerWishList = false;
 		Item oldObject =(Item)getById(((Item)object).getId());
 		Item curObject = (Item) object ;
-		if (curObject.getRetailPrice() < oldObject.getRetailPrice() ) {
+		if (oldObject.getRetailPrice()!=null && curObject.getRetailPrice() != null &&  curObject.getRetailPrice() < oldObject.getRetailPrice() ) {
 			triggerWishList = true ;
 		}
 		TransactionResult result= super.update(object, context);
