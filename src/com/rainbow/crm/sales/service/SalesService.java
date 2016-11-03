@@ -225,8 +225,8 @@ public class SalesService extends AbstractService implements ISalesService{
 	}
 
 	@Override
-	public Map getItemSoldQtyByProduct(Product product, Date from, Date to) {
-		return GeneralSQLs.getItemSoldQtyByProduct(product.getId(), from, to, -1);
+	public Map getItemSoldQtyByProduct(Product product, Date from, Date to,  Division division , String itemClass) {
+		return GeneralSQLs.getItemSoldQtyByProduct(product.getId(), from, to, -1,itemClass);
 	}
 	
 	

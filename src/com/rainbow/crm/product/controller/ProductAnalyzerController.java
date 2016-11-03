@@ -8,8 +8,11 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.SpringObjectFactory;
+import com.rainbow.crm.common.finitevalue.FiniteValue;
+import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.database.LoginSQLs;
 import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.item.service.IItemService;
@@ -47,8 +50,24 @@ public class ProductAnalyzerController  extends GeneralController{
 	public PageResult read(ModelObject object) {
 		String [] colors = { "Red","Blue" ,"Green" , "Violet" , "Indigo" , "Majenta" ,"Brown" ,"Yellow" , "Orange", 
 				"Salmon","Gray","SandyBrown","Ivory","CadetBlue","OrangeRed","SeaGreen"} ;
-		int index = 0;
 		ProductAnalyzer analyzer = (ProductAnalyzer) object;
+		PieChartData  pieTopChartData = readByItemCass(analyzer,CRMConstants.ITEM_CLASS.TOP_END,colors);
+		analyzer.setTopSalesData(pieTopChartData);
+		
+		PieChartData  pieupMedChartData = readByItemCass(analyzer,CRMConstants.ITEM_CLASS.UPPER_MEDIUM,colors);
+		analyzer.setUpMedSalesData(pieupMedChartData);
+		
+		PieChartData  pielowMedChartData = readByItemCass(analyzer,CRMConstants.ITEM_CLASS.LOWER_MEDIUM,colors);
+		analyzer.setLowMedSalesData(pielowMedChartData);
+		
+		PieChartData  pieeconChartData = readByItemCass(analyzer,CRMConstants.ITEM_CLASS.ECONOMIC,colors);
+		analyzer.setEconSalesData(pieeconChartData);
+		
+		return new PageResult();
+	}
+	
+	private PieChartData readByItemCass  (ProductAnalyzer analyzer , String itemClass, String []colors) {
+		int index = 0;
 		PieChartData pieChartData = new PieChartData();
 		Date fromDate = analyzer.getFromDate() ;
 		Date toDate = analyzer.getToDate() ;
@@ -57,7 +76,7 @@ public class ProductAnalyzerController  extends GeneralController{
 		product =(Product) service.getByBusinessKey(product,(CRMContext) getContext());
 		ISalesService salesService = (ISalesService)SpringObjectFactory.INSTANCE.getInstance("ISalesService");
 		IItemService itemService = (IItemService)SpringObjectFactory.INSTANCE.getInstance("IItemService");
-		Map map = salesService.getItemSoldQtyByProduct(product, fromDate, toDate) ;
+		Map map = salesService.getItemSoldQtyByProduct(product, fromDate, toDate,null,itemClass) ;
 		Set keys = map.keySet();
 		Iterator it = keys.iterator();
 		while (it.hasNext()) {
@@ -70,11 +89,10 @@ public class ProductAnalyzerController  extends GeneralController{
 			pieSliceData.setColor(colors[index ++ ]);
 			pieChartData.addPieSlice(pieSliceData);
 		}
-		pieChartData.setFooterNote(product.getName());
-		analyzer.setSalesData(pieChartData);
-		return new PageResult();
+		FiniteValue desc = GeneralSQLs.getFiniteValue(itemClass);
+		pieChartData.setFooterNote(product.getName() + "-" + desc.getDescription());
+		return pieChartData;
 	}
-	
 	
 	
 	

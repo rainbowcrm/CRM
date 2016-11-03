@@ -8,6 +8,10 @@ import com.techtrade.rads.framework.model.graphdata.PieChartData;
 public class ProductAnalyzer extends CRMModelObject{
 	
 	PieChartData salesData  ;
+	PieChartData topSalesData;
+	PieChartData upMedSalesData;
+	PieChartData lowMedSalesData;
+	PieChartData econSalesData;
 	Product product ;
 	Date fromDate;
 	Date toDate;
@@ -15,6 +19,30 @@ public class ProductAnalyzer extends CRMModelObject{
 	
 	
 	
+	public PieChartData getTopSalesData() {
+		return topSalesData;
+	}
+	public void setTopSalesData(PieChartData topSalesData) {
+		this.topSalesData = topSalesData;
+	}
+	public PieChartData getUpMedSalesData() {
+		return upMedSalesData;
+	}
+	public void setUpMedSalesData(PieChartData upMedSalesData) {
+		this.upMedSalesData = upMedSalesData;
+	}
+	public PieChartData getLowMedSalesData() {
+		return lowMedSalesData;
+	}
+	public void setLowMedSalesData(PieChartData lowMedSalesData) {
+		this.lowMedSalesData = lowMedSalesData;
+	}
+	public PieChartData getEconSalesData() {
+		return econSalesData;
+	}
+	public void setEconSalesData(PieChartData econSalesData) {
+		this.econSalesData = econSalesData;
+	}
 	public Product getProduct() {
 		return product;
 	}

@@ -34,13 +34,34 @@ Controller = "com.rainbow.crm.product.controller.ProductAnalyzerController">
 </Element>
 </Section>
 <Section type= "displaySection">
-	<Element type = "UIPieChart" Id = "brChrt"  dataProvider = "salesData" >
+ 	<Element type = "UIPieChart" Id = "brChrt2"  dataProvider = "UpMedSalesData" >
 	  <centerX>150</centerX>
 	  <centerY>150</centerY>
-	  <radius>100</radius>
-	  <rangeHeight>600</rangeHeight>
-	  <rangeWidth>600</rangeWidth>
- </Element>
+	  <radius>50</radius>
+	  <rangeHeight>300</rangeHeight>
+	  <rangeWidth>700</rangeWidth>
+ 	</Element>
+	<Element type = "UIPieChart" Id = "brChrt"  dataProvider = "topSalesData" >
+	  <centerX>150</centerX>
+	  <centerY>150</centerY>
+	  <radius>50</radius>
+	  <rangeHeight>300</rangeHeight>
+	  <rangeWidth>500</rangeWidth>
+ 	</Element>
+ 	<Element type = "UIPieChart" Id = "brChrt3"  dataProvider = "LowMedSalesData" >
+	  <centerX>150</centerX>
+	  <centerY>150</centerY>
+	  <radius>50</radius>
+	  <rangeHeight>300</rangeHeight>
+	  <rangeWidth>500</rangeWidth>
+ 	</Element>
+ 	<Element type = "UIPieChart" Id = "brChrt4"  dataProvider = "EconSalesData" >
+	  <centerX>150</centerX>
+	  <centerY>150</centerY>
+	  <radius>50</radius>
+	  <rangeHeight>300</rangeHeight>
+	  <rangeWidth>500</rangeWidth>
+ 	</Element>  
 </Section>
 </CoreSection>
 <Section type ="copyRightSection"/>

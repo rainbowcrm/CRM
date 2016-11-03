@@ -13,6 +13,7 @@ import java.util.Map;
 
 import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.logger.Logwriter;
+import com.techtrade.rads.framework.utils.Utils;
 
 public class GeneralSQLs {
 	
@@ -62,6 +63,31 @@ public class GeneralSQLs {
 			ConnectionCreater.close(connection, statement, rs);	
 		}
 		return finiteValues;
+	}
+	
+	public static FiniteValue getFiniteValue(String code) {
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet rs  = null ;
+		FiniteValue finiteValue = new FiniteValue();
+		try {
+			connection  = ConnectionCreater.getConnection() ;
+			String sql =   "Select CODE,DESCRIPTION,IS_DEFAULT from FINITE_VALUES where CODE = ? " ;
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, code);
+			rs = statement.executeQuery() ;
+			if (rs.next()) {
+				finiteValue = new FiniteValue();
+				finiteValue.setCode(code);
+				finiteValue.setDefault(rs.getBoolean(3));
+				finiteValue.setDescription(rs.getString(2));
+			}
+		}catch(SQLException ex) {
+			Logwriter.INSTANCE.error(ex);
+		}finally {
+			ConnectionCreater.close(connection, statement, rs);	
+		}
+		return finiteValue;
 	}
 	
 	public static List<FiniteValue> getAllFiniteValues () {
@@ -204,15 +230,18 @@ public class GeneralSQLs {
 		
    }
    
-   public static Map getItemSoldQtyByProduct(int productId, Date fromDate , Date toDate , int divisionId) {
+   public static Map getItemSoldQtyByProduct(int productId, Date fromDate , Date toDate , int divisionId, String itemClass) {
 	   Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet rs  = null ;
 		Map<Integer,Double> ans = new HashMap<Integer,Double>();
 		try {
 			connection  = ConnectionCreater.getConnection() ;
+			String divisionCond = (divisionId!=-1)?" and sales.division_id= " +  divisionId:" ";
+			String itemClassCond =(!Utils.isNull(itemClass))?" and items.item_class = '" + itemClass +"'":" ";
 			String sql = "Select sum(sllines.qty),sllines.item_id from SALES sales,SALES_LINES sllines,Items items where sales.id = sllines.sales_id  " +
-			" and  sllines.item_id = items.id and  items.product_id= ? and sales.SALES_DATE >= ? and sales.SALES_DATE<= ?  group by   sllines.item_id" ;
+			" and  sllines.item_id = items.id and  items.product_id= ? and sales.SALES_DATE >= ? and sales.SALES_DATE<= ? " + divisionCond  +  itemClassCond +
+			" group by   sllines.item_id" ;
 			statement = connection.prepareStatement(sql);
 			//statement.setInt(1, divisionId);
 			statement.setInt(1, productId);

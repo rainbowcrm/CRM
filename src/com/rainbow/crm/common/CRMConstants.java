@@ -32,4 +32,12 @@ public class CRMConstants {
 		public final static String NOSALE = "NOSALE";
 		public final static String PARTSALE = "PARTSALE";
 	}
+	
+	public final static class ITEM_CLASS {
+		public final static String TOP_END = "TOPEND";
+		public final static String UPPER_MEDIUM = "UPMEDIUM";
+		public final static String LOWER_MEDIUM = "LWMEDIUM";
+		public final static String ECONOMIC = "ECONOMIC";
+	}
 }
+

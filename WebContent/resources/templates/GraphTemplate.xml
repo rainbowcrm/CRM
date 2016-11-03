@@ -28,7 +28,7 @@
   </Section>
   <Section Id = "displaySection"  showinTable = "true" style= "childSectionStyle">
    <noRows>-1</noRows>
- <noCols>1</noCols> 
+ <noCols>2</noCols> 
   </Section>
   </CoreSection>
  <Section Id ="summary" showinTable = "true"  style= "summaryStyle" >
