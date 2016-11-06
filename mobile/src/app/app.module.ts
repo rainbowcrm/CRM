@@ -4,7 +4,9 @@ import { IonicApp, IonicModule } from 'ionic-angular';
 import { PSApp } from './app.component';
 import { LoginModule } from '../pages/login/login.module';
 import { CustomerMgmtModule } from '../pages/customer-mgmt/customer-mgmt.module';
+import { ItemModule } from '../pages/items/item.module';
 import { HomePage } from '../pages/home/home';
+import { ContactMgmtModule } from '../pages/contact-mgmt/contact-mgmt.module';
 
 import { HTTPService,Loader } from '../providers/';
 
@@ -16,7 +18,9 @@ import { HTTPService,Loader } from '../providers/';
   imports: [
     IonicModule.forRoot(PSApp),
     LoginModule,
-    CustomerMgmtModule
+    CustomerMgmtModule,
+    ContactMgmtModule,
+    ItemModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

@@ -1,5 +1,5 @@
 ps-customer-list {
-   .card-md ion-card-header {
+   .scroll-content ion-card-header {
     background: color($colors, secondary);
     padding: 10px;
     font-weight: 600;
@@ -12,11 +12,11 @@ ps-customer-list {
     }
   }
 
-  .card-md ion-card-header.deleted-customer{
+  .scroll-content ion-card-header.deleted-customer{
       background: color($colors, danger); 
   }
 
-  .card-md ion-card-header + ion-card-content{
+  .scroll-content ion-card-header + ion-card-content{
         padding-top: 13px;
     }
 

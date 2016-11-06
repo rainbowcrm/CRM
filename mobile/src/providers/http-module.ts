@@ -23,6 +23,7 @@ export class HTTPService {
     }
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
+     console.log(JSON.stringify(data));
     switch(restType){
       case "get": return this.http.get(this.url)
                     .map(this.extractData)

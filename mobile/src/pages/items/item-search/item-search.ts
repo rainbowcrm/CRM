@@ -1,0 +1,91 @@
+import { Component } from '@angular/core';
+import { NavController, ToastController } from 'ionic-angular';
+import { Item, Product, ItemSearchRequest, ItemSearchResponse } from '../';
+import { HTTPService, Loader } from '../../../providers/';
+import { HomePage } from '../../home/home';
+
+/*
+  Generated class for the ItemSearch page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+*/
+@Component({
+  selector: 'ps-item-search',
+  templateUrl: 'item-search.html'
+})
+export class ItemSearch {
+  private model:Item = new Item();
+  private request: ItemSearchRequest;
+  private response: ItemSearchResponse;
+  private errorMessage:string;
+
+  constructor(public navCtrl: NavController, private http:HTTPService,
+    private loader:Loader,  private toastCtrl: ToastController) {
+    this.model.Product = new Product();
+  }
+
+  ionViewDidLoad() {
+    console.log('Hello ItemSearch Page');
+  }
+
+  goHome():void{
+      this.navCtrl.setRoot(HomePage);
+  }
+
+  NoItemsFoundToast():any{
+     let toast = this.toastCtrl.create({
+      message: 'No Items found',
+      duration: 2000,
+      position: 'top'
+     });
+    toast.present();
+  }
+
+  doSearch():void{
+      this.errorMessage = null;
+      this.request = new ItemSearchRequest();
+      this.request.currentmode = 'READ';
+      this.request.fixedAction = "FixedAction.NAV_FIRSTPAGE";
+      this.request.pageID = "items";
+      this.request.filter = [];
+      this.http.processServerRequest("post",this.request, true).subscribe(
+                     res => this.itemSearchSuccess(res),
+                     error =>  this.itemSearchError(error));  
+  }
+
+  getFilters():Array<any>{
+      let filters = [];
+      for(let data in this.model){
+        if(this.model[data] && this.model[data].length>0)
+           filters.push({
+	      	  "field" :data ,
+	   	      "operator" :"EQUALS",
+	   	      "value":this.model[data]
+	         });
+      }
+      return filters;
+  }
+  itemSearchSuccess(response):void{
+    this.loader.dismissLoader();
+    this.response = response;
+    if(this.response.result == "failure"){
+       this.errorMessage = "Failed to search items"; 
+       return ;
+    }
+    if(this.response.dataObject.length == 0){
+       this.NoItemsFoundToast();
+       return ;
+    }
+    debugger
+    //this.navCtrl.push(CustomerListPage, {customers:this.response.dataObject});
+  }
+ 
+
+  itemSearchError(error){
+    this.http.setAuthToken(null);
+    this.loader.dismissLoader();
+    this.errorMessage = "Failed to search items";
+  }
+
+}

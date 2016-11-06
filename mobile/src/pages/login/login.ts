@@ -20,8 +20,8 @@ export class LoginPage {
   private errorMessage;
   constructor(public navCtrl: NavController,private http:HTTPService,
     private loader:Loader) {
-      this.model.password="qwe";
-      this.model.username="abc@assa";
+      this.model.password="abc123";
+      this.model.username="sonu@atstar";
     }
 
   ionViewDidLoad() {

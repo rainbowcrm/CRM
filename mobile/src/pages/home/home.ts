@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { CustomerHomePage } from '../customer-mgmt';
+import { ContactHomePage } from '../contact-mgmt';
+import { ItemSearch } from '../items';
 
 /*
   Generated class for the Home page.
@@ -15,28 +17,13 @@ import { CustomerHomePage } from '../customer-mgmt';
 export class HomePage {
   private rootTitle = "Menu";
   private isRoot;
-  private rootMenus = ["Setup","Items","Customer Management","Sales & Marketing","Pricing & Promotions","Business Intelligence","Inventory"];
+  private rootMenus = ["Item Search","Customer Management","Contacts","Pricing & Promotions","Business Intelligence","Inventory"];
   private submenuList;
   private menuTitle = "Menu";
-  private subMenus = {"Setup":[
-                       {"label":"Configuration", "page":'config'},
-                       {"label":"Data Setup", "page":'rdscontroller?page=setup'},
-                       {"label":"Divisions", "page":'rdscontroller?page=divisions'},
-                       {"label":"Users", "page":'rdscontroller?page=appUsers'},
-                       {"label":"Vendors", "page":'rdscontroller?page=vendors'}
-                     ],
-                    "Items":[
-                       {"label":"Categories", "page":'rdscontroller?page=categories'},
-                       {"label":"Products", "page":'rdscontroller?page=products'},
-                       {"label":"Items", "page":'rdscontroller?page=items'},
-                       {"label":"Item Images", "page":'rdscontroller?page=itemimages'}
-                    ],
-                    "Customer Management":[
-                       {"label":"Customers", "page":CustomerHomePage},
-                       {"label":"Categories", "page":'customers'},
-                       {"label":"Loyalty", "page":'customers'},
-                       {"label":"Wish List", "page":'customers'}
-                    ],
+  private subMenus = {
+                    "Item Search":ItemSearch,
+                    "Customer Management":CustomerHomePage,
+                    "Contacts":ContactHomePage,
                     "Sales & Marketing":[
                        {"label":"Sales Target", "page":'rdscontroller?page=salesperiodlist'},
                        {"label":"Territories", "page":'rdscontroller?page=territories'},
@@ -54,13 +41,6 @@ export class HomePage {
                        {"label":"Sales Target Evaluation", "page":'rdscontroller?page=salesperiodAnalysis'},
                        {"label":"Product Analysis", "page":'rdscontroller?page=productanalysis'},
                        {"label":"Salesforce_Analysis", "page":'rdscontroller?page=salesforceanalysis'}
-                    ],
-                    "Inventory":[
-                       {"label":"Stock", "page":'rdscontroller?page=inventory'},
-                       {"label":"Purchases", "page":'rdscontroller?page=purchases'},
-                       {"label":"Purchase Returns", "page":'rdscontroller?page=purchasereturns'},
-                       {"label":"Sales", "page":'rdscontroller?page=sales'},
-                       {"label":"Sales Returns", "page":'rdscontroller?page=salesreturns'}
                     ]};
   constructor(public navCtrl: NavController) {
     this.isRoot = true;
@@ -71,9 +51,17 @@ export class HomePage {
   }
 
   displaySubmenu(index, rootPage):void{
-    this.isRoot = false;
-    this.menuTitle = rootPage;
     this.submenuList = this.subMenus[rootPage];
+    if(this.submenuList.constructor == Array)
+    {
+      this.isRoot = false;
+      this.menuTitle = rootPage;
+    }
+    else{
+      this.isRoot = true;
+      this.menuTitle = "Menu";
+      this.navigateToPage(index, {page:this.submenuList});
+    }
   }
 
   displayMainmenu(index, menu):void{
