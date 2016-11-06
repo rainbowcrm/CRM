@@ -59,6 +59,8 @@
     </bean>
     <bean id="IFollowupService" class="com.rainbow.crm.followup.service.FollowupService">
     </bean>
+    <bean id="IAlertService" class="com.rainbow.crm.alert.service.AlertService">
+    </bean>
     <bean id="IPurchaseService" class="com.rainbow.crm.purchase.service.PurchaseService">
     </bean>
     <bean id="ISalesPeriodService" class="com.rainbow.crm.salesperiod.service.SalesPeriodService">
@@ -99,6 +101,9 @@
     <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
     <bean id="FollowupDAO" class="com.rainbow.crm.followup.dao.FollowupDAO">
+    <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+     <bean id="AlertDAO" class="com.rainbow.crm.alert.dao.AlertDAO">
     <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
      <bean id="PurchaseDAO" class="com.rainbow.crm.purchase.dao.PurchaseDAO">
@@ -156,6 +161,7 @@
         <value>com/rainbow/crm/saleslead/model/SalesLead.hbm.xml</value>
         <value>com/rainbow/crm/saleslead/model/SalesLeadLine.hbm.xml</value>
         <value>com/rainbow/crm/followup/model/Followup.hbm.xml</value>  
+        <value>com/rainbow/crm/alert/model/Alert.hbm.xml</value>  
         </list>  
         </property>  
         

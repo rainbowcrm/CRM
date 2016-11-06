@@ -70,7 +70,7 @@ public class LoginController extends  GeneralController{
 				if (user.getCompany().getId() == 1)
 					res.setNextPageKey("sysadmin"); // newdivision
 				else
-					res.setNextPageKey("divisions"); // newdivision
+					res.setNextPageKey("alerts"); // newdivision
 				generateLoginRecord(user.getUserId());
 			}else {
 				Logwriter.INSTANCE.debug("Wrong password");

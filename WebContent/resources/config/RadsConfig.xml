@@ -38,6 +38,8 @@
 </Page>
 <Page id = "followups" definition ="/resources/pages/followup/followupList.xml" modelclass = "com.rainbow.crm.followup.model.Followup" >
 </Page>
+<Page id = "alerts" definition ="/resources/pages/alert/alertList.xml" modelclass = "com.rainbow.crm.alert.model.Alert" >
+</Page>
 <Page id = "purchases" definition ="/resources/pages/purchase/purchaseList.xml" modelclass = "com.rainbow.crm.purchase.model.Purchase" >
 </Page>
 <Page id = "salesperiodlist" definition ="/resources/pages/salesperiod/salesPeriodList.xml" modelclass = "com.rainbow.crm.salesperiod.model.SalesPeriod" >
@@ -157,6 +159,7 @@
 	<Element label = "" type = "UIMenu" Id = "menu05" style="menustyle" title="Wish_List" link = "rdscontroller?page=wishlist"   />
  </Element>
  <Element label = "" type = "UIMenu" Id = "menu30" style="menustyleParent" title="Sales_Marketing" groupId= "menuGRP004"  >
+ 	<Element label = "" type = "UIMenu" Id = "menu301" style="menustyle" title="Alerts" link = "rdscontroller?page=alerts"   />
  	<Element label = "" type = "UIMenu" Id = "menu31" style="menustyle" title="Sales_Period" link = "rdscontroller?page=salesperiodlist"   />
 	<Element label = "" type = "UIMenu" Id = "menu33" style="menustyle" title="Expenses" link = "rdscontroller?page=salesexpenses"   />
 	<Element label = "" type = "UIMenu" Id = "menu34" style="menustyle" title="Sales_Leads" link = "rdscontroller?page=saleslead"   />
