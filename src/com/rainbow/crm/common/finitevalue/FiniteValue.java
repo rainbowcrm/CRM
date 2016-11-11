@@ -1,9 +1,11 @@
 package com.rainbow.crm.common.finitevalue;
 
+import java.io.Serializable;
+
 import com.techtrade.rads.framework.annotations.RadsPropertySet;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 
-public class FiniteValue extends ModelObject{
+public class FiniteValue extends ModelObject implements Serializable,Cloneable{
 	String type ;
 	String  code;
 	String description;

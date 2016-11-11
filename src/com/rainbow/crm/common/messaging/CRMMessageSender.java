@@ -9,8 +9,7 @@ import com.rainbow.crm.inventory.model.InventoryUpdateObject;
 public class CRMMessageSender {
 
 	public static void sendMessage(CRMModelObject object) {
-		InventoryUpdateObject io = (InventoryUpdateObject) object ;
 		JmsTemplate template = (JmsTemplate)SpringObjectFactory.INSTANCE.getInstance("jmsTemplate") ;
-		template.convertAndSend(io);
+		template.convertAndSend(object);
 	}
 }

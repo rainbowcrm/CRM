@@ -4,7 +4,13 @@ import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.ObjectMessage;
 
+import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
+import com.rainbow.crm.alert.model.Alert;
+import com.rainbow.crm.alert.service.IAlertService;
+import com.rainbow.crm.common.CRMConstants;
+import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.SpringObjectFactory;
+import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.inventory.model.InventoryUpdateObject;
 import com.rainbow.crm.inventory.service.IInventoryService;
 import com.rainbow.crm.logger.Logwriter;
@@ -17,6 +23,10 @@ public class CRMMessageReceiver implements MessageListener {
 		Logwriter.INSTANCE.debug("message=" + message);
 		ObjectMessage objMsg = (ObjectMessage)message ;
 		try {
+			if (objMsg.getObject() instanceof Alert) {
+				createAlert((Alert)objMsg.getObject() );
+				
+			}
 			if (objMsg.getObject() instanceof InventoryUpdateObject) {
 				InventoryUpdateObject inventoryObject = (InventoryUpdateObject)objMsg.getObject() ; 
 				IInventoryService service = (IInventoryService)SpringObjectFactory.INSTANCE.getInstance("IInventoryService");
@@ -34,6 +44,21 @@ public class CRMMessageReceiver implements MessageListener {
 			Logwriter.INSTANCE.error(ex);
 		}
 		
+	}
+	
+	private CRMContext makeContext(CRMBusinessModelObject model) {
+		CRMContext context = new CRMContext();
+		context.setLoggedinCompany(model.getCompany().getId());
+		context.setAuthenticated(true);
+		context.setUser(model.getLastUpdateUser());
+		return context ;
+	}
+	
+	private void createAlert(Alert alert) {
+		IAlertService service = (IAlertService)SpringObjectFactory.INSTANCE.getInstance("IAlertService");
+		CRMContext context  = makeContext(alert) ;
+		alert.setStatus(new FiniteValue(CRMConstants.ALERT_STATUS.OPEN));
+		service.create(alert, context);
 	}
 	
 	

@@ -41,5 +41,20 @@ public class CRMConstants {
 		public final static String LOWER_MEDIUM = "LWMEDIUM";
 		public final static String ECONOMIC = "ECONOMIC";
 	}
+	
+	public final static class ALERT_STATUS {
+		public final static String OPEN = "ALTOPN";
+		public final static String ACKNOWLEDGED = "ALTACK";
+		public final static String VOID = "ALTVOID";
+		public final static String EXPIRED = "ALTEXPRD";
+	}
+	
+	public final static class ALERT_TYPE {
+		public final static String SALESLEAD = "ALTSLSLEAD";
+		public final static String FOLLOWUP = "ALTFLLWUP";
+		public final static String INVSHORTAGE = "ALTINVSHRT";
+		public final static String APPOINTMENT = "ALTAPP";
+	}
+	
 }
 

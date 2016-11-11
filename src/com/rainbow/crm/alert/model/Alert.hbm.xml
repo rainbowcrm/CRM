@@ -12,6 +12,7 @@
       </id>
       <version name="objectVersion" column="version" type="integer"></version>
       <many-to-one name="owner" column ="OWNER" not-null="false" lazy="false" ></many-to-one>
+      <many-to-one name="division" column ="division_id" not-null="true" lazy="false" ></many-to-one>
       <property name="raisedDate" column="RAISED_DATE" type="timestamp"/>
       <property name="acknowDate" column="ACKNO_DATE" type="timestamp"/>
        <property name="actionDate" column="ACTION_DATE" type="timestamp"/>

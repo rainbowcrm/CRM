@@ -30,6 +30,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.rainbow.crm.abstratcs.model.CRMItemLine;
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
+import com.rainbow.crm.alert.model.Alert;
 import com.rainbow.crm.common.AbstractService;
 import com.rainbow.crm.common.CRMAppConfig;
 import com.rainbow.crm.common.CRMConstants;
@@ -188,9 +189,23 @@ public class SalesLeadService extends AbstractService implements ISalesLeadServi
 			}
 		}
 		TransactionResult result= super.create(object, context);
+		raiseAlert(salesLead, context);
 		return result; 
 	}
 
+	  private void raiseAlert(SalesLead lead, CRMContext context) {
+		  Alert alert = new Alert();
+		  alert.setCompany(lead.getCompany());
+		  alert.setType (new FiniteValue( CRMConstants.ALERT_TYPE.SALESLEAD));
+		  alert.setActionDate(lead.getReleasedDate());
+		  alert.setDivision(lead.getDivision());
+		  alert.setRaisedDate(new java.util.Date());
+		  alert.setData("Sales Lead Generated" +  lead.getDocNumber());
+		 // alert.setUrl("./");
+		  CRMMessageSender.sendMessage(alert);
+		  
+	  }
+	
 	@Override
 	public TransactionResult update(CRMModelObject object, CRMContext context) {
 		SalesLead salesLead = (SalesLead)object ;
