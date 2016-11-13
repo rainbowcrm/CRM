@@ -200,8 +200,8 @@ public class SalesLeadService extends AbstractService implements ISalesLeadServi
 		  alert.setActionDate(lead.getReleasedDate());
 		  alert.setDivision(lead.getDivision());
 		  alert.setRaisedDate(new java.util.Date());
-		  alert.setData("Sales Lead Generated" +  lead.getDocNumber());
-		 // alert.setUrl("./");
+		  alert.setData("New Sales Lead-" +  lead.getDocNumber());
+		  alert.setUrl("./rdscontroller?page=newsaleslead&id="+lead.getId() +"&hdnFixedAction=FixedAction.ACTION_GOEDITMODE");
 		  CRMMessageSender.sendMessage(alert);
 		  
 	  }

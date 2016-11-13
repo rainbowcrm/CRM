@@ -20,7 +20,7 @@
       <many-to-one name="status" column ="STATUS" not-null="false" lazy="false" ></many-to-one>
       <property name="raisedBy" column="RAISED_BY" type="string"/>
       <property name="data" column="DATA" type="string"/>
-      <property name="url" column="URL" type="timestamp"/>
+      <property name="url" column="URL" type="string"/>
       <many-to-one name="company" column ="company_id" not-null="true" lazy="false" ></many-to-one>
       <property name="deleted" column="is_deleted" type="boolean"/>
       <property name="createdDate" column="created_date" type="timestamp" update="false"/>

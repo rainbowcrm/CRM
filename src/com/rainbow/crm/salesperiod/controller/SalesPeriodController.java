@@ -28,7 +28,11 @@ import com.techtrade.rads.framework.utils.Utils;
 
 public class SalesPeriodController extends TransactionController{
 	
-	
+	@Override
+	public ModelObject populateFullObjectfromPK(ModelObject objects) {
+		return (ModelObject) getService().getById(object);
+	}
+
 	
 	@Override
 	public List<RadsError> adaptfromUI(ModelObject modelObject) {

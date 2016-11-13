@@ -28,7 +28,11 @@ import com.techtrade.rads.framework.utils.Utils;
 
 public class PurchaseController extends TransactionController{
 	
-	
+	@Override
+	public ModelObject populateFullObjectfromPK(ModelObject objects) {
+		return (ModelObject) getService().getById(object.getPK());
+	}
+
 	
 	@Override
 	public List<RadsError> adaptfromUI(ModelObject modelObject) {

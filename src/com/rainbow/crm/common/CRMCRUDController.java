@@ -26,7 +26,14 @@ public  abstract class CRMCRUDController  extends CRUDController{
 		return getService().validateforCreate((CRMModelObject)object,(CRMContext)getContext());
 		
 	}
+	
+	
 
+	@Override
+	public ModelObject populateFullObjectfromPK(ModelObject object) {
+		
+		return (ModelObject)getService().getById(object.getPK());
+	}
 	@Override
 	public List<RadsError> validateforUpdate() {
 		return getService().validateforUpdate((CRMModelObject)object,(CRMContext)getContext());

@@ -64,7 +64,7 @@ Controller = "com.rainbow.crm.alert.controller.AlertListController">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="type.description" />
 </Column>
 <Column title ="Alert"   width ="28%">
-<Element label = ""  type = "UINote" Id = "idIdNote"  property ="data" />
+<Element label = ""  type = "UIHyperLink" Id = "idIdNote"    property ="url"  supplementaryProperty="data"/>
 </Column>
 <Column title ="Owner"  width ="18%" >
 <Element label = ""  type = "UINote" Id = "idCt"  property ="owner.userId" />
