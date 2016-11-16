@@ -14,6 +14,11 @@
   <CRUDFieldMarker>:</CRUDFieldMarker>
  <IncludeJS>./resources/js/RadsLib.js</IncludeJS>
  <IncludeJS>./resources/js/dialog-polyfill.js</IncludeJS>
+  <Errors showin ="detail"  style ="errorStyle" showinTable = "true" tabStyle ="errorStyle">
+   <OddRow>oddRowError</OddRow>
+   <EvenRow>evenRowError</EvenRow>
+   <TitleRow>listPageTitleError</TitleRow>
+ </Errors>
  <Sections>
   <Section Id ="topBar"  style ="topBar"  >
   <Panel key ="topBar"  Id ="tpBR" > </Panel>  

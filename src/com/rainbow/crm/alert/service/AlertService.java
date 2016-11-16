@@ -1,7 +1,10 @@
+
 package com.rainbow.crm.alert.service;
 
 import java.util.Iterator;
 import java.util.List;
+
+
 
 
 
@@ -17,6 +20,8 @@ import com.rainbow.crm.hibernate.ORMDAO;
 import com.rainbow.crm.saleslead.model.SalesLead;
 import com.rainbow.crm.saleslead.model.SalesLeadLine;
 import com.rainbow.crm.saleslead.service.ISalesLeadService;
+import com.rainbow.crm.user.model.User;
+import com.rainbow.crm.user.service.IUserService;
 import com.rainbow.crm.alert.dao.AlertDAO;
 import com.rainbow.crm.alert.model.Alert;
 import com.rainbow.crm.alert.validator.AlertValidator;
@@ -79,6 +84,19 @@ public class AlertService extends AbstractService implements IAlertService{
 	protected ORMDAO getDAO() {
 		return (AlertDAO) SpringObjectFactory.INSTANCE.getInstance("AlertDAO");
 	}
+
+	@Override
+	public List<RadsError> acknowledgeAlert(Alert alert, CRMContext context) {
+		IUserService userService = (IUserService) SpringObjectFactory.INSTANCE.getInstance("IUserService") ;
+		alert.setStatus(new FiniteValue(CRMConstants.ALERT_STATUS.ACKNOWLEDGED));
+		User owner = (User)userService.getById(context.getUser());
+ 		alert.setOwner(owner);
+		alert.setAcknowDate(new java.util.Date());
+		getDAO().update(alert);
+		return null;
+	}
+	
+	
 
 
 	

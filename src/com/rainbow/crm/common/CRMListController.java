@@ -46,7 +46,7 @@ public abstract class CRMListController  extends ListController{
 	
 	
 	
-	private static String getOperator(FilterNode node) {
+	protected static String getOperator(FilterNode node) {
 		if (node.getOperater() == null || node.getOperater() == FilterNode.Operator.EQUALS) {
 			return "=";
 		} else if (node.getOperater() == FilterNode.Operator.GREATER_THAN_EQUAL) {

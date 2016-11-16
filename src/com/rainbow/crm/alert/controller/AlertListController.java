@@ -13,9 +13,13 @@ import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.alert.model.Alert;
 import com.rainbow.crm.alert.service.IAlertService;
 import com.rainbow.crm.alert.validator.AlertValidator;
+import com.techtrade.rads.framework.filter.Filter;
+import com.techtrade.rads.framework.filter.FilterNode;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
+import com.techtrade.rads.framework.model.transaction.TransactionResult.Result;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
+import com.techtrade.rads.framework.utils.Utils;
 
 public class AlertListController extends CRMListController{
 
@@ -33,13 +37,19 @@ public class AlertListController extends CRMListController{
 
 	@Override
 	public PageResult submit(List<ModelObject> objects, String submitAction) {
-		// TODO Auto-generated method stub
-		return null;
+		if("acknowledge".equalsIgnoreCase(submitAction)){
+			IAlertService serv =(IAlertService)getService();
+			for ( ModelObject obj :  objects) {
+				serv.acknowledgeAlert((Alert)obj, (CRMContext)getContext());
+			}
+		}
+		PageResult resut = new 	PageResult();
+		resut.setResult(Result.SUCCESS);
+		return resut;
 	}
 
 	@Override
 	public List<RadsError> validateforDelete(List<ModelObject> objects) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -71,5 +81,22 @@ public class AlertListController extends CRMListController{
 	}
 
 	
+	
+	protected String getFilter(Filter filterData ) {
+		StringBuffer whereCondition = new  StringBuffer();
+		if (filterData!=null  && !Utils.isNullList(filterData.getNodeList()) ) {
+			for (FilterNode node : filterData.getNodeList()) {
+				if (!Utils.isNullString(String.valueOf(node.getValue())) && !"FilterName".equals(node.getField())) {
+					if (whereCondition.length() < 1)
+						whereCondition.append( " where  "  + Utils.initlower(node.getField())  + getOperator(node) +  "'" +  node.getValue() + "'");
+					else
+						whereCondition.append( " and  "  + Utils.initlower(node.getField())  +  getOperator(node) + "'" +  node.getValue() + "'");
+				}
+			}
+		}else {
+			whereCondition.append( " where  status='" + CRMConstants.ALERT_STATUS.OPEN + "' and  (owner is null or owner ='" + getContext().getUser() + "')");
+		}
+		return whereCondition.toString();
+	}
 	
 }

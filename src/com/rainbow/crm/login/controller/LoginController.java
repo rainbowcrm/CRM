@@ -63,6 +63,7 @@ public class LoginController extends  GeneralController{
 			Logwriter.INSTANCE.debug("Not a valid user");
 			RadsError error=  new RadsError("101","UnauthorizedAccess");
 			res.addError(error);
+			return res;
 		}else {
 			User user =(User) obj ;
 			if (user.getPassword().equals(login.getPassword())) {
@@ -76,6 +77,7 @@ public class LoginController extends  GeneralController{
 				Logwriter.INSTANCE.debug("Wrong password");
 				RadsError error=  new RadsError("102","Wrong password");
 				res.addError(error);
+				return res;
 			}
 		}
 		CRMContext context =(CRMContext) getContext();

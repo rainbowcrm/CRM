@@ -80,6 +80,7 @@ Controller = "com.rainbow.crm.alert.controller.AlertListController">
 </CoreSection>
 <Section type ="summary">
 <Element type= "Panel" key= "NavPanel"  style = "sameline" ></Element>
+<Element caption = "Acknowledge"  type = "UIButton"    Id = "btnAck"  style="button" onClickJS ="acknowledgeAlert();" />
 </Section>
 <Section type ="copyRightSection"/>
 </Elements>

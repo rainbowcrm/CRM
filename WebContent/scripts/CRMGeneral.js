@@ -24,3 +24,7 @@ function validateforCreate() {
 
 
 
+function acknowledgeAlert(){
+	document.frmList.submitAction.value ="acknowledge" ;
+	document.frmList.submit();
+}

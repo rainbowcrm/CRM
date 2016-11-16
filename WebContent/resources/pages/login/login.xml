@@ -7,10 +7,19 @@ Controller = "com.rainbow.crm.login.controller.LoginController">
 </Forwards>
 <Elements>
 <UIForm  Id ="genCC" method = "POST">
+<CoreSection style ="central">
+
 <Section type ="central">
+
 <Element type = "UIDiv" style = "blueribbon">
-<Element type = "UIErrorList" style = "errorStyle"> </Element>
+
 <Element type = "UITable" rows = "2" cols = "1">
+<Element type = "UITableRow">
+<Element type ="UITableCol">  
+<Element type ="UIErrorList">
+</Element>
+</Element>
+</Element>
 <Element type = "UITableRow">
 <Element type ="UITableCol">  
 	<Element label = "Username"  type = "UIText" Id = "txtUsername" property = "Username" />
@@ -35,6 +44,7 @@ Controller = "com.rainbow.crm.login.controller.LoginController">
 </Element>
 </Element>
 </Section>
+</CoreSection>
 <Section type ="copyRightSection"/>
 
 </UIForm>
