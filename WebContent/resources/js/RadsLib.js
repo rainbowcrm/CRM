@@ -70,8 +70,6 @@ function showLookupDialog(id,curControl) {
 	document.getElementById('idFRM' +id).contentDocument.clickedCellIndex = index;
 	
  }
-
-
 function fireAjaxRequest (service, requestCtrls, responseCtrls, currentCtrl) {
 	var requestStr = appURL + "rdscontroller?ajxService=" + service;
 	var index  = getCurrentObjectIndex(currentCtrl);
@@ -92,7 +90,7 @@ function fireAjaxRequest (service, requestCtrls, responseCtrls, currentCtrl) {
 				var ctrl =  responseCtrls[property];
 				var elem = document.getElementsByName(ctrl)[index];
 				var reqCtrl = requestCtrls[property] ;
-				console.log ('reqCtrl ' + reqCtrl + 'prop' + ctrl );
+				//console.log ('reqCtrl ' + reqCtrl + 'prop' + ctrl );
 				if (typeof(reqCtrl) != "undefined")
 					elem.value = '';
 	}
@@ -121,11 +119,10 @@ function fireAjaxRequest (service, requestCtrls, responseCtrls, currentCtrl) {
 			}
 			
 		}else {
-			console.log('property=' + property) ;
+		//	console.log('property=' + property) ;
 			var valprop = jsonResponse[property]  ;
-			console.log('valprop=' + valprop) ;
+			//console.log('valprop=' + valprop) ;
 			if(valprop != null && valprop !=  "undefined") {
-				console.log('elem = ' + elem + ':valyue=' + valprop );
 				elem.value = valprop;
 				if(elem.nodeName == 'SPAN' )
 					elem.innerHTML= valprop;
