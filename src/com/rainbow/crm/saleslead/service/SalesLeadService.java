@@ -203,7 +203,6 @@ public class SalesLeadService extends AbstractService implements ISalesLeadServi
 		  alert.setData("New Sales Lead-" +  lead.getDocNumber());
 		  alert.setUrl("./rdscontroller?page=newsaleslead&id="+lead.getId() +"&hdnFixedAction=FixedAction.ACTION_GOEDITMODE");
 		  CRMMessageSender.sendMessage(alert);
-		  
 	  }
 	
 	@Override

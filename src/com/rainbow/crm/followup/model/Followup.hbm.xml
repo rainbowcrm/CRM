@@ -23,6 +23,7 @@
       <many-to-one name="resultReason" column ="RESULT_REASON" not-null="false" lazy="false" ></many-to-one>
 	  <property name="comments" column="SALESASSOC_COMMENTS" type="string"/>
       <many-to-one name="company" column ="company_id" not-null="true" lazy="false" ></many-to-one>
+      <property name="alerted" column="IS_ALERTED" type="boolean"/>
       <property name="deleted" column="is_deleted" type="boolean"/>
       <property name="createdDate" column="created_date" type="timestamp" update="false"/>
       <property name="lastUpdateDate" column="last_updated_date" type="timestamp"/>

@@ -23,6 +23,7 @@
       <property name="salesAssReasonCode" column="SALESASS_REASON_CODE" type="string"/>
       <property name="mgrReasonCode" column="MGR_REASON_CODE" type="string"/>
       <property name="voided" column="IS_VOIDED" type="boolean"/>
+      <property name="alerted" column="IS_ALERTED" type="boolean"/>
       <property name="comments" column="comments" type="string"/>
       <property name="createdDate" column="created_date" type="timestamp" update="false"/>
       <property name="lastUpdateDate" column="last_updated_date" type="timestamp"/>

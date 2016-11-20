@@ -20,6 +20,8 @@
       <property name="totalTarget" column="TOTAL_TARGET" type="double"/>
       <property name="additionalTarget" column="ADDITIONAL_TARGET" type="double"/>
       <property name="voided" column="IS_VOIDED" type="boolean"/>
+      <property name="startAlerted" column="IS_START_ALERTED" type="boolean"/>
+      <property name="endAlerted" column="IS_END_ALERTED" type="boolean"/>
       <property name="createdDate" column="created_date" type="timestamp" update="false"/>
       <property name="lastUpdateDate" column="last_updated_date" type="timestamp"/>
       <property name="createdUser" column="created_by" type="string" update="false"/>

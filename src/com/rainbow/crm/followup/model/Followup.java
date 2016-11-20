@@ -24,6 +24,7 @@ public class Followup extends CRMBusinessModelObject{
 	FiniteValue result;
 	FiniteValue resultReason ;
 	String comments;
+	boolean alerted; 
 	
 	@RadsPropertySet(useBKForJSON=true,useBKForXML=true,useBKForMap=true)
 	public SalesLead getLead() {
@@ -101,5 +102,12 @@ public class Followup extends CRMBusinessModelObject{
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
+	public boolean isAlerted() {
+		return alerted;
+	}
+	public void setAlerted(boolean alerted) {
+		this.alerted = alerted;
+	}
+	
 
 }

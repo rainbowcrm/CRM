@@ -1,7 +1,12 @@
 package com.rainbow.crm.salesperiod.dao;
 
+import java.util.Date;
+import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 
+import com.rainbow.crm.filter.model.CRMFilter;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.rainbow.crm.salesperiod.model.SalesPeriod;
 
@@ -16,6 +21,27 @@ public class SalesPeriodDAO  extends SpringHibernateDAO{
 		return obj;
 	}
 
+	public List<SalesPeriod> getStartingSalesPeriodsforAlerts(Date startDt )
+	{
+		Session session = openSession(false);
+		Query query = session.createQuery(" from SalesPeriod where fromDate = :fromDate    and startAlerted = false and voided= false " ) ;
+		query.setParameter("fromDate", startDt);
+		List<SalesPeriod> lst = query.list();
+		closeSession(session, false);
+		return lst;
+	}
+	
+	public List<SalesPeriod> getEndingSalesPeriodsforAlerts(Date toDate )
+	{
+		Session session = openSession(false);
+		Query query = session.createQuery(" from SalesPeriod where fromDate = :fromDate    and endAlerted = false and voided= false " ) ;
+		query.setParameter("toDate", toDate);
+		List<SalesPeriod> lst = query.list();
+		closeSession(session, false);
+		return lst;
+	}
+	
+	
 	/*@Override
 	public void create(CRMModelObject object) {
 		SalesPeriod salesPeriod = (SalesPeriod) object ;

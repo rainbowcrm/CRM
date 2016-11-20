@@ -30,6 +30,7 @@ public class SalesLead extends CRMBusinessModelObject{
 	String salesAssociate ;
 	String salesAssReasonCode;
 	String mgrReasonCode;
+	boolean alerted; 
 	
 	
 	
@@ -123,4 +124,11 @@ public class SalesLead extends CRMBusinessModelObject{
 			salesLeadLines = new LinkedHashSet <SalesLeadLine> ();
 		this.salesLeadLines.add(salesLeadLine);
 	}
+	public boolean isAlerted() {
+		return alerted;
+	}
+	public void setAlerted(boolean alerted) {
+		this.alerted = alerted;
+	}
+	
 }

@@ -54,6 +54,8 @@ public class CRMConstants {
 		public final static String FOLLOWUP = "ALTFLLWUP";
 		public final static String INVSHORTAGE = "ALTINVSHRT";
 		public final static String APPOINTMENT = "ALTAPP";
+		public final static String SLSPERSTART = "ALTSPBEGIN";
+		public final static String SLSPEREND = "ALTSPEND";
 	}
 	
 }

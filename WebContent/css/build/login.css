@@ -5521,7 +5521,8 @@ body {
 
 div.pagestyle {
   position: relative;
-  overflow: auto; }
+  overflow: auto; 
+  }
 
 div.brownribbon {
 	text-align : center;

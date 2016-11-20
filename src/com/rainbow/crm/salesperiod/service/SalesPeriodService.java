@@ -1,6 +1,7 @@
 package com.rainbow.crm.salesperiod.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -184,6 +185,19 @@ public class SalesPeriodService extends AbstractService implements ISalesPeriodS
 			CRMContext context) throws CRMDBException {
 		return super.batchCreate(objects, context);
 	}
+
+	@Override
+	public List<SalesPeriod> getStartingSalesPeriodsforAlerts(Date startDt) {
+		SalesPeriodDAO dao = (SalesPeriodDAO) getDAO();
+		return dao.getStartingSalesPeriodsforAlerts(startDt);
+	}
+
+	@Override
+	public List<SalesPeriod> getEndSalesPeriodsforAlerts(Date endDt) {
+		SalesPeriodDAO dao = (SalesPeriodDAO) getDAO();
+		return dao.getEndingSalesPeriodsforAlerts(endDt);
+	}
+	
 	
 	
 	

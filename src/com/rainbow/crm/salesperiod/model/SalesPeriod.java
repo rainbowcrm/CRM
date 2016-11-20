@@ -1,3 +1,4 @@
+
 package com.rainbow.crm.salesperiod.model;
 
 import java.util.ArrayList;
@@ -22,6 +23,8 @@ public class SalesPeriod extends CRMBusinessModelObject{
 	double additionalTarget;
 	double totalTarget;
 	boolean voided;
+	boolean startAlerted;
+	boolean endAlerted;
 	Set<SalesPeriodLine> salesPeriodLines;
 	
 	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
@@ -89,6 +92,21 @@ public class SalesPeriod extends CRMBusinessModelObject{
 	public void setAdditionalTarget(double additionalTarget) {
 		this.additionalTarget = additionalTarget;
 	}
+	public boolean isStartAlerted() {
+		return startAlerted;
+	}
+	public void setStartAlerted(boolean startAlerted) {
+		this.startAlerted = startAlerted;
+	}
+	public boolean isEndAlerted() {
+		return endAlerted;
+	}
+	public void setEndAlerted(boolean endAlerted) {
+		this.endAlerted = endAlerted;
+	}
+	
+
+	
 	
 		
 }
