@@ -46,7 +46,14 @@ public class SchedulerThread extends Thread{
 	@Override
 	public void run() 
 	{
-		
+		try {
+		for (; ; ) {
+		raiseSalesPeriodAlerts();
+		Thread.sleep(interval);
+		}
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
 		
 	}
 	

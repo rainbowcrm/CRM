@@ -34,7 +34,7 @@ public class SalesPeriodDAO  extends SpringHibernateDAO{
 	public List<SalesPeriod> getEndingSalesPeriodsforAlerts(Date toDate )
 	{
 		Session session = openSession(false);
-		Query query = session.createQuery(" from SalesPeriod where fromDate = :fromDate    and endAlerted = false and voided= false " ) ;
+		Query query = session.createQuery(" from SalesPeriod where toDate = :toDate    and endAlerted = false and voided= false " ) ;
 		query.setParameter("toDate", toDate);
 		List<SalesPeriod> lst = query.list();
 		closeSession(session, false);

@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMDBException;
@@ -27,10 +28,23 @@ import com.techtrade.rads.framework.ui.abstracts.PageResult;
 import com.techtrade.rads.framework.utils.Utils;
 
 public class SalesPeriodController extends TransactionController{
+
+	
 	
 	@Override
+	public void init(HttpServletRequest request) {
+		Object obj  = request.getParameter("id") ;
+		if (obj != null && Utils.isPositiveInt(String.valueOf(obj)))  {
+			int id = Integer.parseInt(String.valueOf(obj));
+			((CRMBusinessModelObject)object).setId(id);
+		}
+		super.init(request);
+	}
+
+
+	@Override
 	public ModelObject populateFullObjectfromPK(ModelObject objects) {
-		return (ModelObject) getService().getById(object);
+		return (ModelObject) getService().getById(object.getPK());
 	}
 
 	
