@@ -11,6 +11,8 @@ import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
+import com.rainbow.crm.followup.model.Followup;
+import com.rainbow.crm.followup.service.IFollowupService;
 import com.rainbow.crm.salesperiod.model.SalesPeriod;
 import com.rainbow.crm.salesperiod.service.ISalesPeriodService;
 import com.techtrade.rads.framework.utils.Utils;
@@ -26,6 +28,20 @@ public class SchedulerThread extends Thread{
 		context.setAuthenticated(true);
 		context.setUser(model.getLastUpdateUser());
 		return context ;
+	}
+	
+	private void createAlertforFollowup(Followup followup,CRMContext context) {
+		IAlertService service = (IAlertService)SpringObjectFactory.INSTANCE.getInstance("IAlertService");
+		Alert alert = new Alert();
+		  alert.setCompany(followup.getCompany());
+		  alert.setType (new FiniteValue(CRMConstants.ALERT_TYPE.FOLLOWUP));
+		  alert.setActionDate(new java.util.Date());
+		  alert.setDivision(followup.getLead().getDivision());
+		  alert.setRaisedDate(new java.util.Date());
+		  alert.setData("Followup due  for-" +  followup.getLead().getDocNumber());
+		  alert.setUrl("./rdscontroller?page=newfollowup&id="+followup.getId() +"&hdnFixedAction=FixedAction.ACTION_GOEDITMODE");
+		  alert.setStatus(new FiniteValue(CRMConstants.ALERT_STATUS.OPEN));
+		  service.create(alert, context);
 	}
 	
 	private void createAlertforSalesPeriod(SalesPeriod period,CRMContext context, FiniteValue alertType) {
@@ -49,6 +65,7 @@ public class SchedulerThread extends Thread{
 		try {
 		for (; ; ) {
 		raiseSalesPeriodAlerts();
+		raiseFollowupAlerts();
 		Thread.sleep(interval);
 		}
 		}catch(Exception ex) {
@@ -57,6 +74,18 @@ public class SchedulerThread extends Thread{
 		
 	}
 	
+	private void raiseFollowupAlerts () {
+		IFollowupService service  = (IFollowupService) SpringObjectFactory.INSTANCE.getInstance("IFollowupService") ;
+		List<Followup> followups = service.getFollowupsforDayforAlerts(new java.util.Date());
+		if(!Utils.isNullList(followups)) {
+			for (Followup followup : followups) {
+				CRMContext context =makeContext(followup);
+				createAlertforFollowup(followup,context);
+				followup.setAlerted(true);
+				service.update(followup, context);
+			}
+		}
+	}
 	private void raiseSalesPeriodAlerts () {
 		
 		ISalesPeriodService service = (ISalesPeriodService) SpringObjectFactory.INSTANCE.getInstance("ISalesPeriodService") ;

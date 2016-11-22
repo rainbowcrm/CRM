@@ -1,11 +1,14 @@
 package com.rainbow.crm.followup.dao;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
+import com.rainbow.crm.salesperiod.model.SalesPeriod;
 import com.rainbow.crm.followup.model.Followup;
 import com.techtrade.rads.framework.utils.Utils;
 
@@ -23,33 +26,15 @@ public class FollowupDAO extends SpringHibernateDAO {
 		return obj;
 	}
 	
-	public Followup findByEmail(int company, String email) {
-		Followup followup = null;
+	
+	public List<Followup> getFollowupsforDayforAlerts(Date startDt, long interval) {
 		Session session = openSession(false);
-		Query query = session.createQuery(" from Followup where email = :email and company.id =:company  " ) ;
-		query.setParameter("email", email);
-		query.setParameter("company", company);
-		List lst = query.list();
-		if (!Utils.isNullList(lst)) {
-			followup = (Followup) lst.get(0) ;
-		}
+		Query query = session.createQuery(" from Followup where nextFollwup < :nextFollwup    and alerted = false  " ) ;
+		query.setParameter("nextFollwup", new Timestamp(startDt.getTime() + interval));
+		List<Followup> lst = query.list();
 		closeSession(session, false);
-		return followup;
+		return lst;
 	}
 	
-	
-	public Followup findByPhone(int company, String phone) {
-		Followup followup = null;
-		Session session = openSession(false);
-		Query query = session.createQuery(" from Followup where phone = :phone and company.id =:company  " ) ;
-		query.setParameter("phone", phone);
-		query.setParameter("company", company);
-		List lst = query.list();
-		if (!Utils.isNullList(lst)){
-			followup = (Followup) lst.get(0) ;
-		}
-		closeSession(session, false);
-		return followup;
-	}
 
 }

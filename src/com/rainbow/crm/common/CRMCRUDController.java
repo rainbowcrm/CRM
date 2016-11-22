@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
@@ -17,6 +18,7 @@ import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.model.transaction.TransactionResult.Result;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
+import com.techtrade.rads.framework.utils.Utils;
 
 public  abstract class CRMCRUDController  extends CRUDController{
 
@@ -26,7 +28,16 @@ public  abstract class CRMCRUDController  extends CRUDController{
 		return getService().validateforCreate((CRMModelObject)object,(CRMContext)getContext());
 		
 	}
-	
+	@Override
+	public void init(HttpServletRequest request) {
+		Object obj  = request.getParameter("id") ;
+		if (obj != null && Utils.isPositiveInt(String.valueOf(obj)))  {
+			int id = Integer.parseInt(String.valueOf(obj));
+			((CRMBusinessModelObject)object).setId(id);
+		}
+		super.init(request);
+	}
+
 	
 
 	@Override

@@ -1,7 +1,9 @@
 package com.rainbow.crm.followup.service;
 
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+
 
 
 
@@ -111,6 +113,15 @@ public class FollowupService extends AbstractService implements IFollowupService
 	protected ORMDAO getDAO() {
 		return (FollowupDAO) SpringObjectFactory.INSTANCE.getInstance("FollowupDAO");
 	}
+
+	@Override
+	public List<Followup> getFollowupsforDayforAlerts(Date startDt) {
+		FollowupDAO dao = (FollowupDAO)getDAO();
+		
+		return dao.getFollowupsforDayforAlerts(startDt, 1000 * 60 * 60 * 12);
+	}
+	
+	
 
 
 	
