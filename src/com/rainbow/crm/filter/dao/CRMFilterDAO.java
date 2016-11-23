@@ -27,7 +27,6 @@ public class CRMFilterDAO extends HibernateDAO {
 		return obj;
 	}
 	
-	
 	public void create(CRMFilter filter) {
 		int id =  getMaxPlusOneId("id", "CRMFilter") ;
 		filter.setId(id);

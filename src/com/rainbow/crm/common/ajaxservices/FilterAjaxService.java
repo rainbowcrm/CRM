@@ -13,23 +13,36 @@ import com.rainbow.crm.filter.model.CRMFilterDetails;
 import com.rainbow.crm.logger.Logwriter;
 import com.techtrade.rads.framework.context.IRadsContext;
 import com.techtrade.rads.framework.controller.abstracts.IAjaxLookupService;
+import com.techtrade.rads.framework.utils.Utils;
 
 public class FilterAjaxService implements IAjaxLookupService{
 
 	@Override
 	public String lookupValues(Map<String, String> searchFields,IRadsContext ctx) {
 		JSONObject json = new JSONObject();
+		CRMFilter filter =null ;
 		try { 
 		String filterId=searchFields.get("filterId");
-		CRMFilter filter =(CRMFilter) CRMFilterDAO.INSTANCE.getById(filterId);
-		json.put("FilterName", filter.getName());
-		for (CRMFilterDetails det : filter.getDetails()) {
-			json.put(det.getField(), det.getValue());
+		String filterName=searchFields.get("filterName");
+		String page=searchFields.get("page");
+		if (!Utils.isNullString(filterId)) {
+			filter =(CRMFilter) CRMFilterDAO.INSTANCE.getById(filterId);
+		} else if (!Utils.isNullString(filterName) &&  !Utils.isNullString(page)) {
+			filter =(CRMFilter) CRMFilterDAO.INSTANCE.findByKey(ctx.getUser(), page, filterName);
 		}
+		if (filter != null ) {
+			json.put("FilterName", filter.getName());
+			for (CRMFilterDetails det : filter.getDetails()) {
+				json.put(det.getField(), det.getValue());
+			}
+		}
+		
+		
 		}catch(Exception ex) {
 			Logwriter.INSTANCE.error(ex);
 		}
 		return json.toString();
+		
 	}
 	
 	
