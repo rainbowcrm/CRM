@@ -218,6 +218,11 @@
  </AjaxService>
  <AjaxService service ="filterSearch" class = "com.rainbow.crm.common.ajaxservices.FilterAjaxService">
  <key>filterId</key>
+ <key>filterName</key>
+ <key>page</key>
+ </AjaxService>
+ <AjaxService service ="allFilters" class = "com.rainbow.crm.common.ajaxservices.AllFiltersAjaxService">
+ <key>page</key>
  </AjaxService>
  <AjaxService service ="companySearch" class = "com.rainbow.crm.common.ajaxservices.CompanyDetailsAjaxService">
  <key>companyName</key>
