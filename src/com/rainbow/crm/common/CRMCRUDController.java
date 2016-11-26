@@ -64,7 +64,6 @@ public  abstract class CRMCRUDController  extends CRUDController{
 		} catch(CRMDBException ex) {
 			return new PageResult(Result.FAILURE,ex.getErrors(),object);
 		}
-		
 	}
 
 	@Override

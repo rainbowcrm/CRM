@@ -282,6 +282,13 @@ dialog.dialogstyle  {
 	height:300px;
 }
 
+dialog.widepopup  {
+	width:750px;
+	height:300px;
+	top: 100;
+}
+
+
 iframe.lookupFrameStyle {
 	left:0%;
 	width:100%;

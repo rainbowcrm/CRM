@@ -57,6 +57,8 @@
 
 <Page id = "newcustomer" definition ="/resources/pages/customer/newcustomer.xml" modelclass = "com.rainbow.crm.customer.model.Customer" >
 </Page>
+<Page id = "quickcustomeradd" definition ="/resources/pages/customer/quickcustomeradd.xml" modelclass = "com.rainbow.crm.customer.model.Customer" >
+</Page>
 <Page id = "newcontact" definition ="/resources/pages/contact/newcontact.xml" modelclass = "com.rainbow.crm.contact.model.Contact" >
 </Page>
 <Page id = "newfollowup" definition ="/resources/pages/followup/newfollowup.xml" modelclass = "com.rainbow.crm.followup.model.Followup" >

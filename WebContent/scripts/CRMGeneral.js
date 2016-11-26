@@ -28,3 +28,10 @@ function acknowledgeAlert(){
 	document.frmList.submitAction.value ="acknowledge" ;
 	document.frmList.submit();
 }
+
+function closeCustomerCreateDialog(dialogId) {
+	window.parent.document.getElementById("txtPhone").value = window.document.getElementById("txtPhone").value;
+	window.parent.document.getElementById("txtEmail").value = window.document.getElementById("txtemail").value;
+	window.parent.document.getElementById("txtCustomerName").value = window.document.getElementById("txtName").value + " " + window.document.getElementById("txtLName").value;
+	window.parent.document.getElementById(dialogId).close();
+}
