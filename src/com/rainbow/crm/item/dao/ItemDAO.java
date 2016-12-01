@@ -59,6 +59,14 @@ public class ItemDAO extends SpringHibernateDAO {
 		closeSession(session, false);
 		return item;
 	}
-	
+	public List<Item> getAllByProduct(int company, int productId) {
+		Item item = null;
+		Session session = openSession(false);
+		Query query = session.createQuery(" from Item where company.id =:company  and product.id =:product  " ) ;
+		query.setParameter("product", productId);
+		query.setParameter("company", company);
+		List lst = query.list();
+		return lst;
+	}
 
 }

@@ -1,7 +1,10 @@
 package com.rainbow.crm.item.service;
 
+import java.util.List;
+
 import com.rainbow.crm.common.IBusinessService;
 import com.rainbow.crm.item.model.Item;
+import com.rainbow.crm.product.model.Product;
 
 public interface IItemService extends IBusinessService{
 
@@ -9,6 +12,7 @@ public interface IItemService extends IBusinessService{
 	public Item getByBarCode(int company, String barcode) ;
 	public Item getByName(int company, String name) ;
 	
+	public List<Item> getAllByProduct(int company, int productId);
 
 	
 

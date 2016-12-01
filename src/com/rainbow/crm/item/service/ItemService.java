@@ -115,6 +115,12 @@ public class ItemService extends AbstractService implements IItemService {
 		
 		return super.batchUpdate(objects, context);
 	}
+
+	@Override
+	public List<Item> getAllByProduct(int company, int productId) {
+		return ((ItemDAO)getDAO()).getAllByProduct(company, productId);
+	}
+	
 	
 	
 

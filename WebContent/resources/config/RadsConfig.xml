@@ -85,6 +85,8 @@
 </Page>
 <Page id = "productanalysis" definition ="/resources/pages/products/productanalyse.xml" modelclass = "com.rainbow.crm.product.model.ProductAnalyzer" >
 </Page>
+<Page id = "salestrend" definition ="/resources/pages/products/productstrend.xml" modelclass = "com.rainbow.crm.sales.model.SalesTrend" >
+</Page>
 <Page id = "newwishlist" definition ="/resources/pages/wishlist/newwishlist.xml" modelclass = "com.rainbow.crm.wishlist.model.WishList" >
 </Page>
 <Page id = "newsaleslead" definition ="/resources/pages/saleslead/newsaleslead.xml" modelclass = "com.rainbow.crm.saleslead.model.SalesLead" >
@@ -173,10 +175,11 @@
 	<Element label = "" type = "UIMenu" Id = "menu05" style="menustyle" title="Promotions" link = "rdscontroller?page=salesexpenses"   />
  </Element>
   <Element label = "" type = "UIMenu" Id = "menu30" style="menustyleParent" title="Business_Intelligence" groupId= "menuGRP006"  >
- 	<Element label = "" type = "UIMenu" Id = "menu05" style="menustyle" title="Manager_Console" link = "rdscontroller?page=managerconsole"   />
-	<Element label = "" type = "UIMenu" Id = "menu05" style="menustyle" title="Sales_Period_Analysis" link = "rdscontroller?page=salesperiodAnalysis"   />
-	<Element label = "" type = "UIMenu" Id = "menu05" style="menustyle" title="Product_Analysis" link = "rdscontroller?page=productanalysis"   />
-	<Element label = "" type = "UIMenu" Id = "menu05" style="menustyle" title="Salesforce_Analysis" link = "rdscontroller?page=salesforceanalysis"   />
+ 	<Element label = "" type = "UIMenu" Id = "menu031" style="menustyle" title="Manager_Console" link = "rdscontroller?page=managerconsole"   />
+	<Element label = "" type = "UIMenu" Id = "menu032" style="menustyle" title="Sales_Period_Analysis" link = "rdscontroller?page=salesperiodAnalysis"   />
+	<Element label = "" type = "UIMenu" Id = "menu033" style="menustyle" title="Product_Analysis" link = "rdscontroller?page=productanalysis"   />
+	<Element label = "" type = "UIMenu" Id = "menu034" style="menustyle" title="Sales_Trend" link = "rdscontroller?page=salestrend"   />
+	<Element label = "" type = "UIMenu" Id = "menu035" style="menustyle" title="Salesforce_Analysis" link = "rdscontroller?page=salesforceanalysis"   />
  </Element>
  <Element label = "" type = "UIMenu" Id = "menu40" style="menustyleParent" title="Inventory" groupId= "menuGRP007"  >
  	<Element label = "" type = "UIMenu" Id = "menu41" style="menustyle" title="Stock" link = "rdscontroller?page=inventory"   />
