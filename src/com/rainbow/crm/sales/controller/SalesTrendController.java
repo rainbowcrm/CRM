@@ -47,6 +47,8 @@ public class SalesTrendController  extends GeneralController{
 
 	@Override
 	public PageResult read(ModelObject object) {
+		String [] colors = { "Brown" , "Red","Green" , "Violet" , "Indigo" , "Majenta" ,"Yellow" , "Orange", 
+				"Salmon","Gray","SandyBrown","Ivory","CadetBlue","OrangeRed","SeaGreen"} ;
 		LineChartData lineChartData = new LineChartData();
 		SalesTrend trend = (SalesTrend) object;
 		int period = trend.getNoItervals() ;
@@ -62,11 +64,13 @@ public class SalesTrendController  extends GeneralController{
 		Date periodFrom  = new Date(fromDate.getTime()) ;
 		Date periodTo = new Date(periodFrom.getTime() + diff) ;
 		int maxValue = 0;
+		int colorIndex = 0;
+		lineChartData.setBorderColor(colors[colorIndex++]);
 		Map <Integer,LineChartEntryData> itemMap = new HashMap<Integer,LineChartEntryData>() ;
-		for (int i = 0 ; i <  period ; i ++) 
+		for (int i = 0 ; i <  period  ; i ++) 
 		{
 			try {
-				lineChartData.addInterval(Utils.dateToString(fromDate, "dd-mm-yyyy"));
+				lineChartData.addInterval(Utils.dateToString(periodFrom, "dd-MM-yyyy"));
 			Map mapSales = salesService.getItemSoldQtyByProduct(selectedProduct, periodFrom, periodTo, null, null);
 			Iterator it = mapSales.keySet().iterator();
 			while(it.hasNext()) {
@@ -79,10 +83,11 @@ public class SalesTrendController  extends GeneralController{
 					lineChartEntryData = new LineChartEntryData();
 					Item item = (Item)itemService.getById(itemId);
 					lineChartEntryData.setText(item.getName());
+					lineChartEntryData.setColor(colors[colorIndex ++] );
 				}else {
 					lineChartEntryData = (LineChartEntryData)itemMap.get(itemId) ;
 				}
-				lineChartEntryData.addToValueMap(Utils.dateToString(fromDate, "dd-mm-yyyy"), qty);
+				lineChartEntryData.addToValueMap(Utils.dateToString(periodFrom, "dd-MM-yyyy"), qty);
 				itemMap.put(itemId, lineChartEntryData);
 			}
 			}catch(Exception ex) {
