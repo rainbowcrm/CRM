@@ -48,7 +48,7 @@ public class SalesTrendController  extends GeneralController{
 	@Override
 	public PageResult read(ModelObject object) {
 		String [] colors = { "Brown" , "Red","Green" , "Violet" , "Indigo" , "Majenta" ,"Yellow" , "Orange", 
-				"Salmon","Gray","SandyBrown","Ivory","CadetBlue","OrangeRed","SeaGreen"} ;
+				"Salmon","Gray","SandyBrown","Teal","CadetBlue","OrangeRed","SeaGreen","crimson"} ;
 		LineChartData lineChartData = new LineChartData();
 		SalesTrend trend = (SalesTrend) object;
 		int period = trend.getNoItervals() ;
@@ -67,36 +67,39 @@ public class SalesTrendController  extends GeneralController{
 		int colorIndex = 0;
 		lineChartData.setBorderColor(colors[colorIndex++]);
 		Map <Integer,LineChartEntryData> itemMap = new HashMap<Integer,LineChartEntryData>() ;
-		for (int i = 0 ; i <  period  ; i ++) 
-		{
-			try {
-				lineChartData.addInterval(Utils.dateToString(periodFrom, "dd-MM-yyyy"));
-			Map mapSales = salesService.getItemSoldQtyByProduct(selectedProduct, periodFrom, periodTo, null, null);
-			Iterator it = mapSales.keySet().iterator();
-			while(it.hasNext()) {
-				Integer itemId = (Integer)it.next() ;
-				Double qty = (Double) mapSales.get(itemId);
-				if (qty > maxValue)
-					maxValue = new Double(qty).intValue(); 
-				LineChartEntryData lineChartEntryData ;
-				if (itemMap.get(itemId) == null) {
-					lineChartEntryData = new LineChartEntryData();
-					Item item = (Item)itemService.getById(itemId);
-					lineChartEntryData.setText(item.getName());
-					lineChartEntryData.setColor(colors[colorIndex ++] );
-				}else {
-					lineChartEntryData = (LineChartEntryData)itemMap.get(itemId) ;
+		try {
+			//lineChartData.addInterval(Utils.dateToString(periodFrom, "dd-MM-yyyy"));
+			lineChartData.setStartingPoint(Utils.dateToString(periodFrom, "dd-MM-yyyy"));
+			for (int i = 0 ; i <  period  ; i ++) 
+			{
+				lineChartData.addInterval(Utils.dateToString(periodTo, "dd-MM-yyyy"));	
+				Map mapSales = salesService.getItemSoldQtyByProduct(selectedProduct, periodFrom, periodTo, null, null);
+				Iterator it = mapSales.keySet().iterator();
+				while(it.hasNext()) {
+					Integer itemId = (Integer)it.next() ;
+					Double qty = (Double) mapSales.get(itemId);
+					if (qty > maxValue)
+						maxValue = new Double(qty).intValue(); 
+					LineChartEntryData lineChartEntryData ;
+					if (itemMap.get(itemId) == null) {
+						lineChartEntryData = new LineChartEntryData();
+						Item item = (Item)itemService.getById(itemId);
+						lineChartEntryData.setText(item.getName());
+						lineChartEntryData.setColor(colors[colorIndex ++] );
+					}else {
+						lineChartEntryData = (LineChartEntryData)itemMap.get(itemId) ;
+					}
+					lineChartEntryData.addToValueMap(Utils.dateToString(periodTo, "dd-MM-yyyy"), qty);
+					itemMap.put(itemId, lineChartEntryData);
 				}
-				lineChartEntryData.addToValueMap(Utils.dateToString(periodFrom, "dd-MM-yyyy"), qty);
-				itemMap.put(itemId, lineChartEntryData);
+				periodFrom.setTime(periodTo.getTime() );
+				periodTo.setTime(periodFrom.getTime() + diff);
+						
 			}
-			}catch(Exception ex) {
-				Logwriter.INSTANCE.error(ex);
-			}
-			periodFrom.setTime(periodTo.getTime() +  (24*60*60*1000));
-			periodTo.setTime(periodFrom.getTime() + diff);
-					
+		}catch(Exception ex) {
+			Logwriter.INSTANCE.error(ex);
 		}
+		
 		LineChartData.Range range = lineChartData.new Range();
 		range.setyMax(maxValue);
 		lineChartData.setRange(range);

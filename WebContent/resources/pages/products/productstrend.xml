@@ -41,7 +41,7 @@ Controller = "com.rainbow.crm.sales.controller.SalesTrendController">
 	  <xStart>0</xStart>
 	  <yStart>0</yStart>
 	  <canvasHeight>550</canvasHeight>
-	  <canvasWidth>1000</canvasWidth>
+	  <canvasWidth>1200</canvasWidth>
 	  <rangeHeight>500</rangeHeight>
 	  <rangeWidth>800</rangeWidth>
 	  <marginWidth>30</marginWidth>
