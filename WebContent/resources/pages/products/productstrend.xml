@@ -40,8 +40,10 @@ Controller = "com.rainbow.crm.sales.controller.SalesTrendController">
  	  <Element type = "UILineChart" Id = "brChrt"  dataProvider = "chartData" >
 	  <xStart>0</xStart>
 	  <yStart>0</yStart>
+	  <canvasHeight>550</canvasHeight>
+	  <canvasWidth>1000</canvasWidth>
 	  <rangeHeight>500</rangeHeight>
-	  <rangeWidth>1000</rangeWidth>
+	  <rangeWidth>800</rangeWidth>
 	  <marginWidth>30</marginWidth>
 	  <marginHeight>30</marginHeight>
 	  <noYAxisDivisions>6</noYAxisDivisions>
