@@ -5,7 +5,7 @@
  <Renderers>
  <Renderer>
  <RendererType>HTML</RendererType>
- <StyleSheet>./css/TransactionPage.css</StyleSheet>
+ <StyleSheet>./css/build/TransactionPage.css</StyleSheet>
   <PageStyle>pagestyle</PageStyle>
  </Renderer>
  </Renderers>

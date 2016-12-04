@@ -45,6 +45,13 @@
   <noRows>-1</noRows>
   <noCols>1</noCols>
  </Section>
+  <Section Id ="brk2"  showinTable = "false" >
+    <Panel key ="breakPanel"  Id ="smallbreakPanel" > </Panel>
+ </Section>
+   <Section Id ="footer" style ="footerStyle"  showinTable = "true" >
+   <noRows>-1</noRows>
+  <noCols>3</noCols> 
+  </Section>
    <Section Id ="brk3"  showinTable = "false" >
     <Panel key ="breakPanel"  Id ="smallbreakPanel" > </Panel>
  </Section>
