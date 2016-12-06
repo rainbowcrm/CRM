@@ -41,7 +41,7 @@ public class ProductService extends AbstractService implements  IProductService{
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
 			String whereCondition, CRMContext context) {
-		return super.listData("Product", from, to, whereCondition, context);
+		return super.listData("Product",from, to, whereCondition, context);
 	}
 
 	@Override

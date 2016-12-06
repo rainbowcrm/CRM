@@ -169,24 +169,24 @@
 	<Element label = "" type = "UIMenu" Id = "menu33" style="menustyle" title="Expenses" link = "rdscontroller?page=salesexpenses"   />
 	<Element label = "" type = "UIMenu" Id = "menu34" style="menustyle" title="Sales_Leads" link = "rdscontroller?page=saleslead"   />
 	<Element label = "" type = "UIMenu" Id = "menu35" style="menustyle" title="Followups" link = "rdscontroller?page=followups"   />
-	<Element label = "" type = "UIMenu" Id = "menu36" style="menustyle" title="Marketing_Campaign" link = "rdscontroller?page=campaign"   />
  </Element>
- <Element label = "" type = "UIMenu" Id = "menu30" style="menustyleParent" title="Pricing_Promotions" groupId= "menuGRP005"  >
+ <Element label = "" type = "UIMenu" Id = "menu30" style="menustyleParent" title="Business Intelligence" groupId= "menuGRP005"  >
+	<Element label = "" type = "UIMenu" Id = "menu031" style="menustyle" title="Manager_Console" link = "rdscontroller?page=managerconsole"   />
  	<Element label = "" type = "UIMenu" Id = "menu05" style="menustyle" title="Pricing_Workbench" link = "rdscontroller?page=territories"   />
 	<Element label = "" type = "UIMenu" Id = "menu05" style="menustyle" title="Promotions" link = "rdscontroller?page=salesexpenses"   />
+	<Element label = "" type = "UIMenu" Id = "menu36" style="menustyle" title="Marketing_Campaign" link = "rdscontroller?page=campaign"   />
  </Element>
-  <Element label = "" type = "UIMenu" Id = "menu30" style="menustyleParent" title="Business_Intelligence" groupId= "menuGRP006"  >
- 	<Element label = "" type = "UIMenu" Id = "menu031" style="menustyle" title="Manager_Console" link = "rdscontroller?page=managerconsole"   />
+  <Element label = "" type = "UIMenu" Id = "menu30" style="menustyleParent" title="Analytics" groupId= "menuGRP006"  >
 	<Element label = "" type = "UIMenu" Id = "menu032" style="menustyle" title="Sales_Period_Analysis" link = "rdscontroller?page=salesperiodAnalysis"   />
 	<Element label = "" type = "UIMenu" Id = "menu033" style="menustyle" title="Product_Analysis" link = "rdscontroller?page=productanalysis"   />
 	<Element label = "" type = "UIMenu" Id = "menu034" style="menustyle" title="Sales_Trend" link = "rdscontroller?page=salestrend"   />
 	<Element label = "" type = "UIMenu" Id = "menu035" style="menustyle" title="Salesforce_Analysis" link = "rdscontroller?page=salesforceanalysis"   />
  </Element>
- <Element label = "" type = "UIMenu" Id = "menu40" style="menustyleParent" title="Inventory" groupId= "menuGRP007"  >
+ <Element label = "" type = "UIMenu" Id = "menu40" style="menustyleParent" title="Operations" groupId= "menuGRP007"  >
  	<Element label = "" type = "UIMenu" Id = "menu41" style="menustyle" title="Stock" link = "rdscontroller?page=inventory"   />
- 	<Element label = "" type = "UIMenu" Id = "menu21" style="menustyle" title="Purchases" link = "rdscontroller?page=purchases"   />
+ 	<Element label = "" type = "UIMenu" Id = "menu21" style="menustyle" title="Purchase Orders" link = "rdscontroller?page=purchases"   />
  	<Element label = "" type = "UIMenu" Id = "menu12" style="menustyle" title="Purchase Returns" link = "rdscontroller?page=purchasereturns"   />
-	<Element label = "" type = "UIMenu" Id = "menu31" style="menustyle" title="Sales" link = "rdscontroller?page=sales"   />
+	<Element label = "" type = "UIMenu" Id = "menu31" style="menustyle" title="Sales Orders" link = "rdscontroller?page=sales"   />
  	<Element label = "" type = "UIMenu" Id = "menu32" style="menustyle" title="Sales Returns" link = "rdscontroller?page=salesreturns"   />
  </Element>
  </Panel>

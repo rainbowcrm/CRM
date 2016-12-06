@@ -5521,18 +5521,7 @@ body {
 
 div.pagestyle {
   position: relative;
-  overflow: auto; 
-  }
-
-div.brownribbon {
-	text-align : center;
-	position:fixed;
-	background-color:rgb(106,53,0); 
-	top:20%;
-	height:60%;
-	width:100%;
-	
-}
+  overflow: auto; }
 
 div.blueribbon {
   text-align: center;
