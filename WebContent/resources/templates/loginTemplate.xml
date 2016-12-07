@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Template id ="loginTemplate" type = "com.techtrade.rads.framework.ui.templates.TemplateType" >
  <DataType>  </DataType>
+<MetaData>
+<meta charset="UTF-8"/>
+<meta name="description" content="Free Web tutorials"/>
+<meta name="keywords" content="HTML,CSS,XML,JavaScript"/>
+<meta name="author" content="Hege Refsnes"/>
+</MetaData>
   <Renderers>
  <Renderer>
  <RendererType>HTML</RendererType>

@@ -13,6 +13,13 @@ Controller = "com.rainbow.crm.login.controller.LoginController">
 
 <Element type = "UIDiv" style = "blueribbon">
 
+<!--  
+<Element type = "UIPagaragraph" />
+<Element type = "UINote" value = "staticdata" />
+<Element type = "UIHeader" level ="1" style = "test "value = "header" />
+
+ -->
+ 
 <Element type = "UITable" rows = "2" cols = "1">
 <Element type = "UITableRow">
 <Element type ="UITableCol">  
@@ -22,12 +29,12 @@ Controller = "com.rainbow.crm.login.controller.LoginController">
 </Element>
 <Element type = "UITableRow">
 <Element type ="UITableCol">  
-	<Element label = "Username"  type = "UIText" Id = "txtUsername" property = "Username" />
+	<Element label = "Username"  type = "UIText" Id = "txtUsername"  placeholder="user" property = "Username" />
 </Element>
 </Element>
 <Element type = "UITableRow">
 <Element type ="UITableCol">  
-	<Element label = "Password"  type = "UIPassword" Id = "txtPassword"  property = "Password" />
+	<Element label = "Password"  type = "UIPassword" Id = "txtPassword" placeholder="pasword" property = "Password" />
 </Element>
 </Element>
 <Element type = "UITableRow">
