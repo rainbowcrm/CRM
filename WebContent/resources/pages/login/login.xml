@@ -28,20 +28,6 @@ Controller = "com.rainbow.crm.login.controller.LoginController">
 	<UIForm  Id ="genCC" method = "POST" style="form-signin">
 <CoreSection style ="central">
 <Section type ="central">
-<Element type = "UINote" value = "&lt;style&gt;.login-div {
-    border: 1px solid #c0c1c4;
-    border-radius: 25px;
-    width:400px
-}
-.backstretch {
-left: 0px; top: 0px; overflow: hidden; margin: 0px; padding: 0px; height: 100%; width: 100%; z-index: -999999; position: fixed;
-background-size: cover;
-background: url('./bootstrap/images/2.jpg') no-repeat center #eee;
-}
-.text-size{
-
-}
-&lt;/style&gt;" />
 <Element type = "UIDiv" style = "container center-block">
 <Element type = "UIHeader" level ="1" style = "text-center text-primary" value = "Primus Solutions CRM" />
 <Element type = "UIBreak"/>
@@ -76,7 +62,7 @@ background: url('./bootstrap/images/2.jpg') no-repeat center #eee;
 <Element type = "UINote" value = "staticdata" />
 <Element type = "UIHeader" level ="1" style = "test "value = "header" />
  -->
-<Element type = "UIDiv" style = "backstretch">
+<Element  Id = "divBack" type = "UIDiv" style = "backstretch">
 <Element type = "UIBreak"/>
 </Element>
 </Section>
