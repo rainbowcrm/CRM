@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
+import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.vendor.model.Vendor;
@@ -33,6 +34,10 @@ public class Sales extends CRMBusinessModelObject{
 	boolean returned;
 	String commments;
 	Set<SalesLine> salesLines;
+	
+	boolean isFutureDelivery;
+	FiniteValue deliveryMode;
+	
 	
 	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
 	public Division getDivision() {

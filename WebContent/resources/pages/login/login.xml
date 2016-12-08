@@ -53,11 +53,12 @@ background: url('./bootstrap/images/2.jpg') no-repeat center #eee;
 		<Element type = "UIHeader" level ="2" style = "form-signin-heading" value = "Please sign in" />
 		<Element  type = "UILabel" value = "Email address" style="sr-only" />
 		<Element label = ""  type = "UIText" Id = "txtUsername"  placeholder="Email address" property = "Username" style="form-control"/>
-		<Element  type = "UILabel" value = "Password" style="sr-only" />
-		<Element type = "UINote" value = "&lt;input type='password' id='txtPassword' class='form-control' placeholder='Password' required
-		/&gt;" />
-		<!--<Element label = ""  type = "UIPassword" Id = "txtPassword" placeholder="Pasword" property = "Password" style="form-control"/>
-		//-->
+		<Element  type = "UILabel" value = "Password"    style="sr-only" />
+		<!-- <Element type = "UINote" value = "&lt;input type='password' id='txtPassword' class='form-control'  property = &quot;Password&quot; placeholder='Password' required
+		/&gt;" />  -->
+		
+		<Element label = ""  type = "UIPassword" Id = "txtPassword" placeholder="Pasword" property = "Password" style="form-control"/>
+		
 		<Element type = "UIDiv" style = "checkbox">
 		<Element type = "UINote" value = "&lt;label&gt;
             &lt;input type='checkbox' value='remember-me'&gt; Remember me
