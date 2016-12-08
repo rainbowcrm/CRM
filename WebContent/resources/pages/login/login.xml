@@ -5,55 +5,84 @@ Controller = "com.rainbow.crm.login.controller.LoginController">
 <Forwards>
 <Forward key ="REFRESH">rdscontroller?page=login</Forward>
 </Forwards>
+<IncludeJS>./bootstrap/js/jquery-1.11.1.min.js</IncludeJS>
+<IncludeJS>./bootstrap/js/bootstrap.min.js</IncludeJS>
+<!-- 
+    <div class="container">
+      <form class="form-signin">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+    </div>
+// -->
 <Elements>
-<UIForm  Id ="genCC" method = "POST">
+	<UIForm  Id ="genCC" method = "POST" style="form-signin">
 <CoreSection style ="central">
-
 <Section type ="central">
+<Element type = "UINote" value = "&lt;style&gt;.login-div {
+    border: 1px solid #c0c1c4;
+    border-radius: 25px;
+    width:400px
+}
+.backstretch {
+left: 0px; top: 0px; overflow: hidden; margin: 0px; padding: 0px; height: 100%; width: 100%; z-index: -999999; position: fixed;
+background-size: cover;
+background: url('./bootstrap/images/2.jpg') no-repeat center #eee;
+}
+.text-size{
 
-<Element type = "UIDiv" style = "blueribbon">
+}
+&lt;/style&gt;" />
+<Element type = "UIDiv" style = "container center-block">
+<Element type = "UIHeader" level ="1" style = "text-center text-primary" value = "Primus Solutions CRM" />
+<Element type = "UIBreak"/>
+<Element type = "UIBreak"/>
+</Element>
+
+<Element type = "UIDiv" style = "container center-block">
+	<Element type = "UIDiv" style = "jumbotron center-block login-div">
+		<Element type = "UIHeader" level ="2" style = "form-signin-heading" value = "Please sign in" />
+		<Element  type = "UILabel" value = "Email address" style="sr-only" />
+		<Element label = ""  type = "UIText" Id = "txtUsername"  placeholder="Email address" property = "Username" style="form-control"/>
+		<Element  type = "UILabel" value = "Password" style="sr-only" />
+		<Element type = "UINote" value = "&lt;input type='password' id='txtPassword' class='form-control' placeholder='Password' required
+		/&gt;" />
+		<!--<Element label = ""  type = "UIPassword" Id = "txtPassword" placeholder="Pasword" property = "Password" style="form-control"/>
+		//-->
+		<Element type = "UIDiv" style = "checkbox">
+		<Element type = "UINote" value = "&lt;label&gt;
+            &lt;input type='checkbox' value='remember-me'&gt; Remember me
+          &lt;/label&gt;" />
+		</Element>
+		<Element caption = "Sign In"  type = "UIButton" Id = "btSubmit"   style="btn btn-lg btn-primary btn-block" fixedAction ="FixedAction.ACTION_PLAINSUBMIT"  />
+		<Element type = "UIDiv" style = "checkbox">
+		<Element  type = "UILabel" value = "Forgot Password?" style="link" />
+		</Element>
+	</Element>
+</Element>
 
 <!--  
 <Element type = "UIPagaragraph" />
 <Element type = "UINote" value = "staticdata" />
 <Element type = "UIHeader" level ="1" style = "test "value = "header" />
-
  -->
- 
-<Element type = "UITable" rows = "2" cols = "1">
-<Element type = "UITableRow">
-<Element type ="UITableCol">  
-<Element type ="UIErrorList">
-</Element>
-</Element>
-</Element>
-<Element type = "UITableRow">
-<Element type ="UITableCol">  
-	<Element label = "Username"  type = "UIText" Id = "txtUsername"  placeholder="user" property = "Username" />
-</Element>
-</Element>
-<Element type = "UITableRow">
-<Element type ="UITableCol">  
-	<Element label = "Password"  type = "UIPassword" Id = "txtPassword" placeholder="pasword" property = "Password" />
-</Element>
-</Element>
-<Element type = "UITableRow">
-<Element type ="UITableCol">
-  <Element caption = "Sign In"  type = "UIButton" Id = "btSubmit"   style="button" fixedAction ="FixedAction.ACTION_PLAINSUBMIT"  />
-   <Element caption = "Cancel"  type = "UIButton" Id = "btCancel"   style="button"  fixedAction ="FixedAction.ACTION_PAGEFORWARD" fixedActionParam =  "REFRESH"  />
-</Element>
-</Element>
-<Element type = "UITableRow">
-<Element type ="UITableCol">
-  <Element  type = "UILabel" value = "Forgot Password?" style="link" />
- </Element>
-</Element>
-</Element>
+<Element type = "UIDiv" style = "backstretch">
+<Element type = "UIBreak"/>
 </Element>
 </Section>
-</CoreSection>
+<Element type = "UIDiv" style = "container center-block">
 <Section type ="copyRightSection"/>
-
+</Element>
+</CoreSection>
 </UIForm>
 </Elements>
 </Page>

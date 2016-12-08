@@ -10,7 +10,8 @@
   <Renderers>
  <Renderer>
  <RendererType>HTML</RendererType>
- <StyleSheet>./css/build/login.css</StyleSheet>
+ <StyleSheet>./bootstrap/css/bootstrap.min.css</StyleSheet>
+ <StyleSheet>./css/login.css</StyleSheet>
  <PageStyle></PageStyle>
  </Renderer>
  </Renderers>
