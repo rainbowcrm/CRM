@@ -4,10 +4,10 @@ div.topBar {
   left: 0px;
   height: 40px;
   width: 100%;
-  background: #387ef5;
+  background: #282828;
   color: #f4f4f4;
   text-align: center;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.24); }
+  box-shadow: 2px 0 3px rgba(0, 0, 0, 0.5); }
 
 span.topBar {
   font-size: 20px;

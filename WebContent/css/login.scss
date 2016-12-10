@@ -1,13 +1,12 @@
 @import "./reset";
-@import "./bootstrap.min";
 @import "./colors.scss";
-@import "./fonts.scss";
 @import "./footer.scss";
+@import "./fonts.scss";
 
 body {
     background:  $background-color;
 	box-sizing: border-box;
-	font-family: "Oregon LDO Book";
+	font-family: 'Roboto', sans-serif;
 }
 
 
@@ -16,24 +15,29 @@ div.pagestyle {
  overflow:auto;
 }
 
+h1.text-center{
+	text-align: center;
+}
+
 
 .login-div {
     border: 1px solid #c0c1c4;
     border-radius: 25px;
-    width:400px
+    width:400px;
+	margin: auto;
 }
 
 .backstretch {
 left: 0px; top: 0px; overflow: hidden; margin: 0px; padding: 0px; height: 100%; width: 100%; z-index: -999999; position: fixed;
 background-size: cover;
-background: url('./bootstrap/images/2.jpg') no-repeat center #eee;
+background: url('../../bootstrap/images/2.jpg') no-repeat center #eee;
 }
 
 
 div.blueribbon{
 	text-align: center;
     position: absolute;
-    background-color: $primary-color;
+    background-color: $login-bg;
     left: 35%;
     width: 33%;
     top: 20%;

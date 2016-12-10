@@ -1,5 +1,5 @@
-$background-color:rgba(207,216,220,0.56);
-$primary-color: #387ef5;
+$background-color:url(../img/sky-bg.jpg) no-repeat center center;
+$primary-color: #00abff;
 $secondary-color:  #B0BEC5;
 $additional-info-color: #263238;
 $medium-dark: #444;
@@ -8,10 +8,13 @@ $dark: #222;
 $light: #f4f4f4;
 $good:   #69BB7B;
 $warn: #FFA500;
-$filter-start-color:#0D47A1;
-$filter-stop-color:#42A5F5;
-$menu-bg-color:rgba(207,216,220,0.87);
+$filter-start-color:rgba(255, 255, 255, 0.3);;
+$filter-stop-color:rgba(255, 255, 255, 0.1);;
+$menu-bg-color:#282828;
+$menu-hover-color:#00abff;
 $background-inherit:rgba(255,255,255,0.58);
 $popup-color:#B0BEC5;
+$header-color:#282828;  
+$login-bg: rgba(255, 255, 255, 0.1);
 
   

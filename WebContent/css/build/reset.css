@@ -25,3 +25,14 @@ blockquote:before, blockquote:after, q:before, q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0; }
+
+::-webkit-scrollbar {
+  width: 0.5em;
+  height: 0.5em; }
+
+::-webkit-scrollbar-thumb {
+  background: #d9d9d9;
+  cursor: pointer; }
+
+::-webkit-scrollbar-track {
+  background: transparent; }

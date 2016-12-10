@@ -1,8 +1,8 @@
 div.leftnav {
   position: relative;
   width: 14%;
-  background: rgba(207, 216, 220, 0.87);
-  color: #444;
+  background: #282828;
+  color: #f4f4f4;
   overflow-y: scroll;
   float: left;
   height: 100%; }
@@ -11,25 +11,30 @@ ul {
   list-style-type: none; }
 
 .menustyle {
-  font-size: 16px;
-  color: #222;
+  font-size: 14px;
+  color: #f4f4f4;
   list-style-type: none;
   text-align: left;
   display: block;
-  padding: 3px;
+  padding: 5px;
   padding-left: 15px; }
+
+.menustyle:first-child {
+  margin-top: 5px; }
 
 .menustyle:hover {
   cursor: hand;
-  background: #f4f4f4;
-  color: #222;
+  background: #00abff;
+  color: #f4f4f4;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.24); }
 
 .menustyleParent {
-  font-size: 16px;
-  color: #222;
+  font-size: 14px;
+  color: #f4f4f4;
   list-style-type: none;
-  text-align: left; }
+  text-align: left;
+  padding: 5px;
+  margin-bottom: 5px; }
 
 .menustyleParent:hover {
   cursor: hand; }

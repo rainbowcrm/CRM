@@ -1,12 +1,10 @@
 @import "./reset";
-@import "./bootstrap.min";
 @import "./colors.scss";
-@import "./fonts.scss";
 
 body {
     background:  $popup-color;
   	box-sizing: border-box;
-	font-family: "Oregon LDO Book";
+    font-family: 'Roboto', sans-serif;
 }
 
 div.lookupPagesummaryStyle{

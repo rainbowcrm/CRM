@@ -4,7 +4,7 @@ div.leftnav {
     position: relative;
     width: 14%;
     background: $menu-bg-color;
-    color: $medium-dark;
+    color: $light;
     overflow-y: scroll;
     float: left;
     height: 100%;
@@ -15,27 +15,33 @@ ul{
  }
  
  .menustyle {
-    font-size: 16px;
-    color:$dark;
+    font-size: 14px;
+    color:$light;
    list-style-type: none;
     text-align:left;
     display: block;
-    padding: 3px;
+    padding: 5px;
     padding-left: 15px;
+ }
+
+ .menustyle:first-child{
+     margin-top: 5px;
  }
  
 .menustyle:hover{
     cursor: hand;
-    background: $light;
-    color: $dark;
+    background: $menu-hover-color;
+    color: $light;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,0.24);
  }
  
 .menustyleParent {
-    font-size: 16px;
-    color:$dark;
-   list-style-type: none;
+    font-size: 14px;
+    color:$light;
+    list-style-type: none;
     text-align:left;
+    padding: 5px;
+    margin-bottom: 5px;
 }
 
 

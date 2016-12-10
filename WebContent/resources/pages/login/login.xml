@@ -5,8 +5,6 @@ Controller = "com.rainbow.crm.login.controller.LoginController">
 <Forwards>
 <Forward key ="REFRESH">rdscontroller?page=login</Forward>
 </Forwards>
-<IncludeJS>./bootstrap/js/jquery-1.11.1.min.js</IncludeJS>
-<IncludeJS>./bootstrap/js/bootstrap.min.js</IncludeJS>
 <!-- 
     <div class="container">
       <form class="form-signin">
@@ -37,19 +35,24 @@ Controller = "com.rainbow.crm.login.controller.LoginController">
 <Element type = "UIDiv" style = "container center-block">
 	<Element type = "UIDiv" style = "jumbotron center-block login-div">
 		<Element type = "UIHeader" level ="2" style = "form-signin-heading" value = "Please sign in" />
-		<Element  type = "UILabel" value = "Email address" style="sr-only" />
-		<Element label = ""  type = "UIText" Id = "txtUsername"  placeholder="Email address" property = "Username" style="form-control"/>
-		<Element  type = "UILabel" value = "Password"    style="sr-only" />
+    <Element type = "UIDiv" style = "form-group">
+	  	<Element  type = "UILabel" value = "Email address" style="sr-only" />
+		  <Element label = ""  type = "UIText" Id = "txtUsername"  placeholder="Email address" property = "Username" style="form-control"/>
+    </Element>
+    <Element type = "UIDiv" style = "form-group">
+	  	<Element  type = "UILabel" value = "Password"    style="sr-only" />
 		<!-- <Element type = "UINote" value = "&lt;input type='password' id='txtPassword' class='form-control'  property = &quot;Password&quot; placeholder='Password' required
 		/&gt;" />  -->
 		
-		<Element label = ""  type = "UIPassword" Id = "txtPassword" placeholder="Pasword" property = "Password" style="form-control"/>
-		
-		<Element type = "UIDiv" style = "checkbox">
-		<Element type = "UINote" value = "&lt;label&gt;
+	  	<Element label = ""  type = "UIPassword" Id = "txtPassword" placeholder="Pasword" property = "Password" style="form-control"/>
+		</Element>
+    <Element type = "UIDiv" style = "form-group">
+	  	<Element type = "UIDiv" style = "checkbox">
+	  	<Element type = "UINote" value = "&lt;label&gt;
             &lt;input type='checkbox' value='remember-me'&gt; Remember me
           &lt;/label&gt;" />
-		</Element>
+		  </Element>
+    </Element>
 		<Element caption = "Sign In"  type = "UIButton" Id = "btSubmit"   style="btn btn-lg btn-primary btn-block" fixedAction ="FixedAction.ACTION_PLAINSUBMIT"  />
 		<Element type = "UIDiv" style = "checkbox">
 		<Element  type = "UILabel" value = "Forgot Password?" style="link" />

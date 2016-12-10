@@ -1,7 +1,5 @@
 @import "./reset";
-@import "./bootstrap.min";
 @import "./colors.scss";
-@import "./fonts.scss";
 @import "./header.scss";
 @import "./footer.scss";
 @import "./nav.scss";
@@ -10,7 +8,7 @@
 body {
     background:  $background-color;
   	box-sizing: border-box;
-	  font-family: "Oregon LDO Book";
+	  font-family: 'Roboto', sans-serif;
 }
 
 div.pagestyle {
