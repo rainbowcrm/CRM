@@ -9,3 +9,7 @@ Project setup<br>
 5. run "npm install", this will copy all the dependency to node_modules folder<br>
 6. run "ionic serve" from root folder, this should build and run the application in the default browser<br>
 
+<h2>CSS Build Setup</h2>
+1. git bash to webContent->CSS folder
+2. run "gulp sass" to build css files
+
