@@ -77,7 +77,7 @@ span.copyRightText {
   src: url("./fonts/Oregon LDO Medium.ttf") format("truetype"); }
 
 body {
-  background: url(../img/sky-bg.jpg) no-repeat center center;
+  background: url(../../bootstrap/images/bck.jpg) no-repeat center center;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif; }
 
@@ -157,9 +157,6 @@ td {
   padding: 5px 10px;
   border-radius: 8px;
   color: #f4f4f4; }
-
-#btSubmit {
-  background: #69BB7B; }
 
 #btCancel {
   background: #f53d3d; }

@@ -179,7 +179,7 @@ dialog.fixed {
   transform: translate(0, -50%); }
 
 body {
-  background: url(../img/sky-bg.jpg) no-repeat center center;
+  background: url(../../bootstrap/images/bck.jpg) no-repeat center center;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif; }
 

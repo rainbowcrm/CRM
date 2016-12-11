@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Page id = "newDiv" showinFrame ="true" title ="New Sales | Rainbow CRM" Object = "com.rainbow.crm.sales.model.Sales" 
 Controller = "com.rainbow.crm.sales.controller.SalesController">
-<Template type= "Transaction"  name = "TargetTemplate"></Template>
+<Template type= "Transaction"  name = "TransactionTemplate"></Template>
 <Forwards>
 <Forward key ="CANCEL">rdscontroller?page=sales</Forward>
 <Forward key ="SAVE">sales</Forward>
