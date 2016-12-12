@@ -51,15 +51,7 @@ background-color:rgb(106,53,0);
  }
 
  svg{
-	 line{
-		 stroke:$primary-color !important;
-	 }
-	 rect:nth-of-type(2n){
-		 fill: $danger;
-	 }
-	 rect:nth-of-type(2n+1){
-		 fill: $good;
-	 }
+	
 	 text{
 		 fill: $additional-info-color;
 	 }

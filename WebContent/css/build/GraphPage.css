@@ -179,7 +179,7 @@ dialog.fixed {
   transform: translate(0, -50%); }
 
 body {
-  background: url(../img/sky-bg.jpg) no-repeat center center;
+  background: url(../../bootstrap/images/bck.jpg) no-repeat center center;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif; }
 
@@ -218,14 +218,6 @@ div.summaryStyle {
   left: 14%;
   background-color: #6a3500; }
 
-svg line {
-  stroke: #00abff !important; }
-
-svg rect:nth-of-type(2n) {
-  fill: #f53d3d; }
-
-svg rect:nth-of-type(2n+1) {
-  fill: #69BB7B; }
 
 svg text {
   fill: #263238; }

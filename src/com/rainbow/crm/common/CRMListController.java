@@ -25,7 +25,7 @@ import com.techtrade.rads.framework.utils.Utils;
 
 public abstract class CRMListController  extends ListController{
 
-	protected final int recordsPerPage  = 19;
+	protected final int recordsPerPage  = 12;
 	public abstract IBusinessService getService();
 	public abstract Object getPrimaryKeyValue(ModelObject object) ;
 	
