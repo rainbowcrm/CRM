@@ -10,6 +10,8 @@
 <Pages>
 <Page id = "login" definition ="/resources/pages/login/login.xml" modelclass = "com.rainbow.crm.login.model.Login" >
 </Page>
+<Page id = "testTags" definition ="/resources/pages/login/testTags.xml" modelclass = "com.rainbow.crm.login.model.Login" >
+</Page>
 <Page id = "sysadmin" definition ="/resources/pages/company/CompanyList.xml" modelclass = "com.rainbow.crm.company.model.Company" >
 </Page>
 <Page id = "compcreate" definition ="/resources/pages/company/CompanyCreate.xml" modelclass = "com.rainbow.crm.company.model.Company" >
