@@ -14,3 +14,6 @@ span.topBar {
   font-weight: bold;
   color: #f4f4f4;
   line-height: 40px; }
+
+.headerStyle table td, .filterStyle table td {
+  border: none; }

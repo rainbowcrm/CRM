@@ -18,3 +18,10 @@ span.topBar {
  color:$light;
  line-height: 40px;
 }
+
+//reset boostrap style for header form
+.headerStyle,.filterStyle{
+    table td{
+        border: none;
+    }
+}

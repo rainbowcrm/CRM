@@ -1,0 +1,191 @@
+@import "./reset";
+@import "./colors.scss";
+@import "./header.scss";
+@import "./footer.scss";
+@import "./nav.scss";
+@import "./alert-dialog.scss";
+body {
+    background:  $background-color;
+  	box-sizing: border-box;
+	font-family: 'Roboto', sans-serif;
+}
+p {
+		margin: 0px;
+	}
+div.pagestyle {
+     position: relative;
+    overflow: auto;
+    width: 86%;
+    float: left;
+}
+
+div.coreStyle {
+ position:relative;
+ overflow:auto;
+ height:90%;
+}
+
+div.detailCRUDStyle {
+position:relative;
+overflow:auto;
+height:40%;
+}
+
+
+
+div.childSectionStyle {
+position:relative;
+overflow:auto;
+}
+ 
+div.summaryStyle{
+ text-align: right;
+ position:fixed;
+top:90%;
+width:86%;
+left:14%;
+table td{
+	border: none;
+}
+.button{
+	background: $primary-color;
+}
+/*background-color:rgb(192,192,192); 192,192,192*/
+/*background-color:rgb(106,53,0); Brown*/
+/**background-color:rgb(185,180,206);**/
+ }
+
+
+input {
+	/*color: white;*/
+	font-size: 12px;
+}
+
+span {
+	color: $light;
+	font-size: 12px;
+}
+span.bigTitle {
+	color: $light;
+	font-size: 18px;
+}
+
+span.errorStyle {
+	color:$danger;
+	font-size:13;
+}
+
+span.bolded {
+	color:yellow;
+	font-size: 15px;
+	width:15;
+	font-weight:bold;
+	
+}
+
+
+span.titleStyleUnSelected  {
+color:yellow;
+background-color:rgb(192,192,192);
+border-color: green;
+}
+
+
+span.titleStyleSelected  {
+border:4px solid #8080c0;
+color:BLACK;
+background-color:#8080c0;
+font-style:normal;
+font-weight:bold;
+border-color: #8080c0;
+}
+
+span.highlighted {
+    font-size: 20px;
+    color:"Black";
+}
+table.errorStyle {
+	text-align: left;
+}
+tr.uitabstyle{
+	text-align: left;
+}
+tr.oddRowError {
+	text-align: left;
+	background-color:black;
+}
+tr.evenRowError {
+	text-align: left;
+	background-color:black;
+}
+table.CRUDtableContainer {
+	line-height: 200%;
+	text-align: left;
+}
+
+tr.CRUDtableContainer {
+	text-align: left;
+}
+table.uitabstyle{
+	background-color: #8080c0;
+}
+th.uitabstyle{
+	background-color:rgb(192,192,192);
+}
+table, tr {
+width : 100%;
+text-align: right;
+}
+
+td.grid {
+
+border: 1px solid #cccccc;
+}
+
+table.grid {
+	border-style: solid;
+	text-align: right;
+	border-collapse: collapse;
+	position:relative;	
+}
+
+.button {
+    background-color: black; /* Green */
+    border: none;
+    color: white;
+    padding: 7px 14px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+	border-radius: 8px;
+
+}
+
+ 
+dialog.dialogstyle  {
+	width:350px;
+	height:300px;
+}
+
+dialog.widepopup  {
+	width:750px;
+	height:300px;
+	top: 100;
+}
+
+
+iframe.lookupFrameStyle {
+	left:0%;
+	width:100%;
+	top:0%;
+	height:100%;
+}
+
+.button {
+    border: none;
+    padding: 5px 10px;
+    border-radius: 8px;
+	color: $light;
+	background-color:$good;
+}

@@ -158,5 +158,8 @@ td {
   border-radius: 8px;
   color: #f4f4f4; }
 
+#btSubmit {
+  background: #69BB7B; }
+
 #btCancel {
   background: #f53d3d; }
