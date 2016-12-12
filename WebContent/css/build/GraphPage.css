@@ -54,6 +54,9 @@ span.topBar {
   color: #f4f4f4;
   line-height: 40px; }
 
+.headerStyle table td, .filterStyle table td {
+  border: none; }
+
 div.copyRight {
   position: fixed;
   bottom: 0%;
@@ -179,7 +182,7 @@ dialog.fixed {
   transform: translate(0, -50%); }
 
 body {
-  background: url(../img/sky-bg.jpg) no-repeat center center;
+  background: url(../../bootstrap/images/bck.jpg) no-repeat center center;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif; }
 
