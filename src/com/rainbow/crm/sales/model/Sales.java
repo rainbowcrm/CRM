@@ -37,6 +37,9 @@ public class Sales extends CRMBusinessModelObject{
 	
 	boolean isFutureDelivery;
 	FiniteValue deliveryMode;
+	String deliveryAgent;
+	Date deliveryDate ;
+	Date  paymentDueDate ;
 	
 	
 	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
@@ -163,6 +166,37 @@ public class Sales extends CRMBusinessModelObject{
 	public void setSalesMan(String salesMan) {
 		this.salesMan = salesMan;
 	}
+	public boolean isFutureDelivery() {
+		return isFutureDelivery;
+	}
+	public void setFutureDelivery(boolean isFutureDelivery) {
+		this.isFutureDelivery = isFutureDelivery;
+	}
+	public FiniteValue getDeliveryMode() {
+		return deliveryMode;
+	}
+	public void setDeliveryMode(FiniteValue deliveryMode) {
+		this.deliveryMode = deliveryMode;
+	}
+	public String getDeliveryAgent() {
+		return deliveryAgent;
+	}
+	public void setDeliveryAgent(String deliveryAgent) {
+		this.deliveryAgent = deliveryAgent;
+	}
+	public Date getDeliveryDate() {
+		return deliveryDate;
+	}
+	public void setDeliveryDate(Date deliveryDate) {
+		this.deliveryDate = deliveryDate;
+	}
+	public Date getPaymentDueDate() {
+		return paymentDueDate;
+	}
+	public void setPaymentDueDate(Date paymentDueDate) {
+		this.paymentDueDate = paymentDueDate;
+	}
+	
 	
 		
 }

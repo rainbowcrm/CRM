@@ -8,11 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
+import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMDBException;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
+import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.database.LoginSQLs;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.division.service.IDivisionService;
@@ -61,6 +63,10 @@ public class SalesController extends TransactionController{
 		return getService().validateforCreate((Sales)object, (CRMContext)getContext());
 	}
 
+	public Map <String, String > getDeliveryModes() {
+		Map<String, String> ans = GeneralSQLs.getFiniteValues(CRMConstants.FV_DELIVERY_MODE);
+		return ans;
+	}
 	
 	/*@Override
 	public List<RadsError> validateforUpdate() {

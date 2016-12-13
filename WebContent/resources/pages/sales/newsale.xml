@@ -112,8 +112,18 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 </Element>
 </Element>
 </Section>
-<Section type ="brk2"/>
 <Section type ="footer">
+<Element label = ""  type = "UICheckBox" Id = "chkCredit"   property ="creditSales" >
+	<options> 
+	  <option key ="true"> Future_Delivery </option>
+	 </options>
+</Element>
+<Element label = "Delivery_Date"  type = "UIDate" Id = "txtDeliveryDate"    property ="deliveryDate"   />
+<Element label = "Delivery_Note"  type = "UIText" Id = "txtDAgent"   property ="deliveryAgent"  size = "40" />
+<Element label = "Delivery_Mode"  type = "UIList" Id = "lstCommMode"   property ="deliveryMode.code"  externalise= "true">
+		<options populator =  "getDeliveryModes"> 
+		</options>
+</Element>
 <Element label = "Discount"  type = "UIText" Id = "txtDiscount"   focusoutJS = "calculateAll()" property ="totalDisc"  isNumeric= "true" size = "10" />  
 <Element label = "Tax_Percent"  type = "UIText" Id = "txtTaxPerc"   focusoutJS = "calculateAll()"  property ="taxPerc" isNumeric= "true" size = "10" />
 <Element label = "Tax_Amount"  type = "UIText" Id = "txtTaxAmt"   property ="taxAmount"  readonly="true" isNumeric= "true" size = "10" />
@@ -125,6 +135,7 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 	  <option key ="true"> Credit_Sales </option>
 	 </options>
 </Element>
+<Element label = "PaymentDue_Date"  type = "UIDate" Id = "txtPaymentDate"    property ="paymentDueDate"   />
 <Element label = "Total_Amount"  type = "UIText" Id = "txtTotalAmt"   property ="netAmount" isNumeric= "true" readonly="true" size = "10" />
 </Section>
 <Section type ="brk3"/>
