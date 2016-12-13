@@ -71,11 +71,11 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 	</Element>
 	</Element>
 </Section>
-<Section type ="brk1"/>
+
 <Section type ="detail">
 <Element label = ""  type = "UILabel" Id = "lblLineitTitle"  style="bigTitle" value ="Line_Items" />
 <Element type = "UITable" rows = "1" cols = "7" style = "grid" applyStyleonChildren ="true" Id  ="tblTrans" property ="SalesLines[]" >
-<Element type = "UITableHead">
+<Element type = "UITableHead" style ="listPageTitle">
  <Element type = "UITableRow">
 
 <Element type ="UITableCol" width = "10%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Code" /></Element>
@@ -91,7 +91,7 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 <Element type = "UITableRow"  dataType = "com.rainbow.crm.sales.model.SalesLine" rendered = "!Object.getVoided">
 
 <Element type ="UITableCol" width = "10%"><Element label = ""  type = "UIText" Id = "txtCode" size  = "10" property ="Item.Code" /> </Element>
-<Element type ="UITableCol" width = "25%"><Element label = ""  type = "UILookupText"  Id = "txtItName"  size  = "40" property ="Item.Name" showLookupAsDialog="true" dialogId="dlgIt"
+<Element type ="UITableCol" width = "25%"><Element label = ""  type = "UILookupText"  Id = "txtItName"  size  = "30" property ="Item.Name" showLookupAsDialog="true" dialogId="dlgIt"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>item</lookupType>
 	 <height>300</height>

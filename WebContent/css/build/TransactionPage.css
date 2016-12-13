@@ -205,6 +205,12 @@ div.detailCRUDStyle {
   overflow: auto;
   height: 40%; }
 
+ thead.listPageTitle {
+    background: #263238;
+    color: #f4f4f4;
+    font-weight: bold;
+    font-size: 18px; }
+    
 div.childSectionStyle {
   position: relative;
   overflow: auto; }

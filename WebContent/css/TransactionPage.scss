@@ -31,7 +31,12 @@ overflow:auto;
 height:40%;
 }
 
-
+thead.listPageTitle {
+    background: $additional-info-color;
+    color: $light;
+    font-weight:bold;
+    font-size:18px;
+  }
 
 div.childSectionStyle {
 position:relative;
