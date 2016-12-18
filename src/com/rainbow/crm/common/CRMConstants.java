@@ -13,6 +13,7 @@ public class CRMConstants {
 	public final static String FV_CONTACT_TYPE = "CONTTYPE";
 	public final static String FV_COMMUNICATION_MODE = "COMMMODE";
 	public final static String FV_DELIVERY_MODE = "DLVMODE";
+	public final static String FV_ORDERTYPE = "SLORDTYPE";
 	public final static String FV_CONFIDENCE_LEVEL = "CONFLEVEL";
 	public final static String FV_FOLLOWUP_RESULT = "FLPRESULT";
 	public final static String FV_SUCCESS_REASON = "SUCCREAS";

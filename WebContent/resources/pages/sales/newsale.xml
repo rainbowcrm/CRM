@@ -54,10 +54,14 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 
 	<Element label = "Bill_No"  type = "UIText" Id = "txtBillNo"  isMandatory="true"  readonly="true" property ="billNumber" />
 	<Element label = "Date"  type = "UIDate" Id = "txtDate" isMandatory="true"  property ="salesDate" />
+	<Element label = "Order_Type"  type = "UIList" Id = "lstOrderType"   property ="orderType.code"  externalise= "true">
+		<options populator =  "getOrderTypes"> 
+		</options>
+	</Element>
+		<Element label = ""  type = "UILabel" Id = "lblFree3"  style="bigTitle" value ="" />
+	<Element label = ""  type = "UILabel" Id = "lblFree4"  style="bigTitle" value ="" />
 	<Element label = ""  type = "UILabel" Id = "lblCustTitle"   value ="Customer" />
-	<Element label = ""  type = "UILabel" Id = "lblFree1"  style="bigTitle" value ="" />
-	<Element label = ""  type = "UILabel" Id = "lblFree2"  style="bigTitle" value ="" />
-	<Element label = "Phone"  type = "UIText" Id = "txtPhone"   property ="Customer.Phone" />
+	<Element label = "Phone"  type = "UIText" Id = "txtPhone"   showInPrevCol ="true"  property ="Customer.Phone" />
 	<Element label = "Email"  type = "UIText" Id = "txtEmail"   property ="Customer.Email" />
 	 <Element label = "Name"  type = "UILookupText"  Id = "txtCustomerName"  isMandatory="true" property ="Customer.FullName" showLookupAsDialog="true" dialogId="dlgComp"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
@@ -65,7 +69,7 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 	 <height>300</height>
 	 <width>290</width>
 	</Element>
-	<Element caption = "New_Customer"  type = "UIButton"    Id = "btnNewCustomer"  style="button" onClickJS = "showLookupDialog('newcustDL',this);"  />
+	<Element caption = "New_Customer"  type = "UIButton"    Id = "btnNewCustomer" showInPrevCol ="true" style="button" onClickJS = "showLookupDialog('newcustDL',this);"  />
 	<Element type ="UIDialog" Id = "newcustDL" style= "widepopup" >
 	<Element type = "UIIFrame" src ="./rdscontroller?page=quickcustomeradd" style ="lookupFrameStyle">
 	</Element>
@@ -73,7 +77,10 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 </Section>
 
 <Section type ="detail">
-<Element label = ""  type = "UILabel" Id = "lblLineitTitle"  style="bigTitle" value ="Line_Items" />
+<Element type ="UITabset" Id = "impexp" style = "uitabstyle" selectedTabStyle= "titleStyleSelected" unSelectedTabStyle ="titleStyleUnSelected" >
+<Element type ="UITab" Id= "idLine" title = "Line_Items" showinTable = "false" >
+
+<!--  <Element label = ""  type = "UILabel" Id = "lblLineitTitle"  style="bigTitle" value ="Line_Items" />  -->
 <Element type = "UITable" rows = "1" cols = "7" style = "grid" applyStyleonChildren ="true" Id  ="tblTrans" property ="SalesLines[]" >
 <Element type = "UITableHead" style ="listPageTitle">
  <Element type = "UITableRow">
@@ -111,31 +118,40 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 </Element>
 </Element>
 </Element>
-</Section>
-<Section type ="footer">
-<Element label = ""  type = "UICheckBox" Id = "chkCredit"   property ="creditSales" >
-	<options> 
-	  <option key ="true"> Future_Delivery </option>
-	 </options>
 </Element>
-<Element label = "Delivery_Date"  type = "UIDate" Id = "txtDeliveryDate"    property ="deliveryDate"   />
-<Element label = "Delivery_Note"  type = "UIText" Id = "txtDAgent"   property ="deliveryAgent"  size = "40" />
-<Element label = "Delivery_Mode"  type = "UIList" Id = "lstCommMode"   property ="deliveryMode.code"  externalise= "true">
-		<options populator =  "getDeliveryModes"> 
-		</options>
-</Element>
-<Element label = "Discount"  type = "UIText" Id = "txtDiscount"   focusoutJS = "calculateAll()" property ="totalDisc"  isNumeric= "true" size = "10" />  
-<Element label = "Tax_Percent"  type = "UIText" Id = "txtTaxPerc"   focusoutJS = "calculateAll()"  property ="taxPerc" isNumeric= "true" size = "10" />
-<Element label = "Tax_Amount"  type = "UIText" Id = "txtTaxAmt"   property ="taxAmount"  readonly="true" isNumeric= "true" size = "10" />
-<Element label = "Comments"  type = "UITextArea" Id = "txtComm"  property ="comments" >
-	 <rows>5</rows> <cols>30</cols>
-</Element>
+<Element type ="UITab" Id= "idDel" title = "Payment_Details" showinTable = "true" cols = "2" >
 <Element label = ""  type = "UICheckBox" Id = "chkCredit"   property ="creditSales" >
 	<options> 
 	  <option key ="true"> Credit_Sales </option>
 	 </options>
 </Element>
 <Element label = "PaymentDue_Date"  type = "UIDate" Id = "txtPaymentDate"    property ="paymentDueDate"   />
+</Element>
+<Element type ="UITab" Id= "idPay" title = "Delivery_Details" showinTable = "true" cols = "2"  >
+
+<Element label = ""  type = "UICheckBox" Id = "chkCredit"   property ="creditSales" >
+	<options> 
+	  <option key ="true"> Future_Delivery </option>
+	 </options>
+</Element>
+<Element label = "Delivery_Mode"  type = "UIList" Id = "lstCommMode"   property ="deliveryMode.code"  externalise= "true">
+		<options populator =  "getDeliveryModes"> 
+		</options>
+</Element>
+<Element label = "Delivery_Agent"  type = "UIText" Id = "txtDAgent"   property ="deliveryAgent"  size = "40" />
+<Element label = "Delivery_Date"  type = "UIDate" Id = "txtDeliveryDate"    property ="deliveryDate"   />
+
+</Element>
+</Element>
+</Section>
+<Section type ="footer">
+<Element label = "Discount"  type = "UIText" Id = "txtDiscount"   focusoutJS = "calculateAll()" property ="totalDisc"  isNumeric= "true" size = "10" />  
+<Element label = "Tax_Percent"  type = "UIText" Id = "txtTaxPerc"   focusoutJS = "calculateAll()"  property ="taxPerc" isNumeric= "true" size = "10" />
+<Element label = "Tax_Amount"  type = "UIText" Id = "txtTaxAmt"   property ="taxAmount"  readonly="true" isNumeric= "true" size = "10" />
+<Element label = "Comments"  type = "UITextArea" Id = "txtComm"  property ="comments" >
+	 <rows>2</rows> <cols>30</cols>
+</Element>
+
 <Element label = "Total_Amount"  type = "UIText" Id = "txtTotalAmt"   property ="netAmount" isNumeric= "true" readonly="true" size = "10" />
 </Section>
 <Section type ="brk3"/>

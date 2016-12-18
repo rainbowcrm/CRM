@@ -68,6 +68,11 @@ public class SalesController extends TransactionController{
 		return ans;
 	}
 	
+	public Map <String, String > getOrderTypes() {
+		Map<String, String> ans = GeneralSQLs.getFiniteValues(CRMConstants.FV_ORDERTYPE);
+		return ans;
+	}
+	
 	/*@Override
 	public List<RadsError> validateforUpdate() {
 		return getService().validateforUpdate((Sales)object, (CRMContext)getContext());

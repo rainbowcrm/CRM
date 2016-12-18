@@ -19,6 +19,7 @@ public class Sales extends CRMBusinessModelObject{
 	Division division;
 	String billNumber;
 	Customer customer;
+	FiniteValue orderType;
 	Date salesDate ;
 	String salesRef;
 	String salesMan;
@@ -196,6 +197,13 @@ public class Sales extends CRMBusinessModelObject{
 	public void setPaymentDueDate(Date paymentDueDate) {
 		this.paymentDueDate = paymentDueDate;
 	}
+	public FiniteValue getOrderType() {
+		return orderType;
+	}
+	public void setOrderType(FiniteValue orderType) {
+		this.orderType = orderType;
+	}
+	
 	
 	
 		
