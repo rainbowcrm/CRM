@@ -10,42 +10,38 @@
 
   
 
-	<path id="master-classpath">
-	<fileset dir="./lib">
+  <path id="master-classpath">
+  <fileset dir="./lib">
     <include name="*.jar"/>
-	</fileset>
-	</path>
-	
+  </fileset>
+  </path>
+  
 
  <target name="clean" 
         description="cleean the classes and libs">
-		<delete dir="${build}"/>
-		<delete dir="${destlib}"/>
-		<mkdir dir="${build}"/>
-		<mkdir dir="${destlib}"/>
+    <delete dir="${build}"/>
+    <delete dir="${destlib}"/>
+    <mkdir dir="${build}"/>
+    <mkdir dir="${destlib}"/>
  </target>
 
    <target name="compile" 
         description="compile the source">
     <!-- Compile the java code from ${src} into ${build} -->
     <javac srcdir="${src}" destdir="${build}"  debug="true" >
-	<classpath refid="master-classpath"/>
-	</javac>
-	<copy todir="${destlib}">
+  <classpath refid="master-classpath"/>
+  </javac>
+  <copy todir="${destlib}">
     <fileset dir="${srclib}" excludes="**/*.java"/>
     </copy>
-	<copy todir="${destlib}">
+  <copy todir="${destlib}">
     <fileset dir="${srclib}" excludes="**/*.java"/>
     </copy>
-	<copy todir="${destconfig}">
+  <copy todir="${destconfig}">
     <fileset dir="${srcconfig}" excludes="**/*.java"/>
     </copy>
+  <exec executable="sh" dir="./WebContent/css/">
+    <arg value="generate_css.sh"/>
+  </exec>
   </target>
-
-
-  
-
-
-  
-
 </project>
