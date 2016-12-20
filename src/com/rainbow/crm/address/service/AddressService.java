@@ -13,7 +13,6 @@ import com.rainbow.crm.address.dao.AddressDAO;
 import com.rainbow.crm.address.model.Address;
 import com.rainbow.crm.address.validator.AddressValidator;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
-import com.techtrade.rads.framework.utils.Utils;
 
 public class AddressService extends AbstractService implements IAddressService{
 

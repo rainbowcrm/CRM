@@ -140,7 +140,15 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 </Element>
 <Element label = "Delivery_Agent"  type = "UIText" Id = "txtDAgent"   property ="deliveryAgent"  size = "40" />
 <Element label = "Delivery_Date"  type = "UIDate" Id = "txtDeliveryDate"    property ="deliveryDate"   />
-
+<Element label = "Recipient"  type = "UIText" Id = "txtRecp"   property ="deliveryAddress.recipient"  size = "40" />
+<Element label = "Address1"  type = "UIText" Id = "txtAddress1"   property ="deliveryAddress.address1"  size = "40" />
+<Element label = "Address2"  type = "UIText" Id = "txtAddr2"   property ="deliveryAddress.address2"  size = "40" />
+<Element label = "City"  type = "UIText" Id = "txtCity"   property ="deliveryAddress.city"  size = "40" />
+<Element label = "ZipCode"  type = "UIText" Id = "txtZip"   property ="deliveryAddress.zipcode"  size = "10" />
+<Element label = "State"  type = "UIText" Id = "txtState"   property ="deliveryAddress.state"  size = "40" />
+<Element label = "Country"  type = "UIText" Id = "txtCountry"   property ="deliveryAddress.country"  size = "40" />
+<Element label = "Phone"  type = "UIText" Id = "txtDelPh"   property ="deliveryAddress.phone"  size = "40" />
+<Element label = "Email"  type = "UIText" Id = "txtDelEmail"   property ="deliveryAddress.email"  size = "40" />
 </Element>
 </Element>
 </Section>

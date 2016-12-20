@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
+import com.rainbow.crm.address.model.Address;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.division.model.Division;
@@ -19,6 +20,7 @@ public class Sales extends CRMBusinessModelObject{
 	Division division;
 	String billNumber;
 	Customer customer;
+	Address deliveryAddress;
 	FiniteValue orderType;
 	Date salesDate ;
 	String salesRef;
@@ -202,6 +204,12 @@ public class Sales extends CRMBusinessModelObject{
 	}
 	public void setOrderType(FiniteValue orderType) {
 		this.orderType = orderType;
+	}
+	public Address getDeliveryAddress() {
+		return deliveryAddress;
+	}
+	public void setDeliveryAddress(Address deliveryAddress) {
+		this.deliveryAddress = deliveryAddress;
 	}
 	
 	

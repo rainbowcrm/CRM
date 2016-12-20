@@ -12,12 +12,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.rainbow.crm.abstratcs.model.CRMItemLine;
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
+import com.rainbow.crm.address.model.Address;
+import com.rainbow.crm.address.service.IAddressService;
 import com.rainbow.crm.common.AbstractService;
+import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMDBException;
 import com.rainbow.crm.common.CRMValidator;
 import com.rainbow.crm.common.Externalize;
 import com.rainbow.crm.common.SpringObjectFactory;
+import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.common.messaging.CRMMessageSender;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
@@ -144,12 +148,26 @@ public class SalesService extends AbstractService implements ISalesService{
 				}
 			}
 		}
+		if(object.getDeliveryAddress() != null  && !object.getDeliveryAddress().isNullContent()) {
+			IAddressService addService = (IAddressService)SpringObjectFactory.INSTANCE.getInstance("IAddressService");
+			Address delivery =(Address) addService.getByBusinessKey(object.getDeliveryAddress(), context);
+			if (delivery != null &&  !delivery.isNullContent())
+				object.setDeliveryAddress(delivery);
+			else  {
+				object.getDeliveryAddress().setCompany(object.getCompany());
+				object.getDeliveryAddress().setAddressType(new FiniteValue(CRMConstants.ADDRESS_TYPE.PRIMARY_SHIPPING));
+				int pk = GeneralSQLs.getNextPKValue("Addresses") ;
+				object.getDeliveryAddress().setId(pk);
+			}
+				
+		}
 		return ans;
 	}
 
 	@Override
 	public TransactionResult create(CRMModelObject object, CRMContext context) {
 		Sales sales = (Sales)object ;
+		
 		if (Utils.isNull(sales.getBillNumber())) {
 			String bKey = NextUpGenerator.getNextNumber("Sales", context, sales.getDivision());
 			sales.setBillNumber(bKey);

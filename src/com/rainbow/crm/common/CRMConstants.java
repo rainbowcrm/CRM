@@ -60,5 +60,11 @@ public class CRMConstants {
 		public final static String SLSPEREND = "ALTSPEND";
 	}
 	
+	public final static class ADDRESS_TYPE {
+		public final static String BILLING = "BLLNG";
+		public final static String PRIMARY_SHIPPING = "SHPPRM";
+		public final static String SECONDARY_SHIPPING = "SHPSEC";
+	}
+	
 }
 

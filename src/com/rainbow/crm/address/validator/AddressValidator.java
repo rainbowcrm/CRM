@@ -33,6 +33,21 @@ public class AddressValidator extends CRMValidator {
 		if (Utils.isNull(Address.getPhone())) {
 			errors.add(getErrorforCode(UserErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Phone"))) ;
 		}
+		if (Utils.isNull(Address.getRecipient())) {
+			errors.add(getErrorforCode(UserErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Recipient"))) ;
+		}
+		if (Utils.isNull(Address.getAddress1())) {
+			errors.add(getErrorforCode(UserErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Address1"))) ;
+		}
+		if (Utils.isNull(Address.getAddress2())) {
+			errors.add(getErrorforCode(UserErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Address2"))) ;
+		}
+		if (Utils.isNull(Address.getCity())) {
+			errors.add(getErrorforCode(UserErrorCodes.FIELD_EMPTY,externalize.externalize(context, "City"))) ;
+		}
+		if (Utils.isNull(Address.getZipcode())) {
+			errors.add(getErrorforCode(UserErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Zipcode"))) ;
+		}
 		if (!Utils.isNull(Address.getEmail()) && (!Address.getEmail().contains("@") || !Address.getEmail().contains(".")) ) {
 			errors.add(getErrorforCode(UserErrorCodes.FIELD_NOT_VALID,externalize.externalize(context, "Email"))) ;
 		}

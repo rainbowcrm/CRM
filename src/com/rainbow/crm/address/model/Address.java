@@ -4,10 +4,10 @@ import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.division.model.Division;
+import com.techtrade.rads.framework.annotations.RadsPropertySet;
 
 public class Address  extends CRMBusinessModelObject{
 	
-	Division division;
 	Customer customer;
 	FiniteValue addressType;
 	String recipient ;
@@ -19,12 +19,7 @@ public class Address  extends CRMBusinessModelObject{
 	String country;
 	String phone;
 	String email;
-	public Division getDivision() {
-		return division;
-	}
-	public void setDivision(Division division) {
-		this.division = division;
-	}
+	
 	public Customer getCustomer() {
 		return customer;
 	}
@@ -37,33 +32,43 @@ public class Address  extends CRMBusinessModelObject{
 	public void setAddressType(FiniteValue addressType) {
 		this.addressType = addressType;
 	}
+	@RadsPropertySet(isBK=true)
 	public String getRecipient() {
 		return recipient;
 	}
+	@RadsPropertySet(isBK=true)
 	public void setRecipient(String recipient) {
 		this.recipient = recipient;
 	}
+	@RadsPropertySet(isBK=true)
 	public String getAddress1() {
 		return address1;
 	}
+	@RadsPropertySet(isBK=true)
 	public void setAddress1(String address1) {
 		this.address1 = address1;
 	}
+	@RadsPropertySet(isBK=true)
 	public String getAddress2() {
 		return address2;
 	}
+	@RadsPropertySet(isBK=true)
 	public void setAddress2(String address2) {
 		this.address2 = address2;
 	}
+	@RadsPropertySet(isBK=true)
 	public String getZipcode() {
 		return zipcode;
 	}
+	@RadsPropertySet(isBK=true)
 	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
 	}
+	@RadsPropertySet(isBK=true)
 	public String getCity() {
 		return city;
 	}
+	@RadsPropertySet(isBK=true)
 	public void setCity(String city) {
 		this.city = city;
 	}

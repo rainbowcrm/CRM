@@ -1,6 +1,7 @@
 package com.rainbow.crm.abstratcs.model;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import com.rainbow.crm.company.model.Company;
@@ -48,6 +49,15 @@ public abstract class CRMBusinessModelObject  extends CRMModelObject{
 		this.temporaryProperties = temporaryProperties;
 	}
 	
-	
+	public boolean isNullContent() {
+		Map<String, Object> keys =  this.getBK();
+		Iterator it = keys.keySet().iterator() ;
+		while(it.hasNext()) {
+			Object ob = keys.get(it.next());
+			if (ob != null)
+				return false; 
+		}
+		return true;
+	}
 
 }
