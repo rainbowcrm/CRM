@@ -38,11 +38,15 @@ import org.hibernate.cfg.Configuration;
 
 
 
+
+
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
+import com.rainbow.crm.alert.model.Alert;
 import com.rainbow.crm.category.model.Category;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.contact.model.Contact;
+import com.rainbow.crm.custcategory.model.CustCategory;
 import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.filter.model.CRMFilter;
@@ -120,8 +124,9 @@ public  abstract class HibernateDAO  extends ORMDAO{
     		configuration.addClass(Sales.class).addResource("com/rainbow/crm/saleslead/model/SalesLead.hbm.xml");
     		configuration.addClass(SalesLine.class).addResource("com/rainbow/crm/saleslead/model/SalesLeadLine.hbm.xml");
     		configuration.addClass(Followup.class).addResource("com/rainbow/crm/followup/model/Followup.hbm.xml");
+    		configuration.addClass(CustCategory.class).addResource("com/rainbow/crm/custcategory/model/CustCategory.hbm.xml");
     		configuration.addClass(Contact.class).addResource("com/rainbow/crm/contact/model/Contact.hbm.xml");
-    		configuration.addClass(Followup.class).addResource("com/rainbow/crm/alert/model/Alert.hbm.xml");
+    		configuration.addClass(Alert.class).addResource("com/rainbow/crm/alert/model/Alert.hbm.xml");
     		sessionFactory = configuration.configure().buildSessionFactory();
     		
     		//sessionFactory.getAllClassMetadata().put(key, value)

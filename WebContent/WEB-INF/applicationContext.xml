@@ -61,6 +61,8 @@
     </bean>
     <bean id="IFollowupService" class="com.rainbow.crm.followup.service.FollowupService">
     </bean>
+    <bean id="ICustCategoryService" class="com.rainbow.crm.custcategory.service.CustCategoryService">
+    </bean>
     <bean id="IAlertService" class="com.rainbow.crm.alert.service.AlertService">
     </bean>
     <bean id="IPurchaseService" class="com.rainbow.crm.purchase.service.PurchaseService">
@@ -106,6 +108,9 @@
     <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
     <bean id="FollowupDAO" class="com.rainbow.crm.followup.dao.FollowupDAO">
+    <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean id="CustCategoryDAO" class="com.rainbow.crm.custcategory.dao.CustCategoryDAO">
     <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
      <bean id="AlertDAO" class="com.rainbow.crm.alert.dao.AlertDAO">
@@ -167,6 +172,7 @@
         <value>com/rainbow/crm/saleslead/model/SalesLead.hbm.xml</value>
         <value>com/rainbow/crm/saleslead/model/SalesLeadLine.hbm.xml</value>
         <value>com/rainbow/crm/followup/model/Followup.hbm.xml</value>  
+        <value>com/rainbow/crm/custcategory/model/CustCategory.hbm.xml</value>  
         <value>com/rainbow/crm/alert/model/Alert.hbm.xml</value>  
         </list>  
         </property>  

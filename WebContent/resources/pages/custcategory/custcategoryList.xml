@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Page id = "followups" showinFrame ="true" title ="Customer Category | Rainbow CRM" Object = "com.rainbow.crm.custcategory.model.CustCategory" 
+Controller = "com.rainbow.crm.custcategory.controller.CustCategoryListController">
+<Template type= "List"  name = "ListTemplate"></Template>
+<Forwards>
+<Forward key ="NEW">rdscontroller?page=newcustcategory</Forward>
+<Forward key ="EDIT">rdscontroller?page=newcustcategory</Forward>
+</Forwards>
+<AjaxGroups>
+<AjaxGroup service ="filterSearch">
+<requestElements>
+<requestElement key = "filterId">lstSavedFilters</requestElement>
+</requestElements>
+<responseElements>
+<responseElement key = "FilterName" >txtFilterName</responseElement>
+
+<responseElement key = "Name" >txtCategory</responseElement>
+<responseElement key = "Criteria" >lstCriteria</responseElement>
+<responseElement key = "ValueLT" >txtValLT</responseElement>
+<responseElement key = "ValueGt" >txtValGT</responseElement>
+</responseElements>
+</AjaxGroup>
+</AjaxGroups>
+
+<IncludeJS>./scripts/CRMGeneral.js</IncludeJS>
+<Elements>
+<Section type ="topBar"></Section>
+<Section type ="leftsideBarApp"></Section>
+<CoreSection>
+<ErrorSection>
+</ErrorSection>
+<FilterSection>
+<FilterNode>
+  <Element label = "Saved_Filters"  type = "UIList" Id = "lstSavedFilters"   property ="" >
+	<options populator =  "getSavedFiters"> 
+	</options>
+  </Element>
+ </FilterNode>
+<FilterNode>
+   	<Element label = "Filter_Name"  type = "UIText" Id = "txtFilterName"  property ="FilterName" />
+ </FilterNode>
+<FilterNode>
+   	<Element label = "Name"  type = "UIText" Id = "txtCategory"  property ="Name" />
+ </FilterNode>
+ <FilterNode>
+   	<Element label = "Criteria"  type = "UIList" Id = "lstCriteria"  property ="salesAssociate" />
+ </FilterNode>
+<FilterNode>
+   	<Element label = "Value LT"  type = "UIText" Id = "txtValLT"  property ="minValue" />
+ </FilterNode>
+ <FilterNode>
+   	<Element label = "Value GT"  type = "UIText" Id = "txtValGT"  property ="maxValue" />
+ </FilterNode>
+</FilterSection>
+<ListSection >
+<Columns allowrowselection ="Multiple" uniqueproperty = "Id">
+<SelectionColumn   >
+<Element label = ""  type = "UICheckBox" Id = "idChkSel"  rendered="!Object.isDeleted" property ="Id" />
+<Element label = ""  type = "UIImage" Id = "idChkSel"  rendered="Object.isDeleted" height = "21" weight ="21" src= "./resources/images/deletedRow.jpg" />
+</SelectionColumn>
+<Column title ="Name"   width ="18%">
+<Element label = ""  type = "UINote" Id = "idIdNote"  property ="Name" />
+</Column>
+<Column title ="EvalFrom"   width ="18%">
+<Element label = ""  type = "UINote" Id = "idIdNote"  property ="evalFrom.description" />
+</Column>
+<Column title ="EvalTo"  width ="18%" >
+<Element label = ""  type = "UINote" Id = "idCt"  property ="evalFrom.description" />
+</Column> 
+<Column title ="Value LT"   width ="18%">
+<Element label = ""  type = "UINote" Id = "idIdNote"  property ="minValue" />
+</Column>
+<Column title ="Value GT"   width ="18%">
+<Element label = ""  type = "UINote" Id = "idIdNote"  property ="maxValue" />
+</Column>  
+<Column title ="Include_Returns"   width ="18%">
+<Element label = ""  type = "UINote" Id = "idIdNote"  property ="incudeReturns" />
+</Column>
+</Columns>
+</ListSection>
+</CoreSection>
+<Section type ="summary">
+<Element caption = "Add"  type = "UIButton"    Id = "btnAdd"  style="button" fixedAction ="FixedAction.ACTION_PAGEFORWARD" fixedActionParam =  "NEW" />
+<Element caption = "Edit"  type = "UIButton"    Id = "btnEdit"  style="button" fixedAction ="FixedAction.ACTION_GOEDITMODE"  fixedActionParam =  "EDIT"  />
+<Element caption = "Delete"  type = "UIButton" Id = "btnDel"  style="button"  fixedAction ="FixedAction.ACTION_DELETE"  fixedActionParam =  "DELETE"
+   fixedActionvalidateFunc ="deleteFromList()"/>
+<Element type= "Panel" key= "NavPanel"  style = "sameline" ></Element>
+</Section>
+<Section type ="copyRightSection"/>
+</Elements>
+</Page>
+

@@ -1,18 +1,26 @@
 package com.rainbow.crm.address.service;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.transaction.annotation.Transactional;
 
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.AbstractService;
 import com.rainbow.crm.common.CRMContext;
+import com.rainbow.crm.common.CRMDBException;
+import com.rainbow.crm.common.CRMValidator;
+import com.rainbow.crm.common.DatabaseException;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
+import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.hibernate.ORMDAO;
 import com.rainbow.crm.address.dao.AddressDAO;
 import com.rainbow.crm.address.model.Address;
 import com.rainbow.crm.address.validator.AddressValidator;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
+import com.techtrade.rads.framework.model.transaction.TransactionResult;
 
 public class AddressService extends AbstractService implements IAddressService{
 
@@ -52,17 +60,26 @@ public class AddressService extends AbstractService implements IAddressService{
 		return validator.validateforUpdate(object);
 	}
 
-	/**
-	@Override
-	public Address getByCode(int company, String code) {
-		return ((AddressDAO)getDAO()).findByCode(company, code);
-	}
-
-	@Override
-	public Address getByName(int company, String name) {
-		return ((AddressDAO)getDAO()).findByName(company, name);
-	}**/
 	
+	@Transactional 
+	public TransactionResult create(CRMModelObject object,CRMContext context)  {
+		List<RadsError> errors  = new ArrayList<RadsError>(); 
+		TransactionResult.Result result = TransactionResult.Result.SUCCESS;
+		try {
+			int pk = GeneralSQLs.getNextPKValue("Addresses") ;
+			((Address)object).setId(pk);
+			object.setObjectVersion(1);
+			object.setCreatedDate(new java.sql.Timestamp(new java.util.Date().getTime()));
+			object.setCreatedUser(context.getUser());
+			getDAO().create(object);
+		}catch(DatabaseException ex) {
+			RadsError error = CRMValidator.getErrorforCode(context.getLocale(),CRMDBException.ERROR_UNABLE_TO_CREATE);
+			errors.add(error);
+			result = TransactionResult.Result.FAILURE ;
+			throw new RuntimeException(ex) ;
+		}
+		return new TransactionResult(result,errors);
+	}
 	
 	
 
