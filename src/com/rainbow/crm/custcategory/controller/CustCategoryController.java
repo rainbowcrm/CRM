@@ -18,10 +18,13 @@ public class CustCategoryController extends CRMCRUDController{
 		return serv;
 	}
 
-	public Map <String, String > getCommunicationModes() {
-		Map<String, String> ans = GeneralSQLs.getFiniteValues(CRMConstants.FV_COMMUNICATION_MODE);
+	public Map <String, String > getEvaluationPeriods() {
+		Map<String, String> ans = GeneralSQLs.getFiniteValues(CRMConstants.FV_EVALDATE);
 		return ans;
 	}
-	
+	public Map <String, String > getEvalCriteria() {
+		Map<String, String> ans = GeneralSQLs.getFiniteValues(CRMConstants.FV_EVALCRIT);
+		return ans;
+	}
 	
 }

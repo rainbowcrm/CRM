@@ -43,7 +43,10 @@ Controller = "com.rainbow.crm.custcategory.controller.CustCategoryListController
    	<Element label = "Name"  type = "UIText" Id = "txtCategory"  property ="Name" />
  </FilterNode>
  <FilterNode>
-   	<Element label = "Criteria"  type = "UIList" Id = "lstCriteria"  property ="salesAssociate" />
+   	<Element label = "Criteria"  type = "UIList" Id = "lstCriteria"  property ="evalCriteria.code" >
+	<options populator =  "getEvalCriteria"> 
+		</options>
+	</Element>
  </FilterNode>
 <FilterNode>
    	<Element label = "Value LT"  type = "UIText" Id = "txtValLT"  property ="minValue" />
@@ -61,10 +64,10 @@ Controller = "com.rainbow.crm.custcategory.controller.CustCategoryListController
 <Column title ="Name"   width ="18%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="Name" />
 </Column>
-<Column title ="EvalFrom"   width ="18%">
+<Column title ="Eval_From"   width ="18%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="evalFrom.description" />
 </Column>
-<Column title ="EvalTo"  width ="18%" >
+<Column title ="Eval_To"  width ="18%" >
 <Element label = ""  type = "UINote" Id = "idCt"  property ="evalFrom.description" />
 </Column> 
 <Column title ="Value LT"   width ="18%">

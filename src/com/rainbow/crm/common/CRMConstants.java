@@ -20,6 +20,8 @@ public class CRMConstants {
 	public final static String FV_FAILURE_REASON = "FAILREAS";
 	public final static String FV_ALERT_TYPE = "ALTTYPE";
 	public final static String FV_ALERT_STATUS = "ALTSTATUS";
+	public final static String FV_EVALDATE = "EVALDATE";
+	public final static String FV_EVALCRIT = "EVALCRT";
 	
 	public final static class SALESCYCLE_STATUS {
 		public final static String INITIATED = "INIT";

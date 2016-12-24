@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Page id = "newContact" showinFrame ="true" title ="New Contact | Rainbow CRM" Object = "com.rainbow.crm.followup.model.Followup" 
-Controller = "com.rainbow.crm.followup.controller.FollowupController">
+<Page id = "newContact" showinFrame ="true" title ="New Customer Category | Rainbow CRM" Object = "com.rainbow.crm.custcategory.model.CustCategory" 
+Controller = "com.rainbow.crm.custcategory.controller.CustCategoryController">
 <Template type= "CRUD"  name = "CRUDTemplate"></Template>
 <Forwards>
-<Forward key ="CANCEL">rdscontroller?page=followups</Forward>
-<Forward key ="SAVE">followups</Forward>
+<Forward key ="CANCEL">rdscontroller?page=custcategories</Forward>
+<Forward key ="SAVE">custcategories</Forward>
 </Forwards>
 <IncludeJS>./resources/js/RadsLib.js</IncludeJS>
 <IncludeJS>./scripts/CRMGeneral.js</IncludeJS>
@@ -18,45 +18,31 @@ Controller = "com.rainbow.crm.followup.controller.FollowupController">
 <Section type ="detail">
 	<Element label = "" type = "UIHidden" Id = "hdnVersion" property ="ObjectVersion" />
 	<Element label = ""  type = "UIHidden" Id = "hdnUserID"  property ="Id" />
-	<Element label = "Sales_Lead"  type = "UILookupText" Id = "txtName"  isMandatory="true" size="30" property ="Lead.docNumber" showLookupAsDialog="true" dialogId="dlgComp"
- 	dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
-  	<lookupType>saleslead</lookupType>
-	 <height>300</height>
-	 <width>290</width>
+	<Element label = "Name"  type = "UIText" Id = "txtName"  isMandatory="true" size="30" property ="Name"  >
+  
   	</Element>
-	<Element label = "Sales_Associate"  type = "UILookupText" Id = "txtLName"  isMandatory="true" size="30" property ="salesAssociate"  showLookupAsDialog="true" dialogId="dlgUser"
- 	dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
- 	<lookupType>user</lookupType>
-	 <height>300</height>
-	 <width>290</width>
+	<Element label = "Eval_from"  type = "UIList" Id = "lstFrom"   property ="evalFrom.code"  externalise= "true">
+		<options populator =  "getEvaluationPeriods"> 
+		</options>
 	</Element>
-	<Element label = "Finalized"  type = "UICheckBox" Id = "txtAdd2" size="30" property ="finalFollowup" >
-	<options> 
+	<Element label = "Eval_To"  type = "UIList" Id = "lstTo"   property ="evalTo.code"  externalise= "true">
+		<options populator =  "getEvaluationPeriods"> 
+		</options>
+	</Element>
+	<Element label = "Criteria"  type = "UIList" Id = "lstCriteria"   property ="evalCriteria.code"  externalise= "true">
+		<options populator =  "getEvalCriteria"> 
+		</options>
+	</Element>
+	<Element label = "Min_Value"  type = "UIText" Id = "txtMin"   property ="minValue"  externalise= "true">
+	</Element>
+		<Element label = "Max_Value"  type = "UIText" Id = "txtMax"   property ="maxValue"  externalise= "true">
+	</Element>
+	<Element label = "Include_Returns"  type = "UICheckBox" Id = "chkReturns" size="30" property ="incudeReturns" >
+		<options> 
 	  <option key ="true">  </option>
 	 </options>
 	</Element>
-	<Element label = "Next_Followup"  type = "UIDate" Id = "txtAdd1" size="30" property ="nextFollwup" />
-	<Element label = "Confidence_Level"  type = "UIList" Id = "lstContact"   property ="confidenceLevel.code"  externalise= "true">
-		<options populator =  "getConfidenceLevels"> 
-		</options>
-	</Element>
-	<Element label = "Communication_Mode"  type = "UIList" Id = "lstCommMode"   property ="communicationMode.code"  externalise= "true">
-		<options populator =  "getCommunicationModes"> 
-		</options>
-	</Element>
-	<Element label = "Offered_Price"  type = "UIText" Id = "txtOffPrice"  isNumeric="true" size="30" property ="offeredPrice" />
-	<Element label = "Result"  type = "UIList" Id = "lstResult"   property ="result.code"  externalise= "true">
-		<options populator =  "getFollowupResults"> 
-		</options>
-	</Element>
-	<Element label = "Result_Reson"  type = "UIList" Id = "lstResultReason"   property ="resultReason.code"  externalise= "true">
-		<options populator =  "getAllReasons"> 
-		</options>
-	</Element>
-	<Element label = "Comments"  type = "UITextArea" Id = "txtComments"   property ="comments" >
-	 <rows>5</rows> <cols>30</cols>
-	</Element>
-	<Element label = "Conversation"  type = "UITextArea" Id = "txtConversation"   property ="comments" >
+	<Element label = "Excluded_Customers"  type = "UITextArea" Id = "txtexcluded"   property ="excludedCustomers" >
 	 <rows>5</rows> <cols>30</cols>
 	</Element>
 </Section>

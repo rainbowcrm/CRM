@@ -1,7 +1,9 @@
 package com.rainbow.crm.custcategory.controller;
 
 import java.util.List;
+import java.util.Map;
 
+import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMListController;
 import com.rainbow.crm.common.IBusinessService;
@@ -9,6 +11,7 @@ import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.custcategory.model.CustCategory;
 import com.rainbow.crm.custcategory.service.ICustCategoryService;
 import com.rainbow.crm.custcategory.validator.CustCategoryValidator;
+import com.rainbow.crm.database.GeneralSQLs;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
@@ -50,6 +53,11 @@ public class CustCategoryListController extends CRMListController{
 		PageResult result = new PageResult();
 		result.setNextPageKey("newcustCategory");
 		return result;
+	}
+	
+	public Map <String, String > getEvalCriteria() {
+		Map<String, String> ans = GeneralSQLs.getFiniteValues(CRMConstants.FV_EVALCRIT);
+		return ans;
 	}
 	
 	

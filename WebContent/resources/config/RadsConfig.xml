@@ -43,7 +43,8 @@
 </Page>
 <Page id = "custcategories" definition ="/resources/pages/custcategory/custcategoryList.xml" modelclass = "com.rainbow.crm.custcategory.model.CustCategory" >
 </Page>
-
+<Page id = "newcustcategory" definition ="/resources/pages/custcategory/newcustcategory.xml" modelclass = "com.rainbow.crm.custcategory.model.CustCategory" >
+</Page>
 <Page id = "alerts" definition ="/resources/pages/alert/alertList.xml" modelclass = "com.rainbow.crm.alert.model.Alert" >
 </Page>
 <Page id = "purchases" definition ="/resources/pages/purchase/purchaseList.xml" modelclass = "com.rainbow.crm.purchase.model.Purchase" >
