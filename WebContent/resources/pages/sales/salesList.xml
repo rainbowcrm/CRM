@@ -69,7 +69,7 @@ Controller = "com.rainbow.crm.sales.controller.SalesListController">
 <Element label = ""  type = "UICheckBox" Id = "idChkSel"  rendered="!Object.isVoided" property ="Id" />
 <Element label = ""  type = "UIImage" Id = "idChkSel"  rendered="Object.isVoided" height = "21" weight ="21" src= "./resources/images/deletedRow.jpg" />
 </SelectionColumn>
-<Column title ="Bill_Number"  width ="20%" >
+<Column title ="Bill_No"  width ="20%" >
 <Element label = ""  type = "UINote" Id = "idDoc"  property ="BillNumber" />
 </Column>
 <Column title ="Date"  width ="20%" >
@@ -91,6 +91,7 @@ Controller = "com.rainbow.crm.sales.controller.SalesListController">
 <Element caption = "Add"  type = "UIButton"    Id = "btnAdd"  style="button" fixedAction ="FixedAction.ACTION_PAGEFORWARD" fixedActionParam =  "NEW" />
 <Element caption = "Edit"  type = "UIButton"    Id = "btnEdit"  style="button" fixedAction ="FixedAction.ACTION_GOEDITMODE"  fixedActionParam =  "EDIT"  />
 <Element type= "Panel" key= "NavPanel"  style = "sameline" ></Element>
+<Element caption = "Print_Invoice"  type = "UIButton"    Id = "btnInvoice"  style="button"   />
 </Section>
 <Section type ="copyRightSection"/>
 </Elements>

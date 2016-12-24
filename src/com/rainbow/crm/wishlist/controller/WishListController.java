@@ -11,6 +11,7 @@ import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMDBException;
+import com.rainbow.crm.common.CRMTransactionController;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
@@ -28,110 +29,11 @@ import com.techtrade.rads.framework.model.transaction.TransactionResult.Result;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
 import com.techtrade.rads.framework.utils.Utils;
 
-public class WishListController extends TransactionController{
+public class WishListController extends CRMTransactionController{
 	
-	@Override
-	public ModelObject populateFullObjectfromPK(ModelObject objects) {
-		return (ModelObject) getService().getById(object.getPK());
-	}
-
-	
-	@Override
-	public List<RadsError> adaptfromUI(ModelObject modelObject) {
-		return  getService().adaptfromUI((CRMContext)getContext(),(WishList) object);
-	}
-
-	@Override
-	public List<RadsError> adapttoUI(ModelObject modelObject) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<RadsError> validateforCancel() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public IWishListService getService() {
 		IWishListService serv = (IWishListService) SpringObjectFactory.INSTANCE.getInstance("IWishListService");
 		return serv;
-	}
-
-	@Override
-	public List<RadsError> validateforCreate() {
-		return getService().validateforCreate((WishList)object, (CRMContext)getContext());
-	}
-
-	
-	/*@Override
-	public List<RadsError> validateforUpdate() {
-		return getService().validateforUpdate((WishList)object, (CRMContext)getContext());
-	}
-
-	@Override
-	public List<RadsError> validateforDelete() {
-		return null;
-	}*/
-
-	@Override
-	public List<RadsError> validateforUpdate() {
-		return getService().validateforUpdate((WishList)object, (CRMContext)getContext());
-	}
-
-	@Override
-	public PageResult create() {
-			return new PageResult(getService().create((CRMModelObject)object, (CRMContext)getContext()));
-	}
-	
-	@Override
-	public PageResult update() {
-		return new PageResult(getService().update((CRMModelObject)object, (CRMContext)getContext()));
-	}
-
-	@Override
-	public PageResult delete() {
-		return null;
-	}
-
-	@Override
-	public void read() {
-		ModelObject thisObject = getService().getByBusinessKey((CRMModelObject)object, (CRMContext)getContext());
-		setObject(thisObject);
-	}
-
-	/*@Override
-	public PageResult update() {
-		return null;
-	}*/
-
-	@Override
-	public IRadsContext generateContext(HttpServletRequest request,
-			HttpServletResponse response) {
-		return LoginSQLs.loggedInUser(request.getSession().getId());
-	}
-	
-	@Override
-	public IRadsContext generateContext(String authToken) {
-		return LoginSQLs.loggedInUser(authToken);
-	}
-	
-	public String getCompanyName() {
-		ICompanyService service = (ICompanyService)SpringObjectFactory.INSTANCE.getInstance("ICompanyService");
-		Company company =(Company) service.getById(((CRMContext)getContext()).getLoggedinCompany());
-		return company.getName();
-	}
-	
-	public Map <String, String > getAllDivisions() {
-		Map<String, String> ans = new LinkedHashMap<String, String> ();
-		IDivisionService service =(IDivisionService) SpringObjectFactory.INSTANCE.getInstance("IDivisionService");
-		List<Division> divisions = service.getAllDivisions(((CRMContext)getContext()).getLoggedinCompany());
-		if (!Utils.isNullList(divisions)) {
-			for (Division division : divisions) {
-				ans.put(String.valueOf(division.getId()), division.getName());
-			}
-		}
-		return ans;
 	}
 	
 	public Map <String, String > getWishListReasons() {

@@ -341,3 +341,6 @@ iframe.lookupFrameStyle {
   border-radius: 8px;
   color: #f4f4f4;
   background-color: #69BB7B; }
+
+.nav-tabs .nav-link {
+  float: left; }

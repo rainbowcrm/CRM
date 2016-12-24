@@ -77,7 +77,7 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 </Section>
 
 <Section type ="detail">
-<Element type ="UITabset" Id = "impexp" style = "uitabstyle" selectedTabStyle= "titleStyleSelected" unSelectedTabStyle ="titleStyleUnSelected" >
+<Element type ="UITabset" Id = "impexp" style = "uitabstyle" selectedTabStyle= "titleStyleSelected active nav-link" unSelectedTabStyle ="titleStyleUnSelected" >
 <Element type ="UITab" Id= "idLine" title = "Line_Items" showinTable = "false" >
 
 <!--  <Element label = ""  type = "UILabel" Id = "lblLineitTitle"  style="bigTitle" value ="Line_Items" />  -->
