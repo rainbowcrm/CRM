@@ -317,3 +317,6 @@ table, tr {
 
 .childSectionStyle span {
   color: #222; }
+
+.nav-tabs .nav-link {
+  float: left; }

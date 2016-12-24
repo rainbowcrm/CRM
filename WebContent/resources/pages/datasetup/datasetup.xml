@@ -12,7 +12,7 @@ Controller = "com.rainbow.framework.setup.controller.DataSetupController">
 </ErrorSection>
 <Section type= "mainSection">
 <Element type ="UIHidden" Id = "hdnAction" value ="" property ="action"></Element>
-<Element type ="UITabset" Id = "impexp" style = "uitabstyle" selectedTabStyle= "titleStyleSelected" unSelectedTabStyle ="titleStyleUnSelected" >
+<Element type ="UITabset" Id = "impexp" style = "uitabstyle" selectedTabStyle= "titleStyleSelected active nav-link" unSelectedTabStyle ="titleStyleUnSelected nav-link" >
 <Element type ="UITab" Id= "idFin" title = "Data_Import" showinTable = "true" cols = "1"  >
   <Element label = "Object"  type = "UIList" Id = "lstObjs" property= "importMetadataClasss"     externalise= "true">
 	<options populator =  "getAllMetaData"> 
