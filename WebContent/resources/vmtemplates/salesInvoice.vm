@@ -1,12 +1,23 @@
 <html>
 <body>
-&nbsp;&nbsp; &nbsp;&nbsp;<font size="10"> <b> $companyName </b> </font>
+<div align="center">
+<font size="6"> <b> $companyName </b> </font>
 <br>
-&nbsp;&nbsp; &nbsp;&nbsp; $title
+$title
+</div>
 <br> <br>
-$billField:<b>$billNo</b>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; $dateField:<b>$saleDate</b>
+<table width="100%" style="border-bottom: 1px solid;" >
+<tr>
+<td align ="left">
+$billField:<b>$billNo</b>
+</td>
+<td align ="right">
+ $dateField:<b>$saleDate</b>
+ </td>
+</tr>
+</table>
 <br>
-_______________________________________________________________________________________________________
+
 <br>
 $custField:$custName
  <br>
@@ -49,10 +60,10 @@ $custField:$custName
 	 <td>
 	 Qty
 	 </td>
-	 <td>
+	 <td align ="right">
 	 Price
 	 </td>
-	<td>
+	<td align ="right">
 	 Amount
 	 </td>
   </tr>
@@ -67,10 +78,10 @@ $custField:$custName
 	 <td>
 	 $line.Qty
 	 </td>
-	 <td>
+	 <td align ="right">
 	 $line.unitPrice
 	 </td>
-	<td>
+	<td align ="right">
 	 $line.lineTotal
 	 </td>
 	 
@@ -78,6 +89,15 @@ $custField:$custName
 #end	
 <table>
 <br>
-$taxField:<b>$taxAmount</b>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; $totalField:<b>$totalAmount</b>	
+<table width="100%" border="0" >
+<tr>
+<td align ="left">
+$taxField:<b>$taxAmount</b>
+</td>
+<td align="right">
+$totalField:<b>$totalAmount</b>	
+<td>
+</tr>
+</table>
  </body>
  </html>
