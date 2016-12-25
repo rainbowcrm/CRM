@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
+
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.IBusinessService;
 import com.rainbow.crm.common.ITransactionService;
@@ -18,5 +20,8 @@ public interface ISalesService extends ITransactionService{
 	public int getItemSaleQuantity(Item item, Date from, Date to,Division division ) ;
 	
 	public Map getItemSoldQtyByProduct(Product product, Date from, Date to, Division division , String itemClass ) ;
+	
+	public String generateInvoice(Sales  sales,CRMContext context) ;
+	
 
 }

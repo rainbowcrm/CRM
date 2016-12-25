@@ -1,0 +1,83 @@
+<html>
+<body>
+&nbsp;&nbsp; &nbsp;&nbsp;<font size="10"> <b> $companyName </b> </font>
+<br>
+&nbsp;&nbsp; &nbsp;&nbsp; $title
+<br> <br>
+$billField:<b>$billNo</b>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; $dateField:<b>$saleDate</b>
+<br>
+_______________________________________________________________________________________________________
+<br>
+$custField:$custName
+ <br>
+ <table width="100%" border="0" >
+   <tr>
+    <td align="right" >
+	$deliveryField: $address1 
+	</td>
+   </tr>
+    <tr>
+    <td align="right" >
+	$address2
+	</td>
+   </tr>
+   <tr>
+    <td align="right" >
+	$city
+	</td>
+   </tr>
+   <tr>
+    <td align="right" >
+	$pincode
+	</td>
+   </tr>
+   <tr>
+    <td align="right" >
+	$phone
+	</td>
+   </tr>
+ </table>
+ <br>
+ <table width="100%" border="1" >
+   <tr>
+     <td>
+	 Sl No
+	 </td>
+	 <td>
+	 Item
+	 </td>
+	 <td>
+	 Qty
+	 </td>
+	 <td>
+	 Price
+	 </td>
+	<td>
+	 Amount
+	 </td>
+  </tr>
+  #foreach ($line in $lines)
+	<tr>
+     <td>
+	 $line.lineNumber
+	 </td>
+	 <td>
+	 $line.item.name
+	 </td>
+	 <td>
+	 $line.Qty
+	 </td>
+	 <td>
+	 $line.unitPrice
+	 </td>
+	<td>
+	 $line.lineTotal
+	 </td>
+	 
+    </tr>
+#end	
+<table>
+<br>
+$taxField:<b>$taxAmount</b>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; $totalField:<b>$totalAmount</b>	
+ </body>
+ </html>

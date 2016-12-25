@@ -1,5 +1,6 @@
 package com.rainbow.crm.sales.service;
 
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -7,6 +8,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.VelocityEngine;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,12 +20,16 @@ import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.address.model.Address;
 import com.rainbow.crm.address.service.IAddressService;
 import com.rainbow.crm.common.AbstractService;
+import com.rainbow.crm.common.CRMAppConfig;
 import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMDBException;
 import com.rainbow.crm.common.CRMValidator;
 import com.rainbow.crm.common.Externalize;
 import com.rainbow.crm.common.SpringObjectFactory;
+import com.rainbow.crm.common.documents.PrintDocument;
+import com.rainbow.crm.common.documents.PrintField;
+import com.rainbow.crm.common.documents.PrintHeaderLine;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.common.messaging.CRMMessageSender;
 import com.rainbow.crm.company.model.Company;
@@ -34,6 +43,7 @@ import com.rainbow.crm.hibernate.ORMDAO;
 import com.rainbow.crm.inventory.model.InventoryUpdateObject;
 import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.item.service.IItemService;
+import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.product.model.Product;
 import com.rainbow.crm.product.validator.ProductValidator;
 import com.rainbow.crm.sales.dao.SalesDAO;
@@ -41,6 +51,8 @@ import com.rainbow.crm.sales.model.Sales;
 import com.rainbow.crm.sales.model.SalesLine;
 import com.rainbow.crm.sales.validator.SalesErrorCodes;
 import com.rainbow.crm.sales.validator.SalesValidator;
+import com.rainbow.crm.user.model.User;
+import com.rainbow.crm.user.service.IUserService;
 import com.rainbow.crm.vendor.model.Vendor;
 import com.rainbow.crm.vendor.service.IVendorService;
 import com.rainbow.framework.nextup.NextUpGenerator;
@@ -246,8 +258,76 @@ public class SalesService extends AbstractService implements ISalesService{
 	public Map getItemSoldQtyByProduct(Product product, Date from, Date to,  Division division , String itemClass) {
 		return GeneralSQLs.getItemSoldQtyByProduct(product.getId(), from, to, -1,itemClass);
 	}
+
 	
 	
+	@Override
+	public String generateInvoice(Sales sales,CRMContext context) {
+		VelocityEngine ve = new VelocityEngine();
+		Externalize externalize = new Externalize();
+        try {
+        IUserService userService = (IUserService)SpringObjectFactory.INSTANCE.getInstance("IUserService");
+        User user = (User)userService.getById(context.getUser());
+        String path = CRMAppConfig.INSTANCE.getProperty("VelocityTemplatePath");
+        ve.setProperty("file.resource.loader.path", path);
+        ve.init();
+        Template t = ve.getTemplate("salesInvoice.vm" );
+        VelocityContext velocityContext = new VelocityContext();
+        velocityContext.put("companyName", sales.getCompany().getName());
+        velocityContext.put("title", externalize.externalize(context, "Sales_Invoice"));
+        velocityContext.put("billField", externalize.externalize(context, "Bill_No"));
+        velocityContext.put("dateField", externalize.externalize(context, "Date"));
+        velocityContext.put("custField", externalize.externalize(context, "Customer"));
+        velocityContext.put("taxField", externalize.externalize(context, "Tax"));
+        velocityContext.put("totalField", externalize.externalize(context, "Total"));
+        velocityContext.put("deliveryField", externalize.externalize(context, "Delivery_Address"));
+
+        velocityContext.put("billNo", sales.getBillNumber());
+        velocityContext.put("saleDate", sales.getSalesDate());
+        velocityContext.put("custName", sales.getCustomer()==null?"":sales.getCustomer().getFullName());
+        velocityContext.put("address1", sales.getDeliveryAddress()==null?"":sales.getDeliveryAddress().getAddress1());
+        velocityContext.put("address2", sales.getDeliveryAddress()==null?"":sales.getDeliveryAddress().getAddress2());
+        velocityContext.put("city", sales.getDeliveryAddress()==null?"":sales.getDeliveryAddress().getCity());
+        velocityContext.put("pincode", sales.getDeliveryAddress()==null?"":sales.getDeliveryAddress().getZipcode());
+        velocityContext.put("phone", sales.getDeliveryAddress()==null?"":sales.getDeliveryAddress().getPhone());
+        velocityContext.put("saleDate", sales.getSalesDate());
+        velocityContext.put("taxAmount", sales.getTaxAmount());
+        velocityContext.put("totalAmount", sales.getNetAmount());
+        velocityContext.put("lines", sales.getSalesLines());
+
+        StringWriter writer = new StringWriter();
+        t.merge( velocityContext, writer );
+        String content=  writer.toString();
+        return content;
+        
+        }catch(Exception ex){
+        	Logwriter.INSTANCE.error(ex);
+        }
+
+        return "";
+		
+	}
+
+	private PrintDocument getPrintDocument(Sales sales,CRMContext context) throws Exception{
+		PrintDocument printDocument = new PrintDocument();
+		Externalize externalize = new Externalize();
+		printDocument.setTitle(sales.getCompany().getName());
+		printDocument.setSubTitle(externalize.externalize(context, "Sales_Invoice"));
+		String billNoField =externalize.externalize(context, "Bill_No");
+		String dateField =externalize.externalize(context, "Date");
+		PrintHeaderLine headerLine1 = new PrintHeaderLine();
+		headerLine1.addPrintField(new PrintField(billNoField,sales.getBillNumber()));
+		printDocument.addHeaderLine(headerLine1);
+		PrintHeaderLine headerLine2 = new PrintHeaderLine();
+		headerLine2.addPrintField(new PrintField(dateField,Utils.dateToString(sales.getSalesDate(),externalize.getDateFormat())));
+		printDocument.addHeaderLine(headerLine2);
+		if (sales.getDeliveryAddress() != null) {
+			PrintHeaderLine deliveryLine  = new PrintHeaderLine();
+			deliveryLine.addPrintField(new PrintField("Delivery",""));
+		}
+		
+		return printDocument;
+	}
 	
 	
 	

@@ -46,6 +46,10 @@ public abstract class CRMListController  extends ListController{
 	
 	
 	
+	@Override
+	public PageResult print(List<ModelObject> objects) {
+		return null;
+	}
 	protected static String getOperator(FilterNode node) {
 		if (node.getOperater() == null || node.getOperater() == FilterNode.Operator.EQUALS) {
 			return "=";

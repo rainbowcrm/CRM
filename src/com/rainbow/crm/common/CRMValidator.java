@@ -65,4 +65,12 @@ public  abstract class CRMValidator {
 		}
 		return errors;
 	}
+	
+	public List<RadsError> eligibleForPrint(List<ModelObject> objects) {
+		List<RadsError> errors = new ArrayList<RadsError>();
+		if (Utils.isNullList(objects) || objects.size() >1 ) {
+			errors.add(getErrorforCode(CommonErrorCodes.ONE_ROW_FOR_EDIT)) ;
+		}
+		return errors;
+	}
 }

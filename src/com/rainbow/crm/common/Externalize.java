@@ -35,6 +35,10 @@ public class Externalize implements IExternalizeFacade {
 				
 	}
 	
+	public String getDateFormat( ) {
+		return "dd-MMM-yyyy";
+	}
+	
 
 }
 
