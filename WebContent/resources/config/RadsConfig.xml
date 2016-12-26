@@ -61,6 +61,8 @@
 <Page id = "uoms" definition ="/resources/pages/uoms/uoms.xml" modelclass = "com.rainbow.crm.uom.model.UOM" >
 </Page>
 -->
+<Page id = "config" definition ="/resources/pages/config/config.xml" modelclass = "com.rainbow.crm.config.model.ConfigSet" >
+</Page>
 
 <Page id = "newcustomer" definition ="/resources/pages/customer/newcustomer.xml" modelclass = "com.rainbow.crm.customer.model.Customer" >
 </Page>

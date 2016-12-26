@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Page id = "itemimages" showinFrame ="true"  title ="Data Setup| Rainbow CRM" Object = "com.rainbow.framework.setup.model.DataLoader" 
+<Page id = "datasetup" showinFrame ="true"  title ="Data Setup| Rainbow CRM" Object = "com.rainbow.framework.setup.model.DataLoader" 
 Controller = "com.rainbow.framework.setup.controller.DataSetupController">
 <Template type= "General"  name = "generalTemplate"></Template>
  <IncludeJS>./resources/js/DataDULoad.js</IncludeJS>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Page id = "configsetup" showinFrame ="true"  title ="Configuration| Rainbow CRM" Object = "com.rainbow.crm.config.model.ConfigSet" 
+Controller = "com.rainbow.crm.config.controller.ConfigController">
+<Template type= "General"  name = "generalTemplate"></Template>
+<Elements>
+<UIForm Id ="frmdd" method = "POST"  >
+<Section type ="topBar"></Section> 
+<Section type ="leftsideBarApp"></Section>
+<CoreSection>
+<ErrorSection>
+</ErrorSection>
+<Section type= "mainSection">
+<Element type ="UITabset" Id = "configSet" style = "uitabstyle" selectedTabStyle= "titleStyleSelected active nav-link" unSelectedTabStyle ="titleStyleUnSelected nav-link" >
+<Element type ="UITab" Id= "idGeneral" title = "General" showinTable = "true" cols = "1"  >
+<Element type ="UIStaticText" >
+   abc 
+</Element>
+</Element>
+<Element type ="UITab" Id= "idcustMgmt" title = "Customer_Management" showinTable = "true" cols = "1"  >
+<Element type ="UIStaticText" >
+   def 
+</Element>
+</Element>
+<Element type ="UITab" Id= "idinven" title = "Inventory" showinTable = "true" cols = "1"  >
+<Element type ="UIStaticText" >
+   ghi 
+</Element>
+</Element>
+<Element type ="UITab" Id= "idpay" title = "Payment" showinTable = "true" cols = "1"  >
+<Element type ="UIStaticText" >
+   jkl 
+</Element>
+</Element>
+<Element type ="UITab" Id= "idordermgmt" title = "Order_Management" showinTable = "true" cols = "1"  >
+</Element>
+</Element>
+</Section>
+</CoreSection>
+<Section type ="copyRightSection"/>
+</UIForm>
+</Elements>
+</Page>

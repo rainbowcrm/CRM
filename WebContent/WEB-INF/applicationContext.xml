@@ -38,7 +38,8 @@
     </bean>
     <bean id="IDataLoaderService" class="com.rainbow.framework.setup.service.DataLoaderService">
     </bean>
-    
+    <bean id="IConfigService" class="com.rainbow.crm.config.service.ConfigService">
+    </bean>    
     <bean id="IItemService" class="com.rainbow.crm.item.service.ItemService">
     </bean>
     <bean id="IInventoryService" class="com.rainbow.crm.inventory.service.InventoryService">
