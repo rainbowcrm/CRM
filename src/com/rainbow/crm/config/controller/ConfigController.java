@@ -20,14 +20,15 @@ public class ConfigController extends GeneralController{
 	@Override
 	public PageResult submit(ModelObject object) {
 		ConfigSet configSet = (ConfigSet) object;
+		PageResult result =	new PageResult ();
 		IConfigService  service = getService() ;
 		if (configSet.isNull()) {
 			configSet = service.getConfig((CRMContext)getContext());
 			setObject(configSet);
-			
+			result.setObject(configSet);
 		}
 
-		return new PageResult();
+		return result;
 	}
 
 	public String getCompanyName() {

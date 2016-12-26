@@ -11,28 +11,66 @@ Controller = "com.rainbow.crm.config.controller.ConfigController">
 </ErrorSection>
 <Section type= "mainSection">
 <Element type ="UITabset" Id = "configSet" style = "uitabstyle" selectedTabStyle= "titleStyleSelected active nav-link" unSelectedTabStyle ="titleStyleUnSelected nav-link" >
-<Element type ="UITab" Id= "idGeneral" title = "General" showinTable = "true" cols = "1"  >
-<Element type ="UIStaticText" >
-   abc 
+<Element type ="UITab" Id= "idGeneral" title = "General"   >
+<Element type = "UITable" rows = "1" cols = "3" style = "grid" applyStyleonChildren ="true" Id  ="tblGeneral" property ="GeneralConfigLines[]" >
+<Element type = "UITableRow"  dataType = "com.rainbow.crm.config.model.ConfigLine" >
+<Element type ="UITableCol" width = "80%" align = "left">
+<Element label = ""  type = "UIHidden" Id = "txtGNCode" size  = "10" property ="configCode" /> 
+<Element label = ""  type = "UILabel" Id = "txtGNDesc" size  = "50" property ="description" /> 
+</Element>
+<Element type ="UITableCol" width = "10%"><Element label = ""  type = "UIText" Id = "txtGNValue" size  = "10" property ="value" /> </Element>
+</Element>
 </Element>
 </Element>
 <Element type ="UITab" Id= "idcustMgmt" title = "Customer_Management" showinTable = "true" cols = "1"  >
-<Element type ="UIStaticText" >
-   def 
+
+<Element type = "UITable" rows = "1" cols = "3" style = "grid" applyStyleonChildren ="true" Id  ="tblGeneral" property ="CustomerConfigLines[]" >
+<Element type = "UITableRow"  dataType = "com.rainbow.crm.config.model.ConfigLine" >
+<Element type ="UITableCol" width = "80%" align = "left">
+<Element label = ""  type = "UIHidden" Id = "txtGNCode" size  = "10" property ="configCode" /> 
+<Element label = ""  type = "UILabel" Id = "txtGNDesc" size  = "50" property ="description" /> 
+</Element>
+<Element type ="UITableCol" width = "10%"><Element label = ""  type = "UIText" Id = "txtGNValue" size  = "10" property ="value" /> </Element>
 </Element>
 </Element>
+</Element>
+
 <Element type ="UITab" Id= "idinven" title = "Inventory" showinTable = "true" cols = "1"  >
-<Element type ="UIStaticText" >
-   ghi 
+<Element type = "UITable" rows = "1" cols = "3" style = "grid" applyStyleonChildren ="true" Id  ="tblGeneral" property ="InventoryConfigLines[]" >
+<Element type = "UITableRow"  dataType = "com.rainbow.crm.config.model.ConfigLine" >
+<Element type ="UITableCol" width = "80%" align = "left">
+<Element label = ""  type = "UIHidden" Id = "txtGNCode" size  = "10" property ="configCode" /> 
+<Element label = ""  type = "UILabel" Id = "txtGNDesc" size  = "50" property ="description" /> 
+</Element>
+<Element type ="UITableCol" width = "10%"><Element label = ""  type = "UIText" Id = "txtGNValue" size  = "10" property ="value" /> </Element>
 </Element>
 </Element>
+</Element>
+
 <Element type ="UITab" Id= "idpay" title = "Payment" showinTable = "true" cols = "1"  >
-<Element type ="UIStaticText" >
-   jkl 
+<Element type = "UITable" rows = "1" cols = "3" style = "grid" applyStyleonChildren ="true" Id  ="tblGeneral" property ="PaymentConfigLines[]" >
+<Element type = "UITableRow"  dataType = "com.rainbow.crm.config.model.ConfigLine" >
+<Element type ="UITableCol" width = "80%" align = "left">
+<Element label = ""  type = "UIHidden" Id = "txtGNCode" size  = "10" property ="configCode" /> 
+<Element label = ""  type = "UILabel" Id = "txtGNDesc" size  = "50" property ="description" /> 
+</Element>
+<Element type ="UITableCol" width = "10%"><Element label = ""  type = "UIText" Id = "txtGNValue" size  = "10" property ="value" /> </Element>
 </Element>
 </Element>
+</Element>
+
 <Element type ="UITab" Id= "idordermgmt" title = "Order_Management" showinTable = "true" cols = "1"  >
+<Element type = "UITable" rows = "1" cols = "3" style = "grid" applyStyleonChildren ="true" Id  ="tblGeneral" property ="OrderConfigLines[]" >
+<Element type = "UITableRow"  dataType = "com.rainbow.crm.config.model.ConfigLine" >
+<Element type ="UITableCol" width = "80%" align = "left">
+<Element label = ""  type = "UIHidden" Id = "txtGNCode" size  = "10" property ="configCode" /> 
+<Element label = ""  type = "UILabel" Id = "txtGNDesc" size  = "50" property ="description" /> 
 </Element>
+<Element type ="UITableCol" width = "10%"><Element label = ""  type = "UIText" Id = "txtGNValue" size  = "10" property ="value" /> </Element>
+</Element>
+</Element>
+</Element>
+
 </Element>
 </Section>
 </CoreSection>

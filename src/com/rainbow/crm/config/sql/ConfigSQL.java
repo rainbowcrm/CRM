@@ -47,7 +47,7 @@ public class ConfigSQL {
 		try {
 			connection  = ConnectionCreater.getConnection() ;
 			String sql =   "Select BC.CODE,BC.CONFIG_DESCRIPTION,BC.CONFIG_GROUP,BC.VALUE_TYPE,BC.VALUE_GENERATOR,BC.DEFAULT_VALUE,CC.VALUE " + 
-			"  from BASE_CONFIGURATION BC LEFT JOIN CC ON  BC.CODE= CC.CODE AND CC.COMPANY_ID =? AND BC.CONFIG_GROUP= ? " ;
+			"  from BASE_CONFIGURATION BC LEFT JOIN  COMPANY_CONFIGURATION CC ON  ( BC.CODE= CC.CONFIG_CODE AND CC.COMPANY_ID =? ) WHERE BC.CONFIG_GROUP= ? " ;
 			statement = connection.prepareStatement(sql);
 			statement.setInt(1, company);
 			statement.setString(2, groupName);
@@ -60,8 +60,13 @@ public class ConfigSQL {
 				configLine.setGroup(rs.getString(3));
 				configLine.setValueType(new FiniteValue(rs.getString(4)));
 				configLine.setValueGenerator(rs.getString(5));
-				configLine.setDefaultValue(rs.getString(6));
-				configLine.setValue(rs.getString(7));
+				String defaultValue = rs.getString(6);
+				configLine.setDefaultValue(defaultValue);
+				String value = rs.getString(7) ;
+				if (value != null)
+					configLine.setValue( value);
+				else
+					configLine.setValue(defaultValue);
 				list.add(configLine);
 			}
 			

@@ -1,6 +1,5 @@
 package com.rainbow.crm.config.model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +9,48 @@ import com.techtrade.rads.framework.utils.Utils;
 
 public class ConfigSet extends ModelObject{
 
+	public final static String GENERAL = "General" ;
+	public final static String CUSTOMER_MANAGEMENT = "Customer Management" ;
+	public final static String PAYMENT = "Payment" ;
+	public final static String INVENTORY = "Inventory" ;
+	public final static String ORDER_MANAGEMENT = "Order Management" ;
+	
 	int company ;
+
+	public List<ConfigLine> getOrderConfigLines() {
+		return configMap.get(ORDER_MANAGEMENT) ;
+	}
+	public void setOrderConfigLines(List<ConfigLine>  configLines) {
+		configMap.put(ORDER_MANAGEMENT, configLines);
+	}
+	
+	public List<ConfigLine> getPaymentConfigLines() {
+		return configMap.get(PAYMENT) ;
+	}
+	public void setPaymentConfigLines(List<ConfigLine>  configLines) {
+		configMap.put(PAYMENT, configLines);
+	}
+	
+	public List<ConfigLine> getInventoryConfigLines() {
+		return configMap.get(INVENTORY) ;
+	}
+	public void setInventoryConfigLines(List<ConfigLine>  configLines) {
+		configMap.put(INVENTORY, configLines);
+	}
+	
+	public List<ConfigLine> getGeneralConfigLines() {
+		return configMap.get(GENERAL) ;
+	}
+	public void setGeneralConfigLines(List<ConfigLine>  configLines) {
+		configMap.put(GENERAL, configLines);
+	}
+	
+	public List<ConfigLine> getCustomerConfigLines() {
+		return configMap.get(CUSTOMER_MANAGEMENT) ;
+	}
+	public void setCustomerConfigLines(List<ConfigLine>  configLines) {
+		configMap.put(CUSTOMER_MANAGEMENT, configLines);
+	}
 	
 	Map<String, List<ConfigLine>> configMap = new HashMap<String, List<ConfigLine>>();
 
