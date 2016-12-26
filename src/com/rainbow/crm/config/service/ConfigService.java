@@ -13,7 +13,7 @@ public class ConfigService implements IConfigService{
 
 	@Override
 	public void saveConfig(ConfigSet set, CRMContext context) {
-		// TODO Auto-generated method stub
+		ConfigSQL.saveConfigSet(set, context.getLoggedinCompany());
 		
 	}
 

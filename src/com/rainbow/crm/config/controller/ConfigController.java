@@ -15,43 +15,45 @@ import com.techtrade.rads.framework.controller.abstracts.GeneralController;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
 
-public class ConfigController extends GeneralController{
+public class ConfigController extends GeneralController {
 
 	@Override
 	public PageResult submit(ModelObject object) {
 		ConfigSet configSet = (ConfigSet) object;
-		PageResult result =	new PageResult ();
-		IConfigService  service = getService() ;
-		if (configSet.isNull()) {
-			configSet = service.getConfig((CRMContext)getContext());
-			setObject(configSet);
-			result.setObject(configSet);
-		}else {
-			
+		PageResult result = new PageResult();
+		IConfigService service = getService();
+		if (!configSet.isNull()) {
+			service.saveConfig(configSet, (CRMContext) getContext());
 		}
+		configSet = service.getConfig((CRMContext) getContext());
+		setObject(configSet);
 
+		result.setObject(configSet);
 		return result;
 	}
 
 	public String getCompanyName() {
-		ICompanyService service = (ICompanyService)SpringObjectFactory.INSTANCE.getInstance("ICompanyService");
-		Company company =(Company) service.getById(((CRMContext)getContext()).getLoggedinCompany());
+		ICompanyService service = (ICompanyService) SpringObjectFactory.INSTANCE
+				.getInstance("ICompanyService");
+		Company company = (Company) service.getById(((CRMContext) getContext())
+				.getLoggedinCompany());
 		return company.getName();
 	}
-	
+
 	@Override
-	public IRadsContext generateContext(HttpServletRequest request,HttpServletResponse response) {
+	public IRadsContext generateContext(HttpServletRequest request,
+			HttpServletResponse response) {
 		return LoginSQLs.loggedInUser(request.getSession().getId());
 	}
-	
-	
+
 	@Override
 	public IRadsContext generateContext(String authToken) {
 		return LoginSQLs.loggedInUser(authToken);
 	}
 
 	public IConfigService getService() {
-		return (IConfigService) SpringObjectFactory.INSTANCE.getInstance("IConfigService");
+		return (IConfigService) SpringObjectFactory.INSTANCE
+				.getInstance("IConfigService");
 	}
-	
+
 }
