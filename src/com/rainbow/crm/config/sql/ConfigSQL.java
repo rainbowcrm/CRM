@@ -15,6 +15,8 @@ import com.rainbow.crm.logger.Logwriter;
 
 public class ConfigSQL {
 
+	public static void 
+	
 	public static ConfigSet getConfigSet( int company){
 		ConfigSet set = new ConfigSet();
 		set.setCompany(company);

@@ -22,6 +22,7 @@ public class CRMConstants {
 	public final static String FV_ALERT_STATUS = "ALTSTATUS";
 	public final static String FV_EVALDATE = "EVALDATE";
 	public final static String FV_EVALCRIT = "EVALCRT";
+	public final static String FV_CONFVALTYPE = "CONFVALTYP";
 	
 	public final static class SALESCYCLE_STATUS {
 		public final static String INITIATED = "INIT";
@@ -68,5 +69,11 @@ public class CRMConstants {
 		public final static String SECONDARY_SHIPPING = "SHPSEC";
 	}
 	
+	public final static class VALUE_TYPE {
+		public final static String NUMERIC = "NUMER";
+		public final static String STRING = "STR";
+		public final static String FINITE_VALUE = "FINVAL";
+		public final static String BOOLEAN = "BOOL";
+	}
 }
 

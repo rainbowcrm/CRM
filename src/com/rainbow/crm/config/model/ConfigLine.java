@@ -1,7 +1,11 @@
 package com.rainbow.crm.config.model;
 
+import java.util.Map;
+
+import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.company.model.Company;
+import com.rainbow.crm.database.GeneralSQLs;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 
 public class ConfigLine  extends ModelObject{
@@ -73,7 +77,28 @@ public class ConfigLine  extends ModelObject{
 		this.value = value;
 	}
 	
+	public Map <String, String > getOptions() {
+		if (  CRMConstants.VALUE_TYPE.FINITE_VALUE.equals(valueType.getCode()) ) {
+			Map<String, String> ans = GeneralSQLs.getFiniteValues(valueGenerator);
+			return ans;
+		}
+		return null;
+	}
 	
+	public boolean isTextField() {
+		return CRMConstants.VALUE_TYPE.STRING.equals(valueType.getCode());
+	}
+	
+	public boolean isFVField() {
+		return CRMConstants.VALUE_TYPE.FINITE_VALUE.equals(valueType.getCode());
+	}
+	
+	public boolean isNumericField() {
+		return CRMConstants.VALUE_TYPE.NUMERIC.equals(valueType.getCode());
+	}
+	public boolean isBooleanField() {
+		return CRMConstants.VALUE_TYPE.BOOLEAN.equals(valueType.getCode());
+	}
 	
 
 }

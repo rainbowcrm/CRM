@@ -26,6 +26,8 @@ public class ConfigController extends GeneralController{
 			configSet = service.getConfig((CRMContext)getContext());
 			setObject(configSet);
 			result.setObject(configSet);
+		}else {
+			
 		}
 
 		return result;
