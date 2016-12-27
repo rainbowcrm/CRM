@@ -154,4 +154,12 @@ public abstract class CRMDataSheetController extends DataSheetController{
 		Company company =(Company) service.getById(((CRMContext)getContext()).getLoggedinCompany());
 		return company.getName();
 	}
+	@Override
+	public PageResult print(List<ModelObject> objects) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+	
 }

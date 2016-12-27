@@ -37,6 +37,8 @@
 </Page>
 <Page id = "customers" definition ="/resources/pages/customer/customerList.xml" modelclass = "com.rainbow.crm.customer.model.Customer" >
 </Page>
+<Page id = "carriers" definition ="/resources/pages/carrier/carrierList.xml" modelclass = "com.rainbow.crm.carrier.model.Carrier" >
+</Page>
 <Page id = "contacts" definition ="/resources/pages/contact/contactList.xml" modelclass = "com.rainbow.crm.contact.model.Contact" >
 </Page>
 <Page id = "followups" definition ="/resources/pages/followup/followupList.xml" modelclass = "com.rainbow.crm.followup.model.Followup" >
@@ -65,6 +67,8 @@
 </Page>
 
 <Page id = "newcustomer" definition ="/resources/pages/customer/newcustomer.xml" modelclass = "com.rainbow.crm.customer.model.Customer" >
+</Page>
+<Page id = "newcarrier" definition ="/resources/pages/carrier/newcarrier.xml" modelclass = "com.rainbow.crm.carrier.model.Carrier" >
 </Page>
 <Page id = "quickcustomeradd" definition ="/resources/pages/customer/quickcustomeradd.xml" modelclass = "com.rainbow.crm.customer.model.Customer" >
 </Page>
@@ -155,6 +159,7 @@
  	<Element label = "" type = "UIMenu" Id = "menu03" style="menustyle" title="Users" link = "rdscontroller?page=appUsers"   />
  	<Element label = "" type = "UIMenu" Id = "menu04" style="menustyle" title="Vendors" link = "rdscontroller?page=vendors"   />
  	<Element label = "" type = "UIMenu" Id = "menu04" style="menustyle" title="Contacts" link = "rdscontroller?page=contacts"   />
+ 	<Element label = "" type = "UIMenu" Id = "menu04" style="menustyle" title="Carriers" link = "rdscontroller?page=carriers"   />
  </Element>
   <Element label = "" type = "UIMenu" Id = "menu10" style="menustyleParent" title="Items" groupId= "menuGRP002"  >
  	<Element label = "" type = "UIMenu" Id = "menu11" style="menustyle" title="Categories" link = "rdscontroller?page=categories"   />
