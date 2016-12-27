@@ -251,19 +251,6 @@ span.bolded {
   width: 15;
   font-weight: bold; }
 
-span.titleStyleUnSelected {
-  color: yellow;
-  background-color: silver;
-  border-color: green; }
-
-span.titleStyleSelected {
-  border: 4px solid #8080c0;
-  color: BLACK;
-  background-color: #8080c0;
-  font-style: normal;
-  font-weight: bold;
-  border-color: #8080c0; }
-
 span.highlighted {
   font-size: 20px;
   color: "Black"; }
@@ -288,9 +275,6 @@ table.CRUDtableContainer {
 
 tr.CRUDtableContainer {
   text-align: left; }
-
-table.uitabstyle {
-  background-color: #8080c0; }
 
 th.uitabstyle {
   background-color: silver; }
