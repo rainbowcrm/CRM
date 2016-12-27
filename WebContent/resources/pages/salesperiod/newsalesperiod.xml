@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Page id = "newsalesperiod" showinFrame ="true" title ="New Sales Period | Rainbow CRM" Object = "com.rainbow.crm.salesperiod.model.SalesPeriod" 
 Controller = "com.rainbow.crm.salesperiod.controller.SalesPeriodController">
-<Template type= "Transaction"  name = "TargetTemplate"></Template>
+<Template type= "Transaction"  name = "TransactionTemplate"></Template>
 <Forwards>
 <Forward key ="CANCEL">rdscontroller?page=salesperiodlist</Forward>
 <Forward key ="SAVE">salesperiodlist</Forward>

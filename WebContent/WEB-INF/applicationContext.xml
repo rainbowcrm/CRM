@@ -78,6 +78,8 @@
     </bean>
     <bean id="ISalesLeadService" class="com.rainbow.crm.saleslead.service.SalesLeadService">
     </bean>
+    <bean id="IDistributionOrderService" class="com.rainbow.crm.distributionorder.service.DistributionOrderService">
+    </bean>
   
    <bean id="CategoryDAO" class="com.rainbow.crm.category.dao.CategoryDAO">
     <property name="sessionFactory" ref="sessionFactory"></property>
@@ -140,6 +142,9 @@
     <bean id="SalesLeadDAO" class="com.rainbow.crm.saleslead.dao.SalesLeadDAO">
     <property name="sessionFactory" ref="sessionFactory"></property>  
     </bean>   
+    <bean id="DistributionOrderDAO" class="com.rainbow.crm.distributionorder.dao.DistributionOrderDAO">
+    <property name="sessionFactory" ref="sessionFactory"></property>  
+    </bean>
     
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">  
         <property name="driverClassName"  value="com.mysql.jdbc.Driver"></property>  
@@ -178,6 +183,8 @@
         <value>com/rainbow/crm/wishlist/model/WishListLine.hbm.xml</value>
         <value>com/rainbow/crm/saleslead/model/SalesLead.hbm.xml</value>
         <value>com/rainbow/crm/saleslead/model/SalesLeadLine.hbm.xml</value>
+        <value>com/rainbow/crm/distributionorder/model/DistributionOrder.hbm.xml</value>
+        <value>com/rainbow/crm/distributionorder/model/DistributionOrderLine.hbm.xml</value>
         <value>com/rainbow/crm/followup/model/Followup.hbm.xml</value>  
         <value>com/rainbow/crm/custcategory/model/CustCategory.hbm.xml</value>  
         <value>com/rainbow/crm/alert/model/Alert.hbm.xml</value>  

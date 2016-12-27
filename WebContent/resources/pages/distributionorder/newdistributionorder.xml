@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Page id = "newDiv" showinFrame ="true" title ="New WishList | Rainbow CRM" Object = "com.rainbow.crm.wishlist.model.WishList" 
-Controller = "com.rainbow.crm.wishlist.controller.WishListController">
+<Page id = "newDiv" showinFrame ="true" title ="New Sales Lead | Rainbow CRM" Object = "com.rainbow.crm.distributionorder.model.DistributionOrder" 
+Controller = "com.rainbow.crm.distributionorder.controller.DistributionOrderController">
 <Template type= "Transaction"  name = "TransactionTemplate"></Template>
 <Forwards>
-<Forward key ="CANCEL">rdscontroller?page=wishlist</Forward>
-<Forward key ="SAVE">wishlist</Forward>
+<Forward key ="CANCEL">rdscontroller?page=distributionorders</Forward>
+<Forward key ="SAVE">distributionorders</Forward>
 </Forwards>
 <IncludeJS>./resources/js/RadsLib.js</IncludeJS>
 <IncludeJS>./scripts/CRMGeneral.js</IncludeJS>
@@ -39,7 +39,7 @@ Controller = "com.rainbow.crm.wishlist.controller.WishListController">
 <Elements>
 <UIForm Id ="cust" method = "POST" > 
 <Section type ="topBar"></Section> 
-<Section type ="leftsideBarApp"></Section>
+<Section type ="leftsideBarApp"></Section> 
 <CoreSection>
 <ErrorSection>
 </ErrorSection>
@@ -51,8 +51,8 @@ Controller = "com.rainbow.crm.wishlist.controller.WishListController">
 	</options>
 	</Element>
 
-	<Element label = "Doc_No"  type = "UIText" Id = "txtDocNo"  isMandatory="true" readonly="true"  property ="docNumber" />
-	<Element label = "Date"  type = "UIDate" Id = "txtwishListDate" isMandatory="true"  property ="WishListDate" />
+	<Element label = "Doc_No"  type = "UIText" Id = "txtDocNo"   readonly="true" property ="docNumber" />
+	<Element label = "Date"  type = "UIDate" Id = "txtwishListDate"  property ="orderDate" />
 	<Element label = ""  type = "UILabel" Id = "lblCustTitle"   value ="Customer" />
 	<Element label = ""  type = "UILabel" Id = "lblFree1"  style="bigTitle" value ="" />
 	<Element label = ""  type = "UILabel" Id = "lblFree2"  style="bigTitle" value ="" />
@@ -60,49 +60,38 @@ Controller = "com.rainbow.crm.wishlist.controller.WishListController">
 	<Element label = "Email"  type = "UIText" Id = "txtEmail"   property ="Customer.Email" />
 	 <Element label = "Name"  type = "UILookupText"  Id = "txtCustomerName"  isMandatory="true" property ="Customer.FullName" showLookupAsDialog="true" dialogId="dlgComp"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
-	 <lookupType>vendor</lookupType>
+	 <lookupType>customer</lookupType>
 	 <height>300</height>
 	 <width>290</width>
 	</Element>
-	<Element caption = "New_Customer"  type = "UIButton"    Id = "btnNewCustomer"  style="button" onclickJS = "newCustomerPopup();"  />
+	<Element label = "Sale_Bill"  type = "UIText" Id = "txtSale"   property ="Sale.BillNumber" />
+	<Element label = "Status"  type = "UIText" Id = "txtStatus"  readonly="true"  property ="Status.description" />
 	
 </Section>
 <Section type ="brk1"/>
 <Section type ="detail">
 <Element label = ""  type = "UILabel" Id = "lblLineitTitle"  style="bigTitle" value ="Line_Items" />
-<Element type = "UITable" rows = "1" cols = "7" style = "grid" applyStyleonChildren ="true" Id  ="tblTrans" property ="WishListLines[]" >
+<Element type = "UITable" rows = "1" cols = "7" style = "grid" applyStyleonChildren ="true" Id  ="tblTrans" property ="DistributionOrderLines[]" >
 <Element type = "UITableHead">
  <Element type = "UITableRow">
-
+<Element type ="UITableCol" width = "10%" ><Element label = ""  type = "UILabel" Id = "selLine" value ="Select" /></Element>
 <Element type ="UITableCol" width = "10%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Code" /></Element>
-<Element type ="UITableCol" width = "23%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Item" /></Element>
+<Element type ="UITableCol" width = "25%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Item" /></Element>
+<Element type ="UITableCol" width = "15%" ><Element label = ""  type = "UILabel" Id = "dtPic" value ="PickDate" /></Element>
 <Element type ="UITableCol" width = "18%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Comments" /></Element>
-<Element type ="UITableCol" width = "8%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Desired_Price" /></Element>
-<Element type ="UITableCol" width = "8%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Desired_Qty" /></Element>
-<Element type ="UITableCol" width = "8%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Desired_Date" /></Element>
-<Element type ="UITableCol" width = "8%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Reason" /></Element>
+<Element type ="UITableCol" width = "8%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Qty" /></Element>
 <Element type ="UITableCol" width = "5%"> </Element>
 </Element>  
  </Element>
-<Element type = "UITableRow"  dataType = "com.rainbow.crm.wishlist.model.WishListLine" rendered = "!Object.getVoided">
+<Element type = "UITableRow"  dataType = "com.rainbow.crm.distributionorder.model.DistributionOrderLine" rendered = "!Object.getVoided">
 
+<Element type ="UITableCol" width = "10%"><Element label = ""  type = "UICheckBox" Id = "chkSel" size  = "10" property ="picked" /> </Element>
 <Element type ="UITableCol" width = "10%"><Element label = ""  type = "UIText" Id = "txtCode" size  = "10" property ="Item.Code" /> </Element>
-<Element type ="UITableCol" width = "23%"><Element label = ""  type = "UILookupText"  Id = "txtItName"  size  = "30" property ="Item.Name" showLookupAsDialog="true" dialogId="dlgIt"
-  dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
-	 <lookupType>item</lookupType>
-	 <height>300</height>
-	 <width>290</width>
-</Element>
- </Element>
+<Element type ="UITableCol" width = "25%"><Element label = ""  type = "UIText"  Id = "txtItName"  size  = "30" property ="Item.Name" /> </Element>
+<Element type ="UITableCol" width = "8%"><Element label = ""  type = "UIDate" Id = "pckDate"  property ="pickDate"   />  </Element>
 <Element type ="UITableCol" width = "18%"><Element label = ""  type = "UIText" Id = "txtLineCo"  property ="Comments" size = "30" />  </Element>
-<Element type ="UITableCol" width = "8%"><Element label = ""  type = "UIText" Id = "txtPrice"  property ="DesiredPrice"  isNumeric= "true" size = "10" />  </Element>
 <Element type ="UITableCol" width = "8%"><Element label = ""  type = "UIText" Id = "txtQty"  property ="Qty"   isNumeric= "true"  size = "10"/>  </Element>
-<Element type ="UITableCol" width = "8%"><Element label = ""  type = "UIDate" Id = "txtlineDisc"  property ="desiredDate"  isNumeric= "true" size = "10" />  </Element>
-<Element type ="UITableCol" width = "8%"><Element label = ""  type = "UIList" Id = "lstReason"  property ="reasonCode"    >  
-	<options populator =  "getWishListReasons"> 
-	</options>
-</Element>
-</Element>
+
 
 <Element type ="UITableCol" width = "5%">
 	<Element caption = "+"  type = "UIButton" Id = "btnAddRow"    fixedAction ="FixedAction.ACTION_ADDTABLEROW"  fixedActionParam =  "this"/>

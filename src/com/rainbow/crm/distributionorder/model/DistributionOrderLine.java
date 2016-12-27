@@ -14,7 +14,7 @@ public class DistributionOrderLine extends CRMItemLine{
 	String docNumber;
 	int lineNumber;
 	Date pickDate;
-	
+	boolean picked ;
 	String comments;
 	boolean voided;
 	DistributionOrder distributionOrderDoc;
@@ -58,6 +58,19 @@ public class DistributionOrderLine extends CRMItemLine{
 	public void setVoided(boolean voided) {
 		this.voided = voided;
 	}
+	public Date getPickDate() {
+		return pickDate;
+	}
+	public void setPickDate(Date pickDate) {
+		this.pickDate = pickDate;
+	}
+	public boolean isPicked() {
+		return picked;
+	}
+	public void setPicked(boolean picked) {
+		this.picked = picked;
+	}
+	
 
 
 }

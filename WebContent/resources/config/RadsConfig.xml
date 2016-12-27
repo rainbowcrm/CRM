@@ -59,6 +59,9 @@
 </Page>
 <Page id = "saleslead" definition ="/resources/pages/saleslead/salesleadList.xml" modelclass = "com.rainbow.crm.saleslead.model.SalesLead" >
 </Page>
+<Page id = "distributionorders" definition ="/resources/pages/distributionorder/distributionorderList.xml" modelclass = "com.rainbow.crm.distributionorder.model.DistributionOrder" >
+</Page>
+
 <!--  TBD 
 <Page id = "uoms" definition ="/resources/pages/uoms/uoms.xml" modelclass = "com.rainbow.crm.uom.model.UOM" >
 </Page>
@@ -103,6 +106,8 @@
 <Page id = "newwishlist" definition ="/resources/pages/wishlist/newwishlist.xml" modelclass = "com.rainbow.crm.wishlist.model.WishList" >
 </Page>
 <Page id = "newsaleslead" definition ="/resources/pages/saleslead/newsaleslead.xml" modelclass = "com.rainbow.crm.saleslead.model.SalesLead" >
+</Page>
+<Page id = "newdistributionorder" definition ="/resources/pages/distributionorder/newdistributionorder.xml" modelclass = "com.rainbow.crm.distributionorder.model.DistributionOrder" >
 </Page>
 </Pages>
 <Panels>
