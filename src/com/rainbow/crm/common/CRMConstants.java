@@ -61,6 +61,7 @@ public class CRMConstants {
 		public final static String APPOINTMENT = "ALTAPP";
 		public final static String SLSPERSTART = "ALTSPBEGIN";
 		public final static String SLSPEREND = "ALTSPEND";
+		public final static String DISTOR = "ALTDO";
 	}
 	
 	public final static class ADDRESS_TYPE {
