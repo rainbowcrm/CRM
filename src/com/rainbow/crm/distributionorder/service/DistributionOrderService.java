@@ -304,6 +304,7 @@ public class DistributionOrderService extends AbstractService implements IDistri
 		order.setDivision(division);
 		order.setAddress(sales.getDeliveryAddress());
 		order.setCustomer(sales.getCustomer());
+		order.setSales(sales);
 		order.setOrderDate(new Date());
 		order.setStatus(new FiniteValue(CRMConstants.DO_STATUS.RELEASED));
 		return order;

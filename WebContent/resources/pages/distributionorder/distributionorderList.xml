@@ -58,10 +58,10 @@ Controller = "com.rainbow.crm.distributionorder.controller.DistributionOrderList
    	<Element label = "Customer"  type = "UIText" Id = "txtCustomer"  property ="Customer.FirstName" />
 </FilterNode>
 <FilterNode operator = ">=">
-   	<Element label = "From"  type = "UIDate" Id = "txtFromDate"  property ="releasedDate" />
+   	<Element label = "From"  type = "UIDate" Id = "txtFromDate"  property ="orderDate" />
 </FilterNode>
 <FilterNode operator = ">=">
-   	<Element label = "To"  type = "UIDate" Id = "txtToDate"  property ="releasedDate" />
+   	<Element label = "To"  type = "UIDate" Id = "txtToDate"  property ="orderDate" />
 </FilterNode>     
 </FilterSection>
 <ListSection >
@@ -74,7 +74,7 @@ Controller = "com.rainbow.crm.distributionorder.controller.DistributionOrderList
 <Element label = ""  type = "UINote" Id = "idDoc"  property ="DocNumber" />
 </Column>
 <Column title ="Date"  width ="20%" >
-<Element label = ""  type = "UINote" Id = "idDt"  property ="releasedDate" />
+<Element label = ""  type = "UINote" Id = "idDt"  property ="orderDate" />
 </Column>
 <Column title ="Customer"  width ="30%" >
 <Element label = ""  type = "UINote" Id = "idCust"  property ="Customer.fullName" />

@@ -166,6 +166,7 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 </CoreSection>
 <Section type ="summary">
 <Element caption = "Print_Invoice"  type = "UIButton"    Id = "btnInvoice"  style="button" fixedAction ="FixedAction.ACTION_PRINT"   />
+<Element caption = "Create_DO"  type = "UIButton"    Id = "btnInvoice"  style="button" fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="createDO"   />
 </Section>
 <Section type ="copyRightSection"/>
 </UIForm>
