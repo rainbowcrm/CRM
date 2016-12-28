@@ -42,6 +42,32 @@ ul{
     text-align:left;
     padding: 5px;
     margin-bottom: 5px;
+    >span{
+      position: relative;
+      display: inline-block;
+      width: 100%
+    }   
+ 
+   >span:before {
+      content: "\f13a";
+      font-family: FontAwesome;
+      font-style: normal;
+      font-weight: normal;
+      text-decoration: inherit;
+      color: $light;
+      font-size: 15px;
+      position: absolute;
+      right: -5px;
+  }
+
+  .menustyleParent{
+      padding-left: 15px;
+  }
+  &.open{
+      >span:before{
+          content: "\f139";
+      }
+  }
 }
 
 

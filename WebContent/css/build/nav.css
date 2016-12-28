@@ -35,6 +35,24 @@ ul {
   text-align: left;
   padding: 5px;
   margin-bottom: 5px; }
+  .menustyleParent > span {
+    position: relative;
+    display: inline-block;
+    width: 100%; }
+  .menustyleParent > span:before {
+    content: "\f13a";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    color: #f4f4f4;
+    font-size: 15px;
+    position: absolute;
+    right: -5px; }
+  .menustyleParent .menustyleParent {
+    padding-left: 15px; }
+  .menustyleParent.open > span:before {
+    content: "\f139"; }
 
 .menustyleParent:hover {
   cursor: hand; }
