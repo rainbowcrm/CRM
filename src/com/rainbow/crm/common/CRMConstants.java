@@ -76,5 +76,13 @@ public class CRMConstants {
 		public final static String FINITE_VALUE = "FINVAL";
 		public final static String BOOLEAN = "BOOL";
 	}
+	
+	public final static class DO_STATUS {
+		public final static String RELEASED = "RLSD";
+		public final static String PICKING = "PICKNG";
+		public final static String PACKING = "PACKNG";
+		public final static String SHIPPING = "SHPPNG";
+		public final static String DELIVERED = "DLVD";
+	}
 }
 
