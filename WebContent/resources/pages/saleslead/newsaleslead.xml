@@ -69,7 +69,7 @@ Controller = "com.rainbow.crm.saleslead.controller.SalesLeadController">
 	<Element type = "UIIFrame" src ="./rdscontroller?page=quickcustomeradd" style ="lookupFrameStyle">
 	</Element>
 	</Element>
-	<Element label = "Sale_Bill"  type = "UIText" Id = "txtSale"   property ="Sale.BillNumber" />
+	<Element label = "Sales_Bill"  type = "UIText" Id = "txtSale"   property ="Sale.BillNumber" />
 	<Element label = "Status"  type = "UIText" Id = "txtStatus"  readonly="true"  property ="Status.description" />
 	
 </Section>

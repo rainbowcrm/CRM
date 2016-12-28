@@ -20,6 +20,7 @@ import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
 import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.database.LoginSQLs;
+import com.rainbow.crm.distributionorder.service.IDistributionOrderService;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.division.service.IDivisionService;
 import com.rainbow.crm.logger.Logwriter;
@@ -38,6 +39,25 @@ public class SalesController extends CRMTransactionController{
 	ServletContext ctx;
 	HttpServletResponse resp;
 	
+	
+	
+	
+	@Override
+	public PageResult submit(ModelObject object) {
+		return super.submit(object);
+	}
+
+	@Override
+	public PageResult submit(ModelObject object, String actionParam) {
+		if("createDO".equals(actionParam)) {
+			IDistributionOrderService distributionservice = (IDistributionOrderService)SpringObjectFactory.INSTANCE.getInstance("IDistributionOrderService") ;
+			Sales sales =(Sales)getService().getById(object.getPK());
+			distributionservice.createDOfromSalesOrder(sales, (CRMContext)getContext()) ;
+			return new PageResult();
+		}else 
+			return super.submit(object, actionParam);
+	}
+
 	@Override
 	public IRadsContext generateContext(HttpServletRequest request,HttpServletResponse response) {
 		ctx =  request.getServletContext() ;

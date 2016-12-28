@@ -6,6 +6,7 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
@@ -60,10 +61,12 @@ import com.rainbow.crm.item.service.IItemService;
 import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.product.validator.ProductValidator;
 import com.rainbow.crm.distributionorder.dao.DistributionOrderDAO;
+import com.rainbow.crm.distributionorder.jdbc.DistributionOrderSQL;
 import com.rainbow.crm.distributionorder.model.DistributionOrder;
 import com.rainbow.crm.distributionorder.model.DistributionOrderLine;
 import com.rainbow.crm.distributionorder.validator.DistributionOrderErrorCodes;
 import com.rainbow.crm.distributionorder.validator.DistributionOrderValidator;
+import com.rainbow.crm.sales.model.Sales;
 import com.rainbow.crm.user.model.User;
 import com.rainbow.crm.user.service.IUserService;
 import com.rainbow.crm.vendor.model.Vendor;
@@ -263,7 +266,66 @@ public class DistributionOrderService extends AbstractService implements IDistri
 		return super.batchCreate(objects, context);
 	}
 
+	@Override
+	public DistributionOrder createDOfromSalesOrder(Sales sales,
+			CRMContext context) {
+			Division division = findDivisionForFullInventory(sales, context);
+			if(division != null ) {
+				DistributionOrder order = createDOHeader(sales, division);
+				Set<DistributionOrderLine> lines = createLines(sales, context);
+				order.setDistributionOrderLines(lines);
+				List<RadsError> errors =validateforCreate(order, context);
+				if (Utils.isNullList(errors)) {
+					create(order, context) ;
+				}
+				return order;
+			}else {
+				createPartialDOs(sales, context);
+			}
+			return null;
+	}
+	
+	private Set<DistributionOrderLine> createLines(Sales sales,CRMContext context) {
+		Set<DistributionOrderLine>  lines= new LinkedHashSet<DistributionOrderLine> ();
+		sales.getSalesLines().forEach(salesLine  -> { 
+			DistributionOrderLine line = new DistributionOrderLine();
+			line.setCompany(sales.getCompany());
+			line.setItem(salesLine.getItem());
+			line.setQty(salesLine.getQty());
+			lines.add(line);
+		});
+		return lines;
+	}
+	
+	
+	private DistributionOrder createDOHeader(Sales sales, Division division) {
+		DistributionOrder order = new DistributionOrder();
+		order.setCompany(sales.getCompany());
+		order.setDivision(division);
+		order.setAddress(sales.getDeliveryAddress());
+		order.setCustomer(sales.getCustomer());
+		order.setSales(sales);
+		order.setOrderDate(new Date());
+		order.setStatus(new FiniteValue(CRMConstants.DO_STATUS.RELEASED));
+		return order;
+	}
+	
+	private void createPartialDOs(Sales sales,CRMContext context) {
+		
+	}
 
+	
+	private Division findDivisionForFullInventory(Sales sales,CRMContext context) {
+		int divisionId = DistributionOrderSQL.getDivisionWithInventory(sales.getId(), context.getLoggedinCompany(), sales.getSalesLines().size());
+		if (divisionId > -1) {
+			IDivisionService divisionService = (IDivisionService)SpringObjectFactory.INSTANCE.getInstance("IDivisionService") ;
+			Division division = (Division)divisionService.getById(divisionId);
+			return division;
+		}
+		return null;
+		
+	}
+	
 	
 	
 	
