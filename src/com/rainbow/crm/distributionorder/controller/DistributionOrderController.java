@@ -39,7 +39,10 @@ public class DistributionOrderController extends CRMTransactionController{
 		return serv;
 	}
 
-	
+	public boolean isReleased() {
+		DistributionOrder dOrder = (DistributionOrder)object ;
+		return dOrder.getStatus().equals(CRMConstants.DO_STATUS.RELEASED) ;
+	}
 	
 	public Map <String, String > getAllDivisions() {
 		Map<String, String> ans = new LinkedHashMap<String, String> ();
@@ -52,6 +55,19 @@ public class DistributionOrderController extends CRMTransactionController{
 		}
 		return ans;
 	}
+
+	@Override
+	public PageResult submit(ModelObject object, String actionParam) {
+		DistributionOrder order = (DistributionOrder)object;
+		IDistributionOrderService  service = getService() ;
+		service.pick(order, (CRMContext) getContext());
+		order = (DistributionOrder)populateFullObjectfromPK(object);
+		PageResult newResult = new PageResult();
+		newResult.setObject(order);
+		return newResult;
+	}
+	
+	
 	
 
 	

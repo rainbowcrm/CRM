@@ -76,7 +76,7 @@ Controller = "com.rainbow.crm.saleslead.controller.SalesLeadController">
 <Section type ="brk1"/>
 <Section type ="detail">
 <Element label = ""  type = "UILabel" Id = "lblLineitTitle"  style="bigTitle" value ="Line_Items" />
-<Element type = "UITable" rows = "1" cols = "7" style = "grid" applyStyleonChildren ="true" Id  ="tblTrans" property ="SalesLeadLines[]" >
+<Element type = "UITable" rows = "1" cols = "7" style = "listPageTitle" applyStyleonChildren ="true" Id  ="tblTrans" property ="SalesLeadLines[]" >
 <Element type = "UITableHead">
  <Element type = "UITableRow">
 

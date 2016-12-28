@@ -15,5 +15,7 @@ import com.techtrade.rads.framework.model.abstracts.RadsError;
 public interface IDistributionOrderService extends ITransactionService{
 
 	public DistributionOrder createDOfromSalesOrder(Sales sales, CRMContext context);
+	
+	public List<RadsError> pick(DistributionOrder order, CRMContext context);
 
 }

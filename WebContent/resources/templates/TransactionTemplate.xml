@@ -61,6 +61,10 @@
  <noCols>1</noCols> 
  <Panel key ="CRUDPanel"  Id ="crudPanel" > </Panel>  
  </Section>
+ <Section Id ="optionalsummary" showinTable = "true"  style= "summaryStyle" >
+ <noRows>1</noRows>
+ <noCols>1</noCols> 
+ </Section>
   <Section Id ="copyRightSection"   style= "copyRight" >
   <Panel key ="copyRightPanel"  Id ="copyRightPanel" > </Panel>  
  </Section>

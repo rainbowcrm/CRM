@@ -193,7 +193,7 @@ public class DistributionOrderService extends AbstractService implements IDistri
 	public TransactionResult create(CRMModelObject object, CRMContext context) {
 		DistributionOrder distributionOrder = (DistributionOrder)object ;
 		if (Utils.isNull(distributionOrder.getDocNumber())) {
-			String bKey = NextUpGenerator.getNextNumber("DistributionOrder", context, distributionOrder.getDivision());
+			String bKey = NextUpGenerator.getNextNumber("Distribution Order", context, distributionOrder.getDivision());
 			distributionOrder.setDocNumber(bKey);
 		}
 		if (!Utils.isNullSet(distributionOrder.getDistributionOrderLines())) {
@@ -208,6 +208,8 @@ public class DistributionOrderService extends AbstractService implements IDistri
 		}
 		TransactionResult result= super.create(object, context);
 		raiseAlert(distributionOrder, context);
+		
+		
 		return result; 
 	}
 
@@ -218,7 +220,7 @@ public class DistributionOrderService extends AbstractService implements IDistri
 		  alert.setActionDate(lead.getOrderDate());
 		  alert.setDivision(lead.getDivision());
 		  alert.setRaisedDate(new java.util.Date());
-		  alert.setData("New Sales Lead-" +  lead.getDocNumber());
+		  alert.setData("New Distribution Order-" +  lead.getDocNumber());
 		  alert.setUrl("./rdscontroller?page=newdistributionorder&id="+lead.getId() +"&hdnFixedAction=FixedAction.ACTION_GOEDITMODE");
 		  CRMMessageSender.sendMessage(alert);
 	  }
@@ -251,6 +253,18 @@ public class DistributionOrderService extends AbstractService implements IDistri
 				distributionOrder.addDistributionOrderLine(oldLine);
 			}
 		}
+		if (distributionOrder.getStatus().equals(
+				new FiniteValue(CRMConstants.DO_STATUS.SHIPPING))) {
+			InventoryUpdateObject invObject = new InventoryUpdateObject();
+			invObject.setCompany(distributionOrder.getCompany());
+			invObject.setContext(context);
+			invObject.setDivision(distributionOrder.getDivision());
+			invObject.setAddition(false);
+			invObject.setItemLines(distributionOrder
+					.getDistributionOrderLines());
+			CRMMessageSender.sendMessage(invObject);
+		}
+		
 		return super.update(object, context);
 	}
 
@@ -325,6 +339,18 @@ public class DistributionOrderService extends AbstractService implements IDistri
 		return null;
 		
 	}
+
+	@Override
+	public List<RadsError> pick(DistributionOrder order, CRMContext context) {
+		DistributionOrder oldOrder = (DistributionOrder) getById(order.getPK());
+		oldOrder.getDistributionOrderLines().forEach(doLine -> { 
+				doLine.setPickDate(new Date());
+		});
+		oldOrder.setStatus(new FiniteValue(CRMConstants.DO_STATUS.PICKING));
+		update(oldOrder,context);
+		return null;
+	}
+	
 	
 	
 	
