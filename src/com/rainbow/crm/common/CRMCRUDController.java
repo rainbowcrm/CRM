@@ -35,7 +35,6 @@ public  abstract class CRMCRUDController  extends CRUDController{
 			int id = Integer.parseInt(String.valueOf(obj));
 			((CRMBusinessModelObject)object).setId(id);
 		}
-		super.init(request);
 	}
 
 	

@@ -11,6 +11,10 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
+
+
 import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
@@ -20,6 +24,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 
+
+
 import org.apache.commons.io.IOUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
@@ -28,6 +34,8 @@ import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+
 
 import com.rainbow.crm.abstratcs.model.CRMItemLine;
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
@@ -221,7 +229,7 @@ public class DistributionOrderService extends AbstractService implements IDistri
 		  alert.setDivision(lead.getDivision());
 		  alert.setRaisedDate(new java.util.Date());
 		  alert.setData("New Distribution Order-" +  lead.getDocNumber());
-		  alert.setUrl("./rdscontroller?page=newdistributionorder&id="+lead.getId() +"&hdnFixedAction=FixedAction.ACTION_GOEDITMODE");
+		  alert.setUrl("./rdscontroller?page=newdistributionorder&id="+lead.getId() +"&navAction=loadfromPK");
 		  CRMMessageSender.sendMessage(alert);
 	  }
 	
@@ -301,11 +309,13 @@ public class DistributionOrderService extends AbstractService implements IDistri
 	
 	private Set<DistributionOrderLine> createLines(Sales sales,CRMContext context) {
 		Set<DistributionOrderLine>  lines= new LinkedHashSet<DistributionOrderLine> ();
+		AtomicInteger counter =new AtomicInteger(0) ;
 		sales.getSalesLines().forEach(salesLine  -> { 
 			DistributionOrderLine line = new DistributionOrderLine();
 			line.setCompany(sales.getCompany());
 			line.setItem(salesLine.getItem());
 			line.setQty(salesLine.getQty());
+			line.setLineNumber(counter.incrementAndGet());
 			lines.add(line);
 		});
 		return lines;
@@ -343,8 +353,17 @@ public class DistributionOrderService extends AbstractService implements IDistri
 	@Override
 	public List<RadsError> pick(DistributionOrder order, CRMContext context) {
 		DistributionOrder oldOrder = (DistributionOrder) getById(order.getPK());
-		oldOrder.getDistributionOrderLines().forEach(doLine -> { 
-				doLine.setPickDate(new Date());
+		oldOrder.getDistributionOrderLines().forEach(doLine -> {
+			AtomicBoolean picked= new AtomicBoolean(false);
+				order.getDistributionOrderLines().forEach( innerLine ->  { 
+					if (innerLine.getLineNumber() == doLine.getLineNumber() &&
+							innerLine.getItem().getId() == doLine.getItem().getId() && innerLine.isPicked()) {
+						picked.set(true);
+					}
+				} );
+				if (picked.get() == true) {
+					doLine.setPickDate(new Date());
+				}
 		});
 		oldOrder.setStatus(new FiniteValue(CRMConstants.DO_STATUS.PICKING));
 		update(oldOrder,context);
