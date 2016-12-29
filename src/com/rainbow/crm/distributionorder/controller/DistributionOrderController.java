@@ -41,7 +41,7 @@ public class DistributionOrderController extends CRMTransactionController{
 
 	public boolean isReleased() {
 		DistributionOrder dOrder = (DistributionOrder)object ;
-		return dOrder.getStatus().equals(CRMConstants.DO_STATUS.RELEASED) ;
+		return ( dOrder.getStatus().equals(CRMConstants.DO_STATUS.RELEASED) || dOrder.getStatus().equals(CRMConstants.DO_STATUS.PICKING)) ;
 	}
 	
 	public Map <String, String > getAllDivisions() {
