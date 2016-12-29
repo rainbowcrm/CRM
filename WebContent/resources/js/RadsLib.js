@@ -43,6 +43,20 @@ function deleteRow(ctrl) {
 	
 }
 
+function workBooleanCheckBoxControl(checkBoxControl, hiddenBoxControlId)
+{
+	console.log('workBooleanCheckBoxControl');
+	var currentIndex = getCurrentObjectIndex(checkBoxControl) ;
+	console.log(currentIndex);
+	var hiddenControl = document.getElementsByName(hiddenBoxControlId)[currentIndex];
+	console.log(checkBoxControl.checked );
+	if (checkBoxControl.checked == true)
+    {
+		hiddenControl.value = "true";
+    }else
+    	hiddenControl.value = "false";
+	
+}
 
 function getCurrentObjectIndex(currentCtrl)  {
 	var objName = currentCtrl.name;

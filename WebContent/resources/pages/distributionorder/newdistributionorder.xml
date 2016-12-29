@@ -82,14 +82,16 @@ Controller = "com.rainbow.crm.distributionorder.controller.DistributionOrderCont
  </Element>
 <Element type = "UITableRow"  dataType = "com.rainbow.crm.distributionorder.model.DistributionOrderLine" rendered = "!Object.getVoided">
 
-<Element type ="UITableCol" width = "3%"><Element label = ""  type = "UICheckBox" Id = "chkSel"   property ="picked" > 
-<options> 
-	  <option key ="true">  </option>
-	 </options>
+<Element type ="UITableCol" width = "3%"><Element label = ""  type = "UIBooleanCheckBox" Id = "chkSel"  hiddenControlId= "hdnSelstate" property ="picked" > 
+	
 	 </Element>
 </Element>
-<Element type ="UITableCol" width = "10%"><Element label = ""  type = "UILabel" Id = "txtCode" size  = "10" property ="Item.Code" /> </Element>
-<Element type ="UITableCol" width = "32%"><Element label = ""  type = "UILabel"  Id = "txtItName"  size  = "30" property ="Item.Name" /> </Element>
+<Element type ="UITableCol" width = "10%"><Element label = ""  type = "UILabel" Id = "txtCode" size  = "10" property ="Item.Code" /> 
+<Element label = ""  type = "UIHidden" Id = "hdnLineNo" size  = "10" property ="lineNumber" />  
+</Element>
+<Element type ="UITableCol" width = "32%"><Element label = ""  type = "UILabel"  Id = "txtItName"  size  = "30" property ="Item.Name" /> 
+<Element label = ""  type = "UIHidden" Id = "hdnItemId" size  = "10" property ="Item.Id" />
+</Element>
 <Element type ="UITableCol" width = "8%"><Element label = ""  type = "UILabel" Id = "pckDate"  property ="pickDate"   />  </Element>
 <Element type ="UITableCol" width = "18%"><Element label = ""  type = "UILabel" Id = "txtLineCo"  property ="Comments" size = "30" />  </Element>
 <Element type ="UITableCol" width = "8%"><Element label = ""  type = "UILabel" Id = "txtQty"  property ="Qty"   isNumeric= "true"  size = "10"/>  </Element>
