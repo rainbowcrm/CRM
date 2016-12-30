@@ -80,8 +80,11 @@ public class CRMConstants {
 	public final static class DO_STATUS {
 		public final static String RELEASED = "RLSD";
 		public final static String PICKING = "PICKNG";
+		public final static String PICKED = "PICKD";
 		public final static String PACKING = "PACKNG";
+		public final static String PACKD = "PACKD";
 		public final static String SHIPPING = "SHPPNG";
+		public final static String SHIPPD = "SHPPD";
 		public final static String DELIVERED = "DLVD";
 	}
 }

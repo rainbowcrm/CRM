@@ -43,6 +43,20 @@ public class DistributionOrderController extends CRMTransactionController{
 		DistributionOrder dOrder = (DistributionOrder)object ;
 		return ( dOrder.getStatus().equals(CRMConstants.DO_STATUS.RELEASED) || dOrder.getStatus().equals(CRMConstants.DO_STATUS.PICKING)) ;
 	}
+	public boolean isPicked() {
+		DistributionOrder dOrder = (DistributionOrder)object ;
+		return ( dOrder.getStatus().equals(CRMConstants.DO_STATUS.PICKED)) ;
+	}
+	
+	public boolean isPacking() {
+		DistributionOrder dOrder = (DistributionOrder)object ;
+		return ( dOrder.getStatus().equals(CRMConstants.DO_STATUS.PACKING) || dOrder.getStatus().equals(CRMConstants.DO_STATUS.PACKD) ) ;
+	}
+	
+	public boolean isShipping() {
+		DistributionOrder dOrder = (DistributionOrder)object ;
+		return ( dOrder.getStatus().equals(CRMConstants.DO_STATUS.SHIPPING) ) ;
+	}
 	
 	public Map <String, String > getAllDivisions() {
 		Map<String, String> ans = new LinkedHashMap<String, String> ();
@@ -60,7 +74,12 @@ public class DistributionOrderController extends CRMTransactionController{
 	public PageResult submit(ModelObject object, String actionParam) {
 		DistributionOrder order = (DistributionOrder)object;
 		IDistributionOrderService  service = getService() ;
-		service.pick(order, (CRMContext) getContext());
+		if ("pick".equals(actionParam))
+			service.pick(order, (CRMContext) getContext());
+		else if ("pack".equals(actionParam))
+			service.pack(order, (CRMContext) getContext());
+		else if ("ship".equals(actionParam))
+			service.startShipping(order, (CRMContext) getContext());
 		order = (DistributionOrder)populateFullObjectfromPK(object);
 		PageResult newResult = new PageResult();
 		newResult.setObject(order);

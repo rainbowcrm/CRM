@@ -365,14 +365,58 @@ public class DistributionOrderService extends AbstractService implements IDistri
 					doLine.setPickDate(new Date());
 				}
 		});
-		oldOrder.setStatus(new FiniteValue(CRMConstants.DO_STATUS.PICKING));
+		oldOrder.setStatus(new FiniteValue(getStatus(oldOrder)));
 		update(oldOrder,context);
 		return null;
 	}
 	
 	
 	
+	@Override
+	public List<RadsError> startShipping(DistributionOrder order,
+			CRMContext context) {
+		DistributionOrder oldOrder = (DistributionOrder) getById(order.getPK());
+		oldOrder.setShippingDate(new Date());
+		oldOrder.setStatus(new FiniteValue(getStatus(oldOrder)));
+		update(oldOrder,context);
+		return null;
+	}
+
+	@Override
+	public List<RadsError> pack(DistributionOrder order, CRMContext context) {
+		DistributionOrder oldOrder = (DistributionOrder) getById(order.getPK());
+		oldOrder.setPackDate(new Date());
+		oldOrder.setStatus(new FiniteValue(getStatus(oldOrder)));
+		update(oldOrder,context);
+		return null;
+	}	
 	
+	private String getStatus(DistributionOrder order) {
+		if (order.getPackDate() == null ) {
+			AtomicBoolean oneLeft = new AtomicBoolean(false);
+			AtomicBoolean onePicked = new AtomicBoolean(false);
+			order.getDistributionOrderLines().forEach( line ->  { 
+				if(line.getPickDate()!= null)
+					onePicked.set(true);
+				else
+					oneLeft.set(true);
+			});
+			if (onePicked.get() && !oneLeft.get()){
+				return CRMConstants.DO_STATUS.PICKED;
+			} else if (onePicked.get() && oneLeft.get()){
+				return CRMConstants.DO_STATUS.PICKING;
+			}else if (!onePicked.get()) {
+				return CRMConstants.DO_STATUS.RELEASED;
+			}
+		} else if (order.getPackDate()!= null && order.getShippingDate() == null ) {
+			return CRMConstants.DO_STATUS.PACKING;
+		} else if (order.getPackDate()!= null && order.getShippingDate() != null ) {
+			return CRMConstants.DO_STATUS.SHIPPING;
+		}
+		
+		return CRMConstants.DO_STATUS.RELEASED;
+		
+	}
 	
 	
 }
