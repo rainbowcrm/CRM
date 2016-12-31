@@ -87,10 +87,10 @@ Controller = "com.rainbow.crm.distributionorder.controller.DistributionOrderCont
 	 </Element>
 </Element>
 <Element type ="UITableCol" width = "10%"><Element label = ""  type = "UILabel" Id = "txtCode" size  = "10" property ="Item.Code" /> 
-<Element label = ""  type = "UIHidden" Id = "hdnLineNo" size  = "10"  rendered = "!Object.isPicked" property ="lineNumber" />  
+<Element label = ""  type = "UIHidden" Id = "hdnLineNo" size  = "10"   property ="lineNumber" />  
 </Element>
 <Element type ="UITableCol" width = "32%"><Element label = ""  type = "UILabel"  Id = "txtItName"  size  = "30" property ="Item.Name" /> 
-<Element label = ""  type = "UIHidden" Id = "hdnItemId" size  = "10" rendered = "!Object.isPicked" property ="Item.Id" />
+<Element label = ""  type = "UIHidden" Id = "hdnItemId" size  = "10"  property ="Item.Id" />
 </Element>
 <Element type ="UITableCol" width = "8%"><Element label = ""  type = "UILabel" Id = "pckDate"  property ="pickDate"   />  </Element>
 <Element type ="UITableCol" width = "18%"><Element label = ""  type = "UILabel" Id = "txtLineCo"  property ="Comments" size = "30" />  </Element>
@@ -115,7 +115,7 @@ Controller = "com.rainbow.crm.distributionorder.controller.DistributionOrderCont
 </Element>
 <Element type ="UITab" Id= "idTasbShipping" title = "Shipment_Details" showinTable = "true" cols = "2" >
 
-<Element label = "Carrier"  type = "UIList"  Id = "lstCarriers"  isMandatory="true" property ="Carrier.code"  >
+<Element label = "Carrier"  type = "UIList"  Id = "lstCarriers"  isMandatory="true" property ="Carrier.id"  >
 <options populator =  "getAllCarriers"> 
 	</options>
 </Element>

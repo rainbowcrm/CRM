@@ -89,6 +89,7 @@ public class DistributionOrderController extends CRMTransactionController{
 	public PageResult submit(ModelObject object, String actionParam) {
 		DistributionOrder order = (DistributionOrder)object;
 		IDistributionOrderService  service = getService() ;
+		service.adaptfromUI((CRMContext) getContext(), order);
 		List<RadsError> errors = null;
 		if ("pick".equals(actionParam))
 			errors =service.pick(order, (CRMContext) getContext());

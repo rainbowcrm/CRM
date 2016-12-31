@@ -10,9 +10,10 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
-
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
+
+
 
 
 import javax.mail.BodyPart;
@@ -23,6 +24,8 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+
+
 
 
 
@@ -37,11 +40,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 
+
+
 import com.rainbow.crm.abstratcs.model.CRMItemLine;
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.address.model.Address;
 import com.rainbow.crm.address.service.IAddressService;
 import com.rainbow.crm.alert.model.Alert;
+import com.rainbow.crm.carrier.model.Carrier;
+import com.rainbow.crm.carrier.service.ICarrierService;
 import com.rainbow.crm.common.AbstractService;
 import com.rainbow.crm.common.CRMAppConfig;
 import com.rainbow.crm.common.CRMConstants;
@@ -176,6 +183,18 @@ public class DistributionOrderService extends AbstractService implements IDistri
 			if (customer != null)
 				 object.setCustomer(customer);
 		}
+		if (object.getCarrier() != null ) {
+			int carrierId = object.getCarrier().getId(); 
+			ICarrierService carrierService = (ICarrierService) SpringObjectFactory.INSTANCE.getInstance("ICarrierService");
+			Carrier carrier; 
+			if (carrierId > 0)
+				carrier =(Carrier) carrierService.getById(carrierId);
+			else
+				carrier =(Carrier) carrierService.getByCode(context.getLoggedinCompany(), object.getCarrier().getCode());
+			if (carrier != null)
+				 object.setCarrier(carrier);
+		}
+		
 		Externalize externalize = new Externalize(); ;
 		
 		if(!Utils.isNullSet(object.getDistributionOrderLines())){
@@ -384,6 +403,7 @@ public class DistributionOrderService extends AbstractService implements IDistri
 			oldOrder.setShipmentRefNumber(order.getShipmentRefNumber());
 			oldOrder.setShippingCharges(order.getShippingCharges());
 			oldOrder.setStatus(new FiniteValue(CRMConstants.DO_STATUS.SHIPPD));
+			update(oldOrder,context);
 		}
 		return errors;
 	}
