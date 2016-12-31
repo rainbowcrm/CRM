@@ -65,7 +65,7 @@ public class DistributionOrderLine extends CRMItemLine{
 		this.pickDate = pickDate;
 	}
 	public boolean isPicked() {
-		return picked;
+		return picked ;
 	}
 	public void setPicked(boolean picked) {
 		this.picked = picked;

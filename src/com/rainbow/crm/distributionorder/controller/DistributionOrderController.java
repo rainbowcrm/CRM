@@ -99,11 +99,16 @@ public class DistributionOrderController extends CRMTransactionController{
 			errors =service.startShipping(order, (CRMContext) getContext());
 		else if ("shipped".equals(actionParam))
 			errors = service.endShipping(order, (CRMContext) getContext());
-		if (Utils.isNullList(errors)) {
-			order = (DistributionOrder)populateFullObjectfromPK(object);
+
+		DistributionOrder	savedOrder = (DistributionOrder)populateFullObjectfromPK(object);
+		if (!Utils.isNullList(errors)) {
+			savedOrder.setCarrier(order.getCarrier());
+			savedOrder.setShipmentRefNumber(order.getShipmentRefNumber());
+			savedOrder.setShippingDate(order.getShippingDate());
+			savedOrder.setShippingCharges(order.getShippingCharges());
 		}
 		PageResult newResult = new PageResult();
-		newResult.setObject(order);
+		newResult.setObject(savedOrder);
 		newResult.setErrors(errors);
 		return newResult;
 	}

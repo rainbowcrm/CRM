@@ -91,6 +91,7 @@ Controller = "com.rainbow.crm.distributionorder.controller.DistributionOrderCont
 </Element>
 <Element type ="UITableCol" width = "32%"><Element label = ""  type = "UILabel"  Id = "txtItName"  size  = "30" property ="Item.Name" /> 
 <Element label = ""  type = "UIHidden" Id = "hdnItemId" size  = "10"  property ="Item.Id" />
+<Element label = ""  type = "UIHidden" Id = "hdnItemName" size  = "10"  property ="Item.Name" />
 </Element>
 <Element type ="UITableCol" width = "8%"><Element label = ""  type = "UILabel" Id = "pckDate"  property ="pickDate"   />  </Element>
 <Element type ="UITableCol" width = "18%"><Element label = ""  type = "UILabel" Id = "txtLineCo"  property ="Comments" size = "30" />  </Element>
