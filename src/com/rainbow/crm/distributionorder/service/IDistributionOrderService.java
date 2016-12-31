@@ -21,5 +21,7 @@ public interface IDistributionOrderService extends ITransactionService{
 	public List<RadsError> pack(DistributionOrder order, CRMContext context);
 	
 	public List<RadsError> startShipping(DistributionOrder order, CRMContext context);
+	
+	public List<RadsError> endShipping(DistributionOrder order, CRMContext context);
 
 }

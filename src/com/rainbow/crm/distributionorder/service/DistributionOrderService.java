@@ -373,6 +373,22 @@ public class DistributionOrderService extends AbstractService implements IDistri
 	
 	
 	@Override
+	public List<RadsError> endShipping(DistributionOrder order,
+			CRMContext context) {
+		
+		DistributionOrder oldOrder = (DistributionOrder) getById(order.getPK());
+		DistributionOrderValidator validator = new DistributionOrderValidator(context);
+		List<RadsError> errors = validator.readyToShip(order);
+		if(Utils.isNullList(errors)) {
+			oldOrder.setCarrier(order.getCarrier());
+			oldOrder.setShipmentRefNumber(order.getShipmentRefNumber());
+			oldOrder.setShippingCharges(order.getShippingCharges());
+			oldOrder.setStatus(new FiniteValue(CRMConstants.DO_STATUS.SHIPPD));
+		}
+		return errors;
+	}
+
+	@Override
 	public List<RadsError> startShipping(DistributionOrder order,
 			CRMContext context) {
 		DistributionOrder oldOrder = (DistributionOrder) getById(order.getPK());
@@ -413,8 +429,7 @@ public class DistributionOrderService extends AbstractService implements IDistri
 		} else if (order.getPackDate()!= null && order.getShippingDate() != null ) {
 			return CRMConstants.DO_STATUS.SHIPPING;
 		}
-		
-		return CRMConstants.DO_STATUS.RELEASED;
+		return order.getStatus().getCode() ;
 		
 	}
 	

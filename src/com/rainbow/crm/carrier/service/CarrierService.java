@@ -73,6 +73,11 @@ public class CarrierService extends AbstractService implements ICarrierService{
 	}
 
 	@Override
+	public List<Carrier> getAllCarriers(int company) {
+		return ((CarrierDAO)getDAO()).getAllCarriers(company);
+	}
+
+	@Override
 	public Carrier getByEmail(int company, String email) {
 		return ((CarrierDAO)getDAO()).findByEmail(company, email);
 	}

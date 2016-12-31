@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
+import com.rainbow.crm.carrier.model.Carrier;
+import com.rainbow.crm.carrier.service.ICarrierService;
 import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMDBException;
@@ -70,20 +72,44 @@ public class DistributionOrderController extends CRMTransactionController{
 		return ans;
 	}
 
+	public Map <String, String > getAllCarriers() {
+		Map<String, String> ans = new LinkedHashMap<String, String> ();
+		ICarrierService service =(ICarrierService) SpringObjectFactory.INSTANCE.getInstance("ICarrierService");
+		List<Carrier> carriers = service.getAllCarriers(((CRMContext)getContext()).getLoggedinCompany());
+		if (!Utils.isNullList(carriers)) {
+			for (Carrier carrier : carriers) {
+				ans.put(String.valueOf(carrier.getId()), carrier.getCode() + " " + carrier.getName());
+			}
+		}
+		return ans;
+	}
+	
+	
 	@Override
 	public PageResult submit(ModelObject object, String actionParam) {
 		DistributionOrder order = (DistributionOrder)object;
 		IDistributionOrderService  service = getService() ;
+		List<RadsError> errors = null;
 		if ("pick".equals(actionParam))
-			service.pick(order, (CRMContext) getContext());
+			errors =service.pick(order, (CRMContext) getContext());
 		else if ("pack".equals(actionParam))
-			service.pack(order, (CRMContext) getContext());
+			errors = service.pack(order, (CRMContext) getContext());
 		else if ("ship".equals(actionParam))
-			service.startShipping(order, (CRMContext) getContext());
-		order = (DistributionOrder)populateFullObjectfromPK(object);
+			errors =service.startShipping(order, (CRMContext) getContext());
+		else if ("shipped".equals(actionParam))
+			errors = service.endShipping(order, (CRMContext) getContext());
+		if (Utils.isNullList(errors)) {
+			order = (DistributionOrder)populateFullObjectfromPK(object);
+		}
 		PageResult newResult = new PageResult();
 		newResult.setObject(order);
+		newResult.setErrors(errors);
 		return newResult;
+	}
+
+	@Override
+	public PageResult print() {
+		return super.print();
 	}
 	
 	

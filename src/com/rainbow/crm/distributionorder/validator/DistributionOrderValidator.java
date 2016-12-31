@@ -1,5 +1,7 @@
 package com.rainbow.crm.distributionorder.validator;
 
+import java.util.List;
+
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMValidator;
 import com.rainbow.crm.common.CommonErrorCodes;
@@ -8,12 +10,26 @@ import com.rainbow.crm.distributionorder.model.DistributionOrder;
 import com.rainbow.crm.distributionorder.model.DistributionOrderLine;
 import com.rainbow.crm.distributionorder.service.IDistributionOrderService;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
+import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.utils.Utils;
 
 public class DistributionOrderValidator extends CRMValidator {
 
 	DistributionOrder distributionOrder ;
-	 
+
+	public List< RadsError> readyToShip(DistributionOrder order) {
+		if (order.getCarrier() == null) {
+			errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Carrier"))) ;
+		}
+		if (Utils.isNull(order.getShipmentRefNumber())){
+			errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Shipment_No"))) ;
+		}
+		if (order.getShippingDate() == null) {
+			errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Shipping_Date"))) ;
+		}
+		return errors;
+	}
+	
 	@Override
 	protected void checkforCreateErrors(ModelObject object) {
 		checkforErrors(object);

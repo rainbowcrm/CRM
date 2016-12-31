@@ -7,6 +7,7 @@ import org.hibernate.Session;
 
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.rainbow.crm.carrier.model.Carrier;
+import com.rainbow.crm.division.model.Division;
 import com.techtrade.rads.framework.utils.Utils;
 
 public class CarrierDAO extends SpringHibernateDAO {
@@ -63,6 +64,15 @@ public class CarrierDAO extends SpringHibernateDAO {
 		}
 		closeSession(session, false);
 		return carrier;
+	}
+	
+	public List<Carrier> getAllCarriers(int company) {
+		Session session = openSession(false);
+		Query query = session.createQuery("from Carrier where company.id=  :id "  );
+		query.setParameter("id", company);
+		List<Carrier> ans = query.list();
+		closeSession(session,false);
+		return ans;
 	}
 
 }

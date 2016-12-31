@@ -25,7 +25,7 @@ public class DistributionOrderSQL {
 			statement.setInt(2, count);
 			rs = statement.executeQuery();
 			while (rs.next()) {
-				return rs.getInt(1);
+				return rs.getInt(2);
 			}
 		} catch (SQLException ex) {
 			Logwriter.INSTANCE.error(ex);

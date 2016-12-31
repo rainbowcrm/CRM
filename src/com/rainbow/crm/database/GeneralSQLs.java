@@ -90,6 +90,32 @@ public class GeneralSQLs {
 		return finiteValue;
 	}
 	
+	public static FiniteValue getFiniteValueFromDescription(String descrption) {
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet rs  = null ;
+		FiniteValue finiteValue = new FiniteValue();
+		try {
+			connection  = ConnectionCreater.getConnection() ;
+			String sql =   "Select CODE,DESCRIPTION,IS_DEFAULT from FINITE_VALUES where DESCRIPTION = ? " ;
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, descrption);
+			rs = statement.executeQuery() ;
+			if (rs.next()) {
+				finiteValue = new FiniteValue();
+				finiteValue.setCode(rs.getString(1));
+				finiteValue.setDefault(rs.getBoolean(3));
+				finiteValue.setDescription(rs.getString(2));
+			}
+		}catch(SQLException ex) {
+			Logwriter.INSTANCE.error(ex);
+		}finally {
+			ConnectionCreater.close(connection, statement, rs);	
+		}
+		return finiteValue;
+	}
+
+	
 	public static List<FiniteValue> getAllFiniteValues () {
 		Connection connection = null;
 		PreparedStatement statement = null;

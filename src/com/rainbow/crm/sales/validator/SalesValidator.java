@@ -14,6 +14,8 @@ public class SalesValidator extends CRMValidator {
 
 	Sales sales ;
 	 
+	
+
 	@Override
 	protected void checkforCreateErrors(ModelObject object) {
 		checkforErrors(object);
