@@ -96,7 +96,14 @@ public class InventoryService extends AbstractService implements  IInventoryServ
 					inv.setCurrentQty(inv.getCurrentQty() + line.getQty());
 					update(inv, inventoryObject.getContext());
 				}else if (inv != null){
-					inv.setCurrentQty(inv.getCurrentQty() - line.getQty());
+					if (inventoryObject.isReserve()) {
+						inv.setReservedQty(inv.getReservedQty() + line.getQty());
+					}else if (inventoryObject.isFulFilll()) {
+						inv.setCurrentQty(inv.getCurrentQty() - line.getQty());
+						inv.setReservedQty(inv.getReservedQty() - line.getQty());
+					} else {
+						inv.setCurrentQty(inv.getCurrentQty() - line.getQty());
+					}
 					update(inv, inventoryObject.getContext());
 				} else if (inventoryObject.isAddition()){
 					Inventory inventory = new Inventory();

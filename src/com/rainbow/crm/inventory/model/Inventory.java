@@ -14,6 +14,8 @@ public class Inventory extends CRMBusinessModelObject{
 	Division division;
 	Item item;
 	int opQty;
+	int reservedQty;
+	int damagedQty;
 	int currentQty;
 	
 	@Override
@@ -57,6 +59,27 @@ public class Inventory extends CRMBusinessModelObject{
 	public void setCurrentQty(int currentQty) {
 		this.currentQty = currentQty;
 	}
+
+
+	public int getReservedQty() {
+		return reservedQty;
+	}
+
+
+	public void setReservedQty(int reservedQty) {
+		this.reservedQty = reservedQty;
+	}
+
+
+	public int getDamagedQty() {
+		return damagedQty;
+	}
+
+
+	public void setDamagedQty(int damagedQty) {
+		this.damagedQty = damagedQty;
+	}
+	
 	
 	
 

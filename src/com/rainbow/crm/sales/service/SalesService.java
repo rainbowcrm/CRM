@@ -195,15 +195,16 @@ public class SalesService extends AbstractService implements ISalesService{
 			}
 		}
 		TransactionResult result= super.create(object, context);
-		if (!sales.isFutureDelivery()) {
-			InventoryUpdateObject invObject = new InventoryUpdateObject();
-			invObject.setCompany(sales.getCompany());
-			invObject.setContext(context);
-			invObject.setDivision(sales.getDivision());
-			invObject.setAddition(false);
-			invObject.setItemLines(sales.getSalesLines());
-			CRMMessageSender.sendMessage(invObject);
+		if (sales.isFutureDelivery()) {
+		InventoryUpdateObject invObject = new InventoryUpdateObject();
+		invObject.setCompany(sales.getCompany());
+		invObject.setContext(context);
+		invObject.setDivision(sales.getDivision());
+		invObject.setAddition(false);
+		invObject.setItemLines(sales.getSalesLines());
+		CRMMessageSender.sendMessage(invObject);
 		}
+		
 		return result; 
 	}
 

@@ -234,6 +234,15 @@ public class DistributionOrderService extends AbstractService implements IDistri
 			}
 		}
 		TransactionResult result= super.create(object, context);
+		InventoryUpdateObject invObject = new InventoryUpdateObject();
+		invObject.setCompany(distributionOrder.getCompany());
+		invObject.setContext(context);
+		invObject.setDivision(distributionOrder.getDivision());
+		invObject.setAddition(false);
+		invObject.setReserve(true);
+		invObject.setItemLines(distributionOrder
+				.getDistributionOrderLines());
+		CRMMessageSender.sendMessage(invObject);
 		raiseAlert(distributionOrder, context);
 		
 		
@@ -281,16 +290,19 @@ public class DistributionOrderService extends AbstractService implements IDistri
 			}
 		}
 		if (distributionOrder.getStatus().equals(
-				new FiniteValue(CRMConstants.DO_STATUS.SHIPPING))) {
+				new FiniteValue(CRMConstants.DO_STATUS.PICKED))) {
 			InventoryUpdateObject invObject = new InventoryUpdateObject();
 			invObject.setCompany(distributionOrder.getCompany());
 			invObject.setContext(context);
 			invObject.setDivision(distributionOrder.getDivision());
 			invObject.setAddition(false);
+			invObject.setFulFilll(true);
 			invObject.setItemLines(distributionOrder
 					.getDistributionOrderLines());
 			CRMMessageSender.sendMessage(invObject);
 		}
+		
+		
 		
 		return super.update(object, context);
 	}

@@ -59,19 +59,25 @@ Controller = "com.rainbow.crm.inventory.controller.InventoryController">
 <Column title ="Division" width ="22%" >
 <Element label = ""  type = "UINote" Id = "idNameNote"  property ="Division.Name" />
 </Column>
-<Column title ="Item_Code" width ="22%" >
+<Column title ="Item_Code" width ="15%" >
 <Element label = ""  type = "UINote" Id = "idItemCd"  property ="Item.Code" />
 </Column>
 <Column title ="Item" width ="22%" >
 <Element label = ""  type = "UINote" Id = "idItem"  property ="Item.Name" />
 </Column>
- <Column title ="Opening_Qty"  width ="10%" >
+ <Column title ="Opening_Qty"  width ="8%" >
   <Element label = ""  type = "UINote" Id = "idOpQty"  property ="opQty" />
  </Column>
-  <Column title ="Current_Qty"  width ="10%" >
+  <Column title ="Current_Qty"  width ="8%" >
   <Element label = ""  type = "UINote" Id = "idCRQty"  property ="currentQty" />
  </Column>
-  <Column title =""  width ="5%" >
+   <Column title ="Reserved_Qty"  width ="8%" >
+  <Element label = ""  type = "UINote" Id = "idRsQty"  property ="reservedQty" />
+ </Column>
+    <Column title ="Damaged_Qty"  width ="8%" >
+  <Element label = ""  type = "UINote" Id = "iddmgQty"  property ="damagedQty" />
+ </Column>
+  <Column title =""  width ="7%" >
   <Element label = ""  type = "UINote" Id = "idAdEd"   />
  </Column>
 </Columns>
@@ -85,8 +91,8 @@ Controller = "com.rainbow.crm.inventory.controller.InventoryController">
 	</options>
 </Element>
 </Column>
-<Column width ="22%">
-<Element label = ""  type = "UIText" Id = "txtCode" size  = "35" property ="Item.Code" />
+<Column width ="15%">
+<Element label = ""  type = "UIText" Id = "txtCode" size  = "23" property ="Item.Code" />
 </Column>
 <Column width ="22%">
 <Element label = ""  type = "UILookupText"  Id = "txtItName"  property ="Item.Name" showLookupAsDialog="true" dialogId="dlgIt"
@@ -97,13 +103,19 @@ Controller = "com.rainbow.crm.inventory.controller.InventoryController">
 </Element>
 
 </Column>
-<Column width ="10%">
+<Column width ="8%">
 <Element label = ""  type = "UIText" Id = "txtOPQTY" isNumeric="true" size ="5" property ="opQty" />
 </Column>
-<Column width ="10%">
+<Column width ="8%">
 <Element label = ""  type = "UINote" Id = ""  property ="currentQty" />
 </Column>
-<Column width="5%">
+<Column width ="8%">
+<Element label = ""  type = "UINote" Id = ""  property ="reservedQty" />
+</Column>
+<Column width ="8%">
+<Element label = ""  type = "UINote" Id = ""  property ="damagedQty" />
+</Column>
+<Column width="7%">
 <Element caption = "+"  type = "UIButton" Id = "btnAddRow"    fixedAction ="FixedAction.ACTION_ADDTABLEROW"   rendered = "Controller.isCreateMode" fixedActionParam =  "this"/>
 <Element caption = "-"  type = "UIButton" Id = "btnDelRow"    fixedAction ="FixedAction.ACTION_DELETETABLEROW" rendered = "Controller.isCreateMode"  fixedActionParam =  "this"/>
 </Column>

@@ -48,7 +48,7 @@ ul {
     color: #f4f4f4;
     font-size: 15px;
     position: absolute;
-    right: -5px; }
+    right: -1px; }
   .menustyleParent .menustyleParent {
     padding-left: 15px; }
   .menustyleParent.open > span:before {

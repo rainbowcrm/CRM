@@ -214,6 +214,7 @@ INSERT INTO METADATA(ENTITY,CLASS_NAME) VALUES('ITEM','com.rainbow.crm.item.mode
 INSERT INTO METADATA(ENTITY,CLASS_NAME) VALUES('INVENTORY','com.rainbow.crm.inventory.model.Inventory');
 INSERT INTO METADATA(ENTITY,CLASS_NAME) VALUES('SALESPERIOD','com.rainbow.crm.salesperiod.model.SalesPeriod');
 INSERT INTO METADATA(ENTITY,CLASS_NAME) VALUES('SALES','com.rainbow.crm.sales.model.Sales');
+INSERT INTO METADATA(ENTITY,CLASS_NAME) VALUES('DO','com.rainbow.crm.distrbutionorder.model.DistributionOrder');
 INSERT INTO METADATA(ENTITY,CLASS_NAME) VALUES('PURCHASE','com.rainbow.crm.purchase.model.Purchase');
 INSERT INTO METADATA(ENTITY,CLASS_NAME) VALUES('SALESLEAD','com.rainbow.crm.saleslead.model.SalesLead');
 INSERT INTO METADATA(ENTITY,CLASS_NAME) VALUES('WISHLIST','com.rainbow.crm.wishlist.model.WishList');

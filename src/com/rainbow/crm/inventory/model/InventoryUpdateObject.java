@@ -15,6 +15,9 @@ public class InventoryUpdateObject extends CRMBusinessModelObject implements Ser
 	boolean addition ;
 	CRMContext context;
 	
+	boolean reserve ;
+	boolean fulFilll ;
+	
 	Set <? extends CRMItemLine> itemLines;
 	public Division getDivision() {
 		return division;
@@ -46,6 +49,19 @@ public class InventoryUpdateObject extends CRMBusinessModelObject implements Ser
 	public void setContext(CRMContext context) {
 		this.context = context;
 	}
+	public boolean isReserve() {
+		return reserve;
+	}
+	public void setReserve(boolean reserve) {
+		this.reserve = reserve;
+	}
+	public boolean isFulFilll() {
+		return fulFilll;
+	}
+	public void setFulFilll(boolean fulFilll) {
+		this.fulFilll = fulFilll;
+	}
+	
 	
 	
 	
