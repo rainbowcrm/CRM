@@ -496,4 +496,7 @@ ALTER TABLE INVENTORY ADD RESERVED_QTY INT 	 ;
 ALTER TABLE INVENTORY ADD DAMAGED_QTY INT ;
 
 INSERT INTO METADATA(ENTITY,CLASS_NAME) VALUES('DO','com.rainbow.crm.distrbutionorder.model.DistributionOrder');
+
+INSERT INTO BASE_CONFIGURATION(CODE,CONFIG_DESCRIPTION,CONFIG_GROUP,VALUE_TYPE,VALUE_GENERATOR,DEFAULT_VALUE)
+values ('ORDLBLPRIN','Tempate to print Shipping Label','Order Management','STR',null,'shippingLabel.vm');
 ____________________________________________________________________

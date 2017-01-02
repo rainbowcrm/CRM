@@ -273,3 +273,6 @@ values ('CAPTTEND','Capture Tender Details in billing','Payment','BOOL',null,'fa
 
 INSERT INTO BASE_CONFIGURATION(CODE,CONFIG_DESCRIPTION,CONFIG_GROUP,VALUE_TYPE,VALUE_GENERATOR,DEFAULT_VALUE)
 values ('MULIDIVSHIP','Allow shipping from multiple divisions','Order Management','BOOL',null,'true');
+
+INSERT INTO BASE_CONFIGURATION(CODE,CONFIG_DESCRIPTION,CONFIG_GROUP,VALUE_TYPE,VALUE_GENERATOR,DEFAULT_VALUE)
+values ('ORDLBLPRIN','Tempate to print Shipping Label','Order Management','STR',null,'shippingLabel.vm');

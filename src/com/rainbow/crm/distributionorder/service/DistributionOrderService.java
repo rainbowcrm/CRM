@@ -16,6 +16,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 
 
+
+
 import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
@@ -29,6 +31,8 @@ import javax.mail.internet.MimeMessage;
 
 
 
+
+
 import org.apache.commons.io.IOUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
@@ -37,6 +41,8 @@ import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+
 
 
 
@@ -464,6 +470,50 @@ public class DistributionOrderService extends AbstractService implements IDistri
 		return order.getStatus().getCode() ;
 		
 	}
+
+	@Override
+	public String generateShippingLabel(DistributionOrder order,
+			CRMContext context) {
+		VelocityEngine ve = new VelocityEngine();
+		Externalize externalize = new Externalize();
+        try {
+        IUserService userService = (IUserService)SpringObjectFactory.INSTANCE.getInstance("IUserService");
+        User user = (User)userService.getById(context.getUser());
+        String path = CRMAppConfig.INSTANCE.getProperty("VelocityTemplatePath");
+        ve.setProperty("file.resource.loader.path", path);
+        ve.init();
+        Template t = ve.getTemplate("shippingLabel.vm" );
+        VelocityContext velocityContext = new VelocityContext();
+        velocityContext.put("reciptent", order.getAddress().getRecipient());
+        velocityContext.put("recaddress1", order.getAddress().getAddress1());
+        velocityContext.put("recaddress2", order.getAddress().getAddress2());
+        velocityContext.put("reccity", order.getAddress().getCity());
+        velocityContext.put("reczipCode", order.getAddress().getZipcode());
+        velocityContext.put("recphone", order.getAddress().getPhone());
+        
+        velocityContext.put("company",order.getCompany().getName());
+        velocityContext.put("divisionName",order.getDivision().getName());
+        velocityContext.put("address1", order.getDivision().getAddress1());
+        velocityContext.put("address2", order.getDivision().getAddress2());
+        velocityContext.put("city", order.getDivision().getCity());
+        velocityContext.put("zipCode", order.getDivision().getZipCode());
+        velocityContext.put("phone", order.getDivision().getPhone());
+        velocityContext.put("From", externalize.externalize(context, "From"));
+        velocityContext.put("To", externalize.externalize(context, "To"));
+        velocityContext.put("lines", order.getDistributionOrderLines());
+        StringWriter writer = new StringWriter();
+        t.merge( velocityContext, writer );
+        String content=  writer.toString();
+        return content;
+        
+        }catch(Exception ex){
+        	Logwriter.INSTANCE.error(ex);
+        }
+
+        return "";
+
+	}
+	
 	
 	
 }

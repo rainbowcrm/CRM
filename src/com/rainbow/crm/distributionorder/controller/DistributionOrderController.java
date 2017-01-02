@@ -1,9 +1,11 @@
 package com.rainbow.crm.distributionorder.controller;
 
+import java.io.OutputStream;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,6 +26,9 @@ import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.division.service.IDivisionService;
 import com.rainbow.crm.distributionorder.model.DistributionOrder;
 import com.rainbow.crm.distributionorder.service.IDistributionOrderService;
+import com.rainbow.crm.logger.Logwriter;
+import com.rainbow.crm.sales.model.Sales;
+import com.rainbow.crm.sales.service.ISalesService;
 import com.techtrade.rads.framework.context.IRadsContext;
 import com.techtrade.rads.framework.controller.abstracts.TransactionController;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
@@ -34,6 +39,8 @@ import com.techtrade.rads.framework.utils.Utils;
 
 public class DistributionOrderController extends CRMTransactionController{
 	
+	ServletContext ctx;
+	HttpServletResponse resp;
 	
 
 	public IDistributionOrderService getService() {
@@ -41,6 +48,13 @@ public class DistributionOrderController extends CRMTransactionController{
 		return serv;
 	}
 
+	@Override
+	public IRadsContext generateContext(HttpServletRequest request,HttpServletResponse response) {
+		ctx =  request.getServletContext() ;
+		resp = response ;
+		return LoginSQLs.loggedInUser(request.getSession().getId());
+	}
+	
 	public boolean isReleased() {
 		DistributionOrder dOrder = (DistributionOrder)object ;
 		return ( dOrder.getStatus().equals(CRMConstants.DO_STATUS.RELEASED) || dOrder.getStatus().equals(CRMConstants.DO_STATUS.PICKING)) ;
@@ -115,7 +129,21 @@ public class DistributionOrderController extends CRMTransactionController{
 
 	@Override
 	public PageResult print() {
-		return super.print();
+		PageResult result  = new PageResult();
+		try {
+		IDistributionOrderService doService = getService();
+		String htmlData = doService.generateShippingLabel((DistributionOrder) object,(CRMContext)getContext());
+        OutputStream responseOutputStream = resp.getOutputStream();
+        
+        resp.setContentType("application/html");
+		resp.setHeader("Content-Disposition","attachment; filename=lbl.html" );
+        responseOutputStream.write(htmlData.getBytes());
+        responseOutputStream.close();
+        result.setResponseAction(PageResult.ResponseAction.FILEDOWNLOAD);
+		}catch(Exception ex) {
+			Logwriter.INSTANCE.error(ex);
+		}
+		return result;
 	}
 	
 	
