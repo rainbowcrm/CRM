@@ -22,7 +22,7 @@ Controller = "com.rainbow.crm.transactiondocuments.controller.TransactionDocumen
 <Element type = "UITableRow">
 <Element type ="UITableCol" align="right">
 
-<Element caption = "Close"  type = "UIButton" Id = "btClose"   style="button" onClickJS = "closeDialog('newcustDL');"  />
+<Element caption = "Close"  type = "UIButton" Id = "btClose"   style="button" onClickJS = "closeDialog('newprintpop');"  />
 <Element caption = "Print"  type = "UIButton" Id = "btPrintNew"   style="button" onClickJS = "window.print();"  />
 </Element>
 </Element>

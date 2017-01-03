@@ -77,6 +77,10 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 </Section>
 
 <Section type ="detail">
+<Element type ="UIDialog" Id = "newprintpop" style= "fullpagepopup" >
+<Element type = "UIIFrame" Id= "printFRM" src ="./rdscontroller?page=transactiondocument" style ="lookupFrameStyle">
+</Element>
+</Element>
 <Element type ="UITabset" Id = "impexp" style = "uitabstyle" selectedTabStyle= "titleStyleSelected active nav-link" unSelectedTabStyle ="titleStyleUnSelected nav-link" >
 <Element type ="UITab" Id= "idLine" title = "Line_Items" showinTable = "false" >
 
@@ -165,7 +169,8 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 <Section type ="brk3"/>
 </CoreSection>
 <Section type ="summary">
-<Element caption = "Print_Invoice"  type = "UIButton"    Id = "btnInvoice"  style="button" fixedAction ="FixedAction.ACTION_PRINT"   rendered = "Controller.isUpdateMode" />
+
+<Element caption = "Print_Invoice"  type = "UIButton"    Id = "btnInvoice"  style="button" onClickJS = "showPrintDialog('newprintpop','SalesInvoice');"  rendered = "Controller.isUpdateMode" />
 <Element caption = "Create_DO"  type = "UIButton"    Id = "btnInvoice"  style="button" rendered = "Controller.isUpdateMode" fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="createDO"   />
 </Section>
 <Section type ="copyRightSection"/>

@@ -67,7 +67,7 @@ Controller = "com.rainbow.crm.distributionorder.controller.DistributionOrderCont
 </Section>
 <Section type ="detail">
 
-<Element type ="UIDialog" Id = "newcustDL" style= "fullpagepopup" >
+<Element type ="UIDialog" Id = "newprintpop" style= "fullpagepopup" >
 <Element type = "UIIFrame" Id= "printFRM" src ="./rdscontroller?page=transactiondocument" style ="lookupFrameStyle">
 </Element>
 </Element>
@@ -141,7 +141,7 @@ Controller = "com.rainbow.crm.distributionorder.controller.DistributionOrderCont
 <Element caption = "Pack"  type = "UIButton"    Id = "btnPack"  style="button" rendered = "Controller.isPicked" fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="pack"   />
 <Element caption = "Start_Shipping"  type = "UIButton"    Id = "btnShip"  style="button" rendered = "Controller.isPacking" fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="ship"   />
 <Element caption = "Shipped"  type = "UIButton"    Id = "btnShipped"  style="button" rendered = "Controller.isShipping" fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="shipped"   />
-<Element caption = "Print_Label"  type = "UIButton"    Id = "btnPrint"  style="button"  onClickJS = "showPrintDialog('newcustDL','ShippingLabel');"    />
+<Element caption = "Print_Label"  type = "UIButton"    Id = "btnPrint"  style="button"  onClickJS = "showPrintDialog('newprintpop','ShippingLabel');"    />
 </Section>
 <Section type ="copyRightSection"/>
 </UIForm>
