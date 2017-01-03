@@ -22,6 +22,18 @@ function validateforCreate() {
 	return true;
 }
 
+function showPrintDialog(id,docType) {
+	var dialog = document.getElementById(id);  
+	document.getElementById('printFRM').contentWindow.document.getElementById('txtid').value = document.getElementById('hdnUserID').value;
+	document.getElementById('printFRM').contentWindow.document.getElementById('docType').value=docType;
+	if(!dialog.showModal)
+	{
+		dialogPolyfill.registerDialog(dialog);
+	}
+	dialog.showModal();
+	document.getElementById('printFRM').contentWindow.document.getElementById('cust').submit();
+	
+ }
 
 
 function acknowledgeAlert(){

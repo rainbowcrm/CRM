@@ -1,8 +1,5 @@
 <html>
 <body>
-
-<br><br>
-
 <table width= "100%">
 
 <td align ="right">
@@ -80,8 +77,6 @@ $phone
 </td>
 </tr>
 </table>
-
-<br>
 <br>
  <table width="100%" border="1" >
    <tr>

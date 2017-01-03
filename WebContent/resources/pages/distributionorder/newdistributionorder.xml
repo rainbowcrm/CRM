@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Page id = "newDiv" showinFrame ="true" title ="New Sales Lead | Rainbow CRM" Object = "com.rainbow.crm.distributionorder.model.DistributionOrder" 
+<Page id = "newDiv" showinFrame ="true" title ="New Distribution Order | Rainbow CRM" Object = "com.rainbow.crm.distributionorder.model.DistributionOrder" 
 Controller = "com.rainbow.crm.distributionorder.controller.DistributionOrderController">
 <Template type= "Transaction"  name = "TransactionTemplate"></Template>
 <Forwards>
@@ -66,6 +66,12 @@ Controller = "com.rainbow.crm.distributionorder.controller.DistributionOrderCont
 	
 </Section>
 <Section type ="detail">
+
+<Element type ="UIDialog" Id = "newcustDL" style= "fullpagepopup" >
+<Element type = "UIIFrame" Id= "printFRM" src ="./rdscontroller?page=transactiondocument" style ="lookupFrameStyle">
+</Element>
+</Element>
+
 <Element type ="UITabset" Id = "impexp" style = "uitabstyle" selectedTabStyle= "titleStyleSelected active nav-link" unSelectedTabStyle ="titleStyleUnSelected nav-link" >
 <Element type ="UITab" Id= "idLine" title = "Line_Items" showinTable = "false" >
 <Element type = "UITable" rows = "1" cols = "7" style = "listPageTitle" applyStyleonChildren ="true" Id  ="tblTrans" property ="DistributionOrderLines[]" >
@@ -135,7 +141,7 @@ Controller = "com.rainbow.crm.distributionorder.controller.DistributionOrderCont
 <Element caption = "Pack"  type = "UIButton"    Id = "btnPack"  style="button" rendered = "Controller.isPicked" fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="pack"   />
 <Element caption = "Start_Shipping"  type = "UIButton"    Id = "btnShip"  style="button" rendered = "Controller.isPacking" fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="ship"   />
 <Element caption = "Shipped"  type = "UIButton"    Id = "btnShipped"  style="button" rendered = "Controller.isShipping" fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="shipped"   />
-<Element caption = "Print_Label"  type = "UIButton"    Id = "btnPrint"  style="button"  fixedAction ="FixedAction.ACTION_PRINT"    />
+<Element caption = "Print_Label"  type = "UIButton"    Id = "btnPrint"  style="button"  onClickJS = "showPrintDialog('newcustDL','ShippingLabel');"    />
 </Section>
 <Section type ="copyRightSection"/>
 </UIForm>

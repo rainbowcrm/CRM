@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Page id = "transactiondocument" showinFrame ="true" title ="Document" Object = "com.rainbow.crm.transactiondocuments.model.TransactionDocument" 
 Controller = "com.rainbow.crm.transactiondocuments.controller.TransactionDocumentController">
-<Template type= "CRUD"  name = "quickAddTemplate"></Template>
+<Template type= "General"  name = "PrintDocTemplate"></Template>
 <Forwards>
 </Forwards>
 <IncludeJS>./resources/js/RadsLib.js</IncludeJS>
@@ -9,14 +9,24 @@ Controller = "com.rainbow.crm.transactiondocuments.controller.TransactionDocumen
 <Elements>
 <UIForm Id ="cust" method = "POST" >
 <CoreSection>
-<Section type ="detail">
-<Element label = ""  type = "UIStaticText" Id = "hdnUserID"  property ="document" />
-<Element label = ""  type = "UIHidden" Id = "hdnType"  property ="docType" />
-<Element label = ""  type = "UIHidden" Id = "id"  property ="pk" />
+<Section type ="mainSection">
+<Element label = ""  type = "UILabel" Id = "hdnUserID"  property ="document" />
+<Element label = ""  type = "UIHidden" Id = "docType"  property ="docType" />
+<Element label = ""  type = "UIHidden" Id = "txtid"  property ="pk" />
 </Section>
 </CoreSection>
 <Section type ="summary">
-<Element caption = "Close"  type = "UIButton" Id = "btClose"   style="button" onClickJS = "closeDialog('printDoc');"  />
+<Element type = "UIBreak"/>
+
+<Element type = "UITable" rows = "1" cols = "1">
+<Element type = "UITableRow">
+<Element type ="UITableCol" align="right">
+
+<Element caption = "Close"  type = "UIButton" Id = "btClose"   style="button" onClickJS = "closeDialog('newcustDL');"  />
+<Element caption = "Print"  type = "UIButton" Id = "btPrintNew"   style="button" onClickJS = "window.print();"  />
+</Element>
+</Element>
+</Element>
 </Section>
 </UIForm>
 </Elements>
