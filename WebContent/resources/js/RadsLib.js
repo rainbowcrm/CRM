@@ -4,6 +4,9 @@ function isEven(n) {
   return n === 0 || !!(n && !(n%2));
 }
 
+function closeDialog(dialogId) {
+	window.parent.document.getElementById(dialogId).close();
+}
 
 function addRow(ctrl,oddRowStyle,evenRowStyle) {
 	console.log('ctrl=' + ctrl ) ;

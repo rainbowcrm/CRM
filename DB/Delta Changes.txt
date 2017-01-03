@@ -369,10 +369,11 @@ INSERT INTO BASE_CONFIGURATION(CODE,CONFIG_DESCRIPTION,CONFIG_GROUP,VALUE_TYPE,V
 values ('ALLOWRETURNS','Allow Sales Return','General','BOOL',null,'true');
 
 
+
 INSERT INTO BASE_CONFIGURATION(CODE,CONFIG_DESCRIPTION,CONFIG_GROUP,VALUE_TYPE,VALUE_GENERATOR,DEFAULT_VALUE)
-values ('LOYALTY','Sales Amount required per loyalty point','Customer Management','NUMER',null);
+values ('LOYALTY','Sales Amount required per loyalty point','Customer Management','NUMER',null,null);
 INSERT INTO BASE_CONFIGURATION(CODE,CONFIG_DESCRIPTION,CONFIG_GROUP,VALUE_TYPE,VALUE_GENERATOR,DEFAULT_VALUE)
-values ('RDMLOYALTY','Amount that can be redeemed per 100 loyalty point','Customer Management','NUMER',null);
+values ('RDMLOYALTY','Amount that can be redeemed per 100 loyalty point','Customer Management','NUMER',null,null);
 INSERT INTO BASE_CONFIGURATION(CODE,CONFIG_DESCRIPTION,CONFIG_GROUP,VALUE_TYPE,VALUE_GENERATOR,DEFAULT_VALUE)
 values ('RDCLYLTRT','Reduce Loyalty based on returns','Customer Management','BOOL',null,'true');
 INSERT INTO BASE_CONFIGURATION(CODE,CONFIG_DESCRIPTION,CONFIG_GROUP,VALUE_TYPE,VALUE_GENERATOR,DEFAULT_VALUE)
