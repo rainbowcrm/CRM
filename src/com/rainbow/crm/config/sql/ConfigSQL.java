@@ -13,6 +13,7 @@ import com.rainbow.crm.config.model.ConfigLine;
 import com.rainbow.crm.config.model.ConfigSet;
 import com.rainbow.crm.database.ConnectionCreater;
 import com.rainbow.crm.logger.Logwriter;
+import com.techtrade.rads.framework.utils.Utils;
 
 public class ConfigSQL {
 
@@ -88,6 +89,37 @@ public class ConfigSQL {
 		return set;
 	}
 
+	
+	public static String getConfigforCode(int company , String configCode) {
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		Connection connection = null;
+		try {
+			connection = ConnectionCreater.getConnection();
+			String sql = "Select BC.DEFAULT_VALUE,CC.VALUE "
+					+ "  from BASE_CONFIGURATION BC LEFT JOIN  COMPANY_CONFIGURATION CC ON  ( BC.CODE= CC.CONFIG_CODE AND CC.COMPANY_ID =? ) WHERE BC.CODE= ? " ;
+			statement = connection.prepareStatement(sql);
+			statement.setInt(1, company);
+			statement.setString(2, configCode);
+			rs = statement.executeQuery();
+			if (rs.next()) {
+				String defaultValue = rs.getString(6);
+				String value = rs.getString(7);
+				if (value  == null)
+					return defaultValue;
+				else
+					return value ;
+			}
+			
+		}catch (SQLException ex) {
+			Logwriter.INSTANCE.error(ex);
+		} finally {
+			ConnectionCreater.close(connection, statement, rs);
+		}
+		return null;
+		
+	}
+		
 	private static List<ConfigLine> getConfigLinesforGroup(int company,
 			String groupName) {
 		List<ConfigLine> list = new ArrayList<ConfigLine>();

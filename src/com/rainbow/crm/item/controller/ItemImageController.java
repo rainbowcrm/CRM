@@ -1,7 +1,12 @@
 package com.rainbow.crm.item.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -17,6 +22,7 @@ import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
+import com.rainbow.crm.config.service.ConfigurationManager;
 import com.rainbow.crm.database.LoginSQLs;
 import com.rainbow.crm.item.dao.ItemImageSQL;
 import com.rainbow.crm.item.model.Item;
@@ -48,6 +54,7 @@ public class ItemImageController extends GeneralController{
 		if (!Utils.isNullList(images)) {
 			for(ItemImage image :  images) {
 				saveFile(image.getImage(), image.getFilePath(), image.getFileName());
+				ftpFile(image.getImage(), image.getFilePath(), image.getFileName(), (CRMContext)getContext());
 			}
 			saveRecords();
 		}
@@ -107,6 +114,29 @@ public class ItemImageController extends GeneralController{
 		}
 	}
 
+	private void ftpFile (byte [] bytes , String filepath, String fileName, CRMContext context) {
+		String ftpUrl = "ftp://%s:%s@%s/%s;type=i";
+		
+		String host = ConfigurationManager.getConfig(ConfigurationManager.IMAGE_SERVER_HOST, context);
+		String user = ConfigurationManager.getConfig(ConfigurationManager.IMAGE_SERVER_USER, context);
+		String pass = ConfigurationManager.getConfig(ConfigurationManager.IMAGE_SERVER_PASSWORD, context);
+		String uploadPath = fileName;
+		
+		ftpUrl = String.format(ftpUrl, user, pass, host, uploadPath);
+		System.out.println("Upload URL: " + ftpUrl);
+
+		try {
+		URL url = new URL(ftpUrl);
+		URLConnection conn = url.openConnection();
+		OutputStream outputStream = conn.getOutputStream();
+		outputStream.write(bytes);
+		outputStream.close();
+		   System.out.println("File uploaded");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+	}
+	
 	private void saveFile(byte [] bytes , String filepath, String fileName) {
 		try {
 		String folderPath = 	ctx.getRealPath("." ) + "//" + filepath ;
