@@ -116,13 +116,13 @@ public class ItemImageController extends GeneralController{
 
 	private void ftpFile (byte [] bytes , String filepath, String fileName, CRMContext context) {
 		String ftpUrl = "ftp://%s:%s@%s/%s;type=i";
-		
+		if (Utils.isNullString(fileName)) return ;
 		String host = ConfigurationManager.getConfig(ConfigurationManager.IMAGE_SERVER_HOST, context);
 		String user = ConfigurationManager.getConfig(ConfigurationManager.IMAGE_SERVER_USER, context);
 		String pass = ConfigurationManager.getConfig(ConfigurationManager.IMAGE_SERVER_PASSWORD, context);
 		String uploadPath = fileName;
 		
-		ftpUrl = String.format(ftpUrl, user, pass, host, uploadPath);
+		ftpUrl = String.format(ftpUrl, user, pass, host, "public_html/pics");
 		System.out.println("Upload URL: " + ftpUrl);
 
 		try {

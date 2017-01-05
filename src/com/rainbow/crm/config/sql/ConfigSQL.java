@@ -103,8 +103,8 @@ public class ConfigSQL {
 			statement.setString(2, configCode);
 			rs = statement.executeQuery();
 			if (rs.next()) {
-				String defaultValue = rs.getString(6);
-				String value = rs.getString(7);
+				String defaultValue = rs.getString(1);
+				String value = rs.getString(2);
 				if (value  == null)
 					return defaultValue;
 				else
