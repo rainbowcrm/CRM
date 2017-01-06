@@ -1,9 +1,11 @@
 package com.rainbow.crm.item.controller;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
@@ -16,6 +18,12 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.net.ftp.FTP;
+import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPFile;
+import org.apache.commons.net.ftp.FTPReply;
+import org.apache.commons.net.ftp.FTPSClient;
 
 import com.rainbow.crm.common.CRMAppConfig;
 import com.rainbow.crm.common.CRMContext;
@@ -54,7 +62,7 @@ public class ItemImageController extends GeneralController{
 		if (!Utils.isNullList(images)) {
 			for(ItemImage image :  images) {
 				saveFile(image.getImage(), image.getFilePath(), image.getFileName());
-				ftpFile(image.getImage(), image.getFilePath(), image.getFileName(), (CRMContext)getContext());
+				ftpAPFile(image.getImage(), image.getFilePath(), image.getFileName(), (CRMContext)getContext());
 			}
 			saveRecords();
 		}
@@ -113,16 +121,65 @@ public class ItemImageController extends GeneralController{
 		
 		}
 	}
+	
+	private void ftpAPFile(byte[] bytes, String filepath, String fileName,
+			CRMContext context) {
+		if (Utils.isNullString(fileName))
+			return;
+		String host = ConfigurationManager.getConfig(
+				ConfigurationManager.IMAGE_SERVER_HOST, context);
+		String user = ConfigurationManager.getConfig(
+				ConfigurationManager.IMAGE_SERVER_USER, context);
+		String pass = ConfigurationManager.getConfig(
+				ConfigurationManager.IMAGE_SERVER_PASSWORD, context);
+		FTPClient  ftpClient = new FTPClient ();
+		try {
+		//	ftpClient.setDefaultTimeout(100000);
+		//	ftpClient.enterLocalPassiveMode();
+			ftpClient.connect(host,21);
+			int reply = ftpClient.getReplyCode();
+			if (FTPReply.isPositiveCompletion(reply)) {
+				
+				ftpClient.login(user, pass);
+				//FTPFile[] files = ftpClient.listFiles(directory);
+				 
+				//ftpClient.enterLocalPassiveMode();
+				ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+				ByteArrayInputStream inputStream = new ByteArrayInputStream(
+						bytes);
+				System.out.println("Start uploading first file");
+				boolean done = ftpClient.storeFile("/public_html/pics/"+fileName, inputStream);
+				inputStream.close();
+				InputStream st2 = ftpClient.retrieveFileStream("/public_html/pics/MP003-a.jpg");
+				if (done) {
+					System.out
+							.println("The first file is uploaded successfully.");
+				}
+			}
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				if (ftpClient.isConnected()) {
+					ftpClient.logout();
+					ftpClient.disconnect();
+				}
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
 
 	private void ftpFile (byte [] bytes , String filepath, String fileName, CRMContext context) {
-		String ftpUrl = "ftp://%s:%s@%s/%s;type=i";
+		String ftpUrl = "ftp://%s:%s@%s;type=i";
 		if (Utils.isNullString(fileName)) return ;
 		String host = ConfigurationManager.getConfig(ConfigurationManager.IMAGE_SERVER_HOST, context);
 		String user = ConfigurationManager.getConfig(ConfigurationManager.IMAGE_SERVER_USER, context);
 		String pass = ConfigurationManager.getConfig(ConfigurationManager.IMAGE_SERVER_PASSWORD, context);
 		String uploadPath = fileName;
 		
-		ftpUrl = String.format(ftpUrl, user, pass, host, "public_html/pics");
+		ftpUrl = String.format(ftpUrl, user, pass, host);
 		System.out.println("Upload URL: " + ftpUrl);
 
 		try {
