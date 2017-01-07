@@ -24,10 +24,10 @@ public class ItemImageSet extends CRMModelObject{
 	public Object getPK() {
 		return null;
 	}
-	public Sku getItem() {
+	public Sku getSku() {
 		return item;
 	}
-	public void setItem(Sku item) {
+	public void setSku(Sku item) {
 		this.item = item;
 	}
 	public byte[] getImage1() {

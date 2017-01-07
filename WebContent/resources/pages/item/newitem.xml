@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Page id = "newDiv" showinFrame ="true" title ="New SKU | Rainbow CRM" Object = "com.rainbow.crm.item.model.Sku" 
-Controller = "com.rainbow.crm.item.controller.SkuController">
+<Page id = "newDiv" showinFrame ="true" title ="New SKU | Rainbow CRM" Object = "com.rainbow.crm.item.model.Item" 
+Controller = "com.rainbow.crm.item.controller.ItemController">
 <Template type= "CRUD"  name = "CRUDTemplate"></Template>
 <Forwards>
-<Forward key ="CANCEL">rdscontroller?page=skus</Forward>
-<Forward key ="SAVE">skus</Forward>
+<Forward key ="CANCEL">rdscontroller?page=items</Forward>
+<Forward key ="SAVE">items</Forward>
 </Forwards>
 <IncludeJS>./resources/js/RadsLib.js</IncludeJS>
 <IncludeJS>./scripts/CRMGeneral.js</IncludeJS>
@@ -18,17 +18,14 @@ Controller = "com.rainbow.crm.item.controller.SkuController">
 <Section type ="detail">
 	<Element label = "" type = "UIHidden" Id = "hdnVersion" property ="ObjectVersion" />
 	<Element label = ""  type = "UIHidden" Id = "hdnUserID"  property ="Id" />
-	<Element label = "Sku_Code"  type = "UIText" Id = "txtCode"  isMandatory="true" size="10" property ="Code" />
-	<Element label = "Barcode"  type = "UIText" Id = "txtBarcode"  isMandatory="true" size="25" property ="Barcode" />
-	<Element label = "Sku_Name"  type = "UIText" Id = "txtName"  isMandatory="true" size="30" property ="Name" />
+	<Element label = "Item_Code"  type = "UIText" Id = "txtCode"  isMandatory="true" size="10" property ="Code" />
+	<Element label = "Item_Name"  type = "UIText" Id = "txtName"  isMandatory="true" size="30" property ="Name" />
 	<Element label = "Product"  type = "UILookupText"  Id = "txtProduct" isMandatory="true"  property ="Product.Name" showLookupAsDialog="true" dialogId="dlgProd"
  	 dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>product</lookupType>
 	 <height>300</height>
 	 <width>290</width>
 	</Element>
-	<Element label = "Color"  type = "UIText" Id = "txtColor"   size="20" property ="Color" />
-	<Element label = "Size"  type = "UIText" Id = "txtSize"   size="20" property ="Size" />
 	<Element label = "Manufacturer"  type = "UIText" Id = "txtManu"   size="30" property ="Manufacturer" />
 	<Element label = "Item_Class"  type = "UIList" Id = "lstClass"   property ="ItemClass"  externalise= "true">
 	<options populator =  "getItemClassTypes"> 

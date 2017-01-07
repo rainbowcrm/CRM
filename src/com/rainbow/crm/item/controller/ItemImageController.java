@@ -79,7 +79,7 @@ public class ItemImageController extends GeneralController{
 	public PageResult delete(ModelObject object) {
 		imageSet = (ItemImageSet) object;
 		SkuService service = (SkuService)SpringObjectFactory.INSTANCE.getInstance("ISkuService") ;
-		Sku item = service.getByName(((CRMContext) getContext()).getLoggedinCompany(), imageSet.getItem().getName());
+		Sku item = service.getByName(((CRMContext) getContext()).getLoggedinCompany(), imageSet.getSku().getName());
 		ItemImageSQL.DeleteAllImagesforItem(item);
 		imageSet.setFilewithPath1("");
 		imageSet.setFilewithPath2("");
@@ -92,7 +92,7 @@ public class ItemImageController extends GeneralController{
 		imageSet = (ItemImageSet) object;
 		try {
 			ISkuService service = (ISkuService)SpringObjectFactory.INSTANCE.getInstance("ISkuService") ;
-			Sku item = service.getByName(((CRMContext) getContext()).getLoggedinCompany(), imageSet.getItem().getName());
+			Sku item = service.getByName(((CRMContext) getContext()).getLoggedinCompany(), imageSet.getSku().getName());
 			String filePath = CRMAppConfig.INSTANCE.getProperty("Image_Path");
 			String code = ((CRMContext) getContext()).getLoggedinCompanyCode();
 			ItemImage dbRecord1 = ItemImageSQL.getItemImage(item.getId(), 'a');
@@ -281,7 +281,7 @@ public class ItemImageController extends GeneralController{
 		
 		List<ItemImage> images = new ArrayList<ItemImage> ();
 		ISkuService service = (ISkuService)SpringObjectFactory.INSTANCE.getInstance("ISkuService") ;
-		Sku item = service.getByName(((CRMContext) getContext()).getLoggedinCompany(), set.getItem().getName());
+		Sku item = service.getByName(((CRMContext) getContext()).getLoggedinCompany(), set.getSku().getName());
 		try  {
 			String filePath = CRMAppConfig.INSTANCE.getProperty("Image_Path");
 			String code = context.getLoggedinCompanyCode();
@@ -291,7 +291,7 @@ public class ItemImageController extends GeneralController{
 				image.setImage(set.getImage1());
 				image.setSuffix('a');
 				image.setFilePath(filePath + "\\" +  code );
-				image.setFileName( set.getItem().getCode() + "-" + image.getSuffix() + "." + getFileExtn(set.getFileName1()) ); 
+				image.setFileName( set.getSku().getCode() + "-" + image.getSuffix() + "." + getFileExtn(set.getFileName1()) ); 
 				images.add(image);
 				set.setFilewithPath1(image.getFilePath() + "\\" + image.getFileName());
 			}
@@ -301,7 +301,7 @@ public class ItemImageController extends GeneralController{
 				image.setImage(set.getImage2());
 				image.setSuffix('b');
 				image.setFilePath(filePath + "\\" +  code );
-				image.setFileName( set.getItem().getCode() + "-" + image.getSuffix() + "." + getFileExtn(set.getFileName2()) );
+				image.setFileName( set.getSku().getCode() + "-" + image.getSuffix() + "." + getFileExtn(set.getFileName2()) );
 				images.add(image);
 				set.setFilewithPath2(image.getFilePath() + "\\" + image.getFileName());
 			}
@@ -311,7 +311,7 @@ public class ItemImageController extends GeneralController{
 				image.setImage(set.getImage3());
 				image.setSuffix('c');
 				image.setFilePath(filePath + "\\" +  code );
-				image.setFileName( set.getItem().getCode() + "-" + image.getSuffix() + "." + getFileExtn(set.getFileName3()) );
+				image.setFileName( set.getSku().getCode() + "-" + image.getSuffix() + "." + getFileExtn(set.getFileName3()) );
 				images.add(image);
 				set.setFilewithPath3(image.getFilePath() + "\\" + image.getFileName());
 			}

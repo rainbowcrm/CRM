@@ -10,25 +10,23 @@ import com.rainbow.crm.common.CRMListController;
 import com.rainbow.crm.common.IBusinessService;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.database.GeneralSQLs;
-import com.rainbow.crm.division.validator.DivisionValidator;
-import com.rainbow.crm.item.model.Sku;
-import com.rainbow.crm.item.service.ISkuService;
+import com.rainbow.crm.item.model.Item;
+import com.rainbow.crm.item.service.IItemService;
 import com.rainbow.crm.item.validator.ItemValidator;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
 
-public class SkuListController extends CRMListController {
-
+public class ItemListController extends CRMListController {
 	@Override
 	public IBusinessService getService() {
-		ISkuService serv = (ISkuService) SpringObjectFactory.INSTANCE.getInstance("ISkuService");
+		IItemService serv = (IItemService) SpringObjectFactory.INSTANCE.getInstance("IItemService");
 		return serv;
 	}
 
 	@Override
 	public Object getPrimaryKeyValue(ModelObject object) {
-		Sku item = (Sku) object;
+		Item item = (Item) object;
 		return item.getId();
 	}
 
@@ -52,7 +50,7 @@ public class SkuListController extends CRMListController {
 	@Override
 	public PageResult goToEdit(List<ModelObject> objects) {
 		PageResult result = new PageResult();
-		result.setNextPageKey("newsku");
+		result.setNextPageKey("newitem");
 		return result;
 	}
 	
@@ -63,6 +61,5 @@ public class SkuListController extends CRMListController {
 		return ans;
 	}
 
-	
 
 }

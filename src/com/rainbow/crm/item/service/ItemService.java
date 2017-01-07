@@ -1,33 +1,27 @@
 package com.rainbow.crm.item.service;
 
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
-import com.rainbow.crm.abstratcs.model.CRMItemLine;
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.AbstractService;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMDBException;
 import com.rainbow.crm.common.SpringObjectFactory;
-import com.rainbow.crm.common.messaging.CRMMessageSender;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
 import com.rainbow.crm.hibernate.ORMDAO;
-import com.rainbow.crm.inventory.model.InventoryUpdateObject;
-import com.rainbow.crm.item.dao.SkuDAO;
+import com.rainbow.crm.item.dao.ItemDAO;
+import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.item.validator.ItemValidator;
-import com.rainbow.crm.item.validator.SkuValidator;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.model.transaction.TransactionResult;
-import com.techtrade.rads.framework.utils.Utils;
 
-public class SkuService extends AbstractService implements ISkuService {
+public class ItemService extends AbstractService implements IItemService{
 
 	@Override
 	public long getTotalRecordCount(CRMContext context) {
-		return getDAO().getTotalRecordCount("Sku",context);
+		return getDAO().getTotalRecordCount("Item",context);
 	}
 
 	@Override
@@ -38,7 +32,7 @@ public class SkuService extends AbstractService implements ISkuService {
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
 			String whereCondition, CRMContext context) {
-		 return super.listData("Sku", from, to, whereCondition, context);
+		 return super.listData("Item", from, to, whereCondition, context);
 
 	}
 
@@ -47,8 +41,8 @@ public class SkuService extends AbstractService implements ISkuService {
 			CRMContext context) {
 		ICompanyService compService = (ICompanyService)SpringObjectFactory.INSTANCE.getInstance("ICompanyService");
 		Company company = (Company)compService.getById(context.getLoggedinCompany());
-		((Sku)object).setCompany(company);
-		SkuValidator validator = new SkuValidator(context);
+		((Item)object).setCompany(company);
+		ItemValidator validator = new ItemValidator(context);
 		return validator.validateforCreate(object);
 	}
 
@@ -57,30 +51,26 @@ public class SkuService extends AbstractService implements ISkuService {
 			CRMContext context) {
 		ICompanyService compService = (ICompanyService)SpringObjectFactory.INSTANCE.getInstance("ICompanyService");
 		Company company = (Company)compService.getById(context.getLoggedinCompany());
-		((Sku)object).setCompany(company);
-		SkuValidator validator = new SkuValidator(context);
+		((Item)object).setCompany(company);
+		ItemValidator validator = new ItemValidator(context);
 		return validator.validateforUpdate(object);
 	}
 
 	@Override
-	public Sku getByCode(int company, String code) {
-		return ((SkuDAO)getDAO()).findByCode(company, code);
+	public Item getByCode(int company, String code) {
+		return ((ItemDAO)getDAO()).findByCode(company, code);
 	}
 
-	@Override
-	public Sku getByBarCode(int company, String barcode) {
-		return ((SkuDAO)getDAO()).findByBarCode(company, barcode);
-	}
 	
 		
 	@Override
-	public Sku getByName(int company, String name) {
-		return ((SkuDAO)getDAO()).findByName(company, name);
+	public Item getByName(int company, String name) {
+		return ((ItemDAO)getDAO()).findByName(company, name);
 	}
 
 	@Override
 	protected ORMDAO getDAO() {
-		return (SkuDAO) SpringObjectFactory.INSTANCE.getInstance("SkuDAO");
+		return (ItemDAO) SpringObjectFactory.INSTANCE.getInstance("ItemDAO");
 	}
 
 	@Override
@@ -92,7 +82,7 @@ public class SkuService extends AbstractService implements ISkuService {
 			triggerWishList = true ;
 		}
 		TransactionResult result= super.update(object, context);
-		if (triggerWishList) {
+		/*if (triggerWishList) {
 			InventoryUpdateObject invObject = new InventoryUpdateObject();
 			invObject.setCompany(curObject.getCompany());
 			invObject.setContext(context);
@@ -106,7 +96,7 @@ public class SkuService extends AbstractService implements ISkuService {
 			newSet.add(itemLine);
 			invObject.setItemLines(newSet);
 			CRMMessageSender.sendMessage(invObject);
-		}
+		}*/
 		return result;
 	}
 
@@ -118,12 +108,8 @@ public class SkuService extends AbstractService implements ISkuService {
 	}
 
 	@Override
-	public List<Sku> getAllByProduct(int company, int productId) {
-		return ((SkuDAO)getDAO()).getAllByProduct(company, productId);
+	public List<Item> getAllByProduct(int company, int productId) {
+		return ((ItemDAO)getDAO()).getAllByProduct(company, productId);
 	}
-	
-	
-	
-
 
 }

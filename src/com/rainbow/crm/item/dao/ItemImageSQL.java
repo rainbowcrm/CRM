@@ -127,7 +127,7 @@ public class ItemImageSQL {
 		ItemImage itemImage  = null;
 		try {
 			connection  = ConnectionCreater.getConnection() ;
-			String sql =   "SELECT IMG.ID, IT.SKU_NAME, IT.ID,IMG.IMAGE_FILE,IMG.SUFFIX FROM ITEM_IMAGES IMG, ITEMS IT where IMG.SKU_ID = ?  AND IMG.SUFFIX = ?  AND IMG.SKU_ID = IT.ID" ;
+			String sql =   "SELECT IMG.ID, IT.SKU_NAME, IT.ID,IMG.IMAGE_FILE,IMG.SUFFIX FROM ITEM_IMAGES IMG, SKUS IT where IMG.SKU_ID = ?  AND IMG.SUFFIX = ?  AND IMG.SKU_ID = IT.ID" ;
 			statement = connection.prepareStatement(sql);
 			statement.setInt(1, itemId);
 			statement.setString(2,String.valueOf(suffix));

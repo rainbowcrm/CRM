@@ -4,29 +4,28 @@ import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMValidator;
 import com.rainbow.crm.common.CommonErrorCodes;
 import com.rainbow.crm.common.SpringObjectFactory;
-import com.rainbow.crm.division.model.Division;
-import com.rainbow.crm.division.validator.DivisionErrorCodes;
-import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.item.model.Sku;
-import com.rainbow.crm.item.service.IItemService;
 import com.rainbow.crm.item.service.ISkuService;
 import com.rainbow.crm.product.model.Product;
 import com.rainbow.crm.product.service.IProductService;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 
-public class ItemValidator extends CRMValidator{
+public class SkuValidator extends CRMValidator{
 
-	Item item =null;
+	Sku item =null;
 	@Override
 	protected void checkforCreateErrors(ModelObject object) {
 		checkforErrors(object);
-		IItemService  service = (IItemService) SpringObjectFactory.INSTANCE.getInstance("IItemService");
-		Item  exist = (Item)service.getByCode(item.getCompany().getId(), item.getCode());
+		ISkuService  service = (ISkuService) SpringObjectFactory.INSTANCE.getInstance("ISkuService");
+		Sku  exist = (Sku)service.getByCode(item.getCompany().getId(), item.getCode());
 		if(exist != null ) {
 			errors.add(getErrorforCode(CommonErrorCodes.UNIQUE_VAL_EXISTS,externalize.externalize(context, "Item_Code"))) ;
 		}
-		
-		exist = (Item)service.getByName(item.getCompany().getId(), item.getName());
+		exist = (Sku)service.getByBarCode(item.getCompany().getId(), item.getCode());
+		if(exist != null ) {
+			errors.add(getErrorforCode(CommonErrorCodes.UNIQUE_VAL_EXISTS,externalize.externalize(context, "Barcode"))) ;
+		}
+		exist = (Sku)service.getByName(item.getCompany().getId(), item.getName());
 		if(exist != null ) {
 			errors.add(getErrorforCode(CommonErrorCodes.UNIQUE_VAL_EXISTS,externalize.externalize(context, "Item_Name"))) ;
 		}
@@ -36,12 +35,16 @@ public class ItemValidator extends CRMValidator{
 	@Override
 	protected void checkforUpdateErrors(ModelObject object) {
 		checkforErrors(object);
-		IItemService  service = (IItemService) SpringObjectFactory.INSTANCE.getInstance("IItemService");
-		Item  exist = (Item)service.getByCode(item.getCompany().getId(), item.getCode());
+		ISkuService  service = (ISkuService) SpringObjectFactory.INSTANCE.getInstance("ISkuService");
+		Sku  exist = (Sku)service.getByCode(item.getCompany().getId(), item.getCode());
 		if(exist != null && exist.getId() != item.getId()) {
 			errors.add(getErrorforCode(CommonErrorCodes.UNIQUE_VAL_EXISTS,externalize.externalize(context, "Item_Code"))) ;
 		}
-		exist = (Item)service.getByName(item.getCompany().getId(), item.getName());
+		exist = (Sku)service.getByBarCode(item.getCompany().getId(), item.getCode());
+		if(exist != null && exist.getId() != item.getId()) {
+			errors.add(getErrorforCode(CommonErrorCodes.UNIQUE_VAL_EXISTS,externalize.externalize(context, "Barcode"))) ;
+		}
+		exist = (Sku)service.getByName(item.getCompany().getId(), item.getName());
 		if(exist != null && exist.getId() != item.getId() ) {
 			errors.add(getErrorforCode(CommonErrorCodes.UNIQUE_VAL_EXISTS,externalize.externalize(context, "Item_Name"))) ;
 		}
@@ -49,9 +52,12 @@ public class ItemValidator extends CRMValidator{
 	}
 	
 	protected void checkforErrors(ModelObject object) {
-		item = (Item) object;
+		item = (Sku) object;
 		if(item.getCode() == null) {
 			errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Item_Code"))) ;
+		}
+		if(item.getBarcode() == null) {
+			errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Barcode"))) ;
 		}
 		if(item.getName() == null) {
 			errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Name"))) ;
@@ -106,13 +112,12 @@ public class ItemValidator extends CRMValidator{
 					externalize.externalize(context, "Max_Price"),externalize.externalize(context, prop))) ;
 		}
 	}
-	public ItemValidator(CRMContext context) {
+	public SkuValidator(CRMContext context) {
 		super(context);
 	}
-	public ItemValidator(){
+	public SkuValidator(){
 		
 	}
-	
-	
+
 
 }

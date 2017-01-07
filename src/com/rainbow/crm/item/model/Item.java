@@ -1,0 +1,138 @@
+package com.rainbow.crm.item.model;
+
+import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
+import com.rainbow.crm.product.model.Product;
+import com.rainbow.crm.uom.model.UOM;
+
+public class Item extends CRMBusinessModelObject{
+	
+	String code;
+	String name; 
+	String description;
+	Product product;
+	String manufacturer;
+	UOM uom; // unused .. 
+	int uomId;
+	Double purchasePrice;
+	Double maxPrice;
+	Double retailPrice;
+	Double wholeSalePrice;
+	Double breakEvenPrice;
+	Double promotionPrice;
+	Double maxDiscount;
+	String specification;
+	boolean onPromotion;
+	String itemClass; 
+	String itemClassDesc;
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public Product getProduct() {
+		return product;
+	}
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+	public String getManufacturer() {
+		return manufacturer;
+	}
+	public void setManufacturer(String manufacturer) {
+		this.manufacturer = manufacturer;
+	}
+	public UOM getUom() {
+		return uom;
+	}
+	public void setUom(UOM uom) {
+		this.uom = uom;
+	}
+	public int getUomId() {
+		return uomId;
+	}
+	public void setUomId(int uomId) {
+		this.uomId = uomId;
+	}
+	public Double getPurchasePrice() {
+		return purchasePrice;
+	}
+	public void setPurchasePrice(Double purchasePrice) {
+		this.purchasePrice = purchasePrice;
+	}
+	public Double getMaxPrice() {
+		return maxPrice;
+	}
+	public void setMaxPrice(Double maxPrice) {
+		this.maxPrice = maxPrice;
+	}
+	public Double getRetailPrice() {
+		return retailPrice;
+	}
+	public void setRetailPrice(Double retailPrice) {
+		this.retailPrice = retailPrice;
+	}
+	public Double getWholeSalePrice() {
+		return wholeSalePrice;
+	}
+	public void setWholeSalePrice(Double wholeSalePrice) {
+		this.wholeSalePrice = wholeSalePrice;
+	}
+	public Double getBreakEvenPrice() {
+		return breakEvenPrice;
+	}
+	public void setBreakEvenPrice(Double breakEvenPrice) {
+		this.breakEvenPrice = breakEvenPrice;
+	}
+	public Double getPromotionPrice() {
+		return promotionPrice;
+	}
+	public void setPromotionPrice(Double promotionPrice) {
+		this.promotionPrice = promotionPrice;
+	}
+	public Double getMaxDiscount() {
+		return maxDiscount;
+	}
+	public void setMaxDiscount(Double maxDiscount) {
+		this.maxDiscount = maxDiscount;
+	}
+	public String getSpecification() {
+		return specification;
+	}
+	public void setSpecification(String specification) {
+		this.specification = specification;
+	}
+	public boolean isOnPromotion() {
+		return onPromotion;
+	}
+	public void setOnPromotion(boolean onPromotion) {
+		this.onPromotion = onPromotion;
+	}
+	public String getItemClass() {
+		return itemClass;
+	}
+	public void setItemClass(String itemClass) {
+		this.itemClass = itemClass;
+	}
+	public String getItemClassDesc() {
+		return itemClassDesc;
+	}
+	public void setItemClassDesc(String itemClassDesc) {
+		this.itemClassDesc = itemClassDesc;
+	} 
+
+	
+	
+}

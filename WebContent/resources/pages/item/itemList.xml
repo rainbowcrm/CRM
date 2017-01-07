@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Page id = "ItemList" showinFrame ="true" title ="SKUS | Rainbow CRM" Object = "com.rainbow.crm.item.model.Sku" 
-Controller = "com.rainbow.crm.item.controller.SkuListController">
+<Page id = "ItemList" showinFrame ="true" title ="Item | Rainbow CRM" Object = "com.rainbow.crm.item.model.Item" 
+Controller = "com.rainbow.crm.item.controller.ItemListController">
 <Template type= "List"  name = "ListTemplate"></Template>
 <Forwards>
-<Forward key ="NEW">rdscontroller?page=newsku</Forward>
-<Forward key ="EDIT">rdscontroller?page=newsku</Forward>
+<Forward key ="NEW">rdscontroller?page=newitem</Forward>
+<Forward key ="EDIT">rdscontroller?page=newitem</Forward>
 </Forwards>
 <AjaxGroups>
 <AjaxGroup service ="filterSearch">

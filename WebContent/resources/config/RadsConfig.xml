@@ -85,6 +85,10 @@
 </Page>
 <Page id = "skus" definition ="/resources/pages/item/skuList.xml" modelclass = "com.rainbow.crm.item.model.Sku" >
 </Page>
+<Page id = "newitem" definition ="/resources/pages/item/newitem.xml" modelclass = "com.rainbow.crm.item.model.Item" >
+</Page>
+<Page id = "items" definition ="/resources/pages/item/itemList.xml" modelclass = "com.rainbow.crm.item.model.Item" >
+</Page>
 <Page id = "itemimages" definition ="/resources/pages/item/itemimages.xml" modelclass = "com.rainbow.crm.item.model.ItemImageSet" >
 </Page>
 <Page id = "setup" definition ="/resources/pages/datasetup/datasetup.xml" modelclass = "com.rainbow.framework.setup.model.DataLoader" >
@@ -168,12 +172,13 @@
  	<Element label = "" type = "UIMenu" Id = "menu04" style="menustyle" title="Contacts" link = "rdscontroller?page=contacts"   />
  	<Element label = "" type = "UIMenu" Id = "menu04" style="menustyle" title="Carriers" link = "rdscontroller?page=carriers"   />
  </Element>
-  <Element label = "" type = "UIMenu" Id = "menu10" style="menustyleParent" title="Items" groupId= "menuGRP002"  >
+  <Element label = "" type = "UIMenu" Id = "menu10" style="menustyleParent" title="Merchandise" groupId= "menuGRP002"  >
  	<Element label = "" type = "UIMenu" Id = "menu11" style="menustyle" title="Categories" link = "rdscontroller?page=categories"   />
- 	<Element label = "" type = "UIMenu" Id = "menu13" style="menustyle" title="Products" link = "rdscontroller?page=products"   />
+ 	<Element label = "" type = "UIMenu" Id = "menu12" style="menustyle" title="Products" link = "rdscontroller?page=products"   />
  	<!-- TBD
  	 <Element label = "" type = "UIMenu" Id = "menu13" style="menustyle" title="UOMs" link = "rdscontroller?page=uoms"   />
  	 -->
+ 	<Element label = "" type = "UIMenu" Id = "menu13" style="menustyle" title="Items" link = "rdscontroller?page=items"   />
  	<Element label = "" type = "UIMenu" Id = "menu14" style="menustyle" title="SKU" link = "rdscontroller?page=skus"   />
  	<Element label = "" type = "UIMenu" Id = "menu15" style="menustyle" title="Item Images" link = "rdscontroller?page=itemimages"   />
  </Element>
