@@ -29,7 +29,7 @@ public abstract class CRMTransactionController extends TransactionController {
 
 	@Override
 	public List<RadsError> adaptfromUI(ModelObject modelObject) {
-		return  getService().adaptfromUI((CRMContext)getContext(),(Sales) object);
+		return  getService().adaptfromUI((CRMContext)getContext(),modelObject);
 	}
 
 	@Override

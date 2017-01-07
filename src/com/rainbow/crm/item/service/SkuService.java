@@ -26,7 +26,7 @@ public class SkuService extends AbstractService implements ISkuService {
 
 	@Override
 	public long getTotalRecordCount(CRMContext context) {
-		return getDAO().getTotalRecordCount("Item",context);
+		return getDAO().getTotalRecordCount("Sku",context);
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class SkuService extends AbstractService implements ISkuService {
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
 			String whereCondition, CRMContext context) {
-		 return super.listData("Item", from, to, whereCondition, context);
+		 return super.listData("Sku", from, to, whereCondition, context);
 
 	}
 

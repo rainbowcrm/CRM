@@ -26,8 +26,8 @@ public class InventoryDAO extends SpringHibernateDAO{
 	public Inventory getByItemandDivision(int item , int division ) {
 		Inventory inventory = null;
 		Session session = openSession(false);
-		Query query = session.createQuery(" from Inventory where item.id = :item  and division.id =:division  " ) ;
-		query.setParameter("item", item);
+		Query query = session.createQuery(" from Inventory where sku.id = :sku  and division.id =:division  " ) ;
+		query.setParameter("sku", item);
 		query.setParameter("division", division);
 		List lst = query.list();
 		if (!Utils.isNullList(lst))

@@ -24,7 +24,7 @@ public class SkuDAO extends SpringHibernateDAO {
 	public Sku findByCode(int company, String code) {
 		Sku item = null;
 		Session session = openSession(false);
-		Query query = session.createQuery(" from Item where code = :code and company.id =:company  " ) ;
+		Query query = session.createQuery(" from Sku where code = :code and company.id =:company  " ) ;
 		query.setParameter("code", code);
 		query.setParameter("company", company);
 		List lst = query.list();
@@ -37,7 +37,7 @@ public class SkuDAO extends SpringHibernateDAO {
 	public Sku findByBarCode(int company, String barcode) {
 		Sku item = null;
 		Session session = openSession(false);
-		Query query = session.createQuery(" from Item where barcode = :barcode and company.id =:company  " ) ;
+		Query query = session.createQuery(" from Sku where barcode = :barcode and company.id =:company  " ) ;
 		query.setParameter("barcode", barcode);
 		query.setParameter("company", company);
 		List lst = query.list();
@@ -50,7 +50,7 @@ public class SkuDAO extends SpringHibernateDAO {
 	public Sku findByName(int company, String name) {
 		Sku item = null;
 		Session session = openSession(false);
-		Query query = session.createQuery(" from Item where name = :name and company.id =:company  " ) ;
+		Query query = session.createQuery(" from Sku where name = :name and company.id =:company  " ) ;
 		query.setParameter("name", name);
 		query.setParameter("company", company);
 		List lst = query.list();
@@ -62,7 +62,7 @@ public class SkuDAO extends SpringHibernateDAO {
 	public List<Sku> getAllByProduct(int company, int productId) {
 		Sku item = null;
 		Session session = openSession(false);
-		Query query = session.createQuery(" from Item where company.id =:company  and product.id =:product  " ) ;
+		Query query = session.createQuery(" from Sku where company.id =:company  and product.id =:product  " ) ;
 		query.setParameter("product", productId);
 		query.setParameter("company", company);
 		List lst = query.list();

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Page id = "ItemList" showinFrame ="true" title ="Items | Rainbow CRM" Object = "com.rainbow.crm.item.model.Item" 
-Controller = "com.rainbow.crm.item.controller.ItemListController">
+Controller = "com.rainbow.crm.item.controller.SkuListController">
 <Template type= "List"  name = "ListTemplate"></Template>
 <Forwards>
 <Forward key ="NEW">rdscontroller?page=newsku</Forward>

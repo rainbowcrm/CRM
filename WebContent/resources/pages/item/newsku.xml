@@ -4,7 +4,7 @@ Controller = "com.rainbow.crm.item.controller.SkuController">
 <Template type= "CRUD"  name = "CRUDTemplate"></Template>
 <Forwards>
 <Forward key ="CANCEL">rdscontroller?page=skus</Forward>
-<Forward key ="SAVE">items</Forward>
+<Forward key ="SAVE">skus</Forward>
 </Forwards>
 <IncludeJS>./resources/js/RadsLib.js</IncludeJS>
 <IncludeJS>./scripts/CRMGeneral.js</IncludeJS>
