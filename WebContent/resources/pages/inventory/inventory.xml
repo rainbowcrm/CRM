@@ -40,7 +40,7 @@ Controller = "com.rainbow.crm.inventory.controller.InventoryController">
 </FilterNode>
 
 <FilterNode>
-<Element label = "Category"  type = "UIList" Id = "lstCategoy"   property ="Item.Product.Category.Id"  externalise= "true">
+<Element label = "Category"  type = "UIList" Id = "lstCategoy"   property ="Sku.Product.Category.Id"  externalise= "true">
 	<options populator =  "getAllCategorieswithSelect"> 
 	</options>
   </Element>
@@ -60,10 +60,10 @@ Controller = "com.rainbow.crm.inventory.controller.InventoryController">
 <Element label = ""  type = "UINote" Id = "idNameNote"  property ="Division.Name" />
 </Column>
 <Column title ="Item_Code" width ="15%" >
-<Element label = ""  type = "UINote" Id = "idItemCd"  property ="Item.Code" />
+<Element label = ""  type = "UINote" Id = "idItemCd"  property ="Sku.Code" />
 </Column>
 <Column title ="Item" width ="22%" >
-<Element label = ""  type = "UINote" Id = "idItem"  property ="Item.Name" />
+<Element label = ""  type = "UINote" Id = "idItem"  property ="Sku.Name" />
 </Column>
  <Column title ="Opening_Qty"  width ="8%" >
   <Element label = ""  type = "UINote" Id = "idOpQty"  property ="opQty" />
@@ -92,10 +92,10 @@ Controller = "com.rainbow.crm.inventory.controller.InventoryController">
 </Element>
 </Column>
 <Column width ="15%">
-<Element label = ""  type = "UIText" Id = "txtCode" size  = "23" property ="Item.Code" />
+<Element label = ""  type = "UIText" Id = "txtCode" size  = "23" property ="Sku.Code" />
 </Column>
 <Column width ="22%">
-<Element label = ""  type = "UILookupText"  Id = "txtItName"  property ="Item.Name" showLookupAsDialog="true" dialogId="dlgIt"
+<Element label = ""  type = "UILookupText"  Id = "txtItName"  property ="Sku.Name" showLookupAsDialog="true" dialogId="dlgIt"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>item</lookupType>
 	 <height>300</height>

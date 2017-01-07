@@ -1,7 +1,7 @@
 package com.rainbow.crm.carrier.validator;
 
-import com.rainbow.crm.item.model.Item;
-import com.rainbow.crm.item.service.IItemService;
+import com.rainbow.crm.item.model.Sku;
+import com.rainbow.crm.item.service.ISkuService;
 import com.rainbow.crm.user.validator.UserErrorCodes;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMValidator;

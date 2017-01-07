@@ -9,8 +9,8 @@ import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.database.LoginSQLs;
-import com.rainbow.crm.item.model.Item;
-import com.rainbow.crm.item.service.IItemService;
+import com.rainbow.crm.item.model.Sku;
+import com.rainbow.crm.item.service.ISkuService;
 import com.techtrade.rads.framework.context.IRadsContext;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.ui.abstracts.ILookupService;
@@ -27,10 +27,10 @@ public class LookupItems implements ILookupService{
 			searchString = searchString.replace("*", "%");
 			condition =  " where name like  '" + searchString + "'" ;
 		}
-		IItemService service = (IItemService) SpringObjectFactory.INSTANCE.getInstance("IItemService");
+		ISkuService service = (ISkuService) SpringObjectFactory.INSTANCE.getInstance("ISkuService");
 		List<? extends CRMModelObject> items = service.listData(from, from  + noRecords, condition,(CRMContext)ctx);
 		for (ModelObject obj :  items) {
-			ans.add(((Item)obj).getName());
+			ans.add(((Sku)obj).getName());
 		}
 
 		return ans;

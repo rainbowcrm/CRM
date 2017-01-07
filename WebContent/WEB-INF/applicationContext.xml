@@ -40,7 +40,7 @@
     </bean>
     <bean id="IConfigService" class="com.rainbow.crm.config.service.ConfigService">
     </bean>    
-    <bean id="IItemService" class="com.rainbow.crm.item.service.ItemService">
+    <bean id="ISkuService" class="com.rainbow.crm.item.service.SkuService">
     </bean>
     <bean id="IInventoryService" class="com.rainbow.crm.inventory.service.InventoryService">
     </bean>  
@@ -93,7 +93,7 @@
     <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>  
     
-     <bean id="ItemDAO" class="com.rainbow.crm.item.dao.ItemDAO">
+     <bean id="SkuDAO" class="com.rainbow.crm.item.dao.SkuDAO">
     <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>    
   
@@ -167,7 +167,7 @@
         <value>com/rainbow/crm/inventory/model/Inventory.hbm.xml</value>
         <value>com/rainbow/crm/product/model/Product.hbm.xml</value>
         <value>com/rainbow/crm/uom/model/UOM.hbm.xml</value>
-        <value>com/rainbow/crm/item/model/Item.hbm.xml</value>
+        <value>com/rainbow/crm/item/model/Sku.hbm.xml</value>
         <value>com/rainbow/crm/vendor/model/Vendor.hbm.xml</value>
         <value>com/rainbow/crm/carrier/model/Carrier.hbm.xml</value>
         <value>com/rainbow/crm/customer/model/Customer.hbm.xml</value>

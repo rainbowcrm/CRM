@@ -4,16 +4,16 @@
  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
 
 <hibernate-mapping>
-   <class name="com.rainbow.crm.item.model.Item" table="ITEMS">
+   <class name="com.rainbow.crm.item.model.Sku" table="SKUS">
     <meta attribute="class-description">
-         This class contains the Items.. .. 
+         This class contains the SKUs.. .. 
       </meta>
       <id name="id" type="int" column="id">
       </id>
       <version name="objectVersion" column="version" type="integer"></version>
-      <property name="code" column="item_code" type="string"/>
+      <property name="code" column="sku_code" type="string"/>
       <property name="barcode" column="barcode" type="string"/>
-      <property name="name" column="item_name" type="string"/>
+      <property name="name" column="sku_name" type="string"/>
       <many-to-one name="company" column ="company_id" not-null="true" lazy="false" ></many-to-one>
       <property name="description" column="description" type="string"/>
       <many-to-one name="product" column ="product_id" not-null="true" lazy="false" ></many-to-one>

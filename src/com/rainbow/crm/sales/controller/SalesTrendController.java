@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.database.LoginSQLs;
-import com.rainbow.crm.item.model.Item;
-import com.rainbow.crm.item.service.IItemService;
+import com.rainbow.crm.item.model.Sku;
+import com.rainbow.crm.item.service.ISkuService;
 import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.product.model.Product;
 import com.rainbow.crm.product.service.IProductService;
@@ -58,9 +58,9 @@ public class SalesTrendController  extends GeneralController{
 		Product selectedProduct =  trend.getProduct();
 		IProductService iProdService = (IProductService)SpringObjectFactory.INSTANCE.getInstance("IProductService") ;
 		selectedProduct = iProdService.getByName(((CRMContext)getContext()).getLoggedinCompany(), selectedProduct.getName());
-		IItemService itemService = (IItemService)SpringObjectFactory.INSTANCE.getInstance("IItemService");
+		ISkuService itemService = (ISkuService)SpringObjectFactory.INSTANCE.getInstance("ISkuService");
 		ISalesService salesService = (ISalesService)SpringObjectFactory.INSTANCE.getInstance("ISalesService");
-		List<Item> items = itemService.getAllByProduct(((CRMContext)getContext()).getLoggedinCompany(), selectedProduct.getId());
+		List<Sku> items = itemService.getAllByProduct(((CRMContext)getContext()).getLoggedinCompany(), selectedProduct.getId());
 		Date periodFrom  = new Date(fromDate.getTime()) ;
 		Date periodTo = new Date(periodFrom.getTime() + diff) ;
 		int maxValue = 0;
@@ -83,7 +83,7 @@ public class SalesTrendController  extends GeneralController{
 					LineChartEntryData lineChartEntryData ;
 					if (itemMap.get(itemId) == null) {
 						lineChartEntryData = new LineChartEntryData();
-						Item item = (Item)itemService.getById(itemId);
+						Sku item = (Sku)itemService.getById(itemId);
 						lineChartEntryData.setText(item.getName());
 						lineChartEntryData.setColor(colors[colorIndex ++] );
 					}else {

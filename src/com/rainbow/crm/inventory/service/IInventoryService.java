@@ -11,7 +11,7 @@ import com.rainbow.crm.common.IBusinessService;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.inventory.model.Inventory;
 import com.rainbow.crm.inventory.model.InventoryUpdateObject;
-import com.rainbow.crm.item.model.Item;
+import com.rainbow.crm.item.model.Sku;
 import com.techtrade.rads.framework.model.transaction.TransactionResult;
 
 @Transactional
@@ -19,7 +19,7 @@ public interface IInventoryService extends IBusinessService{
 	
 	public TransactionResult batchCreate(List<CRMModelObject> objects, CRMContext context) throws CRMDBException;
 	
-	public Inventory getByItemandDivision(Item item, Division division);
+	public Inventory getByItemandDivision(Sku item, Division division);
 	
 	@Transactional
 	public void updateInventory(InventoryUpdateObject inventoryObject) ;

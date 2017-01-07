@@ -7,7 +7,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
-import com.rainbow.crm.item.model.Item;
+import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.sales.model.Sales;
 import com.techtrade.rads.framework.utils.Utils;
 

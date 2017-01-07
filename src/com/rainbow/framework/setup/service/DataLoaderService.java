@@ -226,7 +226,7 @@ public class DataLoaderService implements IDataLoaderService {
 		case "com.rainbow.crm.vendor.model.Vendor" :return "IVendorService";
 		case "com.rainbow.crm.user.model.User" :return "IUserService";
 		case "com.rainbow.crm.product.model.Product" :return "IProductService";
-		case "com.rainbow.crm.item.model.Item" :return "IItemService";
+		case "com.rainbow.crm.item.model.Sku" :return "ISkuService";
 		case "com.rainbow.crm.inventory.model.Inventory" :return "IInventoryService";
 		case "com.rainbow.crm.purchase.model.Purchase" :return "IPurchaseService";
 		case "com.rainbow.crm.sales.model.Sales" :return "ISalesService";

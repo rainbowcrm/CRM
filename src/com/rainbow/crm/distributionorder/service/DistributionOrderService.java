@@ -76,9 +76,9 @@ import com.rainbow.crm.division.service.IDivisionService;
 import com.rainbow.crm.hibernate.ORMDAO;
 import com.rainbow.crm.inventory.model.InventoryUpdateObject;
 import com.rainbow.crm.item.dao.ItemImageSQL;
-import com.rainbow.crm.item.model.Item;
+import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.item.model.ItemImage;
-import com.rainbow.crm.item.service.IItemService;
+import com.rainbow.crm.item.service.ISkuService;
 import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.product.validator.ProductValidator;
 import com.rainbow.crm.distributionorder.dao.DistributionOrderDAO;
@@ -209,13 +209,13 @@ public class DistributionOrderService extends AbstractService implements IDistri
 				line.setCompany(company);
 				line.setDocNumber(object.getDocNumber());
 				line.setLineNumber(lineNo ++);
-				if(line.getItem() == null ) {
+				if(line.getSku() == null ) {
 					ans.add(CRMValidator.getErrorforCode(context.getLocale(), DistributionOrderErrorCodes.FIELD_NOT_VALID , externalize.externalize(context, "Item")));
 				}else {
-					String itemName = line.getItem().getName() ;
-					IItemService itemService = (IItemService)SpringObjectFactory.INSTANCE.getInstance("IItemService");
-					Item item = itemService.getByName(object.getCompany().getId(), itemName);
-					line.setItem(item);
+					String itemName = line.getSku().getName() ;
+					ISkuService itemService = (ISkuService)SpringObjectFactory.INSTANCE.getInstance("ISkuService");
+					Sku item = itemService.getByName(object.getCompany().getId(), itemName);
+					line.setSku(item);
 				}
 			}
 		}
@@ -350,7 +350,7 @@ public class DistributionOrderService extends AbstractService implements IDistri
 		sales.getSalesLines().forEach(salesLine  -> { 
 			DistributionOrderLine line = new DistributionOrderLine();
 			line.setCompany(sales.getCompany());
-			line.setItem(salesLine.getItem());
+			line.setSku(salesLine.getSku());
 			line.setQty(salesLine.getQty());
 			line.setLineNumber(counter.incrementAndGet());
 			lines.add(line);
@@ -394,7 +394,7 @@ public class DistributionOrderService extends AbstractService implements IDistri
 			AtomicBoolean picked= new AtomicBoolean(false);
 				order.getDistributionOrderLines().forEach( innerLine ->  { 
 					if (innerLine.getLineNumber() == doLine.getLineNumber() &&
-							innerLine.getItem().getId() == doLine.getItem().getId() && innerLine.isPicked()) {
+							innerLine.getSku().getId() == doLine.getSku().getId() && innerLine.isPicked()) {
 						picked.set(true);
 					}
 				} );

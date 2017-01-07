@@ -29,8 +29,8 @@ import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.division.service.IDivisionService;
 import com.rainbow.crm.hibernate.ORMDAO;
 import com.rainbow.crm.inventory.model.InventoryUpdateObject;
-import com.rainbow.crm.item.model.Item;
-import com.rainbow.crm.item.service.IItemService;
+import com.rainbow.crm.item.model.Sku;
+import com.rainbow.crm.item.service.ISkuService;
 import com.rainbow.crm.product.validator.ProductValidator;
 import com.rainbow.crm.saleslead.model.SalesLead;
 import com.rainbow.crm.saleslead.model.SalesLeadLine;
@@ -111,9 +111,9 @@ public class WishListService extends AbstractService implements IWishListService
 		for (CRMItemLine item :  invObject.getItemLines()) {
 			List<WishListLine> wishListLines = null;
 			if ("AVLBLTY".equals(reason))
-				wishListLines  = dao.getWishesPerItemByInventory(item.getItem(), invObject.getDivision(), item.getQty(),reason) ;
+				wishListLines  = dao.getWishesPerItemByInventory(item.getSku(), invObject.getDivision(), item.getQty(),reason) ;
 			else if ("LOWPRICE".equals(reason)) 
-				wishListLines  = dao.getWishesPerItemByPrice(item.getItem(),  item.getItem().getRetailPrice() ,reason) ;
+				wishListLines  = dao.getWishesPerItemByPrice(item.getSku(),  item.getSku().getRetailPrice() ,reason) ;
 				
 			if (!Utils.isNullList(wishListLines))  {
 				for (WishListLine line : wishListLines)  {
@@ -132,9 +132,9 @@ public class WishListService extends AbstractService implements IWishListService
 					SalesLeadLine leadLine = new SalesLeadLine();
 					leadLine.setCompany(line.getCompany());
 					leadLine.setDivision(lead.getDivision());
-					leadLine.setItem(line.getItem());
+					leadLine.setSku(line.getSku());
 					leadLine.setQty(line.getQty());
-					leadLine.setPrice(line.getItem().getRetailPrice());
+					leadLine.setPrice(line.getSku().getRetailPrice());
 					leadLine.setSalesLeadDoc(lead);
 					leadLine.getTemporaryProperties().put("wishListLine",line );
 					lead.addSalesLeadLine(leadLine);
@@ -189,13 +189,13 @@ public class WishListService extends AbstractService implements IWishListService
 				line.setDocNumber(object.getDocNumber());
 				line.setDivision(object.getDivision());
 				line.setLineNumber(lineNo ++);
-				if(line.getItem() == null ) {
+				if(line.getSku() == null ) {
 					ans.add(CRMValidator.getErrorforCode(context.getLocale(), WishListErrorCodes.FIELD_NOT_VALID , externalize.externalize(context, "Item")));
 				}else {
-					String itemName = line.getItem().getName() ;
-					IItemService itemService = (IItemService)SpringObjectFactory.INSTANCE.getInstance("IItemService");
-					Item item = itemService.getByName(object.getCompany().getId(), itemName);
-					line.setItem(item);
+					String itemName = line.getSku().getName() ;
+					ISkuService itemService = (ISkuService)SpringObjectFactory.INSTANCE.getInstance("ISkuService");
+					Sku item = itemService.getByName(object.getCompany().getId(), itemName);
+					line.setSku(item);
 				}
 			}
 		}
@@ -268,7 +268,7 @@ public class WishListService extends AbstractService implements IWishListService
 	}
 
 	@Override
-	public int getItemSaleQuantity(Item item, Date from, Date to,Division division) {
+	public int getItemSaleQuantity(Sku item, Date from, Date to,Division division) {
 		//WishListDAO dao = (WishListDAO)getDAO() ;
 		return GeneralSQLs.getItemSoldQty(item.getId(),from,to,division.getId());
 	}

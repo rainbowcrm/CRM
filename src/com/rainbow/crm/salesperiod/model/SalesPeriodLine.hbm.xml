@@ -14,7 +14,7 @@
       <many-to-one name="company" column ="company_id" not-null="true" lazy="false" ></many-to-one>
       <property name="period" column="Period" type="string"/>
       <property name="lineNumber" column="LINE_NUMBER" type="integer"/>
-      <many-to-one name="item" column ="item_id" not-null="true" lazy="false" ></many-to-one>
+      <many-to-one name="sku" column ="sku_id" not-null="true" lazy="false" ></many-to-one>
       <property name="targetPrice" column="target_price" type="double"/>
       <property name="qty" column="target_qty" type="integer"/>
       <property name="comments" column="comments" type="string"/>

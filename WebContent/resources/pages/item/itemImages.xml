@@ -32,10 +32,10 @@ Controller = "com.rainbow.crm.item.controller.ItemImageController">
 <Section type= "mainSection">
 <Element type = "UITable" rows = "1" cols = "3"  style = "outlinedTable">
 	<Element type = "UITableRow">
-	<Element type ="UITableCol"><Element label = "Item_Code"  type = "UIText" Id = "txtcode"    property ="Item.Code"  /> </Element>
-	<Element type ="UITableCol"><Element label = "Barcode"    type = "UIText" Id = "txtBarcode"    property ="Item.Barcode"   /></Element>
+	<Element type ="UITableCol"><Element label = "Item_Code"  type = "UIText" Id = "txtcode"    property ="Sku.Code"  /> </Element>
+	<Element type ="UITableCol"><Element label = "Barcode"    type = "UIText" Id = "txtBarcode"    property ="Sku.Barcode"   /></Element>
 	<Element type ="UITableCol">
-	<Element label = "Item_Name"  type = "UILookupText"  Id = "txtItem"  property ="Item.Name" showLookupAsDialog="true" dialogId="dlgIt"
+	<Element label = "Item_Name"  type = "UILookupText"  Id = "txtItem"  property ="Sku.Name" showLookupAsDialog="true" dialogId="dlgIt"
   	dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>item</lookupType>
 	 <height>300</height>
@@ -44,10 +44,10 @@ Controller = "com.rainbow.crm.item.controller.ItemImageController">
 	</Element> 
 	</Element>
 	<Element type = "UITableRow">
-	<Element type ="UITableCol"><Element label = "Color"  type = "UIText" Id = "txtColor"    property ="Item.Color" /></Element>
-	<Element type ="UITableCol"><Element label = "Size"  type = "UIText" Id = "txtSize"    property ="Item.Size" /></Element>
+	<Element type ="UITableCol"><Element label = "Color"  type = "UIText" Id = "txtColor"    property ="Sku.Color" /></Element>
+	<Element type ="UITableCol"><Element label = "Size"  type = "UIText" Id = "txtSize"    property ="Sku.Size" /></Element>
 	<Element type ="UITableCol">
-	  <Element label = "Specification"  type = "UITextArea" Id = "txtSpecification" property ="Item.Specification"  > 
+	  <Element label = "Specification"  type = "UITextArea" Id = "txtSpecification" property ="Sku.Specification"  > 
 		<rows>5</rows> <cols>40</cols>
 	</Element> 
 	</Element>

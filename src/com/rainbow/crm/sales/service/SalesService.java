@@ -41,8 +41,8 @@ import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.division.service.IDivisionService;
 import com.rainbow.crm.hibernate.ORMDAO;
 import com.rainbow.crm.inventory.model.InventoryUpdateObject;
-import com.rainbow.crm.item.model.Item;
-import com.rainbow.crm.item.service.IItemService;
+import com.rainbow.crm.item.model.Sku;
+import com.rainbow.crm.item.service.ISkuService;
 import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.product.model.Product;
 import com.rainbow.crm.product.validator.ProductValidator;
@@ -150,13 +150,13 @@ public class SalesService extends AbstractService implements ISalesService{
 				line.setCompany(company);
 				line.setBillNumber(object.getBillNumber());
 				line.setLineNumber(lineNo ++);
-				if(line.getItem() == null ) {
+				if(line.getSku() == null ) {
 					ans.add(CRMValidator.getErrorforCode(context.getLocale(), SalesErrorCodes.FIELD_NOT_VALID , externalize.externalize(context, "Item")));
 				}else {
-					String itemName = line.getItem().getName() ;
-					IItemService itemService = (IItemService)SpringObjectFactory.INSTANCE.getInstance("IItemService");
-					Item item = itemService.getByName(object.getCompany().getId(), itemName);
-					line.setItem(item);
+					String itemName = line.getSku().getName() ;
+					ISkuService itemService = (ISkuService)SpringObjectFactory.INSTANCE.getInstance("ISkuService");
+					Sku item = itemService.getByName(object.getCompany().getId(), itemName);
+					line.setSku(item);
 				}
 			}
 		}
@@ -252,7 +252,7 @@ public class SalesService extends AbstractService implements ISalesService{
 	}
 
 	@Override
-	public int getItemSaleQuantity(Item item, Date from, Date to,Division division) {
+	public int getItemSaleQuantity(Sku item, Date from, Date to,Division division) {
 		//SalesDAO dao = (SalesDAO)getDAO() ;
 		return GeneralSQLs.getItemSoldQty(item.getId(),from,to,division.getId());
 	}

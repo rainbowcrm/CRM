@@ -47,14 +47,14 @@ public class SalesLeadValidator extends CRMValidator {
 			errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Line_Items"))) ;
 		}else {
 			for (SalesLeadLine line : salesLead.getSalesLeadLines()) {
-				if (line.getItem() == null ) {
+				if (line.getSku() == null ) {
 					errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Item"))) ;
-				}else if (line.getItem().isDeleted() ) {
-					errors.add(getErrorforCode(CommonErrorCodes.OBJECT_DELETED,externalize.externalize(context, "Item") + line.getItem().getCode())) ;
+				}else if (line.getSku().isDeleted() ) {
+					errors.add(getErrorforCode(CommonErrorCodes.OBJECT_DELETED,externalize.externalize(context, "Item") + line.getSku().getCode())) ;
 				}else if (line.getQty() <=0 ) {
-					errors.add(getErrorforCode(CommonErrorCodes.SHOULD_BE_GREATER_THAN,externalize.externalize(context, "Qty") + line.getItem().getCode(),"0") ) ;
+					errors.add(getErrorforCode(CommonErrorCodes.SHOULD_BE_GREATER_THAN,externalize.externalize(context, "Qty") + line.getSku().getCode(),"0") ) ;
 				}else if (line.getPrice() <=0 ) {
-					errors.add(getErrorforCode(CommonErrorCodes.SHOULD_BE_GREATER_THAN,externalize.externalize(context, "Price") + line.getItem().getCode(),"0") ) ;
+					errors.add(getErrorforCode(CommonErrorCodes.SHOULD_BE_GREATER_THAN,externalize.externalize(context, "Price") + line.getSku().getCode(),"0") ) ;
 				}
 			}
 		}

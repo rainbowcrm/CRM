@@ -5,14 +5,14 @@ import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.category.model.Category;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.division.model.Division;
-import com.rainbow.crm.item.model.Item;
+import com.rainbow.crm.item.model.Sku;
 import com.techtrade.rads.framework.annotations.RadsPropertySet;
 
 public class Inventory extends CRMBusinessModelObject{
 
 
 	Division division;
-	Item item;
+	Sku sku;
 	int opQty;
 	int reservedQty;
 	int damagedQty;
@@ -35,13 +35,13 @@ public class Inventory extends CRMBusinessModelObject{
 	}
 
 	@RadsPropertySet(isBK=true,useBKForJSON=true,useBKForXML=true,useBKForMap=true)
-	public Item getItem() {
-		return item;
+	public Sku getSku() {
+		return sku;
 	}
 
 	@RadsPropertySet(isBK=true,useBKForJSON=true,useBKForXML=true,useBKForMap=true)
-	public void setItem(Item item) {
-		this.item = item;
+	public void setSku(Sku item) {
+		this.sku = item;
 	}
 
 	public int getOpQty() {

@@ -7,7 +7,7 @@ import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.IBusinessService;
 import com.rainbow.crm.common.ITransactionService;
 import com.rainbow.crm.division.model.Division;
-import com.rainbow.crm.item.model.Item;
+import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.sales.model.Sales;
 import com.rainbow.crm.distributionorder.model.DistributionOrder;
 import com.techtrade.rads.framework.model.abstracts.RadsError;

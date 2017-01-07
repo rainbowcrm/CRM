@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 import com.rainbow.crm.common.CRMAppConfig;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.database.ConnectionCreater;
-import com.rainbow.crm.item.model.Item;
+import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.item.model.ItemImage;
 import com.rainbow.crm.logger.Logwriter;
 
@@ -22,11 +22,11 @@ public class ItemImageSQL {
 		ResultSet rs  = null ;
 		try {
 			connection  = ConnectionCreater.getConnection() ;
-			String sql = " INSERT INTO ITEM_IMAGES (ID,ITEM_ID,SUFFIX,IMAGE_FILE,CREATED_DATE,CREATED_BY,VERSION) VALUES (?,?,?,?,?,?,?)" ;
+			String sql = " INSERT INTO ITEM_IMAGES (ID,SKU_ID,SUFFIX,IMAGE_FILE,CREATED_DATE,CREATED_BY,VERSION) VALUES (?,?,?,?,?,?,?)" ;
 			statement = connection.prepareStatement(sql) ;
 			int id = getNextID();
 			statement.setInt(1,id);
-			statement.setInt(2,image.getItem().getId());
+			statement.setInt(2,image.getSku().getId());
 			statement.setString(3, String.valueOf(image.getSuffix()));
 			statement.setString(4, image.getFileName());
 			statement.setTimestamp(5,new Timestamp(new java.util.Date().getTime()));
@@ -103,13 +103,13 @@ public class ItemImageSQL {
 	 }
 	 
 	 
-	 public static void DeleteAllImagesforItem(Item item) {
+	 public static void DeleteAllImagesforItem(Sku item) {
 		 	Connection connection = null;
 			PreparedStatement statement = null;
 			ResultSet rs  = null ;
 			try {
 				connection  = ConnectionCreater.getConnection() ;
-				String sql = " DELETE FROM ITEM_IMAGES WHERE ITEM_ID = ?" ;
+				String sql = " DELETE FROM ITEM_IMAGES WHERE SKU_ID = ?" ;
 				statement = connection.prepareStatement(sql) ;
 				statement.setInt(1, item.getId());
 				statement.executeUpdate();
@@ -127,7 +127,7 @@ public class ItemImageSQL {
 		ItemImage itemImage  = null;
 		try {
 			connection  = ConnectionCreater.getConnection() ;
-			String sql =   "SELECT IMG.ID, IT.ITEM_NAME, IT.ID,IMG.IMAGE_FILE,IMG.SUFFIX FROM ITEM_IMAGES IMG, ITEMS IT where IMG.ITEM_ID = ?  AND IMG.SUFFIX = ?  AND IMG.ITEM_ID = IT.ID" ;
+			String sql =   "SELECT IMG.ID, IT.SKU_NAME, IT.ID,IMG.IMAGE_FILE,IMG.SUFFIX FROM ITEM_IMAGES IMG, ITEMS IT where IMG.SKU_ID = ?  AND IMG.SUFFIX = ?  AND IMG.SKU_ID = IT.ID" ;
 			statement = connection.prepareStatement(sql);
 			statement.setInt(1, itemId);
 			statement.setString(2,String.valueOf(suffix));
@@ -135,10 +135,10 @@ public class ItemImageSQL {
 			if (rs.next()) {
 				itemImage = new ItemImage();
 				itemImage.setId(rs.getInt(1));
-				Item item = new Item();
+				Sku item = new Sku();
 				item.setId(rs.getInt(3));
 				item.setName(rs.getString(2));
-				itemImage.setItem(item);
+				itemImage.setSku(item);
 				itemImage.setFilePath(CRMAppConfig.INSTANCE.getProperty("Image_Path"));
 				itemImage.setFileName(rs.getString(4));
 				itemImage.setSuffix(rs.getString(5).charAt(0));

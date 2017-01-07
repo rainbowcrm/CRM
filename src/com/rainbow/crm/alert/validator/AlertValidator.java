@@ -1,7 +1,7 @@
 package com.rainbow.crm.alert.validator;
 
-import com.rainbow.crm.item.model.Item;
-import com.rainbow.crm.item.service.IItemService;
+import com.rainbow.crm.item.model.Sku;
+import com.rainbow.crm.item.service.ISkuService;
 import com.rainbow.crm.saleslead.model.SalesLead;
 import com.rainbow.crm.saleslead.service.ISalesLeadService;
 import com.rainbow.crm.user.validator.UserErrorCodes;

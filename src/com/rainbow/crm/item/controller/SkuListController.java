@@ -11,24 +11,24 @@ import com.rainbow.crm.common.IBusinessService;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.division.validator.DivisionValidator;
-import com.rainbow.crm.item.model.Item;
-import com.rainbow.crm.item.service.IItemService;
+import com.rainbow.crm.item.model.Sku;
+import com.rainbow.crm.item.service.ISkuService;
 import com.rainbow.crm.item.validator.ItemValidator;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
 
-public class ItemListController extends CRMListController {
+public class SkuListController extends CRMListController {
 
 	@Override
 	public IBusinessService getService() {
-		IItemService serv = (IItemService) SpringObjectFactory.INSTANCE.getInstance("IItemService");
+		ISkuService serv = (ISkuService) SpringObjectFactory.INSTANCE.getInstance("ISkuService");
 		return serv;
 	}
 
 	@Override
 	public Object getPrimaryKeyValue(ModelObject object) {
-		Item item = (Item) object;
+		Sku item = (Sku) object;
 		return item.getId();
 	}
 

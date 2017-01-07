@@ -9,13 +9,13 @@ import org.json.JSONObject;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.database.LoginSQLs;
-import com.rainbow.crm.item.model.Item;
+import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.logger.Logwriter;
 import com.techtrade.rads.framework.context.IRadsContext;
 import com.techtrade.rads.framework.controller.abstracts.IAjaxLookupService;
 import com.techtrade.rads.framework.utils.Utils;
 
-public class ItemAjaxService implements IAjaxLookupService{
+public class SkuAjaxService implements IAjaxLookupService{
 
 	@Override
 	public String lookupValues(Map<String, String> searchFields,
@@ -24,8 +24,8 @@ public class ItemAjaxService implements IAjaxLookupService{
 		String code  = searchFields.get("Code");
 		String barCode = searchFields.get("Barcode");
 		String itName = searchFields.get("Name");
-		IItemService service = (IItemService)SpringObjectFactory.INSTANCE.getInstance("IItemService");
-		Item item = null;
+		ISkuService service = (ISkuService)SpringObjectFactory.INSTANCE.getInstance("ISkuService");
+		Sku item = null;
 		if(!Utils.isNull(itName)){
 			item =service.getByName(context.getLoggedinCompany(), itName);
 		}else if(!Utils.isNull(code)){

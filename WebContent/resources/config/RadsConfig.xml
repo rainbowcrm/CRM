@@ -81,9 +81,9 @@
 </Page>
 <Page id = "newfollowup" definition ="/resources/pages/followup/newfollowup.xml" modelclass = "com.rainbow.crm.followup.model.Followup" >
 </Page>
-<Page id = "newitem" definition ="/resources/pages/item/newItem.xml" modelclass = "com.rainbow.crm.item.model.Item" >
+<Page id = "newsku" definition ="/resources/pages/item/newsku.xml" modelclass = "com.rainbow.crm.item.model.Sku" >
 </Page>
-<Page id = "items" definition ="/resources/pages/item/itemList.xml" modelclass = "com.rainbow.crm.item.model.Item" >
+<Page id = "skus" definition ="/resources/pages/item/skuList.xml" modelclass = "com.rainbow.crm.item.model.Sku" >
 </Page>
 <Page id = "itemimages" definition ="/resources/pages/item/itemimages.xml" modelclass = "com.rainbow.crm.item.model.ItemImageSet" >
 </Page>
@@ -174,7 +174,7 @@
  	<!-- TBD
  	 <Element label = "" type = "UIMenu" Id = "menu13" style="menustyle" title="UOMs" link = "rdscontroller?page=uoms"   />
  	 -->
- 	<Element label = "" type = "UIMenu" Id = "menu14" style="menustyle" title="Items" link = "rdscontroller?page=items"   />
+ 	<Element label = "" type = "UIMenu" Id = "menu14" style="menustyle" title="SKU" link = "rdscontroller?page=skus"   />
  	<Element label = "" type = "UIMenu" Id = "menu15" style="menustyle" title="Item Images" link = "rdscontroller?page=itemimages"   />
  </Element>
  <Element label = "" type = "UIMenu" Id = "menu20" style="menustyleParent" title="Customer_Management" groupId= "menuGRP003"  >
@@ -262,7 +262,7 @@
  <key>Phone</key>
  <key>Email</key>
  </AjaxService>
- <AjaxService service ="itemSearch" class = "com.rainbow.crm.item.service.ItemAjaxService">
+ <AjaxService service ="itemSearch" class = "com.rainbow.crm.item.service.SkuAjaxService">
  <key>Code</key>
  <key>Barcode</key>
  <key>Name</key>

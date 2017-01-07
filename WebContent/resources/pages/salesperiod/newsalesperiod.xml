@@ -68,8 +68,8 @@ Controller = "com.rainbow.crm.salesperiod.controller.SalesPeriodController">
  </Element>
 <Element type = "UITableRow"  dataType = "com.rainbow.crm.salesperiod.model.SalesPeriodLine" rendered = "!Object.getVoided">
 
-<Element type ="UITableCol" width = "10%"><Element label = ""  type = "UIText" Id = "txtCode" size  = "10" property ="Item.Code" /> </Element>
-<Element type ="UITableCol" width = "25%"><Element label = ""  type = "UILookupText"  Id = "txtItName"  size  = "40" property ="Item.Name" showLookupAsDialog="true" dialogId="dlgIt"
+<Element type ="UITableCol" width = "10%"><Element label = ""  type = "UIText" Id = "txtCode" size  = "10" property ="Sku.Code" /> </Element>
+<Element type ="UITableCol" width = "25%"><Element label = ""  type = "UILookupText"  Id = "txtItName"  size  = "40" property ="Sku.Name" showLookupAsDialog="true" dialogId="dlgIt"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>item</lookupType>
 	 <height>300</height>

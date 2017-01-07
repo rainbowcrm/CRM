@@ -10,14 +10,14 @@ import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.IBusinessService;
 import com.rainbow.crm.common.ITransactionService;
 import com.rainbow.crm.division.model.Division;
-import com.rainbow.crm.item.model.Item;
+import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.product.model.Product;
 import com.rainbow.crm.sales.model.Sales;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 
 public interface ISalesService extends ITransactionService{
 	
-	public int getItemSaleQuantity(Item item, Date from, Date to,Division division ) ;
+	public int getItemSaleQuantity(Sku item, Date from, Date to,Division division ) ;
 	
 	public Map getItemSoldQtyByProduct(Product product, Date from, Date to, Division division , String itemClass ) ;
 	

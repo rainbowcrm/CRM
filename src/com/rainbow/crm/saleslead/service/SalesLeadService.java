@@ -52,9 +52,9 @@ import com.rainbow.crm.division.service.IDivisionService;
 import com.rainbow.crm.hibernate.ORMDAO;
 import com.rainbow.crm.inventory.model.InventoryUpdateObject;
 import com.rainbow.crm.item.dao.ItemImageSQL;
-import com.rainbow.crm.item.model.Item;
+import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.item.model.ItemImage;
-import com.rainbow.crm.item.service.IItemService;
+import com.rainbow.crm.item.service.ISkuService;
 import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.product.validator.ProductValidator;
 import com.rainbow.crm.saleslead.dao.SalesLeadDAO;
@@ -158,13 +158,13 @@ public class SalesLeadService extends AbstractService implements ISalesLeadServi
 				line.setDocNumber(object.getDocNumber());
 				line.setDivision(object.getDivision());
 				line.setLineNumber(lineNo ++);
-				if(line.getItem() == null ) {
+				if(line.getSku() == null ) {
 					ans.add(CRMValidator.getErrorforCode(context.getLocale(), SalesLeadErrorCodes.FIELD_NOT_VALID , externalize.externalize(context, "Item")));
 				}else {
-					String itemName = line.getItem().getName() ;
-					IItemService itemService = (IItemService)SpringObjectFactory.INSTANCE.getInstance("IItemService");
-					Item item = itemService.getByName(object.getCompany().getId(), itemName);
-					line.setItem(item);
+					String itemName = line.getSku().getName() ;
+					ISkuService itemService = (ISkuService)SpringObjectFactory.INSTANCE.getInstance("ISkuService");
+					Sku item = itemService.getByName(object.getCompany().getId(), itemName);
+					line.setSku(item);
 				}
 			}
 		}
@@ -249,7 +249,7 @@ public class SalesLeadService extends AbstractService implements ISalesLeadServi
 	}
 
 	@Override
-	public int getItemSaleQuantity(Item item, Date from, Date to,Division division) {
+	public int getItemSaleQuantity(Sku item, Date from, Date to,Division division) {
 		//SalesLeadDAO dao = (SalesLeadDAO)getDAO() ;
 		return GeneralSQLs.getItemSoldQty(item.getId(),from,to,division.getId());
 	}
@@ -348,9 +348,9 @@ public class SalesLeadService extends AbstractService implements ISalesLeadServi
  	private void loadImages(SalesLead salesLead,CRMContext context,String realPath) {
  		try {
  		for (SalesLeadLine line : salesLead.getSalesLeadLines() ) {
- 			ItemImage image1 = ItemImageSQL.getItemImage(line.getItem().getId(), 'a');
- 			ItemImage image2 = ItemImageSQL.getItemImage(line.getItem().getId(), 'b');
- 			ItemImage image3 = ItemImageSQL.getItemImage(line.getItem().getId(), 'c');
+ 			ItemImage image1 = ItemImageSQL.getItemImage(line.getSku().getId(), 'a');
+ 			ItemImage image2 = ItemImageSQL.getItemImage(line.getSku().getId(), 'b');
+ 			ItemImage image3 = ItemImageSQL.getItemImage(line.getSku().getId(), 'c');
  			String filePath = realPath + "\\"  + CRMAppConfig.INSTANCE.getProperty("Image_Path");
 			String code = context.getLoggedinCompanyCode();
 			if (image1 != null && image1.getFileName() != null  ) {

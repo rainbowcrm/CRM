@@ -5,7 +5,7 @@ import com.rainbow.crm.abstratcs.model.CRMModelObject;
 public class ItemImage extends CRMModelObject{
 	int id;
 	byte[] image ;
-	Item item ;
+	Sku item ;
 	char suffix;
 	String fileName ;
 	String filePath;
@@ -26,10 +26,10 @@ public class ItemImage extends CRMModelObject{
 	public void setImage(byte[] image) {
 		this.image = image;
 	}
-	public Item getItem() {
+	public Sku getSku() {
 		return item;
 	}
-	public void setItem(Item item) {
+	public void setSku(Sku item) {
 		this.item = item;
 	}
 	public char getSuffix() {

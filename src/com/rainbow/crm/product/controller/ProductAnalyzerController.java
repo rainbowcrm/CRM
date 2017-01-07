@@ -14,8 +14,8 @@ import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.database.LoginSQLs;
-import com.rainbow.crm.item.model.Item;
-import com.rainbow.crm.item.service.IItemService;
+import com.rainbow.crm.item.model.Sku;
+import com.rainbow.crm.item.service.ISkuService;
 import com.rainbow.crm.product.model.Product;
 import com.rainbow.crm.product.model.ProductAnalyzer;
 import com.rainbow.crm.product.service.IProductService;
@@ -75,14 +75,14 @@ public class ProductAnalyzerController  extends GeneralController{
 		IProductService service = (IProductService)SpringObjectFactory.INSTANCE.getInstance("IProductService");
 		product =(Product) service.getByBusinessKey(product,(CRMContext) getContext());
 		ISalesService salesService = (ISalesService)SpringObjectFactory.INSTANCE.getInstance("ISalesService");
-		IItemService itemService = (IItemService)SpringObjectFactory.INSTANCE.getInstance("IItemService");
+		ISkuService itemService = (ISkuService)SpringObjectFactory.INSTANCE.getInstance("ISkuService");
 		Map map = salesService.getItemSoldQtyByProduct(product, fromDate, toDate,null,itemClass) ;
 		Set keys = map.keySet();
 		Iterator it = keys.iterator();
 		while (it.hasNext()) {
 			PieSliceData pieSliceData = new PieSliceData();
 			Integer itemId = (Integer) it.next() ;
-			Item item = (Item)itemService.getById(itemId);
+			Sku item = (Sku)itemService.getById(itemId);
 			Double qty = (Double) map.get(itemId);
 			pieSliceData.setVolume(qty);
 			pieSliceData.setText(item.getName() + "-" +  qty);

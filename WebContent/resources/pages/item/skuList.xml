@@ -3,8 +3,8 @@
 Controller = "com.rainbow.crm.item.controller.ItemListController">
 <Template type= "List"  name = "ListTemplate"></Template>
 <Forwards>
-<Forward key ="NEW">rdscontroller?page=newitem</Forward>
-<Forward key ="EDIT">rdscontroller?page=newitem</Forward>
+<Forward key ="NEW">rdscontroller?page=newsku</Forward>
+<Forward key ="EDIT">rdscontroller?page=newsku</Forward>
 </Forwards>
 <AjaxGroups>
 <AjaxGroup service ="filterSearch">

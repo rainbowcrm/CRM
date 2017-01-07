@@ -3,12 +3,12 @@ package com.rainbow.crm.abstratcs.model;
 import java.util.Arrays;
 import java.util.Base64;
 
-import com.rainbow.crm.item.model.Item;
+import com.rainbow.crm.item.model.Sku;
 import com.techtrade.rads.framework.annotations.RadsPropertySet;
 
 public  class CRMItemLine extends CRMBusinessModelObject {
 	
-	Item item;
+	Sku sku;
 	int qty;
 	boolean voided;
 	
@@ -20,12 +20,12 @@ public  class CRMItemLine extends CRMBusinessModelObject {
 	
 	
 	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
-	public Item getItem() {
-		return item;
+	public Sku getSku() {
+		return sku;
 	}
 	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
-	public void setItem(Item item) {
-		this.item = item;
+	public void setSku(Sku sku) {
+		this.sku = sku;
 	}
 	public int getQty() {
 		return qty;

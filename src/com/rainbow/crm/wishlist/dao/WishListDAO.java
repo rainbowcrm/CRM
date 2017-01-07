@@ -8,7 +8,7 @@ import org.hibernate.Session;
 
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
-import com.rainbow.crm.item.model.Item;
+import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.wishlist.model.WishList;
 import com.rainbow.crm.wishlist.model.WishListLine;
 import com.techtrade.rads.framework.utils.Utils;
@@ -24,7 +24,7 @@ public class WishListDAO  extends SpringHibernateDAO{
 		return obj;
 	}
 	
-	public List<WishListLine>  getWishesPerItemByPrice(Item item, double price, String reason ) {
+	public List<WishListLine>  getWishesPerItemByPrice(Sku item, double price, String reason ) {
 		Session session = openSession(false) ;
     	try  {
 	    	String queryString = " from WishListLine  where item.id =  :item_id   " +   
@@ -43,7 +43,7 @@ public class WishListDAO  extends SpringHibernateDAO{
     	return null;
 	}
 	
-	public List<WishListLine>  getWishesPerItemByInventory(Item item, Division division, double Qty , String reason ) {
+	public List<WishListLine>  getWishesPerItemByInventory(Sku item, Division division, double Qty , String reason ) {
 		Session session = openSession(false) ;
     	try  {
 	    	String queryString = " from WishListLine  where item.id =  :item_id and qty <= :qty  and division.id= :division_id "  + 

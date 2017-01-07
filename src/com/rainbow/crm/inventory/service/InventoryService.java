@@ -20,7 +20,7 @@ import com.rainbow.crm.inventory.dao.InventoryDAO;
 import com.rainbow.crm.inventory.model.Inventory;
 import com.rainbow.crm.inventory.model.InventoryUpdateObject;
 import com.rainbow.crm.inventory.validator.InventoryValidator;
-import com.rainbow.crm.item.model.Item;
+import com.rainbow.crm.item.model.Sku;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.model.transaction.TransactionResult;
 import com.techtrade.rads.framework.utils.Utils;
@@ -81,7 +81,7 @@ public class InventoryService extends AbstractService implements  IInventoryServ
 	}
 
 	@Override
-	public Inventory getByItemandDivision(Item item, Division division) {
+	public Inventory getByItemandDivision(Sku item, Division division) {
 		Inventory inv = ((InventoryDAO)getDAO()).getByItemandDivision(item.getId(), division.getId());
 		return inv;
 	}
@@ -91,7 +91,7 @@ public class InventoryService extends AbstractService implements  IInventoryServ
 	public void updateInventory(InventoryUpdateObject inventoryObject) {
 		if (inventoryObject != null && !Utils.isNullSet(inventoryObject.getItemLines())) {
 			for(CRMItemLine line : inventoryObject.getItemLines() ) {
-				Inventory inv = getByItemandDivision( line.getItem(),inventoryObject.getDivision());
+				Inventory inv = getByItemandDivision( line.getSku(),inventoryObject.getDivision());
 				if ( inv != null && inventoryObject.isAddition()) {
 					inv.setCurrentQty(inv.getCurrentQty() + line.getQty());
 					update(inv, inventoryObject.getContext());
@@ -109,7 +109,7 @@ public class InventoryService extends AbstractService implements  IInventoryServ
 					Inventory inventory = new Inventory();
 					inventory.setCompany(inventoryObject.getCompany());
 					inventory.setDivision(inventoryObject.getDivision());
-					inventory.setItem(line.getItem());
+					inventory.setSku(line.getSku());
 					inventory.setOpQty(line.getQty());
 					List<RadsError> errors = validateforCreate(inventory, inventoryObject.getContext());
 					if (Utils.isNullList(errors)) {

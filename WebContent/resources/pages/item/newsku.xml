@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Page id = "newDiv" showinFrame ="true" title ="New Item | Rainbow CRM" Object = "com.rainbow.crm.item.model.Item" 
-Controller = "com.rainbow.crm.item.controller.ItemController">
+<Page id = "newDiv" showinFrame ="true" title ="New SKU | Rainbow CRM" Object = "com.rainbow.crm.item.model.Sku" 
+Controller = "com.rainbow.crm.item.controller.SkuController">
 <Template type= "CRUD"  name = "CRUDTemplate"></Template>
 <Forwards>
-<Forward key ="CANCEL">rdscontroller?page=items</Forward>
+<Forward key ="CANCEL">rdscontroller?page=skus</Forward>
 <Forward key ="SAVE">items</Forward>
 </Forwards>
 <IncludeJS>./resources/js/RadsLib.js</IncludeJS>

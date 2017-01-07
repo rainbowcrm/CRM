@@ -37,11 +37,11 @@ import com.rainbow.crm.company.service.ICompanyService;
 import com.rainbow.crm.config.service.ConfigurationManager;
 import com.rainbow.crm.database.LoginSQLs;
 import com.rainbow.crm.item.dao.ItemImageSQL;
-import com.rainbow.crm.item.model.Item;
+import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.item.model.ItemImage;
 import com.rainbow.crm.item.model.ItemImageSet;
-import com.rainbow.crm.item.service.IItemService;
-import com.rainbow.crm.item.service.ItemService;
+import com.rainbow.crm.item.service.ISkuService;
+import com.rainbow.crm.item.service.SkuService;
 import com.rainbow.crm.logger.Logwriter;
 import com.techtrade.rads.framework.context.IRadsContext;
 import com.techtrade.rads.framework.controller.abstracts.GeneralController;
@@ -78,8 +78,8 @@ public class ItemImageController extends GeneralController{
 	@Override
 	public PageResult delete(ModelObject object) {
 		imageSet = (ItemImageSet) object;
-		ItemService service = (ItemService)SpringObjectFactory.INSTANCE.getInstance("IItemService") ;
-		Item item = service.getByName(((CRMContext) getContext()).getLoggedinCompany(), imageSet.getItem().getName());
+		SkuService service = (SkuService)SpringObjectFactory.INSTANCE.getInstance("ISkuService") ;
+		Sku item = service.getByName(((CRMContext) getContext()).getLoggedinCompany(), imageSet.getItem().getName());
 		ItemImageSQL.DeleteAllImagesforItem(item);
 		imageSet.setFilewithPath1("");
 		imageSet.setFilewithPath2("");
@@ -91,8 +91,8 @@ public class ItemImageController extends GeneralController{
 	public PageResult read(ModelObject object) {
 		imageSet = (ItemImageSet) object;
 		try {
-			IItemService service = (IItemService)SpringObjectFactory.INSTANCE.getInstance("IItemService") ;
-			Item item = service.getByName(((CRMContext) getContext()).getLoggedinCompany(), imageSet.getItem().getName());
+			ISkuService service = (ISkuService)SpringObjectFactory.INSTANCE.getInstance("ISkuService") ;
+			Sku item = service.getByName(((CRMContext) getContext()).getLoggedinCompany(), imageSet.getItem().getName());
 			String filePath = CRMAppConfig.INSTANCE.getProperty("Image_Path");
 			String code = ((CRMContext) getContext()).getLoggedinCompanyCode();
 			ItemImage dbRecord1 = ItemImageSQL.getItemImage(item.getId(), 'a');
@@ -118,7 +118,7 @@ public class ItemImageController extends GeneralController{
 
 	private void saveRecords() {
 		for(ItemImage image :  images) {
-			ItemImage dbRecord = ItemImageSQL.getItemImage(image.getItem().getId(), image.getSuffix());
+			ItemImage dbRecord = ItemImageSQL.getItemImage(image.getSku().getId(), image.getSuffix());
 			if(dbRecord == null  ) {
 				ItemImageSQL.insertItemImage(image,(CRMContext) getContext());
 			}else {
@@ -280,14 +280,14 @@ public class ItemImageController extends GeneralController{
 	private List<ItemImage> splitImageSet(ItemImageSet set,CRMContext context) {
 		
 		List<ItemImage> images = new ArrayList<ItemImage> ();
-		IItemService service = (IItemService)SpringObjectFactory.INSTANCE.getInstance("IItemService") ;
-		Item item = service.getByName(((CRMContext) getContext()).getLoggedinCompany(), set.getItem().getName());
+		ISkuService service = (ISkuService)SpringObjectFactory.INSTANCE.getInstance("ISkuService") ;
+		Sku item = service.getByName(((CRMContext) getContext()).getLoggedinCompany(), set.getItem().getName());
 		try  {
 			String filePath = CRMAppConfig.INSTANCE.getProperty("Image_Path");
 			String code = context.getLoggedinCompanyCode();
 			if(set.getImage1() != null ) {
 				ItemImage image = new ItemImage();
-				image.setItem(item);
+				image.setSku(item);
 				image.setImage(set.getImage1());
 				image.setSuffix('a');
 				image.setFilePath(filePath + "\\" +  code );
@@ -297,7 +297,7 @@ public class ItemImageController extends GeneralController{
 			}
 			if(set.getImage2() != null ) {
 				ItemImage image = new ItemImage();
-				image.setItem(item);
+				image.setSku(item);
 				image.setImage(set.getImage2());
 				image.setSuffix('b');
 				image.setFilePath(filePath + "\\" +  code );
@@ -307,7 +307,7 @@ public class ItemImageController extends GeneralController{
 			}
 			if(set.getImage3() != null ) {
 				ItemImage image = new ItemImage();
-				image.setItem(item);
+				image.setSku(item);
 				image.setImage(set.getImage3());
 				image.setSuffix('c');
 				image.setFilePath(filePath + "\\" +  code );

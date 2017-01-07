@@ -2,7 +2,7 @@ package com.rainbow.crm.purchase.model;
 
 import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
 import com.rainbow.crm.abstratcs.model.CRMItemLine;
-import com.rainbow.crm.item.model.Item;
+import com.rainbow.crm.item.model.Sku;
 import com.techtrade.rads.framework.annotations.RadsPropertySet;
 
 public class PurchaseLine extends CRMItemLine{

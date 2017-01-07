@@ -7,7 +7,7 @@ import com.techtrade.rads.framework.utils.Utils;
 
 public class ItemImageSet extends CRMModelObject{
 
-	Item item;
+	Sku item;
 	byte[] image1 ;
 	byte[] image2 ;
 	byte[] image3 ;
@@ -24,10 +24,10 @@ public class ItemImageSet extends CRMModelObject{
 	public Object getPK() {
 		return null;
 	}
-	public Item getItem() {
+	public Sku getItem() {
 		return item;
 	}
-	public void setItem(Item item) {
+	public void setItem(Sku item) {
 		this.item = item;
 	}
 	public byte[] getImage1() {

@@ -16,17 +16,17 @@ import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
 import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.database.LoginSQLs;
-import com.rainbow.crm.item.model.Item;
-import com.rainbow.crm.item.service.IItemService;
+import com.rainbow.crm.item.model.Sku;
+import com.rainbow.crm.item.service.ISkuService;
 import com.techtrade.rads.framework.context.IRadsContext;
 import com.techtrade.rads.framework.controller.abstracts.CRUDController;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
 
-public class ItemController extends CRMCRUDController{
+public class SkuController extends CRMCRUDController{
 
 	public IBusinessService getService() {
-		IItemService serv = (IItemService) SpringObjectFactory.INSTANCE.getInstance("IItemService");
+		ISkuService serv = (ISkuService) SpringObjectFactory.INSTANCE.getInstance("ISkuService");
 		return serv;
 	}
 	

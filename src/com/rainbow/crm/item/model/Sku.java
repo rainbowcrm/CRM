@@ -8,7 +8,7 @@ import com.rainbow.crm.product.model.Product;
 import com.rainbow.crm.uom.model.UOM;
 import com.techtrade.rads.framework.annotations.RadsPropertySet;
 
-public class Item  extends CRMBusinessModelObject{
+public class Sku  extends CRMBusinessModelObject{
 	String code;
 	String barcode;
 	String name; 
