@@ -25,6 +25,10 @@ import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
 import org.apache.commons.net.ftp.FTPSClient;
 
+import com.jcraft.jsch.Channel;
+import com.jcraft.jsch.ChannelSftp;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.Session;
 import com.rainbow.crm.common.CRMAppConfig;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.SpringObjectFactory;
@@ -62,7 +66,10 @@ public class ItemImageController extends GeneralController{
 		if (!Utils.isNullList(images)) {
 			for(ItemImage image :  images) {
 				saveFile(image.getImage(), image.getFilePath(), image.getFileName());
+				if(image.getFileName().charAt(image.getFileName().length()-1) != '.' ) {
 				ftpAPFile(image.getImage(), image.getFilePath(), image.getFileName(), (CRMContext)getContext());
+				//ftpJCSFile(image.getImage(), image.getFilePath(), image.getFileName(), (CRMContext)getContext());
+				}
 			}
 			saveRecords();
 		}
@@ -121,6 +128,40 @@ public class ItemImageController extends GeneralController{
 		
 		}
 	}
+
+	
+	
+	private void ftpJCSFile (byte[] bytes, String filepath, String fileName,
+			CRMContext context) 
+	{
+		try {
+		JSch jsch = new JSch();
+		/* String privateKey = "~/.ssh/id_rsa";
+		 jsch.addIdentity(privateKey);*/ 
+		String host = ConfigurationManager.getConfig(
+				ConfigurationManager.IMAGE_SERVER_HOST, context);
+		String user = ConfigurationManager.getConfig(
+				ConfigurationManager.IMAGE_SERVER_USER, context);
+		String pass = ConfigurationManager.getConfig(
+				ConfigurationManager.IMAGE_SERVER_PASSWORD, context);
+		String port = ConfigurationManager.getConfig(
+				ConfigurationManager.IMAGE_SERVER_PORT, context);
+	    Session session = jsch.getSession( user, host, Integer.parseInt(port) );
+	    session.setConfig( "PreferredAuthentications", "password" );
+	    session.setConfig("StrictHostKeyChecking", "no"); 
+	    session.setPassword( pass );
+	    session.connect(10000);
+	    Channel channel = session.openChannel( "sftp" );
+	    ChannelSftp sftp = ( ChannelSftp ) channel;
+	    sftp.connect( 10000 );
+	    ByteArrayInputStream inputStream = new ByteArrayInputStream(
+				bytes);
+	    sftp.put(inputStream,fileName);
+	    sftp.quit();
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+	}
 	
 	private void ftpAPFile(byte[] bytes, String filepath, String fileName,
 			CRMContext context) {
@@ -132,11 +173,16 @@ public class ItemImageController extends GeneralController{
 				ConfigurationManager.IMAGE_SERVER_USER, context);
 		String pass = ConfigurationManager.getConfig(
 				ConfigurationManager.IMAGE_SERVER_PASSWORD, context);
+		String port = ConfigurationManager.getConfig(
+				ConfigurationManager.IMAGE_SERVER_PORT, context);
 		FTPClient  ftpClient = new FTPClient ();
 		try {
-		//	ftpClient.setDefaultTimeout(100000);
-		//	ftpClient.enterLocalPassiveMode();
-			ftpClient.connect(host,21);
+			ftpClient.setDefaultTimeout(100000);
+			if (Integer.parseInt(port) > 0)
+				ftpClient.connect(host,Integer.parseInt(port));
+			else
+				ftpClient.connect(host);
+			ftpClient.enterLocalPassiveMode();
 			int reply = ftpClient.getReplyCode();
 			if (FTPReply.isPositiveCompletion(reply)) {
 				
@@ -148,7 +194,7 @@ public class ItemImageController extends GeneralController{
 				ByteArrayInputStream inputStream = new ByteArrayInputStream(
 						bytes);
 				System.out.println("Start uploading first file");
-				boolean done = ftpClient.storeFile("/public_html/pics/"+fileName, inputStream);
+				boolean done = ftpClient.storeFile(fileName, inputStream);
 				inputStream.close();
 				InputStream st2 = ftpClient.retrieveFileStream("/public_html/pics/MP003-a.jpg");
 				if (done) {
