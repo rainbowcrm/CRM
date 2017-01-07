@@ -73,7 +73,7 @@ $custField:$custName
 	 $line.lineNumber
 	 </td>
 	 <td>
-	 $line.item.name
+	 $line.sku.name
 	 </td>
 	 <td>
 	 $line.Qty

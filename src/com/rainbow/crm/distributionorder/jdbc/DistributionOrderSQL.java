@@ -18,7 +18,7 @@ public class DistributionOrderSQL {
 		ResultSet rs = null;
 		try {
 			connection = ConnectionCreater.getConnection();
-			String sql = "Select  COUNT(ORD.ITEM_ID) AS CT,INV.DIVISION_ID from SALES_LINES ORD ,INVENTORY INV WHERE ORD.ITEM_ID = INV.ITEM_ID " + 
+			String sql = "Select  COUNT(ORD.SKU_ID) AS CT,INV.DIVISION_ID from SALES_LINES ORD ,INVENTORY INV WHERE ORD.SKU_ID = INV.SKU_ID " + 
 			"AND INV.CURRENT_QTY >= ORD.QTY AND ORD.SALES_ID = ?  GROUP BY INV.DIVISION_ID   HAVING  CT =  ? ORDER BY  (INV.CURRENT_QTY - ORD.QTY ) ";
 			statement = connection.prepareStatement(sql);
 			statement.setInt(1, salesOrderID);

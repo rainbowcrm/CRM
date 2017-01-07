@@ -237,7 +237,7 @@ public class GeneralSQLs {
 		try {
 			connection  = ConnectionCreater.getConnection() ;
 			String sql = "Select sum(sllines.qty) from SALES sales,SALES_LINES sllines  where sales.id = sllines.sales_id and sales.division_id = ?  " +
-			" and  sllines.item_id = ? and sales.SALES_DATE >= ? and sales.SALES_DATE<= ?  " ;
+			" and  sllines.sku_id = ? and sales.SALES_DATE >= ? and sales.SALES_DATE<= ?  " ;
 			statement = connection.prepareStatement(sql);
 			statement.setInt(1, divisionId);
 			statement.setInt(2, itemId);
@@ -266,8 +266,8 @@ public class GeneralSQLs {
 			String divisionCond = (divisionId!=-1)?" and sales.division_id= " +  divisionId:" ";
 			String itemClassCond =(!Utils.isNull(itemClass))?" and items.item_class = '" + itemClass +"'":" ";
 			String sql = "Select sum(sllines.qty),sllines.item_id from SALES sales,SALES_LINES sllines,Items items where sales.id = sllines.sales_id  " +
-			" and  sllines.item_id = items.id and  items.product_id= ? and sales.SALES_DATE >= ? and sales.SALES_DATE<= ? " + divisionCond  +  itemClassCond +
-			" group by   sllines.item_id" ;
+			" and  sllines.sku_id = skus.id and  items.product_id= ? and sales.SALES_DATE >= ? and sales.SALES_DATE<= ? " + divisionCond  +  itemClassCond +
+			" group by   sllines.sku_id" ;
 			statement = connection.prepareStatement(sql);
 			//statement.setInt(1, divisionId);
 			statement.setInt(1, productId);

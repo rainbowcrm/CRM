@@ -62,7 +62,7 @@ public abstract class CRMTransactionController extends TransactionController {
 	
 	@Override
 	public List<RadsError> validateforUpdate() {
-		return getService().validateforUpdate((Sales)object, (CRMContext)getContext());
+		return getService().validateforUpdate((CRMModelObject)object, (CRMContext)getContext());
 	}
 
 	@Override
