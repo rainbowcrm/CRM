@@ -54,7 +54,7 @@ span.topBar {
   color: #f4f4f4;
   line-height: 40px; }
 
-.headerStyle table td, .filterStyle table td {
+.headerStyle table tbody tr td, .filterStyle table tbody tr td {
   border: none; }
 
 div.copyRight {
@@ -358,7 +358,8 @@ table.grid {
   text-decoration: none;
   display: inline-block;
   font-size: 12px;
-  border-radius: 8px; }
+  border-radius: 8px;
+  font-size: 13px; }
 
 .menustyle {
   font-family: "Verdana";

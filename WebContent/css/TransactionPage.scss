@@ -54,6 +54,7 @@ table td{
 }
 .button{
 	background: $primary-color;
+	font-size: 13px;
 }
 /*background-color:rgb(192,192,192); 192,192,192*/
 /*background-color:rgb(106,53,0); Brown*/
@@ -144,6 +145,7 @@ table.grid {
     display: inline-block;
     font-size: 12px;
 	border-radius: 8px;
+	font-size: 13px;
 
 }
 
@@ -178,6 +180,7 @@ iframe.lookupFrameStyle {
     border-radius: 8px;
 	color: $light;
 	background-color:$good;
+	font-size: 13px;
 }
 
 .nav-tabs .nav-link{

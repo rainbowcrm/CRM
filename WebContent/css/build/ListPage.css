@@ -54,7 +54,7 @@ span.topBar {
   color: #f4f4f4;
   line-height: 40px; }
 
-.headerStyle table td, .filterStyle table td {
+.headerStyle table tbody tr td, .filterStyle table tbody tr td {
   border: none; }
 
 div.copyRight {
@@ -297,6 +297,19 @@ tr.oddRow {
   background-color: inherit;
   color: #222; }
 
+#btnAddRow, #btnDelRow {
+  font-family: FontAwesome;
+  border: none;
+  border-radius: 15px;
+  height: 30px;
+  width: 30px;
+  color: #f4f4f4;
+  background-color: #69BB7B; }
+
+#btnDelRow {
+  background-color: #f53d3d;
+  margin-top: 2px; }
+
 tr.evenRow {
   background-color: #B0BEC5; }
 
@@ -304,4 +317,5 @@ tr.evenRow {
   border: none;
   padding: 5px 10px;
   border-radius: 8px;
-  color: #f4f4f4; }
+  color: #f4f4f4;
+  font-size: 13px; }

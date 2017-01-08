@@ -65,4 +65,5 @@ select.lookupMultiSelect {
   border: none;
   padding: 5px 10px;
   border-radius: 8px;
-  color: #f4f4f4; }
+  color: #f4f4f4;
+  font-size: 13px; }

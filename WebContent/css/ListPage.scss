@@ -129,6 +129,22 @@ background-color:inherit;
 color:$dark;
 }
 
+#btnAddRow,#btnDelRow {
+   font-family: FontAwesome;
+   border: none;
+   border-radius: 15px;
+   height: 30px;
+   width: 30px;
+   color: $light;
+   background-color: $good;
+}
+
+#btnDelRow
+{
+  background-color: $danger;
+  margin-top: 2px;
+}
+
 
 
 tr.evenRow{
@@ -142,4 +158,5 @@ background-color:$secondary-color;
     padding: 5px 10px;
     border-radius: 8px;
 	  color: $light;
+    font-size: 13px;
 }

@@ -21,7 +21,7 @@ span.topBar {
 
 //reset boostrap style for header form
 .headerStyle,.filterStyle{
-    table td{
+    table tbody tr td{
         border: none;
     }
 }
