@@ -49,6 +49,7 @@ public abstract class CRMBusinessModelObject  extends CRMModelObject{
 		this.temporaryProperties = temporaryProperties;
 	}
 	
+	@RadsPropertySet(excludeFromJSON=true,excludeFromMap=true,excludeFromXML=true)
 	public boolean isNullContent() {
 		Map<String, Object> keys =  this.getBK();
 		Iterator it = keys.keySet().iterator() ;

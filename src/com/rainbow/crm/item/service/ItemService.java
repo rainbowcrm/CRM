@@ -76,8 +76,8 @@ public class ItemService extends AbstractService implements IItemService{
 	@Override
 	public TransactionResult update(CRMModelObject object, CRMContext context) {
 		boolean triggerWishList = false;
-		Sku oldObject =(Sku)getById(((Sku)object).getId());
-		Sku curObject = (Sku) object ;
+		Item oldObject =(Item)getById(((Item)object).getId());
+		Item curObject = (Item) object ;
 		if (oldObject.getRetailPrice()!=null && curObject.getRetailPrice() != null &&  curObject.getRetailPrice() < oldObject.getRetailPrice() ) {
 			triggerWishList = true ;
 		}

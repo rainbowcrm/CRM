@@ -230,6 +230,9 @@
 <Lookup type ="item" lookupservice="com.rainbow.crm.lookups.LookupItems" 
  lookuppage= "lookup">
 </Lookup>
+<Lookup type ="sku" lookupservice="com.rainbow.crm.lookups.LookupSkus" 
+ lookuppage= "lookup">
+</Lookup>
 <Lookup type ="product" lookupservice="com.rainbow.crm.lookups.LookupProducts" 
  lookuppage= "lookup">
 </Lookup>
@@ -267,7 +270,7 @@
  <key>Phone</key>
  <key>Email</key>
  </AjaxService>
- <AjaxService service ="itemSearch" class = "com.rainbow.crm.item.service.SkuAjaxService">
+ <AjaxService service ="skuSearch" class = "com.rainbow.crm.item.service.SkuAjaxService">
  <key>Code</key>
  <key>Barcode</key>
  <key>Name</key>

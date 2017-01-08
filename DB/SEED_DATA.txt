@@ -211,6 +211,7 @@ INSERT INTO METADATA(ENTITY,CLASS_NAME) VALUES('VENDOR','com.rainbow.crm.vendor.
 INSERT INTO METADATA(ENTITY,CLASS_NAME) VALUES('CUSTOMER','com.rainbow.crm.customer.model.Customer');
 INSERT INTO METADATA(ENTITY,CLASS_NAME) VALUES('PRODUCT','com.rainbow.crm.product.model.Product');
 INSERT INTO METADATA(ENTITY,CLASS_NAME) VALUES('SKU','com.rainbow.crm.item.model.Sku');
+INSERT INTO METADATA(ENTITY,CLASS_NAME) VALUES('ITEM','com.rainbow.crm.item.model.Item');
 INSERT INTO METADATA(ENTITY,CLASS_NAME) VALUES('INVENTORY','com.rainbow.crm.inventory.model.Inventory');
 INSERT INTO METADATA(ENTITY,CLASS_NAME) VALUES('SALESPERIOD','com.rainbow.crm.salesperiod.model.SalesPeriod');
 INSERT INTO METADATA(ENTITY,CLASS_NAME) VALUES('SALES','com.rainbow.crm.sales.model.Sales');

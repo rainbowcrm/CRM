@@ -21,7 +21,7 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 <responseElement key = "FullName">txtCustomerName</responseElement>
 </responseElements>
 </AjaxGroup>
-<AjaxGroup service ="itemSearch">
+<AjaxGroup service ="skuSearch">
 <requestElements event = "">
 <requestElement key = "Name">txtItName</requestElement>
 <requestElement key = "Code">txtCode</requestElement>
@@ -104,7 +104,7 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 <Element type ="UITableCol" width = "10%"><Element label = ""  type = "UIText" Id = "txtCode" size  = "10" property ="Sku.Code" /> </Element>
 <Element type ="UITableCol" width = "25%"><Element label = ""  type = "UILookupText"  Id = "txtItName"  size  = "30" property ="Sku.Name" showLookupAsDialog="true" dialogId="dlgIt"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
-	 <lookupType>item</lookupType>
+	 <lookupType>sku</lookupType>
 	 <height>300</height>
 	 <width>290</width>
 </Element>

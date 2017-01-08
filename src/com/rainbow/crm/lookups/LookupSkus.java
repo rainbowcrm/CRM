@@ -1,4 +1,3 @@
-
 package com.rainbow.crm.lookups;
 
 import java.util.ArrayList;
@@ -12,12 +11,13 @@ import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.database.LoginSQLs;
 import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.item.service.IItemService;
+import com.rainbow.crm.item.service.ISkuService;
 import com.techtrade.rads.framework.context.IRadsContext;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.ui.abstracts.ILookupService;
 import com.techtrade.rads.framework.utils.Utils;
 
-public class LookupItems implements ILookupService{
+public class LookupSkus implements ILookupService{
 
 	@Override
 	public List<Object> lookupData(IRadsContext ctx, String searchString,
@@ -28,7 +28,7 @@ public class LookupItems implements ILookupService{
 			searchString = searchString.replace("*", "%");
 			condition =  " where name like  '" + searchString + "'" ;
 		}
-		IItemService service = (IItemService) SpringObjectFactory.INSTANCE.getInstance("IItemService");
+		ISkuService service = (ISkuService) SpringObjectFactory.INSTANCE.getInstance("ISkuService");
 		List<? extends CRMModelObject> items = service.listData(from, from  + noRecords, condition,(CRMContext)ctx);
 		for (ModelObject obj :  items) {
 			ans.add(((Sku)obj).getName());
@@ -41,4 +41,6 @@ public class LookupItems implements ILookupService{
 	public IRadsContext generateContext(HttpServletRequest request) {
 		return LoginSQLs.loggedInUser(request.getSession().getId());
 	}
+
+	
 }

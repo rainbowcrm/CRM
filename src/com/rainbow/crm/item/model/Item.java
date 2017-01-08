@@ -3,6 +3,7 @@ package com.rainbow.crm.item.model;
 import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
 import com.rainbow.crm.product.model.Product;
 import com.rainbow.crm.uom.model.UOM;
+import com.techtrade.rads.framework.annotations.RadsPropertySet;
 
 public class Item extends CRMBusinessModelObject{
 	
@@ -30,9 +31,11 @@ public class Item extends CRMBusinessModelObject{
 	public void setCode(String code) {
 		this.code = code;
 	}
+	@RadsPropertySet(isBK=true)
 	public String getName() {
 		return name;
 	}
+	@RadsPropertySet(isBK=true)
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -42,9 +45,11 @@ public class Item extends CRMBusinessModelObject{
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
 	public Product getProduct() {
 		return product;
 	}
+	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
 	public void setProduct(Product product) {
 		this.product = product;
 	}
