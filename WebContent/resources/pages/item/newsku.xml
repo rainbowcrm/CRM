@@ -27,6 +27,12 @@ Controller = "com.rainbow.crm.item.controller.SkuController">
 	 <height>300</height>
 	 <width>290</width>
 	</Element>
+	<Element label = "Item"  type = "UILookupText"  Id = "txtItNM" isMandatory="true"  property ="Item.Name" showLookupAsDialog="true" dialogId="dlgitPNM"
+ 	 dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
+	 <lookupType>item</lookupType>
+	 <height>300</height>
+	 <width>290</width>
+	</Element>
 	<Element label = "Color"  type = "UIText" Id = "txtColor"   size="20" property ="Color" />
 	<Element label = "Size"  type = "UIText" Id = "txtSize"   size="20" property ="Size" />
 	<Element label = "Manufacturer"  type = "UIText" Id = "txtManu"   size="30" property ="Manufacturer" />

@@ -20,6 +20,7 @@
       <property name="color" column="color" type="string"/>
       <property name="size" column="size" type="string"/>
        <property name="manufacturer" column="manufacturer" type="string"/>
+       <many-to-one name="item" column ="item_id"  lazy="false" ></many-to-one>
        <property name="itemClass" column="item_class" type="string"/>
 <!--       <many-to-one name="uom" column ="uom_id" not-null="true" lazy="false" ></many-to-one>  -->
       <property name="uomId" column="uom_id" type="integer"/>

@@ -10,6 +10,7 @@ import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.database.LoginSQLs;
+import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.item.service.IItemService;
 import com.techtrade.rads.framework.context.IRadsContext;
@@ -31,7 +32,7 @@ public class LookupItems implements ILookupService{
 		IItemService service = (IItemService) SpringObjectFactory.INSTANCE.getInstance("IItemService");
 		List<? extends CRMModelObject> items = service.listData(from, from  + noRecords, condition,(CRMContext)ctx);
 		for (ModelObject obj :  items) {
-			ans.add(((Sku)obj).getName());
+			ans.add(((Item)obj).getName());
 		}
 
 		return ans;

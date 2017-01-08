@@ -31,6 +31,8 @@ public class Sku  extends CRMBusinessModelObject{
 	String itemClass; 
 	String itemClassDesc; 
 	
+	Item item;
+	
 	public String getCode() {
 		return code;
 	}
@@ -167,6 +169,15 @@ public class Sku  extends CRMBusinessModelObject{
 	public String getItemClassDesc() {
 		return FiniteValueManager.INSTANCE.getFiniteValueDesc(itemClass);
 	}
+
+	public Item getItem() {
+		return item;
+	}
+
+	public void setItem(Item item) {
+		this.item = item;
+	}
+	
 	
 	
 
