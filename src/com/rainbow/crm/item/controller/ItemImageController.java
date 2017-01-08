@@ -78,7 +78,7 @@ public class ItemImageController extends GeneralController{
 	@Override
 	public PageResult delete(ModelObject object) {
 		imageSet = (ItemImageSet) object;
-		SkuService service = (SkuService)SpringObjectFactory.INSTANCE.getInstance("ISkuService") ;
+		ISkuService service = (ISkuService)SpringObjectFactory.INSTANCE.getInstance("ISkuService") ;
 		Sku item = service.getByName(((CRMContext) getContext()).getLoggedinCompany(), imageSet.getSku().getName());
 		ItemImageSQL.DeleteAllImagesforItem(item);
 		imageSet.setFilewithPath1("");
@@ -194,14 +194,15 @@ public class ItemImageController extends GeneralController{
 				ByteArrayInputStream inputStream = new ByteArrayInputStream(
 						bytes);
 				System.out.println("Start uploading first file");
+				boolean success = ftpClient.changeWorkingDirectory("/" +  context.getLoggedinCompanyCode());
 				boolean done = ftpClient.storeFile(fileName, inputStream);
 				inputStream.close();
-				InputStream st2 = ftpClient.retrieveFileStream("/public_html/pics/MP003-a.jpg");
+/*				InputStream st2 = ftpClient.retrieveFileStream("/public_html/pics/MP003-a.jpg");
 				if (done) {
 					System.out
 							.println("The first file is uploaded successfully.");
 				}
-			}
+*/			}
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
