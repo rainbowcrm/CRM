@@ -12,6 +12,8 @@ import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
+import com.rainbow.crm.company.model.Company;
+import com.rainbow.crm.company.service.ICompanyService;
 import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.database.LoginSQLs;
 import com.rainbow.crm.item.model.Sku;
@@ -44,6 +46,12 @@ public class ProductAnalyzerController  extends GeneralController{
 	public IRadsContext generateContext(String authToken) {
 		// TODO Auto-generated method stub
 		return LoginSQLs.loggedInUser(authToken);
+	}
+	
+	public String getCompanyName() {
+		ICompanyService service = (ICompanyService)SpringObjectFactory.INSTANCE.getInstance("ICompanyService");
+		Company company =(Company) service.getById(((CRMContext)getContext()).getLoggedinCompany());
+		return company.getName();
 	}
 
 	@Override

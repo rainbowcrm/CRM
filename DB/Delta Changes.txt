@@ -576,3 +576,8 @@ INSERT INTO METADATA(ENTITY,CLASS_NAME) VALUES('ITEM','com.rainbow.crm.item.mode
 ALTER TABLE SKUS ADD  ITEM_ID INT 
 ALTER TABLE SKUS ADD FOREIGN KEY (ITEM_ID) REFERENCES ITEMS(ID)
 update skus set item_id = (select id from items where skus.sku_code = items.item_code)
+
+
+
+ALTER TABLE SALESPERIOD_LINES CHANGE  SKU_ID ITEM_ID  INT NOT NULL;
+

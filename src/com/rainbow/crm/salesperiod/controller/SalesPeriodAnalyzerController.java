@@ -61,7 +61,7 @@ public class SalesPeriodAnalyzerController  extends GeneralController{
 			int minY = 0 , maxY =0;
 			for  (SalesPeriodLine periodLine : periodLines) {
 				BarData barData = new BarData();
-				barData.setText(periodLine.getSku().getName());
+				barData.setText(periodLine.getItem().getName());
 				if (periodLine.getQty() > maxY ) {
 					maxY= periodLine.getQty();
 				}
@@ -74,7 +74,7 @@ public class SalesPeriodAnalyzerController  extends GeneralController{
  				
  				BarData actualSales = new BarData();
  				//actualSales.setText(periodLine.getItem().getName());
- 				int soldQty = salesService.getItemSaleQuantity(periodLine.getSku(), salesPeriod.getFromDate(), salesPeriod.getToDate(), salesPeriod.getDivision()) ;
+ 				int soldQty = salesService.getItemSaleQuantity(periodLine.getItem(), salesPeriod.getFromDate(), salesPeriod.getToDate(), salesPeriod.getDivision()) ;
  				actualSales.setValue(soldQty);
  				actualSales.setColor("red");
 				divis.addBarData(actualSales);

@@ -41,6 +41,7 @@ import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.division.service.IDivisionService;
 import com.rainbow.crm.hibernate.ORMDAO;
 import com.rainbow.crm.inventory.model.InventoryUpdateObject;
+import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.item.service.ISkuService;
 import com.rainbow.crm.logger.Logwriter;
@@ -252,8 +253,7 @@ public class SalesService extends AbstractService implements ISalesService{
 	}
 
 	@Override
-	public int getItemSaleQuantity(Sku item, Date from, Date to,Division division) {
-		//SalesDAO dao = (SalesDAO)getDAO() ;
+	public int getItemSaleQuantity(Item item, Date from, Date to,Division division) {
 		return GeneralSQLs.getItemSoldQty(item.getId(),from,to,division.getId());
 	}
 

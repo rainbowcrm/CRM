@@ -236,13 +236,13 @@ public class GeneralSQLs {
 		Map<String,String> ans = new HashMap<String,String>();
 		try {
 			connection  = ConnectionCreater.getConnection() ;
-			String sql = "Select sum(sllines.qty) from SALES sales,SALES_LINES sllines  where sales.id = sllines.sales_id and sales.division_id = ?  " +
-			" and  sllines.sku_id = ? and sales.SALES_DATE >= ? and sales.SALES_DATE<= ?  " ;
+			String sql = "Select sum(sllines.qty) from SALES sales,SALES_LINES sllines,SKUS skus  where sales.id = sllines.sales_id and sales.division_id = ?  " +
+			" and  sllines.sku_id = skus.id and sales.SALES_DATE >= ? and sales.SALES_DATE<= ?  and skus.item_id = ?  " ;
 			statement = connection.prepareStatement(sql);
 			statement.setInt(1, divisionId);
-			statement.setInt(2, itemId);
-			statement.setTimestamp(3, new java.sql.Timestamp(fromDate.getTime()));
-			statement.setTimestamp(4, new java.sql.Timestamp(toDate.getTime()));
+			statement.setTimestamp(2, new java.sql.Timestamp(fromDate.getTime()));
+			statement.setTimestamp(3, new java.sql.Timestamp(toDate.getTime()));
+			statement.setInt(4, itemId);
 			rs = statement.executeQuery() ;
 			if (rs.next()) {
 				return rs.getInt(1);
@@ -264,9 +264,9 @@ public class GeneralSQLs {
 		try {
 			connection  = ConnectionCreater.getConnection() ;
 			String divisionCond = (divisionId!=-1)?" and sales.division_id= " +  divisionId:" ";
-			String itemClassCond =(!Utils.isNull(itemClass))?" and items.item_class = '" + itemClass +"'":" ";
-			String sql = "Select sum(sllines.qty),sllines.item_id from SALES sales,SALES_LINES sllines,Items items where sales.id = sllines.sales_id  " +
-			" and  sllines.sku_id = skus.id and  items.product_id= ? and sales.SALES_DATE >= ? and sales.SALES_DATE<= ? " + divisionCond  +  itemClassCond +
+			String itemClassCond =(!Utils.isNull(itemClass))?" and skus.item_class = '" + itemClass +"'":" ";
+			String sql = "Select sum(sllines.qty),sllines.sku_id from SALES sales,SALES_LINES sllines,skus skus where sales.id = sllines.sales_id  " +
+			" and  sllines.sku_id = skus.id and  skus.product_id= ? and sales.SALES_DATE >= ? and sales.SALES_DATE<= ? " + divisionCond  +  itemClassCond +
 			" group by   sllines.sku_id" ;
 			statement = connection.prepareStatement(sql);
 			//statement.setInt(1, divisionId);

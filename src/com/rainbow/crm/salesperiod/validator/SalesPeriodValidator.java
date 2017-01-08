@@ -53,12 +53,12 @@ public class SalesPeriodValidator extends CRMValidator {
 			errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Line_Items"))) ;
 		}else {
 			for (SalesPeriodLine line : salesPeriod.getSalesPeriodLines()) {
-				if (line.getSku() == null ) {
+				if (line.getItem() == null ) {
 					errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Item"))) ;
-				}else if (line.getSku().isDeleted() ) {
-					errors.add(getErrorforCode(CommonErrorCodes.OBJECT_DELETED,externalize.externalize(context, "Item") + line.getSku().getCode())) ;
+				}else if (line.getItem().isDeleted() ) {
+					errors.add(getErrorforCode(CommonErrorCodes.OBJECT_DELETED,externalize.externalize(context, "Item") + line.getItem().getCode())) ;
 				}else if (line.getQty() <=0 ) {
-					errors.add(getErrorforCode(CommonErrorCodes.SHOULD_BE_GREATER_THAN,externalize.externalize(context, "Target_Qty") + line.getSku().getCode(),"0") ) ;
+					errors.add(getErrorforCode(CommonErrorCodes.SHOULD_BE_GREATER_THAN,externalize.externalize(context, "Target_Qty") + line.getItem().getCode(),"0") ) ;
 				}
 			}
 		}
