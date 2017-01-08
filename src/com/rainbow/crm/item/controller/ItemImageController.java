@@ -65,7 +65,7 @@ public class ItemImageController extends GeneralController{
 		images = splitImageSet(imageSet,(CRMContext)getContext());
 		if (!Utils.isNullList(images)) {
 			for(ItemImage image :  images) {
-				saveFile(image.getImage(), image.getFilePath(), image.getFileName());
+				//saveFile(image.getImage(), image.getFilePath(), image.getFileName());
 				if(image.getFileName().charAt(image.getFileName().length()-1) != '.' ) {
 				ftpAPFile(image.getImage(), image.getFilePath(), image.getFileName(), (CRMContext)getContext());
 				//ftpJCSFile(image.getImage(), image.getFilePath(), image.getFileName(), (CRMContext)getContext());
@@ -93,7 +93,9 @@ public class ItemImageController extends GeneralController{
 		try {
 			ISkuService service = (ISkuService)SpringObjectFactory.INSTANCE.getInstance("ISkuService") ;
 			Sku item = service.getByName(((CRMContext) getContext()).getLoggedinCompany(), imageSet.getSku().getName());
-			String filePath = CRMAppConfig.INSTANCE.getProperty("Image_Path");
+			//String filePath = CRMAppConfig.INSTANCE.getProperty("Image_Path");
+			String filePath = ConfigurationManager.getConfig(
+					ConfigurationManager.IMAGE_SERVER_URL, (CRMContext)getContext());
 			String code = ((CRMContext) getContext()).getLoggedinCompanyCode();
 			ItemImage dbRecord1 = ItemImageSQL.getItemImage(item.getId(), 'a');
 			if (dbRecord1 != null ) {
@@ -194,7 +196,7 @@ public class ItemImageController extends GeneralController{
 				ByteArrayInputStream inputStream = new ByteArrayInputStream(
 						bytes);
 				System.out.println("Start uploading first file");
-				boolean success = ftpClient.changeWorkingDirectory("/" +  context.getLoggedinCompanyCode());
+				boolean success = ftpClient.changeWorkingDirectory( context.getLoggedinCompanyCode());
 				boolean done = ftpClient.storeFile(fileName, inputStream);
 				inputStream.close();
 /*				InputStream st2 = ftpClient.retrieveFileStream("/public_html/pics/MP003-a.jpg");
@@ -284,37 +286,39 @@ public class ItemImageController extends GeneralController{
 		ISkuService service = (ISkuService)SpringObjectFactory.INSTANCE.getInstance("ISkuService") ;
 		Sku item = service.getByName(((CRMContext) getContext()).getLoggedinCompany(), set.getSku().getName());
 		try  {
-			String filePath = CRMAppConfig.INSTANCE.getProperty("Image_Path");
+			//String filePath = CRMAppConfig.INSTANCE.getProperty("Image_Path");
+			String filePath = ConfigurationManager.getConfig(
+					ConfigurationManager.IMAGE_SERVER_URL, context);
 			String code = context.getLoggedinCompanyCode();
 			if(set.getImage1() != null ) {
 				ItemImage image = new ItemImage();
 				image.setSku(item);
 				image.setImage(set.getImage1());
 				image.setSuffix('a');
-				image.setFilePath(filePath + "\\" +  code );
+				image.setFilePath(filePath + "/" +  code );
 				image.setFileName( set.getSku().getCode() + "-" + image.getSuffix() + "." + getFileExtn(set.getFileName1()) ); 
 				images.add(image);
-				set.setFilewithPath1(image.getFilePath() + "\\" + image.getFileName());
+				set.setFilewithPath1(image.getFilePath() + "/" + image.getFileName());
 			}
 			if(set.getImage2() != null ) {
 				ItemImage image = new ItemImage();
 				image.setSku(item);
 				image.setImage(set.getImage2());
 				image.setSuffix('b');
-				image.setFilePath(filePath + "\\" +  code );
+				image.setFilePath(filePath + "/" +  code );
 				image.setFileName( set.getSku().getCode() + "-" + image.getSuffix() + "." + getFileExtn(set.getFileName2()) );
 				images.add(image);
-				set.setFilewithPath2(image.getFilePath() + "\\" + image.getFileName());
+				set.setFilewithPath2(image.getFilePath() + "/" + image.getFileName());
 			}
 			if(set.getImage3() != null ) {
 				ItemImage image = new ItemImage();
 				image.setSku(item);
 				image.setImage(set.getImage3());
 				image.setSuffix('c');
-				image.setFilePath(filePath + "\\" +  code );
+				image.setFilePath(filePath + "/" +  code );
 				image.setFileName( set.getSku().getCode() + "-" + image.getSuffix() + "." + getFileExtn(set.getFileName3()) );
 				images.add(image);
-				set.setFilewithPath3(image.getFilePath() + "\\" + image.getFileName());
+				set.setFilewithPath3(image.getFilePath() + "/" + image.getFileName());
 			}
 		}catch(Exception ex) {
 			Logwriter.INSTANCE.error(ex);

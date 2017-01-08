@@ -580,4 +580,5 @@ update skus set item_id = (select id from items where skus.sku_code = items.item
 
 
 ALTER TABLE SALESPERIOD_LINES CHANGE  SKU_ID ITEM_ID  INT NOT NULL;
-
+INSERT INTO BASE_CONFIGURATION(CODE,CONFIG_DESCRIPTION,CONFIG_GROUP,VALUE_TYPE,VALUE_GENERATOR,DEFAULT_VALUE)
+values ('IMGSRVURL','Image Server URL','General','STR',null,null);

@@ -14,6 +14,7 @@ public class ConfigurationManager {
 	public static final String IMAGE_SERVER_USER = "IMGSRVUSR";
 	public static final String IMAGE_SERVER_PASSWORD = "IMGSRVPWD";
 	public static final String IMAGE_SERVER_PORT = "IMGSRVPRT";
+	public static final String IMAGE_SERVER_URL = "IMGSRVURL";
 	
 	public static final String LOYALTY = "LOYALTY";
 	public static final String REDEEM_LOYALTY = "RDMLOYALTY";

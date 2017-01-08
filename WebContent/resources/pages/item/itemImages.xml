@@ -58,16 +58,16 @@ Controller = "com.rainbow.crm.item.controller.ItemImageController">
 <Element type = "UITableRow">
 <Element type ="UITableCol">
   <Element label = "Image1" type = "UIFileUpload" Id = "txtPhoto1" property ="Image1"  fileNameProperty="fileName1"
-   maxSize = "25600" multiple ="false" onClickJS ="readURL(this,'idIMG1')" accept= ".png, .jpg, .jpeg" /> 
+   maxSize = "30720" multiple ="false" onClickJS ="readURL(this,'idIMG1')" accept= ".png, .jpg, .jpeg" /> 
   <Element label = ""  type = "UIImage" Id = "idIMG1"  height = "200" weight ="200" src= "#" property ="filewithPath1" />
 </Element>
 <Element type ="UITableCol">
   <Element label = "Image2" type = "UIFileUpload" Id = "txtPhoto2" fileNameProperty="fileName2" 
-  property ="Image2" maxSize ="25600" multiple ="false" onClickJS ="readURL(this,'idIMG2')" accept= ".png, .jpg, .jpeg" />
+  property ="Image2" maxSize ="30720" multiple ="false" onClickJS ="readURL(this,'idIMG2')" accept= ".png, .jpg, .jpeg" />
     <Element label = ""  type = "UIImage" Id = "idIMG2"  height = "200" weight ="200" src= "#" property ="filewithPath2"  /> 
 </Element>
 <Element type ="UITableCol">
-  <Element label = "Image2" type = "UIFileUpload" Id = "txtPhoto3" property ="Image3" maxSize="25600"
+  <Element label = "Image2" type = "UIFileUpload" Id = "txtPhoto3" property ="Image3" maxSize="30720"
    multiple ="false"  fileNameProperty="fileName3"  onClickJS ="readURL(this,'idIMG3')" accept= ".png, .jpg, .jpeg"  />
    <Element label = ""  type = "UIImage" Id = "idIMG3"  height = "200" weight ="200" src= "#" property ="filewithPath3" /> 
 </Element>
