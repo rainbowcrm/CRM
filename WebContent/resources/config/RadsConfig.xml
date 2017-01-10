@@ -29,6 +29,8 @@
 </Page>
 <Page id = "categories" definition ="/resources/pages/category/categories.xml" modelclass = "com.rainbow.crm.category.model.Category" >
 </Page>
+<Page id = "brands" definition ="/resources/pages/brand/brands.xml" modelclass = "com.rainbow.crm.brand.model.Brand" >
+</Page>
 <Page id = "inventory" definition ="/resources/pages/inventory/inventory.xml" modelclass = "com.rainbow.crm.inventory.model.Inventory" >
 </Page>
 <Page id = "products" definition ="/resources/pages/products/products.xml" modelclass = "com.rainbow.crm.product.model.Product" >
@@ -173,6 +175,7 @@
  	<Element label = "" type = "UIMenu" Id = "menu04" style="menustyle" title="Carriers" link = "rdscontroller?page=carriers"   />
  </Element>
   <Element label = "" type = "UIMenu" Id = "menu10" style="menustyleParent" title="Merchandise" groupId= "menuGRP002"  >
+ 	<Element label = "" type = "UIMenu" Id = "menu110" style="menustyle" title="Brands" link = "rdscontroller?page=brands"   />
  	<Element label = "" type = "UIMenu" Id = "menu11" style="menustyle" title="Categories" link = "rdscontroller?page=categories"   />
  	<Element label = "" type = "UIMenu" Id = "menu12" style="menustyle" title="Products" link = "rdscontroller?page=products"   />
  	<!-- TBD

@@ -36,6 +36,8 @@
     
     <bean id="ICategoryService" class="com.rainbow.crm.category.service.CategoryService">
     </bean>
+     <bean id="IBrandService" class="com.rainbow.crm.brand.service.BrandService">
+    </bean>
     <bean id="IDataLoaderService" class="com.rainbow.framework.setup.service.DataLoaderService">
     </bean>
     <bean id="IConfigService" class="com.rainbow.crm.config.service.ConfigService">
@@ -84,6 +86,10 @@
     </bean>
   
    <bean id="CategoryDAO" class="com.rainbow.crm.category.dao.CategoryDAO">
+    <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean> 
+    
+    <bean id="BrandDAO" class="com.rainbow.crm.brand.dao.BrandDAO">
     <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>   
     
@@ -169,6 +175,7 @@
         <value>com/rainbow/crm/user/model/User.hbm.xml</value>
         <value>com/rainbow/crm/company/model/Company.hbm.xml</value>  
         <value>com/rainbow/crm/division/model/Division.hbm.xml</value>
+        <value>com/rainbow/crm/brand/model/Brand.hbm.xml</value>
         <value>com/rainbow/crm/category/model/Category.hbm.xml</value>
         <value>com/rainbow/crm/inventory/model/Inventory.hbm.xml</value>
         <value>com/rainbow/crm/product/model/Product.hbm.xml</value>
