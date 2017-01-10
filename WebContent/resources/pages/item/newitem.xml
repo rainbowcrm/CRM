@@ -35,6 +35,10 @@ Controller = "com.rainbow.crm.item.controller.ItemController">
 		<options populator =  "getUOMs"> 
 		</options>
 	</Element>
+	<Element label = "Brand"  type = "UIList" Id = "lstBrand"    isMandatory="true" property ="brand.id" externalise= "true" >
+		<options populator =  "getAllBrands"> 
+		</options>
+	</Element>
 	<Element label = "Purchase_Price"  type = "UIText" Id = "txtPurPrice" size="10" property ="PurchasePrice"  isNumeric="true"  />
 	<Element label = "Max_Price"  type = "UIText" Id = "txtMaxPrice" size="10" property ="MaxPrice"  isNumeric="true"  />
 	<Element label = "Retail_Price"  type = "UIText" Id = "txtRetailPrice" size="10" property ="RetailPrice"  isNumeric="true"  />

@@ -16,6 +16,7 @@
       <many-to-one name="company" column ="company_id" not-null="true" lazy="false" ></many-to-one>
       <property name="description" column="description" type="string"/>
       <many-to-one name="product" column ="product_id" not-null="true" lazy="false" ></many-to-one>
+      <many-to-one name="brand" column ="brand_id" not-null="true" lazy="false" ></many-to-one>
        <property name="manufacturer" column="manufacturer" type="string"/>
        <property name="itemClass" column="item_class" type="string"/>
 <!--       <many-to-one name="uom" column ="uom_id" not-null="true" lazy="false" ></many-to-one>  -->

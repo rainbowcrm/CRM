@@ -1,6 +1,7 @@
 package com.rainbow.crm.item.model;
 
 import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
+import com.rainbow.crm.brand.model.Brand;
 import com.rainbow.crm.product.model.Product;
 import com.rainbow.crm.uom.model.UOM;
 import com.techtrade.rads.framework.annotations.RadsPropertySet;
@@ -11,6 +12,7 @@ public class Item extends CRMBusinessModelObject{
 	String name; 
 	String description;
 	Product product;
+	Brand brand; 
 	String manufacturer;
 	UOM uom; // unused .. 
 	int uomId;
@@ -25,6 +27,17 @@ public class Item extends CRMBusinessModelObject{
 	boolean onPromotion;
 	String itemClass; 
 	String itemClassDesc;
+	
+	
+	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
+	public Brand getBrand() {
+		return brand;
+	}
+	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
+	public void setBrand(Brand brand) {
+		this.brand = brand;
+	}
+	
 	public String getCode() {
 		return code;
 	}

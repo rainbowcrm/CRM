@@ -1,5 +1,7 @@
 package com.rainbow.crm.item.validator;
 
+import com.rainbow.crm.brand.model.Brand;
+import com.rainbow.crm.brand.service.IBrandService;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMValidator;
 import com.rainbow.crm.common.CommonErrorCodes;
@@ -62,6 +64,16 @@ public class ItemValidator extends CRMValidator{
 			IProductService service =(IProductService)SpringObjectFactory.INSTANCE.getInstance("IProductService");
 			Product product = service.getByName(item.getCompany().getId(),item.getProduct().getName());
 			item.setProduct(product);
+		}
+		if(item.getBrand() == null || item.getBrand().getId() <= 0 ) {
+			errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Brand"))) ;
+		}else {
+			IBrandService service = (IBrandService)SpringObjectFactory.INSTANCE.getInstance("IBrandService");
+			Brand brand = (Brand)service.getById(item.getBrand().getId());
+			if (brand == null ) {
+				errors.add(getErrorforCode(CommonErrorCodes.VALUE_NOT_FOUND,externalize.externalize(context, "Brand"))) ;
+			}else
+				item.setBrand(brand);
 		}
 		if(item.getUomId() <= 0) {
 			errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "UOM"))) ;
