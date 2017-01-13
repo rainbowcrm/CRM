@@ -44,6 +44,8 @@ import org.hibernate.cfg.Configuration;
 
 
 
+
+
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.address.model.Address;
 import com.rainbow.crm.alert.model.Alert;
@@ -69,6 +71,8 @@ import com.rainbow.crm.sales.model.Sales;
 import com.rainbow.crm.sales.model.SalesLine;
 import com.rainbow.crm.salesperiod.model.SalesPeriod;
 import com.rainbow.crm.salesperiod.model.SalesPeriodLine;
+import com.rainbow.crm.salesportfolio.model.SalesPortfolio;
+import com.rainbow.crm.salesportfolio.model.SalesPortfolioLine;
 import com.rainbow.crm.uom.model.UOM;
 import com.rainbow.crm.user.model.User;
 import com.rainbow.crm.vendor.model.Vendor;
@@ -128,6 +132,8 @@ public  abstract class HibernateDAO  extends ORMDAO{
     		configuration.addClass(PurchaseLine.class).addResource("com/rainbow/crm/purchase/model/PurchaseLine.hbm.xml");
     		configuration.addClass(SalesPeriod.class).addResource("com/rainbow/crm/salesperiod/model/SalesPeriod.hbm.xml");
     		configuration.addClass(SalesPeriodLine.class).addResource("com/rainbow/crm/salesperiod/model/SalesPeriodLine.hbm.xml");
+    		configuration.addClass(SalesPortfolio.class).addResource("com/rainbow/crm/salesportfolio/model/SalesPortfolio.hbm.xml");
+    		configuration.addClass(SalesPortfolioLine.class).addResource("com/rainbow/crm/salesportfolio/model/SalesPortfolioLine.hbm.xml");
     		configuration.addClass(Sales.class).addResource("com/rainbow/crm/sales/model/Sales.hbm.xml");
     		configuration.addClass(SalesLine.class).addResource("com/rainbow/crm/sales/model/SalesLine.hbm.xml");
     		configuration.addClass(WishList.class).addResource("com/rainbow/crm/wishlist/model/WishList.hbm.xml");
