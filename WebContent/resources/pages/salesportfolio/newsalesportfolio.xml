@@ -30,7 +30,7 @@ Controller = "com.rainbow.crm.salesportfolio.controller.SalesPortfolioController
 	</Element>
 	<Element label = "From_Date"  type = "UIDate" Id = "txtDate" isMandatory="true"  property ="startDate" />
 	<Element label = "To_Date"  type = "UIDate" Id = "txtToDate" isMandatory="true"  property ="endDate" />
-	<Element label = "User"  type = "UILookupText"  Id = "txtUser"  property ="User.Id" showLookupAsDialog="true" dialogId="dlgIt"
+	<Element label = "User"  type = "UILookupText"  Id = "txtUser"  property ="User.userId" showLookupAsDialog="true" dialogId="dlgIt"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>user</lookupType>
 	 <height>300</height>
