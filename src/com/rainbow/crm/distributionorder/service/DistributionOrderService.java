@@ -18,6 +18,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 
 
+
 import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
@@ -26,6 +27,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+
 
 
 
@@ -48,6 +50,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 
+
 import com.rainbow.crm.abstratcs.model.CRMItemLine;
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.address.model.Address;
@@ -56,6 +59,7 @@ import com.rainbow.crm.alert.model.Alert;
 import com.rainbow.crm.carrier.model.Carrier;
 import com.rainbow.crm.carrier.service.ICarrierService;
 import com.rainbow.crm.common.AbstractService;
+import com.rainbow.crm.common.AbstractionTransactionService;
 import com.rainbow.crm.common.CRMAppConfig;
 import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
@@ -99,7 +103,7 @@ import com.techtrade.rads.framework.model.transaction.TransactionResult;
 import com.techtrade.rads.framework.utils.Utils;
 
 @Transactional
-public class DistributionOrderService extends AbstractService implements IDistributionOrderService{
+public class DistributionOrderService extends AbstractionTransactionService implements IDistributionOrderService{
 
 	@Override
 	public long getTotalRecordCount(CRMContext context) {

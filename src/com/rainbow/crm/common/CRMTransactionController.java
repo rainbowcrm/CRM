@@ -34,8 +34,7 @@ public abstract class CRMTransactionController extends TransactionController {
 
 	@Override
 	public List<RadsError> adapttoUI(ModelObject modelObject) {
-		// TODO Auto-generated method stub
-		return null;
+		return  getService().adaptToUI((CRMContext)getContext(),modelObject);
 	}
 
 	@Override

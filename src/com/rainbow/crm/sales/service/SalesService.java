@@ -20,6 +20,7 @@ import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.address.model.Address;
 import com.rainbow.crm.address.service.IAddressService;
 import com.rainbow.crm.common.AbstractService;
+import com.rainbow.crm.common.AbstractionTransactionService;
 import com.rainbow.crm.common.CRMAppConfig;
 import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
@@ -63,7 +64,7 @@ import com.techtrade.rads.framework.model.transaction.TransactionResult;
 import com.techtrade.rads.framework.utils.Utils;
 
 @Transactional
-public class SalesService extends AbstractService implements ISalesService{
+public class SalesService extends AbstractionTransactionService implements ISalesService{
 
 	@Override
 	public long getTotalRecordCount(CRMContext context) {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Page id = "salesportfolioList" showinFrame ="true" title ="Purchases | Rainbow CRM"  Object = "com.rainbow.crm.salesportfolio.model.SalesPortfolio" 
+<Page id = "salesportfolioList" showinFrame ="true" title ="Sales Portfolio | Rainbow CRM"  Object = "com.rainbow.crm.salesportfolio.model.SalesPortfolio" 
 Controller = "com.rainbow.crm.salesportfolio.controller.SalesPortfolioListController">
 <Template type= "List"  name = "ListTemplate"></Template>
 <Forwards>
@@ -71,10 +71,10 @@ Controller = "com.rainbow.crm.salesportfolio.controller.SalesPortfolioListContro
 <Element label = ""  type = "UINote" Id = "idperiod"  property ="User.id" />
 </Column>
 <Column title ="From_Date"  width ="15%" >
-<Element label = ""  type = "UINote" Id = "idfrmDate"  property ="FromDate" />
+<Element label = ""  type = "UINote" Id = "idfrmDate"  property ="startDate" />
 </Column>
 <Column title ="To_Date"  width ="15%" >
-<Element label = ""  type = "UINote" Id = "idDoc"  property ="ToDate" />
+<Element label = ""  type = "UINote" Id = "idDoc"  property ="EndDate" />
 </Column>
 </Columns>
 </ListSection>

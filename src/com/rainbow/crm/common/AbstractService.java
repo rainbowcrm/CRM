@@ -146,4 +146,6 @@ public abstract class AbstractService implements IBusinessService{
 		 return  getDAO().listData(className ,from, to, additionalCondition.toString() , orderBy);
 
 	}
+	
+	
 }

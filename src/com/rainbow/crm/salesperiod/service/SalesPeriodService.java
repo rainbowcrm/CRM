@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.AbstractService;
+import com.rainbow.crm.common.AbstractionTransactionService;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMDBException;
 import com.rainbow.crm.common.CRMValidator;
@@ -38,7 +39,7 @@ import com.techtrade.rads.framework.model.transaction.TransactionResult;
 import com.techtrade.rads.framework.utils.Utils;
 
 @Transactional
-public class SalesPeriodService extends AbstractService implements ISalesPeriodService{
+public class SalesPeriodService extends AbstractionTransactionService implements ISalesPeriodService{
 
 	@Override
 	public long getTotalRecordCount(CRMContext context) {

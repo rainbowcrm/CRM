@@ -12,6 +12,7 @@ public class SalesPortfolioLine extends CRMBusinessModelObject {
 	int lineNumber;
 	FiniteValue portfolioType;
 	String portfolioKey;
+	String portfolioValue;
 	boolean voided;
 	String comments;
 
@@ -70,5 +71,15 @@ public class SalesPortfolioLine extends CRMBusinessModelObject {
 	public void setPortfolioKey(String portfolioKey) {
 		this.portfolioKey = portfolioKey;
 	}
+
+	public String getPortfolioValue() {
+		return portfolioValue;
+	}
+
+	public void setPortfolioValue(String portfolioValue) {
+		this.portfolioValue = portfolioValue;
+	}
+	
+	
 
 }
