@@ -60,15 +60,15 @@ Controller = "com.rainbow.crm.salesportfolio.controller.SalesPortfolioListContro
 </FilterSection>
 <ListSection >
  <Columns allowrowselection ="Multiple" uniqueproperty = "Id">
-<SelectionColumn   >
+<SelectionColumn  width ="5%"  >
 <Element label = ""  type = "UICheckBox" Id = "idChkSel"  rendered="!Object.isVoided" property ="Id" />
 <Element label = ""  type = "UIImage" Id = "idChkSel"  rendered="Object.isVoided" height = "21" weight ="21" src= "./resources/images/deletedRow.jpg" />
 </SelectionColumn>
-<Column title ="Division"  width ="25%" >
+<Column title ="Division"  width ="30%" >
 <Element label = ""  type = "UINote" Id = "idperiod"  property ="Division.Name" />
 </Column>
-<Column title ="User"  width ="25%" >
-<Element label = ""  type = "UINote" Id = "idperiod"  property ="User.id" />
+<Column title ="User"  width ="30%%" >
+<Element label = ""  type = "UINote" Id = "iduse"  property ="User.userId" />
 </Column>
 <Column title ="From_Date"  width ="15%" >
 <Element label = ""  type = "UINote" Id = "idfrmDate"  property ="startDate" />

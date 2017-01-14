@@ -44,6 +44,8 @@ import com.rainbow.crm.salesportfolio.model.SalesPortfolio;
 import com.rainbow.crm.salesportfolio.model.SalesPortfolioLine;
 import com.rainbow.crm.salesportfolio.validator.SalesPortfolioErrorCodes;
 import com.rainbow.crm.salesportfolio.validator.SalesPortfolioValidator;
+import com.rainbow.crm.user.model.User;
+import com.rainbow.crm.user.service.IUserService;
 import com.rainbow.framework.nextup.NextUpGenerator;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
@@ -60,7 +62,9 @@ public class SalesPortfolioService extends AbstractService implements ISalesPort
 
 	@Override
 	public Object getById(Object PK) {
-		return getDAO().getById(PK);
+		Object object  = getDAO().getById(PK);
+		adaptToUI(null,(SalesPortfolio) object);
+		return object;
 	}
 
 	@Override
@@ -101,7 +105,7 @@ public class SalesPortfolioService extends AbstractService implements ISalesPort
 	public List<RadsError> adaptToUI(CRMContext context, ModelObject object) {
 		SalesPortfolio salesPortfolio = (SalesPortfolio) object;
 		for (SalesPortfolioLine line: salesPortfolio.getSalesPortfolioLines()) {
-			String value = getSalesPortfolioValue(line.getPortfolioType(), line.getPortfolioKey(), context);
+			String value = getSalesPortfolioValue(line.getPortfolioType(), line.getPortfolioKey());
 			line.setPortfolioValue(value);
 		}
 		return null;
@@ -133,6 +137,13 @@ public class SalesPortfolioService extends AbstractService implements ISalesPort
 			}
 		}
 		Externalize externalize = new Externalize(); ;
+		if(object.getUser() != null && !Utils.isNullString(object.getUser().getUserId())) {
+			IUserService userService = (IUserService)SpringObjectFactory.INSTANCE.getInstance("IUserService");
+			User user  = (User)userService.getById(object.getUser().getUserId());
+			object.setUser(user); 
+		}else {
+			ans.add(CRMValidator.getErrorforCode(context.getLocale(), SalesPortfolioErrorCodes.FIELD_EMPTY , externalize.externalize(context, "User")));
+		}
 		
 		if(!Utils.isNullSet(object.getSalesPortfolioLines())){
 			int lineNo=1;
@@ -210,14 +221,13 @@ public class SalesPortfolioService extends AbstractService implements ISalesPort
 
 	}
 	
-	private String getSalesPortfolioValue(FiniteValue type, String id,
-			CRMContext context) {
+	private String getSalesPortfolioValue(FiniteValue type, String id) {
 		if (CRMConstants.SALESPFTYPE.CATEGORY.equals(type.getCode())) {
 			ICategoryService service = (ICategoryService) SpringObjectFactory.INSTANCE
 					.getInstance("ICategoryService");
 			Category object = new Category();
 			object.setId(Integer.parseInt(id));
-			object = (Category) service.getById(object);
+			object = (Category) service.getById(object.getId());
 			if (object != null)
 				return String.valueOf(object.getName());
 			else
@@ -228,7 +238,7 @@ public class SalesPortfolioService extends AbstractService implements ISalesPort
 					.getInstance("IBrandService");
 			Brand object = new Brand();
 			object.setId(Integer.parseInt(id));
-			object = (Brand) service.getById(object);
+			object = (Brand) service.getById(object.getId());
 			if (object != null)
 				return String.valueOf(object.getName());
 			else
@@ -239,7 +249,7 @@ public class SalesPortfolioService extends AbstractService implements ISalesPort
 					.getInstance("IProductService");
 			Product object = new Product();
 			object.setId(Integer.parseInt(id));
-			object = (Product) service.getById(object);
+			object = (Product) service.getById(object.getId());
 			if (object != null)
 				return String.valueOf(object.getName());
 			else
@@ -250,7 +260,7 @@ public class SalesPortfolioService extends AbstractService implements ISalesPort
 					.getInstance("IItemService");
 			Item object = new Item();
 			object.setId(Integer.parseInt(id));
-			object = (Item) service.getById(object);
+			object = (Item) service.getById(object.getId());
 			if (object != null)
 				return String.valueOf(object.getName());
 			else

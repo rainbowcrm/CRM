@@ -94,7 +94,9 @@ public abstract class CRMTransactionController extends TransactionController {
 
 	@Override
 	public ModelObject populateFullObjectfromPK(ModelObject objects) {
-		return (ModelObject) getService().getById(object.getPK());
+		object = (ModelObject) getService().getById(object.getPK());
+		adapttoUI(object);
+		return object;
 	}
 
 	@Override
