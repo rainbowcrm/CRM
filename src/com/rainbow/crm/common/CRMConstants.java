@@ -23,6 +23,14 @@ public class CRMConstants {
 	public final static String FV_EVALDATE = "EVALDATE";
 	public final static String FV_EVALCRIT = "EVALCRT";
 	public final static String FV_CONFVALTYPE = "CONFVALTYP";
+	public final static String FV_SPFTYPE = "SPFTYPE";
+	
+	public final static class SALESPFTYPE{
+		public final static String CATEGORY = "SPFCATG";
+		public final static String PRODUCT = "SPFPROD";
+		public final static String BRAND = "SPFBRAND";
+		public final static String ITEM = "SPFITEM";
+	}
 	
 	public final static class SALESCYCLE_STATUS {
 		public final static String INITIATED = "INIT";

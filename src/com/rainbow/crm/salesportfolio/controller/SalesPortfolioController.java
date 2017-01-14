@@ -9,12 +9,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
+import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMDBException;
 import com.rainbow.crm.common.CRMTransactionController;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
+import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.database.LoginSQLs;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.division.service.IDivisionService;
@@ -56,4 +58,8 @@ public class SalesPortfolioController extends CRMTransactionController{
 		return ans;
 	}
 
+	public Map <String, String > getAllTypes() {
+		Map<String, String> ans = GeneralSQLs.getFiniteValues(CRMConstants.FV_SPFTYPE);
+		return ans;
+	}
 }

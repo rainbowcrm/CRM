@@ -6,17 +6,17 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
+import com.rainbow.crm.brand.model.Brand;
+import com.rainbow.crm.brand.service.IBrandService;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.database.LoginSQLs;
-import com.rainbow.crm.product.model.Product;
-import com.rainbow.crm.product.service.IProductService;
 import com.techtrade.rads.framework.context.IRadsContext;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.ui.abstracts.ILookupService;
 import com.techtrade.rads.framework.utils.Utils;
 
-public class LookupProducts implements ILookupService{
+public class LookupBrands implements ILookupService{
 
 	@Override
 	public List<Object> lookupData(IRadsContext ctx, String searchString,
@@ -27,10 +27,10 @@ public class LookupProducts implements ILookupService{
 			searchString = searchString.replace("*", "%");
 			condition =  " where name like  '" + searchString + "'" ;
 		}
-		IProductService service = (IProductService) SpringObjectFactory.INSTANCE.getInstance("IProductService");
-		List<?  extends CRMModelObject> products = service.listData(from, from  + noRecords, condition,(CRMContext)ctx);
-		for (ModelObject obj :  products) {
-			ans.add(((Product)obj).getName());
+		IBrandService service = (IBrandService) SpringObjectFactory.INSTANCE.getInstance("IBrandService");
+		List<? extends CRMModelObject> items = service.listData(from, from  + noRecords, condition,(CRMContext)ctx);
+		for (ModelObject obj :  items) {
+			ans.add(((Brand)obj).getName());
 		}
 
 		return ans;

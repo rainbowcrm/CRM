@@ -55,6 +55,8 @@
 </Page>
 <Page id = "salesperiodlist" definition ="/resources/pages/salesperiod/salesPeriodList.xml" modelclass = "com.rainbow.crm.salesperiod.model.SalesPeriod" >
 </Page>
+<Page id = "salesportfoliolist" definition ="/resources/pages/salesportfolio/salesportfolioList.xml" modelclass = "com.rainbow.crm.salesportfolio.model.SalesPortfolio" >
+</Page>
 <Page id = "sales" definition ="/resources/pages/sales/salesList.xml" modelclass = "com.rainbow.crm.sales.model.Sales" >
 </Page>
 <Page id = "wishlist" definition ="/resources/pages/wishlist/wishlistList.xml" modelclass = "com.rainbow.crm.wishlist.model.WishList" >
@@ -102,6 +104,8 @@
 <Page id = "newpurchase" definition ="/resources/pages/purchase/newpurchase.xml" modelclass = "com.rainbow.crm.purchase.model.Purchase" >
 </Page>
 <Page id = "newsalesperiod" definition ="/resources/pages/salesperiod/newsalesperiod.xml" modelclass = "com.rainbow.crm.salesperiod.model.SalesPeriod" >
+</Page>
+<Page id = "newsalesportfolio" definition ="/resources/pages/salesportfolio/newsalesportfolio.xml" modelclass = "com.rainbow.crm.salesportfolio.model.SalesPortfolio" >
 </Page>
 <Page id = "newsales" definition ="/resources/pages/sales/newsale.xml" modelclass = "com.rainbow.crm.sales.model.Sales" >
 </Page>
@@ -191,10 +195,14 @@
 	<Element label = "" type = "UIMenu" Id = "menu05" style="menustyle" title="Loyalty" link = "rdscontroller?page=customers"   />
 	<Element label = "" type = "UIMenu" Id = "menu05" style="menustyle" title="Wish_List" link = "rdscontroller?page=wishlist"   />
  </Element>
- <Element label = "" type = "UIMenu" Id = "menu30" style="menustyleParent" title="Sales_Marketing" groupId= "menuGRP004"  >
+ <Element label = "" type = "UIMenu" Id = "menu300" style="menustyleParent" title="Sales_Planning" groupId= "menuGRP0040"  >
+	 <Element label = "" type = "UIMenu" Id = "menu301" style="menustyle" title="Sales_Associate_PortFolio" link = "rdscontroller?page=salesportfoliolist"   />
+	 <Element label = "" type = "UIMenu" Id = "menu302" style="menustyle" title="Sales_Period_Item" link = "rdscontroller?page=salesperiodlist"   />
+	 <Element label = "" type = "UIMenu" Id = "menu302" style="menustyle" title="Sales_Target_Associates" link = "rdscontroller?page=salesperiodlist"   /> 
+	<Element label = "" type = "UIMenu" Id = "menu303" style="menustyle" title="Expenses" link = "rdscontroller?page=salesexpenses"   />
+ </Element>
+ <Element label = "" type = "UIMenu" Id = "menu30" style="menustyleParent" title="Sales_Operations" groupId= "menuGRP004"  >
  	<Element label = "" type = "UIMenu" Id = "menu301" style="menustyle" title="Alerts" link = "rdscontroller?page=alerts"   />
- 	<Element label = "" type = "UIMenu" Id = "menu31" style="menustyle" title="Sales_Period" link = "rdscontroller?page=salesperiodlist"   />
-	<Element label = "" type = "UIMenu" Id = "menu33" style="menustyle" title="Expenses" link = "rdscontroller?page=salesexpenses"   />
 	<Element label = "" type = "UIMenu" Id = "menu34" style="menustyle" title="Sales_Leads" link = "rdscontroller?page=saleslead"   />
 	<Element label = "" type = "UIMenu" Id = "menu35" style="menustyle" title="Followups" link = "rdscontroller?page=followups"   />
  </Element>
@@ -228,6 +236,12 @@
  lookuppage= "lookup">
 </Lookup>
 <Lookup type ="division" lookupservice="com.rainbow.crm.lookups.LookupDivisions" 
+ lookuppage= "lookup">
+</Lookup>
+<Lookup type ="salesportfoliokey" lookupservice="com.rainbow.crm.lookups.LookupSalesPortfolioKeys" 
+ lookuppage= "lookup">
+</Lookup>
+<Lookup type ="brand" lookupservice="com.rainbow.crm.lookups.LookupBrands" 
  lookuppage= "lookup">
 </Lookup>
 <Lookup type ="item" lookupservice="com.rainbow.crm.lookups.LookupItems" 

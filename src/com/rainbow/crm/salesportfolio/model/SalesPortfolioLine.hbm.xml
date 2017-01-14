@@ -4,7 +4,7 @@
  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
 
 <hibernate-mapping>
-<class name="com.rainbow.crm.salesportfolio.model.SalesPortfolioLine" table="SALESPERIOD_LINES" lazy="false">
+<class name="com.rainbow.crm.salesportfolio.model.SalesPortfolioLine" table="SAPORTFOLIO_LINES" lazy="false">
 	<meta attribute="class-description">
          This class contains the Sales Period Lines 
       </meta>

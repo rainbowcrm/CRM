@@ -76,7 +76,7 @@
     </bean>
     <bean id="ISalesPeriodService" class="com.rainbow.crm.salesperiod.service.SalesPeriodService">
     </bean>
-    <bean id="ISalesPortolioService" class="com.rainbow.crm.salesportfolio.service.SalesPortfolioService">
+    <bean id="ISalesPortfolioService" class="com.rainbow.crm.salesportfolio.service.SalesPortfolioService">
     </bean>
     <bean id="ISalesService" class="com.rainbow.crm.sales.service.SalesService">
     </bean>
@@ -196,7 +196,7 @@
         <value>com/rainbow/crm/purchase/model/PurchaseLine.hbm.xml</value>
         <value>com/rainbow/crm/salesperiod/model/SalesPeriod.hbm.xml</value>
         <value>com/rainbow/crm/salesperiod/model/SalesPeriodLine.hbm.xml</value>
-        <value>com/rainbow/crm/salesportfolio/model/SalesPeriod.hbm.xml</value>
+        <value>com/rainbow/crm/salesportfolio/model/SalesPortfolio.hbm.xml</value>
         <value>com/rainbow/crm/salesportfolio/model/SalesPortfolioLine.hbm.xml</value>
         <value>com/rainbow/crm/sales/model/Sales.hbm.xml</value>
         <value>com/rainbow/crm/sales/model/SalesLine.hbm.xml</value>  

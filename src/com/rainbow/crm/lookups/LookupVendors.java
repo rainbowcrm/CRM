@@ -21,7 +21,7 @@ import com.techtrade.rads.framework.utils.Utils;
 public class LookupVendors implements ILookupService{
 	
 	@Override
-	public List<Object> lookupData(IRadsContext ctx,String searchString, int from, int noRecords) {
+	public List<Object> lookupData(IRadsContext ctx,String searchString, int from, int noRecords, String lookupParam) {
 		List<Object> ans = new ArrayList<Object>();
 		String condition = null;
 		if (!Utils.isNull(searchString)) { 

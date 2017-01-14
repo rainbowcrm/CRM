@@ -6,6 +6,7 @@
 <Elements>
 <UIForm Id ="lookupFrm" method = "POST" >
 <Section type ="querySection">
+<Element label = ""  type = "UIHidden" Id = "additionalParam"   />
 <Element label = "" type = "UIText" Id = "txtSearch" property="x"/>
 <Element caption = "Search"  type = "UIButton"    Id = "btnSearch"  style="button" fixedAction ="FixedAction.ACTION_PLAINSUBMIT"  />
 
