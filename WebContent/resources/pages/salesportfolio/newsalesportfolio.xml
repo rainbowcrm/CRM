@@ -37,7 +37,8 @@ Controller = "com.rainbow.crm.salesportfolio.controller.SalesPortfolioController
 	 <width>290</width>
 </Element> 	
 	<Element label = "Comments"  type = "UIText" Id = "txtDesc" isMandatory="true"  size  = "40"  property ="comments" />
-	
+	<Element label = "Voided"  type = "UIBooleanCheckBox" Id = "txtBoolVoid" hiddenControlId= "txtVoidedValue"   property ="voided" />
+	<Element label = ""  type = "UILabel" Id = "txtBoolExpired" rendered ="expired" value ="Expired" />
 </Section>
 <Section type ="brk1"/>
 <Section type ="detail">

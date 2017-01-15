@@ -197,8 +197,7 @@
  </Element>
  <Element label = "" type = "UIMenu" Id = "menu300" style="menustyleParent" title="Sales_Planning" groupId= "menuGRP0040"  >
 	 <Element label = "" type = "UIMenu" Id = "menu301" style="menustyle" title="Sales_Associate_PortFolio" link = "rdscontroller?page=salesportfoliolist"   />
-	 <Element label = "" type = "UIMenu" Id = "menu302" style="menustyle" title="Sales_Period_Item" link = "rdscontroller?page=salesperiodlist"   />
-	 <Element label = "" type = "UIMenu" Id = "menu302" style="menustyle" title="Sales_Target_Associates" link = "rdscontroller?page=salesperiodlist"   /> 
+	 <Element label = "" type = "UIMenu" Id = "menu302" style="menustyle" title="Sales_Period" link = "rdscontroller?page=salesperiodlist"   />
 	<Element label = "" type = "UIMenu" Id = "menu303" style="menustyle" title="Expenses" link = "rdscontroller?page=salesexpenses"   />
  </Element>
  <Element label = "" type = "UIMenu" Id = "menu30" style="menustyleParent" title="Sales_Operations" groupId= "menuGRP004"  >
@@ -290,6 +289,10 @@
  <AjaxService service ="skuSearch" class = "com.rainbow.crm.item.service.SkuAjaxService">
  <key>Code</key>
  <key>Barcode</key>
+ <key>Name</key>
+ </AjaxService>
+ <AjaxService service ="itemSearch" class = "com.rainbow.crm.item.service.ItemAjaxService">
+ <key>Code</key>
  <key>Name</key>
  </AjaxService>
   <AjaxService service ="customerSearch" class = "com.rainbow.crm.customer.service.CustomerAjaxService">

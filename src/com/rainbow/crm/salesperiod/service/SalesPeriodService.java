@@ -29,9 +29,12 @@ import com.rainbow.crm.item.service.IItemService;
 import com.rainbow.crm.item.service.ISkuService;
 import com.rainbow.crm.salesperiod.dao.SalesPeriodDAO;
 import com.rainbow.crm.salesperiod.model.SalesPeriod;
+import com.rainbow.crm.salesperiod.model.SalesPeriodAssociate;
 import com.rainbow.crm.salesperiod.model.SalesPeriodLine;
 import com.rainbow.crm.salesperiod.validator.SalesPeriodErrorCodes;
 import com.rainbow.crm.salesperiod.validator.SalesPeriodValidator;
+import com.rainbow.crm.user.model.User;
+import com.rainbow.crm.user.service.IUserService;
 import com.rainbow.framework.nextup.NextUpGenerator;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
@@ -125,6 +128,22 @@ public class SalesPeriodService extends AbstractionTransactionService implements
 					IItemService itemService = (IItemService)SpringObjectFactory.INSTANCE.getInstance("IItemService");
 					Item item = itemService.getByName(object.getCompany().getId(), itemName);
 					line.setItem(item);
+				}
+			}
+		}
+		
+		if(!Utils.isNullSet(object.getSalesPeriodAsssociates())){
+			int lineNo=1;
+			for (SalesPeriodAssociate line: object.getSalesPeriodAsssociates()) {
+				line.setCompany(company);
+				line.setPeriod(object.getPeriod());
+				line.setLineNumber(lineNo ++);
+				if(line.getUser() == null ) {
+					ans.add(CRMValidator.getErrorforCode(context.getLocale(), SalesPeriodErrorCodes.FIELD_NOT_VALID , externalize.externalize(context, "User")));
+				}else {
+					IUserService userService = (IUserService)SpringObjectFactory.INSTANCE.getInstance("IUserService");
+					User user  = (User)userService.getById(line.getUser().getUserId());
+					line.setUser(user);
 				}
 			}
 		}

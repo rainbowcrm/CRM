@@ -30,5 +30,9 @@
      	 <key column="SALES_PERIOD_ID"></key>
       <one-to-many class="com.rainbow.crm.salesperiod.model.SalesPeriodLine"/>
       </set>
+       <set   name="salesPeriodAsssociates" cascade="all" inverse="true" lazy="false"  order-by="lineNumber" >
+     	 <key column="SALES_PERIOD_ID"></key>
+      <one-to-many class="com.rainbow.crm.salesperiod.model.SalesPeriodAssociate"/>
+      </set>
  </class>
 </hibernate-mapping>

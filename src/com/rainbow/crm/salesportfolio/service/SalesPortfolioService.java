@@ -55,6 +55,13 @@ import com.techtrade.rads.framework.utils.Utils;
 @Transactional
 public class SalesPortfolioService extends AbstractService implements ISalesPortfolioService{
 
+	
+	
+	@Override
+	public List<SalesPortfolio> getPortfoliosforExpiry(Date date) {
+		return ((SalesPortfolioDAO)getDAO()).getPortfoliosforExpiry(date);
+	}
+
 	@Override
 	public long getTotalRecordCount(CRMContext context) {
 		return getDAO().getTotalRecordCount("SalesPortfolio",context);

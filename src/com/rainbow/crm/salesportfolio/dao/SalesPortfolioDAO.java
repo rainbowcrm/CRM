@@ -1,5 +1,6 @@
 package com.rainbow.crm.salesportfolio.dao;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -23,7 +24,15 @@ public class SalesPortfolioDAO  extends SpringHibernateDAO{
 
 	
 	
-	
+	public List<SalesPortfolio> getPortfoliosforExpiry(Date date) {
+		Session session = openSession(false);
+		Query query = session.createQuery(" from SalesPortfolio where endDate < :endDate    and expired = false  " ) ;
+		query.setParameter("endDate", new Timestamp(date.getTime() ));
+		List<SalesPortfolio> lst = query.list();
+		closeSession(session, false);
+		return lst;
+	}
+
 	/*@Override
 	public void create(CRMModelObject object) {
 		SalesPortfolio salesPortfolio = (SalesPortfolio) object ;

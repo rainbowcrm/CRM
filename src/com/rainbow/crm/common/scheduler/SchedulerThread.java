@@ -15,6 +15,8 @@ import com.rainbow.crm.followup.model.Followup;
 import com.rainbow.crm.followup.service.IFollowupService;
 import com.rainbow.crm.salesperiod.model.SalesPeriod;
 import com.rainbow.crm.salesperiod.service.ISalesPeriodService;
+import com.rainbow.crm.salesportfolio.model.SalesPortfolio;
+import com.rainbow.crm.salesportfolio.service.ISalesPortfolioService;
 import com.techtrade.rads.framework.utils.Utils;
 
 public class SchedulerThread extends Thread{
@@ -66,12 +68,25 @@ public class SchedulerThread extends Thread{
 		for (; ; ) {
 		raiseSalesPeriodAlerts();
 		raiseFollowupAlerts();
+		expireSalesPortFolios();
 		Thread.sleep(interval);
 		}
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}
 		
+	}
+
+	private void expireSalesPortFolios() {
+		ISalesPortfolioService service = (ISalesPortfolioService) SpringObjectFactory.INSTANCE.getInstance("ISalesPortfolioService") ;
+		List<SalesPortfolio> portfolios =service.getPortfoliosforExpiry(new java.util.Date());
+		if(! Utils.isNullList(portfolios)) {
+			for (SalesPortfolio portfolio : portfolios)  {
+				CRMContext context =makeContext(portfolio);
+				portfolio.setExpired(true);
+				service.update(portfolio, context);
+			}
+		}
 	}
 	
 	private void raiseFollowupAlerts () {

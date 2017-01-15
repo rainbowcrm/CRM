@@ -23,7 +23,8 @@
  </Errors>
  <Sections>
   <Section Id ="topBar"  style ="topBar"  >
-  <Panel key ="topBar"  Id ="tpBR" > </Panel>  
+  <Panel key ="topBar"  Id ="tpBR" > </Panel>
+    
  </Section>
  <Section Id ="leftsideBar"  style ="leftnav"  >
   <Panel key ="menuPanel"  Id ="leftnav" > </Panel>  

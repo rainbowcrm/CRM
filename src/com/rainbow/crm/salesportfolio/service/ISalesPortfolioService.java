@@ -9,6 +9,7 @@ import com.rainbow.crm.salesportfolio.model.SalesPortfolio;
 
 public interface ISalesPortfolioService extends ITransactionService{
 
+	public List<SalesPortfolio> getPortfoliosforExpiry(Date date) ;
 
 
   

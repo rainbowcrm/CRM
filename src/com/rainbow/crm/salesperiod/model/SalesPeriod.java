@@ -26,6 +26,7 @@ public class SalesPeriod extends CRMBusinessModelObject{
 	boolean startAlerted;
 	boolean endAlerted;
 	Set<SalesPeriodLine> salesPeriodLines;
+	Set<SalesPeriodAssociate> salesPeriodAsssociates ;
 	
 	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
 	public Division getDivision() {
@@ -85,6 +86,19 @@ public class SalesPeriod extends CRMBusinessModelObject{
 		if (salesPeriodLines == null )
 			salesPeriodLines = new LinkedHashSet <SalesPeriodLine> ();
 		this.salesPeriodLines.add(salesPeriodLine);
+	}
+	public void addSalesPeriodAssociate(SalesPeriodAssociate salesPeriodAssociate) {
+		if (salesPeriodAsssociates == null )
+			salesPeriodAsssociates = new LinkedHashSet <SalesPeriodAssociate> ();
+		this.salesPeriodAsssociates.add(salesPeriodAssociate);
+	}
+	
+	public Set<SalesPeriodAssociate> getSalesPeriodAsssociates() {
+		return salesPeriodAsssociates;
+	}
+	public void setSalesPeriodAsssociates(
+			Set<SalesPeriodAssociate> salesPeriodAsssociates) {
+		this.salesPeriodAsssociates = salesPeriodAsssociates;
 	}
 	public double getAdditionalTarget() {
 		return additionalTarget;

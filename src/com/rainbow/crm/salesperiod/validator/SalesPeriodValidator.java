@@ -5,6 +5,7 @@ import com.rainbow.crm.common.CRMValidator;
 import com.rainbow.crm.common.CommonErrorCodes;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.salesperiod.model.SalesPeriod;
+import com.rainbow.crm.salesperiod.model.SalesPeriodAssociate;
 import com.rainbow.crm.salesperiod.model.SalesPeriodLine;
 import com.rainbow.crm.salesperiod.service.ISalesPeriodService;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
@@ -61,6 +62,20 @@ public class SalesPeriodValidator extends CRMValidator {
 					errors.add(getErrorforCode(CommonErrorCodes.SHOULD_BE_GREATER_THAN,externalize.externalize(context, "Target_Qty") + line.getItem().getCode(),"0") ) ;
 				}
 			}
+		}
+		
+		if(!Utils.isNullSet(salesPeriod.getSalesPeriodAsssociates())){
+			for (SalesPeriodAssociate line: salesPeriod.getSalesPeriodAsssociates()) {
+				if (line.getUser() == null ) {
+					errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Item"))) ;
+				}else if (line.getUser().isDeleted() ) {
+					errors.add(getErrorforCode(CommonErrorCodes.OBJECT_DELETED,externalize.externalize(context, "Item") + line.getUser().getUserId())) ;
+				}else if (line.getLineTotal() <=0 ) {
+					errors.add(getErrorforCode(CommonErrorCodes.SHOULD_BE_GREATER_THAN,externalize.externalize(context, "Total") + line.getUser().getUserId(),"0") ) ;
+				}
+				
+			}
+			
 		}
 	}
 	public SalesPeriodValidator(CRMContext context) {
