@@ -132,9 +132,9 @@ public class SalesPeriodService extends AbstractionTransactionService implements
 			}
 		}
 		
-		if(!Utils.isNullSet(object.getSalesPeriodAsssociates())){
+		if(!Utils.isNullSet(object.getSalesPeriodAssociates())){
 			int lineNo=1;
-			for (SalesPeriodAssociate line: object.getSalesPeriodAsssociates()) {
+			for (SalesPeriodAssociate line: object.getSalesPeriodAssociates()) {
 				line.setCompany(company);
 				line.setPeriod(object.getPeriod());
 				line.setLineNumber(lineNo ++);
@@ -158,6 +158,11 @@ public class SalesPeriodService extends AbstractionTransactionService implements
 			salesPeriod.setId(pk);
 			for (SalesPeriodLine  line : salesPeriod.getSalesPeriodLines()) {
 				int linePK = GeneralSQLs.getNextPKValue( "SalesPeriod_Lines") ;
+				line.setId(linePK);
+				line.setSalesPeriodDoc(salesPeriod);
+			}
+			for (SalesPeriodAssociate  line : salesPeriod.getSalesPeriodAssociates()) {
+				int linePK = GeneralSQLs.getNextPKValue( "SALESPERIOD_ASSOCIATES") ;
 				line.setId(linePK);
 				line.setSalesPeriodDoc(salesPeriod);
 			}
@@ -193,6 +198,31 @@ public class SalesPeriodService extends AbstractionTransactionService implements
 				salesPeriod.addSalesPeriodLine(oldLine);
 			}
 		}
+		
+		if (!Utils.isNullSet(salesPeriod.getSalesPeriodAssociates())) {
+			int  ct = 0;
+			Iterator it = oldObject.getSalesPeriodAssociates().iterator() ;
+			for (SalesPeriodAssociate  line : salesPeriod.getSalesPeriodAssociates()) {
+				SalesPeriodAssociate oldLine = null ;
+				if (it.hasNext()) {
+					oldLine= (SalesPeriodAssociate) it.next() ;
+				}
+				line.setSalesPeriodDoc(salesPeriod);
+				if (oldLine != null) {
+					line.setId(oldLine.getId());
+					line.setObjectVersion(oldLine.getObjectVersion());
+				}else {
+					int linePK = GeneralSQLs.getNextPKValue( "SalesPeriod_Lines") ;
+					line.setId(linePK);
+				}
+			}
+			while (it.hasNext()) {
+				SalesPeriodAssociate oldLine= (SalesPeriodAssociate) it.next() ;
+				oldLine.setVoided(true);
+				salesPeriod.addSalesPeriodAssociate(oldLine);
+			}
+		}
+		
 		return super.update(object, context);
 	}
 

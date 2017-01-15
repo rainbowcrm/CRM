@@ -64,8 +64,8 @@ public class SalesPeriodValidator extends CRMValidator {
 			}
 		}
 		
-		if(!Utils.isNullSet(salesPeriod.getSalesPeriodAsssociates())){
-			for (SalesPeriodAssociate line: salesPeriod.getSalesPeriodAsssociates()) {
+		if(!Utils.isNullSet(salesPeriod.getSalesPeriodAssociates())){
+			for (SalesPeriodAssociate line: salesPeriod.getSalesPeriodAssociates()) {
 				if (line.getUser() == null ) {
 					errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Item"))) ;
 				}else if (line.getUser().isDeleted() ) {
