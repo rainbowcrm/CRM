@@ -21,13 +21,22 @@ public class LookupUsers implements ILookupService{
 	@Override
 	public List<Object> lookupData(IRadsContext ctx,String searchString, int from, int noRecords, String lookupParam) {
 		List<Object> ans = new ArrayList<Object>();
-		String condition = null;
+		StringBuffer condition = new StringBuffer("");
 		if (!Utils.isNull(searchString)) { 
 			searchString = searchString.replace("*", "%");
-			condition =  " where userId like  '" + searchString + "'" ;
+			condition.append(" where userId like  '" + searchString + "'") ;
+			
+		}
+		
+		if (!Utils.isNullString(lookupParam)) {
+			if (condition.length() > 2)
+				condition.append( " and ");
+			else
+				condition.append( " where ");
+			condition.append("  division.id=" + lookupParam);
 		}
 		IUserService service = (IUserService) SpringObjectFactory.INSTANCE.getInstance("IUserService");
-		List<? extends CRMModelObject> users = service.listData(from, from  + noRecords, condition,(CRMContext)ctx);
+		List<? extends CRMModelObject> users = service.listData(from, from  + noRecords, condition.toString(),(CRMContext)ctx);
 		for (ModelObject obj :  users) {
 			ans.add(((User)obj).getUserId());
 		}

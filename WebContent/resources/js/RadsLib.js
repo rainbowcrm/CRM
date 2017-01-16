@@ -79,15 +79,17 @@ function showLookupDialog(id,curControl,additionalControl) {
 	console.log('index=' + index); 
 	clickedCellIndex= index;
 	var dialog = document.getElementById(id);  
+
+	if( additionalControl != null &&  additionalControl != '' &&  additionalControl != 'undefined' && additionalControl != 'null')
+		document.getElementById('idFRM' +id).contentWindow.document.getElementById('additionalParam').value = document.getElementById(additionalControl).value;
+	
+	document.getElementById('idFRM' +id).contentDocument.clickedCellIndex = index;
+	document.getElementById('idFRM' +id).contentWindow.document.forms[0].submit();
 	if(!dialog.showModal)
 	{
 		dialogPolyfill.registerDialog(dialog);
 	}
 	dialog.showModal();
-	if( additionalControl != null &&  additionalControl != '' &&  additionalControl != 'undefined' && additionalControl != 'null')
-		document.getElementById('idFRM' +id).contentWindow.document.getElementById('additionalParam').value = document.getElementById(additionalControl).value;
-	
-	document.getElementById('idFRM' +id).contentDocument.clickedCellIndex = index;
 	
  }
 function fireAjaxRequest (service, requestCtrls, responseCtrls, currentCtrl) {
