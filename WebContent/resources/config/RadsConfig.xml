@@ -24,7 +24,7 @@
 </Page>
 <Page id = "appUsers" definition ="/resources/pages/user/AppUserList.xml" modelclass = "com.rainbow.crm.user.model.User" >
 </Page>
-<Page id = "lookup" definition ="/resources/pages/lookup/lookup.xml"  > </Page>
+<Page id = "lookup" definition ="/resources/pages/lookup/lookup.xml"  modelclass = "com.techtrade.rads.framework.model.simple.LookupObject" > </Page>
 <Page id = "divisions" definition ="/resources/pages/division/divisionList.xml" modelclass = "com.rainbow.crm.division.model.Division" >
 </Page>
 <Page id = "categories" definition ="/resources/pages/category/categories.xml" modelclass = "com.rainbow.crm.category.model.Category" >

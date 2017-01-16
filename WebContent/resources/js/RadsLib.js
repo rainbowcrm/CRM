@@ -74,7 +74,7 @@ function getCurrentObjectIndex(currentCtrl)  {
 }
 
 var clickedCellIndex = -1;
-function showLookupDialog(id,curControl) {
+function showLookupDialog(id,curControl,additionalControl) {
 	var index  = getCurrentObjectIndex(curControl);  
 	console.log('index=' + index); 
 	clickedCellIndex= index;
@@ -84,6 +84,9 @@ function showLookupDialog(id,curControl) {
 		dialogPolyfill.registerDialog(dialog);
 	}
 	dialog.showModal();
+	if( additionalControl != null &&  additionalControl != '' &&  additionalControl != 'undefined' && additionalControl != 'null')
+		document.getElementById('idFRM' +id).contentWindow.document.getElementById('additionalParam').value = document.getElementById(additionalControl).value;
+	
 	document.getElementById('idFRM' +id).contentDocument.clickedCellIndex = index;
 	
  }
