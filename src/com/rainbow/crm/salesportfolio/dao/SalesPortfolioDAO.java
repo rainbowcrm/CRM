@@ -33,6 +33,23 @@ public class SalesPortfolioDAO  extends SpringHibernateDAO{
 		return lst;
 	}
 
+	public List<Object> getPortfoliosforsku(int itemId, int productId, int brandId, int categoryId) {
+		Session session = openSession(false);
+		Query query = session.createQuery(" from SalesPortfolio parent  left join   SalesPortfolioLine as line with parent.id = line.salesPortfolioDoc.id  where (  " +
+		     " ( line.portfolioType.code = 'SPFITEM' and line.portfolioKey = :itemId ) or " +
+			"  ( line.portfolioType.code = 'SPFPROD' and line.portfolioKey = :productId ) or " +
+			" ( line.portfolioType.code = 'SPFBRAND' and line.portfolioKey = :brandId ) or " +
+			"  ( line.portfolioType.code = 'SPFCATG' and line.portfolioKey = :categoryId )  " +
+				" )" );
+		query.setParameter("itemId", String.valueOf(itemId));
+		query.setParameter("productId", String.valueOf(productId));
+		query.setParameter("brandId", String.valueOf(brandId));
+		query.setParameter("categoryId", String.valueOf(categoryId));
+		List<Object> lst = query.list(); 
+		closeSession(session, false);
+		return lst;
+	}
+	
 	/*@Override
 	public void create(CRMModelObject object) {
 		SalesPortfolio salesPortfolio = (SalesPortfolio) object ;

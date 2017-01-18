@@ -2,6 +2,7 @@ package com.rainbow.crm.sales.controller;
 
 import java.io.FileInputStream;
 import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,6 +79,11 @@ public class SalesController extends CRMTransactionController{
 	
 	public Map <String, String > getOrderTypes() {
 		Map<String, String> ans = GeneralSQLs.getFiniteValues(CRMConstants.FV_ORDERTYPE);
+		return ans;
+	}
+	
+	public Map <String, String > getAssociates() {
+		Map<String, String> ans = new HashMap<String,String>();
 		return ans;
 	}
 	

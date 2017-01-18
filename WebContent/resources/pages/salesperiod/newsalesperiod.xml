@@ -105,7 +105,7 @@ Controller = "com.rainbow.crm.salesperiod.controller.SalesPeriodController">
 <Element type = "UITableRow"  dataType = "com.rainbow.crm.salesperiod.model.SalesPeriodAssociate" rendered = "!Object.getVoided">
 
 <Element type ="UITableCol" width = "25%"><Element label = ""  type = "UILookupText"  Id = "txtAssociate"  size  = "40" property ="User.userId" showLookupAsDialog="true" dialogId="dlgslsAss"
-  dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
+  dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle"  additionalInputControl = "lstInvDivision" >
 	 <lookupType>user</lookupType>
 	 <height>300</height>
 	 <width>290</width>

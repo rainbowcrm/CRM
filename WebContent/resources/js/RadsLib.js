@@ -100,7 +100,11 @@ function fireAjaxRequest (service, requestCtrls, responseCtrls, currentCtrl) {
     var  property ;
 	for (property in  requestCtrls) {
 		    var ctrl =  requestCtrls[property];
-		    var elem = document.getElementsByName(ctrl)[index];
+		    var elem = '';
+		    if(document.getElementsByName(ctrl).length == 1)
+				elem = document.getElementsByName(ctrl)[0] ;
+			else if (document.getElementsByName(ctrl).length > index)
+			    elem = document.getElementsByName(ctrl)[index];
 		    var value = elem.value; 
 			requestStr = requestStr + "&" + property +"=" + value  ;
 	}
@@ -119,7 +123,11 @@ function fireAjaxRequest (service, requestCtrls, responseCtrls, currentCtrl) {
 	var jsonResponse =  JSON.parse(reqObject.responseText) ;
 	for (property in responseCtrls) {
 		var ctrl =  responseCtrls[property];
-		var elem = document.getElementsByName(ctrl)[index];
+		var elem = '';
+	    if(document.getElementsByName(ctrl).length == 1)
+			elem = document.getElementsByName(ctrl)[0] ;
+		else if (document.getElementsByName(ctrl).length > index)
+		    elem = document.getElementsByName(ctrl)[index];
 		
 		//console.log('elem = ' + elem  + 'ctrl =' + ctrl + 'prop =' + property) ;
 		//console.log('elem type= ' + (jsonResponse[property] instanceof Array)) ;

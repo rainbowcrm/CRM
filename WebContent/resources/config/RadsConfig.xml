@@ -288,6 +288,7 @@
  </AjaxService>
  <AjaxService service ="skuSearch" class = "com.rainbow.crm.item.service.SkuAjaxService">
  <key>Code</key>
+ <key>Division</key>
  <key>Barcode</key>
  <key>Name</key>
  </AjaxService>

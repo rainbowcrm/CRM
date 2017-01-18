@@ -57,6 +57,24 @@ public class SalesPortfolioService extends AbstractService implements ISalesPort
 
 	
 	
+	
+	@Override
+	public List<SalesPortfolio> getUsersforItem(Sku sku, int divisionId, Date date) {
+		List<SalesPortfolio> results = new ArrayList<SalesPortfolio>();
+		int itemId = sku.getItem().getId() ;
+		int productId = sku.getItem().getProduct().getId() ;
+		int brandId = sku.getItem().getBrand().getId();
+		int categoryId = sku.getItem().getProduct().getCategory().getId();
+		List<Object> objects =((SalesPortfolioDAO)getDAO()).getPortfoliosforsku(itemId, productId, brandId, categoryId);
+		objects.forEach( object ->  { 
+			Object []  objArray  = (Object [])object;
+			results.add((SalesPortfolio)objArray[0]);		
+		});
+		Object []  objArray  = (Object [])objects.get(0);
+		
+		return  results;
+	}
+
 	@Override
 	public List<SalesPortfolio> getPortfoliosforExpiry(Date date) {
 		return ((SalesPortfolioDAO)getDAO()).getPortfoliosforExpiry(date);

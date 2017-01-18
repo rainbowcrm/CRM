@@ -25,13 +25,14 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 <requestElements event = "">
 <requestElement key = "Name">txtItName</requestElement>
 <requestElement key = "Code">txtCode</requestElement>
+<requestElement key = "Division">lstInvDivision</requestElement>
 </requestElements>
 <responseElements>
 <!-- <responseElement key = "Name" >txtItem</responseElement>  -->
 <responseElement key = "Code">txtCode</responseElement>
 <responseElement key = "Name">txtItName</responseElement>
 <responseElement key = "RetailPrice">txtPrice</responseElement>
-
+<responseElement key = "SalesAssociates">lstAssociate</responseElement>
 </responseElements>
 </AjaxGroup>
 
@@ -90,10 +91,10 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
  <Element type = "UITableRow">
 
 <Element type ="UITableCol" width = "10%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Code" /></Element>
-<Element type ="UITableCol" width = "25%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Item" /></Element>
-<Element type ="UITableCol" width = "18%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Comments" /></Element>
-<Element type ="UITableCol" width = "8%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Price" /></Element>
-<Element type ="UITableCol" width = "8%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Qty" /></Element>
+<Element type ="UITableCol" width = "22%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Item" /></Element>
+<Element type ="UITableCol" width = "16%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Sales_Associate" /> </Element>
+<Element type ="UITableCol" width = "5%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Price" /></Element>
+<Element type ="UITableCol" width = "5%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Qty" /></Element>
 <Element type ="UITableCol" width = "8%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Discount" /></Element>
 <Element type ="UITableCol" width = "8%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Total" /></Element>
 <Element type ="UITableCol" width = "5%"> </Element>
@@ -102,16 +103,22 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 <Element type = "UITableRow"  dataType = "com.rainbow.crm.sales.model.SalesLine" rendered = "!Object.getVoided">
 
 <Element type ="UITableCol" width = "10%"><Element label = ""  type = "UIText" Id = "txtCode" size  = "10" property ="Sku.Code" /> </Element>
-<Element type ="UITableCol" width = "25%"><Element label = ""  type = "UILookupText"  Id = "txtItName"  size  = "30" property ="Sku.Name" showLookupAsDialog="true" dialogId="dlgIt"
+<Element type ="UITableCol" width = "22%"><Element label = ""  type = "UILookupText"  Id = "txtItName"  size  = "30" property ="Sku.Name" showLookupAsDialog="true" dialogId="dlgIt"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>sku</lookupType>
 	 <height>300</height>
 	 <width>290</width>
 </Element>
  </Element>
-<Element type ="UITableCol" width = "18%"><Element label = ""  type = "UIText" Id = "txtLineCo"  property ="Comments" size = "30" />  </Element>
-<Element type ="UITableCol" width = "8%"><Element label = ""  type = "UIText" Id = "txtPrice"  property ="unitPrice"  isNumeric= "true" size = "10" />  </Element>
-<Element type ="UITableCol" width = "8%"><Element label = ""  type = "UIText" Id = "txtQty"  property ="Qty"   isNumeric= "true" 
+ <Element type ="UITableCol" width = "16%">
+ <Element label = ""  type = "UIList" Id = "lstAssociate"   property ="User.userId"  externalise= "true">
+		<options populator =  "getAssociates"> 
+		</options>
+	</Element>
+</Element>
+
+<Element type ="UITableCol" width = "5%"><Element label = ""  type = "UIText" Id = "txtPrice"  property ="unitPrice"  isNumeric= "true" size = "10" />  </Element>
+<Element type ="UITableCol" width = "5%"><Element label = ""  type = "UIText" Id = "txtQty"  property ="Qty"   isNumeric= "true" 
  focusoutJS = "calculateAll()" size = "10"/>  </Element>
 <Element type ="UITableCol" width = "8%"><Element label = ""  type = "UIText" Id = "txtlineDisc"  property ="lineTotalDisc"  isNumeric= "true" size = "10" />  </Element>
 <Element type ="UITableCol" width = "8%"><Element label = ""  type = "UIText" Id = "txtlineTotal"  property ="lineTotal" size = "10"  readonly="true" />  </Element>

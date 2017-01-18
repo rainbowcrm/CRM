@@ -15,6 +15,7 @@
       <property name="billNumber" column="bill_number" type="string"/>
       <property name="lineNumber" column="LINE_NUMBER" type="integer"/>
       <many-to-one name="sku" column ="sku_id" not-null="true" lazy="false" ></many-to-one>
+      <many-to-one name="user" column ="user_id"  lazy="false" ></many-to-one>
       <property name="unitPrice" column="unit_price" type="double"/>
       <property name="qty" column="qty" type="integer"/>
       <property name="comments" column="comments" type="string"/>
