@@ -216,8 +216,15 @@
         <property name="hibernateProperties">  
             <props>  
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>  
-                <prop key="hibernate.hbm2ddl.auto">update</prop>  
-                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                
+		   <!--     <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>
+		        <prop key="hibernate.cache.use_second_level_cache">true</prop>
+				 <prop key="hibernate.cache.use_query_cache">true</prop>
+                <prop key="net.sf.ehcache.configurationResourceName">egCacheCfg.xml</prop> --> 
+                <prop key="hibernate.show_sql">true</prop>  
+                
+                
             </props>  
         </property>  
     </bean>  
@@ -226,6 +233,10 @@
     <property name="sessionFactory" ref="sessionFactory"></property>  
     </bean>  
    
+   <bean id="cacheManager"
+       class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"
+       p:shared="true"/>
+       
     <bean id="transactionInterceptor"
        class="org.springframework.transaction.interceptor.TransactionInterceptor">
 	<property name="transactionManager" ref="transactionManager" />

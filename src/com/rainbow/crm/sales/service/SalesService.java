@@ -160,6 +160,14 @@ public class SalesService extends AbstractionTransactionService implements ISale
 					Sku item = itemService.getByName(object.getCompany().getId(), itemName);
 					line.setSku(item);
 				}
+				if(line.getUser() != null) {
+					IUserService userService = (IUserService) SpringObjectFactory.INSTANCE.getInstance("IUserService");
+					User user = (User)userService.getById(line.getUser().getUserId());
+					if (user == null ) {
+						ans.add(CRMValidator.getErrorforCode(context.getLocale(), SalesErrorCodes.FIELD_NOT_VALID , externalize.externalize(context, "User")));
+					}
+					line.setUser(user);
+				}
 			}
 		}
 		if(object.getDeliveryAddress() != null  && !object.getDeliveryAddress().isNullContent()) {
@@ -179,6 +187,7 @@ public class SalesService extends AbstractionTransactionService implements ISale
 	}
 
 	@Override
+	@Transactional
 	public TransactionResult create(CRMModelObject object, CRMContext context) {
 		Sales sales = (Sales)object ;
 		

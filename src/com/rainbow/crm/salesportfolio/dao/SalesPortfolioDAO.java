@@ -33,21 +33,31 @@ public class SalesPortfolioDAO  extends SpringHibernateDAO{
 		return lst;
 	}
 
-	public List<Object> getPortfoliosforsku(int itemId, int productId, int brandId, int categoryId) {
+	public List<Object> getPortfoliosforsku(int divisionId, int itemId, int productId, int brandId, int categoryId) {
 		Session session = openSession(false);
-		Query query = session.createQuery(" from SalesPortfolio parent  left join   SalesPortfolioLine as line with parent.id = line.salesPortfolioDoc.id  where (  " +
+		Query query = session.createQuery(" from SalesPortfolio parent  left join   SalesPortfolioLine as line with parent.id = line.salesPortfolioDoc.id " + 
+		    "  where parent.division.id = :divisionId and  parent.voided = false and parent.expired= false  and(  " +
 		     " ( line.portfolioType.code = 'SPFITEM' and line.portfolioKey = :itemId ) or " +
 			"  ( line.portfolioType.code = 'SPFPROD' and line.portfolioKey = :productId ) or " +
 			" ( line.portfolioType.code = 'SPFBRAND' and line.portfolioKey = :brandId ) or " +
 			"  ( line.portfolioType.code = 'SPFCATG' and line.portfolioKey = :categoryId )  " +
 				" )" );
+		try {
+		//query.setCacheable(true);
+		query.setParameter("divisionId", divisionId);
 		query.setParameter("itemId", String.valueOf(itemId));
 		query.setParameter("productId", String.valueOf(productId));
 		query.setParameter("brandId", String.valueOf(brandId));
 		query.setParameter("categoryId", String.valueOf(categoryId));
-		List<Object> lst = query.list(); 
-		closeSession(session, false);
+		List<Object> lst = query.list();
+		System.out.println(lst);
 		return lst;
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}finally {
+		closeSession(session, false);
+		}
+		return null;
 	}
 	
 	/*@Override

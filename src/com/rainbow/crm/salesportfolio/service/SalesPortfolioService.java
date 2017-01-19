@@ -1,4 +1,3 @@
-
 package com.rainbow.crm.salesportfolio.service;
 
 import java.util.ArrayList;
@@ -53,57 +52,59 @@ import com.techtrade.rads.framework.model.transaction.TransactionResult;
 import com.techtrade.rads.framework.utils.Utils;
 
 @Transactional
-public class SalesPortfolioService extends AbstractService implements ISalesPortfolioService{
+public class SalesPortfolioService extends AbstractService implements
+		ISalesPortfolioService {
 
-	
-	
-	
 	@Override
-	public List<SalesPortfolio> getUsersforItem(Sku sku, int divisionId, Date date) {
+	public List<SalesPortfolio> getUsersforItem(Sku sku, int divisionId,
+			Date date) {
 		List<SalesPortfolio> results = new ArrayList<SalesPortfolio>();
-		int itemId = sku.getItem().getId() ;
-		int productId = sku.getItem().getProduct().getId() ;
+		int itemId = sku.getItem().getId();
+		int productId = sku.getItem().getProduct().getId();
 		int brandId = sku.getItem().getBrand().getId();
 		int categoryId = sku.getItem().getProduct().getCategory().getId();
-		List<Object> objects =((SalesPortfolioDAO)getDAO()).getPortfoliosforsku(itemId, productId, brandId, categoryId);
-		objects.forEach( object ->  { 
-			Object []  objArray  = (Object [])object;
-			results.add((SalesPortfolio)objArray[0]);		
+		List<Object> objects = ((SalesPortfolioDAO) getDAO())
+				.getPortfoliosforsku(divisionId, itemId, productId, brandId,
+						categoryId);
+		objects.forEach(object -> {
+			Object[] objArray = (Object[]) object;
+			results.add((SalesPortfolio) objArray[0]);
 		});
-		Object []  objArray  = (Object [])objects.get(0);
-		
-		return  results;
+		return results;
 	}
 
 	@Override
 	public List<SalesPortfolio> getPortfoliosforExpiry(Date date) {
-		return ((SalesPortfolioDAO)getDAO()).getPortfoliosforExpiry(date);
+		return ((SalesPortfolioDAO) getDAO()).getPortfoliosforExpiry(date);
 	}
 
 	@Override
 	public long getTotalRecordCount(CRMContext context) {
-		return getDAO().getTotalRecordCount("SalesPortfolio",context);
+		return getDAO().getTotalRecordCount("SalesPortfolio", context);
 	}
 
 	@Override
 	public Object getById(Object PK) {
-		Object object  = getDAO().getById(PK);
-		adaptToUI(null,(SalesPortfolio) object);
+		Object object = getDAO().getById(PK);
+		adaptToUI(null, (SalesPortfolio) object);
 		return object;
 	}
 
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
 			String whereCondition, CRMContext context) {
-		return super.listData("SalesPortfolio", from, to, whereCondition, context);
+		return super.listData("SalesPortfolio", from, to, whereCondition,
+				context);
 	}
 
 	@Override
 	public List<RadsError> validateforCreate(CRMModelObject object,
 			CRMContext context) {
-		ICompanyService compService = (ICompanyService)SpringObjectFactory.INSTANCE.getInstance("ICompanyService");
-		Company company = (Company)compService.getById(context.getLoggedinCompany());
-		((SalesPortfolio)object).setCompany(company);
+		ICompanyService compService = (ICompanyService) SpringObjectFactory.INSTANCE
+				.getInstance("ICompanyService");
+		Company company = (Company) compService.getById(context
+				.getLoggedinCompany());
+		((SalesPortfolio) object).setCompany(company);
 		SalesPortfolioValidator validator = new SalesPortfolioValidator(context);
 		return validator.validateforCreate(object);
 	}
@@ -111,26 +112,28 @@ public class SalesPortfolioService extends AbstractService implements ISalesPort
 	@Override
 	public List<RadsError> validateforUpdate(CRMModelObject object,
 			CRMContext context) {
-		ICompanyService compService = (ICompanyService)SpringObjectFactory.INSTANCE.getInstance("ICompanyService");
-		Company company = (Company)compService.getById(context.getLoggedinCompany());
-		((SalesPortfolio)object).setCompany(company);
+		ICompanyService compService = (ICompanyService) SpringObjectFactory.INSTANCE
+				.getInstance("ICompanyService");
+		Company company = (Company) compService.getById(context
+				.getLoggedinCompany());
+		((SalesPortfolio) object).setCompany(company);
 		SalesPortfolioValidator validator = new SalesPortfolioValidator(context);
 		return validator.validateforUpdate(object);
 	}
 
 	@Override
 	protected ORMDAO getDAO() {
-//	return new SalesPortfolioDAO();
-	return (SalesPortfolioDAO) SpringObjectFactory.INSTANCE.getInstance("SalesPortfolioDAO");
+		// return new SalesPortfolioDAO();
+		return (SalesPortfolioDAO) SpringObjectFactory.INSTANCE
+				.getInstance("SalesPortfolioDAO");
 	}
 
-	
-	
 	@Override
 	public List<RadsError> adaptToUI(CRMContext context, ModelObject object) {
 		SalesPortfolio salesPortfolio = (SalesPortfolio) object;
-		for (SalesPortfolioLine line: salesPortfolio.getSalesPortfolioLines()) {
-			String value = getSalesPortfolioValue(line.getPortfolioType(), line.getPortfolioKey());
+		for (SalesPortfolioLine line : salesPortfolio.getSalesPortfolioLines()) {
+			String value = getSalesPortfolioValue(line.getPortfolioType(),
+					line.getPortfolioKey());
 			line.setPortfolioValue(value);
 		}
 		return null;
@@ -138,55 +141,76 @@ public class SalesPortfolioService extends AbstractService implements ISalesPort
 
 	@Override
 	public List<RadsError> adaptfromUI(CRMContext context, ModelObject object) {
-		return adaptfromUI(context, (SalesPortfolio)object);
+		return adaptfromUI(context, (SalesPortfolio) object);
 	}
 
-	private List<RadsError> adaptfromUI(CRMContext context,SalesPortfolio object) {
-		ICompanyService compService = (ICompanyService) SpringObjectFactory.INSTANCE.getInstance("ICompanyService");
-		Company company = (Company)compService.getById(context.getLoggedinCompany());
+	private List<RadsError> adaptfromUI(CRMContext context,
+			SalesPortfolio object) {
+		ICompanyService compService = (ICompanyService) SpringObjectFactory.INSTANCE
+				.getInstance("ICompanyService");
+		Company company = (Company) compService.getById(context
+				.getLoggedinCompany());
 		object.setCompany(company);
-				
+
 		List<RadsError> ans = new ArrayList<RadsError>();
 		if (object.getDivision() != null) {
-			int divisionId  = object.getDivision().getId() ;
-			IDivisionService divisionService =(IDivisionService) SpringObjectFactory.INSTANCE.getInstance("IDivisionService");
+			int divisionId = object.getDivision().getId();
+			IDivisionService divisionService = (IDivisionService) SpringObjectFactory.INSTANCE
+					.getInstance("IDivisionService");
 			Division division = null;
-			if (divisionId > 0 )
-				division = (Division)divisionService.getById(divisionId);
+			if (divisionId > 0)
+				division = (Division) divisionService.getById(divisionId);
 			else
-				division  = (Division)divisionService.getByBusinessKey(object.getDivision(), context);
-			if(division == null){
-				ans.add(CRMValidator.getErrorforCode(context.getLocale(), SalesPortfolioErrorCodes.FIELD_NOT_VALID , "Division"));
-			}else {
+				division = (Division) divisionService.getByBusinessKey(
+						object.getDivision(), context);
+			if (division == null) {
+				ans.add(CRMValidator.getErrorforCode(context.getLocale(),
+						SalesPortfolioErrorCodes.FIELD_NOT_VALID, "Division"));
+			} else {
 				object.setDivision(division);
 			}
 		}
-		Externalize externalize = new Externalize(); ;
-		if(object.getUser() != null && !Utils.isNullString(object.getUser().getUserId())) {
-			IUserService userService = (IUserService)SpringObjectFactory.INSTANCE.getInstance("IUserService");
-			User user  = (User)userService.getById(object.getUser().getUserId());
-			object.setUser(user); 
-		}else {
-			ans.add(CRMValidator.getErrorforCode(context.getLocale(), SalesPortfolioErrorCodes.FIELD_EMPTY , externalize.externalize(context, "User")));
+		Externalize externalize = new Externalize();
+		;
+		if (object.getUser() != null
+				&& !Utils.isNullString(object.getUser().getUserId())) {
+			IUserService userService = (IUserService) SpringObjectFactory.INSTANCE
+					.getInstance("IUserService");
+			User user = (User) userService
+					.getById(object.getUser().getUserId());
+			object.setUser(user);
+		} else {
+			ans.add(CRMValidator.getErrorforCode(context.getLocale(),
+					SalesPortfolioErrorCodes.FIELD_EMPTY,
+					externalize.externalize(context, "User")));
 		}
-		
-		if(!Utils.isNullSet(object.getSalesPortfolioLines())){
-			int lineNo=1;
-			for (SalesPortfolioLine line: object.getSalesPortfolioLines()) {
+
+		if (!Utils.isNullSet(object.getSalesPortfolioLines())) {
+			int lineNo = 1;
+			for (SalesPortfolioLine line : object.getSalesPortfolioLines()) {
 				line.setCompany(company);
-				line.setLineNumber(lineNo ++);
-				if(line.getPortfolioType() == null  || line.getPortfolioType().getCode() == null) {
-					ans.add(CRMValidator.getErrorforCode(context.getLocale(), SalesPortfolioErrorCodes.FIELD_EMPTY , externalize.externalize(context, "Type")));
+				line.setLineNumber(lineNo++);
+				if (line.getPortfolioType() == null
+						|| line.getPortfolioType().getCode() == null) {
+					ans.add(CRMValidator.getErrorforCode(context.getLocale(),
+							SalesPortfolioErrorCodes.FIELD_EMPTY,
+							externalize.externalize(context, "Type")));
 				}
-				if (Utils.isNullString(line.getPortfolioValue()) ) {
-					ans.add(CRMValidator.getErrorforCode(context.getLocale(), SalesPortfolioErrorCodes.FIELD_EMPTY , externalize.externalize(context, "Value")));
-				}else {
-					
-					String portfolioKey =  getSalesPortfolioKey (line.getPortfolioType(),line.getPortfolioValue(),context);
-					if("-1".equalsIgnoreCase(portfolioKey)) {
-						ans.add(CRMValidator.getErrorforCode(context.getLocale(), SalesPortfolioErrorCodes.VALUE_NOT_FOUND , externalize.externalize(context, "Value")));
-					}
-					else
+				if (Utils.isNullString(line.getPortfolioValue())) {
+					ans.add(CRMValidator.getErrorforCode(context.getLocale(),
+							SalesPortfolioErrorCodes.FIELD_EMPTY,
+							externalize.externalize(context, "Value")));
+				} else {
+
+					String portfolioKey = getSalesPortfolioKey(
+							line.getPortfolioType(), line.getPortfolioValue(),
+							context);
+					if ("-1".equalsIgnoreCase(portfolioKey)) {
+						ans.add(CRMValidator.getErrorforCode(
+								context.getLocale(),
+								SalesPortfolioErrorCodes.VALUE_NOT_FOUND,
+								externalize.externalize(context, "Value")));
+					} else
 						line.setPortfolioKey(portfolioKey);
 				}
 			}
@@ -194,7 +218,6 @@ public class SalesPortfolioService extends AbstractService implements ISalesPort
 		return ans;
 	}
 
-	
 	private String getSalesPortfolioKey(FiniteValue type, String value,
 			CRMContext context) {
 		if (CRMConstants.SALESPFTYPE.CATEGORY.equals(type.getCode())) {
@@ -240,12 +263,12 @@ public class SalesPortfolioService extends AbstractService implements ISalesPort
 				return String.valueOf(object.getId());
 			else
 				return "-1";
-			
+
 		}
 		return "-1";
 
 	}
-	
+
 	private String getSalesPortfolioValue(FiniteValue type, String id) {
 		if (CRMConstants.SALESPFTYPE.CATEGORY.equals(type.getCode())) {
 			ICategoryService service = (ICategoryService) SpringObjectFactory.INSTANCE
@@ -290,52 +313,55 @@ public class SalesPortfolioService extends AbstractService implements ISalesPort
 				return String.valueOf(object.getName());
 			else
 				return "-1";
-			
+
 		}
 		return "-1";
 
 	}
-	
-	
+
 	@Override
 	public TransactionResult create(CRMModelObject object, CRMContext context) {
-		SalesPortfolio salesPortfolio = (SalesPortfolio)object ;
+		SalesPortfolio salesPortfolio = (SalesPortfolio) object;
 		if (!Utils.isNullSet(salesPortfolio.getSalesPortfolioLines())) {
-			int pk = GeneralSQLs.getNextPKValue("SalesPortfolios") ;
+			int pk = GeneralSQLs.getNextPKValue("SalesPortfolios");
 			salesPortfolio.setId(pk);
-			for (SalesPortfolioLine  line : salesPortfolio.getSalesPortfolioLines()) {
-				int linePK = GeneralSQLs.getNextPKValue( "SalesPortfolio_Lines") ;
+			for (SalesPortfolioLine line : salesPortfolio
+					.getSalesPortfolioLines()) {
+				int linePK = GeneralSQLs.getNextPKValue("SalesPortfolio_Lines");
 				line.setId(linePK);
 				line.setSalesPortfolioDoc(salesPortfolio);
 			}
 		}
-		TransactionResult result= super.create(object, context);
-		return result; 
+		TransactionResult result = super.create(object, context);
+		return result;
 	}
 
 	@Override
 	public TransactionResult update(CRMModelObject object, CRMContext context) {
-		SalesPortfolio salesPortfolio = (SalesPortfolio)object ;
-		SalesPortfolio oldObject = (SalesPortfolio)getById(salesPortfolio.getPK());
+		SalesPortfolio salesPortfolio = (SalesPortfolio) object;
+		SalesPortfolio oldObject = (SalesPortfolio) getById(salesPortfolio
+				.getPK());
 		if (!Utils.isNullSet(salesPortfolio.getSalesPortfolioLines())) {
-			int  ct = 0;
-			Iterator it = oldObject.getSalesPortfolioLines().iterator() ;
-			for (SalesPortfolioLine  line : salesPortfolio.getSalesPortfolioLines()) {
-				SalesPortfolioLine oldLine = null ;
+			int ct = 0;
+			Iterator it = oldObject.getSalesPortfolioLines().iterator();
+			for (SalesPortfolioLine line : salesPortfolio
+					.getSalesPortfolioLines()) {
+				SalesPortfolioLine oldLine = null;
 				if (it.hasNext()) {
-					oldLine= (SalesPortfolioLine) it.next() ;
+					oldLine = (SalesPortfolioLine) it.next();
 				}
 				line.setSalesPortfolioDoc(salesPortfolio);
 				if (oldLine != null) {
 					line.setId(oldLine.getId());
 					line.setObjectVersion(oldLine.getObjectVersion());
-				}else {
-					int linePK = GeneralSQLs.getNextPKValue( "SAPORTFOLIO_LINES") ;
+				} else {
+					int linePK = GeneralSQLs
+							.getNextPKValue("SAPORTFOLIO_LINES");
 					line.setId(linePK);
 				}
 			}
 			while (it.hasNext()) {
-				SalesPortfolioLine oldLine= (SalesPortfolioLine) it.next() ;
+				SalesPortfolioLine oldLine = (SalesPortfolioLine) it.next();
 				oldLine.setVoided(true);
 				salesPortfolio.addSalesPortfolioLine(oldLine);
 			}
@@ -355,8 +381,4 @@ public class SalesPortfolioService extends AbstractService implements ISalesPort
 		return super.batchCreate(objects, context);
 	}
 
-
-	
-	
-	
 }

@@ -97,6 +97,7 @@ public abstract class ORMDAO {
 		return ans;
 	}
 	
+	@Transactional
 	public void batchCreate(List<CRMModelObject> objects) throws DatabaseException{
 		Session session = openSession(true);
 		boolean success = false; 
@@ -114,6 +115,7 @@ public abstract class ORMDAO {
 		}
 	}
 	
+	@Transactional
 	public void create(CRMModelObject object) {
 		Session session = openSession(true);
 		boolean success = false; 
