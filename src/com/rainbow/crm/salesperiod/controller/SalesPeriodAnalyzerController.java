@@ -19,6 +19,7 @@ import com.rainbow.crm.database.LoginSQLs;
 import com.rainbow.crm.sales.service.ISalesService;
 import com.rainbow.crm.salesperiod.model.SalesPeriod;
 import com.rainbow.crm.salesperiod.model.SalesPeriodAnalyzer;
+import com.rainbow.crm.salesperiod.model.SalesPeriodAssociate;
 import com.rainbow.crm.salesperiod.model.SalesPeriodLine;
 import com.rainbow.crm.salesperiod.service.ISalesPeriodService;
 import com.techtrade.rads.framework.context.IRadsContext;
@@ -50,45 +51,90 @@ public class SalesPeriodAnalyzerController  extends GeneralController{
 	
 	@Override
 	public PageResult read(ModelObject object) {
-		SalesPeriodAnalyzer analyzer=  (SalesPeriodAnalyzer) object;
+		SalesPeriodAnalyzer analyzer = (SalesPeriodAnalyzer) object;
 		int period = analyzer.getSalePeriod();
-		if  (period > 0 ) {
-			ISalesPeriodService service =(ISalesPeriodService)SpringObjectFactory.INSTANCE.getInstance("ISalesPeriodService") ;
-			ISalesService salesService = (ISalesService)SpringObjectFactory.INSTANCE.getInstance("ISalesService") ;
-			SalesPeriod salesPeriod = (SalesPeriod)service.getById(period) ;
+		if (period > 0) {
+			ISalesPeriodService service = (ISalesPeriodService) SpringObjectFactory.INSTANCE
+					.getInstance("ISalesPeriodService");
+			ISalesService salesService = (ISalesService) SpringObjectFactory.INSTANCE
+					.getInstance("ISalesService");
+			SalesPeriod salesPeriod = (SalesPeriod) service.getById(period);
 			BarChartData barChartData = new BarChartData();
-			Set<SalesPeriodLine> periodLines =  salesPeriod.getSalesPeriodLines() ;
-			int minY = 0 , maxY =0;
-			for  (SalesPeriodLine periodLine : periodLines) {
-				BarData barData = new BarData();
-				barData.setText(periodLine.getItem().getName());
-				if (periodLine.getQty() > maxY ) {
-					maxY= periodLine.getQty();
+			if ("It".equalsIgnoreCase(analyzer.getBasedOn())) {
+				Set<SalesPeriodLine> periodLines = salesPeriod
+						.getSalesPeriodLines();
+				int minY = 0, maxY = 0;
+				for (SalesPeriodLine periodLine : periodLines) {
+					BarData barData = new BarData();
+					barData.setText(periodLine.getItem().getName());
+					if (periodLine.getQty() > maxY) {
+						maxY = periodLine.getQty();
+					}
+					barData.setValue(periodLine.getQty());
+					barData.setColor("green");
+					barData.setTextColor("blue");
+					BarChartData.Division divis = barChartData.new Division();
+					divis.addBarData(barData);
+
+					BarData actualSales = new BarData();
+					// actualSales.setText(periodLine.getItem().getName());
+					int soldQty = salesService.getItemSaleQuantity(
+							periodLine.getItem(), salesPeriod.getFromDate(),
+							salesPeriod.getToDate(), salesPeriod.getDivision());
+					actualSales.setValue(soldQty);
+					if (soldQty > maxY) {
+						maxY = soldQty;
+					}
+					actualSales.setColor("red");
+					divis.addBarData(actualSales);
+
+					barChartData.addDivision(divis);
 				}
-				barData.setValue(periodLine.getQty());
-				barData.setColor("green");
-				barData.setTextColor("blue");
-				BarChartData.Division divis =  barChartData.new Division();
-				divis.addBarData(barData);
- 				
- 				
- 				BarData actualSales = new BarData();
- 				//actualSales.setText(periodLine.getItem().getName());
- 				int soldQty = salesService.getItemSaleQuantity(periodLine.getItem(), salesPeriod.getFromDate(), salesPeriod.getToDate(), salesPeriod.getDivision()) ;
- 				actualSales.setValue(soldQty);
- 				actualSales.setColor("red");
-				divis.addBarData(actualSales);
-				
-				barChartData.addDivision(divis);
+				BarChartData.Range range = barChartData.new Range();
+				range.setyMax(maxY);
+				range.setyMin(0);
+				barChartData.setRange(range);
+				analyzer.setSalesData(barChartData);
+			} else  if ("US".equalsIgnoreCase(analyzer.getBasedOn())) {
+				Set<SalesPeriodAssociate> associates = salesPeriod.getSalesPeriodAssociates();
+				int minY = 0, maxY = 0;
+				for (SalesPeriodAssociate periodLine : associates) {
+					BarData barData = new BarData();
+					barData.setText(periodLine.getUser().getFirstName() + " "+ periodLine.getUser().getLastName());
+					if (periodLine.getLineTotal() > maxY) {
+						maxY = (int)periodLine.getLineTotal();
+					}
+					barData.setValue(periodLine.getLineTotal());
+					barData.setColor("green");
+					barData.setTextColor("blue");
+					BarChartData.Division divis = barChartData.new Division();
+					divis.addBarData(barData);
+
+					BarData actualSales = new BarData();
+					// actualSales.setText(periodLine.getItem().getName());
+					int soldQty = salesService.getSalesManSaleQuantity(
+							periodLine.getUser(), salesPeriod.getFromDate(),
+							salesPeriod.getToDate(), salesPeriod.getDivision());
+					actualSales.setValue(soldQty);
+					actualSales.setValue(soldQty);
+					if (soldQty > maxY) {
+						maxY = soldQty;
+					}
+					actualSales.setColor("red");
+					divis.addBarData(actualSales);
+
+					barChartData.addDivision(divis);
+				}
+				BarChartData.Range range = barChartData.new Range();
+				range.setyMax(maxY);
+				range.setyMin(0);
+				barChartData.setRange(range);
+				analyzer.setSalesData(barChartData);
+
 			}
-			BarChartData.Range range = barChartData.new Range();
-			range.setyMax(maxY);
-			range.setyMin(0);
-			barChartData.setRange(range);
-			analyzer.setSalesData(barChartData);
 		}
-		
-		return new PageResult(); 
+
+		return new PageResult();
 	}
 	
 	public Map <String, String > getItemClassTypes() {

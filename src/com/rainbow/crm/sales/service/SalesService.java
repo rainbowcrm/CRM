@@ -266,6 +266,14 @@ public class SalesService extends AbstractionTransactionService implements ISale
 	public int getItemSaleQuantity(Item item, Date from, Date to,Division division) {
 		return GeneralSQLs.getItemSoldQty(item.getId(),from,to,division.getId());
 	}
+	
+	
+
+	@Override
+	public int getSalesManSaleQuantity(User user, Date from, Date to,
+			Division division) {
+		return GeneralSQLs.getSalesMenSoldQty(user.getUserId(),from,to,division.getId());
+	}
 
 	@Override
 	public Map getItemSoldQtyByProduct(Product product, Date from, Date to,  Division division , String itemClass) {

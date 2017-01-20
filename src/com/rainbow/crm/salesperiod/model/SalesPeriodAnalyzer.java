@@ -7,6 +7,8 @@ public class SalesPeriodAnalyzer extends CRMModelObject{
 	
 	int salePeriod ;
 	BarChartData salesData;
+	
+	String basedOn;
 
 	
 	public int getSalePeriod() {
@@ -24,6 +26,16 @@ public class SalesPeriodAnalyzer extends CRMModelObject{
 	public void setSalesData(BarChartData salesData) {
 		this.salesData = salesData;
 	}
+
+	public String getBasedOn() {
+		return basedOn;
+	}
+
+	public void setBasedOn(String basedOn) {
+		this.basedOn = basedOn;
+	}
+
+	
 	
 	
 		

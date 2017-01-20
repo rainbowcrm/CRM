@@ -14,6 +14,7 @@ import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.product.model.Product;
 import com.rainbow.crm.sales.model.Sales;
+import com.rainbow.crm.user.model.User;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 
 public interface ISalesService extends ITransactionService{
@@ -24,5 +25,6 @@ public interface ISalesService extends ITransactionService{
 	
 	public String generateInvoice(Sales  sales,CRMContext context) ;
 	
+	public int getSalesManSaleQuantity(User user, Date from, Date to,Division division ) ;
 
 }
