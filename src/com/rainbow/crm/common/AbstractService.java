@@ -135,7 +135,7 @@ public abstract class AbstractService implements IBusinessService{
 
 	}
 	
-	public List<CRMModelObject> listData(String className,int from, int to,
+	public List<? extends CRMModelObject> listData(String className,int from, int to,
 			String whereCondition, String orderBy, CRMContext context) {
 		 StringBuffer additionalCondition = new StringBuffer();
 		 if (Utils.isNullString(whereCondition) ){
@@ -145,6 +145,20 @@ public abstract class AbstractService implements IBusinessService{
 		 }
 		 return  getDAO().listData(className ,from, to, additionalCondition.toString() , orderBy);
 
+	}
+	
+	@Override
+	public List<CRMModelObject> findAll(String className, String whereCondition, String orderBy, CRMContext context)
+	{
+		StringBuffer additionalCondition = new StringBuffer();
+		 if (Utils.isNullString(whereCondition) ){
+			 additionalCondition = additionalCondition.append(" where company.id = " +  context.getLoggedinCompany()) ;
+		 }else { 
+			 additionalCondition = additionalCondition.append(whereCondition +  " and company.id= " +  context.getLoggedinCompany()) ;
+		 }
+		 return  getDAO().findAll(className , additionalCondition.toString() , orderBy);
+
+		
 	}
 	
 	

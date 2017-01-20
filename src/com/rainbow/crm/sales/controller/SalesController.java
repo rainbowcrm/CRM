@@ -27,6 +27,8 @@ import com.rainbow.crm.division.service.IDivisionService;
 import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.sales.model.Sales;
 import com.rainbow.crm.sales.service.ISalesService;
+import com.rainbow.crm.user.model.User;
+import com.rainbow.crm.user.service.IUserService;
 import com.techtrade.rads.framework.context.IRadsContext;
 import com.techtrade.rads.framework.controller.abstracts.TransactionController;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
@@ -84,6 +86,21 @@ public class SalesController extends CRMTransactionController{
 	
 	public Map <String, String > getAssociates() {
 		Map<String, String> ans = new HashMap<String,String>();
+		List<User> userList  = null ;
+		if ( getObject() !=null ) {
+			Sales sales = (Sales) getObject();
+			IUserService userService  = (IUserService) SpringObjectFactory.INSTANCE.getInstance("IUserService") ;
+			if (sales.getDivision() != null && sales.getDivision().getId() > 0 ){
+				userList = (List<User>)userService.findAll("User"," division.id= "  + sales.getDivision().getId() ,"userId",(CRMContext)getContext());
+			}else
+				userList = (List<User>)userService.findAll("User",null,"userId",(CRMContext)getContext());
+				
+		}
+		if(!Utils.isNullList(userList)) {
+			userList.forEach( user ->  { 
+				ans.put(user.getUserId(), user.getUserId());
+			});
+		}
 		return ans;
 	}
 	

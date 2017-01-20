@@ -97,6 +97,16 @@ public abstract class ORMDAO {
 		return ans;
 	}
 	
+	public List<CRMModelObject> findAll(String table,  String whereCondition, String orderby ) {
+		Session session = openSession(false);
+		Query query = session.createQuery("from " + table   +  ((Utils.isNull(whereCondition))?"":whereCondition) +
+				 " " + ((Utils.isNull(orderby))?"": (" order by " + orderby) ) );
+		List<CRMModelObject> ans = query.list();
+		supplement(ans);
+		closeSession(session,false);
+		return ans;
+	}
+	
 	@Transactional
 	public void batchCreate(List<CRMModelObject> objects) throws DatabaseException{
 		Session session = openSession(true);

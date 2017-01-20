@@ -29,7 +29,7 @@ Controller = "com.rainbow.crm.salesperiod.controller.SalesPeriodAnalyzerControll
 	  <xStart>0</xStart>
 	  <yStart>20</yStart>
 	  <rangeHeight>600</rangeHeight>
-	  <rangeWidth>600</rangeWidth>
+	  <rangeWidth>1600</rangeWidth>
 	  <marginWidth>30</marginWidth>
 	  <barWidth>30</barWidth>
 	  <noYAxisDivisions>6</noYAxisDivisions>

@@ -34,5 +34,7 @@ public interface IBusinessService {
 	
 	public List<RadsError> validateforUpdate(CRMModelObject object, CRMContext context);
 	
+	public List<? extends CRMModelObject> findAll(String className, String whereCondition, String orderBy, CRMContext context);
+	
 
 }
