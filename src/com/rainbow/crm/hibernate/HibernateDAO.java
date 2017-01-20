@@ -9,44 +9,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.address.model.Address;
 import com.rainbow.crm.alert.model.Alert;
@@ -75,6 +37,8 @@ import com.rainbow.crm.salesperiod.model.SalesPeriodAssociate;
 import com.rainbow.crm.salesperiod.model.SalesPeriodLine;
 import com.rainbow.crm.salesportfolio.model.SalesPortfolio;
 import com.rainbow.crm.salesportfolio.model.SalesPortfolioLine;
+import com.rainbow.crm.territory.model.Territory;
+import com.rainbow.crm.territory.model.TerritoryLine;
 import com.rainbow.crm.uom.model.UOM;
 import com.rainbow.crm.user.model.User;
 import com.rainbow.crm.vendor.model.Vendor;
@@ -143,6 +107,8 @@ public  abstract class HibernateDAO  extends ORMDAO{
     		configuration.addClass(WishListLine.class).addResource("com/rainbow/crm/wishlist/model/WishListLine.hbm.xml");
     		configuration.addClass(Sales.class).addResource("com/rainbow/crm/saleslead/model/SalesLead.hbm.xml");
     		configuration.addClass(SalesLine.class).addResource("com/rainbow/crm/saleslead/model/SalesLeadLine.hbm.xml");
+    		configuration.addClass(Territory.class).addResource("com/rainbow/crm/territory/model/Territory.hbm.xml");
+    		configuration.addClass(TerritoryLine.class).addResource("com/rainbow/crm/territory/model/TerritoryLine.hbm.xml");
     		configuration.addClass(Sales.class).addResource("com/rainbow/crm/distributionorder/model/DistributionOrder.hbm.xml");
     		configuration.addClass(SalesLine.class).addResource("com/rainbow/crm/distributionorder/model/DistributionOrderLine.hbm.xml");
     		configuration.addClass(Followup.class).addResource("com/rainbow/crm/followup/model/Followup.hbm.xml");
