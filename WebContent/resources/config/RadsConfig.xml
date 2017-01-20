@@ -63,6 +63,9 @@
 </Page>
 <Page id = "saleslead" definition ="/resources/pages/saleslead/salesleadList.xml" modelclass = "com.rainbow.crm.saleslead.model.SalesLead" >
 </Page>
+
+<Page id = "territories" definition ="/resources/pages/territory/territoryList.xml" modelclass = "com.rainbow.crm.territory.model.Territory" >
+</Page>
 <Page id = "distributionorders" definition ="/resources/pages/distributionorder/distributionorderList.xml" modelclass = "com.rainbow.crm.distributionorder.model.DistributionOrder" >
 </Page>
 
@@ -118,6 +121,8 @@
 <Page id = "newwishlist" definition ="/resources/pages/wishlist/newwishlist.xml" modelclass = "com.rainbow.crm.wishlist.model.WishList" >
 </Page>
 <Page id = "newsaleslead" definition ="/resources/pages/saleslead/newsaleslead.xml" modelclass = "com.rainbow.crm.saleslead.model.SalesLead" >
+</Page>
+<Page id = "newterritory" definition ="/resources/pages/territory/newterritory.xml" modelclass = "com.rainbow.crm.territory.model.Territory" >
 </Page>
 <Page id = "newdistributionorder" definition ="/resources/pages/distributionorder/newdistributionorder.xml" modelclass = "com.rainbow.crm.distributionorder.model.DistributionOrder" >
 </Page>
@@ -196,6 +201,7 @@
 	<Element label = "" type = "UIMenu" Id = "menu05" style="menustyle" title="Wish_List" link = "rdscontroller?page=wishlist"   />
  </Element>
  <Element label = "" type = "UIMenu" Id = "menu300" style="menustyleParent" title="Sales_Planning" groupId= "menuGRP0040"  >
+ <Element label = "" type = "UIMenu" Id = "menu3001" style="menustyle" title="Territories" link = "rdscontroller?page=territories"   />
 	 <Element label = "" type = "UIMenu" Id = "menu301" style="menustyle" title="Sales_Associate_PortFolio" link = "rdscontroller?page=salesportfoliolist"   />
 	 <Element label = "" type = "UIMenu" Id = "menu302" style="menustyle" title="Sales_Period" link = "rdscontroller?page=salesperiodlist"   />
 	<Element label = "" type = "UIMenu" Id = "menu303" style="menustyle" title="Expenses" link = "rdscontroller?page=salesexpenses"   />

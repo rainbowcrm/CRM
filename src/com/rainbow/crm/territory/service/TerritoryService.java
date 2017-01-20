@@ -157,6 +157,7 @@ public class TerritoryService extends AbstractionTransactionService implements I
 				int linePK = GeneralSQLs.getNextPKValue( "Territory_Lines") ;
 				line.setId(linePK);
 				line.setTerritoryDoc(territory);
+				line.setCompany(territory.getCompany());
 			}
 		}
 		TransactionResult result= super.create(object, context);

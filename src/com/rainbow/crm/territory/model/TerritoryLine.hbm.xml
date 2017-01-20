@@ -4,7 +4,7 @@
  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
 
 <hibernate-mapping>
-<class name="com.rainbow.crm.territory.model.TerritoryLine" table="SALESLEAD_LINES" lazy="false">
+<class name="com.rainbow.crm.territory.model.TerritoryLine" table="TERRITORY_LINES" lazy="false">
 	<meta attribute="class-description">
          This class contains the Territory Line
       </meta>
