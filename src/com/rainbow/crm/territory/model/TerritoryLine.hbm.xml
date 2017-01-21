@@ -15,6 +15,7 @@
       <property name="lineNumber" column="LINE_NUMBER" type="integer"/>
       <property name="zipCode" column="zipCode" type="string"/>
       <property name="keyLocations" column="KEY_LOCATIONS" type="string"/>
+       <property name="deleted" column="is_deleted" type="boolean"/>
       <property name="createdDate" column="created_date" type="timestamp" update="false"/>
       <property name="lastUpdateDate" column="last_updated_date" type="timestamp"/>
       <property name="createdUser" column="created_by" type="string" update="false"/>

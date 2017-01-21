@@ -58,6 +58,8 @@ import com.rainbow.crm.item.model.ItemImage;
 import com.rainbow.crm.item.service.ISkuService;
 import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.product.validator.ProductValidator;
+import com.rainbow.crm.saleslead.model.SalesLeadLine;
+import com.rainbow.crm.saleslead.validator.SalesLeadErrorCodes;
 import com.rainbow.crm.territory.dao.TerritoryDAO;
 import com.rainbow.crm.territory.model.Territory;
 import com.rainbow.crm.territory.model.TerritoryLine;
@@ -143,7 +145,13 @@ public class TerritoryService extends AbstractionTransactionService implements I
 			}
 		}
 		Externalize externalize = new Externalize(); ;
-		
+		if(!Utils.isNullSet(object.getTerritoryLines())){
+			int lineNo=1;
+			for (TerritoryLine line: object.getTerritoryLines()) {
+				line.setCompany(company);
+				line.setLineNumber(lineNo ++);
+			}
+		}
 		return ans;
 	}
 

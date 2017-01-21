@@ -3,8 +3,8 @@
 Controller = "com.rainbow.crm.territory.controller.TerritoryController">
 <Template type= "Transaction"  name = "TransactionTemplate"></Template>
 <Forwards>
-<Forward key ="CANCEL">rdscontroller?page=territory</Forward>
-<Forward key ="SAVE">saleslead</Forward>
+<Forward key ="CANCEL">rdscontroller?page=territories</Forward>
+<Forward key ="SAVE">territories</Forward>
 </Forwards>
 <IncludeJS>./resources/js/RadsLib.js</IncludeJS>
 <IncludeJS>./scripts/CRMGeneral.js</IncludeJS>
@@ -43,7 +43,7 @@ Controller = "com.rainbow.crm.territory.controller.TerritoryController">
 <Element type ="UITableCol" width = "5%"> </Element>
 </Element>  
  </Element>
-<Element type = "UITableRow"  dataType = "com.rainbow.crm.territory.model.TerritoryLine" rendered = "!Object.getVoided">
+<Element type = "UITableRow"  dataType = "com.rainbow.crm.territory.model.TerritoryLine" rendered = "!Object.isDeleted">
 
  
 <Element type ="UITableCol" width = "25%"><Element label = ""  type = "UIText" Id = "txtLineCo"  property ="ZipCode" size = "10" />  </Element>
