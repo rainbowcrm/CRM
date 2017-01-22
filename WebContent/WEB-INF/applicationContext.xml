@@ -204,6 +204,7 @@
         <value>com/rainbow/crm/salesperiod/model/SalesPeriod.hbm.xml</value>
         <value>com/rainbow/crm/salesperiod/model/SalesPeriodLine.hbm.xml</value>
         <value>com/rainbow/crm/salesperiod/model/SalesPeriodAssociate.hbm.xml</value>
+        <value>com/rainbow/crm/salesperiod/model/SalesPeriodTerritory.hbm.xml</value>
         <value>com/rainbow/crm/salesportfolio/model/SalesPortfolio.hbm.xml</value>
         <value>com/rainbow/crm/salesportfolio/model/SalesPortfolioLine.hbm.xml</value>
         <value>com/rainbow/crm/sales/model/Sales.hbm.xml</value>

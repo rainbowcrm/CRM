@@ -20,6 +20,8 @@ import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.division.service.IDivisionService;
 import com.rainbow.crm.salesperiod.model.SalesPeriod;
 import com.rainbow.crm.salesperiod.service.ISalesPeriodService;
+import com.rainbow.crm.territory.model.Territory;
+import com.rainbow.crm.territory.service.ITerritoryService;
 import com.techtrade.rads.framework.context.IRadsContext;
 import com.techtrade.rads.framework.controller.abstracts.TransactionController;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
@@ -51,6 +53,18 @@ public class SalesPeriodController extends CRMTransactionController{
 		if (!Utils.isNullList(divisions)) {
 			for (Division division : divisions) {
 				ans.put(String.valueOf(division.getId()), division.getName());
+			}
+		}
+		return ans;
+	}
+	
+	public Map <String, String > getAllTerritories() {
+		Map<String, String> ans = new LinkedHashMap<String, String> ();
+		ITerritoryService service =(ITerritoryService) SpringObjectFactory.INSTANCE.getInstance("ITerritoryService");
+		List<Territory> territorries = (List<Territory>)service.findAll("Territory", "", "territory", (CRMContext)getContext());
+		if (!Utils.isNullList(territorries)) {
+			for (Territory territory : territorries) {
+				ans.put(String.valueOf(territory.getId()), territory.getTerritory());
 			}
 		}
 		return ans;

@@ -54,6 +54,7 @@ Controller = "com.rainbow.crm.config.controller.ConfigController">
 </Element>
 </Element>
 
+
 <Element type ="UITab" Id= "idinven" title = "Inventory"   >
 <Element type = "UITable" rows = "1" cols = "3" style = "grid" applyStyleonChildren ="true" Id  ="tblInv" property ="InventoryConfigLines[]" >
 <Element type = "UITableRow"  dataType = "com.rainbow.crm.config.model.ConfigLine" >

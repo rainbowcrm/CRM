@@ -46,7 +46,7 @@ public class SalesValidator extends CRMValidator {
 			errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Date"))) ;
 		}
 		if (Utils.isNullSet(sales.getSalesLines())) {
-			errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Line_Items"))) ;
+		//	errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Line_Items"))) ;
 		}else {
 			for (SalesLine line : sales.getSalesLines()) {
 				if (line.getSku() == null ) {

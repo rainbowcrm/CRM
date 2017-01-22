@@ -31,8 +31,11 @@ import com.rainbow.crm.salesperiod.dao.SalesPeriodDAO;
 import com.rainbow.crm.salesperiod.model.SalesPeriod;
 import com.rainbow.crm.salesperiod.model.SalesPeriodAssociate;
 import com.rainbow.crm.salesperiod.model.SalesPeriodLine;
+import com.rainbow.crm.salesperiod.model.SalesPeriodTerritory;
 import com.rainbow.crm.salesperiod.validator.SalesPeriodErrorCodes;
 import com.rainbow.crm.salesperiod.validator.SalesPeriodValidator;
+import com.rainbow.crm.territory.model.Territory;
+import com.rainbow.crm.territory.service.ITerritoryService;
 import com.rainbow.crm.user.model.User;
 import com.rainbow.crm.user.service.IUserService;
 import com.rainbow.framework.nextup.NextUpGenerator;
@@ -147,6 +150,22 @@ public class SalesPeriodService extends AbstractionTransactionService implements
 				}
 			}
 		}
+		
+		if(!Utils.isNullSet(object.getSalesPeriodTerritories())){
+			int lineNo=1;
+			for (SalesPeriodTerritory line: object.getSalesPeriodTerritories()) {
+				line.setCompany(company);
+				line.setPeriod(object.getPeriod());
+				line.setLineNumber(lineNo ++);
+				if(line.getTerritory() == null ) {
+					ans.add(CRMValidator.getErrorforCode(context.getLocale(), SalesPeriodErrorCodes.FIELD_NOT_VALID , externalize.externalize(context, "Territory")));
+				}else {
+					ITerritoryService territoryService = (ITerritoryService)SpringObjectFactory.INSTANCE.getInstance("ITerritoryService");
+					Territory territory  = (Territory)territoryService.getById(line.getTerritory().getId());
+					line.setTerritory(territory);
+				}
+			}
+		}
 		return ans;
 	}
 
@@ -163,6 +182,11 @@ public class SalesPeriodService extends AbstractionTransactionService implements
 			}
 			for (SalesPeriodAssociate  line : salesPeriod.getSalesPeriodAssociates()) {
 				int linePK = GeneralSQLs.getNextPKValue( "SALESPERIOD_ASSOCIATES") ;
+				line.setId(linePK);
+				line.setSalesPeriodDoc(salesPeriod);
+			}
+			for (SalesPeriodTerritory  line : salesPeriod.getSalesPeriodTerritories()) {
+				int linePK = GeneralSQLs.getNextPKValue( "SALESPERIOD_TERRITORIES") ;
 				line.setId(linePK);
 				line.setSalesPeriodDoc(salesPeriod);
 			}
@@ -201,10 +225,12 @@ public class SalesPeriodService extends AbstractionTransactionService implements
 		
 		if (!Utils.isNullSet(salesPeriod.getSalesPeriodAssociates())) {
 			int  ct = 0;
-			Iterator it = oldObject.getSalesPeriodAssociates().iterator() ;
+			Iterator it = null;
+			if (!Utils.isNullSet(oldObject.getSalesPeriodAssociates()))
+				it = oldObject.getSalesPeriodAssociates().iterator() ;
 			for (SalesPeriodAssociate  line : salesPeriod.getSalesPeriodAssociates()) {
 				SalesPeriodAssociate oldLine = null ;
-				if (it.hasNext()) {
+				if (it != null && it.hasNext()) {
 					oldLine= (SalesPeriodAssociate) it.next() ;
 				}
 				line.setSalesPeriodDoc(salesPeriod);
@@ -212,17 +238,45 @@ public class SalesPeriodService extends AbstractionTransactionService implements
 					line.setId(oldLine.getId());
 					line.setObjectVersion(oldLine.getObjectVersion());
 				}else {
-					int linePK = GeneralSQLs.getNextPKValue( "SalesPeriod_Lines") ;
+					int linePK = GeneralSQLs.getNextPKValue( "SALESPERIOD_ASSOCIATES") ;
 					line.setId(linePK);
 				}
 			}
-			while (it.hasNext()) {
-				SalesPeriodAssociate oldLine= (SalesPeriodAssociate) it.next() ;
-				oldLine.setVoided(true);
-				salesPeriod.addSalesPeriodAssociate(oldLine);
+			if (it != null) {
+				while (it.hasNext()) {
+					SalesPeriodAssociate oldLine = (SalesPeriodAssociate) it.next();
+					oldLine.setVoided(true);
+					salesPeriod.addSalesPeriodAssociate(oldLine);
+				}
 			}
 		}
-		
+		if (!Utils.isNullSet(salesPeriod.getSalesPeriodTerritories())) {
+			int  ct = 0;
+			Iterator it = null;
+			if (!Utils.isNullSet(oldObject.getSalesPeriodTerritories()))
+					it = oldObject.getSalesPeriodTerritories().iterator() ;
+			for (SalesPeriodTerritory  line : salesPeriod.getSalesPeriodTerritories()) {
+				SalesPeriodTerritory oldLine = null ;
+				if ( it != null && it.hasNext()) {
+					oldLine= (SalesPeriodTerritory) it.next() ;
+				}
+				line.setSalesPeriodDoc(salesPeriod);
+				if (oldLine != null) {
+					line.setId(oldLine.getId());
+					line.setObjectVersion(oldLine.getObjectVersion());
+				}else {
+					int linePK = GeneralSQLs.getNextPKValue( "SALESPERIOD_TERRITORIES") ;
+					line.setId(linePK);
+				}
+			}
+			if (it != null ) {
+				while (it.hasNext()) {
+					SalesPeriodTerritory oldLine= (SalesPeriodTerritory) it.next() ;
+					oldLine.setVoided(true);
+					salesPeriod.addSalesPeriodTerritory(oldLine);
+				}
+			}
+		}
 		return super.update(object, context);
 	}
 

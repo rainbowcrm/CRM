@@ -124,6 +124,41 @@ Controller = "com.rainbow.crm.salesperiod.controller.SalesPeriodController">
 
 
 </Element>
+
+<Element type ="UITab" Id= "idSalesTerritory" title = "Sales_Associate_Territories" showinTable = "false" >
+
+<Element type = "UITable" rows = "1" cols = "3" style = "listPageTitle" applyStyleonChildren ="true" Id  ="tblTransAss" property ="SalesPeriodTerritories[]" >
+<Element type = "UITableHead">
+ <Element type = "UITableRow">
+
+<Element type ="UITableCol" width = "25%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Territory" /></Element>
+<Element type ="UITableCol" width = "18%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Comments" /></Element>
+<Element type ="UITableCol" width = "8%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Total" /></Element>
+<Element type ="UITableCol" width = "5%"> </Element>
+</Element>  
+ </Element>
+<Element type = "UITableRow"  dataType = "com.rainbow.crm.salesperiod.model.SalesPeriodTerritory" rendered = "!Object.getVoided">
+
+<Element type ="UITableCol" width = "25%">
+<Element label = ""  type = "UIList"  Id = "txtTerritory"   property ="Territory.Id"  >
+	 <options populator =  "getAllTerritories"> 
+	</options>
+</Element>
+
+
+	
+ </Element>
+<Element type ="UITableCol" width = "18%"><Element label = ""  type = "UIText" Id = "txtTerrLineCo"  property ="Comments" size = "30" />  </Element>
+<Element type ="UITableCol" width = "8%"><Element label = ""  type = "UIText" Id = "txtTerrilineTotal"  property ="lineTotal" size = "10"   />  </Element>
+
+<Element type ="UITableCol" width = "5%">
+	<Element caption = "+"  type = "UIButton" Id = "btnAddRow"    fixedAction ="FixedAction.ACTION_ADDTABLEROW"  fixedActionParam =  "this"/>
+	<Element caption = "-"  type = "UIButton" Id = "btnDelRow"    fixedAction ="FixedAction.ACTION_DELETETABLEROW"  fixedActionParam =  "this"/>
+</Element>
+</Element>
+</Element>
+
+</Element>
 </Element>
 </Section>
 <Section type ="brk3"/>

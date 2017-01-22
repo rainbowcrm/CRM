@@ -35,6 +35,7 @@ import com.rainbow.crm.sales.model.SalesLine;
 import com.rainbow.crm.salesperiod.model.SalesPeriod;
 import com.rainbow.crm.salesperiod.model.SalesPeriodAssociate;
 import com.rainbow.crm.salesperiod.model.SalesPeriodLine;
+import com.rainbow.crm.salesperiod.model.SalesPeriodTerritory;
 import com.rainbow.crm.salesportfolio.model.SalesPortfolio;
 import com.rainbow.crm.salesportfolio.model.SalesPortfolioLine;
 import com.rainbow.crm.territory.model.Territory;
@@ -99,6 +100,7 @@ public  abstract class HibernateDAO  extends ORMDAO{
     		configuration.addClass(SalesPeriod.class).addResource("com/rainbow/crm/salesperiod/model/SalesPeriod.hbm.xml");
     		configuration.addClass(SalesPeriodLine.class).addResource("com/rainbow/crm/salesperiod/model/SalesPeriodLine.hbm.xml");
     		configuration.addClass(SalesPeriodAssociate.class).addResource("com/rainbow/crm/salesperiod/model/SalesPeriodAssociate.hbm.xml");
+    		configuration.addClass(SalesPeriodTerritory.class).addResource("com/rainbow/crm/salesperiod/model/SalesPeriodTerritory.hbm.xml");
     		configuration.addClass(SalesPortfolio.class).addResource("com/rainbow/crm/salesportfolio/model/SalesPortfolio.hbm.xml");
     		configuration.addClass(SalesPortfolioLine.class).addResource("com/rainbow/crm/salesportfolio/model/SalesPortfolioLine.hbm.xml");
     		configuration.addClass(Sales.class).addResource("com/rainbow/crm/sales/model/Sales.hbm.xml");
