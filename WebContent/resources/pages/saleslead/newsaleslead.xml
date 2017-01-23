@@ -50,9 +50,15 @@ Controller = "com.rainbow.crm.saleslead.controller.SalesLeadController">
 	<options populator =  "getAllDivisions"> 
 	</options>
 	</Element>
+	<Element label = "Territory"  type = "UIList"  Id = "txtTerritory"   property ="Territory.Id"  >
+	 <options populator =  "getAllTerritories"> 
+	</options>
+   </Element>
 
 	<Element label = "Doc_No"  type = "UIText" Id = "txtDocNo"  isMandatory="true"  readonly="true" property ="docNumber" />
 	<Element label = "Date"  type = "UIDate" Id = "txtwishListDate" isMandatory="true"  property ="releasedDate" />
+	<Element label = "Sales_Bill"  type = "UIText" Id = "txtSale"   property ="Sale.BillNumber" />
+	<Element label = "Status"  type = "UIText" Id = "txtStatus"  readonly="true"  property ="Status.description" />
 	<Element label = ""  type = "UILabel" Id = "lblCustTitle"   value ="Customer" />
 	<Element label = ""  type = "UILabel" Id = "lblFree1"  style="bigTitle" value ="" />
 	<Element label = ""  type = "UILabel" Id = "lblFree2"  style="bigTitle" value ="" />
@@ -69,11 +75,8 @@ Controller = "com.rainbow.crm.saleslead.controller.SalesLeadController">
 	<Element type = "UIIFrame" src ="./rdscontroller?page=quickcustomeradd" style ="lookupFrameStyle">
 	</Element>
 	</Element>
-	<Element label = "Sales_Bill"  type = "UIText" Id = "txtSale"   property ="Sale.BillNumber" />
-	<Element label = "Status"  type = "UIText" Id = "txtStatus"  readonly="true"  property ="Status.description" />
 	
 </Section>
-<Section type ="brk1"/>
 <Section type ="detail">
 <Element label = ""  type = "UILabel" Id = "lblLineitTitle"  style="bigTitle" value ="Line_Items" />
 <Element type = "UITable" rows = "1" cols = "7" style = "listPageTitle" applyStyleonChildren ="true" Id  ="tblTrans" property ="SalesLeadLines[]" >

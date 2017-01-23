@@ -40,34 +40,7 @@ public class SalesPeriodController extends CRMTransactionController{
 	}
 
 		
-	public String getCompanyName() {
-		ICompanyService service = (ICompanyService)SpringObjectFactory.INSTANCE.getInstance("ICompanyService");
-		Company company =(Company) service.getById(((CRMContext)getContext()).getLoggedinCompany());
-		return company.getName();
-	}
 	
-	public Map <String, String > getAllDivisions() {
-		Map<String, String> ans = new LinkedHashMap<String, String> ();
-		IDivisionService service =(IDivisionService) SpringObjectFactory.INSTANCE.getInstance("IDivisionService");
-		List<Division> divisions = service.getAllDivisions(((CRMContext)getContext()).getLoggedinCompany());
-		if (!Utils.isNullList(divisions)) {
-			for (Division division : divisions) {
-				ans.put(String.valueOf(division.getId()), division.getName());
-			}
-		}
-		return ans;
-	}
 	
-	public Map <String, String > getAllTerritories() {
-		Map<String, String> ans = new LinkedHashMap<String, String> ();
-		ITerritoryService service =(ITerritoryService) SpringObjectFactory.INSTANCE.getInstance("ITerritoryService");
-		List<Territory> territorries = (List<Territory>)service.findAll("Territory", "", "territory", (CRMContext)getContext());
-		if (!Utils.isNullList(territorries)) {
-			for (Territory territory : territorries) {
-				ans.put(String.valueOf(territory.getId()), territory.getTerritory());
-			}
-		}
-		return ans;
-	}
 
 }

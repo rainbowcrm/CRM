@@ -12,6 +12,7 @@ import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.sales.model.Sales;
+import com.rainbow.crm.territory.model.Territory;
 import com.rainbow.crm.vendor.model.Vendor;
 import com.techtrade.rads.framework.annotations.RadsPropertySet;
 
@@ -20,6 +21,7 @@ public class SalesLead extends CRMBusinessModelObject{
 	Division division;
 	String docNumber;
 	Customer customer;
+	Territory territory;
 	Date releasedDate ;
 	boolean salesWon;
 	Sales sales ;
@@ -129,6 +131,12 @@ public class SalesLead extends CRMBusinessModelObject{
 	}
 	public void setAlerted(boolean alerted) {
 		this.alerted = alerted;
+	}
+	public Territory getTerritory() {
+		return territory;
+	}
+	public void setTerritory(Territory territory) {
+		this.territory = territory;
 	}
 	
 }

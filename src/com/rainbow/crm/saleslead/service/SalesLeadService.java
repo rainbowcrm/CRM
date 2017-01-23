@@ -63,6 +63,8 @@ import com.rainbow.crm.saleslead.model.SalesLead;
 import com.rainbow.crm.saleslead.model.SalesLeadLine;
 import com.rainbow.crm.saleslead.validator.SalesLeadErrorCodes;
 import com.rainbow.crm.saleslead.validator.SalesLeadValidator;
+import com.rainbow.crm.territory.model.Territory;
+import com.rainbow.crm.territory.service.ITerritoryService;
 import com.rainbow.crm.user.model.User;
 import com.rainbow.crm.user.service.IUserService;
 import com.rainbow.crm.vendor.model.Vendor;
@@ -150,7 +152,14 @@ public class SalesLeadService extends AbstractionTransactionService implements I
 			if (customer != null)
 				 object.setCustomer(customer);
 		}
+		
+		
 		Externalize externalize = new Externalize(); ;
+		if(object.getTerritory() != null) {
+			ITerritoryService territoryService = (ITerritoryService)SpringObjectFactory.INSTANCE.getInstance("ITerritoryService");
+			Territory territory  = (Territory)territoryService.getById(object.getTerritory().getId());
+			object.setTerritory(territory);
+		}
 		
 		if(!Utils.isNullSet(object.getSalesLeadLines())){
 			int lineNo=1;
