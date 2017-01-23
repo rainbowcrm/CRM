@@ -21,6 +21,7 @@ import com.rainbow.crm.salesperiod.model.SalesPeriod;
 import com.rainbow.crm.salesperiod.model.SalesPeriodAnalyzer;
 import com.rainbow.crm.salesperiod.model.SalesPeriodAssociate;
 import com.rainbow.crm.salesperiod.model.SalesPeriodLine;
+import com.rainbow.crm.salesperiod.model.SalesPeriodTerritory;
 import com.rainbow.crm.salesperiod.service.ISalesPeriodService;
 import com.techtrade.rads.framework.context.IRadsContext;
 import com.techtrade.rads.framework.controller.abstracts.GeneralController;
@@ -116,6 +117,39 @@ public class SalesPeriodAnalyzerController  extends GeneralController{
 							periodLine.getUser(), salesPeriod.getFromDate(),
 							salesPeriod.getToDate(), salesPeriod.getDivision());
 					actualSales.setValue(soldQty);
+					if (soldQty > maxY) {
+						maxY = soldQty;
+					}
+					actualSales.setColor("red");
+					divis.addBarData(actualSales);
+
+					barChartData.addDivision(divis);
+				}
+				BarChartData.Range range = barChartData.new Range();
+				range.setyMax(maxY);
+				range.setyMin(0);
+				barChartData.setRange(range);
+				analyzer.setSalesData(barChartData);
+			}else  if ("TR".equalsIgnoreCase(analyzer.getBasedOn())) {
+				Set<SalesPeriodTerritory> territories = salesPeriod.getSalesPeriodTerritories();
+				int minY = 0, maxY = 0;
+				for (SalesPeriodTerritory periodLine : territories) {
+					BarData barData = new BarData();
+					barData.setText(periodLine.getTerritory().getTerritory());
+					if (periodLine.getLineTotal() > maxY) {
+						maxY = (int)periodLine.getLineTotal();
+					}
+					barData.setValue(periodLine.getLineTotal());
+					barData.setColor("green");
+					barData.setTextColor("blue");
+					BarChartData.Division divis = barChartData.new Division();
+					divis.addBarData(barData);
+
+					BarData actualSales = new BarData();
+					// actualSales.setText(periodLine.getItem().getName());
+					int soldQty = salesService.getTerritorySaleQuantity(
+							periodLine.getTerritory().getId(), salesPeriod.getFromDate(),
+							salesPeriod.getToDate(), salesPeriod.getDivision());
 					actualSales.setValue(soldQty);
 					if (soldQty > maxY) {
 						maxY = soldQty;
@@ -130,7 +164,6 @@ public class SalesPeriodAnalyzerController  extends GeneralController{
 				range.setyMin(0);
 				barChartData.setRange(range);
 				analyzer.setSalesData(barChartData);
-
 			}
 		}
 

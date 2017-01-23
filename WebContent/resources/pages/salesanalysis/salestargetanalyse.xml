@@ -19,10 +19,11 @@ Controller = "com.rainbow.crm.salesperiod.controller.SalesPeriodAnalyzerControll
 	 </Element>
 	 </Element>
 	 <Element type ="UITableCol">
-	 	<Element label = ""  type = "UIRadioBox" Id = "rdoType"   property ="basedOn" >
+	 	<Element label = "Based on"  type = "UIRadioBox" Id = "rdoType"   property ="basedOn" >
 	  <options> 
-	  <option key ="IT"> Item Based</option>
-	  <option key ="US"> User Based</option>
+	  <option key ="IT"> Item </option>
+	  <option key ="US"> User </option>
+	  <option key ="TR"> Territory </option>
 	  </options>
 	</Element>
 	</Element>

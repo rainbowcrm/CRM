@@ -287,9 +287,13 @@ public class SalesService extends AbstractionTransactionService implements ISale
 	public Map getItemSoldQtyByProduct(Product product, Date from, Date to,  Division division , String itemClass) {
 		return GeneralSQLs.getItemSoldQtyByProduct(product.getId(), from, to, -1,itemClass);
 	}
+	
+	@Override
+	public int getTerritorySaleQuantity(int territory, Date from, Date to,
+			Division division) {
+		return GeneralSQLs.getTerritorySoldQty(territory, from, to, division.getId());
+	}
 
-	
-	
 	@Override
 	public String generateInvoice(Sales sales,CRMContext context) {
 		VelocityEngine ve = new VelocityEngine();

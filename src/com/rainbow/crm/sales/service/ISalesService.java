@@ -26,5 +26,7 @@ public interface ISalesService extends ITransactionService{
 	public String generateInvoice(Sales  sales,CRMContext context) ;
 	
 	public int getSalesManSaleQuantity(User user, Date from, Date to,Division division ) ;
+	
+	public int getTerritorySaleQuantity(int territory, Date from, Date to,Division division ) ;
 
 }
