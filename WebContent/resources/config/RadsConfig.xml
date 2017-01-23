@@ -206,12 +206,12 @@
 	 <Element label = "" type = "UIMenu" Id = "menu302" style="menustyle" title="Sales_Period" link = "rdscontroller?page=salesperiodlist"   />
 	<Element label = "" type = "UIMenu" Id = "menu303" style="menustyle" title="Expenses" link = "rdscontroller?page=salesexpenses"   />
  </Element>
- <Element label = "" type = "UIMenu" Id = "menu30" style="menustyleParent" title="Sales_Operations" groupId= "menuGRP004"  >
+ <Element label = "" type = "UIMenu" Id = "menu30" style="menustyleParent" title="Salesforce_WorkBench" groupId= "menuGRP004"  >
  	<Element label = "" type = "UIMenu" Id = "menu301" style="menustyle" title="Alerts" link = "rdscontroller?page=alerts"   />
 	<Element label = "" type = "UIMenu" Id = "menu34" style="menustyle" title="Sales_Leads" link = "rdscontroller?page=saleslead"   />
 	<Element label = "" type = "UIMenu" Id = "menu35" style="menustyle" title="Followups" link = "rdscontroller?page=followups"   />
  </Element>
- <Element label = "" type = "UIMenu" Id = "menu30" style="menustyleParent" title="Business Intelligence" groupId= "menuGRP005"  >
+ <Element label = "" type = "UIMenu" Id = "menu30" style="menustyleParent" title="Manager_Workbench" groupId= "menuGRP005"  >
 	<Element label = "" type = "UIMenu" Id = "menu031" style="menustyle" title="Manager_Console" link = "rdscontroller?page=managerconsole"   />
  	<Element label = "" type = "UIMenu" Id = "menu05" style="menustyle" title="Pricing_Workbench" link = "rdscontroller?page=territories"   />
 	<Element label = "" type = "UIMenu" Id = "menu05" style="menustyle" title="Promotions" link = "rdscontroller?page=salesexpenses"   />
@@ -301,6 +301,9 @@
  <AjaxService service ="itemSearch" class = "com.rainbow.crm.item.service.ItemAjaxService">
  <key>Code</key>
  <key>Name</key>
+ </AjaxService>
+  <AjaxService service ="divisionTerritorySearch" class = "com.rainbow.crm.territory.service.DivTerritoryAjaxService">
+ <key>divisionId</key>
  </AjaxService>
   <AjaxService service ="customerSearch" class = "com.rainbow.crm.customer.service.CustomerAjaxService">
  <key>Phone</key>

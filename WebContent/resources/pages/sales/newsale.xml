@@ -21,6 +21,14 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 <responseElement key = "FullName">txtCustomerName</responseElement>
 </responseElements>
 </AjaxGroup>
+<AjaxGroup service ="divisionTerritorySearch">
+<requestElements event = "">
+<requestElement key = "divisionId">lstInvDivision</requestElement>
+</requestElements>
+<responseElements>
+<responseElement key = "territories">txtTerritory</responseElement>
+</responseElements>
+</AjaxGroup>
 <AjaxGroup service ="skuSearch">
 <requestElements event = "">
 <requestElement key = "Name">txtItName</requestElement>
@@ -52,6 +60,10 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 	<options populator =  "getAllDivisions"> 
 	</options>
 	</Element>
+		<Element label = "Territory"  type = "UIList"  Id = "txtTerritory"   property ="Territory.Id"  >
+	 <options populator =  "getAllTerritories"> 
+	</options>
+   </Element>
 
 	<Element label = "Bill_No"  type = "UIText" Id = "txtBillNo"  isMandatory="true"  readonly="true" property ="billNumber" />
 	<Element label = "Date"  type = "UIDate" Id = "txtDate" isMandatory="true"  property ="salesDate" />
@@ -59,7 +71,7 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 		<options populator =  "getOrderTypes"> 
 		</options>
 	</Element>
-		<Element label = ""  type = "UILabel" Id = "lblFree3"  style="bigTitle" value ="" />
+	
 	<Element label = ""  type = "UILabel" Id = "lblFree4"  style="bigTitle" value ="" />
 	<Element label = ""  type = "UILabel" Id = "lblCustTitle"   value ="Customer" />
 	<Element label = "Phone"  type = "UIText" Id = "txtPhone"   showInPrevCol ="true"  property ="Customer.Phone" />

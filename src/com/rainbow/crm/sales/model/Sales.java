@@ -12,6 +12,7 @@ import com.rainbow.crm.address.model.Address;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.division.model.Division;
+import com.rainbow.crm.territory.model.Territory;
 import com.rainbow.crm.vendor.model.Vendor;
 import com.techtrade.rads.framework.annotations.RadsPropertySet;
 
@@ -20,6 +21,7 @@ public class Sales extends CRMBusinessModelObject{
 	Division division;
 	String billNumber;
 	Customer customer;
+	Territory territory;
 	Address deliveryAddress;
 	FiniteValue orderType;
 	Date salesDate ;
@@ -210,6 +212,12 @@ public class Sales extends CRMBusinessModelObject{
 	}
 	public void setDeliveryAddress(Address deliveryAddress) {
 		this.deliveryAddress = deliveryAddress;
+	}
+	public Territory getTerritory() {
+		return territory;
+	}
+	public void setTerritory(Territory territory) {
+		this.territory = territory;
 	}
 	
 	

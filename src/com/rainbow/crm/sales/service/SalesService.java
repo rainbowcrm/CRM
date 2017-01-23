@@ -53,6 +53,8 @@ import com.rainbow.crm.sales.model.Sales;
 import com.rainbow.crm.sales.model.SalesLine;
 import com.rainbow.crm.sales.validator.SalesErrorCodes;
 import com.rainbow.crm.sales.validator.SalesValidator;
+import com.rainbow.crm.territory.model.Territory;
+import com.rainbow.crm.territory.service.ITerritoryService;
 import com.rainbow.crm.user.model.User;
 import com.rainbow.crm.user.service.IUserService;
 import com.rainbow.crm.vendor.model.Vendor;
@@ -145,6 +147,12 @@ public class SalesService extends AbstractionTransactionService implements ISale
 				 object.setCustomer(customer);
 		}
 		Externalize externalize = new Externalize(); ;
+		
+		if(object.getTerritory() != null) {
+			ITerritoryService territoryService = (ITerritoryService)SpringObjectFactory.INSTANCE.getInstance("ITerritoryService");
+			Territory territory  = (Territory)territoryService.getById(object.getTerritory().getId());
+			object.setTerritory(territory);
+		}
 		
 		if(!Utils.isNullSet(object.getSalesLines())){
 			int lineNo=1;

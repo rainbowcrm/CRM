@@ -20,6 +20,15 @@ Controller = "com.rainbow.crm.saleslead.controller.SalesLeadController">
 <responseElement key = "FullName">txtCustomerName</responseElement>
 </responseElements>
 </AjaxGroup>
+<AjaxGroup service ="divisionTerritorySearch">
+<requestElements event = "">
+<requestElement key = "divisionId">lstInvDivision</requestElement>
+</requestElements>
+<responseElements>
+<responseElement key = "territories">txtTerritory</responseElement>
+</responseElements>
+</AjaxGroup>
+
 <AjaxGroup service ="skuSearch">
 <requestElements event = "">
 <requestElement key = "Name">txtItName</requestElement>

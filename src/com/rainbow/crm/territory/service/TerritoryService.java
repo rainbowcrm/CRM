@@ -155,6 +155,14 @@ public class TerritoryService extends AbstractionTransactionService implements I
 		return ans;
 	}
 
+	
+	
+	
+	@Override
+	public List<Territory> getAllTerritoriesforDivision(int division) {
+		return ((TerritoryDAO)getDAO()).getAllTerritoriesforDivision(division);
+	}
+
 	@Override
 	public TransactionResult create(CRMModelObject object, CRMContext context) {
 		Territory territory = (Territory)object ;

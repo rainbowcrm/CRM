@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.territory.model.Territory;
@@ -23,6 +24,15 @@ public class TerritoryDAO  extends SpringHibernateDAO{
 	}
 
 
+	public List<Territory> getAllTerritoriesforDivision(int divisionId)
+	{
+		Session session = openSession(false);
+		Query query = session.createQuery(" from Territory where division.id = :divisionId  and deleted=false  " ) ;
+		query.setParameter("divisionId", divisionId);
+		List<Territory> lst = query.list();
+		closeSession(session, false);
+		return lst;
+	}
 	
 	
 	

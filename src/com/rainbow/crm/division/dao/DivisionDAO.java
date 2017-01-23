@@ -25,7 +25,7 @@ public class DivisionDAO extends HibernateDAO {
 	public Division getByCode(String code,int company) {
 		Division division = null;
 		Session session = openSession(false);
-		Query query = session.createQuery(" from Division where code = :code  and company.id =:id  " ) ;
+		Query query = session.createQuery(" from Division where code = :code  and company.id =:id and deleted=false  " ) ;
 		query.setParameter("code", code);
 		query.setParameter("id", company);
 		List lst = query.list();
@@ -38,7 +38,7 @@ public class DivisionDAO extends HibernateDAO {
 	public Division getByName(String name,int company) {
 		Division division = null;
 		Session session = openSession(false);
-		Query query = session.createQuery(" from Division where name = :name  and company.id =:id  " ) ;
+		Query query = session.createQuery(" from Division where name = :name  and company.id =:id  and deleted=false  " ) ;
 		query.setParameter("name", name);
 		query.setParameter("id", company);
 		List lst = query.list();
@@ -50,7 +50,7 @@ public class DivisionDAO extends HibernateDAO {
 	
 	public List<Division> getAllDivisions(int company) {
 		Session session = openSession(false);
-		Query query = session.createQuery("from Division where company.id=  :id "  );
+		Query query = session.createQuery("from Division where company.id=  :id and deleted=false  "  );
 		query.setParameter("id", company);
 		List<Division> ans = query.list();
 		closeSession(session,false);

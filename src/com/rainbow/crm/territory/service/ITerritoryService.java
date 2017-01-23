@@ -14,4 +14,6 @@ import com.techtrade.rads.framework.model.abstracts.RadsError;
 public interface ITerritoryService extends ITransactionService{
 
 	
+	public List<Territory> getAllTerritoriesforDivision(int divisionId);
+	
 }
