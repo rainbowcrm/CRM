@@ -50,7 +50,6 @@ Controller = "com.rainbow.crm.salesperiod.controller.SalesPeriodController">
 	<Element label = "Total_Amount"  type = "UIText" Id = "txtTotalAmt"   property ="totalTarget" isNumeric= "true" readonly="true" size = "10" />
 	 	
 </Section>
-<Section type ="brk1"/>
 <Section type ="detail">
 <Element type ="UITabset" Id = "impexp" style = "uitabstyle" selectedTabStyle= "titleStyleSelected active nav-link" unSelectedTabStyle ="titleStyleUnSelected nav-link" >
 <Element type ="UITab" Id= "idLine" title = "Line_Item_Targets" showinTable = "false" >

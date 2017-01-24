@@ -213,6 +213,9 @@ div.pagestyle {
   width: 86%;
   float: left; }
 
+div.uitabstyle {
+  background-color: #A0A0A0; }
+
 div.detailCRUDStyle {
   position: relative;
   top: 5%;

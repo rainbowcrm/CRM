@@ -42,7 +42,11 @@ div.childSectionStyle {
 position:relative;
 overflow:auto;
 }
- 
+
+div.uitabstyle {
+background-color:#A0A0A0;
+} 
+
 div.summaryStyle{
  text-align: right;
  position:fixed;
@@ -185,4 +189,17 @@ iframe.lookupFrameStyle {
 
 .nav-tabs .nav-link{
 	float: left;
+}
+
+
+span.titleStyleSelected  {
+    background: $primary-color;
+    font-weight: bold;
+}
+
+span.titleStyleUnSelected:hover  {
+  background: $light;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.24);
+  color:$dark;
+  cursor: hand;
 }
