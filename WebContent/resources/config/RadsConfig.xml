@@ -29,6 +29,8 @@
 </Page>
 <Page id = "categories" definition ="/resources/pages/category/categories.xml" modelclass = "com.rainbow.crm.category.model.Category" >
 </Page>
+<Page id = "expenseheads" definition ="/resources/pages/expensehead/expenseheads.xml" modelclass = "com.rainbow.crm.expensehead.model.ExpenseHead" >
+</Page>
 <Page id = "brands" definition ="/resources/pages/brand/brands.xml" modelclass = "com.rainbow.crm.brand.model.Brand" >
 </Page>
 <Page id = "inventory" definition ="/resources/pages/inventory/inventory.xml" modelclass = "com.rainbow.crm.inventory.model.Inventory" >
@@ -204,7 +206,7 @@
  <Element label = "" type = "UIMenu" Id = "menu3001" style="menustyle" title="Territories" link = "rdscontroller?page=territories"   />
 	 <Element label = "" type = "UIMenu" Id = "menu301" style="menustyle" title="Sales_Associate_PortFolio" link = "rdscontroller?page=salesportfoliolist"   />
 	 <Element label = "" type = "UIMenu" Id = "menu302" style="menustyle" title="Sales_Period" link = "rdscontroller?page=salesperiodlist"   />
-	<Element label = "" type = "UIMenu" Id = "menu303" style="menustyle" title="Expenses" link = "rdscontroller?page=salesexpenses"   />
+	<Element label = "" type = "UIMenu" Id = "menu303" style="menustyle" title="Expense_Heads" link = "rdscontroller?page=expenseheads"   />
  </Element>
  <Element label = "" type = "UIMenu" Id = "menu30" style="menustyleParent" title="Salesforce_WorkBench" groupId= "menuGRP004"  >
  	<Element label = "" type = "UIMenu" Id = "menu301" style="menustyle" title="Alerts" link = "rdscontroller?page=alerts"   />

@@ -36,6 +36,8 @@
     
     <bean id="ICategoryService" class="com.rainbow.crm.category.service.CategoryService">
     </bean>
+    <bean id="IExpenseHeadService" class="com.rainbow.crm.expensehead.service.ExpenseHeadService">
+    </bean>
      <bean id="IBrandService" class="com.rainbow.crm.brand.service.BrandService">
     </bean>
     <bean id="IDataLoaderService" class="com.rainbow.framework.setup.service.DataLoaderService">
@@ -91,7 +93,10 @@
   
    <bean id="CategoryDAO" class="com.rainbow.crm.category.dao.CategoryDAO">
     <property name="sessionFactory" ref="sessionFactory"></property>
-    </bean> 
+    </bean>
+    <bean id="ExpenseHeadDAO" class="com.rainbow.crm.expensehead.dao.ExpenseHeadDAO">
+    <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>  
     
     <bean id="BrandDAO" class="com.rainbow.crm.brand.dao.BrandDAO">
     <property name="sessionFactory" ref="sessionFactory"></property>
@@ -187,6 +192,7 @@
         <value>com/rainbow/crm/division/model/Division.hbm.xml</value>
         <value>com/rainbow/crm/brand/model/Brand.hbm.xml</value>
         <value>com/rainbow/crm/category/model/Category.hbm.xml</value>
+        <value>com/rainbow/crm/expensehead/model/ExpenseHead.hbm.xml</value>
         <value>com/rainbow/crm/inventory/model/Inventory.hbm.xml</value>
         <value>com/rainbow/crm/product/model/Product.hbm.xml</value>
         <value>com/rainbow/crm/uom/model/UOM.hbm.xml</value>

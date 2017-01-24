@@ -214,7 +214,6 @@ public class SalesService extends AbstractionTransactionService implements ISale
 			}
 		}
 		TransactionResult result= super.create(object, context);
-		if (sales.isFutureDelivery()) {
 		InventoryUpdateObject invObject = new InventoryUpdateObject();
 		invObject.setCompany(sales.getCompany());
 		invObject.setContext(context);
@@ -222,7 +221,6 @@ public class SalesService extends AbstractionTransactionService implements ISale
 		invObject.setAddition(false);
 		invObject.setItemLines(sales.getSalesLines());
 		CRMMessageSender.sendMessage(invObject);
-		}
 		
 		return result; 
 	}
