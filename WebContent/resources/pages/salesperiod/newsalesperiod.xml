@@ -90,7 +90,6 @@ Controller = "com.rainbow.crm.salesperiod.controller.SalesPeriodController">
 </Element>
 </Element>
 <Element type ="UITab" Id= "idSalesAss" title = "Sales_Associate_Targets" showinTable = "false" >
-
 <Element type = "UITable" rows = "1" cols = "3" style = "listPageTitle" applyStyleonChildren ="true" Id  ="tblTransAss" property ="SalesPeriodAssociates[]" >
 <Element type = "UITableHead">
  <Element type = "UITableRow">
@@ -125,7 +124,7 @@ Controller = "com.rainbow.crm.salesperiod.controller.SalesPeriodController">
 </Element>
 
 <Element type ="UITab" Id= "idSalesTerritory" title = "Sales_Associate_Territories" showinTable = "false" >
-
+<Element type= "UIDiv" align = "center" width="60%">
 <Element type = "UITable" rows = "1" cols = "3" style = "listPageTitle" applyStyleonChildren ="true" Id  ="tblTransAss" property ="SalesPeriodTerritories[]" >
 <Element type = "UITableHead">
  <Element type = "UITableRow">
@@ -156,7 +155,7 @@ Controller = "com.rainbow.crm.salesperiod.controller.SalesPeriodController">
 </Element>
 </Element>
 </Element>
-
+</Element>
 </Element>
 </Element>
 </Section>
