@@ -32,6 +32,10 @@ public class ConfigurationManager {
 	public static final String ALLOW_SHIPPING_FROMMULTI_DIV = "MULIDIVSHIP";
 	public static final String ORDER_LABEL_TEMPLATE = "ORDLBLPRIN";
 	
+	public static final String SALESPERSONAL_ASSOCIATION = "ASSSLSPERHDLIN";
+	public static final String ASSOCIATE_ACC_ALLDIV = "ALLDIVACCASS";
+	public static final String MANAGER_ACC_ALLDIV = "ALLDIVACCGMR";
+	
 	public static String  getConfig(String key , CRMContext context) {
 		return ConfigSQL.getConfigforCode(context.getLoggedinCompany(), key);
 	}

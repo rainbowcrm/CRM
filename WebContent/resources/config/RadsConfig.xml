@@ -212,6 +212,7 @@
  	<Element label = "" type = "UIMenu" Id = "menu301" style="menustyle" title="Alerts" link = "rdscontroller?page=alerts"   />
 	<Element label = "" type = "UIMenu" Id = "menu34" style="menustyle" title="Sales_Leads" link = "rdscontroller?page=saleslead"   />
 	<Element label = "" type = "UIMenu" Id = "menu35" style="menustyle" title="Followups" link = "rdscontroller?page=followups"   />
+	<Element label = "" type = "UIMenu" Id = "menu36" style="menustyle" title="Expense_Vouchers" link = "rdscontroller?page=expensevouchers"   />
  </Element>
  <Element label = "" type = "UIMenu" Id = "menu30" style="menustyleParent" title="Manager_Workbench" groupId= "menuGRP005"  >
 	<Element label = "" type = "UIMenu" Id = "menu031" style="menustyle" title="Manager_Console" link = "rdscontroller?page=managerconsole"   />

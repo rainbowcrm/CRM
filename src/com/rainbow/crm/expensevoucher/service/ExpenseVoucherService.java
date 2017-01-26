@@ -1,0 +1,186 @@
+package com.rainbow.crm.expensevoucher.service;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.rainbow.crm.abstratcs.model.CRMModelObject;
+import com.rainbow.crm.common.AbstractionTransactionService;
+import com.rainbow.crm.common.CRMContext;
+import com.rainbow.crm.common.CRMDBException;
+import com.rainbow.crm.common.CRMValidator;
+import com.rainbow.crm.common.Externalize;
+import com.rainbow.crm.common.SpringObjectFactory;
+import com.rainbow.crm.company.model.Company;
+import com.rainbow.crm.company.service.ICompanyService;
+import com.rainbow.crm.database.GeneralSQLs;
+import com.rainbow.crm.division.model.Division;
+import com.rainbow.crm.division.service.IDivisionService;
+import com.rainbow.crm.hibernate.ORMDAO;
+import com.rainbow.crm.expensehead.model.ExpenseHead;
+import com.rainbow.crm.expensehead.service.IExpenseHeadService;
+import com.rainbow.crm.expensevoucher.dao.ExpenseVoucherDAO;
+import com.rainbow.crm.expensevoucher.model.ExpenseVoucher;
+import com.rainbow.crm.expensevoucher.model.ExpenseVoucherLine;
+import com.rainbow.crm.expensevoucher.validator.ExpenseVoucherErrorCodes;
+import com.rainbow.crm.expensevoucher.validator.ExpenseVoucherValidator;
+import com.rainbow.framework.nextup.NextUpGenerator;
+import com.techtrade.rads.framework.model.abstracts.ModelObject;
+import com.techtrade.rads.framework.model.abstracts.RadsError;
+import com.techtrade.rads.framework.model.transaction.TransactionResult;
+import com.techtrade.rads.framework.utils.Utils;
+
+@Transactional
+public class ExpenseVoucherService extends AbstractionTransactionService implements IExpenseVoucherService{
+
+	@Override
+	public long getTotalRecordCount(CRMContext context) {
+		return getDAO().getTotalRecordCount("ExpenseVoucher",context);
+	}
+
+	@Override
+	public Object getById(Object PK) {
+		return getDAO().getById(PK);
+	}
+
+	@Override
+	public List<CRMModelObject> listData(int from, int to,
+			String whereCondition, CRMContext context) {
+		return super.listData("ExpenseVoucher", from, to, whereCondition, context);
+	}
+
+	@Override
+	public List<RadsError> validateforCreate(CRMModelObject object,
+			CRMContext context) {
+		ICompanyService compService = (ICompanyService)SpringObjectFactory.INSTANCE.getInstance("ICompanyService");
+		Company company = (Company)compService.getById(context.getLoggedinCompany());
+		((ExpenseVoucher)object).setCompany(company);
+		ExpenseVoucherValidator validator = new ExpenseVoucherValidator(context);
+		return validator.validateforCreate(object);
+	}
+
+	@Override
+	public List<RadsError> validateforUpdate(CRMModelObject object,
+			CRMContext context) {
+		ICompanyService compService = (ICompanyService)SpringObjectFactory.INSTANCE.getInstance("ICompanyService");
+		Company company = (Company)compService.getById(context.getLoggedinCompany());
+		((ExpenseVoucher)object).setCompany(company);
+		ExpenseVoucherValidator validator = new ExpenseVoucherValidator(context);
+		return validator.validateforUpdate(object);
+	}
+
+	@Override
+	protected ORMDAO getDAO() {
+//	return new ExpenseVoucherDAO();
+	return (ExpenseVoucherDAO) SpringObjectFactory.INSTANCE.getInstance("ExpenseVoucherDAO");
+	}
+
+	
+	@Override
+	public List<RadsError> adaptfromUI(CRMContext context,ModelObject obj) {
+		ExpenseVoucher object = (ExpenseVoucher) obj;
+		ICompanyService compService = (ICompanyService) SpringObjectFactory.INSTANCE.getInstance("ICompanyService");
+		Company company = (Company)compService.getById(context.getLoggedinCompany());
+		object.setCompany(company);
+				
+		List<RadsError> ans = new ArrayList<RadsError>();
+		if (object.getDivision() != null) {
+			int divisionId  = object.getDivision().getId() ;
+			IDivisionService divisionService =(IDivisionService) SpringObjectFactory.INSTANCE.getInstance("IDivisionService");
+			Division division = null;
+			if (divisionId > 0 )
+				division = (Division)divisionService.getById(divisionId);
+			else
+				division  = (Division)divisionService.getByBusinessKey(object.getDivision(), context);
+			if(division == null){
+				ans.add(CRMValidator.getErrorforCode(context.getLocale(), ExpenseVoucherErrorCodes.FIELD_NOT_VALID , "Division"));
+			}else {
+				object.setDivision(division);
+			}
+		}
+		Externalize externalize = new Externalize(); ;
+		if(!Utils.isNullSet(object.getExpenseVoucherLines())){
+			int lineNo=1;
+			for (ExpenseVoucherLine line: object.getExpenseVoucherLines()) {
+				line.setCompany(company);
+				line.setLineNumber(lineNo ++);
+				if(line.getExpenseHead() == null ) {
+					ans.add(CRMValidator.getErrorforCode(context.getLocale(), ExpenseVoucherErrorCodes.FIELD_NOT_VALID , externalize.externalize(context, "Item")));
+				}else {
+					String itemName = line.getExpenseHead().getName();
+					IExpenseHeadService service = (IExpenseHeadService)SpringObjectFactory.INSTANCE.getInstance("IExpenseHeadService");
+					ExpenseHead head = service.getByName(object.getCompany().getId(), itemName);
+					line.setExpenseHead(head);
+				}
+			}
+		}
+		return ans;
+	}
+
+	@Override
+	public TransactionResult create(CRMModelObject object, CRMContext context) {
+		ExpenseVoucher expenseVoucher = (ExpenseVoucher)object ;
+		if (Utils.isNull(expenseVoucher.getDocNumber())) {
+			String bKey = NextUpGenerator.getNextNumber("ExpenseVoucher", context, expenseVoucher.getDivision());
+			expenseVoucher.setDocNumber(bKey);
+		}
+		if (!Utils.isNullSet(expenseVoucher.getExpenseVoucherLines())) {
+			int pk = GeneralSQLs.getNextPKValue("ExpenseVoucher") ;
+			expenseVoucher.setId(pk);
+			for (ExpenseVoucherLine  line : expenseVoucher.getExpenseVoucherLines()) {
+				int linePK = GeneralSQLs.getNextPKValue( "ExpenseVoucher_Lines") ;
+				line.setId(linePK);
+				line.setExpenseVoucherDoc(expenseVoucher);
+			}
+		}
+		TransactionResult result= super.create(object, context);
+		return result; 
+	}
+
+	  
+	
+	@Override
+	public TransactionResult update(CRMModelObject object, CRMContext context) {
+		ExpenseVoucher expenseVoucher = (ExpenseVoucher)object ;
+		ExpenseVoucher oldObject = (ExpenseVoucher)getById(expenseVoucher.getPK());
+		//ExpenseVoucher oldInvObj = (ExpenseVoucher)oldObject.clone();
+		if (!Utils.isNullSet(expenseVoucher.getExpenseVoucherLines())) {
+			int  ct = 0;
+			Iterator it = oldObject.getExpenseVoucherLines().iterator() ;
+			for (ExpenseVoucherLine  line : expenseVoucher.getExpenseVoucherLines()) {
+				ExpenseVoucherLine oldLine = null ;
+				if (it.hasNext()) {
+					oldLine= (ExpenseVoucherLine) it.next() ;
+				}
+				line.setExpenseVoucherDoc(expenseVoucher);
+				if (oldLine != null) {
+					line.setId(oldLine.getId());
+					line.setObjectVersion(oldLine.getObjectVersion());
+				}else {
+					int linePK = GeneralSQLs.getNextPKValue( "ExpenseVoucher_Lines") ;
+					line.setId(linePK);
+				}
+			}
+			while (it.hasNext()) {
+				ExpenseVoucherLine oldLine= (ExpenseVoucherLine) it.next() ;
+				expenseVoucher.addExpenseVoucherLine(oldLine);
+			}
+		}
+		return super.update(object, context);
+	}
+
+	@Override
+	public TransactionResult batchUpdate(List<CRMModelObject> objects,
+			CRMContext context) throws CRMDBException {
+		return super.batchUpdate(objects, context);
+	}
+
+	@Override
+	public TransactionResult batchCreate(List<CRMModelObject> objects,
+			CRMContext context) throws CRMDBException {
+		return super.batchCreate(objects, context);
+	}
+
+	
+}

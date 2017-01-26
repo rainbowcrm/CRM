@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Page id = "expensevoucherlist" showinFrame ="true" title ="Expense Vouchers | Rainbow CRM"  Object = "com.rainbow.crm.expensevoucher.model.ExpenseVoucher" 
+Controller = "com.rainbow.crm.expensevoucher.controller.ExpenseVoucherController">
+<Template type= "List"  name = "ListTemplate"></Template>
+<Forwards>
+<Forward key ="NEW">rdscontroller?page=newexpensevoucher</Forward>
+<Forward key ="EDIT">rdscontroller?page=newexpensevoucher</Forward>
+</Forwards>
+<AjaxGroups>
+<AjaxGroup service ="filterSearch">
+<requestElements>
+<requestElement key = "filterId">lstSavedFilters</requestElement>
+</requestElements>
+<responseElements>
+<responseElement key = "FilterName" >txtFilterName</responseElement>
+<responseElement key = "DocNo" >txtBillNo</responseElement>
+<responseElement key = "Division.Name" >txtDivision</responseElement>
+<responseElement key = "User.userId" >txtUser</responseElement>
+<responseElement key = "FromDate" >txtFromDate</responseElement>
+<responseElement key = "ToDate" >txtToDate</responseElement>
+</responseElements>
+</AjaxGroup>
+</AjaxGroups>
+<IncludeJS>./scripts/CRMGeneral.js</IncludeJS>
+<IncludeJS>./scripts/sales/SalesLead.js</IncludeJS>
+<Elements>
+<Section type ="topBar"></Section>
+<Section type ="leftsideBarApp"></Section>
+<CoreSection>
+<ErrorSection>
+</ErrorSection>
+<FilterSection>
+<FilterNode>
+  <Element label = "Saved_Filters"  type = "UIList" Id = "lstSavedFilters"   property ="" >
+	<options populator =  "getSavedFiters"> 
+	</options>
+  </Element>
+ </FilterNode>
+<FilterNode>
+   	<Element label = "Filter_Name"  type = "UIText" Id = "txtFilterName"  property ="FilterName" />
+</FilterNode>
+<FilterNode>
+   	<Element label = "Voucher_No"  type = "UIText" Id = "txtBillNo"  property ="billNumber" />
+</FilterNode>
+<FilterNode>
+<Element label = "Division"  type = "UILookupText"  Id = "txtDivision"  property ="Division.Name" showLookupAsDialog="true" dialogId="dlgComp"
+  dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
+	 <lookupType>division</lookupType>
+	 <height>300</height>
+	 <width>290</width>
+</Element>
+</FilterNode>
+<FilterNode>
+   	<Element label = "User"  type = "UILookupText"  Id = "txtDivision"  property ="User.userId" showLookupAsDialog="true" dialogId="dlgUser"
+  dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
+	 <lookupType>user</lookupType>
+	 <height>300</height>
+	 <width>290</width>
+</Element>
+</FilterNode>
+<FilterNode operator = ">=">
+   	<Element label = "From"  type = "UIDate" Id = "txtFromDate"  property ="expenseDate" />
+</FilterNode>
+<FilterNode operator = ">=">
+   	<Element label = "To"  type = "UIDate" Id = "txtToDate"  property ="expenseDate" />
+</FilterNode>   
+<FilterNode operator = ">=">
+   	<Element label = "Amount >"  type = "UIText" Id = "txtReqAmGT"  property ="requestedTotal" />
+</FilterNode>  
+</FilterSection>
+<ListSection >
+ <Columns allowrowselection ="Multiple" uniqueproperty = "Id">
+<SelectionColumn   >
+<Element label = ""  type = "UICheckBox" Id = "idChkSel"  rendered="!Object.isDeleted" property ="Id" />
+<Element label = ""  type = "UIImage" Id = "idChkSel"  rendered="Object.isDeleted" height = "21" weight ="21" src= "./resources/images/deletedRow.jpg" />
+</SelectionColumn>
+<Column title ="Doc_Number"  width ="20%" >
+<Element label = ""  type = "UINote" Id = "idDoc"  property ="DocNumber" />
+</Column>
+<Column title ="Date"  width ="20%" >
+<Element label = ""  type = "UINote" Id = "idDt"  property ="expenseDate" />
+</Column>
+<Column title ="User"  width ="30%" >
+<Element label = ""  type = "UINote" Id = "idCust"  property ="User.userId" />
+</Column>
+<Column title ="Requested_Amount"  width ="10%" >
+<Element label = ""  type = "UINote" Id = "idPhone"  property ="requestedTotal" />
+</Column>
+<Column title ="Status"  width ="25%" >
+<Element label = ""  type = "UINote" Id = "idAmt"  property ="Status.description" />
+</Column>
+</Columns>
+</ListSection>
+</CoreSection>
+<Section type ="summary">
+<Element caption = "Add"  type = "UIButton"    Id = "btnAdd"  style="button" fixedAction ="FixedAction.ACTION_PAGEFORWARD" fixedActionParam =  "NEW" />
+<Element caption = "Edit"  type = "UIButton"    Id = "btnEdit"  style="button" fixedAction ="FixedAction.ACTION_GOEDITMODE"  fixedActionParam =  "EDIT"  />
+<Element caption = "Start_SaleCycle"  type = "UIButton"    Id = "btnslscyc"  style="button" onClickJS ="promote();" />
+<Element caption = "Send_Email"  type = "UIButton"    Id = "btnslemail"  style="button" onClickJS ="sendemail();" />
+<Element type= "Panel" key= "NavPanel"  style = "sameline" ></Element>
+</Section>
+<Section type ="copyRightSection"/>
+</Elements>
+</Page>
+
+
+

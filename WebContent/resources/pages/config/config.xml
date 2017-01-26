@@ -54,6 +54,30 @@ Controller = "com.rainbow.crm.config.controller.ConfigController">
 </Element>
 </Element>
 
+<Element type ="UITab" Id= "idwfMgmt" title = "Workforce_Management"   >
+
+<Element type = "UITable" rows = "1" cols = "3" style = "grid" applyStyleonChildren ="true" Id  ="tblWForce" property ="WorkforceConfigLines[]" >
+<Element type = "UITableRow"  dataType = "com.rainbow.crm.config.model.ConfigLine" >
+<Element type ="UITableCol" width = "70%" align = "left">
+<Element label = ""  type = "UIHidden" Id = "txtWFMCode" size  = "10" property ="configCode" /> 
+<Element label = ""  type = "UILabel" Id = "txtWFMDesc" size  = "50" property ="description" /> 
+</Element>
+<Element type ="UITableCol" width = "30%">
+<Element label = ""  type = "UIText" Id = "txtWFMValue" size  = "40" property ="value" rendered = "Object.isTextField"/> 
+<Element label = ""  type = "UIList" Id = "txtWFMValue"  property ="value" rendered = "Object.isFVField"> 
+<options populator = "Object.getOptions" >
+</options>
+</Element>
+<Element label = ""  type = "UIText" Id = "txtWFMValue"   size  = "10" isNumeric  ="true" property ="value" rendered = "Object.isNumericField"/>
+<Element label = ""  type = "UIBooleanCheckBox" Id = "hdnCMCHKBX"  property ="value"  hiddenControlId= "txtWFMValue" rendered = "Object.isBooleanField">
+</Element>
+</Element>
+</Element>
+</Element>
+</Element>
+
+
+
 
 <Element type ="UITab" Id= "idinven" title = "Inventory"   >
 <Element type = "UITable" rows = "1" cols = "3" style = "grid" applyStyleonChildren ="true" Id  ="tblInv" property ="InventoryConfigLines[]" >

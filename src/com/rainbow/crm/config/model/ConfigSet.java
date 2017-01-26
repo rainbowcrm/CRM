@@ -14,6 +14,7 @@ public class ConfigSet extends ModelObject{
 	public final static String PAYMENT = "Payment" ;
 	public final static String INVENTORY = "Inventory" ;
 	public final static String ORDER_MANAGEMENT = "Order Management" ;
+	public final static String WORKFORCE_MANAGEMENT = "Workforce Management" ;
 	
 	int company ;
 
@@ -22,6 +23,12 @@ public class ConfigSet extends ModelObject{
 	}
 	public void setOrderConfigLines(List<ConfigLine>  configLines) {
 		configMap.put(ORDER_MANAGEMENT, configLines);
+	}
+	public List<ConfigLine> getWorkforceConfigLines() {
+		return configMap.get(WORKFORCE_MANAGEMENT) ;
+	}
+	public void setWorkforceConfigLines(List<ConfigLine>  configLines) {
+		configMap.put(WORKFORCE_MANAGEMENT, configLines);
 	}
 	
 	public List<ConfigLine> getPaymentConfigLines() {

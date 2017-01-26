@@ -86,6 +86,8 @@
     </bean>
     <bean id="ISalesLeadService" class="com.rainbow.crm.saleslead.service.SalesLeadService">
     </bean>
+    <bean id="IExpenseVoucherService" class="com.rainbow.crm.expensevoucher.service.ExpenseVoucherService">
+    </bean>
     <bean id="ITerritoryService" class="com.rainbow.crm.territory.service.TerritoryService">
     </bean>
     <bean id="IDistributionOrderService" class="com.rainbow.crm.distributionorder.service.DistributionOrderService">
@@ -166,6 +168,9 @@
     <bean id="SalesLeadDAO" class="com.rainbow.crm.saleslead.dao.SalesLeadDAO">
     <property name="sessionFactory" ref="sessionFactory"></property>  
     </bean>
+    <bean id="ExpenseVoucherDAO" class="com.rainbow.crm.expensevoucher.dao.ExpenseVoucherDAO">
+    <property name="sessionFactory" ref="sessionFactory"></property>  
+    </bean>
     <bean id="TerritoryDAO" class="com.rainbow.crm.territory.dao.TerritoryDAO">
     <property name="sessionFactory" ref="sessionFactory"></property>  
     </bean>   
@@ -217,6 +222,8 @@
         <value>com/rainbow/crm/sales/model/SalesLine.hbm.xml</value>  
         <value>com/rainbow/crm/wishlist/model/WishList.hbm.xml</value>
         <value>com/rainbow/crm/wishlist/model/WishListLine.hbm.xml</value>
+        <value>com/rainbow/crm/expensevoucher/model/ExpenseVoucher.hbm.xml</value>
+        <value>com/rainbow/crm/expensevoucher/model/ExpenseVoucherLine.hbm.xml</value>
         <value>com/rainbow/crm/saleslead/model/SalesLead.hbm.xml</value>
         <value>com/rainbow/crm/saleslead/model/SalesLeadLine.hbm.xml</value>
         <value>com/rainbow/crm/distributionorder/model/DistributionOrder.hbm.xml</value>

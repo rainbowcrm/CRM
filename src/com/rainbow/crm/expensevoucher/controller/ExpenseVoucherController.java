@@ -1,4 +1,4 @@
-package com.rainbow.crm.saleslead.controller;
+package com.rainbow.crm.expensevoucher.controller;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -20,8 +20,8 @@ import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.database.LoginSQLs;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.division.service.IDivisionService;
-import com.rainbow.crm.saleslead.model.SalesLead;
-import com.rainbow.crm.saleslead.service.ISalesLeadService;
+import com.rainbow.crm.expensevoucher.model.ExpenseVoucher;
+import com.rainbow.crm.expensevoucher.service.IExpenseVoucherService;
 import com.techtrade.rads.framework.context.IRadsContext;
 import com.techtrade.rads.framework.controller.abstracts.TransactionController;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
@@ -30,18 +30,18 @@ import com.techtrade.rads.framework.model.transaction.TransactionResult.Result;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
 import com.techtrade.rads.framework.utils.Utils;
 
-public class SalesLeadController extends CRMTransactionController{
+public class ExpenseVoucherController extends CRMTransactionController{
 	
 	
 
-	public ISalesLeadService getService() {
-		ISalesLeadService serv = (ISalesLeadService) SpringObjectFactory.INSTANCE.getInstance("ISalesLeadService");
+	public IExpenseVoucherService getService() {
+		IExpenseVoucherService serv = (IExpenseVoucherService) SpringObjectFactory.INSTANCE.getInstance("IExpenseVoucherService");
 		return serv;
 	}
 
 	
 	
-
+	
 
 	
 	
