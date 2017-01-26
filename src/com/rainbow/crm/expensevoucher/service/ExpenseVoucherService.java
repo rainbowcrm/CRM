@@ -3,21 +3,26 @@ package com.rainbow.crm.expensevoucher.service;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.AbstractionTransactionService;
+import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMDBException;
 import com.rainbow.crm.common.CRMValidator;
 import com.rainbow.crm.common.Externalize;
 import com.rainbow.crm.common.SpringObjectFactory;
+import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
 import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.division.service.IDivisionService;
 import com.rainbow.crm.hibernate.ORMDAO;
+import com.rainbow.crm.user.model.User;
+import com.rainbow.crm.user.service.IUserService;
 import com.rainbow.crm.expensehead.model.ExpenseHead;
 import com.rainbow.crm.expensehead.service.IExpenseHeadService;
 import com.rainbow.crm.expensevoucher.dao.ExpenseVoucherDAO;
@@ -108,12 +113,20 @@ public class ExpenseVoucherService extends AbstractionTransactionService impleme
 				if(line.getExpenseHead() == null ) {
 					ans.add(CRMValidator.getErrorforCode(context.getLocale(), ExpenseVoucherErrorCodes.FIELD_NOT_VALID , externalize.externalize(context, "Item")));
 				}else {
-					String itemName = line.getExpenseHead().getName();
+					int id = line.getExpenseHead().getId();
 					IExpenseHeadService service = (IExpenseHeadService)SpringObjectFactory.INSTANCE.getInstance("IExpenseHeadService");
-					ExpenseHead head = service.getByName(object.getCompany().getId(), itemName);
+					ExpenseHead head = (ExpenseHead)service.getById(id);
 					line.setExpenseHead(head);
 				}
 			}
+		}
+		if (object.getSalesAssoicate() != null ) {
+			IUserService service = (IUserService) SpringObjectFactory.INSTANCE.getInstance("IUserService");
+			User user = (User)service.getById(object.getSalesAssoicate().getUserId());
+			object.setSalesAssoicate(user);
+		}
+		if (object.getStatus() == null) {
+			object.setStatus(new FiniteValue(CRMConstants.EXP_VOUCHER_STATUS.REQUESTED));
 		}
 		return ans;
 	}
@@ -122,7 +135,7 @@ public class ExpenseVoucherService extends AbstractionTransactionService impleme
 	public TransactionResult create(CRMModelObject object, CRMContext context) {
 		ExpenseVoucher expenseVoucher = (ExpenseVoucher)object ;
 		if (Utils.isNull(expenseVoucher.getDocNumber())) {
-			String bKey = NextUpGenerator.getNextNumber("ExpenseVoucher", context, expenseVoucher.getDivision());
+			String bKey = NextUpGenerator.getNextNumber("Expense Voucher", context, expenseVoucher.getDivision());
 			expenseVoucher.setDocNumber(bKey);
 		}
 		if (!Utils.isNullSet(expenseVoucher.getExpenseVoucherLines())) {

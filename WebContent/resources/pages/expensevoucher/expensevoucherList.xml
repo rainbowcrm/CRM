@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Page id = "expensevoucherlist" showinFrame ="true" title ="Expense Vouchers | Rainbow CRM"  Object = "com.rainbow.crm.expensevoucher.model.ExpenseVoucher" 
-Controller = "com.rainbow.crm.expensevoucher.controller.ExpenseVoucherController">
+Controller = "com.rainbow.crm.expensevoucher.controller.ExpenseVoucherListController">
 <Template type= "List"  name = "ListTemplate"></Template>
 <Forwards>
 <Forward key ="NEW">rdscontroller?page=newexpensevoucher</Forward>
@@ -15,14 +15,14 @@ Controller = "com.rainbow.crm.expensevoucher.controller.ExpenseVoucherController
 <responseElement key = "FilterName" >txtFilterName</responseElement>
 <responseElement key = "DocNo" >txtBillNo</responseElement>
 <responseElement key = "Division.Name" >txtDivision</responseElement>
-<responseElement key = "User.userId" >txtUser</responseElement>
+<responseElement key = "salesAssoicate.userId" >txtFilSalesAsso</responseElement>
 <responseElement key = "FromDate" >txtFromDate</responseElement>
 <responseElement key = "ToDate" >txtToDate</responseElement>
+<responseElement key = "requestedTotal" >txtReqAmGT</responseElement>
 </responseElements>
 </AjaxGroup>
 </AjaxGroups>
 <IncludeJS>./scripts/CRMGeneral.js</IncludeJS>
-<IncludeJS>./scripts/sales/SalesLead.js</IncludeJS>
 <Elements>
 <Section type ="topBar"></Section>
 <Section type ="leftsideBarApp"></Section>
@@ -51,7 +51,7 @@ Controller = "com.rainbow.crm.expensevoucher.controller.ExpenseVoucherController
 </Element>
 </FilterNode>
 <FilterNode>
-   	<Element label = "User"  type = "UILookupText"  Id = "txtDivision"  property ="User.userId" showLookupAsDialog="true" dialogId="dlgUser"
+   	<Element label = "User"  type = "UILookupText"  Id = "txtFilSalesAsso"  property ="salesAssoicate.userId" showLookupAsDialog="true" dialogId="dlgUser"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>user</lookupType>
 	 <height>300</height>
@@ -75,13 +75,13 @@ Controller = "com.rainbow.crm.expensevoucher.controller.ExpenseVoucherController
 <Element label = ""  type = "UIImage" Id = "idChkSel"  rendered="Object.isDeleted" height = "21" weight ="21" src= "./resources/images/deletedRow.jpg" />
 </SelectionColumn>
 <Column title ="Doc_Number"  width ="20%" >
-<Element label = ""  type = "UINote" Id = "idDoc"  property ="DocNumber" />
+<Element label = ""  type = "UINote" Id = "idDoc"  property ="docNumber" />
 </Column>
 <Column title ="Date"  width ="20%" >
 <Element label = ""  type = "UINote" Id = "idDt"  property ="expenseDate" />
 </Column>
 <Column title ="User"  width ="30%" >
-<Element label = ""  type = "UINote" Id = "idCust"  property ="User.userId" />
+<Element label = ""  type = "UINote" Id = "idCust"  property ="salesAssoicate.userId" />
 </Column>
 <Column title ="Requested_Amount"  width ="10%" >
 <Element label = ""  type = "UINote" Id = "idPhone"  property ="requestedTotal" />
@@ -95,8 +95,7 @@ Controller = "com.rainbow.crm.expensevoucher.controller.ExpenseVoucherController
 <Section type ="summary">
 <Element caption = "Add"  type = "UIButton"    Id = "btnAdd"  style="button" fixedAction ="FixedAction.ACTION_PAGEFORWARD" fixedActionParam =  "NEW" />
 <Element caption = "Edit"  type = "UIButton"    Id = "btnEdit"  style="button" fixedAction ="FixedAction.ACTION_GOEDITMODE"  fixedActionParam =  "EDIT"  />
-<Element caption = "Start_SaleCycle"  type = "UIButton"    Id = "btnslscyc"  style="button" onClickJS ="promote();" />
-<Element caption = "Send_Email"  type = "UIButton"    Id = "btnslemail"  style="button" onClickJS ="sendemail();" />
+
 <Element type= "Panel" key= "NavPanel"  style = "sameline" ></Element>
 </Section>
 <Section type ="copyRightSection"/>

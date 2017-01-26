@@ -65,6 +65,8 @@
 </Page>
 <Page id = "saleslead" definition ="/resources/pages/saleslead/salesleadList.xml" modelclass = "com.rainbow.crm.saleslead.model.SalesLead" >
 </Page>
+<Page id = "expensevouchers" definition ="/resources/pages/expensevoucher/expensevoucherList.xml" modelclass = "com.rainbow.crm.expensevoucher.model.ExpenseVoucher" >
+</Page>
 
 <Page id = "territories" definition ="/resources/pages/territory/territoryList.xml" modelclass = "com.rainbow.crm.territory.model.Territory" >
 </Page>
@@ -107,6 +109,8 @@
 <Page id = "newvendor" definition ="/resources/pages/vendor/newVendor.xml" modelclass = "com.rainbow.crm.vendor.model.Vendor" >
 </Page>
 <Page id = "newpurchase" definition ="/resources/pages/purchase/newpurchase.xml" modelclass = "com.rainbow.crm.purchase.model.Purchase" >
+</Page>
+<Page id = "newexpensevoucher" definition ="/resources/pages/expensevoucher/newexpensevoucher.xml" modelclass = "com.rainbow.crm.expensevoucher.model.ExpenseVoucher" >
 </Page>
 <Page id = "newsalesperiod" definition ="/resources/pages/salesperiod/newsalesperiod.xml" modelclass = "com.rainbow.crm.salesperiod.model.SalesPeriod" >
 </Page>

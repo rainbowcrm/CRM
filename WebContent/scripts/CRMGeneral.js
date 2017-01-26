@@ -47,3 +47,15 @@ function closeCustomerCreateDialog(dialogId) {
 	window.parent.document.getElementById("txtCustomerName").value = window.document.getElementById("txtName").value + " " + window.document.getElementById("txtLName").value;
 	window.parent.document.getElementById(dialogId).close();
 }
+
+
+
+function  calculateAllExpenses () {
+	var ct = document.getElementsByName('txtLineReqAmt').length;
+	var netPrice = 0.0 ;
+	for (var i = 0 ; i < ct ; i ++ ) {
+		var priceElem = document.getElementsByName('txtLineReqAmt')[i].value;
+		netPrice += (priceElem * 1);
+	}
+	document.getElementById('txtReqTotal').value = netPrice;
+}

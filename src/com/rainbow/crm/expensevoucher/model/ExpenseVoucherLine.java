@@ -23,7 +23,10 @@ public class ExpenseVoucherLine extends CRMBusinessModelObject{
 	String managerComments;
 	String file1;
 	String file2;
-		ExpenseVoucher expenseVoucherDoc;
+	ExpenseVoucher expenseVoucherDoc;
+	
+	byte[] file1Data ;
+	byte[] file2Data ;
 	
 	public ExpenseVoucherLine() {
 	
@@ -104,6 +107,18 @@ public class ExpenseVoucherLine extends CRMBusinessModelObject{
 	}
 	public void setFile2(String file2) {
 		this.file2 = file2;
+	}
+	public byte[] getFile1Data() {
+		return file1Data;
+	}
+	public void setFile1Data(byte[] file1Data) {
+		this.file1Data = file1Data;
+	}
+	public byte[] getFile2Data() {
+		return file2Data;
+	}
+	public void setFile2Data(byte[] file2Data) {
+		this.file2Data = file2Data;
 	}
 	
 	

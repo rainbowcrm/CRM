@@ -20,6 +20,8 @@ import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.database.LoginSQLs;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.division.service.IDivisionService;
+import com.rainbow.crm.expensehead.model.ExpenseHead;
+import com.rainbow.crm.expensehead.service.IExpenseHeadService;
 import com.rainbow.crm.expensevoucher.model.ExpenseVoucher;
 import com.rainbow.crm.expensevoucher.service.IExpenseVoucherService;
 import com.techtrade.rads.framework.context.IRadsContext;
@@ -43,7 +45,17 @@ public class ExpenseVoucherController extends CRMTransactionController{
 	
 	
 
-	
+	public Map <String, String > getAllExpenseHeads() {
+		Map<String, String> ans = new LinkedHashMap<String, String> ();
+		IExpenseHeadService service =(IExpenseHeadService) SpringObjectFactory.INSTANCE.getInstance("IExpenseHeadService");
+		List<ExpenseHead> divisions = service.getAllExpenseHeads(((CRMContext)getContext()).getLoggedinCompany());
+		if (!Utils.isNullList(divisions)) {
+			for (ExpenseHead division : divisions) {
+				ans.put(String.valueOf(division.getId()), division.getName());
+			}
+		}
+		return ans;
+	}
 	
 
 }

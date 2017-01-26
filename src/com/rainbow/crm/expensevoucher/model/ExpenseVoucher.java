@@ -22,7 +22,6 @@ public class ExpenseVoucher extends CRMBusinessModelObject{
 	Division division;
 	String docNumber;
 	User salesAssoicate;
-	String comments;
 	User manager;
 	Date expenseDate;
 	String associateComments;
@@ -60,12 +59,7 @@ public class ExpenseVoucher extends CRMBusinessModelObject{
 		this.status = status;
 	}
 	
-	public String getComments() {
-		return comments;
-	}
-	public void setComments(String commments) {
-		this.comments = commments;
-	}
+	
 	public Set<ExpenseVoucherLine> getExpenseVoucherLines() {
 		return expenseVoucherLines;
 	}

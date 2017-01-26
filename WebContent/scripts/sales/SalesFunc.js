@@ -1,4 +1,5 @@
 
+
 function calculateAll() {
 	var ct = document.getElementsByName('txtPrice').length;
 	var netPrice = 0 ;
@@ -14,8 +15,6 @@ function calculateAll() {
 	netPrice+= taxAmt ;
 	document.getElementById('txtTotalAmt').value = netPrice;
 }
-
-
 
 function calculateLineTotal(index) {
 	var ct = document.getElementsByName('txtPrice').length;
@@ -33,5 +32,20 @@ function calculateLineTotal(index) {
 	
 }
 
+function calculateExpenseTotal(index) {
+	var ct = document.getElementsByName('txtPrice').length;
+	var netPrice = 0 ;
+	if (index < ct ) {
+		var priceElem = document.getElementsByName('txtPrice')[index];
+		var qtyElem = document.getElementsByName('txtQty')[index];
+		var discElem = document.getElementsByName('txtlineDisc')[index];
+		var totalPrice =( priceElem.value * qtyElem.value ) - discElem.value ;
+		netPrice += totalPrice;
+		document.getElementsByName('txtlineTotal')[index].value  = totalPrice;
+	}
+	return netPrice;
+
+	
+}
 
 

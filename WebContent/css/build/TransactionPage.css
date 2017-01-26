@@ -229,6 +229,10 @@ thead.listPageTitle {
   font-weight: bold;
   font-size: 18px; }
 
+span.listPageTitle {
+  font-size: 16px;
+  color: #f4f4f4; }
+
 div.childSectionStyle {
   position: relative;
   overflow: auto; }

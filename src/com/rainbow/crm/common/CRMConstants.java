@@ -24,6 +24,7 @@ public class CRMConstants {
 	public final static String FV_EVALCRIT = "EVALCRT";
 	public final static String FV_CONFVALTYPE = "CONFVALTYP";
 	public final static String FV_SPFTYPE = "SPFTYPE";
+	public final static String FV_EXP_VOUCHER_STATUS = "EXPSTATUS";
 	
 	public final static class SALESPFTYPE{
 		public final static String CATEGORY = "SPFCATG";
@@ -94,6 +95,16 @@ public class CRMConstants {
 		public final static String SHIPPING = "SHPPNG";
 		public final static String SHIPPD = "SHPPD";
 		public final static String DELIVERED = "DLVD";
+	}
+	
+	public final static class EXP_VOUCHER_STATUS { 
+		public final static String REQUESTED = "EXPREQ";
+		public final static String APPROVED = "EXPAPPR";
+		public final static String REJECTED = "EXPREJEC";
+		public final static String PENDING = "EXPPEN";
+		public final static String REREQUESTED = "EXPREREQ";
+		public final static String CLOSED = "EXPPDCLSD";
+		public final static String REJECTEDCLOSED = "EXPRJCLSD";
 	}
 }
 
