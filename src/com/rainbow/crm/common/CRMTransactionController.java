@@ -11,12 +11,14 @@ import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
+import com.rainbow.crm.config.service.ConfigurationManager;
 import com.rainbow.crm.database.LoginSQLs;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.division.service.IDivisionService;
 import com.rainbow.crm.sales.model.Sales;
 import com.rainbow.crm.territory.model.Territory;
 import com.rainbow.crm.territory.service.ITerritoryService;
+import com.rainbow.crm.user.model.User;
 import com.techtrade.rads.framework.context.IRadsContext;
 import com.techtrade.rads.framework.controller.abstracts.TransactionController;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
@@ -104,13 +106,19 @@ public abstract class CRMTransactionController extends TransactionController {
 	@Override
 	public IRadsContext generateContext(HttpServletRequest request,
 			HttpServletResponse response) {
-		return LoginSQLs.loggedInUser(request.getSession().getId());
 		
+		CRMContext context=  LoginSQLs.loggedInUser(request.getSession().getId());
+		User user = CommonUtil.getUser(context, context.getUser());
+		context.setLoggedInUser(user);
+		return context;
 	}
 	
 	@Override
 	public IRadsContext generateContext(String authToken) {
-		return LoginSQLs.loggedInUser(authToken);
+		CRMContext context=  LoginSQLs.loggedInUser(authToken);
+		User user = CommonUtil.getUser(context, context.getUser());
+		context.setLoggedInUser(user);
+		return context;
 	}
 	
 	public String getCompanyName() {
@@ -120,12 +128,17 @@ public abstract class CRMTransactionController extends TransactionController {
 	}
 	
 	public Map <String, String > getAllDivisions() {
-		Map<String, String> ans = new LinkedHashMap<String, String> ();
-		IDivisionService service =(IDivisionService) SpringObjectFactory.INSTANCE.getInstance("IDivisionService");
-		List<Division> divisions = service.getAllDivisions(((CRMContext)getContext()).getLoggedinCompany());
+		CRMContext ctx = ((CRMContext) getContext());
+		boolean allowAll =CommonUtil.allowAllDivisionAccess(ctx);
+		Map<String, String> ans = new LinkedHashMap<String, String>();
+		IDivisionService service = (IDivisionService) SpringObjectFactory.INSTANCE
+				.getInstance("IDivisionService");
+		List<Division> divisions = service.getAllDivisions(ctx
+				.getLoggedinCompany());
 		if (!Utils.isNullList(divisions)) {
 			for (Division division : divisions) {
-				ans.put(String.valueOf(division.getId()), division.getName());
+				if (allowAll || division.getId() == ctx.getLoggedInUser().getDivision().getId())
+					ans.put(String.valueOf(division.getId()), division.getName());
 			}
 		}
 		return ans;

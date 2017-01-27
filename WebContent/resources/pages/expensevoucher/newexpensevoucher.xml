@@ -83,7 +83,7 @@ Controller = "com.rainbow.crm.expensevoucher.controller.ExpenseVoucherController
 <Element label = "Associate_comments"  type = "UITextArea" Id = "txtAssociateComments"    property ="associateComments" >
 	 <rows>2</rows> <cols>30</cols>
 </Element>
-<Element label = "Manager_comments"  type = "UITextArea" Id = "txtMgrComments"  readonly="true"  property ="managerComments" >
+<Element label = "Manager_Comments"  type = "UITextArea" Id = "txtMgrComments"  readonly="true"  property ="managerComments" >
 	 <rows>2</rows> <cols>30</cols>
 </Element>
 <Element label = "Requested_Total"  type = "UIText" Id = "txtReqTotal"   readonly="true" property ="requestedTotal" />

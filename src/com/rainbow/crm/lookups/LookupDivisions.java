@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.CRMContext;
+import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.database.LoginSQLs;
 import com.rainbow.crm.division.model.Division;
@@ -22,6 +23,7 @@ public class LookupDivisions implements ILookupService{
 	public List<Object> lookupData(IRadsContext ctx, String searchString,
 			int from, int noRecords, String lookupParam) {
 		List<Object> ans = new ArrayList<Object>();
+		boolean allowAll =CommonUtil.allowAllDivisionAccess((CRMContext)ctx);
 		String condition = null;
 		if (!Utils.isNull(searchString)) { 
 			searchString = searchString.replace("*", "%");
@@ -30,7 +32,8 @@ public class LookupDivisions implements ILookupService{
 		IDivisionService service = (IDivisionService) SpringObjectFactory.INSTANCE.getInstance("IDivisionService");
 		List<? extends CRMModelObject> divisions = service.listData(from, from  + noRecords, condition,(CRMContext)ctx);
 		for (ModelObject obj :  divisions) {
-			ans.add(((Division)obj).getName());
+			if (allowAll || ((Division)obj).getId() == ((CRMContext)ctx).getLoggedInUser().getDivision().getId())
+				ans.add(((Division)obj).getName());
 		}
 
 		return ans;
@@ -38,7 +41,7 @@ public class LookupDivisions implements ILookupService{
 
 	@Override
 	public IRadsContext generateContext(HttpServletRequest request) {
-		return LoginSQLs.loggedInUser(request.getSession().getId());
+		return CommonUtil.generateContext(request.getSession().getId());
 	}
 	
 	

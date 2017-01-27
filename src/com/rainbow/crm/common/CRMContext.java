@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.util.Locale;
 import java.util.Map;
 
+import com.rainbow.crm.user.model.User;
 import com.techtrade.rads.framework.context.IRadsContext;
 
 public class CRMContext implements IRadsContext,Serializable{
@@ -16,6 +17,7 @@ public class CRMContext implements IRadsContext,Serializable{
 	Timestamp logoffTime;
 	String loggedinCompanyCode;
 	Locale locale = Locale.US;
+	User loggedInUser; 
 	
 	@Override
 	public String getUser() {
@@ -96,6 +98,14 @@ public class CRMContext implements IRadsContext,Serializable{
 	public void setLocale(Locale locale) {
 		this.locale=locale;
 		
+	}
+
+	public User getLoggedInUser() {
+		return loggedInUser;
+	}
+
+	public void setLoggedInUser(User loggedInUser) {
+		this.loggedInUser = loggedInUser;
 	}
 	
 	

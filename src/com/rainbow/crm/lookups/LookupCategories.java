@@ -9,6 +9,7 @@ import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.category.model.Category;
 import com.rainbow.crm.category.service.ICategoryService;
 import com.rainbow.crm.common.CRMContext;
+import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.database.LoginSQLs;
 import com.rainbow.crm.item.model.Item;
@@ -40,7 +41,7 @@ public class LookupCategories implements ILookupService{
 	@Override
 	public IRadsContext generateContext(HttpServletRequest request) {
 		// TODO Auto-generated method stub
-		return LoginSQLs.loggedInUser(request.getSession().getId());
+		return CommonUtil.generateContext(request.getSession().getId());
 	}
 	
 	

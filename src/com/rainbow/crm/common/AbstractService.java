@@ -126,11 +126,13 @@ public abstract class AbstractService implements IBusinessService{
 	public List<CRMModelObject> listData(String className,int from, int to,
 			String whereCondition, CRMContext context) {
 		 StringBuffer additionalCondition = new StringBuffer();
+		 boolean allowAllDiv = CommonUtil.allowAllDivisionAccess(context);
 		 if (Utils.isNullString(whereCondition) ){
 			 additionalCondition = additionalCondition.append(" where company.id = " +  context.getLoggedinCompany()) ;
 		 }else { 
 			 additionalCondition = additionalCondition.append(whereCondition +  " and company.id= " +  context.getLoggedinCompany()) ;
 		 }
+		 
 		 return  getDAO().listData(className ,from, to, additionalCondition.toString());
 
 	}

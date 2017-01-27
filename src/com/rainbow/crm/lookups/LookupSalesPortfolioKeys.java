@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.rainbow.crm.common.CRMConstants;
+import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.database.LoginSQLs;
 import com.techtrade.rads.framework.context.IRadsContext;
 import com.techtrade.rads.framework.ui.abstracts.ILookupService;
@@ -38,7 +39,7 @@ public class LookupSalesPortfolioKeys implements ILookupService{
 
 	@Override
 	public IRadsContext generateContext(HttpServletRequest request) {
-		return LoginSQLs.loggedInUser(request.getSession().getId());
+		return CommonUtil.generateContext(request.getSession().getId());
 	}
 	
 	

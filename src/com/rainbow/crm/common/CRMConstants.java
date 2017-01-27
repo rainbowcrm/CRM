@@ -26,6 +26,15 @@ public class CRMConstants {
 	public final static String FV_SPFTYPE = "SPFTYPE";
 	public final static String FV_EXP_VOUCHER_STATUS = "EXPSTATUS";
 	
+	public final static class ROLETYPE {
+		public final static String SYSADMIN = "SYSADMIN";
+		public final static String CORPADMIN = "CORPADMIN";
+		public final static String MANAGER = "MANAGER";
+		public final static String SALESASSOCIATE = "SALESASS";
+		public final static String OFFICEASSOCIATE = "OFFASSOC";
+		public final static String FLOORWORK = "FLOORWRK";
+	}
+		
 	public final static class SALESPFTYPE{
 		public final static String CATEGORY = "SPFCATG";
 		public final static String PRODUCT = "SPFPROD";
