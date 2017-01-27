@@ -86,7 +86,7 @@ Controller = "com.rainbow.crm.distributionorder.controller.DistributionOrderCont
 
 </Element>  
  </Element>
-<Element type = "UITableRow"  dataType = "com.rainbow.crm.distributionorder.model.DistributionOrderLine" rendered = "!Object.getVoided">
+<Element type = "UITableRow"  dataType = "com.rainbow.crm.distributionorder.model.DistributionOrderLine"  style = "uitabstyle" rendered = "!Object.getVoided">
 
 <Element type ="UITableCol" width = "3%"><Element label = ""  type = "UIBooleanCheckBox" Id = "chkSel"  rendered = "!Object.isPicked" hiddenControlId= "hdnSelstate" property ="picked" > 
 	

@@ -1,11 +1,15 @@
 package com.rainbow.framework.setup.model;
 
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
+import com.rainbow.crm.common.finitevalue.FiniteValue;
 
 public class Metadata  extends CRMModelObject{
 
 	String objectName;
 	String className;
+	FiniteValue  metaDataType;
+	boolean isDivisionSpecific;
+	
 	public String getObjectName() {
 		return objectName;
 	}
@@ -18,6 +22,31 @@ public class Metadata  extends CRMModelObject{
 	public void setClassName(String className) {
 		this.className = className;
 	}
+	public FiniteValue getMetaDataType() {
+		return metaDataType;
+	}
+	public void setMetaDataType(FiniteValue metaDataType) {
+		this.metaDataType = metaDataType;
+	}
+	public boolean isDivisionSpecific() {
+		return isDivisionSpecific;
+	}
+	public void setDivisionSpecific(boolean isDivisionSpecific) {
+		this.isDivisionSpecific = isDivisionSpecific;
+	}
+	public Metadata(String objectName, String className,
+			FiniteValue metaDataType, boolean isDivisionSpecific) {
+		super();
+		this.objectName = objectName;
+		this.className = className;
+		this.metaDataType = metaDataType;
+		this.isDivisionSpecific = isDivisionSpecific;
+	}
+	
+	public Metadata(){
+		
+	}
+	
 	
 	
 }

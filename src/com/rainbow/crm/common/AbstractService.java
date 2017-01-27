@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.hibernate.ORMDAO;
+import com.rainbow.framework.setup.model.Metadata;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.model.transaction.TransactionResult;
 import com.techtrade.rads.framework.utils.Utils;
@@ -127,12 +128,15 @@ public abstract class AbstractService implements IBusinessService{
 			String whereCondition, CRMContext context) {
 		 StringBuffer additionalCondition = new StringBuffer();
 		 boolean allowAllDiv = CommonUtil.allowAllDivisionAccess(context);
+		 Metadata metadata = CommonUtil.getMetaDataforClass(className);
 		 if (Utils.isNullString(whereCondition) ){
 			 additionalCondition = additionalCondition.append(" where company.id = " +  context.getLoggedinCompany()) ;
 		 }else { 
 			 additionalCondition = additionalCondition.append(whereCondition +  " and company.id= " +  context.getLoggedinCompany()) ;
 		 }
-		 
+		 if (!allowAllDiv && metadata != null && metadata.isDivisionSpecific()) {
+			 additionalCondition = additionalCondition.append(" and division.id = "  +  context.getLoggedInUser().getDivision().getId());
+		 }
 		 return  getDAO().listData(className ,from, to, additionalCondition.toString());
 
 	}

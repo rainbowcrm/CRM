@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMListController;
+import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.IBusinessService;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.database.LoginSQLs;
@@ -25,7 +26,7 @@ public class DistributionOrderListController extends CRMListController{
 	@Override
 	public IRadsContext generateContext(HttpServletRequest request,HttpServletResponse response) {
 		realPath = request.getServletContext().getRealPath(".");
-		return LoginSQLs.loggedInUser(request.getSession().getId());
+		return CommonUtil.generateContext(request.getSession().getId());
 	}
 	
 	@Override

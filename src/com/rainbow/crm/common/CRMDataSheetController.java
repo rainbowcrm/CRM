@@ -102,15 +102,16 @@ public abstract class CRMDataSheetController extends DataSheetController{
 	
 	@Override
 	public IRadsContext generateContext(HttpServletRequest request,HttpServletResponse response) {
-		return LoginSQLs.loggedInUser(request.getSession().getId());
+		return CommonUtil.generateContext(request.getSession().getId());
 	}
 	
 	
 	
 	@Override
 	public IRadsContext generateContext(String authToken) {
-		return LoginSQLs.loggedInUser(authToken);
+		return CommonUtil.generateContext(authToken);
 	}
+	
 	@Override
 	public PageResult delete(List<ModelObject> objects) {
 		for (ModelObject object : objects) {

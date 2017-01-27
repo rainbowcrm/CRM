@@ -25,7 +25,7 @@ public class SalesLeadListController extends CRMListController{
 	@Override
 	public IRadsContext generateContext(HttpServletRequest request,HttpServletResponse response) {
 		realPath = request.getServletContext().getRealPath(".");
-		return LoginSQLs.loggedInUser(request.getSession().getId());
+		return super.generateContext(request, response);
 	}
 	
 	@Override

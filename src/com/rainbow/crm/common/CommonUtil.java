@@ -1,16 +1,26 @@
 package com.rainbow.crm.common;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import java.util.StringTokenizer;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 import com.rainbow.crm.config.service.ConfigurationManager;
 import com.rainbow.crm.database.LoginSQLs;
 import com.rainbow.crm.user.model.User;
 import com.rainbow.crm.user.service.IUserService;
+import com.rainbow.framework.setup.model.Metadata;
+import com.rainbow.framework.setup.sql.MetadataSQL;
 import com.techtrade.rads.framework.context.IRadsContext;
 
 public class CommonUtil {
 	
+	private static Map <String,Metadata> metadataMap = new HashMap<String,Metadata> ();
 
 	public static User getUser(CRMContext context, String userId){
 		IUserService service = (IUserService) SpringObjectFactory.INSTANCE.getInstance("IUserService");
@@ -49,6 +59,26 @@ public class CommonUtil {
 		User user = CommonUtil.getUser(context, context.getUser());
 		context.setLoggedInUser(user);
 		return context;
+	}
+	
+	public static Metadata getMetaDataforClass(String classId)
+	{
+		if(metadataMap.containsKey(classId)) {
+			return metadataMap.get(classId) ;
+		}else {
+			List<Metadata> metadataList = MetadataSQL.getMetadata();
+			metadataList.forEach( metadata -> {   
+				String className  =metadata.getClassName() ;
+				StringTokenizer tokenizer = new StringTokenizer(className,".");
+				int countTokens =  tokenizer.countTokens();
+				String lastToken = null ;
+				while(tokenizer.hasMoreElements()) {
+					lastToken = String.valueOf(tokenizer.nextElement());
+				}
+				metadataMap.put(lastToken, metadata);
+			});
+			return metadataMap.get(classId) ;
+		}
 	}
 
 }
