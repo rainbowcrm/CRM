@@ -17,6 +17,7 @@ import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMDBException;
 import com.rainbow.crm.common.CRMTransactionController;
+import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
@@ -52,7 +53,7 @@ public class DistributionOrderController extends CRMTransactionController{
 	public IRadsContext generateContext(HttpServletRequest request,HttpServletResponse response) {
 		ctx =  request.getServletContext() ;
 		resp = response ;
-		return LoginSQLs.loggedInUser(request.getSession().getId());
+		return CommonUtil.generateContext(request, response);
 	}
 	
 	public boolean isReleased() {
@@ -74,17 +75,6 @@ public class DistributionOrderController extends CRMTransactionController{
 		return ( dOrder.getStatus().equals(CRMConstants.DO_STATUS.SHIPPING) ) ;
 	}
 	
-	public Map <String, String > getAllDivisions() {
-		Map<String, String> ans = new LinkedHashMap<String, String> ();
-		IDivisionService service =(IDivisionService) SpringObjectFactory.INSTANCE.getInstance("IDivisionService");
-		List<Division> divisions = service.getAllDivisions(((CRMContext)getContext()).getLoggedinCompany());
-		if (!Utils.isNullList(divisions)) {
-			for (Division division : divisions) {
-				ans.put(String.valueOf(division.getId()), division.getName());
-			}
-		}
-		return ans;
-	}
 
 	public Map <String, String > getAllCarriers() {
 		Map<String, String> ans = new LinkedHashMap<String, String> ();
