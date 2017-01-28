@@ -3,8 +3,8 @@
 Controller = "com.rainbow.crm.expensevoucher.controller.ExpenseVoucherController">
 <Template type= "Transaction"  name = "TransactionTemplate"></Template>
 <Forwards>
-<Forward key ="CANCEL">rdscontroller?page=expensevouchers</Forward>
-<Forward key ="SAVE">expensevouchers</Forward>
+<Forward key ="CANCEL">rdscontroller?page=openexpenses</Forward>
+<Forward key ="SAVE">openexpenses</Forward>
 </Forwards>
 <IncludeJS>./resources/js/RadsLib.js</IncludeJS>
 <IncludeJS>./scripts/CRMGeneral.js</IncludeJS>
@@ -12,7 +12,7 @@ Controller = "com.rainbow.crm.expensevoucher.controller.ExpenseVoucherController
 </AjaxGroups>
 
 <Elements>
-<UIForm Id ="cust"  method = "POST" enctype="multipart/form-data" > 
+<UIForm Id ="cust"  method = "POST"  > 
 <Section type ="topBar"></Section> 
 <Section type ="leftsideBarApp"></Section> 
 <CoreSection>
@@ -21,19 +21,10 @@ Controller = "com.rainbow.crm.expensevoucher.controller.ExpenseVoucherController
 <Section type ="header">
 	<Element label = "" type = "UIHidden" Id = "hdnVersion" property ="ObjectVersion" />
 	<Element label = ""  type = "UIHidden" Id = "hdnUserID"  property ="Id" />
-	<Element label = "Division"  type = "UIList" Id = "lstInvDivision"  isMandatory="true" property ="Division.Id" >
-	<options populator =  "getAllDivisions"> 
-	</options>
-	</Element>
-	<Element label = "Associate"  type = "UILookupText"  Id = "txtAssociate"  size  = "20" property ="salesAssoicate.userId" showLookupAsDialog="true" dialogId="dlgslsAss"
-	  dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle"  additionalInputControl = "lstInvDivision" >
-		 <lookupType>user</lookupType>
-		 <height>300</height>
-		 <width>290</width>
-	</Element>
-
+	<Element label = "Division"  type = "UIText" Id = "lstInvDivision"  readonly="true" property ="Division.Name" />
+	<Element label = "Associate"  type = "UIText"  Id = "txtAssociate"  size  = "20" readonly="true" property ="salesAssoicate.userId" />
 	<Element label = "Doc_No"  type = "UIText" Id = "txtDocNo"  isMandatory="true"  readonly="true" property ="docNumber" />
-	<Element label = "Date"  type = "UIDate" Id = "txtwishListDate" isMandatory="true"  property ="expenseDate" />
+	<Element label = "Date"  type = "UIDate" Id = "txtwishListDate" isMandatory="true" readonly="true"  property ="expenseDate" />
 	<Element label = "Status"  type = "UIText" Id = "txtStatus"  readonly="true"  property ="Status.description" />
 	<Element label = "Manager"  type = "UIText" Id = "txtMgr"  readonly="true"  property ="manager.userId" />
 	
@@ -51,31 +42,27 @@ Controller = "com.rainbow.crm.expensevoucher.controller.ExpenseVoucherController
 <Element type ="UITableCol" width = "20%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Manager_Comments" /></Element>
 <Element type ="UITableCol" width = "12%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Attachment" /></Element>
 <Element type ="UITableCol" width = "6%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Requested_Amount" /></Element>
-<Element type ="UITableCol" width = "6%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Corrected_Amount" /></Element>
-<Element type ="UITableCol" width = "8%"> </Element>
+<Element type ="UITableCol" width = "6%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Countered_Amount" /></Element>
+
 </Element>  
  </Element>
-<Element type = "UITableRow"  dataType = "com.rainbow.crm.expensevoucher.model.ExpenseVoucherLine" rendered = "!Object.isDeleted">
+<Element type = "UITableRow"  dataType = "com.rainbow.crm.expensevoucher.model.ExpenseVoucherLine"  rendered = "!Object.isDeleted">
 
-<Element type ="UITableCol" width = "15%"><Element label = ""  type = "UIList" Id = "lstExpents"  property ="expenseHead.Id" > 
-<options populator =  "getAllExpenseHeads"> 
-	</options>
+<Element type ="UITableCol" width = "15%"><Element label = ""  type = "UILabel" Id = "lstExpents" style="uitabstyle" property ="expenseHead.name" />
+ <Element label = ""  type = "UIHidden" Id = "lstHDBExpensID"  property ="expenseHead.id" />
 </Element>
-</Element>
-<Element type ="UITableCol" width = "10%"><Element label = ""  type = "UIText" Id = "txtLineCo"  property ="billNumber" size = "10" />  </Element>
-<Element type ="UITableCol" width = "20%"><Element label = ""  type = "UIText" Id = "txtLineMgrComm"  property ="associateComments"  size = "18" />  </Element>
-<Element type ="UITableCol" width = "20%"><Element label = ""  type = "UIText" Id = "txtLineAssComm"  property ="managerComments" readonly="true"  size = "18" />  </Element>
-<Element type ="UITableCol" width = "12%">
-<Element label = "" type = "UIFileUpload" Id = "txtPhoto3" property ="file1Data" maxSize="30720"
+
+
+<Element type ="UITableCol" width = "10%"><Element label = ""  type = "UILabel" Id = "txtLineCo" readonly="true"  style="uitabstyle"   property ="billNumber" size = "10" />  </Element>
+<Element type ="UITableCol" width = "20%"><Element label = ""  type = "UILabel" Id = "txtLineAssComm" readonly="true"   style="uitabstyle"  property ="associateComments"  size = "18" />  </Element>
+<Element type ="UITableCol" width = "20%"><Element label = ""  type = "UIText" Id = "txtLineMgrComm"  property ="managerComments" readonly="true"  size = "18" />  </Element>
+<Element type ="UITableCol" width = "12%"/>
+<!--  <Element label = "" type = "UIFileUpload" Id = "txtPhoto3" property ="file1Data" maxSize="30720"
    multiple ="false"  fileNameProperty="file1"    />
-</Element>
-<Element type ="UITableCol" width = "6%"><Element label = ""  type = "UIText" Id = "txtLineReqAmt"  property ="requestedAmount"  focusoutJS = "calculateAllExpenses()"  isNumeric= "true"  size = "5"/>  </Element>
-<Element type ="UITableCol" width = "6%"><Element label = ""  type = "UIText" Id = "txtLineCorrAmt"  property ="correctedAmount"  isNumeric= "true" size = "5" />  </Element>
+</Element>  -->
+<Element type ="UITableCol" width = "6%"><Element label = ""  type = "UIText" Id = "txtLineReqAmt"  property ="requestedAmount"  readonly="true"   size = "5"/>  </Element>
+<Element type ="UITableCol" width = "6%"><Element label = ""  type = "UIText" Id = "txtLineCorrAmt"  property ="correctedAmount"   isNumeric= "true" size = "5" />  </Element>
 
-<Element type ="UITableCol" width = "8%">
-	<Element caption = "+"  type = "UIButton" Id = "btnAddRow"    fixedAction ="FixedAction.ACTION_ADDTABLEROW"  fixedActionParam =  "this"/>
-	<Element caption = "-"  type = "UIButton" Id = "btnDelRow"    fixedAction ="FixedAction.ACTION_DELETETABLEROW"  fixedActionParam =  "this"/>
-</Element>
 </Element>
 </Element>
 </Section>
@@ -87,12 +74,16 @@ Controller = "com.rainbow.crm.expensevoucher.controller.ExpenseVoucherController
 	 <rows>2</rows> <cols>30</cols>
 </Element>
 <Element label = "Requested_Total"  type = "UIText" Id = "txtReqTotal"   readonly="true" property ="requestedTotal" />
-<Element label = "Corrected_Total"  type = "UIText" Id = "txtCorrectedTotal"   readonly="true" property ="correctedTotal" />
+<Element label = "Countered_Total"  type = "UIText" Id = "txtCounteredTotal"   readonly="true" property ="correctedTotal" />
 <Element label = "Approved_Total"  type = "UIText" Id = "txtApprTotal"   readonly="true" property ="approvedTotal" />
 	
 </Section>
 </CoreSection>
-<Section type ="summary">
+<Section type ="optionalsummary">
+<Element caption = "Approve"  type = "UIButton"    Id = "btnPick"  style="button"  fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="Approve"   />
+<Element caption = "Counter"  type = "UIButton"    Id = "btnCounter"  style="button"  fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="Counter"   />
+<Element caption = "Reject"  type = "UIButton"    Id = "btnReject"  style="button"  fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="Reject"   />
+<Element caption = "Pending"  type = "UIButton"    Id = "btnPending"  style="button"  fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="Hold"   />
 
 </Section>
 <Section type ="copyRightSection"/>

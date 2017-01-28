@@ -114,6 +114,8 @@
 </Page>
 <Page id = "newexpensevoucher" definition ="/resources/pages/expensevoucher/newexpensevoucher.xml" modelclass = "com.rainbow.crm.expensevoucher.model.ExpenseVoucher" >
 </Page>
+<Page id = "mgrexpensevoucher" definition ="/resources/pages/expensevoucher/mgrproexpensevoucher.xml" modelclass = "com.rainbow.crm.expensevoucher.model.ExpenseVoucher" >
+</Page>
 <Page id = "newsalesperiod" definition ="/resources/pages/salesperiod/newsalesperiod.xml" modelclass = "com.rainbow.crm.salesperiod.model.SalesPeriod" >
 </Page>
 <Page id = "newsalesportfolio" definition ="/resources/pages/salesportfolio/newsalesportfolio.xml" modelclass = "com.rainbow.crm.salesportfolio.model.SalesPortfolio" >

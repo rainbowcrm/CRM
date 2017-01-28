@@ -51,7 +51,7 @@ Controller = "com.rainbow.crm.expensevoucher.controller.ExpenseVoucherController
 <Element type ="UITableCol" width = "20%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Manager_Comments" /></Element>
 <Element type ="UITableCol" width = "12%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Attachment" /></Element>
 <Element type ="UITableCol" width = "6%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Requested_Amount" /></Element>
-<Element type ="UITableCol" width = "6%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Corrected_Amount" /></Element>
+<Element type ="UITableCol" width = "6%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Countered_Amount" /></Element>
 <Element type ="UITableCol" width = "8%"> </Element>
 </Element>  
  </Element>
@@ -87,7 +87,7 @@ Controller = "com.rainbow.crm.expensevoucher.controller.ExpenseVoucherController
 	 <rows>2</rows> <cols>30</cols>
 </Element>
 <Element label = "Requested_Total"  type = "UIText" Id = "txtReqTotal"   readonly="true" property ="requestedTotal" />
-<Element label = "Corrected_Total"  type = "UIText" Id = "txtCorrectedTotal"   readonly="true" property ="correctedTotal" />
+<Element label = "Countered_Total"  type = "UIText" Id = "txtCorrectedTotal"   readonly="true" property ="correctedTotal" />
 <Element label = "Approved_Total"  type = "UIText" Id = "txtApprTotal"   readonly="true" property ="approvedTotal" />
 	
 </Section>

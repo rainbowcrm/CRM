@@ -108,6 +108,7 @@ public class CRMConstants {
 	
 	public final static class EXP_VOUCHER_STATUS { 
 		public final static String REQUESTED = "EXPREQ";
+		public final static String COUNTERED = "EXPCONTRD";
 		public final static String APPROVED = "EXPAPPR";
 		public final static String REJECTED = "EXPREJEC";
 		public final static String PENDING = "EXPPEN";

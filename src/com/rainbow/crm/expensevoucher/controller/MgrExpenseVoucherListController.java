@@ -1,6 +1,10 @@
 package com.rainbow.crm.expensevoucher.controller;
 
+import java.util.List;
+
 import com.techtrade.rads.framework.filter.Filter;
+import com.techtrade.rads.framework.model.abstracts.ModelObject;
+import com.techtrade.rads.framework.ui.abstracts.PageResult;
 
 public class MgrExpenseVoucherListController  extends ExpenseVoucherListController{
 	
@@ -14,5 +18,13 @@ public class MgrExpenseVoucherListController  extends ExpenseVoucherListControll
 		filter.append(  prefix +  "  status.code in  ('EXPREQ','EXPREREQ' )" ) ;
 		return filter.toString();
 	}
+	
+	@Override
+	public PageResult goToEdit(List<ModelObject> objects) {
+		PageResult result = new PageResult();
+		result.setNextPageKey("mgrexpensevoucher");
+		return result;
+	}
+	
 
 }

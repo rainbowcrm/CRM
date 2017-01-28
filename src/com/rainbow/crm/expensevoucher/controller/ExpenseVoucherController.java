@@ -43,7 +43,31 @@ public class ExpenseVoucherController extends CRMTransactionController{
 
 	
 	
+
 	
+
+	@Override
+	public PageResult submit(ModelObject object, String actionParam) {
+		PageResult result = new PageResult();
+		IExpenseVoucherService service =(IExpenseVoucherService) SpringObjectFactory.INSTANCE.getInstance("IExpenseVoucherService");
+		if("Approve".equalsIgnoreCase(actionParam)) {
+			service.approve((CRMContext)getContext(), (ExpenseVoucher) object);
+		}else if ("Counter".equalsIgnoreCase(actionParam)) {
+			service.counter((CRMContext)getContext(), (ExpenseVoucher) object);
+		}else if ("Reject".equalsIgnoreCase(actionParam)) {
+			service.reject((CRMContext)getContext(), (ExpenseVoucher) object);
+		}else if ("Hold".equalsIgnoreCase(actionParam)) {
+			service.hold((CRMContext)getContext(), (ExpenseVoucher) object);
+		}
+		
+		
+		return result;
+	}
+
+
+
+
+
 
 	public Map <String, String > getAllExpenseHeads() {
 		Map<String, String> ans = new LinkedHashMap<String, String> ();

@@ -195,5 +195,29 @@ public class ExpenseVoucherService extends AbstractionTransactionService impleme
 		return super.batchCreate(objects, context);
 	}
 
+	@Override
+	public List<RadsError> approve(CRMContext context, ExpenseVoucher voucher) {
+		adaptfromUI(context,voucher);
+		return null;
+	}
+
+	@Override
+	public List<RadsError> counter(CRMContext context, ExpenseVoucher voucher) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<RadsError> reject(CRMContext context, ExpenseVoucher voucher) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<RadsError> hold(CRMContext context, ExpenseVoucher voucher) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 }

@@ -13,5 +13,14 @@ import com.techtrade.rads.framework.model.abstracts.RadsError;
 
 public interface IExpenseVoucherService extends ITransactionService{
 
+	public List<RadsError> approve(CRMContext context ,ExpenseVoucher voucher);
+	
+	public List<RadsError> counter(CRMContext context ,ExpenseVoucher voucher);
+	
+	public List<RadsError> reject(CRMContext context ,ExpenseVoucher voucher);
+	
+	public List<RadsError> hold(CRMContext context ,ExpenseVoucher voucher);
+	
+		
 
 }

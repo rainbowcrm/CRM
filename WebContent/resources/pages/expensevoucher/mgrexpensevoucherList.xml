@@ -3,8 +3,8 @@
 Controller = "com.rainbow.crm.expensevoucher.controller.MgrExpenseVoucherListController">
 <Template type= "List"  name = "ListTemplate"></Template>
 <Forwards>
-<Forward key ="NEW">rdscontroller?page=newexpensevoucher</Forward>
-<Forward key ="EDIT">rdscontroller?page=newexpensevoucher</Forward>
+<Forward key ="NEW">rdscontroller?page=mgrexpensevoucher</Forward>
+<Forward key ="EDIT">rdscontroller?page=mgrexpensevoucher</Forward>
 </Forwards>
 <AjaxGroups>
 <AjaxGroup service ="filterSearch">
