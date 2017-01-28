@@ -17,10 +17,15 @@ function addRow(ctrl,oddRowStyle,evenRowStyle) {
 	var rowCount = tabl.rows.length;
 	console.log('evenRowStyle=' + evenRowStyle  + ":oddRowStyle="  + oddRowStyle ) ;
 	var newrow = tabl.insertRow();
+	if(oddRowStyle == '' && evenRowStyle  == '') {
+		var lastStyle =tabl.rows[rowCount -1].className ;
+		newrow.className =lastStyle 
+	}else {
 	if (isEven(rowCount))
 		newrow.className  = oddRowStyle  ;
 	else
 		newrow.className  =  evenRowStyle ;
+	}
 	newrow.innerHTML = row.innerHTML;
 	if (typeof loadAjaxServices == 'function' )
 		loadAjaxServices();

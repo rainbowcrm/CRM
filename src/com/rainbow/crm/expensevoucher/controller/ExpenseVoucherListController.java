@@ -20,13 +20,7 @@ import com.techtrade.rads.framework.ui.abstracts.PageResult;
 
 public class ExpenseVoucherListController extends CRMListController{
 
-	String realPath ;
 	
-	@Override
-	public IRadsContext generateContext(HttpServletRequest request,HttpServletResponse response) {
-		realPath = request.getServletContext().getRealPath(".");
-		return LoginSQLs.loggedInUser(request.getSession().getId());
-	}
 	
 	@Override
 	public IBusinessService getService() {

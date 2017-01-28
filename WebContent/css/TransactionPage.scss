@@ -37,6 +37,11 @@ thead.listPageTitle {
     font-weight:bold;
     font-size:18px;
   }
+  
+ tr.listPageTitle {
+ background-color: $trans-table-row;
+ }
+ 
 
 span.listPageTitle {
 font-size:16px;

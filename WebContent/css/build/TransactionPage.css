@@ -229,6 +229,9 @@ thead.listPageTitle {
   font-weight: bold;
   font-size: 18px; }
 
+tr.listPageTitle {
+  background-color: #eceeef; }
+
 span.listPageTitle {
   font-size: 16px;
   color: #f4f4f4; }

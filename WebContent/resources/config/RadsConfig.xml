@@ -67,6 +67,8 @@
 </Page>
 <Page id = "expensevouchers" definition ="/resources/pages/expensevoucher/expensevoucherList.xml" modelclass = "com.rainbow.crm.expensevoucher.model.ExpenseVoucher" >
 </Page>
+<Page id = "openexpenses" definition ="/resources/pages/expensevoucher/mgrexpensevoucherList.xml" modelclass = "com.rainbow.crm.expensevoucher.model.ExpenseVoucher" >
+</Page>
 
 <Page id = "territories" definition ="/resources/pages/territory/territoryList.xml" modelclass = "com.rainbow.crm.territory.model.Territory" >
 </Page>
@@ -219,7 +221,7 @@
 	<Element label = "" type = "UIMenu" Id = "menu36" style="menustyle" title="Expense_Vouchers" link = "rdscontroller?page=expensevouchers"   />
  </Element>
  <Element label = "" type = "UIMenu" Id = "menu70" style="menustyleParent" title="Manager_Workbench" groupId= "menuGRP005"  >
- 	<Element label = "" type = "UIMenu" Id = "menu0701" style="menustyle" title="Expenditure_Console" link = "rdscontroller?page=managerexpenseconsole"   />
+ 	<Element label = "" type = "UIMenu" Id = "menu0701" style="menustyle" title="Open_Expenditure" link = "rdscontroller?page=openexpenses"   />
 	<Element label = "" type = "UIMenu" Id = "menu071" style="menustyle" title="Manager_Console" link = "rdscontroller?page=managerconsole"   />
  	<Element label = "" type = "UIMenu" Id = "menu072" style="menustyle" title="Pricing_Workbench" link = "rdscontroller?page=territories"   />
 	<Element label = "" type = "UIMenu" Id = "menu073" style="menustyle" title="Promotions" link = "rdscontroller?page=salesexpenses"   />
