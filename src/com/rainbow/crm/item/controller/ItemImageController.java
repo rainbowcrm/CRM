@@ -31,6 +31,7 @@ import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
 import com.rainbow.crm.common.CRMAppConfig;
 import com.rainbow.crm.common.CRMContext;
+import com.rainbow.crm.common.CRMGeneralController;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
@@ -49,7 +50,7 @@ import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
 import com.techtrade.rads.framework.utils.Utils;
 
-public class ItemImageController extends GeneralController{
+public class ItemImageController extends CRMGeneralController{
 
 	ItemImageSet imageSet ;
 	List<ItemImage>  images ;
@@ -268,17 +269,6 @@ public class ItemImageController extends GeneralController{
 		return "";
 	}
 	
-	@Override
-	public IRadsContext generateContext(HttpServletRequest request,HttpServletResponse response) {
-		ctx =  request.getServletContext() ;
-		return LoginSQLs.loggedInUser(request.getSession().getId());
-		
-	}
-	
-	@Override
-	public IRadsContext generateContext(String authToken) {
-		return LoginSQLs.loggedInUser(authToken);
-	}
 	
 	private List<ItemImage> splitImageSet(ItemImageSet set,CRMContext context) {
 		

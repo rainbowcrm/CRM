@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
+import com.rainbow.crm.common.CRMGeneralController;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
@@ -31,7 +32,7 @@ import com.techtrade.rads.framework.model.graphdata.BarData;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
 import com.techtrade.rads.framework.utils.Utils;
 
-public class SalesPeriodAnalyzerController  extends GeneralController{
+public class SalesPeriodAnalyzerController  extends CRMGeneralController{
 
 	@Override
 	public PageResult submit(ModelObject object) {
@@ -39,16 +40,7 @@ public class SalesPeriodAnalyzerController  extends GeneralController{
 		return new PageResult();
 	}
 
-	@Override
-	public IRadsContext generateContext(HttpServletRequest request,
-			HttpServletResponse response) {
-		return LoginSQLs.loggedInUser(request.getSession().getId());
-	}
-	
-	@Override
-	public IRadsContext generateContext(String authToken) {
-		return LoginSQLs.loggedInUser(authToken);
-	}
+
 	
 	@Override
 	public PageResult read(ModelObject object) {

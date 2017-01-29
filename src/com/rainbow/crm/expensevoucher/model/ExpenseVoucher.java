@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
+import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.division.model.Division;
@@ -120,6 +121,14 @@ public class ExpenseVoucher extends CRMBusinessModelObject{
 		this.approvedTotal = approvedTotal;
 	}
 	
+	public boolean isOpen()
+	{
+		if(status != null && CRMConstants.EXP_VOUCHER_STATUS.REQUESTED.equals(status.getCode()) || CRMConstants.EXP_VOUCHER_STATUS.COUNTERED.equals(status.getCode()) ||
+				CRMConstants.EXP_VOUCHER_STATUS.REREQUESTED.equals(status.getCode()))
+			return true ;
+		else 
+			return false;
+	}
 	
 	
 }

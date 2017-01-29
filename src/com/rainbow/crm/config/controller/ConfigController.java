@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.rainbow.crm.common.CRMContext;
+import com.rainbow.crm.common.CRMGeneralController;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
@@ -15,7 +16,7 @@ import com.techtrade.rads.framework.controller.abstracts.GeneralController;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
 
-public class ConfigController extends GeneralController {
+public class ConfigController extends CRMGeneralController {
 
 	@Override
 	public PageResult submit(ModelObject object) {
@@ -40,16 +41,6 @@ public class ConfigController extends GeneralController {
 		return company.getName();
 	}
 
-	@Override
-	public IRadsContext generateContext(HttpServletRequest request,
-			HttpServletResponse response) {
-		return LoginSQLs.loggedInUser(request.getSession().getId());
-	}
-
-	@Override
-	public IRadsContext generateContext(String authToken) {
-		return LoginSQLs.loggedInUser(authToken);
-	}
 
 	public IConfigService getService() {
 		return (IConfigService) SpringObjectFactory.INSTANCE

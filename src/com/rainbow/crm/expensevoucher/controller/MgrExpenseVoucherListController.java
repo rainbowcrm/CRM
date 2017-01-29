@@ -15,7 +15,7 @@ public class MgrExpenseVoucherListController  extends ExpenseVoucherListControll
 			prefix = " where " ;
 		else 
 			prefix = " and " ;
-		filter.append(  prefix +  "  status.code in  ('EXPREQ','EXPREREQ' )" ) ;
+		filter.append(  prefix +  "  status.code in  ('EXPREQ','EXPREREQ','EXPPEN' )" ) ;
 		return filter.toString();
 	}
 	

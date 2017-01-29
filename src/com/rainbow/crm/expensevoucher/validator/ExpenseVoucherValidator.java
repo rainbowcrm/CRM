@@ -1,9 +1,11 @@
 package com.rainbow.crm.expensevoucher.validator;
 
+import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMValidator;
 import com.rainbow.crm.common.CommonErrorCodes;
 import com.rainbow.crm.common.SpringObjectFactory;
+import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.expensevoucher.model.ExpenseVoucher;
 import com.rainbow.crm.expensevoucher.model.ExpenseVoucherLine;
 import com.rainbow.crm.expensevoucher.service.IExpenseVoucherService;
@@ -56,6 +58,13 @@ public class ExpenseVoucherValidator extends CRMValidator {
 				}
 			}
 		}
+		FiniteValue status = expenseVoucher.getStatus();
+		if(status != null && CRMConstants.EXP_VOUCHER_STATUS.APPROVED.equals(status.getCode()) || CRMConstants.EXP_VOUCHER_STATUS.REJECTED.equals(status.getCode()) ||
+				CRMConstants.EXP_VOUCHER_STATUS.CLOSED.equals(status.getCode()) ||  CRMConstants.EXP_VOUCHER_STATUS.REJECTEDCLOSED.equals(status.getCode())){
+		
+			errors.add(getErrorforCode(ExpenseVoucherErrorCodes.INVALID_STATUS,externalize.externalize(context, status.getDescription())));
+		}
+		
 	}
 	
 	public ExpenseVoucherValidator(CRMContext context) {

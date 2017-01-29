@@ -34,6 +34,7 @@ Controller = "com.rainbow.crm.expensevoucher.controller.ExpenseVoucherController
 
 	<Element label = "Doc_No"  type = "UIText" Id = "txtDocNo"  isMandatory="true"  readonly="true" property ="docNumber" />
 	<Element label = "Date"  type = "UIDate" Id = "txtwishListDate" isMandatory="true"  property ="expenseDate" />
+	<Element label = ""  type = "UIHidden" Id = "txtHDBStatus"    property ="Status.Code" />
 	<Element label = "Status"  type = "UIText" Id = "txtStatus"  readonly="true"  property ="Status.description" />
 	<Element label = "Manager"  type = "UIText" Id = "txtMgr"  readonly="true"  property ="manager.userId" />
 	
@@ -70,7 +71,7 @@ Controller = "com.rainbow.crm.expensevoucher.controller.ExpenseVoucherController
    multiple ="false"  fileNameProperty="file1"    />
 </Element>
 <Element type ="UITableCol" width = "6%"><Element label = ""  type = "UIText" Id = "txtLineReqAmt"  property ="requestedAmount"  focusoutJS = "calculateAllExpenses()"  isNumeric= "true"  size = "5"/>  </Element>
-<Element type ="UITableCol" width = "6%"><Element label = ""  type = "UIText" Id = "txtLineCorrAmt"  property ="correctedAmount"  isNumeric= "true" size = "5" />  </Element>
+<Element type ="UITableCol" width = "6%"><Element label = ""  type = "UIText" Id = "txtLineCorrAmt"  property ="correctedAmount" readonly="true"  isNumeric= "true" size = "5" />  </Element>
 
 <Element type ="UITableCol" width = "8%">
 	<Element caption = "+"  type = "UIButton" Id = "btnAddRow"    fixedAction ="FixedAction.ACTION_ADDTABLEROW"  fixedActionParam =  "this"/>
@@ -92,8 +93,12 @@ Controller = "com.rainbow.crm.expensevoucher.controller.ExpenseVoucherController
 	
 </Section>
 </CoreSection>
-<Section type ="summary">
-
+<Section type ="optionalsummary">
+<Element caption = "Create"  type = "UIButton" Id = "btSubmit"   style="button"  rendered = "Controller.isCreateMode" fixedAction ="FixedAction.ACTION_CREATE" 
+  fixedActionvalidateFunc="validateforCreate()" fixedActionParam =  "SAVE"  />
+<Element caption = "Update"  type = "UIButton" Id = "btUpdate"   style="button"  rendered = "Object.isOpen"  
+  fixedAction ="FixedAction.ACTION_UPDATE"  fixedActionvalidateFunc="validateforCreate()" fixedActionParam =  "SAVE"  />
+<Element caption = "Cancel"  type = "UIButton" Id = "btCancel"  style="button"  fixedAction ="FixedAction.ACTION_PAGEFORWARD" fixedActionParam =  "CANCEL"  />
 </Section>
 <Section type ="copyRightSection"/>
 </UIForm>

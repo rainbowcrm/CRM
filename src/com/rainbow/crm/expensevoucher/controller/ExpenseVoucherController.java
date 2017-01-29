@@ -45,7 +45,6 @@ public class ExpenseVoucherController extends CRMTransactionController{
 	
 
 	
-
 	@Override
 	public PageResult submit(ModelObject object, String actionParam) {
 		PageResult result = new PageResult();
@@ -59,8 +58,7 @@ public class ExpenseVoucherController extends CRMTransactionController{
 		}else if ("Hold".equalsIgnoreCase(actionParam)) {
 			service.hold((CRMContext)getContext(), (ExpenseVoucher) object);
 		}
-		
-		
+		result.setNextPageKey("openexpenses");
 		return result;
 	}
 

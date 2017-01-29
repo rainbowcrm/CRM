@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
+import com.rainbow.crm.common.CRMGeneralController;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.company.model.Company;
@@ -29,24 +30,14 @@ import com.techtrade.rads.framework.model.graphdata.PieChartData;
 import com.techtrade.rads.framework.model.graphdata.PieSliceData;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
 
-public class ProductAnalyzerController  extends GeneralController{
+public class ProductAnalyzerController  extends CRMGeneralController{
 
 	@Override
 	public PageResult submit(ModelObject object) {
 		return new PageResult();
 	}
 
-	@Override
-	public IRadsContext generateContext(HttpServletRequest request,
-			HttpServletResponse response) {
-		return LoginSQLs.loggedInUser(request.getSession().getId());
-	}
-
-	@Override
-	public IRadsContext generateContext(String authToken) {
-		// TODO Auto-generated method stub
-		return LoginSQLs.loggedInUser(authToken);
-	}
+	
 	
 	public String getCompanyName() {
 		ICompanyService service = (ICompanyService)SpringObjectFactory.INSTANCE.getInstance("ICompanyService");

@@ -125,8 +125,15 @@ public class ExpenseVoucherService extends AbstractionTransactionService impleme
 			User user = (User)service.getById(object.getSalesAssoicate().getUserId());
 			object.setSalesAssoicate(user);
 		}
+		if (object.getManager() != null ) {
+			IUserService service = (IUserService) SpringObjectFactory.INSTANCE.getInstance("IUserService");
+			User user = (User)service.getById(object.getManager().getUserId());
+			object.setManager(user);
+		}
 		if (object.getStatus() == null) {
 			object.setStatus(new FiniteValue(CRMConstants.EXP_VOUCHER_STATUS.REQUESTED));
+		}else if (object.getStatus().getCode().equals(CRMConstants.EXP_VOUCHER_STATUS.COUNTERED) ) {
+			object.setStatus(new FiniteValue(CRMConstants.EXP_VOUCHER_STATUS.REREQUESTED));
 		}
 		return ans;
 	}
@@ -195,28 +202,63 @@ public class ExpenseVoucherService extends AbstractionTransactionService impleme
 		return super.batchCreate(objects, context);
 	}
 
+	private ExpenseVoucher applyNewChanges(CRMContext context, ExpenseVoucher modifiedVoucher, FiniteValue status){
+		ExpenseVoucher oldVoucher= (ExpenseVoucher)getById(modifiedVoucher.getPK());
+		oldVoucher.setManager(context.getLoggedInUser());
+		oldVoucher.setManagerComments(modifiedVoucher.getManagerComments());
+		double counteredTotal= 0 ;
+		if (!Utils.isNullSet(oldVoucher.getExpenseVoucherLines())) {
+			int  ct = 0;
+			Iterator it = oldVoucher.getExpenseVoucherLines().iterator() ;
+			for (ExpenseVoucherLine  line : modifiedVoucher.getExpenseVoucherLines()) {
+				ExpenseVoucherLine oldLine = null ;
+				if (it.hasNext()) {
+					oldLine= (ExpenseVoucherLine) it.next() ;
+				}
+				if (oldLine != null) {
+					if (CRMConstants.EXP_VOUCHER_STATUS.COUNTERED.equals(status.getCode())) {
+						oldLine.setCorrectedAmount(line.getCorrectedAmount());
+						counteredTotal += line.getCorrectedAmount();
+					}
+					oldLine.setManagerComments(line.getManagerComments());
+				}
+			}
+		}
+		if (CRMConstants.EXP_VOUCHER_STATUS.COUNTERED.equals(status.getCode())) {
+			oldVoucher.setCorrectedTotal(counteredTotal);
+		}
+		oldVoucher.setStatus(status);
+		return oldVoucher; 
+	}
+	
 	@Override
 	public List<RadsError> approve(CRMContext context, ExpenseVoucher voucher) {
-		adaptfromUI(context,voucher);
+		ExpenseVoucher modvoucher = applyNewChanges(context, voucher,new FiniteValue(CRMConstants.EXP_VOUCHER_STATUS.APPROVED));
+		super.update(modvoucher, context);
 		return null;
 	}
 
 	@Override
 	public List<RadsError> counter(CRMContext context, ExpenseVoucher voucher) {
-		// TODO Auto-generated method stub
+		ExpenseVoucher modvoucher = applyNewChanges(context, voucher,new FiniteValue(CRMConstants.EXP_VOUCHER_STATUS.COUNTERED));
+		super.update(modvoucher, context);
 		return null;
 	}
 
 	@Override
 	public List<RadsError> reject(CRMContext context, ExpenseVoucher voucher) {
-		// TODO Auto-generated method stub
+		ExpenseVoucher modvoucher = applyNewChanges(context, voucher,new FiniteValue(CRMConstants.EXP_VOUCHER_STATUS.REJECTED));
+		super.update(modvoucher, context);
 		return null;
+
 	}
 
 	@Override
 	public List<RadsError> hold(CRMContext context, ExpenseVoucher voucher) {
-		// TODO Auto-generated method stub
+		ExpenseVoucher modvoucher = applyNewChanges(context, voucher,new FiniteValue(CRMConstants.EXP_VOUCHER_STATUS.PENDING));
+		super.update(modvoucher, context);
 		return null;
+
 	}
 
 	

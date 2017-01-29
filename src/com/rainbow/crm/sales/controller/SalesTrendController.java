@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.rainbow.crm.common.CRMContext;
+import com.rainbow.crm.common.CRMGeneralController;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.database.LoginSQLs;
 import com.rainbow.crm.item.model.Sku;
@@ -27,24 +28,14 @@ import com.techtrade.rads.framework.model.graphdata.LineChartEntryData;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
 import com.techtrade.rads.framework.utils.Utils;
 
-public class SalesTrendController  extends GeneralController{
+public class SalesTrendController  extends CRMGeneralController{
 
 	@Override
 	public PageResult submit(ModelObject object) {
 		return new PageResult();
 	}
 
-	@Override
-	public IRadsContext generateContext(HttpServletRequest request,
-			HttpServletResponse response) {
-		return LoginSQLs.loggedInUser(request.getSession().getId());
-	}
 	
-	@Override
-	public IRadsContext generateContext(String authToken) {
-		return LoginSQLs.loggedInUser(authToken);
-	}
-
 	@Override
 	public PageResult read(ModelObject object) {
 		String [] colors = { "Brown" , "Red","Green" , "Violet" , "Indigo" , "Majenta" ,"Yellow" , "Orange", 
