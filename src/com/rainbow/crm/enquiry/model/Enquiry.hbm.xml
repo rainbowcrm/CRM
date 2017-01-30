@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name="com.rainbow.crm.enquiry.model.Enquiry" table="ENQUIRIES" lazy="false">
+      <meta attribute="class-description">
+         This class contains the Enquiries 
+      </meta>
+       <id name="id" type="int" column="id">
+      </id>
+      <version name="objectVersion" column="version" type="integer"></version>
+      <many-to-one name="company" column ="company_id" not-null="true" lazy="false" ></many-to-one>
+      <many-to-one name="division" column ="division_id" not-null="true" lazy="false" ></many-to-one>
+      <many-to-one name="territory" column ="territory_id"  lazy="false" ></many-to-one>
+      <many-to-one name="enquiryType" column ="ENQUIRY_TYPE" not-null="false" lazy="false" ></many-to-one>
+      <many-to-one name="contact" column ="contact_id"  lazy="false" ></many-to-one>
+      <many-to-one name="salesAssociate" column ="SALES_ASSOCIATE"  not-null="false" lazy="false" ></many-to-one>
+      <property name="enquiry" column="enquiry" type="string"/>
+      <property name="enqDate" column="ENQ_DATE" type="timestamp"/>
+      <many-to-one name="nearestItem" column ="NEAREST_ITEM_ID"  lazy="false" ></many-to-one>
+      <many-to-one name="nearestSku" column ="NEAREST_SKU_ID"  lazy="false" ></many-to-one>
+  	  <property name="comments" column="COMMENTS" type="string"/>
+      <property name="deleted" column="is_deleted" type="boolean"/>
+      <property name="createdDate" column="created_date" type="timestamp" update="false"/>
+      <property name="lastUpdateDate" column="last_updated_date" type="timestamp"/>
+      <property name="createdUser" column="created_by" type="string" update="false"/>
+      <property name="lastUpdateUser" column="last_updated_by" type="string"/>
+      
+   </class>
+ </hibernate-mapping>

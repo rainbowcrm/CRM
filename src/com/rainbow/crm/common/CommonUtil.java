@@ -3,20 +3,29 @@ package com.rainbow.crm.common;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
+
+
+
+
+
+import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
+import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.config.service.ConfigurationManager;
 import com.rainbow.crm.database.LoginSQLs;
+import com.rainbow.crm.division.model.Division;
+import com.rainbow.crm.division.service.IDivisionService;
 import com.rainbow.crm.user.model.User;
 import com.rainbow.crm.user.service.IUserService;
 import com.rainbow.framework.setup.model.Metadata;
 import com.rainbow.framework.setup.sql.MetadataSQL;
 import com.techtrade.rads.framework.context.IRadsContext;
+import com.techtrade.rads.framework.utils.Utils;
 
 public class CommonUtil {
 	
@@ -79,6 +88,28 @@ public class CommonUtil {
 			});
 			return metadataMap.get(classId) ;
 		}
+	}
+	
+	public static Division getDivisionObect(CRMContext context , Division division) {
+		IDivisionService divisionService = (IDivisionService) SpringObjectFactory.INSTANCE.getInstance("IDivisionService");
+		Division retdivision = null ;
+		if(division.getId() > 0 ) {
+			retdivision =(Division) divisionService.getById(division.getId());
+		} else if (!Utils.isNullString(division.getName())) {
+			retdivision =(Division) divisionService.getByBusinessKey(division, context);
+		}
+		return retdivision;
+	}
+	
+	public static CRMModelObject getCRMModelObject(CRMContext context,CRMBusinessModelObject modelObject, String interfaceName ) {
+		IBusinessService  businessService =(IBusinessService)  SpringObjectFactory.INSTANCE.getInstance(interfaceName);
+		CRMBusinessModelObject retObject = null;
+		if (modelObject.getPK() != null ) {
+			retObject = (CRMBusinessModelObject) businessService.getById(modelObject.getPK());
+		}else if  (!Utils.isNullMap(modelObject.getBK())) {
+			retObject = (CRMBusinessModelObject) businessService.getByBusinessKey(modelObject, context);
+		}
+		return retObject;
 	}
 
 }
