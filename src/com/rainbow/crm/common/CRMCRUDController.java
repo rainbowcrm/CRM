@@ -1,5 +1,6 @@
 package com.rainbow.crm.common;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,9 @@ import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
 import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.database.LoginSQLs;
+import com.rainbow.crm.division.model.Division;
+import com.rainbow.crm.division.service.IDivisionService;
+import com.rainbow.crm.user.model.User;
 import com.techtrade.rads.framework.context.IRadsContext;
 import com.techtrade.rads.framework.controller.abstracts.CRUDController;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
@@ -89,15 +93,42 @@ public  abstract class CRMCRUDController  extends CRUDController{
 		
 	}
 
+	public Map <String, String > getAllDivisions() {
+		CRMContext ctx = ((CRMContext) getContext());
+		boolean allowAll =CommonUtil.allowAllDivisionAccess(ctx);
+		Map<String, String> ans = new LinkedHashMap<String, String>();
+		IDivisionService service = (IDivisionService) SpringObjectFactory.INSTANCE
+				.getInstance("IDivisionService");
+		List<Division> divisions = service.getAllDivisions(ctx
+				.getLoggedinCompany());
+		if (!Utils.isNullList(divisions)) {
+			for (Division division : divisions) {
+				if (allowAll || division.getId() == ctx.getLoggedInUser().getDivision().getId())
+					ans.put(String.valueOf(division.getId()), division.getName());
+			}
+		}
+		return ans;
+	}
+
+	
 	@Override
-	public IRadsContext generateContext(HttpServletRequest request,HttpServletResponse response) {
-		return LoginSQLs.loggedInUser(request.getSession().getId());
+	public IRadsContext generateContext(HttpServletRequest request,
+			HttpServletResponse response) {
+		
+		CRMContext context=  LoginSQLs.loggedInUser(request.getSession().getId());
+		User user = CommonUtil.getUser(context, context.getUser());
+		context.setLoggedInUser(user);
+		return context;
 	}
 	
 	@Override
 	public IRadsContext generateContext(String authToken) {
-		return LoginSQLs.loggedInUser(authToken);
+		CRMContext context=  LoginSQLs.loggedInUser(authToken);
+		User user = CommonUtil.getUser(context, context.getUser());
+		context.setLoggedInUser(user);
+		return context;
 	}
+	
 	
 	public String getCompanyName() {
 		ICompanyService service = (ICompanyService)SpringObjectFactory.INSTANCE.getInstance("ICompanyService");

@@ -12,6 +12,8 @@ import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
 import com.rainbow.crm.database.LoginSQLs;
+import com.rainbow.crm.division.model.Division;
+import com.rainbow.crm.division.service.IDivisionService;
 import com.rainbow.crm.filter.dao.CRMFilterDAO;
 import com.rainbow.crm.filter.model.CRMFilter;
 import com.techtrade.rads.framework.context.IRadsContext;
@@ -44,6 +46,23 @@ public abstract class CRMListController  extends ListController{
 		return whereCondition.toString();
 	}
 	
+	
+	public Map <String, String > getAllDivisions() {
+		CRMContext ctx = ((CRMContext) getContext());
+		boolean allowAll =CommonUtil.allowAllDivisionAccess(ctx);
+		Map<String, String> ans = new LinkedHashMap<String, String>();
+		IDivisionService service = (IDivisionService) SpringObjectFactory.INSTANCE
+				.getInstance("IDivisionService");
+		List<Division> divisions = service.getAllDivisions(ctx
+				.getLoggedinCompany());
+		if (!Utils.isNullList(divisions)) {
+			for (Division division : divisions) {
+				if (allowAll || division.getId() == ctx.getLoggedInUser().getDivision().getId())
+					ans.put(String.valueOf(division.getId()), division.getName());
+			}
+		}
+		return ans;
+	}
 	
 	
 	@Override

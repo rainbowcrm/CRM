@@ -51,7 +51,7 @@ public class EnquiryValidator extends CRMValidator {
 			enquiry.setContact((Contact)CommonUtil.getCRMModelObject(context, enquiry.getContact(), "IContactService"));
 		}
 		if (enquiry.getTerritory() != null){
-			enquiry.setTerritory((Territory)CommonUtil.getCRMModelObject(context, enquiry.getContact(), "ITerritoryService"));
+			enquiry.setTerritory((Territory)CommonUtil.getCRMModelObject(context, enquiry.getTerritory(), "ITerritoryService"));
 		}
 		if (enquiry.getNearestItem() != null){
 			enquiry.setNearestItem((Item)CommonUtil.getCRMModelObject(context, enquiry.getNearestItem(), "IItemService"));

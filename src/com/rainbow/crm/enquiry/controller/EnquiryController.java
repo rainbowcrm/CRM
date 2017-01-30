@@ -2,14 +2,20 @@ package com.rainbow.crm.enquiry.controller;
 
 
 
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.rainbow.crm.common.CRMCRUDController;
 import com.rainbow.crm.common.CRMConstants;
+import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.IBusinessService;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.enquiry.service.IEnquiryService;
+import com.rainbow.crm.territory.model.Territory;
+import com.rainbow.crm.territory.service.ITerritoryService;
 import com.rainbow.crm.database.GeneralSQLs;
+import com.techtrade.rads.framework.utils.Utils;
 
 public class EnquiryController extends CRMCRUDController{
 	
@@ -18,32 +24,20 @@ public class EnquiryController extends CRMCRUDController{
 		return serv;
 	}
 
-	public Map <String, String > getCommunicationModes() {
-		Map<String, String> ans = GeneralSQLs.getFiniteValues(CRMConstants.FV_COMMUNICATION_MODE);
+	public Map <String, String > getEnquiryTypes() {
+		Map<String, String> ans = GeneralSQLs.getFiniteValues(CRMConstants.FV_ENQUIRY_TYPE);
 		return ans;
 	}
 	
-	public Map <String, String > getConfidenceLevels() {
-		Map<String, String> ans = GeneralSQLs.getFiniteValues(CRMConstants.FV_CONFIDENCE_LEVEL);
-		return ans;
-	}
-	
-	public Map <String, String > getEnquiryResults() {
-		Map<String, String> ans = GeneralSQLs.getFiniteValues(CRMConstants.FV_FOLLOWUP_RESULT);
-		return ans;
-	}
-	public Map <String, String > getSuccessReasons() {
-		Map<String, String> ans = GeneralSQLs.getFiniteValues(CRMConstants.FV_SUCCESS_REASON);
-		return ans;
-	}
-	public Map <String, String > getFailureReasons() {
-		Map<String, String> ans = GeneralSQLs.getFiniteValues(CRMConstants.FV_FAILURE_REASON);
-		return ans;
-	}
-	public Map <String, String > getAllReasons() {
-		Map<String, String> ans = GeneralSQLs.getFiniteValues(CRMConstants.FV_SUCCESS_REASON);
-		Map<String, String> ans1 = GeneralSQLs.getFiniteValues(CRMConstants.FV_FAILURE_REASON);
-		ans.putAll(ans1);
+	public Map <String, String > getAllTerritories() {
+		Map<String, String> ans = new LinkedHashMap<String, String> ();
+		ITerritoryService service =(ITerritoryService) SpringObjectFactory.INSTANCE.getInstance("ITerritoryService");
+		List<Territory> territorries = (List<Territory>)service.findAll("Territory", "", "territory", (CRMContext)getContext());
+		if (!Utils.isNullList(territorries)) {
+			for (Territory territory : territorries) {
+				ans.put(String.valueOf(territory.getId()), territory.getTerritory());
+			}
+		}
 		return ans;
 	}
 }

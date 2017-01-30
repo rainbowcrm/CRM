@@ -1,11 +1,14 @@
 package com.rainbow.crm.enquiry.controller;
 
 import java.util.List;
+import java.util.Map;
 
+import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMListController;
 import com.rainbow.crm.common.IBusinessService;
 import com.rainbow.crm.common.SpringObjectFactory;
+import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.enquiry.model.Enquiry;
 import com.rainbow.crm.enquiry.service.IEnquiryService;
 import com.rainbow.crm.enquiry.validator.EnquiryValidator;
@@ -52,6 +55,10 @@ public class EnquiryListController extends CRMListController{
 		return result;
 	}
 	
+	public Map <String, String > getEnquiryTypes() {
+		Map<String, String> ans = GeneralSQLs.getFiniteValues(CRMConstants.FV_ENQUIRY_TYPE);
+		return ans;
+	}
 	
 
 	

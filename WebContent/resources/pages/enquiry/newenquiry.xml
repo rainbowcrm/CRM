@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Page id = "newEnquiry" showinFrame ="true" title ="New Enquiry | Rainbow CRM" Object = "com.rainbow.crm.enquiry.model.Enquiry" 
+Controller = "com.rainbow.crm.enquiry.controller.EnquiryController">
+<Template type= "CRUD"  name = "CRUDTemplate"></Template>
+<Forwards>
+<Forward key ="CANCEL">rdscontroller?page=enquiries</Forward>
+<Forward key ="SAVE">enquiries</Forward>
+</Forwards>
+<IncludeJS>./resources/js/RadsLib.js</IncludeJS>
+<IncludeJS>./scripts/CRMGeneral.js</IncludeJS>
+<AjaxGroups>
+<AjaxGroup service ="divisionTerritorySearch">
+<requestElements event = "">
+<requestElement key = "divisionId">lstInvDivision</requestElement>
+</requestElements>
+<responseElements>
+<responseElement key = "territories">txtTerritory</responseElement>
+</responseElements>
+</AjaxGroup>
+</AjaxGroups>
+<Elements>
+<UIForm Id ="cust" method = "POST" >
+<Section type ="topBar"></Section> 
+<Section type ="leftsideBarApp"></Section>
+<CoreSection>
+<ErrorSection>
+</ErrorSection>
+<Section type ="detail">
+	<Element label = "" type = "UIHidden" Id = "hdnVersion" property ="ObjectVersion" />
+	<Element label = ""  type = "UIHidden" Id = "hdnUserID"  property ="Id" />
+	<Element label = "Division"  type = "UIList" Id = "lstInvDivision"  isMandatory="true" property ="Division.Id" >
+	<options populator =  "getAllDivisions"> 
+	</options>
+	</Element>
+	<Element label = "Sales_Associate"  type = "UILookupText" Id = "txtLName"  isMandatory="true" size="30" property ="salesAssociate.userId"  showLookupAsDialog="true" dialogId="dlgUser"
+ 	dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" additionalInputControl = "lstInvDivision" >
+ 	<lookupType>user</lookupType>
+	 <height>300</height>
+	 <width>290</width>
+	</Element>
+	<Element label = "Territory"  type = "UIList"  Id = "txtTerritory"   property ="Territory.Id"  >
+	 <options populator =  "getAllTerritories"> 
+	</options>
+	</Element>
+	<Element label = "Enquiry_Type"  type = "UIList" Id = "lstEnqType"   property ="enquiryType.code"  externalise= "true">
+		<options populator =  "getEnquiryTypes"> 
+		</options>
+	</Element>
+	<Element label = "Date"  type = "UIDate" Id = "txtDT"   property ="enqDate" />
+	<Element label = "Nearest_Item"  type = "UILookupText" Id = "txtITNearLName"   size="30" property ="nearestItem.name"  showLookupAsDialog="true" dialogId="dlgNearItem"
+ 	dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle"  >
+ 	<lookupType>item</lookupType>
+	 <height>300</height>
+	 <width>290</width>
+	</Element>
+	<Element label = "Nearest_Sku"  type = "UILookupText" Id = "txtSKUNearLName"   size="30" property ="nearestSku.name"  showLookupAsDialog="true" dialogId="dlgNearSku"
+ 	dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle"  >
+ 	<lookupType>sku</lookupType>
+	 <height>300</height>
+	 <width>290</width>
+	</Element>
+	<Element label = "Enquiry"  type = "UITextArea" Id = "txtConversation"   property ="enquiry" >
+	 <rows>5</rows> <cols>50</cols>
+	</Element>
+	<Element label = "Comments"  type = "UITextArea" Id = "txtComments"   property ="comments" >
+	 <rows>5</rows> <cols>30</cols>
+	</Element>
+</Section>
+</CoreSection>
+<Section type ="summary">
+</Section>
+<Section type ="copyRightSection"/>
+</UIForm>
+</Elements>
+</Page>

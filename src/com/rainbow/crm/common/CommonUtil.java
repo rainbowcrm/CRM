@@ -104,7 +104,9 @@ public class CommonUtil {
 	public static CRMModelObject getCRMModelObject(CRMContext context,CRMBusinessModelObject modelObject, String interfaceName ) {
 		IBusinessService  businessService =(IBusinessService)  SpringObjectFactory.INSTANCE.getInstance(interfaceName);
 		CRMBusinessModelObject retObject = null;
-		if (modelObject.getPK() != null ) {
+		if (modelObject == null)
+			return null;
+		if (  modelObject.getPK() != null ) {
 			retObject = (CRMBusinessModelObject) businessService.getById(modelObject.getPK());
 		}else if  (!Utils.isNullMap(modelObject.getBK())) {
 			retObject = (CRMBusinessModelObject) businessService.getByBusinessKey(modelObject, context);
