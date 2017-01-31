@@ -6,7 +6,7 @@
 <Element   type = "UIList" Id = "lstOptions"  WindowAction ="CLOSELOOKUPWINDOW" size = "20"/>
 <Summary>
 <Element caption = "Close"  type = "UIButton" Id = "btnClose"  fixedAction ="FixedAction.CLOSELOOKUPWINDOW"   />
-<Element caption = "Cancel"  type = "UIButton" Id = "btnCancel" fixedAction ="FixedAction.CANCELWINDOW />
+<Element caption = "Cancel"  type = "UIButton" Id = "btnCancel" fixedAction ="FixedAction.CANCELWINDOW" />
 </Summary>
 </Elements>
 </Page>

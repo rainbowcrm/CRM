@@ -49,6 +49,8 @@
 </Page>
 <Page id = "enquiries" definition ="/resources/pages/enquiry/enquiryList.xml" modelclass = "com.rainbow.crm.enquiry.model.Enquiry" >
 </Page>
+<Page id = "salespitches" definition ="/resources/pages/salespitch/salespitchList.xml" modelclass = "com.rainbow.crm.salespitch.model.Salespitch" >
+</Page>
 <Page id = "custcategories" definition ="/resources/pages/custcategory/custcategoryList.xml" modelclass = "com.rainbow.crm.custcategory.model.CustCategory" >
 </Page>
 <Page id = "newcustcategory" definition ="/resources/pages/custcategory/newcustcategory.xml" modelclass = "com.rainbow.crm.custcategory.model.CustCategory" >
@@ -97,6 +99,8 @@
 <Page id = "newfollowup" definition ="/resources/pages/followup/newfollowup.xml" modelclass = "com.rainbow.crm.followup.model.Followup" >
 </Page>
 <Page id = "newenquiry" definition ="/resources/pages/enquiry/newenquiry.xml" modelclass = "com.rainbow.crm.enquiry.model.Enquiry" >
+</Page>
+<Page id = "newsalespitch" definition ="/resources/pages/salespitch/newsalespitch.xml" modelclass = "com.rainbow.crm.salespitch.model.Salespitch" >
 </Page>
 <Page id = "newsku" definition ="/resources/pages/item/newsku.xml" modelclass = "com.rainbow.crm.item.model.Sku" >
 </Page>
@@ -226,6 +230,7 @@
 	<Element label = "" type = "UIMenu" Id = "menu35" style="menustyle" title="Followups" link = "rdscontroller?page=followups"   />
 	<Element label = "" type = "UIMenu" Id = "menu36" style="menustyle" title="Expense_Vouchers" link = "rdscontroller?page=expensevouchers"   />
 	<Element label = "" type = "UIMenu" Id = "menu36" style="menustyle" title="Enquiries" link = "rdscontroller?page=enquiries"   />
+	<Element label = "" type = "UIMenu" Id = "menu36" style="menustyle" title="Sales_Pitches" link = "rdscontroller?page=salespitches"   />
  </Element>
  <Element label = "" type = "UIMenu" Id = "menu70" style="menustyleParent" title="Manager_Workbench" groupId= "menuGRP005"  >
  	<Element label = "" type = "UIMenu" Id = "menu0701" style="menustyle" title="Open_Expenditure" link = "rdscontroller?page=openexpenses"   />

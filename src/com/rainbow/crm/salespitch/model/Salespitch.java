@@ -25,7 +25,7 @@ public class Salespitch extends CRMBusinessModelObject{
 	Contact contact;
 	User salesAssociate;
 	String title;
-	String date;
+	String details;
 	Date pitchDate;
 	Item item;
 	String comments;
@@ -88,11 +88,13 @@ public class Salespitch extends CRMBusinessModelObject{
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getDate() {
-		return date;
+	
+
+	public String getDetails() {
+		return details;
 	}
-	public void setDate(String date) {
-		this.date = date;
+	public void setDetails(String details) {
+		this.details = details;
 	}
 	@RadsPropertySet(useBKForJSON=true,useBKForXML=true,useBKForMap=true)
 	public Item getItem() {

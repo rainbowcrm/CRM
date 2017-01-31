@@ -72,7 +72,7 @@
     </bean>
     <bean id="IEnquiryService" class="com.rainbow.crm.enquiry.service.EnquiryService">
     </bean>
-    <bean id="ISalesPitchService" class="com.rainbow.crm.salespitch.service.SalespitchService">
+    <bean id="ISalespitchService" class="com.rainbow.crm.salespitch.service.SalespitchService">
     </bean>
     <bean id="ICustCategoryService" class="com.rainbow.crm.custcategory.service.CustCategoryService">
     </bean>
