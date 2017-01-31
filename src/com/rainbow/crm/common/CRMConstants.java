@@ -26,6 +26,7 @@ public class CRMConstants {
 	public final static String FV_SPFTYPE = "SPFTYPE";
 	public final static String FV_EXP_VOUCHER_STATUS = "EXPSTATUS";
 	public final static String FV_ENQUIRY_TYPE = "ENQTYPE";
+	public final static String FV_SPITCH_TYPE = "PITCHTYPE";
 	
 	public final static class ROLETYPE {
 		public final static String SYSADMIN = "SYSADMIN";

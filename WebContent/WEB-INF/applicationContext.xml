@@ -72,6 +72,8 @@
     </bean>
     <bean id="IEnquiryService" class="com.rainbow.crm.enquiry.service.EnquiryService">
     </bean>
+    <bean id="ISalesPitchService" class="com.rainbow.crm.salespitch.service.SalespitchService">
+    </bean>
     <bean id="ICustCategoryService" class="com.rainbow.crm.custcategory.service.CustCategoryService">
     </bean>
     <bean id="IAlertService" class="com.rainbow.crm.alert.service.AlertService">
@@ -144,6 +146,9 @@
     <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
     <bean id="EnquiryDAO" class="com.rainbow.crm.enquiry.dao.EnquiryDAO">
+    <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean id="SalespitchDAO" class="com.rainbow.crm.salespitch.dao.SalespitchDAO">
     <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
     <bean id="CustCategoryDAO" class="com.rainbow.crm.custcategory.dao.CustCategoryDAO">
@@ -235,6 +240,7 @@
         <value>com/rainbow/crm/distributionorder/model/DistributionOrderLine.hbm.xml</value>
         <value>com/rainbow/crm/followup/model/Followup.hbm.xml</value>  
         <value>com/rainbow/crm/enquiry/model/Enquiry.hbm.xml</value>
+        <value>com/rainbow/crm/salespitch/model/Salespitch.hbm.xml</value>
         <value>com/rainbow/crm/custcategory/model/CustCategory.hbm.xml</value>  
         <value>com/rainbow/crm/alert/model/Alert.hbm.xml</value>  
         </list>  
