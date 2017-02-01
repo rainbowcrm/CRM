@@ -17,6 +17,9 @@
       <many-to-one name="salespitchType" column ="PITCH_TYPE" not-null="false" lazy="false" ></many-to-one>
       <many-to-one name="contact" column ="contact_id"  lazy="false" ></many-to-one>
       <many-to-one name="salesAssociate" column ="SALES_ASSOCIATE"  not-null="false" lazy="false" ></many-to-one>
+      <many-to-one name="customer" column ="customer_id"  lazy="false" ></many-to-one>
+      <property name="phoneNumber" column="PHONE_NUMBER" type="string"/>
+      <property name="email" column="EMAIL" type="string"/>
       <property name="title" column="TITLE" type="string"/>
       <property name="details" column="DETAILS" type="string"/>
       <property name="pitchDate" column="PITCH_DATE" type="date"/>

@@ -7,6 +7,7 @@ import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.contact.model.Contact;
+import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.item.model.Sku;
@@ -29,6 +30,13 @@ public class Salespitch extends CRMBusinessModelObject{
 	Date pitchDate;
 	Item item;
 	String comments;
+	
+	Customer customer;
+	String phoneNumber;
+	String email;
+	
+	
+	
 	
 	public String getComments() {
 		return comments;
@@ -104,5 +112,25 @@ public class Salespitch extends CRMBusinessModelObject{
 	public void setItem(Item nearestItem) {
 		this.item = nearestItem;
 	}
+	public Customer getCustomer() {
+		return customer;
+	}
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	
 
 }
