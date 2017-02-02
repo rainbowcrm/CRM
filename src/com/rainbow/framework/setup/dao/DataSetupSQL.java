@@ -37,6 +37,30 @@ public class DataSetupSQL {
 		return ans;
 	}
 	
+	public static List<Metadata> getTransactionEntities(){
+	 	Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet rs  = null ;
+		List<Metadata> ans = new ArrayList<Metadata>();
+		try {
+			connection  = ConnectionCreater.getConnection() ;
+			String sql =   " SELECT * FROM METADATA WHERE METADATA_TYPE = 'TRANS' " ;
+			statement = connection.prepareStatement(sql);
+			rs = statement.executeQuery() ;
+			while (rs.next()) {
+				Metadata metadata = new Metadata();
+				metadata.setObjectName(rs.getString(1));
+				metadata.setClassName(rs.getString(2));
+				ans.add(metadata);
+			}
+		}catch(SQLException ex) {
+			Logwriter.INSTANCE.error(ex);
+		}finally {
+			ConnectionCreater.close(connection, statement, rs);	
+		}
+		return ans;
+	}
+	
 	public static Metadata getMetadataforClass(String className){
 		Connection connection = null;
 		PreparedStatement statement = null;

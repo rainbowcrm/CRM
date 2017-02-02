@@ -83,9 +83,10 @@
 <Page id = "uoms" definition ="/resources/pages/uoms/uoms.xml" modelclass = "com.rainbow.crm.uom.model.UOM" >
 </Page>
 -->
+<Page id = "queries" definition ="/resources/pages/query/query.xml" modelclass = "com.rainbow.framework.query.model.Query" >
+</Page>
 <Page id = "config" definition ="/resources/pages/config/config.xml" modelclass = "com.rainbow.crm.config.model.ConfigSet" >
 </Page>
-
 <Page id = "newcustomer" definition ="/resources/pages/customer/newcustomer.xml" modelclass = "com.rainbow.crm.customer.model.Customer" >
 </Page>
 <Page id = "newcarrier" definition ="/resources/pages/carrier/newcarrier.xml" modelclass = "com.rainbow.crm.carrier.model.Carrier" >
@@ -234,7 +235,7 @@
  </Element>
  <Element label = "" type = "UIMenu" Id = "menu70" style="menustyleParent" title="Manager_Workbench" groupId= "menuGRP005"  >
  	<Element label = "" type = "UIMenu" Id = "menu0701" style="menustyle" title="Open_Expenditure" link = "rdscontroller?page=openexpenses"   />
-	<Element label = "" type = "UIMenu" Id = "menu071" style="menustyle" title="Manager_Console" link = "rdscontroller?page=managerconsole"   />
+	<Element label = "" type = "UIMenu" Id = "menu071" style="menustyle" title="Queries" link = "rdscontroller?page=queries"   />
  	<Element label = "" type = "UIMenu" Id = "menu072" style="menustyle" title="Pricing_Workbench" link = "rdscontroller?page=territories"   />
 	<Element label = "" type = "UIMenu" Id = "menu073" style="menustyle" title="Promotions" link = "rdscontroller?page=salesexpenses"   />
 	<Element label = "" type = "UIMenu" Id = "menu074" style="menustyle" title="Marketing_Campaign" link = "rdscontroller?page=campaign"   />
