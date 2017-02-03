@@ -102,7 +102,7 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 <Element type = "UITableRow"   >
 <Element type = "UITableCol"  align="left" >
 
-<Element type = "UIList"  label = "Fields" size="8" multiple="true" id= "lstAllFieldsEntity"   >
+<Element type = "UIList"  label = "Fields" size="8" multiple="true" Id= "lstAllFieldsEntity"  property = "selectedFields"  >
 <options populator =  "getAllEntityFields"> 
 	</options>
 </Element>
@@ -112,17 +112,18 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 <Element type = "UITable" rows = "1" cols = "7" style = "grid" applyStyleonChildren ="true" Id  ="tblTrans" property ="conditions[]" >
 <Element type = "UITableHead" style ="listPageTitle">
  <Element type = "UITableRow">
- <Element type ="UITableCol" width = "5%" ><Element label = ""  type = "UILabel" Id = "lblTit1" value ="(" /></Element>
+ <Element type ="UITableCol" width = "3%" ><Element label = ""  type = "UILabel" Id = "lblTit1" value ="(" /></Element>
  <Element type ="UITableCol" width = "30%" ><Element label = ""  type = "UILabel" Id = "lblTit2" value ="Field" /></Element>
- <Element type ="UITableCol" width = "10%" ><Element label = ""  type = "UILabel" Id = "lblTit3" value ="Operator" /></Element>
+ <Element type ="UITableCol" width = "5%" ><Element label = ""  type = "UILabel" Id = "lblTit3" value ="Op" /></Element>
  <Element type ="UITableCol" width = "30%" ><Element label = ""  type = "UILabel" Id = "lblTit4" value ="Value" /></Element>
- <Element type ="UITableCol" width = "20%" ><Element label = ""  type = "UILabel" Id = "lblTit5" value =".." /></Element>
- <Element type ="UITableCol" width = "5%" ><Element label = ""  type = "UILabel" Id = "lblTit1" value =")" /></Element>
-</Element>
 
+ <Element type ="UITableCol" width = "3%" ><Element label = ""  type = "UILabel" Id = "lblTit1" value =")" /></Element>
+  <Element type ="UITableCol" width = "20%" ><Element label = ""  type = "UILabel" Id = "lblTit5" value =".." /></Element>
+</Element>
+</Element>
 <Element type = "UITableRow"  dataType = "com.rainbow.framework.query.model.QueryCondition" >
 
-<Element type ="UITableCol" width = "5%" ><Element type = "UIText"  size="3"  id= "txtOpBrac" property ="openBrackets"   /></Element>
+<Element type ="UITableCol" width = "3%" ><Element type = "UIText"  size="3"  id= "txtOpBrac" property ="openBrackets"   /></Element>
 
 <Element type ="UITableCol" width = "30%" >
 <Element type = "UIList"    id= "lstCritFieldsEntity"   property ="field" >
@@ -131,7 +132,7 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 </Element>
 </Element>
 
-<Element type ="UITableCol" width = "10%" >
+<Element type ="UITableCol" width = "5%" >
 <Element type = "UIList"    id= "lstOpts"   property ="operator" >
 <options populator =  "getOperators"> 
 	</options>
@@ -140,7 +141,7 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 
 <Element type ="UITableCol" width = "30%" ><Element type = "UIText"    id= "txtVales" property ="value"   /></Element>
 
-<Element type ="UITableCol" width = "5%" ><Element type = "UIText"  size="3"  id= "txtCloseBrac" property ="closeBrackets"   /></Element>
+<Element type ="UITableCol" width = "3%" ><Element type = "UIText"  size="3"  id= "txtCloseBrac" property ="closeBrackets"   /></Element>
 
 <Element type ="UITableCol" width = "10%">
 	<Element caption = "AND"  type = "UIButton" Id = "btnAddRow"    fixedAction ="FixedAction.ACTION_ADDTABLEROW"  fixedActionParam =  "this"/>
@@ -151,7 +152,7 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 </Element>
 
 </Element>
-</Element>
+
 
 
 </Element>

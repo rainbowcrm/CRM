@@ -20,6 +20,7 @@ public class Query extends CRMBusinessModelObject{
 	
 	String dateValueType;
 	
+	String selectedFields[];
 
 	List<QueryCondition> conditions;
 
@@ -93,6 +94,15 @@ public class Query extends CRMBusinessModelObject{
 		this.dateValueType = dateValueType;
 	}
 
+	public String[] getSelectedFields() {
+		return selectedFields;
+	}
+
+	public void setSelectedFields(String[] selectedFields) {
+		this.selectedFields = selectedFields;
+	}
+
+	
 	
 	
 }

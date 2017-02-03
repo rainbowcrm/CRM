@@ -13,7 +13,6 @@ public abstract class CRMGeneralController  extends GeneralController{
 	@Override
 	public IRadsContext generateContext(HttpServletRequest request,
 			HttpServletResponse response) {
-		
 		CRMContext context=  LoginSQLs.loggedInUser(request.getSession().getId());
 		User user = CommonUtil.getUser(context, context.getUser());
 		context.setLoggedInUser(user);

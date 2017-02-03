@@ -115,6 +115,22 @@ span.highlighted {
     font-size: 20px;
     color:"Black";
 }
+
+thead.listPageTitle {
+    background: $additional-info-color;
+    color: $light;
+    font-weight:bold;
+    font-size:18px;
+  }
+  
+ tr.listPageTitle {
+ background-color: $trans-table-row;
+ }
+ 
+ span.listPageTitle {
+font-size:16px;
+color: $light;
+}
 table.errorStyle {
 	text-align: left;
 }
