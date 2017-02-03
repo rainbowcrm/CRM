@@ -1,12 +1,16 @@
 package com.rainbow.framework.query.model;
 
+import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
 
-public class QueryCondition {
+public class QueryCondition  extends CRMBusinessModelObject{
 
 	int noOpenBrackets;
 	int noCloseBrackets;
 
+	String openBrackets;
+	String closeBrackets;
+	
 	FiniteValue dataType;
 
 	String field;
@@ -70,5 +74,23 @@ public class QueryCondition {
 	public void setPostCondition(String postCondition) {
 		this.postCondition = postCondition;
 	}
+
+	public String getOpenBrackets() {
+		return openBrackets;
+	}
+
+	public void setOpenBrackets(String openBrackets) {
+		this.openBrackets = openBrackets;
+	}
+
+	public String getCloseBrackets() {
+		return closeBrackets;
+	}
+
+	public void setCloseBrackets(String closeBrackets) {
+		this.closeBrackets = closeBrackets;
+	}
+	
+	
 
 }

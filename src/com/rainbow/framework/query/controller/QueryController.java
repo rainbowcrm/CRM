@@ -13,8 +13,10 @@ import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.division.service.IDivisionService;
+import com.rainbow.framework.query.model.Query;
 import com.rainbow.framework.setup.dao.DataSetupSQL;
 import com.rainbow.framework.setup.model.Metadata;
+import com.rainbow.framework.setup.sql.MetadataSQL;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
 import com.techtrade.rads.framework.utils.Utils;
@@ -33,7 +35,7 @@ public class QueryController extends CRMGeneralController {
 	}
 	
 	public Map <String, String > getAllEntities() {
-		List<Metadata> metaDatas = DataSetupSQL.getTransactionEntities();
+		List<Metadata> metaDatas = MetadataSQL.getTransactionEntities();
 		Map<String, String> ans = new HashMap<String, String>();
 		metaDatas.forEach( metaData ->  { 
 			ans.put(metaData.getObjectName(),metaData.getObjectName());
@@ -63,5 +65,26 @@ public class QueryController extends CRMGeneralController {
 		Map<String, String> ans = new HashMap<String, String>();
 		return ans;
 	}
+	
+	public Map <String, String > getOperators() {
+		Map<String, String> ans = new HashMap<String, String>();
+		ans.put("=", "=");
+		ans.put("<=", "<=");
+		ans.put("<", "<");
+		ans.put(">=", ">=");
+		ans.put(">", ">");
+		ans.put("!=", "!=");
+		
+		return ans;
+	}
 
+	public Map <String, String > 	getAllEntityFields() {
+		Map<String, String> ans = new HashMap<String, String>();
+		if (getObject() != null)  {
+			Query  query =(Query) getObject();
+			String entity = query.getEntity() ;
+			return MetadataSQL.getAllEntityFields(entity);
+		}
+		return ans;
+	}
 }

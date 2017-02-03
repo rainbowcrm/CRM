@@ -19,7 +19,7 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 <Element type = "UITableCol"   >
 
 <Element label = "Saved_Queries"  type = "UIList" Id = "lstQueries" >
-	<options populator =  "getAllSavedQueries"> 
+	<options populator =  "getAllQueries"> 
 	</options>
 </Element>
 </Element>
@@ -36,18 +36,19 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 <Element type = "UITableRow"   >
 <Element type = "UITableCol"   >
 
-<Element label = "Division"  type = "UIList" Id = "lstInvDivision"  isMandatory="true" property ="Division.Id" >
-	<options populator =  "getAllDivisions"> 
+<Element label = "Transaction"  type = "UIList" Id = "lstTrans"  isMandatory="true" property ="entity" >
+	<options populator =  "getAllEntities"> 
 	</options>
 </Element>
 </Element>
 
 <Element type = "UITableCol"   >
 
-<Element label = "Transaction"  type = "UIList" Id = "lstTrans"  isMandatory="true" property ="entity" >
-	<options populator =  "getAllEntities"> 
+<Element label = "Division"  type = "UIList" Id = "lstInvDivision"  isMandatory="true" property ="Division.Id" >
+	<options populator =  "getAllDivisions"> 
 	</options>
 </Element>
+
 </Element>
 </Element>
 
@@ -96,6 +97,69 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 
 <Element type ="UITabset" Id = "configSet" style = "uitabstyle" selectedTabStyle= "titleStyleSelected active nav-link" unSelectedTabStyle ="titleStyleUnSelected nav-link" >
 <Element type ="UITab" Id= "idGeneral" title = "List"   >
+
+<Element type = "UITable" rows = "3" cols = "2" style = "grid" applyStyleonChildren ="true" Id  ="tblList"  >
+<Element type = "UITableRow"   >
+<Element type = "UITableCol"  align="left" >
+
+<Element type = "UIList"  label = "Fields" size="8" multiple="true" id= "lstAllFieldsEntity"   >
+<options populator =  "getAllEntityFields"> 
+	</options>
+</Element>
+</Element>
+<Element type = "UITableCol"  align="left" >
+
+<Element type = "UITable" rows = "1" cols = "7" style = "grid" applyStyleonChildren ="true" Id  ="tblTrans" property ="conditions[]" >
+<Element type = "UITableHead" style ="listPageTitle">
+ <Element type = "UITableRow">
+ <Element type ="UITableCol" width = "5%" ><Element label = ""  type = "UILabel" Id = "lblTit1" value ="(" /></Element>
+ <Element type ="UITableCol" width = "30%" ><Element label = ""  type = "UILabel" Id = "lblTit2" value ="Field" /></Element>
+ <Element type ="UITableCol" width = "10%" ><Element label = ""  type = "UILabel" Id = "lblTit3" value ="Operator" /></Element>
+ <Element type ="UITableCol" width = "30%" ><Element label = ""  type = "UILabel" Id = "lblTit4" value ="Value" /></Element>
+ <Element type ="UITableCol" width = "20%" ><Element label = ""  type = "UILabel" Id = "lblTit5" value =".." /></Element>
+ <Element type ="UITableCol" width = "5%" ><Element label = ""  type = "UILabel" Id = "lblTit1" value =")" /></Element>
+</Element>
+
+<Element type = "UITableRow"  dataType = "com.rainbow.framework.query.model.QueryCondition" >
+
+<Element type ="UITableCol" width = "5%" ><Element type = "UIText"  size="3"  id= "txtOpBrac" property ="openBrackets"   /></Element>
+
+<Element type ="UITableCol" width = "30%" >
+<Element type = "UIList"    id= "lstCritFieldsEntity"   property ="field" >
+<options populator =  "getAllEntityFields"> 
+	</options>
+</Element>
+</Element>
+
+<Element type ="UITableCol" width = "10%" >
+<Element type = "UIList"    id= "lstOpts"   property ="operator" >
+<options populator =  "getOperators"> 
+	</options>
+</Element>
+</Element>
+
+<Element type ="UITableCol" width = "30%" ><Element type = "UIText"    id= "txtVales" property ="value"   /></Element>
+
+<Element type ="UITableCol" width = "5%" ><Element type = "UIText"  size="3"  id= "txtCloseBrac" property ="closeBrackets"   /></Element>
+
+<Element type ="UITableCol" width = "10%">
+	<Element caption = "AND"  type = "UIButton" Id = "btnAddRow"    fixedAction ="FixedAction.ACTION_ADDTABLEROW"  fixedActionParam =  "this"/>
+	<Element caption = "OR"  type = "UIButton" Id = "btnDelRow"    fixedAction ="FixedAction.ACTION_ADDTABLEROW"  fixedActionParam =  "this"/>
+	<Element caption = "-"  type = "UIButton" Id = "btnDelRow"    fixedAction ="FixedAction.ACTION_DELETETABLEROW"  fixedActionParam =  "this"/>
+</Element>
+
+</Element>
+
+</Element>
+</Element>
+
+
+</Element>
+
+
+</Element>
+</Element>
+
 </Element>
 <Element type ="UITab" Id= "idcustMgmt" title = "Aggregates"   >
 </Element>
