@@ -14,6 +14,8 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 </ErrorSection>
 <Section type= "mainSection">
 
+ 
+
 <Element type = "UITable" rows = "3" cols = "2" style = "grid" applyStyleonChildren ="true" Id  ="tblcommon"  >
 <Element type = "UITableRow"   >
 <Element type = "UITableCol"   >
@@ -95,6 +97,7 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 </Element>
 
 
+
 <Element type ="UITabset" Id = "configSet" style = "uitabstyle" selectedTabStyle= "titleStyleSelected active nav-link" unSelectedTabStyle ="titleStyleUnSelected nav-link" >
 <Element type ="UITab" Id= "idGeneral" title = "List"   >
 
@@ -102,10 +105,12 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 <Element type = "UITableRow"   >
 <Element type = "UITableCol"  align="left" >
 
+ 
 <Element type = "UIList"  label = "Fields" size="8" multiple="true" Id= "lstAllFieldsEntity"  property = "selectedFields"  >
 <options populator =  "getAllEntityFields"> 
 	</options>
 </Element>
+
 </Element>
 <Element type = "UITableCol"  align="left" >
 
@@ -123,25 +128,25 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 </Element>
 <Element type = "UITableRow"  dataType = "com.rainbow.framework.query.model.QueryCondition" >
 
-<Element type ="UITableCol" width = "3%" ><Element type = "UIText"  size="3"  id= "txtOpBrac" property ="openBrackets"   /></Element>
+<Element type ="UITableCol" width = "3%" ><Element type = "UIText"  size="3"  Id= "txtOpBrac" property ="openBrackets"   /></Element>
 
 <Element type ="UITableCol" width = "30%" >
-<Element type = "UIList"    id= "lstCritFieldsEntity"   property ="field" >
+<Element type = "UIList"    Id= "lstCritFieldsEntity"   property ="field" >
 <options populator =  "getAllEntityFields"> 
 	</options>
 </Element>
 </Element>
 
 <Element type ="UITableCol" width = "5%" >
-<Element type = "UIList"    id= "lstOpts"   property ="operator" >
+<Element type = "UIList"    Id= "lstOpts"   property ="operator" >
 <options populator =  "getOperators"> 
 	</options>
 </Element>
 </Element>
 
-<Element type ="UITableCol" width = "30%" ><Element type = "UIText"    id= "txtVales" property ="value"   /></Element>
+<Element type ="UITableCol" width = "30%" ><Element type = "UIText"    Id= "txtVales" property ="value"   /></Element>
 
-<Element type ="UITableCol" width = "3%" ><Element type = "UIText"  size="3"  id= "txtCloseBrac" property ="closeBrackets"   /></Element>
+<Element type ="UITableCol" width = "3%" ><Element type = "UIText"  size="3"  Id= "txtCloseBrac" property ="closeBrackets"   /></Element>
 
 <Element type ="UITableCol" width = "10%">
 	<Element caption = "AND"  type = "UIButton" Id = "btnAddRow"    fixedAction ="FixedAction.ACTION_ADDTABLEROW"  fixedActionParam =  "this"/>
