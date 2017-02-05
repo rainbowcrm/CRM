@@ -88,6 +88,8 @@
     </bean>
     <bean id="IWishListService" class="com.rainbow.crm.wishlist.service.WishListService">
     </bean>
+    <bean id="IQueryService" class="com.rainbow.framework.query.service.QueryService">
+    </bean>
     <bean id="ISalesLeadService" class="com.rainbow.crm.saleslead.service.SalesLeadService">
     </bean>
     <bean id="IExpenseVoucherService" class="com.rainbow.crm.expensevoucher.service.ExpenseVoucherService">
@@ -182,6 +184,9 @@
     <property name="sessionFactory" ref="sessionFactory"></property>  
     </bean>
     <bean id="TerritoryDAO" class="com.rainbow.crm.territory.dao.TerritoryDAO">
+    <property name="sessionFactory" ref="sessionFactory"></property>  
+    </bean>
+    <bean id="QueryDAO" class="com.rainbow.framework.query.dao.QueryDAO">
     <property name="sessionFactory" ref="sessionFactory"></property>  
     </bean>   
     <bean id="DistributionOrderDAO" class="com.rainbow.crm.distributionorder.dao.DistributionOrderDAO">

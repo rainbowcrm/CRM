@@ -70,6 +70,34 @@ public class MetadataSQL {
 		return ans;
 	}
 	
+	public static Metadata getMetaDataforEntity(String entity){
+	 	Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet rs  = null ;
+		try {
+			connection  = ConnectionCreater.getConnection() ;
+			String sql =   " SELECT * FROM METADATA WHERE ENTITY = ? " ;
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, entity);
+			rs = statement.executeQuery() ;
+			while (rs.next()) {
+				String className =  rs.getString("CLASS_NAME");
+				FiniteValue metaDataType =new FiniteValue (rs.getString("METADATA_TYPE"));
+				boolean isDivSpecific = rs.getBoolean("IS_DIVISION_SPEC");
+				String hql = rs.getString("HQL_CLASS");
+				String desc = rs.getString("DESCRIPTION") ;
+				String dateField = rs.getString("DATE_FIELD");
+				Metadata metaData  = new Metadata(entity,className,metaDataType,isDivSpecific,hql,desc,dateField);
+				return  metaData;
+			}
+		}catch(SQLException ex) {
+			Logwriter.INSTANCE.error(ex);
+		}finally {
+			ConnectionCreater.close(connection, statement, rs);	
+		}
+		return null;
+	}
+	
 	public static Map<String,String> getAllEntityFields (String entity) {
 		Connection connection = null;
 		PreparedStatement statement = null;

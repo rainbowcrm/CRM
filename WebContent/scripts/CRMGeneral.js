@@ -22,6 +22,22 @@ function validateforCreate() {
 	return true;
 }
 
+var clickedCellIndex = -1;
+function createNewCustomer(id,curControl) {
+	var index  = getCurrentObjectIndex(curControl);  
+	console.log('index=' + index); 
+	clickedCellIndex= index;
+	var dialog = document.getElementById(id);  
+
+//	document.getElementById('idFRM' +id).contentWindow.document.forms[0].submit();
+	if(!dialog.showModal)
+	{
+		dialogPolyfill.registerDialog(dialog);
+	}
+	dialog.showModal();
+	
+ }
+
 function showPrintDialog(id,docType) {
 	var dialog = document.getElementById(id);  
 	document.getElementById('printFRM').contentWindow.document.getElementById('txtid').value = document.getElementById('hdnUserID').value;

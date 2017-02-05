@@ -9,6 +9,10 @@ public class Metadata  extends CRMModelObject{
 	String className;
 	FiniteValue  metaDataType;
 	boolean isDivisionSpecific;
+	String hqlClass;
+	String description;
+	String dateField;
+	
 	
 	public String getObjectName() {
 		return objectName;
@@ -43,9 +47,42 @@ public class Metadata  extends CRMModelObject{
 		this.isDivisionSpecific = isDivisionSpecific;
 	}
 	
+	
+	
+	public Metadata(String objectName, String className,
+			FiniteValue metaDataType, boolean isDivisionSpecific,
+			String hqlClass, String description, String dateField) {
+		super();
+		this.objectName = objectName;
+		this.className = className;
+		this.metaDataType = metaDataType;
+		this.isDivisionSpecific = isDivisionSpecific;
+		this.hqlClass = hqlClass;
+		this.description = description;
+		this.dateField = dateField;
+	}
 	public Metadata(){
 		
 	}
+	public String getHqlClass() {
+		return hqlClass;
+	}
+	public void setHqlClass(String hqlClass) {
+		this.hqlClass = hqlClass;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getDateField() {
+		return dateField;
+	}
+	public void setDateField(String dateField) {
+		this.dateField = dateField;
+	}
+	
 	
 	
 	

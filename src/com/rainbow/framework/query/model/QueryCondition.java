@@ -17,8 +17,26 @@ public class QueryCondition  extends CRMBusinessModelObject{
 	String operator;
 	String value;
 
+	
 	String postCondition;
 
+	
+	@Override
+	public String toString() 
+	{
+		StringBuffer condition  =new StringBuffer(" ");
+		condition.append(openBrackets ).append( field).append(operator);
+		if("NUMER".equalsIgnoreCase(dataType.getCode())) {
+			condition.append(value) ; 
+		}
+		if("NUMER".equalsIgnoreCase(dataType.getCode()) ||   "BOOL".equalsIgnoreCase(dataType.getCode())) {
+			condition.append(value) ; 
+		}
+		if("STR".equalsIgnoreCase(dataType.getCode()) ||   "DATE".equalsIgnoreCase(dataType.getCode())) {
+			condition.append("'"+ value + "'") ; 
+		}
+		return condition.toString();
+	}
 	public int getNoOpenBrackets() {
 		return noOpenBrackets;
 	}

@@ -1,51 +1,47 @@
 
-
-function calculateAll() {
-	var ct = document.getElementsByName('txtPrice').length;
-	var netPrice = 0 ;
-	for (var i = 0 ; i < ct ; i ++ ) {
-		netPrice+= calculateLineTotal(i);
-	}
-	var totDiscElem = document.getElementById('txtDiscount');
-	netPrice -=  totDiscElem.value;
-	
-	var taxPercent = document.getElementById('txtTaxPerc').value;
-	var taxAmt = netPrice * taxPercent / 100;
-	document.getElementById('txtTaxAmt').value = taxAmt;
-	netPrice+= taxAmt ;
-	document.getElementById('txtTotalAmt').value = netPrice;
-}
-
-function calculateLineTotal(index) {
-	var ct = document.getElementsByName('txtPrice').length;
-	var netPrice = 0 ;
-	if (index < ct ) {
-		var priceElem = document.getElementsByName('txtPrice')[index];
-		var qtyElem = document.getElementsByName('txtQty')[index];
-		var discElem = document.getElementsByName('txtlineDisc')[index];
-		var totalPrice =( priceElem.value * qtyElem.value ) - discElem.value ;
-		netPrice += totalPrice;
-		document.getElementsByName('txtlineTotal')[index].value  = totalPrice;
-	}
-	return netPrice;
-
+function submitWithParam(param)
+{
+	document.frmdd.submitAction.value=param;
+	document.frmdd.submit();
 	
 }
 
-function calculateExpenseTotal(index) {
-	var ct = document.getElementsByName('txtPrice').length;
-	var netPrice = 0 ;
-	if (index < ct ) {
-		var priceElem = document.getElementsByName('txtPrice')[index];
-		var qtyElem = document.getElementsByName('txtQty')[index];
-		var discElem = document.getElementsByName('txtlineDisc')[index];
-		var totalPrice =( priceElem.value * qtyElem.value ) - discElem.value ;
-		netPrice += totalPrice;
-		document.getElementsByName('txtlineTotal')[index].value  = totalPrice;
+function addRowQuery(ctrl,oddRowStyle,evenRowStyle) {
+	console.log('ctrl=' + ctrl ) ;
+	var row = ctrl.parentElement.parentElement
+	console.log('row=' + row ) ;
+	var tabl = row.parentElement ;
+	console.log('tabl=' + tabl ) ;
+	var rowCount = tabl.rows.length;
+	console.log('evenRowStyle=' + evenRowStyle  + ":oddRowStyle="  + oddRowStyle ) ;
+	var newrow = tabl.insertRow();
+	if(oddRowStyle == '' && evenRowStyle  == '') {
+		var lastStyle =tabl.rows[rowCount -1].className ;
+		newrow.className =lastStyle 
+	}else {
+	if (isEven(rowCount))
+		newrow.className  = oddRowStyle  ;
+	else
+		newrow.className  =  evenRowStyle ;
 	}
-	return netPrice;
-
-	
+	newrow.innerHTML = row.innerHTML;
+	/*if (typeof loadAjaxServices == 'function' )
+		loadAjaxServices();*/
 }
 
+function addRowofTable(tabl) {
+	console.log('tabl=' + tabl ) ;
+	var newrow = tabl.insertRow();
+}
 
+function deleteRow(Queryctrl) {
+	console.log('ctrl=' + ctrl ) ;
+	var row = ctrl.parentElement.parentElement;
+	console.log('row=' + row ) ;
+	var tabl = row.parentElement ;
+	console.log('tabl=' + tabl ) ;
+	var i = row.rowIndex - 1;
+	console.log("rowindex=" + i);
+    tabl.deleteRow(i);
+	
+}

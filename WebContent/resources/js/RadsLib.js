@@ -41,7 +41,7 @@ function addRowofTable(tabl) {
 
 function deleteRow(ctrl) {
 	console.log('ctrl=' + ctrl ) ;
-	var row = ctrl.parentElement.parentElement
+	var row = ctrl.parentElement.parentElement;
 	console.log('row=' + row ) ;
 	var tabl = row.parentElement ;
 	console.log('tabl=' + tabl ) ;

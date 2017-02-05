@@ -3,6 +3,8 @@ package com.rainbow.crm.common;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.rainbow.crm.company.model.Company;
+import com.rainbow.crm.company.service.ICompanyService;
 import com.rainbow.crm.database.LoginSQLs;
 import com.rainbow.crm.user.model.User;
 import com.techtrade.rads.framework.context.IRadsContext;
@@ -25,6 +27,12 @@ public abstract class CRMGeneralController  extends GeneralController{
 		User user = CommonUtil.getUser(context, context.getUser());
 		context.setLoggedInUser(user);
 		return context;
+	}
+	
+	public String getCompanyName() {
+		ICompanyService service = (ICompanyService)SpringObjectFactory.INSTANCE.getInstance("ICompanyService");
+		Company company =(Company) service.getById(((CRMContext)getContext()).getLoggedinCompany());
+		return company.getName();
 	}
 
 }

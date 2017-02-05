@@ -4,11 +4,13 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 <Template type= "General"  name = "generalTemplate"></Template>
 
 <IncludeJS>./scripts/query/QueryFunc.js</IncludeJS>
-
 <Elements>
 <UIForm Id ="frmdd" method = "POST"  >
 <Section type ="topBar"></Section> 
 <Section type ="leftsideBarApp"></Section>
+
+
+
 <CoreSection>
 <ErrorSection>
 </ErrorSection>
@@ -16,12 +18,12 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 
  
 
-<Element type = "UITable" rows = "3" cols = "2" style = "grid" applyStyleonChildren ="true" Id  ="tblcommon"  >
+<Element type = "UITable" rows = "3" cols = "3" style = "grid" applyStyleonChildren ="true" Id  ="tblcommon"  >
 <Element type = "UITableRow"   >
-<Element type = "UITableCol"   >
+<Element type = "UITableCol"   align="left" >
 
 <Element label = "Saved_Queries"  type = "UIList" Id = "lstQueries" >
-	<options populator =  "getAllQueries"> 
+	<options populator =  "getAllSavedQueries"> 
 	</options>
 </Element>
 </Element>
@@ -32,17 +34,16 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 	
 </Element>
 </Element>
-</Element>
-
-
-<Element type = "UITableRow"   >
 <Element type = "UITableCol"   >
 
-<Element label = "Transaction"  type = "UIList" Id = "lstTrans"  isMandatory="true" property ="entity" >
+<Element label = "Transaction"  type = "UIList" Id = "lstTrans"  onChangeJS = "submitWithParam('entitychanged')" isMandatory="true" property ="entity" >
 	<options populator =  "getAllEntities"> 
 	</options>
 </Element>
 </Element>
+
+</Element>
+<Element type = "UITableRow"   >
 
 <Element type = "UITableCol"   >
 
@@ -52,8 +53,27 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 </Element>
 
 </Element>
+
+
+
+<Element type = "UITableCol"   >
+<Element type = "UIList"  label = "Sort_By"  Id= "lstSortedFieldsEntity"  property = "sortField"  >
+<options populator =  "getAllEntityFields"> 
+	</options>
+</Element>
 </Element>
 
+<Element type = "UITableCol"   >
+<Element label = ""  type = "UIRadioBox" Id = "rdoSortyBy"   property ="sortDesc" >
+	  <options> 
+	  <option key ="ASC"> ASC</option>
+	  <option key ="DESC"> DESC</option>
+	  </options>
+</Element>
+
+
+</Element>
+</Element>
 <Element type = "UITableRow"   >
 <Element type = "UITableCol"   >
  <Element label = ""  type = "UIRadioBox" Id = "txtDteType"   property ="dateValueType" >
@@ -76,7 +96,7 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 	  <options> 
 	  <option key ="REL"> Relative Dates</option>
 	  </options>
-	</Element>
+</Element>
 </Element>
 
 <Element type = "UITableCol"   >
@@ -146,12 +166,14 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 
 <Element type ="UITableCol" width = "30%" ><Element type = "UIText"    Id= "txtVales" property ="value"   /></Element>
 
-<Element type ="UITableCol" width = "3%" ><Element type = "UIText"  size="3"  Id= "txtCloseBrac" property ="closeBrackets"   /></Element>
+<Element type ="UITableCol" width = "3%" ><Element type = "UIText"  size="3"  Id= "txtCloseBrac" property ="closeBrackets"   />
+<Element type = "UIHidden"   Id= "hdnPOstOp" property ="postCondition"   />
+</Element>
 
 <Element type ="UITableCol" width = "10%">
-	<Element caption = "AND"  type = "UIButton" Id = "btnAddRow"    fixedAction ="FixedAction.ACTION_ADDTABLEROW"  fixedActionParam =  "this"/>
-	<Element caption = "OR"  type = "UIButton" Id = "btnDelRow"    fixedAction ="FixedAction.ACTION_ADDTABLEROW"  fixedActionParam =  "this"/>
-	<Element caption = "-"  type = "UIButton" Id = "btnDelRow"    fixedAction ="FixedAction.ACTION_DELETETABLEROW"  fixedActionParam =  "this"/>
+	<Element caption = "AND"  type = "UIButton" Id = "btnAddRow"   onClickJS="addRow(this)"/>
+	<Element caption = "OR"  type = "UIButton" Id = "btnDelRow"    onClickJS="addRow(this)"/>
+	<Element caption = "-"  type = "UIButton" Id = "btnDelRow"    onClickJS="deleteRow(this)"/>
 </Element>
 
 </Element>
@@ -168,18 +190,24 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 
 </Element>
 <Element type ="UITab" Id= "idcustMgmt" title = "Aggregates"   >
+<Element type = "UILabel" id =  "idiDummyLBL" value = "">
+</Element>
 </Element>
 </Element>
 
 
 </Section>
 </CoreSection>
+ 
  <Section type ="summary"  >
-<Element caption = "Query"  type = "UIButton" Id = "btdwLoad"  style="button"  
-  fixedAction ="FixedAction.ACTION_PLAINSUBMIT"   />
+<Element caption = "Query"  type = "UIButton" Id = "btdwLoad"  style="button"  onClickJS="submitWithParam('runQuery')"   />
  </Section>
 
-<Section type ="copyRightSection"/>
+
+ 
+
+
+
 </UIForm>
 </Elements>
 </Page>

@@ -14,10 +14,12 @@ import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.division.service.IDivisionService;
 import com.rainbow.framework.query.model.Query;
+import com.rainbow.framework.query.service.IQueryService;
 import com.rainbow.framework.setup.dao.DataSetupSQL;
 import com.rainbow.framework.setup.model.Metadata;
 import com.rainbow.framework.setup.sql.MetadataSQL;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
+import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
 import com.techtrade.rads.framework.utils.Utils;
 
@@ -27,8 +29,36 @@ public class QueryController extends CRMGeneralController {
 	public PageResult submit(ModelObject object) {
 		return new PageResult();
 	}
+	
+	private IQueryService getService()
+	{
+		return 	(IQueryService)SpringObjectFactory.INSTANCE.getInstance("IQueryService") ;
+	}
 
 	
+	@Override
+	public PageResult submit(ModelObject object, String actionParam) {
+		Query query = (Query)object;
+		if ("entitychanged".equals(actionParam)) {
+			return new PageResult();
+		}else if ("runQuery".equalsIgnoreCase(actionParam)){
+			IQueryService service= getService();
+			List<RadsError> errors = service.validate(query, (CRMContext  )getContext());
+			if(Utils.isNullList(errors))
+				service.getResult(query, (CRMContext  )getContext());
+			else {
+				PageResult result = new PageResult();
+				result.setErrors(errors);
+				return result;
+			}
+				
+		}
+		return new PageResult();
+	}
+
+
+
+
 	public Map <String, String > getEvaluationPeriods() {
 		Map<String, String> ans = GeneralSQLs.getFiniteValues(CRMConstants.FV_EVALDATE);
 		return ans;

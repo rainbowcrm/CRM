@@ -82,7 +82,7 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 	 <height>300</height>
 	 <width>290</width>
 	</Element>
-	<Element caption = "New_Customer"  type = "UIButton"    Id = "btnNewCustomer" showInPrevCol ="true" style="button" onClickJS = "showLookupDialog('newcustDL',this);"  />
+	<Element caption = "New_Customer"  type = "UIButton"    Id = "btnNewCustomer" showInPrevCol ="true" style="button" onClickJS = "createNewCustomer('newcustDL',this);"  />
 	<Element type ="UIDialog" Id = "newcustDL" style= "widepopup" >
 	<Element type = "UIIFrame" src ="./rdscontroller?page=quickcustomeradd" style ="lookupFrameStyle">
 	</Element>
