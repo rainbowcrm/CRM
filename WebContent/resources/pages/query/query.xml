@@ -16,7 +16,24 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 </ErrorSection>
 <Section type= "mainSection">
 
+<Element type ="UIDialog" Id = "newprintpop" style= "fullpagepopup" rendered = "Controller.getResultFetched">
+<Element type = "UILabel" Id = "testing" property = "sortField"></Element>
+
+<Element type = "UIStaticText" Id = "static" >
+ &lt;script&gt;
+ var dialog = document.getElementById('newprintpop');
+ if(!dialog.showModal)
+	{
+		dialogPolyfill.registerDialog(dialog);
+	}
+	dialog.showModal();
  
+ &lt;/script&gt;
+ 
+</Element>
+
+</Element>
+
 
 <Element type = "UITable" rows = "3" cols = "3" style = "grid" applyStyleonChildren ="true" Id  ="tblcommon"  >
 <Element type = "UITableRow"   >

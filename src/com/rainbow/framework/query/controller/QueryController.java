@@ -14,6 +14,7 @@ import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.division.service.IDivisionService;
 import com.rainbow.framework.query.model.Query;
+import com.rainbow.framework.query.model.QueryReport;
 import com.rainbow.framework.query.service.IQueryService;
 import com.rainbow.framework.setup.dao.DataSetupSQL;
 import com.rainbow.framework.setup.model.Metadata;
@@ -25,6 +26,7 @@ import com.techtrade.rads.framework.utils.Utils;
 
 public class QueryController extends CRMGeneralController {
 
+	private boolean resultFetched;
 	@Override
 	public PageResult submit(ModelObject object) {
 		return new PageResult();
@@ -36,6 +38,12 @@ public class QueryController extends CRMGeneralController {
 	}
 
 	
+	
+	public boolean getResultFetched()
+	{
+		return resultFetched;
+	}
+	
 	@Override
 	public PageResult submit(ModelObject object, String actionParam) {
 		Query query = (Query)object;
@@ -44,8 +52,10 @@ public class QueryController extends CRMGeneralController {
 		}else if ("runQuery".equalsIgnoreCase(actionParam)){
 			IQueryService service= getService();
 			List<RadsError> errors = service.validate(query, (CRMContext  )getContext());
-			if(Utils.isNullList(errors))
-				service.getResult(query, (CRMContext  )getContext());
+			if(Utils.isNullList(errors)) {
+				QueryReport report =service.getResult(query, (CRMContext  )getContext());
+				resultFetched = true;
+			}
 			else {
 				PageResult result = new PageResult();
 				result.setErrors(errors);

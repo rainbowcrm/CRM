@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.rainbow.crm.common.CRMContext;
+import com.rainbow.crm.common.CRMGeneralController;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.database.LoginSQLs;
 import com.rainbow.crm.distributionorder.model.DistributionOrder;
@@ -16,9 +17,8 @@ import com.techtrade.rads.framework.controller.abstracts.GeneralController;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.transaction.TransactionResult.Result;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
-import com.techtrade.rads.framework.utils.Utils;
 
-public class TransactionDocumentController extends GeneralController{
+public class TransactionDocumentController extends CRMGeneralController{
 
 	@Override
 	public PageResult submit(ModelObject object) {

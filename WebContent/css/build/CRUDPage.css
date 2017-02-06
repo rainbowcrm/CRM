@@ -310,6 +310,17 @@ tr.evenRowError {
   text-align: left;
   background-color: #222; }
 
+dialog.fullpagepopup {
+  width: 1300px;
+  height: 550px;
+  top: 100; }
+
+iframe.lookupFrameStyle {
+  left: 0%;
+  width: 100%;
+  top: 0%;
+  height: 100%; }
+
 table.CRUDtableContainer {
   line-height: 200%; }
   table.CRUDtableContainer td {

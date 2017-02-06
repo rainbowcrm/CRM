@@ -34,8 +34,8 @@ public class QueryService implements IQueryService{
 			for(int i = 0 ; i < list.size() ; i ++ ) {
 				QueryRecord record= new QueryRecord();
 				Object [] objects  = (Object [])list.get(i);
-				String[] stringArray = Arrays.copyOf(objects, objects.length, String[].class);
-				record.setFields(stringArray);
+				//String[] stringArray = Arrays.copyOf(objects, objects.length, String[].class);
+				//record.setFields((String [])objects);
 				record.setFieldCount(objects.length);
 				report.addRecord(record);
 			}
