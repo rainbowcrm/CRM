@@ -2,6 +2,7 @@ package com.rainbow.framework.query.model;
 
 import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
+import com.techtrade.rads.framework.utils.Utils;
 
 public class QueryCondition  extends CRMBusinessModelObject{
 
@@ -25,16 +26,18 @@ public class QueryCondition  extends CRMBusinessModelObject{
 	public String toString() 
 	{
 		StringBuffer condition  =new StringBuffer(" ");
-		condition.append(openBrackets ).append( field).append(operator);
-		if("NUMER".equalsIgnoreCase(dataType.getCode())) {
-			condition.append(value) ; 
-		}
+		if(!Utils.isNullString(openBrackets))
+			condition.append(openBrackets );
+		
+		condition.append( field).append(operator);
 		if("NUMER".equalsIgnoreCase(dataType.getCode()) ||   "BOOL".equalsIgnoreCase(dataType.getCode())) {
 			condition.append(value) ; 
 		}
 		if("STR".equalsIgnoreCase(dataType.getCode()) ||   "DATE".equalsIgnoreCase(dataType.getCode())) {
 			condition.append("'"+ value + "'") ; 
 		}
+		if(!Utils.isNullString(closeBrackets))
+			condition.append(closeBrackets );
 		return condition.toString();
 	}
 	public int getNoOpenBrackets() {

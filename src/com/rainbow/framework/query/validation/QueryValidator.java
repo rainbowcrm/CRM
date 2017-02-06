@@ -6,6 +6,8 @@ import com.rainbow.crm.common.CRMValidator;
 import com.rainbow.crm.user.validator.UserErrorCodes;
 import com.rainbow.framework.query.model.Query;
 import com.rainbow.framework.query.model.QueryCondition;
+import com.rainbow.framework.setup.model.EntityField;
+import com.rainbow.framework.setup.sql.MetadataSQL;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.utils.Utils;
 
@@ -24,6 +26,8 @@ public class QueryValidator extends CRMValidator {
 			AtomicInteger openBrackets = new AtomicInteger (0);
 			AtomicInteger closeBrackets = new AtomicInteger (0);
 			query.getConditions().forEach( condition ->  { 
+				EntityField field = MetadataSQL.getEntityField(query.getEntity(),condition.getField());
+				condition.setDataType(field.getDataType());
 				int  opCount  = (condition.getOpenBrackets()!= null)?condition.getOpenBrackets().trim().length():0;
 				condition.setNoOpenBrackets(opCount);
 				int cloCount =  (condition.getCloseBrackets()!= null)?condition.getCloseBrackets().trim().length():0;

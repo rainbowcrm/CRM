@@ -1,5 +1,6 @@
 package com.rainbow.framework.query.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -18,17 +19,19 @@ public class QueryDAO  extends SpringHibernateDAO{
 		return null;
 	}
 	
-	public QueryReport getQueryRecord(String queryString, int company)
+	public List getQueryRecord(String queryString, int company, Date fromDate, Date toDate)
 	{
 		Session session = openSession(false);
 		Query query = session.createQuery( queryString  ) ;
 		query.setParameter("company", company);
+		query.setParameter("fromDate", fromDate);
+		query.setParameter("toDate", toDate);
 		List lst = query.list();
-	   System.out.print(lst);
-		return null;	
+		return lst;	
 		
 	}
 	
+
 	
 
 }

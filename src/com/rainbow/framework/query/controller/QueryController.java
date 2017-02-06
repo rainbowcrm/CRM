@@ -68,7 +68,7 @@ public class QueryController extends CRMGeneralController {
 		List<Metadata> metaDatas = MetadataSQL.getTransactionEntities();
 		Map<String, String> ans = new HashMap<String, String>();
 		metaDatas.forEach( metaData ->  { 
-			ans.put(metaData.getObjectName(),metaData.getObjectName());
+			ans.put(metaData.getHqlClass(),metaData.getObjectName());
 			
 		} );
 		return ans;

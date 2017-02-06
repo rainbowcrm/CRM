@@ -13,6 +13,7 @@ import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.config.model.ConfigLine;
 import com.rainbow.crm.database.ConnectionCreater;
 import com.rainbow.crm.logger.Logwriter;
+import com.rainbow.framework.setup.model.EntityField;
 import com.rainbow.framework.setup.model.Metadata;
 
 public class MetadataSQL {
@@ -59,7 +60,10 @@ public class MetadataSQL {
 				String className =  rs.getString("CLASS_NAME");
 				FiniteValue metaDataType =new FiniteValue (rs.getString("METADATA_TYPE"));
 				boolean isDivSpecific = rs.getBoolean("IS_DIVISION_SPEC");
-				Metadata metaData  = new Metadata(entity,className,metaDataType,isDivSpecific);
+				String hqlClass = rs.getString("HQL_CLASS");
+				String desc = rs.getString("DESCRIPTION");
+				String dateField = rs.getString("DATE_FIELD");
+				Metadata metaData  = new Metadata(entity,className,metaDataType,isDivSpecific,hqlClass,desc,dateField);
 				ans.add(metaData);
 			}
 		}catch(SQLException ex) {
@@ -122,5 +126,64 @@ public class MetadataSQL {
 		return ans;
 	}
 	
+	
+	public static List<EntityField> getEntityFields (String entity) {
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet rs  = null ;
+		List<EntityField> fields =new ArrayList<EntityField> ();
+		try {
+			connection  = ConnectionCreater.getConnection() ;
+			String sql =   " SELECT * FROM ENTITY_FIELDS WHERE ENTITY = ? " ;
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, entity);
+			rs = statement.executeQuery() ;
+			while (rs.next()) {
+				String displayField = rs.getString("KEY_FIELD");
+				String hqlField = rs.getString("HQL_KEY_FIELD");
+				String desc = rs.getString("DESCRIPTION");
+				String dType = rs.getString("DATA_TYPE");
+				FiniteValue dataType = new FiniteValue(dType);
+				String fvType = rs.getString("FV_TYPE");
+				EntityField efield = new EntityField(entity,displayField,hqlField,desc,dataType,fvType);
+				fields.add(efield);
+			}
+		}catch(SQLException ex) {
+			Logwriter.INSTANCE.error(ex);
+		}finally {
+			ConnectionCreater.close(connection, statement, rs);	
+		}
+		return fields;
+	}
+	
+	public static EntityField getEntityField (String entity, String keyField) {
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet rs  = null ;
+		try {
+			connection  = ConnectionCreater.getConnection() ;
+			String sql =   " SELECT * FROM ENTITY_FIELDS WHERE ENTITY = ? AND HQL_KEY_FIELD = ? " ;
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, entity);
+			statement.setString(2, keyField);
+			rs = statement.executeQuery() ;
+			
+			while (rs.next()) {
+				String displayField = rs.getString("KEY_FIELD");
+				String hqlField = rs.getString("HQL_KEY_FIELD");
+				String desc = rs.getString("DESCRIPTION");
+				String dType = rs.getString("DATA_TYPE");
+				FiniteValue dataType = new FiniteValue(dType);
+				String fvType = rs.getString("FV_TYPE");
+				EntityField efield = new EntityField(entity,displayField,hqlField,desc,dataType,fvType);
+				return efield;
+			}
+		}catch(SQLException ex) {
+			Logwriter.INSTANCE.error(ex);
+		}finally {
+			ConnectionCreater.close(connection, statement, rs);	
+		}
+		return null;
+	}
 	
 }
