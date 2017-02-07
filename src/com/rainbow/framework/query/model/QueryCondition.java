@@ -38,6 +38,10 @@ public class QueryCondition  extends CRMBusinessModelObject{
 		}
 		if(!Utils.isNullString(closeBrackets))
 			condition.append(closeBrackets );
+		
+		if(!Utils.isNullString(postCondition))
+			condition.append(" " + postCondition + " " );
+		
 		return condition.toString();
 	}
 	public int getNoOpenBrackets() {

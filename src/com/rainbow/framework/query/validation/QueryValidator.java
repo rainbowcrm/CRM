@@ -22,6 +22,7 @@ public class QueryValidator extends CRMValidator {
 			errors.add(getErrorforCode(UserErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Conditions"))) ;
 		if (query.getSelectedFields() == null)
 			errors.add(getErrorforCode(UserErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Display_Fields"))) ;
+		
 		if (!Utils.isNullList(query.getConditions())) {
 			AtomicInteger openBrackets = new AtomicInteger (0);
 			AtomicInteger closeBrackets = new AtomicInteger (0);

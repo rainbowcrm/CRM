@@ -27,6 +27,7 @@ public class QueryDAO  extends SpringHibernateDAO{
 		query.setParameter("fromDate", fromDate);
 		query.setParameter("toDate", toDate);
 		List lst = query.list();
+		closeSession(session,false);
 		return lst;	
 		
 	}

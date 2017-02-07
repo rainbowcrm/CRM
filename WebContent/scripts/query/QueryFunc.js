@@ -6,13 +6,15 @@ function submitWithParam(param)
 	
 }
 
-function addRowQuery(ctrl,oddRowStyle,evenRowStyle) {
+function addRowQuery(ctrl,opType,oddRowStyle,evenRowStyle) {
 	console.log('ctrl=' + ctrl ) ;
 	var row = ctrl.parentElement.parentElement
 	console.log('row=' + row ) ;
 	var tabl = row.parentElement ;
 	console.log('tabl=' + tabl ) ;
 	var rowCount = tabl.rows.length;
+	var index = getCurrentObjectIndex(ctrl);
+	document.getElementsByName('txtandor')[index].value = opType;
 	console.log('evenRowStyle=' + evenRowStyle  + ":oddRowStyle="  + oddRowStyle ) ;
 	var newrow = tabl.insertRow();
 	if(oddRowStyle == '' && evenRowStyle  == '') {
@@ -35,8 +37,8 @@ function addRowofTable(tabl) {
 }
 
 function deleteRow(Queryctrl) {
-	console.log('ctrl=' + ctrl ) ;
-	var row = ctrl.parentElement.parentElement;
+	console.log('ctrl=' + Queryctrl ) ;
+	var row = Queryctrl.parentElement.parentElement;
 	console.log('row=' + row ) ;
 	var tabl = row.parentElement ;
 	console.log('tabl=' + tabl ) ;
