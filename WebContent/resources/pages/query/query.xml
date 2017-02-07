@@ -17,7 +17,19 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 <Section type= "mainSection">
 
 <Element type ="UIDialog" Id = "newprintpop" style= "fullpagepopup" rendered = "Controller.getResultFetched">
-<Element type = "UILabel" Id = "testing" property = "sortField"></Element>
+<Element type = "UILabel" Id = "testing" style="fullpage" property = "reportData"></Element>
+
+<Element type = "UIBreak"/>
+
+<Element type = "UITable" rows = "1" cols = "1">
+<Element type = "UITableRow">
+<Element type ="UITableCol" align="right">
+
+<Element caption = "Close"  type = "UIButton" Id = "btClose"   style="button" onClickJS = "closeDialog('newprintpop');"  />
+<Element caption = "Print"  type = "UIButton" Id = "btPrintNew"   style="button" onClickJS = "window.print();"  />
+</Element>
+</Element>
+</Element>
 
 <Element type = "UIStaticText" Id = "static" >
  &lt;script&gt;
@@ -29,6 +41,7 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 	dialog.showModal();
  
  &lt;/script&gt;
+
  
 </Element>
 
@@ -219,10 +232,6 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
  <Section type ="summary"  >
 <Element caption = "Query"  type = "UIButton" Id = "btdwLoad"  style="button"  onClickJS="submitWithParam('runQuery')"   />
  </Section>
-
-
- 
-
 
 
 </UIForm>

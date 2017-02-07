@@ -23,6 +23,8 @@ public class Query extends CRMBusinessModelObject{
 	String selectedFields[];
 	String sortField;
 	String sortDesc;
+	
+	String reportData;
 
 	List<QueryCondition> conditions;
 
@@ -119,6 +121,16 @@ public class Query extends CRMBusinessModelObject{
 	public void setSortDesc(String sortDesc) {
 		this.sortDesc = sortDesc;
 	}
+
+	public String getReportData() {
+		return reportData;
+	}
+
+	public void setReportData(String reportData) {
+		this.reportData = reportData;
+	}
+	
+	
 
 	
 	

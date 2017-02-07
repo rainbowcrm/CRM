@@ -73,7 +73,13 @@ span {
     min-width: 100px;
 }
 
-
+span.fullpage {
+	color: $span-default;
+	font-size: 14px;
+	display: inline-block;
+    min-width: 100px;
+    width:100%;
+}
 
 span.errorStyle {
 	color:$danger;

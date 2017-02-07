@@ -14,8 +14,12 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
+
+
 import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
+import com.rainbow.crm.company.model.Company;
+import com.rainbow.crm.company.service.ICompanyService;
 import com.rainbow.crm.config.service.ConfigurationManager;
 import com.rainbow.crm.database.LoginSQLs;
 import com.rainbow.crm.division.model.Division;
@@ -35,6 +39,12 @@ public class CommonUtil {
 		IUserService service = (IUserService) SpringObjectFactory.INSTANCE.getInstance("IUserService");
 		User user  = (User) service.getById(userId);
 		return user;
+	}
+	
+	public static Company getCompany(int company){
+		ICompanyService service = (ICompanyService) SpringObjectFactory.INSTANCE.getInstance("ICompanyService");
+		Company comp  = (Company) service.getById(company);
+		return comp;
 	}
 	
 	public static boolean isManagerRole(User user) {

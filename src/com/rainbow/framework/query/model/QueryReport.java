@@ -6,6 +6,12 @@ import java.util.List;
 public class QueryReport {
 	
 	List<QueryRecord>  records;
+	
+	String [] titles;
+	
+	String from;
+	String to;
+	
 
 	public List<QueryRecord> getRecords() {
 		return records;
@@ -20,6 +26,33 @@ public class QueryReport {
 			records = new ArrayList<> ();
 		records.add(record);
 	}
+
+	public String[] getTitles() {
+		return titles;
+	}
+
+	public void setTitles(String[] titles) {
+		this.titles = titles;
+	}
+
+	public String getFrom() {
+		return from;
+	}
+
+	public void setFrom(String from) {
+		this.from = from;
+	}
+
+	public String getTo() {
+		return to;
+	}
+
+	public void setTo(String to) {
+		this.to = to;
+	}
+	
+	
+	
 	
 
 }

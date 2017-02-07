@@ -55,6 +55,8 @@ public class QueryController extends CRMGeneralController {
 			if(Utils.isNullList(errors)) {
 				QueryReport report =service.getResult(query, (CRMContext  )getContext());
 				resultFetched = true;
+				String reportData= service.getVelocityConverted(report,  (CRMContext  )getContext());
+				query.setReportData(reportData);
 			}
 			else {
 				PageResult result = new PageResult();

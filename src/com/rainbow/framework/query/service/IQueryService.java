@@ -12,6 +12,7 @@ public interface IQueryService {
 	public  QueryReport getResult(Query query , CRMContext context);
 	
 	public List<RadsError> validate (Query query , CRMContext context);
-	
+
+	public String getVelocityConverted(QueryReport query , CRMContext context);
 
 }

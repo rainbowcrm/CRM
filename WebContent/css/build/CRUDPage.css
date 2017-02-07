@@ -253,6 +253,13 @@ span {
   display: inline-block;
   min-width: 100px; }
 
+span.fullpage {
+  color: #373a3c;
+  font-size: 14px;
+  display: inline-block;
+  min-width: 100px;
+  width: 100%; }
+
 span.errorStyle {
   color: #f53d3d;
   font-size: 13; }
