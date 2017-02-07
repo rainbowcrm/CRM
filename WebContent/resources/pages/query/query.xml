@@ -164,45 +164,46 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 </Element>
 <Element type = "UITableCol"  align="left" >
 
-<Element type = "UITable" rows = "1" cols = "7" style = "grid" applyStyleonChildren ="true" Id  ="tblTrans" property ="conditions[]" >
+<Element type = "UITable" rows = "1" cols = "8" style = "grid" applyStyleonChildren ="true" Id  ="tblTrans" property ="conditions[]" >
 <Element type = "UITableHead" style ="listPageTitle">
  <Element type = "UITableRow">
  <Element type ="UITableCol" width = "3%" ><Element label = ""  type = "UILabel" Id = "lblTit1" value ="(" /></Element>
- <Element type ="UITableCol" width = "30%" ><Element label = ""  type = "UILabel" Id = "lblTit2" value ="Field" /></Element>
- <Element type ="UITableCol" width = "5%" ><Element label = ""  type = "UILabel" Id = "lblTit3" value ="Op" /></Element>
- <Element type ="UITableCol" width = "30%" ><Element label = ""  type = "UILabel" Id = "lblTit4" value ="Value" /></Element>
-
+ <Element type ="UITableCol" width = "20%" ><Element label = ""  type = "UILabel" Id = "lblTit2" value ="Field" /></Element>
+ <Element type ="UITableCol" width = "3%" ><Element label = ""  type = "UILabel" Id = "lblTit3" value ="Op" /></Element>
+ <Element type ="UITableCol" width = "20%" ><Element label = ""  type = "UILabel" Id = "lblTit4" value ="Value" /></Element>
  <Element type ="UITableCol" width = "3%" ><Element label = ""  type = "UILabel" Id = "lblTit1" value =")" /></Element>
+ <Element type ="UITableCol" width = "10%" ><Element label = ""  type = "UILabel" Id = "lblTit4" value ="AND/OR" /></Element>
   <Element type ="UITableCol" width = "20%" ><Element label = ""  type = "UILabel" Id = "lblTit5" value =".." /></Element>
 </Element>
 </Element>
 <Element type = "UITableRow"  dataType = "com.rainbow.framework.query.model.QueryCondition" >
 
-<Element type ="UITableCol" width = "3%" ><Element type = "UIText"  size="3"  Id= "txtOpBrac" property ="openBrackets"   /></Element>
+<Element type ="UITableCol" width = "3%" ><Element type = "UIText"  size="3"  Id= "txtOpBrac"  property ="openBrackets"   /></Element>
 
-<Element type ="UITableCol" width = "30%" >
+<Element type ="UITableCol" width = "20%" >
 <Element type = "UIList"    Id= "lstCritFieldsEntity"   property ="field" >
 <options populator =  "getAllEntityFields"> 
 	</options>
 </Element>
 </Element>
 
-<Element type ="UITableCol" width = "5%" >
+<Element type ="UITableCol" width = "3%" >
 <Element type = "UIList"    Id= "lstOpts"   property ="operator" >
 <options populator =  "getOperators"> 
 	</options>
 </Element>
 </Element>
 
-<Element type ="UITableCol" width = "30%" ><Element type = "UIText"    Id= "txtVales" property ="value"   /></Element>
+<Element type ="UITableCol" width = "20%" ><Element type = "UIText"   size ="15" Id= "txtVales" property ="value"   /></Element>
+<Element type ="UITableCol" width = "3%" ><Element type = "UIText"  size="3"  Id= "txtCloseBrac" property ="closeBrackets"   /></Element>
+<Element type ="UITableCol" width = "10%" ><Element type = "UIText" size="5"   Id= "txtandor"  property ="postCondition"   /></Element>
 
-<Element type ="UITableCol" width = "3%" ><Element type = "UIText"  size="3"  Id= "txtCloseBrac" property ="closeBrackets"   />
-<Element type = "UIHidden"   Id= "hdnPOstOp" property ="postCondition"   />
-</Element>
+
+
 
 <Element type ="UITableCol" width = "10%">
-	<Element caption = "AND"  type = "UIButton" Id = "btnAddRow"   onClickJS="addRow(this)"/>
-	<Element caption = "OR"  type = "UIButton" Id = "btnDelRow"    onClickJS="addRow(this)"/>
+	<Element caption = "AND"  type = "UIButton" Id = "btnAddRow"   onClickJS="addRowQuery(this, ' AND ')"/>
+	<Element caption = "OR"  type = "UIButton" Id = "btnAddORRow"    onClickJS="addRowQuery(this,' OR ')"/>
 	<Element caption = "-"  type = "UIButton" Id = "btnDelRow"    onClickJS="deleteRow(this)"/>
 </Element>
 
