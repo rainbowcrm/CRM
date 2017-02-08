@@ -33,7 +33,7 @@ public class QueryCondition  extends CRMBusinessModelObject{
 		if("NUMER".equalsIgnoreCase(dataType.getCode()) ||   "BOOL".equalsIgnoreCase(dataType.getCode())) {
 			condition.append(value) ; 
 		}
-		if("STR".equalsIgnoreCase(dataType.getCode()) ||   "DATE".equalsIgnoreCase(dataType.getCode())) {
+		if("STR".equalsIgnoreCase(dataType.getCode()) ||  "FINVAL".equalsIgnoreCase(dataType.getCode())   || "DATE".equalsIgnoreCase(dataType.getCode())) {
 			condition.append("'"+ value + "'") ; 
 		}
 		if(!Utils.isNullString(closeBrackets))

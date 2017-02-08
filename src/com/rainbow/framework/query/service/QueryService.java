@@ -3,7 +3,9 @@ package com.rainbow.framework.query.service;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
@@ -25,6 +27,7 @@ import com.rainbow.framework.query.model.Query;
 import com.rainbow.framework.query.model.QueryRecord;
 import com.rainbow.framework.query.model.QueryReport;
 import com.rainbow.framework.query.validation.QueryValidator;
+import com.rainbow.framework.setup.model.EntityField;
 import com.rainbow.framework.setup.model.Metadata;
 import com.rainbow.framework.setup.sql.MetadataSQL;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
@@ -74,20 +77,35 @@ public class QueryService implements IQueryService{
 	}
 	private String makeQuery(Query query) {
 		StringBuffer selectFields = new StringBuffer (" select ");
-		
+		Set<String> joins= new LinkedHashSet<String>();
+		Set<String> conditions= new LinkedHashSet<String>();
 		for (int i = 0 ; i  < query.getSelectedFields().length ; i ++ )  {
+			
+			EntityField field = MetadataSQL.getEntityField(query.getEntity(),query.getSelectedFields()[i]);
+			if(!Utils.isNullString(field.getHqljoinClause())) { 
+				  joins.add(field.getHqljoinClause() + " " );
+				  conditions.add( field.getJoinCondition()) ;
+			}
 			 selectFields.append( " " + query.getSelectedFields()[i] + " ");
 			 if (i < query.getSelectedFields().length-1) 
 				 selectFields.append(",") ;
 		}
 		
-		selectFields.append(" from " + query.getEntity()) ;
+		selectFields.append(" from " + query.getEntity()+ " " + query.getEntity()) ;
+		joins.forEach( hqlClause  ->  { 
+			selectFields.append(" " +  hqlClause + " ");
+		} );
+		
 		Metadata metadata = MetadataSQL.getMetaDataforEntity(query.getEntity());
 		if (!Utils.isNullString( metadata.getDateField()))
-			selectFields.append(" where " + metadata.getDateField()  + " >= :fromDate "+ 
-					" and  "   + metadata.getDateField() + " <= :toDate  and company.id =:company and ");
+			selectFields.append(" where " + query.getEntity() + "."+ metadata.getDateField()  + " >= :fromDate "+ 
+					" and  "   +  query.getEntity() + "."+ metadata.getDateField() + " <= :toDate  and  " + query.getEntity() + ".company.id =:company and ");
 		else
-			selectFields.append(" where company.id =:company and ");
+			selectFields.append(" where  " + query.getEntity() + ".company.id =:company and ");
+	
+		/*conditions.forEach( condition  ->  { 
+			selectFields.append(" " +  condition + " and ");
+		} );*/
 		
 		query.getConditions().forEach( condition ->  {  
 			selectFields.append( condition.toString() );

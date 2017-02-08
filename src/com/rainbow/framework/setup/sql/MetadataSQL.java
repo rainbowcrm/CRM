@@ -145,7 +145,9 @@ public class MetadataSQL {
 				String dType = rs.getString("DATA_TYPE");
 				FiniteValue dataType = new FiniteValue(dType);
 				String fvType = rs.getString("FV_TYPE");
-				EntityField efield = new EntityField(entity,displayField,hqlField,desc,dataType,fvType);
+				String joinClause = rs.getString("JOIN_HQL_CLAUSE");
+				String joinCondition = rs.getString("JOIN_HQL_CONDITION");
+				EntityField efield = new EntityField(entity,displayField,hqlField,desc,dataType,fvType,joinClause,joinCondition);
 				fields.add(efield);
 			}
 		}catch(SQLException ex) {
@@ -175,7 +177,9 @@ public class MetadataSQL {
 				String dType = rs.getString("DATA_TYPE");
 				FiniteValue dataType = new FiniteValue(dType);
 				String fvType = rs.getString("FV_TYPE");
-				EntityField efield = new EntityField(entity,displayField,hqlField,desc,dataType,fvType);
+				String joinClause = rs.getString("JOIN_HQL_CLAUSE");
+				String joinCondition = rs.getString("JOIN_HQL_CONDITION");
+				EntityField efield = new EntityField(entity,displayField,hqlField,desc,dataType,fvType,joinClause,joinCondition);
 				return efield;
 			}
 		}catch(SQLException ex) {

@@ -279,13 +279,18 @@ INSERT INTO METADATA(ENTITY,CLASS_NAME,METADATA_TYPE ,IS_DIVISION_SPEC,HQL_CLASS
 INSERT INTO METADATA(ENTITY,CLASS_NAME,METADATA_TYPE ,IS_DIVISION_SPEC,HQL_CLASS) VALUES('ALERT','com.rainbow.crm.alert.model.Alert','TRANS',false,'Alert');
 
 
-INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('SALES','Bill Number','billNumber','STR');
-INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('SALES','Division Name','division.name','STR');
-INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('SALES','Customer Phone','customer.phone','STR');
-INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('SALES','Customer First Name','customer.firstName','STR');
-INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('SALES','Sales Associate','salesLine.user.userId','STR');
-INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('SALES','Net Amount','netAmount','NUMER');
-INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,FV_TYPE) values ('SALES','Order Type','orderType.code','FINVAL','SLORDTYPE');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('SALES','Bill Number','Sales.billNumber','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('SALES','Division Name','Sales.division.name','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE,JOIN_HQL_CONDITION) values ('SALES','Customer Phone','customer.phone','STR','left outer join  Sales.customer customer',' 1= 1 ');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE,JOIN_HQL_CONDITION) values ('SALES','Customer First Name','customer.firstName','STR','left outer join  Sales.customer customer',' 1= 1');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE,JOIN_HQL_CONDITION) values ('SALES','Sales Line Associate','salesLine.user.userId','STR','left outer join  Sales.salesLines salesLine',' 1=1 ');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE,JOIN_HQL_CONDITION) values ('SALES','Sales Header Associate','salesLine.user.userId','STR','left outer join  Sales.salesLines salesLine',' 1=1 ');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('SALES','Sales Net Amount','Sales.netAmount','NUMER');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('SALES','Sales Line Total','salesLine.lineTotal','NUMER');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('SALES','Sales Line SKU','salesLine.sku.name','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('SALES','Sales Line Qty','salesLine.qty','NUMER');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('SALES','Sales Line Price','salesLine.unitPrice','NUMER');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,FV_TYPE) values ('SALES','Order Type','Sales.orderType.code','FINVAL','SLORDTYPE');
 
 
 

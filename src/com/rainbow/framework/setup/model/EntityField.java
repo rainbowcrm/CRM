@@ -10,6 +10,9 @@ public class EntityField {
 	String description;
 	FiniteValue dataType;
 	String fvType;
+	String hqljoinClause;
+	String joinCondition;
+	
 	public String getEntity() {
 		return entity;
 	}
@@ -47,7 +50,7 @@ public class EntityField {
 		this.fvType = fvType;
 	}
 	public EntityField(String entity, String keyField, String hqlField,
-			String description, FiniteValue dataType, String fvType) {
+			String description, FiniteValue dataType, String fvType,String hqlJoinClause,String joinCondition) {
 		super();
 		this.entity = entity;
 		this.keyField = keyField;
@@ -55,7 +58,25 @@ public class EntityField {
 		this.description = description;
 		this.dataType = dataType;
 		this.fvType = fvType;
+		this.hqljoinClause=hqlJoinClause;
+		this.joinCondition=joinCondition;
 	}
+	public String getHqljoinClause() {
+		return hqljoinClause;
+	}
+	public void setHqljoinClause(String hqljoinClause) {
+		this.hqljoinClause = hqljoinClause;
+	}
+	public String getJoinCondition() {
+		return joinCondition;
+	}
+	public void setJoinCondition(String joinCondition) {
+		this.joinCondition = joinCondition;
+	}
+	
+	
+	
+	
 	
 	
 	
