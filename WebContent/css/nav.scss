@@ -15,7 +15,7 @@ ul{
  }
  
  .menustyle {
-    font-size: 14px;
+    font-size: 13px;
     color:$light;
    list-style-type: none;
     text-align:left;
@@ -36,38 +36,27 @@ ul{
  }
  
 .menustyleParent {
-    font-size: 14px;
+    font-size: 13px;
     color:$light;
     list-style-type: none;
     text-align:left;
     padding: 5px;
     margin-bottom: 5px;
-    >span{
-      position: relative;
-      display: inline-block;
-      width: 100%
-    }   
- 
-   >span:before {
+    &.open:before{
+          content: "\f139";
+    }
+}
+
+.menustyleParent:before{
       content: "\f13a";
       font-family: FontAwesome;
       font-style: normal;
       font-weight: normal;
       text-decoration: inherit;
       color: $light;
-      font-size: 15px;
+      font-size: 13px;
       position: absolute;
-      right: -1px;
-  }
-
-  .menustyleParent{
-      padding-left: 15px;
-  }
-  &.open{
-      >span:before{
-          content: "\f139";
-      }
-  }
+      right: 1px;
 }
 
 

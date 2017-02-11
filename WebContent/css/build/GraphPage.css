@@ -89,7 +89,7 @@ ul {
   list-style-type: none; }
 
 .menustyle {
-  font-size: 14px;
+  font-size: 13px;
   color: #f4f4f4;
   list-style-type: none;
   text-align: left;
@@ -107,30 +107,25 @@ ul {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.24); }
 
 .menustyleParent {
-  font-size: 14px;
+  font-size: 13px;
   color: #f4f4f4;
   list-style-type: none;
   text-align: left;
   padding: 5px;
   margin-bottom: 5px; }
-  .menustyleParent > span {
-    position: relative;
-    display: inline-block;
-    width: 100%; }
-  .menustyleParent > span:before {
-    content: "\f13a";
-    font-family: FontAwesome;
-    font-style: normal;
-    font-weight: normal;
-    text-decoration: inherit;
-    color: #f4f4f4;
-    font-size: 15px;
-    position: absolute;
-    right: -1px; }
-  .menustyleParent .menustyleParent {
-    padding-left: 15px; }
-  .menustyleParent.open > span:before {
+  .menustyleParent.open:before {
     content: "\f139"; }
+
+.menustyleParent:before {
+  content: "\f13a";
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+  color: #f4f4f4;
+  font-size: 13px;
+  position: absolute;
+  right: 1px; }
 
 .menustyleParent:hover {
   cursor: hand; }
@@ -200,7 +195,7 @@ dialog.fixed {
   transform: translate(0, -50%); }
 
 body {
-  background: url(../../bootstrap/images/bck.jpg) no-repeat center center;
+  background: rgba(195, 195, 195, 0.8) !important;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif; }
 
