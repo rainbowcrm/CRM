@@ -10,6 +10,26 @@ div.topBar{
     color: $light;
     text-align: center;
     box-shadow: 2px 0 3px rgba(0, 0, 0, 0.5);
+
+    .menu:hover{
+      cursor: hand;
+    }
+    .menu{
+      display: none;
+    }
+ 
+   .menu:before {
+      content: "\f039";
+      font-family: FontAwesome;
+      font-style: normal;
+      font-weight: normal;
+      text-decoration: inherit;
+      color: $light;
+      font-size: 30px;
+      padding-right: 0.5em;
+      position: absolute;
+      left: 25px;
+  }
 }
 
 span.topBar {
@@ -23,5 +43,22 @@ span.topBar {
 .headerStyle,.filterStyle{
     table tbody tr td{
         border: none;
+    }
+}
+
+@media screen and (max-width: $break-large) {
+    div.topBar{
+      .menu{
+        display: inline;
+      }
+    }
+    div.leftnav{
+        display: none;
+    }
+    body div.pagestyle{
+        width: 100%;
+    }
+    input[type="text"], select{
+        width: 150px;
     }
 }

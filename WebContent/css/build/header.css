@@ -8,6 +8,21 @@ div.topBar {
   color: #f4f4f4;
   text-align: center;
   box-shadow: 2px 0 3px rgba(0, 0, 0, 0.5); }
+  div.topBar .menu:hover {
+    cursor: hand; }
+  div.topBar .menu {
+    display: none; }
+  div.topBar .menu:before {
+    content: "\f039";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    color: #f4f4f4;
+    font-size: 30px;
+    padding-right: 0.5em;
+    position: absolute;
+    left: 25px; }
 
 span.topBar {
   font-size: 20px;
@@ -17,3 +32,13 @@ span.topBar {
 
 .headerStyle table tbody tr td, .filterStyle table tbody tr td {
   border: none; }
+
+@media screen and (max-width: 768px) {
+  div.topBar .menu {
+    display: inline; }
+  div.leftnav {
+    display: none; }
+  body div.pagestyle {
+    width: 100%; }
+  input[type="text"], select {
+    width: 150px; } }
