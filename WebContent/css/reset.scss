@@ -11,3 +11,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 ::-webkit-scrollbar-track {
     background: transparent;
 }
+//remove default white tabs background Color
+div.panel-default{
+    background: rgba(244,244,244,0.8);
+}

@@ -37,6 +37,9 @@ table {
 ::-webkit-scrollbar-track {
   background: transparent; }
 
+div.panel-default {
+  background: rgba(244, 244, 244, 0.8); }
+
 body {
   background: #B0BEC5;
   box-sizing: border-box;
