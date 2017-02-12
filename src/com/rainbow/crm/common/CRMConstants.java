@@ -28,6 +28,18 @@ public class CRMConstants {
 	public final static String FV_ENQUIRY_TYPE = "ENQTYPE";
 	public final static String FV_SPITCH_TYPE = "PITCHTYPE";
 	
+	public final static class RELDATE {
+		public final static String TODAY ="TODAY";
+		public final static String LASTWEEK ="LSTWEEK";
+		public final static String LASTMONTH ="LSTMNTH";
+		public final static String LASTTWOMONTH ="LSTTWOMNTH";
+		public final static String LASTTHREEMONTH ="LSTTHRMNTH";
+		public final static String LASTSIXMONTH ="LSTSIXMNTH";
+		public final static String LASTYEAR ="LSTYR";
+		public final static String LASTTWOYEAR ="LSTTWOYR";
+		public final static String LASTTHREEYEAR ="LSTTHRYR";
+	}
+	
 	public final static class ROLETYPE {
 		public final static String SYSADMIN = "SYSADMIN";
 		public final static String CORPADMIN = "CORPADMIN";
@@ -117,6 +129,9 @@ public class CRMConstants {
 		public final static String REREQUESTED = "EXPREREQ";
 		public final static String CLOSED = "EXPPDCLSD";
 		public final static String REJECTEDCLOSED = "EXPRJCLSD";
+
 	}
+	
+	
 }
 

@@ -284,14 +284,12 @@ INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values 
 INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE,JOIN_HQL_CONDITION) values ('SALES','Customer Phone','customer.phone','STR','left outer join  Sales.customer customer',' 1= 1 ');
 INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE,JOIN_HQL_CONDITION) values ('SALES','Customer First Name','customer.firstName','STR','left outer join  Sales.customer customer',' 1= 1');
 INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE,JOIN_HQL_CONDITION) values ('SALES','Sales Line Associate','salesLine.user.userId','STR','left outer join  Sales.salesLines salesLine',' 1=1 ');
-INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE,JOIN_HQL_CONDITION) values ('SALES','Sales Header Associate','salesLine.user.userId','STR','left outer join  Sales.salesLines salesLine',' 1=1 ');
 INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('SALES','Sales Net Amount','Sales.netAmount','NUMER');
-INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('SALES','Sales Line Total','salesLine.lineTotal','NUMER');
-INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('SALES','Sales Line SKU','salesLine.sku.name','STR');
-INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('SALES','Sales Line Qty','salesLine.qty','NUMER');
-INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('SALES','Sales Line Price','salesLine.unitPrice','NUMER');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('SALES','Sales Line Total','salesLine.lineTotal','NUMER','left outer join  Sales.salesLines salesLine');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('SALES','Sales Line SKU','salesLine.sku.name','STR','left outer join  Sales.salesLines salesLine');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('SALES','Sales Line Qty','salesLine.qty','NUMER','left outer join  Sales.salesLines salesLine');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('SALES','Sales Line Price','salesLine.unitPrice','NUMER','left outer join  Sales.salesLines salesLine');
 INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,FV_TYPE) values ('SALES','Order Type','Sales.orderType.code','FINVAL','SLORDTYPE');
-
 
 
 INSERT INTO NEXTUP_CONFIG (COMPANY_ID,PROGRAM,FIELD1_TYPE,FIELD1_WIDTH,FIELD1_VAULE,FIELD2_TYPE,FIELD2_WIDTH,FIELD2_VAULE,FIELD3_TYPE,FIELD3_WIDTH,FIELD3_VAULE,FIELD4_TYPE,FIELD4_WIDTH,FIELD4_VAULE) VALUES ( -1, 'Purchases','DIVCODE',4,NULL,'CONSTANT',2,'PC','SEQCOMP',5,NULL,NULL,NULL,NULL);

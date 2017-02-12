@@ -3,6 +3,7 @@ package com.rainbow.framework.query.service;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -35,19 +36,36 @@ import com.techtrade.rads.framework.utils.Utils;
 
 public class QueryService implements IQueryService{
 
+	private Date getQuerySelDate(Query query , String fromTo) {
+		if ("ABS".equalsIgnoreCase(query.getDateValueType())) {
+			if("from".equalsIgnoreCase(fromTo))
+				return query.getFromDate() ;
+			if("To".equalsIgnoreCase(fromTo))
+				return query.getToDate() ;
+		}
+		if ("REL".equalsIgnoreCase(query.getDateValueType())) {
+			if("from".equalsIgnoreCase(fromTo)) {
+				return CommonUtil.getRelativeDate(query.getFromCriteria());
+			}if("To".equalsIgnoreCase(fromTo))
+				return CommonUtil.getRelativeDate(query.getToCriteria());
+		}
+		return new java.util.Date();
+	}
+	
+	
 	@Override
 	public QueryReport getResult(Query query, CRMContext context) {
 		String queryString = makeQuery(query);
 		QueryDAO dao = (QueryDAO)getDAO();
-		List lst = dao.getQueryRecord(queryString, context.getLoggedinCompany(),query.getFromDate(),query.getToDate());
+		List lst = dao.getQueryRecord(queryString, context.getLoggedinCompany(),getQuerySelDate(query,"From"),getQuerySelDate(query,"To"));
 		return generateReport(query,lst);
 	}
 
 	private QueryReport generateReport(Query query, List  list) {
 		QueryReport report = new QueryReport();
 		report.setTitles(query.getSelectedFields());
-		report.setFrom(query.getFromDate().toLocaleString());
-		report.setTo(query.getToDate().toLocaleString());
+		report.setFrom(getQuerySelDate(query,"From").toLocaleString());
+		report.setTo(getQuerySelDate(query,"To").toLocaleString());
 		if(!Utils.isNullList(list)) {
 			for(int i = 0 ; i < list.size() ; i ++ ) {
 				QueryRecord record= new QueryRecord();
@@ -67,7 +85,7 @@ public class QueryService implements IQueryService{
 	@Override
 	public List<RadsError> validate(Query query, CRMContext context) {
 	   List<RadsError> errors = new ArrayList< > ();
-		QueryValidator validator = new QueryValidator();
+		QueryValidator validator = new QueryValidator(context);
 		return validator.validateforCreate(query);
 	}
 	
@@ -106,6 +124,10 @@ public class QueryService implements IQueryService{
 		/*conditions.forEach( condition  ->  { 
 			selectFields.append(" " +  condition + " and ");
 		} );*/
+		if (query.getDivision().getId() > 0 ) {
+			selectFields.append(" " + query.getEntity() + "."+ "division.id=" + query.getDivision().getId() + " and ");
+		}
+		
 		
 		query.getConditions().forEach( condition ->  {  
 			selectFields.append( condition.toString() );

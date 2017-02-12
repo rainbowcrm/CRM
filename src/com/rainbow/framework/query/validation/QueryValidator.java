@@ -2,6 +2,7 @@ package com.rainbow.framework.query.validation;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMValidator;
 import com.rainbow.crm.user.validator.UserErrorCodes;
 import com.rainbow.framework.query.model.Query;
@@ -22,6 +23,22 @@ public class QueryValidator extends CRMValidator {
 			errors.add(getErrorforCode(UserErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Conditions"))) ;
 		if (query.getSelectedFields() == null)
 			errors.add(getErrorforCode(UserErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Display_Fields"))) ;
+		if(Utils.isNullString(query.getDateValueType()))
+			errors.add(getErrorforCode(UserErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Date_Criteria"))) ;
+		
+		if ("REL".equals(query.getDateValueType())) {
+			if (query.getFromCriteria() == null || query.getFromCriteria().getCode() ==null)
+				errors.add(getErrorforCode(UserErrorCodes.FIELD_EMPTY,externalize.externalize(context, "From"))) ;
+			if (query.getToCriteria() == null || query.getToCriteria().getCode() ==null)
+				errors.add(getErrorforCode(UserErrorCodes.FIELD_EMPTY,externalize.externalize(context, "To"))) ;	
+		}
+		if ("ABS".equals(query.getDateValueType())) {
+			if (query.getFromDate() == null)
+				errors.add(getErrorforCode(UserErrorCodes.FIELD_EMPTY,externalize.externalize(context, "From"))) ;
+			if (query.getToDate() == null)
+				errors.add(getErrorforCode(UserErrorCodes.FIELD_EMPTY,externalize.externalize(context, "To"))) ;	
+		}
+				
 		
 		if (!Utils.isNullList(query.getConditions())) {
 			AtomicInteger openBrackets = new AtomicInteger (0);
@@ -47,6 +64,15 @@ public class QueryValidator extends CRMValidator {
 	protected void checkforUpdateErrors(ModelObject object) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public QueryValidator() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public QueryValidator(CRMContext context) {
+		super(context);
 	}
 	
 	

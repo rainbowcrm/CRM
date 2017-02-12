@@ -1,5 +1,6 @@
 package com.rainbow.crm.common;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,8 +17,11 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
+
+
 import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
+import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
 import com.rainbow.crm.config.service.ConfigurationManager;
@@ -35,6 +39,32 @@ public class CommonUtil {
 	
 	private static Map <String,Metadata> metadataMap = new HashMap<String,Metadata> ();
 
+	public static Date getRelativeDate(FiniteValue dateValue) {
+			if(CRMConstants.RELDATE.TODAY.equals(dateValue.getCode())) {
+				return new java.util.Date();
+			}else if(CRMConstants.RELDATE.LASTWEEK.equals(dateValue.getCode())) {
+				return new java.util.Date (new java.util.Date().getTime() -  (7l * 24l  * 3600l * 1000l));
+			}else if(CRMConstants.RELDATE.LASTWEEK.equals(dateValue.getCode())) {
+				return new java.util.Date (new java.util.Date().getTime() -  (7l * 24l   * 3600l * 1000l));
+			}else if(CRMConstants.RELDATE.LASTMONTH.equals(dateValue.getCode())) {
+				return new java.util.Date (new java.util.Date().getTime() -  (30l * 24l   * 3600l * 1000l));
+			}else if(CRMConstants.RELDATE.LASTTWOMONTH.equals(dateValue.getCode())) {
+				return new java.util.Date (new java.util.Date().getTime() -  (60l * 24l   * 3600l * 1000l));
+			}else if(CRMConstants.RELDATE.LASTTHREEMONTH.equals(dateValue.getCode())) {
+				return new java.util.Date (new java.util.Date().getTime() -  (91l * 24l   * 3600l * 1000l));
+			}else if(CRMConstants.RELDATE.LASTSIXMONTH.equals(dateValue.getCode())) {
+				return new java.util.Date (new java.util.Date().getTime() -  (182l * 24l   * 3600l * 1000l));
+			}else if(CRMConstants.RELDATE.LASTYEAR.equals(dateValue.getCode())) {
+				return new java.util.Date (new java.util.Date().getTime() -  (365l * 24l   * 3600l * 1000l));
+			}else if(CRMConstants.RELDATE.LASTTWOYEAR.equals(dateValue.getCode())) {
+				return new java.util.Date (new java.util.Date().getTime() -  (365l * 2l * 24l   * 3600l * 1000l));
+			}else if(CRMConstants.RELDATE.LASTTHREEYEAR.equals(dateValue.getCode())) {
+				return new java.util.Date (new java.util.Date().getTime() -  (365l * 3l * 24l   * 3600l * 1000l));
+			}else
+				return null;
+	}
+	
+	
 	public static User getUser(CRMContext context, String userId){
 		IUserService service = (IUserService) SpringObjectFactory.INSTANCE.getInstance("IUserService");
 		User user  = (User) service.getById(userId);
