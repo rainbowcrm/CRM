@@ -109,6 +109,16 @@ public class QueryController extends CRMGeneralController {
 		return ans;
 	}
 	
+	public Map <String, String > getAllAggregationTypes() {
+		Map<String, String> ans = new HashMap<String, String>();
+		ans.put("sum", "sum");
+		ans.put("avg", "avg");
+		ans.put("count", "count");
+		ans.put("max", "max");
+		ans.put("min", "min");
+		return ans;
+	}
+
 	public Map <String, String > getOperators() {
 		Map<String, String> ans = new HashMap<String, String>();
 		ans.put("=", "=");
@@ -121,12 +131,23 @@ public class QueryController extends CRMGeneralController {
 		return ans;
 	}
 
+	
 	public Map <String, String > 	getAllEntityFields() {
 		Map<String, String> ans = new HashMap<String, String>();
 		if (getObject() != null)  {
 			Query  query =(Query) getObject();
 			String entity = query.getEntity() ;
 			return MetadataSQL.getAllEntityFields(entity);
+		}
+		return ans;
+	}
+	
+	public Map <String, String > 	getNumericEntityFields() {
+		Map<String, String> ans = new HashMap<String, String>();
+		if (getObject() != null)  {
+			Query  query =(Query) getObject();
+			String entity = query.getEntity() ;
+			return MetadataSQL.getNumericEntityFields(entity);
 		}
 		return ans;
 	}

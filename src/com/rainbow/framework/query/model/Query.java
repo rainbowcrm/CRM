@@ -19,12 +19,15 @@ public class Query extends CRMBusinessModelObject{
 	FiniteValue toCriteria;
 	
 	String dateValueType;
+	String resultType; 
 	
 	String selectedFields[];
 	String sortField;
 	String sortDesc;
 	
 	String reportData;
+	AggregationFields aggregationFields;
+
 
 	List<QueryCondition> conditions;
 
@@ -129,10 +132,22 @@ public class Query extends CRMBusinessModelObject{
 	public void setReportData(String reportData) {
 		this.reportData = reportData;
 	}
-	
-	
 
-	
+	public String getResultType() {
+		return resultType;
+	}
+
+	public void setResultType(String resultType) {
+		this.resultType = resultType;
+	}
+
+	public AggregationFields getAggregationFields() {
+		return aggregationFields;
+	}
+
+	public void setAggregationFields(AggregationFields aggregationFields) {
+		this.aggregationFields = aggregationFields;
+	}
 	
 
 	

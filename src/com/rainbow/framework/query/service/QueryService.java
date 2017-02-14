@@ -25,6 +25,7 @@ import com.rainbow.crm.user.model.User;
 import com.rainbow.crm.user.service.IUserService;
 import com.rainbow.framework.query.dao.QueryDAO;
 import com.rainbow.framework.query.model.Query;
+import com.rainbow.framework.query.model.QueryCondition;
 import com.rainbow.framework.query.model.QueryRecord;
 import com.rainbow.framework.query.model.QueryReport;
 import com.rainbow.framework.query.validation.QueryValidator;
@@ -55,7 +56,11 @@ public class QueryService implements IQueryService{
 	
 	@Override
 	public QueryReport getResult(Query query, CRMContext context) {
-		String queryString = makeQuery(query);
+		String queryString = "";
+		if(query.getResultType().equals("AGGREGATED"))
+			 queryString = makeGroupQuery(query);
+		else
+			queryString = makeQuery(query);
 		QueryDAO dao = (QueryDAO)getDAO();
 		List lst = dao.getQueryRecord(queryString, context.getLoggedinCompany(),getQuerySelDate(query,"From"),getQuerySelDate(query,"To"));
 		return generateReport(query,lst);
@@ -63,7 +68,13 @@ public class QueryService implements IQueryService{
 
 	private QueryReport generateReport(Query query, List  list) {
 		QueryReport report = new QueryReport();
-		report.setTitles(query.getSelectedFields());
+		if(query.getResultType().equals("AGGREGATED")) {
+			 String[] titles = new String[2];
+			 titles[0]= query.getAggregationFields().getAggregationType() + "-"+  query.getAggregationFields().getAggredatedField();
+			 titles[1] =query.getAggregationFields().getGroupByField();
+			 report.setTitles(titles);
+		}else 
+			report.setTitles(query.getSelectedFields());
 		report.setFrom(getQuerySelDate(query,"From").toLocaleString());
 		report.setTo(getQuerySelDate(query,"To").toLocaleString());
 		if(!Utils.isNullList(list)) {
@@ -138,6 +149,56 @@ public class QueryService implements IQueryService{
 		return selectFields.toString();
 	}
 
+	
+	private String makeGroupQuery(Query query) {
+		StringBuffer selectFields = new StringBuffer (" select ");
+		Set<String> joins= new LinkedHashSet<String>();
+		Set<String> conditions= new LinkedHashSet<String>();
+		EntityField field = MetadataSQL.getEntityField(query.getEntity(),query.getAggregationFields().getAggredatedField());
+		if(!Utils.isNullString(field.getHqljoinClause())) { 
+			  joins.add(field.getHqljoinClause() + " " );
+			  conditions.add( field.getJoinCondition()) ;
+		}
+		
+		for (int i = 0 ; i  < query.getConditions().size() ; i ++ )  {
+			QueryCondition cond = (QueryCondition)query.getConditions().get(i);
+			EntityField fieldCond = MetadataSQL.getEntityField(query.getEntity(),cond.getField());
+			if(!Utils.isNullString(fieldCond.getHqljoinClause())) { 
+				  joins.add(fieldCond.getHqljoinClause() + " " );
+			}
+		}
+		
+		selectFields.append( " " + query.getAggregationFields().getAggregationType() + "(" + query.getAggregationFields().getAggredatedField()  + "), ");
+		selectFields.append(query.getAggregationFields().getGroupByField() + " ");
+		
+		selectFields.append(" from " + query.getEntity()+ " " + query.getEntity()) ;
+		joins.forEach( hqlClause  ->  { 
+			selectFields.append(" " +  hqlClause + " ");
+		} );
+		
+		Metadata metadata = MetadataSQL.getMetaDataforEntity(query.getEntity());
+		if (!Utils.isNullString( metadata.getDateField()))
+			selectFields.append(" where " + query.getEntity() + "."+ metadata.getDateField()  + " >= :fromDate "+ 
+					" and  "   +  query.getEntity() + "."+ metadata.getDateField() + " <= :toDate  and  " + query.getEntity() + ".company.id =:company and ");
+		else
+			selectFields.append(" where  " + query.getEntity() + ".company.id =:company and ");
+	
+		if (query.getDivision().getId() > 0 ) {
+			selectFields.append(" " + query.getEntity() + "."+ "division.id=" + query.getDivision().getId() + " and ");
+		}
+		query.getConditions().forEach( condition ->  {  
+			selectFields.append( condition.toString() );
+		});
+		
+		selectFields.append(" group by  " +  query.getAggregationFields().getGroupByField() );
+		
+	/*	if(!Utils.isNullString(query.getSortField())) {
+				selectFields.append(" order by " +query.getSortField() + " "  + query.getSortDesc());
+		}*/
+		return selectFields.toString();
+	}
+
+	
 	@Override
 	public String getVelocityConverted(QueryReport report, CRMContext context) {
 		VelocityEngine ve = new VelocityEngine();

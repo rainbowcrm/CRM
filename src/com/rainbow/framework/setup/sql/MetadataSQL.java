@@ -126,6 +126,30 @@ public class MetadataSQL {
 		return ans;
 	}
 	
+	public static Map<String,String> getNumericEntityFields (String entity) {
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet rs  = null ;
+		Map<String,String> ans = new HashMap<String, String>();
+		try {
+			connection  = ConnectionCreater.getConnection() ;
+			String sql =   " SELECT * FROM ENTITY_FIELDS WHERE ENTITY = ? and DATA_TYPE = 'NUMER'" ;
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, entity);
+			rs = statement.executeQuery() ;
+			while (rs.next()) {
+				String displayField = rs.getString("KEY_FIELD");
+				String hqlField = rs.getString("HQL_KEY_FIELD");
+				ans.put(hqlField, displayField);
+			}
+		}catch(SQLException ex) {
+			Logwriter.INSTANCE.error(ex);
+		}finally {
+			ConnectionCreater.close(connection, statement, rs);	
+		}
+		return ans;
+	}
+	
 	
 	public static List<EntityField> getEntityFields (String entity) {
 		Connection connection = null;

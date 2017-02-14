@@ -143,6 +143,14 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 
 </Element>
 
+<Element type = "UITableCol"   >
+<Element label = "Result_Display"  type = "UIRadioBox" Id = "rdoResulType"   property ="resultType" >
+	  <options> 
+	  <option key ="LIST"> List</option>
+	  <option key ="AGGREGATED"> Aggregated</option>
+	  </options>
+</Element>
+</Element>
 </Element>
 </Element>
 
@@ -151,7 +159,7 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 <Element type ="UITabset" Id = "configSet" style = "uitabstyle" selectedTabStyle= "titleStyleSelected active nav-link" unSelectedTabStyle ="titleStyleUnSelected nav-link" >
 <Element type ="UITab" Id= "idGeneral" title = "List"   >
 
-<Element type = "UITable" rows = "3" cols = "2" style = "grid" applyStyleonChildren ="true" Id  ="tblList"  >
+<Element type = "UITable" rows = "3" cols = "1" style = "grid" applyStyleonChildren ="true" Id  ="tblList"  >
 <Element type = "UITableRow"   >
 <Element type = "UITableCol"  align="left" >
 
@@ -162,7 +170,46 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 </Element>
 
 </Element>
+
+
+<!--  end col -->
+
+</Element>
+</Element>
+
+</Element>
+
+<Element type ="UITab" Id= "idcustMgmt" title = "Aggregates"   >
+<Element type = "UITable" rows = "3" cols = "3" style = "grid" applyStyleonChildren ="true" Id  ="tblAggreList"  >
+<Element type = "UITableRow"   >
+
 <Element type = "UITableCol"  align="left" >
+<Element type = "UIList"  label = "Aggregation_Type"  Id= "lstAggrType"  property = "aggregationFields.aggregationType"  >
+<options populator =  "getAllAggregationTypes"> 
+	</options>
+</Element>
+</Element>
+
+<Element type = "UITableCol"  align="left" >
+<Element type = "UIList"  label = "Field"  Id= "lstGAggFldType"  property = "aggregationFields.aggredatedField"  >
+<options populator =  "getNumericEntityFields"> 
+	</options>
+</Element>
+</Element>
+
+<Element type = "UITableCol"  align="left" >
+<Element type = "UIList"  label = "By"  Id= "lstGroupType"  property = "aggregationFields.groupByField"  >
+<options populator =  "getAllEntityFields"> 
+	</options>
+</Element>
+</Element>
+
+
+</Element>
+</Element>
+</Element>
+
+<Element type ="UITab" Id= "idCond" title = "Criteria"   >
 
 <Element type = "UITable" rows = "1" cols = "8" style = "grid" applyStyleonChildren ="true" Id  ="tblTrans" property ="conditions[]" >
 <Element type = "UITableHead" style ="listPageTitle">
@@ -200,30 +247,21 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 
 
 
-
 <Element type ="UITableCol" width = "10%">
 	<Element caption = "AND"  type = "UIButton" Id = "btnAddRow"   onClickJS="addRowQuery(this, ' AND ')"/>
 	<Element caption = "OR"  type = "UIButton" Id = "btnAddORRow"    onClickJS="addRowQuery(this,' OR ')"/>
 	<Element caption = "-"  type = "UIButton" Id = "btnDelRow"    onClickJS="deleteRow(this)"/>
 </Element>
 
-</Element>
-
-</Element>
-
-
-
-</Element>
 
 
 </Element>
 </Element>
 
+
 </Element>
-<Element type ="UITab" Id= "idcustMgmt" title = "Aggregates"   >
-<Element type = "UILabel" id =  "idiDummyLBL" value = "">
-</Element>
-</Element>
+
+
 </Element>
 
 
