@@ -120,23 +120,24 @@ public class QueryService implements IQueryService{
 				 selectFields.append(",") ;
 		}
 		
-		selectFields.append(" from " + query.getEntity()+ " " + query.getEntity()) ;
+		Metadata metadata = MetadataSQL.getMetaDataforEntity(query.getEntity());  
+		selectFields.append(" from " + metadata.getHqlClass() + " " + metadata.getHqlClass()) ;
 		joins.forEach( hqlClause  ->  { 
 			selectFields.append(" " +  hqlClause + " ");
 		} );
 		
-		Metadata metadata = MetadataSQL.getMetaDataforEntity(query.getEntity());
+		
 		if (!Utils.isNullString( metadata.getDateField()))
-			selectFields.append(" where " + query.getEntity() + "."+ metadata.getDateField()  + " >= :fromDate "+ 
-					" and  "   +  query.getEntity() + "."+ metadata.getDateField() + " <= :toDate  and  " + query.getEntity() + ".company.id =:company and ");
+			selectFields.append(" where " + metadata.getHqlClass()  + "."+ metadata.getDateField()  + " >= :fromDate "+ 
+					" and  "   +  metadata.getHqlClass()  + "."+ metadata.getDateField() + " <= :toDate  and  " + metadata.getHqlClass() + ".company.id =:company and ");
 		else
-			selectFields.append(" where  " + query.getEntity() + ".company.id =:company and ");
+			selectFields.append(" where  " + metadata.getHqlClass()  + ".company.id =:company and ");
 	
 		/*conditions.forEach( condition  ->  { 
 			selectFields.append(" " +  condition + " and ");
 		} );*/
 		if (query.getDivision().getId() > 0 ) {
-			selectFields.append(" " + query.getEntity() + "."+ "division.id=" + query.getDivision().getId() + " and ");
+			selectFields.append(" " + metadata.getHqlClass()  + "."+ "division.id=" + query.getDivision().getId() + " and ");
 		}
 		
 		
@@ -170,21 +171,21 @@ public class QueryService implements IQueryService{
 		
 		selectFields.append( " " + query.getAggregationFields().getAggregationType() + "(" + query.getAggregationFields().getAggredatedField()  + "), ");
 		selectFields.append(query.getAggregationFields().getGroupByField() + " ");
-		
-		selectFields.append(" from " + query.getEntity()+ " " + query.getEntity()) ;
+		Metadata metadata = MetadataSQL.getMetaDataforEntity(query.getEntity());
+		selectFields.append(" from " + metadata.getHqlClass() + " " + metadata.getHqlClass()) ;
 		joins.forEach( hqlClause  ->  { 
 			selectFields.append(" " +  hqlClause + " ");
 		} );
 		
-		Metadata metadata = MetadataSQL.getMetaDataforEntity(query.getEntity());
+		
 		if (!Utils.isNullString( metadata.getDateField()))
-			selectFields.append(" where " + query.getEntity() + "."+ metadata.getDateField()  + " >= :fromDate "+ 
-					" and  "   +  query.getEntity() + "."+ metadata.getDateField() + " <= :toDate  and  " + query.getEntity() + ".company.id =:company and ");
+			selectFields.append(" where " + metadata.getHqlClass() + "."+ metadata.getDateField()  + " >= :fromDate "+ 
+					" and  "   +  metadata.getHqlClass() + "."+ metadata.getDateField() + " <= :toDate  and  " + metadata.getHqlClass() + ".company.id =:company and ");
 		else
-			selectFields.append(" where  " + query.getEntity() + ".company.id =:company and ");
+			selectFields.append(" where  " + metadata.getHqlClass() + ".company.id =:company and ");
 	
 		if (query.getDivision().getId() > 0 ) {
-			selectFields.append(" " + query.getEntity() + "."+ "division.id=" + query.getDivision().getId() + " and ");
+			selectFields.append(" " + metadata.getHqlClass() + "."+ "division.id=" + query.getDivision().getId() + " and ");
 		}
 		query.getConditions().forEach( condition ->  {  
 			selectFields.append( condition.toString() );

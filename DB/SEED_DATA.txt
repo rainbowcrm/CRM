@@ -279,6 +279,7 @@ INSERT INTO METADATA(ENTITY,CLASS_NAME,METADATA_TYPE ,IS_DIVISION_SPEC,HQL_CLASS
 INSERT INTO METADATA(ENTITY,CLASS_NAME,METADATA_TYPE ,IS_DIVISION_SPEC,HQL_CLASS) VALUES('ALERT','com.rainbow.crm.alert.model.Alert','TRANS',false,'Alert');
 
 
+
 INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('SALES','Bill Number','Sales.billNumber','STR');
 INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('SALES','Division Name','Sales.division.name','STR');
 INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE,JOIN_HQL_CONDITION) values ('SALES','Customer Phone','customer.phone','STR','left outer join  Sales.customer customer',' 1= 1 ');
@@ -290,6 +291,26 @@ INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL
 INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('SALES','Sales Line Qty','salesLine.qty','NUMER','left outer join  Sales.salesLines salesLine');
 INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('SALES','Sales Line Price','salesLine.unitPrice','NUMER','left outer join  Sales.salesLines salesLine');
 INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,FV_TYPE) values ('SALES','Order Type','Sales.orderType.code','FINVAL','SLORDTYPE');
+
+
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('DO','Doc Number','DistributionOrder.docNumber','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('DO','Division Name','DistributionOrder.division.name','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('DO','Customer Phone','customer.phone','STR','left outer join  DistributionOrder.customer customer');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('DO','Customer First Name','customer.firstName','STR','left outer join  DistributionOrder.customer customer');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('DO','Carrier Name','DistributionOrder.carrier.name','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('DO','Carrier Code','DistributionOrder.carrier.code','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('DO','Order Date','DistributionOrder.orderDate','DATE');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('DO','Pack Date','DistributionOrder.packDate','DATE');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('DO','Shipping Date','DistributionOrder.shippingDate','DATE');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('DO','Shipping Charges','DistributionOrder.shippingCharges','NUMER');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('DO','User','DistributionOrder.user.userId','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('DO','Sales Bill','DistributionOrder.sales.billNumber','STR');
+
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('DO','DO Line SKU','doLine.sku.name','STR','left outer join  DistributionOrder.distributionOrderLines doLine');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('DO','DO Line Qty','doLine.qty','NUMER','left outer join  DistributionOrder.distributionOrderLines doLine');
+
+
+
 
 
 INSERT INTO NEXTUP_CONFIG (COMPANY_ID,PROGRAM,FIELD1_TYPE,FIELD1_WIDTH,FIELD1_VAULE,FIELD2_TYPE,FIELD2_WIDTH,FIELD2_VAULE,FIELD3_TYPE,FIELD3_WIDTH,FIELD3_VAULE,FIELD4_TYPE,FIELD4_WIDTH,FIELD4_VAULE) VALUES ( -1, 'Purchases','DIVCODE',4,NULL,'CONSTANT',2,'PC','SEQCOMP',5,NULL,NULL,NULL,NULL);

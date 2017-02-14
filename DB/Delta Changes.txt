@@ -1029,6 +1029,30 @@ INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL
 INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,FV_TYPE) values ('SALES','Order Type','Sales.orderType.code','FINVAL','SLORDTYPE');
 
 
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('DO','Doc Number','DistributionOrder.docNumber','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('DO','Division Name','DistributionOrder.division.name','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('DO','Customer Phone','customer.phone','STR','left outer join  DistributionOrder.customer customer');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('DO','Customer First Name','customer.firstName','STR','left outer join  DistributionOrder.customer customer');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('DO','Carrier Name','DistributionOrder.carrier.name','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('DO','Carrier Code','DistributionOrder.carrier.code','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('DO','Order Date','DistributionOrder.orderDate','DATE');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('DO','Pack Date','DistributionOrder.packDate','DATE');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('DO','Shipping Date','DistributionOrder.shippingDate','DATE');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('DO','Shipping Charges','DistributionOrder.shippingCharges','NUMER');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('DO','User','DistributionOrder.user.userId','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('DO','Sales Bill','DistributionOrder.sales.billNumber','STR');
+
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('DO','DO Line SKU','doLine.sku.name','STR','left outer join  DistributionOrder.distributionOrderLines doLine');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('DO','DO Line Qty','doLine.qty','NUMER','left outer join  DistributionOrder.distributionOrderLines doLine');
+
+
+
+
+
+
+
+
+
 
 
 CREATE TABLE ENTITY_RELATION (
