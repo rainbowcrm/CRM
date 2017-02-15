@@ -30,7 +30,9 @@ public class Query extends CRMBusinessModelObject{
 
 
 	List<QueryCondition> conditions;
+	boolean isDateExcluded ;
 
+	
 	public String getEntity() {
 		return entity;
 	}
@@ -148,6 +150,16 @@ public class Query extends CRMBusinessModelObject{
 	public void setAggregationFields(AggregationFields aggregationFields) {
 		this.aggregationFields = aggregationFields;
 	}
+
+	public boolean isDateExcluded() {
+		return isDateExcluded;
+	}
+
+	public void setDateExcluded(boolean isDateExcluded) {
+		this.isDateExcluded = isDateExcluded;
+	}
+	
+	
 	
 
 	

@@ -279,6 +279,14 @@ INSERT INTO METADATA(ENTITY,CLASS_NAME,METADATA_TYPE ,IS_DIVISION_SPEC,HQL_CLASS
 INSERT INTO METADATA(ENTITY,CLASS_NAME,METADATA_TYPE ,IS_DIVISION_SPEC,HQL_CLASS) VALUES('ALERT','com.rainbow.crm.alert.model.Alert','TRANS',false,'Alert');
 
 
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('INVENTORY','Division Name','Inventory.division.name','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('INVENTORY','SKU','Inventory.sku.name','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('INVENTORY','Item','Inventory.sku.item.name','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('INVENTORY','Opening Qty','Inventory.opQty','NUMER');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('INVENTORY','Current Qty','Inventory.currentQty','NUMER');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('INVENTORY','Damaged Qty','Inventory.damagedQty','NUMER');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('INVENTORY','Reserved Qty','Inventory.reservedQty','NUMER');
+
 
 INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('SALES','Bill Number','Sales.billNumber','STR');
 INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('SALES','Division Name','Sales.division.name','STR');
@@ -291,6 +299,21 @@ INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL
 INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('SALES','Sales Line Qty','salesLine.qty','NUMER','left outer join  Sales.salesLines salesLine');
 INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('SALES','Sales Line Price','salesLine.unitPrice','NUMER','left outer join  Sales.salesLines salesLine');
 INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,FV_TYPE) values ('SALES','Order Type','Sales.orderType.code','FINVAL','SLORDTYPE');
+
+
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('PURCHASE','Bill Number','Purchase.billNumber','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('PURCHASE','Doc Number','Purchase.docNumber','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('PURCHASE','Division Name','Purchase.division.name','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('PURCHASE','Vendor Name','Purchase.vendor.name','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('PURCHASE','Date','Purchase.purchaseDate','DATE');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('PURCHASE','Settled','Purchase.settled','BOOL');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('PURCHASE','Total Discount','Purchase.totalDisc','NUMER');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('PURCHASE','Net Amount','Purchase.netAmount','NUMER');
+
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('PURCHASE','Purchase Line SKU','purchaseLine.sku.name','STR','left outer join  Purchase.purchaseLines purchaseLine');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('PURCHASE','Purchase Line Qty','purchaseLine.qty','NUMER','left outer join  Purchase.purchaseLines purchaseLine');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('PURCHASE','Purchase Line Price','purchaseLine.unitPrice','NUMER','left outer join  Purchase.purchaseLines purchaseLine');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('PURCHASE','Purchase Line Total','purchaseLine.lineTotal','NUMER','left outer join  Purchase.purchaseLines purchaseLine');
 
 
 INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('DO','Doc Number','DistributionOrder.docNumber','STR');

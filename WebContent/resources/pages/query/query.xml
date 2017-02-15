@@ -86,23 +86,8 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 
 
 
-<Element type = "UITableCol"   >
-<Element type = "UIList"  label = "Sort_By"  Id= "lstSortedFieldsEntity"  property = "sortField"  >
-<options populator =  "getAllEntityFields"> 
-	</options>
-</Element>
-</Element>
-
-<Element type = "UITableCol"   >
-<Element label = ""  type = "UIRadioBox" Id = "rdoSortyBy"   property ="sortDesc" >
-	  <options> 
-	  <option key ="ASC"> ASC</option>
-	  <option key ="DESC"> DESC</option>
-	  </options>
-</Element>
 
 
-</Element>
 </Element>
 <Element type = "UITableRow"   >
 <Element type = "UITableCol"   >
@@ -159,7 +144,7 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 <Element type ="UITabset" Id = "configSet" style = "uitabstyle" selectedTabStyle= "titleStyleSelected active nav-link" unSelectedTabStyle ="titleStyleUnSelected nav-link" >
 <Element type ="UITab" Id= "idGeneral" title = "List"   >
 
-<Element type = "UITable" rows = "3" cols = "1" style = "grid" applyStyleonChildren ="true" Id  ="tblList"  >
+<Element type = "UITable" rows = "1" cols = "3" style = "grid" applyStyleonChildren ="true" Id  ="tblList"  >
 <Element type = "UITableRow"   >
 <Element type = "UITableCol"  align="left" >
 
@@ -172,6 +157,21 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 </Element>
 
 
+<Element type = "UITableCol"   >
+<Element type = "UIList"  label = "Sort_By"  Id= "lstSortedFieldsEntity"  property = "sortField"  >
+<options populator =  "getAllEntityFields"> 
+	</options>
+</Element>
+</Element>
+
+<Element type = "UITableCol"   >
+<Element label = ""  type = "UIRadioBox" Id = "rdoSortyBy"   property ="sortDesc" >
+	  <options> 
+	  <option key ="ASC"> ASC</option>
+	  <option key ="DESC"> DESC</option>
+	  </options>
+</Element>
+</Element>
 <!--  end col -->
 
 </Element>
@@ -183,21 +183,21 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 <Element type = "UITable" rows = "3" cols = "3" style = "grid" applyStyleonChildren ="true" Id  ="tblAggreList"  >
 <Element type = "UITableRow"   >
 
-<Element type = "UITableCol"  align="left" >
+<Element type = "UITableCol"  >
 <Element type = "UIList"  label = "Aggregation_Type"  Id= "lstAggrType"  property = "aggregationFields.aggregationType"  >
 <options populator =  "getAllAggregationTypes"> 
 	</options>
 </Element>
 </Element>
 
-<Element type = "UITableCol"  align="left" >
+<Element type = "UITableCol"  >
 <Element type = "UIList"  label = "Field"  Id= "lstGAggFldType"  property = "aggregationFields.aggredatedField"  >
 <options populator =  "getNumericEntityFields"> 
 	</options>
 </Element>
 </Element>
 
-<Element type = "UITableCol"  align="left" >
+<Element type = "UITableCol"   >
 <Element type = "UIList"  label = "By"  Id= "lstGroupType"  property = "aggregationFields.groupByField"  >
 <options populator =  "getAllEntityFields"> 
 	</options>

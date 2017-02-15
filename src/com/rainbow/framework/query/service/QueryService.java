@@ -38,6 +38,7 @@ import com.techtrade.rads.framework.utils.Utils;
 public class QueryService implements IQueryService{
 
 	private Date getQuerySelDate(Query query , String fromTo) {
+		if(query.isDateExcluded() == true ) return null;
 		if ("ABS".equalsIgnoreCase(query.getDateValueType())) {
 			if("from".equalsIgnoreCase(fromTo))
 				return query.getFromDate() ;
@@ -75,8 +76,10 @@ public class QueryService implements IQueryService{
 			 report.setTitles(titles);
 		}else 
 			report.setTitles(query.getSelectedFields());
+		if(getQuerySelDate(query,"From")!=null)  {
 		report.setFrom(getQuerySelDate(query,"From").toLocaleString());
 		report.setTo(getQuerySelDate(query,"To").toLocaleString());
+		}
 		if(!Utils.isNullList(list)) {
 			for(int i = 0 ; i < list.size() ; i ++ ) {
 				QueryRecord record= new QueryRecord();
@@ -130,8 +133,10 @@ public class QueryService implements IQueryService{
 		if (!Utils.isNullString( metadata.getDateField()))
 			selectFields.append(" where " + metadata.getHqlClass()  + "."+ metadata.getDateField()  + " >= :fromDate "+ 
 					" and  "   +  metadata.getHqlClass()  + "."+ metadata.getDateField() + " <= :toDate  and  " + metadata.getHqlClass() + ".company.id =:company and ");
-		else
+		else {
 			selectFields.append(" where  " + metadata.getHqlClass()  + ".company.id =:company and ");
+			query.setDateExcluded(true);
+		}
 	
 		/*conditions.forEach( condition  ->  { 
 			selectFields.append(" " +  condition + " and ");
@@ -181,9 +186,11 @@ public class QueryService implements IQueryService{
 		if (!Utils.isNullString( metadata.getDateField()))
 			selectFields.append(" where " + metadata.getHqlClass() + "."+ metadata.getDateField()  + " >= :fromDate "+ 
 					" and  "   +  metadata.getHqlClass() + "."+ metadata.getDateField() + " <= :toDate  and  " + metadata.getHqlClass() + ".company.id =:company and ");
-		else
-			selectFields.append(" where  " + metadata.getHqlClass() + ".company.id =:company and ");
-	
+		else {
+			selectFields.append(" where  " + metadata.getHqlClass()  + ".company.id =:company and ");
+			query.setDateExcluded(true);
+		}
+		
 		if (query.getDivision().getId() > 0 ) {
 			selectFields.append(" " + metadata.getHqlClass() + "."+ "division.id=" + query.getDivision().getId() + " and ");
 		}
