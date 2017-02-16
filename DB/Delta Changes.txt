@@ -1016,6 +1016,78 @@ FOREIGN KEY (DATA_TYPE) REFERENCES FINITE_VALUES(CODE),
 FOREIGN KEY (FV_TYPE) REFERENCES FINITE_VALUE_TYPE(CODE)
 );
 
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('SALESLEAD','Division Name','SalesLead.division.name','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('SALESLEAD','Doc No','SalesLead.docNumber','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('SALESLEAD','Customer Phone','customer.phone','STR','left outer join  SalesLead.customer customer');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('SALESLEAD','Customer First Name','customer.firstName','STR','left outer join  SalesLead.customer customer');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('SALESLEAD','Customer Last Name','customer.lastName','STR','left outer join  SalesLead.customer customer');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('SALESLEAD','Territory','SalesLead.territory.territory','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('SALESLEAD','Released Date','SalesLead.releasedDate','DATE');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('SALESLEAD','Sales Won','SalesLead.salesWon','BOOL');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('SALESLEAD','Sales Bill','SalesLead.sales.billNumber','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('SALESLEAD','Sales Associate','SalesLead.salesAssociate','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('SALESLEAD','Sales Associate Reason','SalesLead.salesAssReasonCode.description','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('SALESLEAD','Manager Reason','SalesLead.mgrReasonCode.description','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('SALESLEAD','Line SKU','salesLeadLine.sku.name','STR','left outer join  SalesLead.salesLeadLines salesLeadLine');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('SALESLEAD','Price','salesLeadLine.price','NUMER','left outer join  SalesLead.salesLeadLines salesLeadLine');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('SALESLEAD','Negotiated Price','salesLeadLine.negotiatedPrice','NUMER','left outer join  SalesLead.salesLeadLines salesLeadLine');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('SALESLEAD','Qty','salesLeadLine.qty','NUMER','left outer join  SalesLead.salesLeadLines salesLeadLine');
+
+
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('SALESPERIOD','Period','SalesPeriod.period','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('SALESPERIOD','Division Name','SalesPeriod.division.name','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('SALESPERIOD','From Date','SalesPeriod.fromDate','DATE');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('SALESPERIOD','To Date','SalesPeriod.toDate','DATE');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('SALESPERIOD','Total Target','SalesPeriod.totalTarget','NUMER');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('SALESPERIOD','Line Item','salesPeriodLine.item.name','STR','left outer join  SalesPeriod.salesPeriodLines salesPeriodLine');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('SALESPERIOD','Qty','salesPeriodLine.qty','NUMER','left outer join  SalesPeriod.salesPeriodLines salesPeriodLine');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('SALESPERIOD','Target Price','salesPeriodLine.targetPrice','NUMER','left outer join  SalesPeriod.salesPeriodLines salesPeriodLine');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('SALESPERIOD','Line Total','salesPeriodLine.lineTotal','NUMER','left outer join  SalesPeriod.salesPeriodLines salesPeriodLine');
+
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('SALESPERIOD','Associate','salesPeriodAssociate.user.userId','STR','left outer join  SalesPeriod.salesPeriodAssociates salesPeriodAssociate');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('SALESPERIOD','Associate Target','salesPeriodAssociate.lineTotal','NUMER','left outer join  SalesPeriod.salesPeriodAssociates salesPeriodAssociate');
+
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('SALESPERIOD','Territory','salesPeriodTerritory.territory.territory','STR','left outer join  SalesPeriod.salesPeriodTerritories salesPeriodTerritory');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('SALESPERIOD','Territory Target','salesPeriodTerritory.lineTotal','NUMER','left outer join  SalesPeriod.salesPeriodTerritories salesPeriodTerritory');
+
+
+
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('WISHLIST','Doc Number','WishList.docNumber','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('WISHLIST','Division Name','WishList.division.name','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('WISHLIST','Customer Phone','customer.phone','STR','left outer join  WishList.customer customer');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('WISHLIST','Customer First Name','customer.firstName','STR','left outer join  WishList.customer customer');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('WISHLIST','Date','WishList.wishListDate','DATE');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('WISHLIST','Fullfilled','WishList.fulfilled','BOOL');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('WISHLIST','Expired','WishList.expired','BOOL');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('WISHLIST','Line SKU','wishListLine.sku.name','STR','left outer join  WishList.wishListLines wishListLine');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('WISHLIST','Desired Price','wishListLine.desiredPrice','NUMER','left outer join  WishList.wishListLines wishListLine');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE) values ('WISHLIST','Desired Qty','wishListLine.qty','NUMER','left outer join  WishList.wishListLines wishListLine');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('WISHLIST','Sales Lead Gen','WishList.salesLeadGenerated','BOOL');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('WISHLIST','Sales Lead Doc','WishList.salesLead.docNumber','STR');
+
+
+
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('FOLLOWUP','Division Name','Followup.lead.division.name','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('FOLLOWUP','Confidence Level','Followup.confidenceLevel.description','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('FOLLOWUP','Communication Mode','Followup.communicationMode.description','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('FOLLOWUP','Offered Price','Followup.offeredPrice','NUMER');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('FOLLOWUP','Sales Associate','Followup.salesAssociate','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('FOLLOWUP','Next Followup','Followup.nextFollwup','DATE');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('FOLLOWUP','Final Followup','Followup.finalFollowup','BOOL');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('FOLLOWUP','Result','Followup.result.description','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('FOLLOWUP','Result Reason','Followup.resultReason.description','STR');
+
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('ALERT','Division Name','Alert.division.name','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('ALERT','Owner Name','Alert.owner.userId','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('ALERT','Raised Date','Alert.raisedDate','DATE');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('ALERT','Acknowledged Date','Alert.acknowDate','DATE');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('ALERT','Type','Alert.type.description','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('ALERT','Status','Alert.status.description','STR');
+INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('ALERT','Raised By','Alert.raisedBy','STR');
+
+
+
+
 INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('INVENTORY','Division Name','Inventory.division.name','STR');
 INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('INVENTORY','SKU','Inventory.sku.name','STR');
 INSERT INTO ENTITY_FIELDS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE) values ('INVENTORY','Item','Inventory.sku.item.name','STR');
