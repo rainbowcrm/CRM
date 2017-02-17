@@ -21,12 +21,16 @@ public class QueryValidator extends CRMValidator {
 				errors.add(getErrorforCode(UserErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Transaction"))) ;
 		if (Utils.isNullList(query.getConditions()))
 			errors.add(getErrorforCode(UserErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Conditions"))) ;
-		if (query.getSelectedFields() == null)
-			errors.add(getErrorforCode(UserErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Display_Fields"))) ;
 		if(Utils.isNullString(query.getDateValueType()))
 			errors.add(getErrorforCode(UserErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Date_Criteria"))) ;
-		if(Utils.isNullString(query.getResultType()))
+		if(Utils.isNullString(query.getResultType())) 
 			errors.add(getErrorforCode(UserErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Result_Display"))) ;
+		if("LIST".equalsIgnoreCase(query.getResultType())){
+			if (query.getSelectedFields() == null)
+				errors.add(getErrorforCode(UserErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Display_Fields"))) ;
+			if(Utils.isNullString(query.getSortDesc()))
+				errors.add(getErrorforCode(UserErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Sort_Desc"))) ;
+		}
 		
 		if ("REL".equals(query.getDateValueType())) {
 			if (query.getFromCriteria() == null || query.getFromCriteria().getCode() ==null)
