@@ -53,10 +53,12 @@ public class SalesPeriodAnalyzerController  extends CRMGeneralController{
 					.getInstance("ISalesService");
 			SalesPeriod salesPeriod = (SalesPeriod) service.getById(period);
 			BarChartData barChartData = new BarChartData();
+			barChartData.setTitle("Sales Period Analyzer");
 			if ("It".equalsIgnoreCase(analyzer.getBasedOn())) {
 				Set<SalesPeriodLine> periodLines = salesPeriod
 						.getSalesPeriodLines();
 				int minY = 0, maxY = 0;
+				barChartData.setSubTitle("Item Wise");
 				for (SalesPeriodLine periodLine : periodLines) {
 					BarData barData = new BarData();
 					barData.setText(periodLine.getItem().getName());
@@ -66,11 +68,12 @@ public class SalesPeriodAnalyzerController  extends CRMGeneralController{
 					barData.setValue(periodLine.getQty());
 					barData.setColor("green");
 					barData.setTextColor("blue");
+					barData.setLegend("Target");
 					BarChartData.Division divis = barChartData.new Division();
 					divis.addBarData(barData);
 
 					BarData actualSales = new BarData();
-					// actualSales.setText(periodLine.getItem().getName());
+					actualSales.setText(periodLine.getItem().getName());
 					int soldQty = salesService.getItemSaleQuantity(
 							periodLine.getItem(), salesPeriod.getFromDate(),
 							salesPeriod.getToDate(), salesPeriod.getDivision());
@@ -79,6 +82,7 @@ public class SalesPeriodAnalyzerController  extends CRMGeneralController{
 						maxY = soldQty;
 					}
 					actualSales.setColor("red");
+					actualSales.setLegend("Actual");
 					divis.addBarData(actualSales);
 
 					barChartData.addDivision(divis);
@@ -90,6 +94,7 @@ public class SalesPeriodAnalyzerController  extends CRMGeneralController{
 				analyzer.setSalesData(barChartData);
 			} else  if ("US".equalsIgnoreCase(analyzer.getBasedOn())) {
 				Set<SalesPeriodAssociate> associates = salesPeriod.getSalesPeriodAssociates();
+				barChartData.setSubTitle("Associate Wise");
 				int minY = 0, maxY = 0;
 				for (SalesPeriodAssociate periodLine : associates) {
 					BarData barData = new BarData();
@@ -100,11 +105,12 @@ public class SalesPeriodAnalyzerController  extends CRMGeneralController{
 					barData.setValue(periodLine.getLineTotal());
 					barData.setColor("green");
 					barData.setTextColor("blue");
+					barData.setLegend("Target");
 					BarChartData.Division divis = barChartData.new Division();
 					divis.addBarData(barData);
 
 					BarData actualSales = new BarData();
-					// actualSales.setText(periodLine.getItem().getName());
+					actualSales.setText(periodLine.getUser().getFirstName() + " "+ periodLine.getUser().getLastName());
 					int soldQty = salesService.getSalesManSaleQuantity(
 							periodLine.getUser(), salesPeriod.getFromDate(),
 							salesPeriod.getToDate(), salesPeriod.getDivision());
@@ -113,6 +119,7 @@ public class SalesPeriodAnalyzerController  extends CRMGeneralController{
 						maxY = soldQty;
 					}
 					actualSales.setColor("red");
+					actualSales.setLegend("Actual");
 					divis.addBarData(actualSales);
 
 					barChartData.addDivision(divis);
@@ -124,6 +131,7 @@ public class SalesPeriodAnalyzerController  extends CRMGeneralController{
 				analyzer.setSalesData(barChartData);
 			}else  if ("TR".equalsIgnoreCase(analyzer.getBasedOn())) {
 				Set<SalesPeriodTerritory> territories = salesPeriod.getSalesPeriodTerritories();
+				barChartData.setSubTitle("Territory Wise");
 				int minY = 0, maxY = 0;
 				for (SalesPeriodTerritory periodLine : territories) {
 					BarData barData = new BarData();
@@ -134,11 +142,12 @@ public class SalesPeriodAnalyzerController  extends CRMGeneralController{
 					barData.setValue(periodLine.getLineTotal());
 					barData.setColor("green");
 					barData.setTextColor("blue");
+					barData.setLegend("Target");
 					BarChartData.Division divis = barChartData.new Division();
 					divis.addBarData(barData);
 
 					BarData actualSales = new BarData();
-					// actualSales.setText(periodLine.getItem().getName());
+					actualSales.setText(periodLine.getTerritory().getTerritory());
 					int soldQty = salesService.getTerritorySaleQuantity(
 							periodLine.getTerritory().getId(), salesPeriod.getFromDate(),
 							salesPeriod.getToDate(), salesPeriod.getDivision());
@@ -147,6 +156,7 @@ public class SalesPeriodAnalyzerController  extends CRMGeneralController{
 						maxY = soldQty;
 					}
 					actualSales.setColor("red");
+					actualSales.setLegend("Actual");
 					divis.addBarData(actualSales);
 
 					barChartData.addDivision(divis);
