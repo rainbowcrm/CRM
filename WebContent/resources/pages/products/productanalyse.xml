@@ -39,8 +39,8 @@ Controller = "com.rainbow.crm.product.controller.ProductAnalyzerController">
 	  <centerY>150</centerY>
 	  <radius>50</radius>
 	  <rangeHeight>300</rangeHeight>
-	  <rangeWidth>700</rangeWidth>
- 	</Element>
+	  <rangeWidth>500</rangeWidth>
+ 	</Element>  
 	<Element type = "UIPieChart" Id = "brChrt"  dataProvider = "topSalesData" >
 	  <centerX>150</centerX>
 	  <centerY>150</centerY>

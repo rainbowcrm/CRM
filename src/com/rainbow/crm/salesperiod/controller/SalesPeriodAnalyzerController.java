@@ -71,9 +71,10 @@ public class SalesPeriodAnalyzerController  extends CRMGeneralController{
 					barData.setLegend("Target");
 					BarChartData.Division divis = barChartData.new Division();
 					divis.addBarData(barData);
+					divis.setDivisionTitle(periodLine.getItem().getName());
 
 					BarData actualSales = new BarData();
-					actualSales.setText(periodLine.getItem().getName());
+					//actualSales.setText(periodLine.getItem().getName());
 					int soldQty = salesService.getItemSaleQuantity(
 							periodLine.getItem(), salesPeriod.getFromDate(),
 							salesPeriod.getToDate(), salesPeriod.getDivision());
@@ -108,9 +109,10 @@ public class SalesPeriodAnalyzerController  extends CRMGeneralController{
 					barData.setLegend("Target");
 					BarChartData.Division divis = barChartData.new Division();
 					divis.addBarData(barData);
+					divis.setDivisionTitle(periodLine.getUser().getFirstName() + " "+ periodLine.getUser().getLastName());
 
 					BarData actualSales = new BarData();
-					actualSales.setText(periodLine.getUser().getFirstName() + " "+ periodLine.getUser().getLastName());
+					//actualSales.setText(periodLine.getUser().getFirstName() + " "+ periodLine.getUser().getLastName());
 					int soldQty = salesService.getSalesManSaleQuantity(
 							periodLine.getUser(), salesPeriod.getFromDate(),
 							salesPeriod.getToDate(), salesPeriod.getDivision());
@@ -145,9 +147,10 @@ public class SalesPeriodAnalyzerController  extends CRMGeneralController{
 					barData.setLegend("Target");
 					BarChartData.Division divis = barChartData.new Division();
 					divis.addBarData(barData);
+					divis.setDivisionTitle(periodLine.getTerritory().getTerritory());
 
 					BarData actualSales = new BarData();
-					actualSales.setText(periodLine.getTerritory().getTerritory());
+					//actualSales.setText(periodLine.getTerritory().getTerritory());
 					int soldQty = salesService.getTerritorySaleQuantity(
 							periodLine.getTerritory().getId(), salesPeriod.getFromDate(),
 							salesPeriod.getToDate(), salesPeriod.getDivision());

@@ -6,6 +6,7 @@
 <Properties>
 <appURL>http://localhost:8080/</appURL>
 <bootstrapFolder>./bootstrap</bootstrapFolder>
+<useGoogleforGraphs>true</useGoogleforGraphs>
 </Properties>
 <Pages>
 <Page id = "login" definition ="/resources/pages/login/login.xml" modelclass = "com.rainbow.crm.login.model.Login" >

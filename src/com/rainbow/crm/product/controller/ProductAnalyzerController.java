@@ -51,15 +51,23 @@ public class ProductAnalyzerController  extends CRMGeneralController{
 				"Salmon","Gray","SandyBrown","Ivory","CadetBlue","OrangeRed","SeaGreen"} ;
 		ProductAnalyzer analyzer = (ProductAnalyzer) object;
 		PieChartData  pieTopChartData = readByItemCass(analyzer,CRMConstants.ITEM_CLASS.TOP_END,colors);
+		pieTopChartData.setTitle("Items");
+		pieTopChartData.setTitle("Top End");
 		analyzer.setTopSalesData(pieTopChartData);
 		
 		PieChartData  pieupMedChartData = readByItemCass(analyzer,CRMConstants.ITEM_CLASS.UPPER_MEDIUM,colors);
+		pieupMedChartData.setTitle("Items");
+		pieupMedChartData.setTitle("Upper Medium");
 		analyzer.setUpMedSalesData(pieupMedChartData);
 		
 		PieChartData  pielowMedChartData = readByItemCass(analyzer,CRMConstants.ITEM_CLASS.LOWER_MEDIUM,colors);
+		pielowMedChartData.setTitle("Items");
+		pielowMedChartData.setTitle("Lower Medium");
 		analyzer.setLowMedSalesData(pielowMedChartData);
 		
 		PieChartData  pieeconChartData = readByItemCass(analyzer,CRMConstants.ITEM_CLASS.ECONOMIC,colors);
+		pieeconChartData.setTitle("Items");
+		pieeconChartData.setTitle("Economic");
 		analyzer.setEconSalesData(pieeconChartData);
 		
 		return new PageResult();
