@@ -57,6 +57,8 @@ public class SalesTrendController  extends CRMGeneralController{
 		int maxValue = 0;
 		int colorIndex = 0;
 		lineChartData.setBorderColor(colors[colorIndex++]);
+		lineChartData.setTitle("Sales Trend");
+		lineChartData.setSubTitle(selectedProduct.getName());
 		Map <Integer,LineChartEntryData> itemMap = new HashMap<Integer,LineChartEntryData>() ;
 		try {
 			//lineChartData.addInterval(Utils.dateToString(periodFrom, "dd-MM-yyyy"));
