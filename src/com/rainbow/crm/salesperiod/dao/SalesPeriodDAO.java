@@ -8,7 +8,10 @@ import org.hibernate.Session;
 
 import com.rainbow.crm.filter.model.CRMFilter;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
+import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.salesperiod.model.SalesPeriod;
+import com.rainbow.crm.salesperiod.model.SalesPeriodAssociate;
+import com.techtrade.rads.framework.utils.Utils;
 
 public class SalesPeriodDAO  extends SpringHibernateDAO{
 
@@ -40,6 +43,36 @@ public class SalesPeriodDAO  extends SpringHibernateDAO{
 		closeSession(session, false);
 		return lst;
 	}
+	
+	public SalesPeriod getActiveSalesPeriodforAssociate(String userId,  Date toDate )
+	{
+		Session session = openSession(false);
+		try 
+		{
+			Query query = session.createQuery("from SalesPeriod  SalesPeriod left outer join  SalesPeriod.salesPeriodAssociates salesPeriodAssociate "
+			+ "   where SalesPeriod.voided=false and SalesPeriod.fromDate <= :fromDate and SalesPeriod.toDate >= :toDate and   salesPeriodAssociate.user.userId = :userId" ) ;
+			query.setDate("toDate", toDate);
+			query.setDate("fromDate", toDate);
+			query.setParameter("userId", userId);
+			List	lst = query.list();
+			if (!Utils.isNullList(lst)) {
+				Object[] objects = (Object[])lst.stream().findFirst().get();
+				SalesPeriod period = (SalesPeriod) objects[0]  ;
+				SalesPeriodAssociate associate = (SalesPeriodAssociate)objects[1] ;
+				period.addSalesPeriodAssociate(associate);
+				return period;
+			}
+		} catch( Exception ex )
+		{
+			Logwriter.INSTANCE.error(ex);
+			
+		} finally {
+			closeSession(session, false);
+		}
+		return null;
+		
+	}
+	
 	
 	
 	/*@Override

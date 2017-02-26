@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Page id = "salesdashboard" showinFrame ="true"  title ="Sales Dashboard| Rainbow CRM" Object = "com.rainbow.crm.dashboard.model.SalesDashbBard" 
+Controller = "com.rainbow.crm.dashboard.controller.SalesDashBoardController">
+<Template type= "General"  name = "GraphTemplate"></Template>
+
+<Elements>
+<UIForm Id ="cust" method = "POST" enctype="multipart/form-data" >
+<Section type ="topBar"></Section> 
+<Section type ="leftsideBarApp"></Section>
+<CoreSection>
+<ErrorSection>
+</ErrorSection>
+<Section type= "displaySection">
+	<Element type = "UIBarChart" Id = "brChrt"  dataProvider = "salesTargetData" >
+	  <xStart>0</xStart>
+	  <yStart>20</yStart>
+	  <rangeHeight>300</rangeHeight>
+	  <rangeWidth>500</rangeWidth>
+	  <marginWidth>30</marginWidth>
+	  <barWidth>30</barWidth>
+	  <noYAxisDivisions>6</noYAxisDivisions>
+	</Element> 
+	<!--  <Element type = "UIBarChart" Id = "brChrt2"  dataProvider = "salesTargetData" >
+	  <xStart>0</xStart>
+	  <yStart>20</yStart>
+	  <rangeHeight>600</rangeHeight>
+	  <rangeWidth>1000</rangeWidth>
+	  <marginWidth>30</marginWidth>
+	  <barWidth>30</barWidth>
+	  <noYAxisDivisions>6</noYAxisDivisions>
+	</Element>
+ 	<Element type = "UIBarChart" Id = "brChrt3"  dataProvider = "salesTargetData" >
+	  <xStart>0</xStart>
+	  <yStart>20</yStart>
+	  <rangeHeight>600</rangeHeight>
+	  <rangeWidth>1000</rangeWidth>
+	  <marginWidth>30</marginWidth>
+	  <barWidth>30</barWidth>
+	  <noYAxisDivisions>6</noYAxisDivisions>
+	</Element>
+ 	<Element type = "UIBarChart" Id = "brChrt4"  dataProvider = "salesTargetData" >
+	  <xStart>0</xStart>
+	  <yStart>20</yStart>
+	  <rangeHeight>600</rangeHeight>
+	  <rangeWidth>1000</rangeWidth>
+	  <marginWidth>30</marginWidth>
+	  <barWidth>30</barWidth>
+	  <noYAxisDivisions>6</noYAxisDivisions>
+	</Element>  -->  
+</Section>
+</CoreSection>
+<Section type ="copyRightSection"/>
+</UIForm>
+</Elements>
+</Page>

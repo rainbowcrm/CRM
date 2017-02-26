@@ -74,6 +74,8 @@
     </bean>
     <bean id="ISalespitchService" class="com.rainbow.crm.salespitch.service.SalespitchService">
     </bean>
+    <bean id="IDashBoardService" class="com.rainbow.crm.dashboard.service.DashBoardService">
+    </bean>
     <bean id="ICustCategoryService" class="com.rainbow.crm.custcategory.service.CustCategoryService">
     </bean>
     <bean id="IAlertService" class="com.rainbow.crm.alert.service.AlertService">

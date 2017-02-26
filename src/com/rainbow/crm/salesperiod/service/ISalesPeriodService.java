@@ -13,5 +13,6 @@ public interface ISalesPeriodService extends ITransactionService{
   
   public List<SalesPeriod> getEndSalesPeriodsforAlerts(Date endDt ) ;
 
+  public SalesPeriod getSalesPeriodforAssociate(String userId,  Date date) ;
   
 }

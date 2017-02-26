@@ -303,6 +303,12 @@ public class SalesPeriodService extends AbstractionTransactionService implements
 		SalesPeriodDAO dao = (SalesPeriodDAO) getDAO();
 		return dao.getEndingSalesPeriodsforAlerts(endDt);
 	}
+
+	@Override
+	public SalesPeriod getSalesPeriodforAssociate(String userId, Date date) {
+		SalesPeriodDAO dao = (SalesPeriodDAO) getDAO();
+		return dao.getActiveSalesPeriodforAssociate(userId, date);
+	}
 	
 	
 	
