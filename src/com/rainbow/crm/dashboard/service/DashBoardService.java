@@ -7,6 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.SpringObjectFactory;
+import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.sales.service.ISalesService;
 import com.rainbow.crm.salesperiod.model.SalesPeriod;
 import com.rainbow.crm.salesperiod.model.SalesPeriodAssociate;
@@ -15,9 +16,12 @@ import com.rainbow.crm.user.model.User;
 import com.techtrade.rads.framework.model.graphdata.BarChartData;
 import com.techtrade.rads.framework.model.graphdata.BarData;
 import com.techtrade.rads.framework.model.graphdata.LineChartData;
+import com.techtrade.rads.framework.model.graphdata.LineChartEntryData;
 import com.techtrade.rads.framework.model.graphdata.PieChartData;
 import com.techtrade.rads.framework.model.graphdata.BarChartData.Division;
+import com.techtrade.rads.framework.model.graphdata.LineChartData.Range;
 import com.techtrade.rads.framework.model.graphdata.PieSliceData;
+import com.techtrade.rads.framework.utils.Utils;
 
 public class DashBoardService  implements IDashBoardService{
 
@@ -75,8 +79,39 @@ public class DashBoardService  implements IDashBoardService{
 	@Override
 	public LineChartData getSalesHistory(User associate, Date date,
 			CRMContext context) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		LineChartData lineChartData = new LineChartData();
+		long points = 3;
+		int maxValue = 0;
+	try { 
+		LineChartEntryData lineChartEntryData  = new LineChartEntryData();
+		lineChartData.setBorderColor(CommonUtil.getGraphColors()[1] );
+		lineChartData.setTitle("Sales Progression");
+		lineChartData.setSubTitle("Sales History");
+		lineChartEntryData.setColor(CommonUtil.getGraphColors()[1] );
+		for (long i = points;  i >0 ; i--) {
+			Date startDate = new Date(date.getTime() -  (7 * i * 24l * 3600l * 1000l  ));
+			Date endDate = new Date(date.getTime() -  (7 * (i-1) * 24l * 3600l * 1000l  ));
+			Double saleQty = DashBoardSQLs.getPeriodTotalSale(associate.getUserId(), new java.sql.Date(startDate.getTime()), new java.sql.Date(endDate.getTime()));
+			if (i == points){
+				lineChartData.setStartingPoint(Utils.dateToString(startDate, "dd-MM-yyyy"));
+			}
+			lineChartData.addInterval(Utils.dateToString(endDate, "dd-MM-yyyy"));
+			lineChartEntryData.addToValueMap(Utils.dateToString(endDate, "dd-MM-yyyy"), saleQty);
+			if (saleQty > maxValue )
+				maxValue = new Double(saleQty).intValue();
+				 
+					
+		}
+		lineChartData.addEntry(lineChartEntryData);
+		LineChartData.Range range = lineChartData.new Range();
+		range.setyMax(maxValue);
+		lineChartData.setRange(range);
+	}catch(Exception ex) {
+		Logwriter.INSTANCE.error(ex);
+	}
+		
+		return lineChartData;
 	}
 
 	@Override

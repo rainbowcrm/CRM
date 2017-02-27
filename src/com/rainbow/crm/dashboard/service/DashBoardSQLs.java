@@ -13,6 +13,34 @@ import com.rainbow.crm.logger.Logwriter;
 
 public class DashBoardSQLs {
 
+	public static Double getPeriodTotalSale(String associate,  Date startDate, Date endDate )
+	{
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		try {
+			connection = ConnectionCreater.getConnection();
+			String sql =  " SELECT SUM(SALES_LINES.LINE_TOTAL) FROM SALES , SALES_LINES WHERE SALES.ID= SALES_LINES.SALES_ID AND  " + 
+			 " SALES.SALES_DATE > ? AND  SALES.SALES_DATE <= ?  AND " + 
+			" SALES_LINES.USER_ID= ? AND  SALES_LINES.IS_VOIDED = FALSE AND SALES.IS_VOIDED= FALSE  ";
+			statement = connection.prepareStatement(sql);
+			statement.setDate(1, startDate);
+			statement.setDate(2, endDate);
+			statement.setString(3, associate);
+			rs = statement.executeQuery();
+			while (rs.next()) {
+				Double amount = rs.getDouble(1);
+				return amount; 
+			}
+			
+		}catch (SQLException ex) {
+			Logwriter.INSTANCE.error(ex);
+		} finally {
+			ConnectionCreater.close(connection, statement, rs);
+		}
+		return 0d ;
+	}
+	
 	
 	public static Map<String, Double> getItemWiseSale(int division, String associate,  Date startDate, Date endDate )
 	{

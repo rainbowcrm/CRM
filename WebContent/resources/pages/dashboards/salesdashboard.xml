@@ -18,7 +18,7 @@ Controller = "com.rainbow.crm.dashboard.controller.SalesDashBoardController">
 	  <xStart>0</xStart>
 	  <yStart>20</yStart>
 	  <rangeHeight>300</rangeHeight>
-	  <rangeWidth>300</rangeWidth>
+	  <rangeWidth>500</rangeWidth>
 	  <marginWidth>30</marginWidth>
 	  <barWidth>30</barWidth>
 	  <noYAxisDivisions>6</noYAxisDivisions>
@@ -27,7 +27,7 @@ Controller = "com.rainbow.crm.dashboard.controller.SalesDashBoardController">
  	
 
 <Element type = "UITableCol" width ="50%" >
-	<Element type = "UIPieChart" Id = "pieChart1"  dataProvider = "portfolioSplits" useGoogleGraph="true" >
+	<Element type = "UIPieChart" Id = "pieChart1"  dataProvider = "portfolioSplits" useGoogleGraph="false" >
 	  <centerX>150</centerX>
 	  <centerY>150</centerY>
 	  <radius>50</radius>
@@ -36,18 +36,24 @@ Controller = "com.rainbow.crm.dashboard.controller.SalesDashBoardController">
  	</Element>  
 </Element>
 </Element>	
-</Element>
 
- 	<!--   <Element type = "UIBarChart" Id = "brChrt3"  dataProvider = "salesTargetData" >
+<Element type = "UITableRow" >
+<Element type = "UITableCol" width ="50%" >
+ 	<Element type = "UILineChart" Id = "line3"  dataProvider = "salesHistory" useGoogleGraph="true"  >
 	  <xStart>0</xStart>
-	  <yStart>20</yStart>
-	  <rangeHeight>600</rangeHeight>
-	  <rangeWidth>1000</rangeWidth>
+	  <yStart>0</yStart>
+	  <canvasHeight>300</canvasHeight>
+	  <canvasWidth>500</canvasWidth>
+	  <rangeHeight>300</rangeHeight>
+	  <rangeWidth>500</rangeWidth>
 	  <marginWidth>30</marginWidth>
-	  <barWidth>30</barWidth>
+	  <marginHeight>30</marginHeight>
 	  <noYAxisDivisions>6</noYAxisDivisions>
+	  <noXAxisDivisions>6</noXAxisDivisions>
 	</Element>
- 	<Element type = "UIBarChart" Id = "brChrt4"  dataProvider = "salesTargetData" >
+</Element>
+</Element>
+ 	<!-- <Element type = "UIBarChart" Id = "brChrt4"  dataProvider = "salesTargetData" >
 	  <xStart>0</xStart>
 	  <yStart>20</yStart>
 	  <rangeHeight>600</rangeHeight>
@@ -56,6 +62,7 @@ Controller = "com.rainbow.crm.dashboard.controller.SalesDashBoardController">
 	  <barWidth>30</barWidth>
 	  <noYAxisDivisions>6</noYAxisDivisions>
 	</Element>  -->  
+</Element>
 </Section>
 </CoreSection>
 <Section type ="copyRightSection"/>
