@@ -9,6 +9,7 @@ import com.rainbow.crm.dashboard.model.SalesDashBoard;
 import com.rainbow.crm.dashboard.service.IDashBoardService;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.graphdata.BarChartData;
+import com.techtrade.rads.framework.model.graphdata.PieChartData;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
 
 public class SalesDashBoardController extends CRMGeneralController{
@@ -19,6 +20,9 @@ public class SalesDashBoardController extends CRMGeneralController{
 		IDashBoardService service = (IDashBoardService) SpringObjectFactory.INSTANCE.getInstance("IDashBoardService");
 		BarChartData barChartData = service.setSalesTargetData(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext());
 		dashBoard.setSalesTargetData(barChartData);
+		
+		PieChartData pieChartData  = service.getPortfolioSplits(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext());
+		dashBoard.setPortfolioSplits(pieChartData);
 		return new PageResult();
 	}
 

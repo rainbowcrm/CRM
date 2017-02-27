@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
+
 import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
@@ -39,6 +40,13 @@ public class CommonUtil {
 	
 	private static Map <String,Metadata> metadataMap = new HashMap<String,Metadata> ();
 
+	private static String [] colors = { "Red","Blue" ,"Green" , "Violet" , "Indigo" , "Majenta" ,"Brown" ,"Yellow" , "Orange", 
+			"Salmon","Gray","SandyBrown","Ivory","CadetBlue","OrangeRed","SeaGreen"} ;
+	
+	public static String [] getGraphColors() {
+		return colors;
+	}
+	
 	public static Date getRelativeDate(FiniteValue dateValue) {
 			if(CRMConstants.RELDATE.TODAY.equals(dateValue.getCode())) {
 				return new java.util.Date();
