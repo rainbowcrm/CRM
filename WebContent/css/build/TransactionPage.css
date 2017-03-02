@@ -168,6 +168,11 @@ dialog.dialogstyle {
   left: 0px;
   z-index: 10; }
 
+iframe.graphWindow {
+  width: 600px;
+  height: 350px;
+  margin: none; }
+
 iframe.lookupFrameStyle {
   width: 350px;
   height: 350px;

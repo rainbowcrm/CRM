@@ -62,10 +62,31 @@ public class DashBoardService  implements IDashBoardService{
 		actualBarData.setColor(CommonUtil.getGraphColors()[1]);
 		targetDivis.addBarData(actualBarData);
 		
-		targetDivis.setDivisionTitle("Sales Figures");
+		targetDivis.setDivisionTitle("My Sales Figures");
 		barChartData.addDivision(targetDivis);
 
-
+		int totalSoldQty = salesService.getTotalSaleQuantity(currentPeriod.getFromDate(),
+				currentPeriod.getToDate(), currentPeriod.getDivision());
+		
+		int noAssociates  =getNoAssociates(associate, date, context) ;
+		
+		BarChartData.Division avgDataDivis = barChartData.new Division();
+		BarData tagetAvgBarData = new BarData();
+		tagetAvgBarData.setText("Target");
+		tagetAvgBarData.setLegend("Target");
+		tagetAvgBarData.setValue(currentPeriod.getTotalTarget()/noAssociates);
+		tagetAvgBarData.setColor(CommonUtil.getGraphColors()[0]);
+		avgDataDivis.addBarData(tagetAvgBarData);
+		
+		BarData actualavgBarData = new BarData();
+		actualavgBarData.setText("Actual");
+		actualavgBarData.setLegend("Actual");
+		actualavgBarData.setValue(totalSoldQty/noAssociates);
+		actualavgBarData.setColor(CommonUtil.getGraphColors()[1]);
+		avgDataDivis.addBarData(actualavgBarData);
+		
+		avgDataDivis.setDivisionTitle("Avg Sales Figures");
+		barChartData.addDivision(avgDataDivis);
 		
 		BarChartData.Range range =  barChartData.new  Range();
 		range.setyMax( (int)((target>soldQty)?target:soldQty));
@@ -113,12 +134,8 @@ public class DashBoardService  implements IDashBoardService{
 			Date startDate = new Date(date.getTime() -  (7 * i * 24l * 3600l * 1000l  ));
 			Date endDate = new Date(date.getTime() -  (7 * (i-1) * 24l * 3600l * 1000l  ));
 			SalesPeriod currentPeriod = getSalesPeriodforUser(associate, endDate, context);
-			ISalesPeriodService service = (ISalesPeriodService)SpringObjectFactory.INSTANCE.getInstance("ISalesPeriodService");
-			currentPeriod =(SalesPeriod) service.getById(currentPeriod.getPK());
 			Double saleQty = DashBoardSQLs.getSaleAllMade(currentPeriod.getDivision().getId(), new java.sql.Date(startDate.getTime()), new java.sql.Date(endDate.getTime()));
-			int noAssociates = 1;
-			if (!Utils.isNullSet(currentPeriod.getSalesPeriodAssociates()))
-				noAssociates = currentPeriod.getSalesPeriodAssociates().size();
+			int noAssociates  =getNoAssociates(associate, endDate, context) ;
 			lineChartavgEntry.addToValueMap(Utils.dateToString(endDate, "dd-MM-yyyy"), saleQty/noAssociates);
 			if (saleQty > maxValue )
 				maxValue = new Double(saleQty).intValue();
@@ -134,6 +151,17 @@ public class DashBoardService  implements IDashBoardService{
 	}
 		
 		return lineChartData;
+	}
+	
+	private int getNoAssociates (User associate, Date endDate, CRMContext context) 
+	{
+		SalesPeriod currentPeriod = getSalesPeriodforUser(associate, endDate, context);
+		ISalesPeriodService service = (ISalesPeriodService)SpringObjectFactory.INSTANCE.getInstance("ISalesPeriodService");
+		currentPeriod =(SalesPeriod) service.getById(currentPeriod.getPK());
+		int noAssociates = 1;
+		if (!Utils.isNullSet(currentPeriod.getSalesPeriodAssociates()))
+			noAssociates = currentPeriod.getSalesPeriodAssociates().size();
+		return noAssociates; 
 	}
 
 	@Override

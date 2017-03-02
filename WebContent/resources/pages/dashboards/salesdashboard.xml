@@ -14,7 +14,19 @@ Controller = "com.rainbow.crm.dashboard.controller.SalesDashBoardController">
 <Element type = "UITable" rows = "1" cols = "2"  style = "outlinedTable">
 <Element type = "UITableRow" >
 <Element type = "UITableCol" width ="50%" >
-  <Element type = "UIBarChart" Id = "brChrt"  dataProvider = "salesTargetData"  useGoogleGraph="false">
+	<!-- <Element type = "UIPieChart" Id = "pieChart1"  dataProvider = "portfolioSplits" useGoogleGraph="true" >
+	  <centerX>150</centerX>
+	  <centerY>150</centerY>
+	  <radius>50</radius>
+	  <rangeHeight>300</rangeHeight>
+	  <rangeWidth>500</rangeWidth>
+ 	</Element>  -->  
+ 	<Element type = "UIIFrame" src ="./rdscontroller?page=salesportfoliosplits"  style = "graphWindow">
+	</Element>
+</Element>
+
+<Element type = "UITableCol" width ="50%" >
+<!--   <Element type = "UIBarChart" Id = "brChrt"  dataProvider = "salesTargetData"  useGoogleGraph="false">
 	  <xStart>0</xStart>
 	  <yStart>20</yStart>
 	  <rangeHeight>300</rangeHeight>
@@ -22,19 +34,14 @@ Controller = "com.rainbow.crm.dashboard.controller.SalesDashBoardController">
 	  <marginWidth>30</marginWidth>
 	  <barWidth>30</barWidth>
 	  <noYAxisDivisions>6</noYAxisDivisions>
-	</Element> 
+	</Element>  -->
+ 	<Element type = "UIIFrame" src ="./rdscontroller?page=salesdashboardtargetdata"  style="graphWindow">
+	</Element>
+	
 </Element>	
  	
 
-<Element type = "UITableCol" width ="50%" >
-	<Element type = "UIPieChart" Id = "pieChart1"  dataProvider = "portfolioSplits" useGoogleGraph="false" >
-	  <centerX>150</centerX>
-	  <centerY>150</centerY>
-	  <radius>50</radius>
-	  <rangeHeight>300</rangeHeight>
-	  <rangeWidth>500</rangeWidth>
- 	</Element>  
-</Element>
+
 </Element>	
 
 <Element type = "UITableRow" >

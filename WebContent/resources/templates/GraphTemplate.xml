@@ -30,6 +30,11 @@
    <noRows>-1</noRows>
  <noCols>2</noCols> 
   </Section>
+    <Section Id = "fullSection"  showinTable = "false" style= "childSectionStyle">
+   <noRows>-1</noRows>
+ <noCols>2</noCols> 
+  </Section>
+  
   </CoreSection>
  <Section Id ="summary" showinTable = "true"  style= "summaryStyle" >
  <noRows>1</noRows>

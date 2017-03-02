@@ -27,6 +27,8 @@ public interface ISalesService extends ITransactionService{
 	
 	public int getSalesManSaleQuantity(User user, Date from, Date to,Division division ) ;
 	
+	public int getTotalSaleQuantity(Date from, Date to,Division division ) ;
+	
 	public int getTerritorySaleQuantity(int territory, Date from, Date to,Division division ) ;
 
 }

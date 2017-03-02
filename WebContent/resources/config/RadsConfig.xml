@@ -54,6 +54,10 @@
 </Page>
 <Page id = "dashboard" definition ="/resources/pages/dashboards/salesdashboard.xml" modelclass = "com.rainbow.crm.dashboard.model.SalesDashBoard" >
 </Page>
+<Page id = "salesdashboardtargetdata" definition ="/resources/pages/dashboards/salesdashboardtargetdata.xml" modelclass = "com.rainbow.crm.dashboard.model.SalesDashBoard" >
+</Page>
+<Page id = "salesportfoliosplits" definition ="/resources/pages/dashboards/salesportfoliosplits.xml" modelclass = "com.rainbow.crm.dashboard.model.SalesDashBoard" >
+</Page> 
 <Page id = "custcategories" definition ="/resources/pages/custcategory/custcategoryList.xml" modelclass = "com.rainbow.crm.custcategory.model.CustCategory" >
 </Page>
 <Page id = "newcustcategory" definition ="/resources/pages/custcategory/newcustcategory.xml" modelclass = "com.rainbow.crm.custcategory.model.CustCategory" >

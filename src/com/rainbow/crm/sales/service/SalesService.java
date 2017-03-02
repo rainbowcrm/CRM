@@ -274,6 +274,13 @@ public class SalesService extends AbstractionTransactionService implements ISale
 	}
 	
 	
+	
+
+	@Override
+	public int getTotalSaleQuantity( Date from, Date to,Division division) {
+		// TODO Auto-generated method stub
+		return GeneralSQLs.getTotalSoldQty(from,to,division.getId());
+	}
 
 	@Override
 	public int getSalesManSaleQuantity(User user, Date from, Date to,
