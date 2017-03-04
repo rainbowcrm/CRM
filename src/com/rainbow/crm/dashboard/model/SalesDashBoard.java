@@ -13,6 +13,8 @@ public class SalesDashBoard extends CRMModelObject{
 	LineChartData salesHistory;
 	PieChartData portfolioSplits;
 	
+	String graphId;
+	
 	
 	public BarChartData getSalesTargetData() {
 		return salesTargetData;
@@ -32,6 +34,13 @@ public class SalesDashBoard extends CRMModelObject{
 	public void setPortfolioSplits(PieChartData portfolioSplits) {
 		this.portfolioSplits = portfolioSplits;
 	}
+	public String getGraphId() {
+		return graphId;
+	}
+	public void setGraphId(String graphId) {
+		this.graphId = graphId;
+	}
+	
 		
 	
 

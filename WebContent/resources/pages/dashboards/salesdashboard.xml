@@ -21,7 +21,7 @@ Controller = "com.rainbow.crm.dashboard.controller.SalesDashBoardController">
 	  <rangeHeight>300</rangeHeight>
 	  <rangeWidth>500</rangeWidth>
  	</Element>  -->  
- 	<Element type = "UIIFrame" src ="./rdscontroller?page=salesportfoliosplits"  style = "graphWindow">
+ 	<Element type = "UIIFrame" src ="./rdscontroller?page=salesportfoliosplits&amp;graphId=portfoliosplits"  style = "graphWindow">
 	</Element>
 </Element>
 
@@ -35,7 +35,7 @@ Controller = "com.rainbow.crm.dashboard.controller.SalesDashBoardController">
 	  <barWidth>30</barWidth>
 	  <noYAxisDivisions>6</noYAxisDivisions>
 	</Element>  -->
- 	<Element type = "UIIFrame" src ="./rdscontroller?page=salesdashboardtargetdata"  style="graphWindow">
+ 	<Element type = "UIIFrame" src ="./rdscontroller?page=salesdashboardtargetdata&amp;graphId=targetanalysis"  style="graphWindow">
 	</Element>
 	
 </Element>	
@@ -46,7 +46,7 @@ Controller = "com.rainbow.crm.dashboard.controller.SalesDashBoardController">
 
 <Element type = "UITableRow" >
 <Element type = "UITableCol" width ="50%" >
- 	<Element type = "UILineChart" Id = "line3"  dataProvider = "salesHistory" useGoogleGraph="true"  >
+ 	<!-- <Element type = "UILineChart" Id = "line3"  dataProvider = "salesHistory" useGoogleGraph="true"  >
 	  <xStart>0</xStart>
 	  <yStart>0</yStart>
 	  <canvasHeight>300</canvasHeight>
@@ -57,7 +57,11 @@ Controller = "com.rainbow.crm.dashboard.controller.SalesDashBoardController">
 	  <marginHeight>30</marginHeight>
 	  <noYAxisDivisions>6</noYAxisDivisions>
 	  <noXAxisDivisions>6</noXAxisDivisions>
+	</Element> -->
+	
+	<Element type = "UIIFrame" src ="./rdscontroller?page=salesdashboardsaleshistory&amp;graphId=saleshistory"  style="graphWindow">
 	</Element>
+	
 </Element>
 </Element>
  	<!-- <Element type = "UIBarChart" Id = "brChrt4"  dataProvider = "salesTargetData" >
