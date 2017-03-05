@@ -1,3 +1,4 @@
+
 package com.rainbow.crm.salesperiod.service;
 
 import java.util.Date;
@@ -14,5 +15,7 @@ public interface ISalesPeriodService extends ITransactionService{
   public List<SalesPeriod> getEndSalesPeriodsforAlerts(Date endDt ) ;
 
   public SalesPeriod getSalesPeriodforAssociate(String userId,  Date date) ;
+  
+  public SalesPeriod getActiveSalesPeriodforDivision(int divisionId,  Date date) ;
   
 }

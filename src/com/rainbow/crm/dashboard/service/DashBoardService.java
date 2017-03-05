@@ -32,6 +32,13 @@ public class DashBoardService  implements IDashBoardService{
 
 	}
 
+	private SalesPeriod getActiveSalesPeriodforManager(User associate, Date date,CRMContext context)
+	{
+		ISalesPeriodService salesPeriodService = (ISalesPeriodService)SpringObjectFactory.INSTANCE.getInstance("ISalesPeriodService");
+		return salesPeriodService.getActiveSalesPeriodforDivision(associate.getDivision().getId(), date);
+
+	}
+	
 	@Override
 	public BarChartData setSalesTargetData(User associate, Date date,
 			CRMContext context) {
@@ -40,6 +47,8 @@ public class DashBoardService  implements IDashBoardService{
 		barChartData.setTitle("Target vs Actual");
 		barChartData.setSubTitle(" ");
 		SalesPeriod currentPeriod = getSalesPeriodforUser(associate, date, context);
+		if(currentPeriod == null)
+			return null;
 		SalesPeriodAssociate salesPerAssociate = currentPeriod.getSalesPeriodAssociates().stream().findFirst().get();
 		Double target  = salesPerAssociate.getLineTotal() ;
 		ISalesService salesService =  (ISalesService)SpringObjectFactory.INSTANCE.getInstance("ISalesService");
@@ -122,7 +131,6 @@ public class DashBoardService  implements IDashBoardService{
 			lineChartEntryData.addToValueMap(Utils.dateToString(endDate, "dd-MM-yyyy"), saleQty);
 			if (saleQty > maxValue )
 				maxValue = new Double(saleQty).intValue();
-				 
 					
 		}
 		lineChartData.addEntry(lineChartEntryData);
@@ -134,6 +142,8 @@ public class DashBoardService  implements IDashBoardService{
 			Date startDate = new Date(date.getTime() -  (7 * i * 24l * 3600l * 1000l  ));
 			Date endDate = new Date(date.getTime() -  (7 * (i-1) * 24l * 3600l * 1000l  ));
 			SalesPeriod currentPeriod = getSalesPeriodforUser(associate, endDate, context);
+			if (currentPeriod == null)
+				return null;
 			Double saleQty = DashBoardSQLs.getSaleAllMade(currentPeriod.getDivision().getId(), new java.sql.Date(startDate.getTime()), new java.sql.Date(endDate.getTime()));
 			int noAssociates  =getNoAssociates(associate, endDate, context) ;
 			lineChartavgEntry.addToValueMap(Utils.dateToString(endDate, "dd-MM-yyyy"), saleQty/noAssociates);
@@ -169,6 +179,7 @@ public class DashBoardService  implements IDashBoardService{
 			CRMContext context) {
 		PieChartData pieChartData  = new PieChartData();
 		SalesPeriod currentPeriod = getSalesPeriodforUser(associate, date, context);
+		if(currentPeriod == null) return null;
 		Map <String , Double > results = DashBoardSQLs.getItemWiseSale(currentPeriod.getDivision().getId(), associate.getUserId(), new java.sql.Date( currentPeriod.getFromDate().getTime()),
 				new java.sql.Date( currentPeriod.getToDate().getTime())) ;
 		AtomicInteger index = new AtomicInteger(0);
@@ -185,6 +196,68 @@ public class DashBoardService  implements IDashBoardService{
 				
 	}
 
+	@Override
+	public PieChartData getAssociateSplits(User manager, Date date,
+			CRMContext context) {
+		SalesPeriod currentPeriod = getActiveSalesPeriodforManager(manager,date,context);
+		if (currentPeriod == null )
+			return null;
+		Map<String , Double> splits = DashBoardSQLs.getSaleMadeByAssociate(currentPeriod.getDivision().getId(), 
+				new java.sql.Date(currentPeriod.getFromDate().getTime()), new java.sql.Date(currentPeriod.getToDate().getTime()));
+		PieChartData pieChartData = new PieChartData();
+		AtomicInteger index = new AtomicInteger(0);
+		splits.forEach(  (item, qty) -> {  
+			PieSliceData pieSliceData  = new PieSliceData();
+			pieSliceData.setVolume(qty);
+			pieSliceData.setText(item);
+			pieSliceData.setColor(CommonUtil.getGraphColors()[index.getAndIncrement()]);
+			pieChartData.addPieSlice(pieSliceData);
+		} );
+		pieChartData.setFooterNote("Sale by Associate");
+		pieChartData.setTitle("Sale by Associate");
+		return pieChartData;
+	}
+
+	@Override
+	public BarChartData setDivisionSalesTargetData(User manager, Date date,
+			CRMContext context) {
+		SalesPeriod currentPeriod = getActiveSalesPeriodforManager(manager,date,context);
+		ISalesPeriodService service = (ISalesPeriodService)SpringObjectFactory.INSTANCE.getInstance("ISalesPeriodService");
+		ISalesService salesService =  (ISalesService)SpringObjectFactory.INSTANCE.getInstance("ISalesService");
+		int totalSoldQty = salesService.getTotalSaleQuantity(currentPeriod.getFromDate(),
+				currentPeriod.getToDate(), currentPeriod.getDivision());
+		
+		//int noAssociates  =getNoAssociates(associate, date, context) ;
+		BarChartData barChartData = new BarChartData();
+		BarChartData.Division avgDataDivis = barChartData.new Division();
+		BarData tagetAvgBarData = new BarData();
+		tagetAvgBarData.setText("Target");
+		tagetAvgBarData.setLegend("Target");
+		tagetAvgBarData.setValue(currentPeriod.getTotalTarget());
+		tagetAvgBarData.setColor(CommonUtil.getGraphColors()[0]);
+		avgDataDivis.addBarData(tagetAvgBarData);
+		
+		BarData actualavgBarData = new BarData();
+		actualavgBarData.setText("Actual");
+		actualavgBarData.setLegend("Actual");
+		actualavgBarData.setValue(totalSoldQty);
+		actualavgBarData.setColor(CommonUtil.getGraphColors()[1]);
+		avgDataDivis.addBarData(actualavgBarData);
+		
+		avgDataDivis.setDivisionTitle("Total Sales Figures");
+		barChartData.addDivision(avgDataDivis);
+		
+		BarChartData.Range range =  barChartData.new  Range();
+		range.setyMax( (int)((currentPeriod.getTotalTarget()>totalSoldQty)?currentPeriod.getTotalTarget():totalSoldQty));
+		range.setyMin(0);
+		range.setxMin(0);
+		range.setxMax(100);
+		barChartData.setRange(range);
+		return barChartData;
+		
+	}
+
+	
 	
 	
 }

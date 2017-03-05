@@ -44,6 +44,33 @@ public class SalesPeriodDAO  extends SpringHibernateDAO{
 		return lst;
 	}
 	
+	
+	public SalesPeriod getActiveSalesPeriodforDivision(int divisionId,  Date toDate )
+	{
+		Session session = openSession(false);
+		try 
+		{
+			Query query = session.createQuery("from SalesPeriod  SalesPeriod  "
+			+ "   where SalesPeriod.voided=false and SalesPeriod.fromDate <= :fromDate and SalesPeriod.toDate >= :toDate and   SalesPeriod.division.id = :divisionId" ) ;
+			query.setDate("toDate", toDate);
+			query.setDate("fromDate", toDate);
+			query.setParameter("divisionId", divisionId);
+			List	lst = query.list();
+			if (!Utils.isNullList(lst)) {
+				SalesPeriod period = (SalesPeriod)lst.stream().findFirst().get();
+				return period;
+			}
+		} catch( Exception ex )
+		{
+			Logwriter.INSTANCE.error(ex);
+			
+		} finally {
+			closeSession(session, false);
+		}
+		return null;
+		
+	}
+	
 	public SalesPeriod getActiveSalesPeriodforAssociate(String userId,  Date toDate )
 	{
 		Session session = openSession(false);

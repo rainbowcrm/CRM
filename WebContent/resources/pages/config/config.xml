@@ -24,6 +24,7 @@ Controller = "com.rainbow.crm.config.controller.ConfigController">
 <options populator = "Object.getOptions" >
 </options>
 </Element>
+<Element label = ""  type = "UIHidden" Id = "hdnGNCHKBX"    rendered = "!Object.isBooleanField"/>
 <Element label = ""  type = "UIText" Id = "txtGNValue"   size  = "10" isNumeric  ="true" property ="value" rendered = "Object.isNumericField"/>
 <Element label = ""  type = "UIBooleanCheckBox" Id = "hdnGNCHKBX"  property ="value"  hiddenControlId= "txtGNValue" rendered = "Object.isBooleanField">
 </Element>	   
@@ -46,6 +47,7 @@ Controller = "com.rainbow.crm.config.controller.ConfigController">
 <options populator = "Object.getOptions" >
 </options>
 </Element>
+<Element label = ""  type = "UIHidden" Id = "hdnCMCHKBX"    rendered = "!Object.isBooleanField"/>
 <Element label = ""  type = "UIText" Id = "txtCMValue"   size  = "10" isNumeric  ="true" property ="value" rendered = "Object.isNumericField"/>
 <Element label = ""  type = "UIBooleanCheckBox" Id = "hdnCMCHKBX"  property ="value"  hiddenControlId= "txtCMValue" rendered = "Object.isBooleanField">
 </Element>
@@ -68,8 +70,9 @@ Controller = "com.rainbow.crm.config.controller.ConfigController">
 <options populator = "Object.getOptions" >
 </options>
 </Element>
+<Element label = ""  type = "UIHidden" Id = "hdnWFCHKBX"    rendered = "!Object.isBooleanField"/>
 <Element label = ""  type = "UIText" Id = "txtWFMValue"   size  = "10" isNumeric  ="true" property ="value" rendered = "Object.isNumericField"/>
-<Element label = ""  type = "UIBooleanCheckBox" Id = "hdnCMCHKBX"  property ="value"  hiddenControlId= "txtWFMValue" rendered = "Object.isBooleanField">
+<Element label = ""  type = "UIBooleanCheckBox" Id = "hdnWFCHKBX"  property ="value"  hiddenControlId= "txtWFMValue" rendered = "Object.isBooleanField">
 </Element>
 </Element>
 </Element>
@@ -92,6 +95,7 @@ Controller = "com.rainbow.crm.config.controller.ConfigController">
 <options populator = "Object.getOptions" >
 </options>
 </Element>
+<Element label = ""  type = "UIHidden" Id = "hdnCHKBX"    rendered = "!Object.isBooleanField"/>
 <Element label = ""  type = "UIText" Id = "txtINValue"   size  = "10" isNumeric  ="true" property ="value" rendered = "Object.isNumericField"/>
 <Element label = ""  type = "UIBooleanCheckBox" Id = "hdnCHKBX"  property ="value"  hiddenControlId= "txtINValue" rendered = "Object.isBooleanField">
 </Element>
@@ -113,6 +117,7 @@ Controller = "com.rainbow.crm.config.controller.ConfigController">
 <options populator = "Object.getOptions" >
 </options>
 </Element>
+<Element label = ""  type = "UIHidden" Id = "hdnPYCHKBX"    rendered = "!Object.isBooleanField"/>
 <Element label = ""  type = "UIText" Id = "txtPYValue"   size  = "10" isNumeric  ="true" property ="value" rendered = "Object.isNumericField"/>
 <Element label = ""  type = "UIBooleanCheckBox" Id = "hdnPYCHKBX"  property ="value"  hiddenControlId= "txtPYValue" rendered = "Object.isBooleanField">
 </Element> 
@@ -134,6 +139,7 @@ Controller = "com.rainbow.crm.config.controller.ConfigController">
 <options populator = "Object.getOptions" >
 </options>
 </Element>
+<Element label = ""  type = "UIHidden" Id = "hdnOMCHKBX"    rendered = "!Object.isBooleanField"/>
 <Element label = ""  type = "UIText" Id = "txtOMValue"   size  = "10" isNumeric  ="true" property ="value" rendered = "Object.isNumericField"/>
 <Element label = ""  type = "UIBooleanCheckBox" Id = "hdnOMCHKBX"  property ="value"  hiddenControlId= "txtOMValue" rendered = "Object.isBooleanField">
 </Element>

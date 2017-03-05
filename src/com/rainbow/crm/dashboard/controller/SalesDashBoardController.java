@@ -21,24 +21,44 @@ public class SalesDashBoardController extends CRMGeneralController{
 	
 	String graphId;
 	
+	static final String TARGET_ANALYSIS = "targetanalysis" ;
+	static final String PORTFOLIO_SPLITS = "portfoliosplits" ;
+	static final String SALES_HISTORY = "saleshistory" ;
+
+	static final String DIV_TARGET_ANALYSIS = "divtargetanalysis" ;
+	static final String DIV_ASSOC_SALES_SPLITS = "divassocsalessplits" ;
+	
 	@Override
 	public PageResult submit(ModelObject object) {
 		SalesDashBoard dashBoard = (SalesDashBoard) object;
 		IDashBoardService service = (IDashBoardService) SpringObjectFactory.INSTANCE.getInstance("IDashBoardService");
-		if("targetanalysis".equalsIgnoreCase(graphId))  {
+		if(TARGET_ANALYSIS.equalsIgnoreCase(graphId))  {
 		BarChartData barChartData = service.setSalesTargetData(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext());
 		dashBoard.setSalesTargetData(barChartData);
 		}
 		
-		if("portfoliosplits".equalsIgnoreCase(graphId))  {
+		if(DIV_TARGET_ANALYSIS.equalsIgnoreCase(graphId))  {
+			BarChartData barChartData = service.setDivisionSalesTargetData(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext());
+			dashBoard.setDivManagersalesTargetData(barChartData);
+		}
+		
+		if(PORTFOLIO_SPLITS.equalsIgnoreCase(graphId))  {
 		PieChartData pieChartData  = service.getPortfolioSplits(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext());
 		dashBoard.setPortfolioSplits(pieChartData);
 		}
 		
-		if("saleshistory".equalsIgnoreCase(graphId))  {
+		if(DIV_ASSOC_SALES_SPLITS.equalsIgnoreCase(graphId))  {
+			PieChartData pieChartData  = service.getAssociateSplits(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext());
+			dashBoard.setDivManagerSalesAssociateSplits(pieChartData);
+		}
+		
+		if(SALES_HISTORY.equalsIgnoreCase(graphId))  {
 		LineChartData lineChartData = service.getSalesHistory(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext());
 		dashBoard.setSalesHistory(lineChartData);
 		}
+		
+		
+		
 		return new PageResult();
 	}
 

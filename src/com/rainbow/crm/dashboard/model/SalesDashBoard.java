@@ -13,6 +13,9 @@ public class SalesDashBoard extends CRMModelObject{
 	LineChartData salesHistory;
 	PieChartData portfolioSplits;
 	
+	BarChartData divManagersalesTargetData  ;
+	PieChartData  divManagerSalesAssociateSplits;
+	
 	String graphId;
 	
 	
@@ -40,8 +43,19 @@ public class SalesDashBoard extends CRMModelObject{
 	public void setGraphId(String graphId) {
 		this.graphId = graphId;
 	}
-	
-		
+	public BarChartData getDivManagersalesTargetData() {
+		return divManagersalesTargetData;
+	}
+	public void setDivManagersalesTargetData(BarChartData divManagersalesTargetData) {
+		this.divManagersalesTargetData = divManagersalesTargetData;
+	}
+	public PieChartData getDivManagerSalesAssociateSplits() {
+		return divManagerSalesAssociateSplits;
+	}
+	public void setDivManagerSalesAssociateSplits(
+			PieChartData divManagerSalesAssociateSplits) {
+		this.divManagerSalesAssociateSplits = divManagerSalesAssociateSplits;
+	}
 	
 
 }
