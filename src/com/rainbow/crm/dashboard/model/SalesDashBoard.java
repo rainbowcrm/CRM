@@ -15,10 +15,20 @@ public class SalesDashBoard extends CRMModelObject{
 	
 	BarChartData divManagersalesTargetData  ;
 	PieChartData  divManagerSalesAssociateSplits;
+	PieChartData divManagerSaleProductsSplits;
 	
 	String graphId;
 	
+	String salespiecriteria;
 	
+	
+	
+	public String getSalespiecriteria() {
+		return salespiecriteria;
+	}
+	public void setSalespiecriteria(String salespiecriteria) {
+		this.salespiecriteria = salespiecriteria;
+	}
 	public BarChartData getSalesTargetData() {
 		return salesTargetData;
 	}
@@ -55,6 +65,13 @@ public class SalesDashBoard extends CRMModelObject{
 	public void setDivManagerSalesAssociateSplits(
 			PieChartData divManagerSalesAssociateSplits) {
 		this.divManagerSalesAssociateSplits = divManagerSalesAssociateSplits;
+	}
+	public PieChartData getDivManagerSaleProductsSplits() {
+		return divManagerSaleProductsSplits;
+	}
+	public void setDivManagerSaleProductsSplits(
+			PieChartData divManagerSaleProductsSplits) {
+		this.divManagerSaleProductsSplits = divManagerSaleProductsSplits;
 	}
 	
 

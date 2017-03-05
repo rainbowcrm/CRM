@@ -3,6 +3,7 @@ package com.rainbow.crm.dashboard.service;
 import java.util.Date;
 
 import com.rainbow.crm.common.CRMContext;
+import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.user.model.User;
 import com.techtrade.rads.framework.model.graphdata.BarChartData;
 import com.techtrade.rads.framework.model.graphdata.LineChartData;
@@ -15,6 +16,12 @@ public interface IDashBoardService {
 	public LineChartData getSalesHistory(User associate,Date date, CRMContext context  );
 	
 	public PieChartData getPortfolioSplits(User associate,Date date, CRMContext context  );
+	
+	public PieChartData getProductwiseSales(User manager,Date date, CRMContext context  );
+	
+	public PieChartData getItemwiseSales(User manager,Date date, CRMContext context  );
+	
+	public PieChartData getCategorywiseSales(User manager,Date date, CRMContext context  );
 	
 	public PieChartData getAssociateSplits(User manager,Date date, CRMContext context  );
 	

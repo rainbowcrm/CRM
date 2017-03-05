@@ -35,7 +35,7 @@ Controller = "com.rainbow.crm.dashboard.controller.SalesDashBoardController">
 	  <barWidth>30</barWidth>
 	  <noYAxisDivisions>6</noYAxisDivisions>
 	</Element>  -->
- 	<Element type = "UIIFrame" src ="./rdscontroller?page=salesdashboardtargetdata&amp;graphId=targetanalysis"  style="graphWindow">
+ 	<Element type = "UIIFrame" src ="./rdscontroller?page=divproductsalesplits&amp;graphId=divprodsalessplits"  style="graphWindow">
 	</Element>
 	
 </Element>	

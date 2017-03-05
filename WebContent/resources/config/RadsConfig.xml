@@ -66,6 +66,8 @@
 </Page> 
 <Page id = "divassocsalessplits" definition ="/resources/pages/dashboards/divassocsalessplits.xml" modelclass = "com.rainbow.crm.dashboard.model.SalesDashBoard" >
 </Page> 
+<Page id = "divproductsalesplits" definition ="/resources/pages/dashboards/divproductsalesplits.xml" modelclass = "com.rainbow.crm.dashboard.model.SalesDashBoard" >
+</Page> 
 <Page id = "custcategories" definition ="/resources/pages/custcategory/custcategoryList.xml" modelclass = "com.rainbow.crm.custcategory.model.CustCategory" >
 </Page>
 <Page id = "newcustcategory" definition ="/resources/pages/custcategory/newcustcategory.xml" modelclass = "com.rainbow.crm.custcategory.model.CustCategory" >
@@ -253,7 +255,7 @@
  <Element label = "" type = "UIMenu" Id = "menu70" style="menustyleParent" title="Manager_Workbench" groupId= "menuGRP005"  >
  	<Element label = "" type = "UIMenu" Id = "menu0701" style="menustyle" title="Open_Expenditure" link = "rdscontroller?page=openexpenses"   />
 	<Element label = "" type = "UIMenu" Id = "menu071" style="menustyle" title="Queries" link = "rdscontroller?page=queries"   />
- 	<Element label = "" type = "UIMenu" Id = "menu072" style="menustyle" title="DashBoard" link = "rdscontroller?page=divmgrdashboard"   />
+ 	<Element label = "" type = "UIMenu" Id = "menu072" style="menustyle" title="Dashboard" link = "rdscontroller?page=divmgrdashboard"   />
 	<Element label = "" type = "UIMenu" Id = "menu073" style="menustyle" title="Promotions" link = "rdscontroller?page=salesexpenses"   />
 	<Element label = "" type = "UIMenu" Id = "menu074" style="menustyle" title="Marketing_Campaign" link = "rdscontroller?page=campaign"   />
  </Element>

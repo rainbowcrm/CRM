@@ -16,6 +16,7 @@ import com.techtrade.rads.framework.model.graphdata.BarChartData;
 import com.techtrade.rads.framework.model.graphdata.LineChartData;
 import com.techtrade.rads.framework.model.graphdata.PieChartData;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
+import com.techtrade.rads.framework.utils.Utils;
 
 public class SalesDashBoardController extends CRMGeneralController{
 	
@@ -27,6 +28,7 @@ public class SalesDashBoardController extends CRMGeneralController{
 
 	static final String DIV_TARGET_ANALYSIS = "divtargetanalysis" ;
 	static final String DIV_ASSOC_SALES_SPLITS = "divassocsalessplits" ;
+	static final String DIV_PROD_SALES_SPLITS = "divprodsalessplits" ;
 	
 	@Override
 	public PageResult submit(ModelObject object) {
@@ -50,6 +52,20 @@ public class SalesDashBoardController extends CRMGeneralController{
 		if(DIV_ASSOC_SALES_SPLITS.equalsIgnoreCase(graphId))  {
 			PieChartData pieChartData  = service.getAssociateSplits(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext());
 			dashBoard.setDivManagerSalesAssociateSplits(pieChartData);
+		}
+		
+		if(DIV_PROD_SALES_SPLITS.equalsIgnoreCase(graphId))  {
+			String type = dashBoard.getSalespiecriteria() ; 
+			if(Utils.isNullString(type)  || "PRODUCT".equals(type)) {
+				PieChartData pieChartData  = service.getProductwiseSales(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext());
+				dashBoard.setDivManagerSaleProductsSplits(pieChartData);
+			} else if("ITEM".equals(type)) {
+				PieChartData pieChartData  = service.getItemwiseSales(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext());
+				dashBoard.setDivManagerSaleProductsSplits(pieChartData);
+			} else if("CATEGORY".equals(type)) {
+				PieChartData pieChartData  = service.getCategorywiseSales(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext());
+				dashBoard.setDivManagerSaleProductsSplits(pieChartData);
+			}
 		}
 		
 		if(SALES_HISTORY.equalsIgnoreCase(graphId))  {

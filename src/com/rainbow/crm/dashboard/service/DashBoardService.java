@@ -173,6 +173,78 @@ public class DashBoardService  implements IDashBoardService{
 			noAssociates = currentPeriod.getSalesPeriodAssociates().size();
 		return noAssociates; 
 	}
+	
+	
+
+	
+
+	@Override
+	public PieChartData getProductwiseSales(User manager, Date date,
+			CRMContext context) {
+		PieChartData pieChartData  = new PieChartData();
+		SalesPeriod currentPeriod = getActiveSalesPeriodforManager(manager,date,context);
+		if(currentPeriod == null) return null;
+		Map <String , Double > results = DashBoardSQLs.getProductWiseSale(currentPeriod.getDivision().getId(),  new java.sql.Date( currentPeriod.getFromDate().getTime()),
+				new java.sql.Date( currentPeriod.getToDate().getTime())) ;
+		AtomicInteger index = new AtomicInteger(0);
+		results.forEach(  (item, qty) -> {  
+			PieSliceData pieSliceData  = new PieSliceData();
+			pieSliceData.setVolume(qty);
+			pieSliceData.setText(item);
+			pieSliceData.setColor(CommonUtil.getGraphColors()[index.getAndIncrement()]);
+			pieChartData.addPieSlice(pieSliceData);
+		} );
+		pieChartData.setFooterNote("Sale by Product");
+		pieChartData.setTitle("Sale by Product");
+		return pieChartData;
+
+	}
+	
+		
+
+	@Override
+	public PieChartData getItemwiseSales(User manager, Date date,
+			CRMContext context) {
+		 PieChartData pieChartData  = new PieChartData();
+		SalesPeriod currentPeriod = getActiveSalesPeriodforManager(manager,date,context);
+		if(currentPeriod == null) return null;
+		Map <String , Double > results = DashBoardSQLs.getItemWiseSale(currentPeriod.getDivision().getId(),  new java.sql.Date( currentPeriod.getFromDate().getTime()),
+				new java.sql.Date( currentPeriod.getToDate().getTime())) ;
+		AtomicInteger index = new AtomicInteger(0);
+		results.forEach(  (item, qty) -> {  
+			PieSliceData pieSliceData  = new PieSliceData();
+			pieSliceData.setVolume(qty);
+			pieSliceData.setText(item);
+			pieSliceData.setColor(CommonUtil.getGraphColors()[index.getAndIncrement()]);
+			pieChartData.addPieSlice(pieSliceData);
+		} );
+		pieChartData.setFooterNote("Sale by Item");
+		pieChartData.setTitle("Sale by Item");
+		return pieChartData;
+	}
+
+	
+	
+	@Override
+	public PieChartData getCategorywiseSales(User manager, Date date,
+			CRMContext context) {
+		PieChartData pieChartData  = new PieChartData();
+		SalesPeriod currentPeriod = getActiveSalesPeriodforManager(manager,date,context);
+		if(currentPeriod == null) return null;
+		Map <String , Double > results = DashBoardSQLs.getCategoryWiseSale(currentPeriod.getDivision().getId(),  new java.sql.Date( currentPeriod.getFromDate().getTime()),
+				new java.sql.Date( currentPeriod.getToDate().getTime())) ;
+		AtomicInteger index = new AtomicInteger(0);
+		results.forEach(  (item, qty) -> {  
+			PieSliceData pieSliceData  = new PieSliceData();
+			pieSliceData.setVolume(qty);
+			pieSliceData.setText(item);
+			pieSliceData.setColor(CommonUtil.getGraphColors()[index.getAndIncrement()]);
+			pieChartData.addPieSlice(pieSliceData);
+		} );
+		pieChartData.setFooterNote("Sale by Category");
+		pieChartData.setTitle("Sale by Category");
+		return pieChartData;
+	}
 
 	@Override
 	public PieChartData getPortfolioSplits(User associate, Date date,
@@ -246,7 +318,8 @@ public class DashBoardService  implements IDashBoardService{
 		
 		avgDataDivis.setDivisionTitle("Total Sales Figures");
 		barChartData.addDivision(avgDataDivis);
-		
+		barChartData.setTitle("Sales Target state");
+		barChartData.setSubTitle(currentPeriod.getPeriod());
 		BarChartData.Range range =  barChartData.new  Range();
 		range.setyMax( (int)((currentPeriod.getTotalTarget()>totalSoldQty)?currentPeriod.getTotalTarget():totalSoldQty));
 		range.setyMin(0);
