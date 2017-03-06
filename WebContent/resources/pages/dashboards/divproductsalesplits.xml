@@ -17,8 +17,8 @@ Controller = "com.rainbow.crm.dashboard.controller.SalesDashBoardController">
  
 	<Element label = "Based_on"  type = "UIList" Id = "lstAggrType"   property ="salespiecriteria" >
 	  <options> 
-	  <option key ="ITEM"> Item</option>
 	  <option key ="PRODUCT"> Product</option>
+	  <option key ="ITEM"> Item</option>
 	  <option key ="CATEGORY"> Category</option>
 	  </options>
 	</Element>

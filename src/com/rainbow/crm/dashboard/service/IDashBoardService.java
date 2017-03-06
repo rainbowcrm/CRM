@@ -25,6 +25,8 @@ public interface IDashBoardService {
 	
 	public PieChartData getAssociateSplits(User manager,Date date, CRMContext context  );
 	
+	public PieChartData getTerritorySplits(User manager,Date date, CRMContext context  );
+	
 	public BarChartData setDivisionSalesTargetData(User manager,Date date, CRMContext context  );
 	
 }

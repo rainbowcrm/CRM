@@ -50,8 +50,14 @@ public class SalesDashBoardController extends CRMGeneralController{
 		}
 		
 		if(DIV_ASSOC_SALES_SPLITS.equalsIgnoreCase(graphId))  {
-			PieChartData pieChartData  = service.getAssociateSplits(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext());
-			dashBoard.setDivManagerSalesAssociateSplits(pieChartData);
+			String type = dashBoard.getSalespiecriteria() ;
+			if(Utils.isNullString(type)  || "ASSOCIATE".equals(type)) {
+				PieChartData pieChartData  = service.getAssociateSplits(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext());
+				dashBoard.setDivManagerSalesAssociateSplits(pieChartData);
+			} else if("TERRITORY".equals(type)) {
+				PieChartData pieChartData  = service.getTerritorySplits(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext());
+				dashBoard.setDivManagerSalesAssociateSplits(pieChartData);
+			}
 		}
 		
 		if(DIV_PROD_SALES_SPLITS.equalsIgnoreCase(graphId))  {

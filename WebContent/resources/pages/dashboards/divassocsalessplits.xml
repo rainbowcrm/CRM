@@ -14,6 +14,17 @@ Controller = "com.rainbow.crm.dashboard.controller.SalesDashBoardController">
 	  <rangeHeight>270</rangeHeight>
 	  <rangeWidth>500</rangeWidth>
  	</Element>  
+ 	
+	<Element label = "Based_on"  type = "UIList" Id = "lstAggrType"   property ="salespiecriteria" >
+	  <options> 
+	  <option key ="ASSOCIATE"> Associate</option>
+	  <option key ="TERRITORY"> Territory</option>
+	  </options>
+	</Element>
+	
+
+<Element caption = "Refresh"  type = "UIButton" Id = "btfilterSave"  style="button" fixedAction ="FixedAction.ACTION_PLAINSUBMIT"   /> 	
+ 
 </Section>
 </UIForm>
 </Elements>

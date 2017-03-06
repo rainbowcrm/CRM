@@ -268,6 +268,31 @@ public class DashBoardService  implements IDashBoardService{
 				
 	}
 
+	
+	
+	@Override
+	public PieChartData getTerritorySplits(User manager, Date date,
+			CRMContext context) {
+		SalesPeriod currentPeriod = getActiveSalesPeriodforManager(manager,date,context);
+		if (currentPeriod == null )
+			return null;
+		Map<String , Double> splits = DashBoardSQLs.getSaleMadeByTerritory(currentPeriod.getDivision().getId(), 
+				new java.sql.Date(currentPeriod.getFromDate().getTime()), new java.sql.Date(currentPeriod.getToDate().getTime()));
+		PieChartData pieChartData = new PieChartData();
+		AtomicInteger index = new AtomicInteger(0);
+		splits.forEach(  (item, qty) -> {  
+			PieSliceData pieSliceData  = new PieSliceData();
+			pieSliceData.setVolume(qty);
+			pieSliceData.setText(item);
+			pieSliceData.setColor(CommonUtil.getGraphColors()[index.getAndIncrement()]);
+			pieChartData.addPieSlice(pieSliceData);
+		} );
+		pieChartData.setFooterNote("Sale by Territory");
+		pieChartData.setTitle("Sale by Territory");
+		return pieChartData;
+
+	}
+
 	@Override
 	public PieChartData getAssociateSplits(User manager, Date date,
 			CRMContext context) {

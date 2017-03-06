@@ -98,6 +98,35 @@ public class DashBoardSQLs {
 		return ans;
 	}
 	
+	public static Map<String, Double> getSaleMadeByTerritory(int divison,  Date startDate, Date endDate )
+	{
+		Map<String, Double> ans = new HashMap<String, Double>();
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		try {
+			connection = ConnectionCreater.getConnection();
+			String sql =  " SELECT SUM(SALES.NET_AMOUNT),TERRITORIES.TERRITORY FROM SALES , TERRITORIES WHERE TERRITORIES.ID= SALES.TERRITORY_ID AND  " + 
+			 " SALES.SALES_DATE > ? AND  SALES.SALES_DATE <= ?  AND SALES.DIVISION_ID = ?  " + 
+			"  AND  SALES.IS_VOIDED= FALSE  GROUP BY TERRITORIES.TERRITORY";
+			statement = connection.prepareStatement(sql);
+			statement.setDate(1, startDate);
+			statement.setDate(2, endDate);
+			statement.setInt(3, divison);
+			rs = statement.executeQuery();
+			while (rs.next()) {
+				Double amount = rs.getDouble(1);
+				String user = rs.getString(2);
+				ans.put(user, amount);
+			}
+		}catch (SQLException ex) {
+			Logwriter.INSTANCE.error(ex);
+		} finally {
+			ConnectionCreater.close(connection, statement, rs);
+		}
+		return ans;
+	}
+	
 	public static Map<String, Double> getItemWiseSale(int division, String associate,  Date startDate, Date endDate )
 	{
 		Connection connection = null;
