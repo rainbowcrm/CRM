@@ -15,14 +15,14 @@ import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
 
-public class SalesListController extends CRMListController{
+public class SalesReturnListController  extends CRMListController{
 
 	@Override
 	protected String getFilter(Filter filterData) {
 		FilterNode node =new FilterNode();
 		node.setField("return");
 		node.setOperater(FilterNode.Operator.EQUALS);
-		node.setValue(0);
+		node.setValue(1);
 		filterData.addNode(node);
 		return super.getFilter(filterData);
 	}
@@ -42,8 +42,9 @@ public class SalesListController extends CRMListController{
 
 	@Override
 	public PageResult submit(List<ModelObject> objects, String submitAction) {
-		// TODO Auto-generated method stub
-		return null;
+		PageResult result = new PageResult();
+		result.setNextPageKey("salesreturnsearch");
+		return result;
 	}
 
 	@Override
@@ -61,10 +62,8 @@ public class SalesListController extends CRMListController{
 	@Override
 	public PageResult goToEdit(List<ModelObject> objects) {
 		PageResult result = new PageResult();
-		result.setNextPageKey("newsales");
+		result.setNextPageKey("newsalesreturn");
 		return result;
 	}
-	
-	
 
 }

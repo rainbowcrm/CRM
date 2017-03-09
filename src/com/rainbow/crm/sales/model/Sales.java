@@ -45,6 +45,10 @@ public class Sales extends CRMBusinessModelObject{
 	String deliveryAgent;
 	Date deliveryDate ;
 	Date  paymentDueDate ;
+
+	boolean isReturn;
+	String originalBillNo;
+	Integer originalSalesId;
 	
 	
 	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
@@ -219,6 +223,25 @@ public class Sales extends CRMBusinessModelObject{
 	public void setTerritory(Territory territory) {
 		this.territory = territory;
 	}
+	public boolean isReturn() {
+		return isReturn;
+	}
+	public void setReturn(boolean isReturn) {
+		this.isReturn = isReturn;
+	}
+	public String getOriginalBillNo() {
+		return originalBillNo;
+	}
+	public void setOriginalBillNo(String originalBillNo) {
+		this.originalBillNo = originalBillNo;
+	}
+	public Integer getOriginalSalesId() {
+		return originalSalesId;
+	}
+	public void setOriginalSalesId(Integer originalSalesId) {
+		this.originalSalesId = originalSalesId;
+	}
+	
 	
 	
 	

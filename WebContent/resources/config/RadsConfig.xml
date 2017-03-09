@@ -82,6 +82,10 @@
 </Page>
 <Page id = "sales" definition ="/resources/pages/sales/salesList.xml" modelclass = "com.rainbow.crm.sales.model.Sales" >
 </Page>
+<Page id = "salesreturns" definition ="/resources/pages/sales/salesreturnList.xml" modelclass = "com.rainbow.crm.sales.model.Sales" >
+</Page>
+<Page id = "salesreturnsearch" definition ="/resources/pages/sales/salesreturnsearch.xml" modelclass = "com.rainbow.crm.sales.model.SalesReturnSearch" >
+</Page>
 <Page id = "wishlist" definition ="/resources/pages/wishlist/wishlistList.xml" modelclass = "com.rainbow.crm.wishlist.model.WishList" >
 </Page>
 <Page id = "saleslead" definition ="/resources/pages/saleslead/salesleadList.xml" modelclass = "com.rainbow.crm.saleslead.model.SalesLead" >

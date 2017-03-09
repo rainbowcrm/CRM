@@ -23,6 +23,8 @@ public class SalesLine extends CRMItemLine{
 	Sales salesDoc;
 	User user ;
 	
+	boolean isReturnLine;
+	
 	public SalesLine() {
 	}
 	
@@ -116,6 +118,16 @@ public class SalesLine extends CRMItemLine{
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+
+	public boolean isReturnLine() {
+		return isReturnLine;
+	}
+
+
+	public void setReturnLine(boolean isReturnLine) {
+		this.isReturnLine = isReturnLine;
 	}
 	
 	
