@@ -152,6 +152,8 @@
 </Page>
 <Page id = "newsales" definition ="/resources/pages/sales/newsale.xml" modelclass = "com.rainbow.crm.sales.model.Sales" >
 </Page>
+<Page id = "newsalereturn" definition ="/resources/pages/sales/newsalereturn.xml" modelclass = "com.rainbow.crm.sales.model.Sales" >
+</Page>
 <Page id = "salesperiodAnalysis" definition ="/resources/pages/salesanalysis/salestargetanalyse.xml" modelclass = "com.rainbow.crm.salesperiod.model.SalesPeriodAnalyzer" >
 </Page>
 <Page id = "productanalysis" definition ="/resources/pages/products/productanalyse.xml" modelclass = "com.rainbow.crm.product.model.ProductAnalyzer" >

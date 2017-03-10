@@ -14,6 +14,20 @@ import com.techtrade.rads.framework.utils.Utils;
 
 public class SalesReturnSearchController  extends CRMGeneralController{
 
+	private void prepareForReturn(Sales sales)  {
+		sales.setOriginalBillNo(sales.getBillNumber());
+		sales.setBillNumber(null);
+		sales.setOriginalDate(sales.getSalesDate().toLocaleString());
+		sales.setSalesDate(null);
+		sales.setOriginalSalesId(sales.getId());
+		sales.getSalesLines().forEach( salesLine ->  { 
+			salesLine.setOriginalPrice(salesLine.getUnitPrice());
+			salesLine.setOriginalQty(salesLine.getQty());
+			salesLine.setQty(0);
+			salesLine.setReturnPrice(salesLine.getUnitPrice());
+		});
+	}
+	
 	@Override
 	public PageResult submit(ModelObject object) {
 		SalesReturnSearch search = (SalesReturnSearch) object; 
@@ -27,6 +41,11 @@ public class SalesReturnSearchController  extends CRMGeneralController{
 				return result;
 			}else
 			{
+				prepareForReturn(sales);
+				
+				result.setObject(sales);
+				result.setNextPageKey("newsalereturn");
+				return result;
 				
 			}
 		}

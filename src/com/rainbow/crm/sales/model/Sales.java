@@ -49,7 +49,7 @@ public class Sales extends CRMBusinessModelObject{
 	boolean isReturn;
 	String originalBillNo;
 	Integer originalSalesId;
-	
+	String originalDate;
 	
 	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
 	public Division getDivision() {
@@ -240,6 +240,12 @@ public class Sales extends CRMBusinessModelObject{
 	}
 	public void setOriginalSalesId(Integer originalSalesId) {
 		this.originalSalesId = originalSalesId;
+	}
+	public String getOriginalDate() {
+		return originalDate;
+	}
+	public void setOriginalDate(String originalDate) {
+		this.originalDate = originalDate;
 	}
 	
 	

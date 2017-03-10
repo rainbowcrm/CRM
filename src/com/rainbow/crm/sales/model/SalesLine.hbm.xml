@@ -20,6 +20,9 @@
       <property name="qty" column="qty" type="integer"/>
       <property name="comments" column="comments" type="string"/>
       <property name="unitDisc" column="UNIT_DISCOUNT" type="double"/>
+      <property name="returnPrice" column="RETURN_PRICE" type="double"/>
+      <property name="originalPrice" column="ORIGINAL_PRICE" type="double"/>
+      <property name="originalQty" column="ORIGINAL_QTY" type="integer"/>
       <property name="discPercent" column="DISC_PERCENT" type="double"/>
       <property name="lineTotalDisc" column="LINE_TOTDISC" type="double"/>
       <property name="taxPercent" column="TAX_PERCENT" type="double"/>
