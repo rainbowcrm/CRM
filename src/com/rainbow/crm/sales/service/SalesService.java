@@ -68,6 +68,17 @@ import com.techtrade.rads.framework.utils.Utils;
 @Transactional
 public class SalesService extends AbstractionTransactionService implements ISalesService{
 
+	
+	
+	
+	
+	@Override
+	public Sales getByBillNumberforReturn(Division division, String billNumber) {
+		SalesDAO salesDao = (SalesDAO) getDAO();
+		Sales sale = salesDao.getByBillNumberandDivision(division, billNumber);
+		return sale ;
+	}
+
 	@Override
 	public long getTotalRecordCount(CRMContext context) {
 		return getDAO().getTotalRecordCount("Sales",context);

@@ -11,14 +11,25 @@ Controller = "com.rainbow.crm.sales.controller.SalesReturnSearchController">
 <ErrorSection>
 </ErrorSection>
 <Section type= "mainSection">
-
+<Element type = "UITable" rows = "1" cols = "3"  style = "outlinedTable">
+<Element type = "UITableRow">
+<Element type ="UITableCol">	
 <Element label = "Division"  type = "UIList" Id = "lstInvDivision"  isMandatory="true" property ="Division.Id" >
 	<options populator =  "getAllDivisions"> 
 	</options>
 </Element>
+</Element>
 
+<Element type ="UITableCol">
 <Element label = "Bill_Number"  type = "UIText" Id = "txtQryName" property= "originalBilllNumber" />
+</Element>
 
+<Element type ="UITableCol">
+<Element caption = "Search"  type = "UIButton" Id = "btnFilterDelete"  style="button" fixedAction ="FixedAction.ACTION_PLAINSUBMIT"   />
+</Element>
+
+</Element>
+</Element>
 </Section>
 </CoreSection>
 

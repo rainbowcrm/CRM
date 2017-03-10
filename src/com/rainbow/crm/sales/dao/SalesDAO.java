@@ -6,9 +6,11 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.sales.model.Sales;
+import com.rainbow.crm.salesperiod.model.SalesPeriod;
 import com.techtrade.rads.framework.utils.Utils;
 
 public class SalesDAO  extends SpringHibernateDAO{
@@ -20,6 +22,21 @@ public class SalesDAO  extends SpringHibernateDAO{
 		Object obj = session.get(Sales.class, salesId);
 		closeSession(session, false);
 		return obj;
+	}
+
+	public Sales getByBillNumberandDivision(Division division, String billNumber)
+	{
+		Session session = openSession(false);
+		Query query = session.createQuery(" from Sales where division.id = :division    and billNumber = :billNumber and voided= false " ) ;
+		query.setParameter("division", division.getId());
+		query.setParameter("billNumber", billNumber);
+		List<Sales> lst = query.list();
+		closeSession(session, false);
+		if(!Utils.isNullList(lst))
+			return lst.stream().findFirst().get();
+		else
+			return null;
+		
 	}
 
 
