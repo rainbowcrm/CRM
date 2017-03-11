@@ -56,6 +56,7 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 <Section type ="header">
 	<Element label = "" type = "UIHidden" Id = "hdnVersion" property ="ObjectVersion" />
 	<Element label = ""  type = "UIHidden" Id = "hdnUserID"  property ="Id" />
+	<Element label = ""  type = "UIHidden" Id = "hdnReturn"  property ="return" constantValue ="true"/>
 	<Element label = "Division"  type = "UIText" Id = "lstInvDivision" readonly="true" property ="Division.Name" />
 	<Element label = ""  type = "UIHidden" Id = "hdnlstDiv" readonly="true" property ="Division.Id" />
 	<Element label = "Territory"  type = "UIText"  Id = "txtTerritory"  readonly="true" property ="Territory.territory"  />
@@ -104,14 +105,13 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
  </Element>
 <Element type ="UITableCol" width = "5%"><Element label = ""  type = "UIText" Id = "txtOrigPrice"  property ="originalPrice" readonly="true"  size = "10" />  </Element>
 <Element type ="UITableCol" width = "5%"><Element label = ""  type = "UIText" Id = "txtOrigQty"  property ="originalQty" readonly="true"  size = "10"/>  </Element>
-<Element type ="UITableCol" width = "5%"><Element label = ""  type = "UIText" Id = "txtPrice"  property ="unitPrice"  isNumeric= "true" size = "10" />  </Element>
+<Element type ="UITableCol" width = "5%"><Element label = ""  type = "UIText" Id = "txtPrice"  property ="returnPrice"  isNumeric= "true" size = "10" />  </Element>
 <Element type ="UITableCol" width = "5%"><Element label = ""  type = "UIText" Id = "txtQty"  property ="Qty"   isNumeric= "true" 
  focusoutJS = "calculateAll()" size = "10"/>  </Element>
 <Element type ="UITableCol" width = "8%"><Element label = ""  type = "UIText" Id = "txtlineTotal"  property ="lineTotal" size = "10"  readonly="true" />  </Element>
 
 <Element type ="UITableCol" width = "5%">
-	<Element caption = "+"  type = "UIButton" Id = "btnAddRow"    fixedAction ="FixedAction.ACTION_ADDTABLEROW"  fixedActionParam =  "this"/>
-	<Element caption = "-"  type = "UIButton" Id = "btnDelRow"    fixedAction ="FixedAction.ACTION_DELETETABLEROW"  fixedActionParam =  "this"/>
+
 </Element>
 </Element>
 </Element>

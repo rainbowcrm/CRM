@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Page id = "salesList" showinFrame ="true" title ="Saless | Rainbow CRM"  Object = "com.rainbow.crm.sales.model.Sales" 
+<Page id = "salesList" showinFrame ="true" title ="Sales | Rainbow CRM"  Object = "com.rainbow.crm.sales.model.Sales" 
 Controller = "com.rainbow.crm.sales.controller.SalesListController">
 <Template type= "List"  name = "ListTemplate"></Template>
 <Forwards>

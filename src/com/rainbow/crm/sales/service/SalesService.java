@@ -4,6 +4,7 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -52,6 +53,7 @@ import com.rainbow.crm.sales.dao.SalesDAO;
 import com.rainbow.crm.sales.model.Sales;
 import com.rainbow.crm.sales.model.SalesLine;
 import com.rainbow.crm.sales.validator.SalesErrorCodes;
+import com.rainbow.crm.sales.validator.SalesReturnValidator;
 import com.rainbow.crm.sales.validator.SalesValidator;
 import com.rainbow.crm.territory.model.Territory;
 import com.rainbow.crm.territory.service.ITerritoryService;
@@ -100,9 +102,17 @@ public class SalesService extends AbstractionTransactionService implements ISale
 			CRMContext context) {
 		ICompanyService compService = (ICompanyService)SpringObjectFactory.INSTANCE.getInstance("ICompanyService");
 		Company company = (Company)compService.getById(context.getLoggedinCompany());
-		((Sales)object).setCompany(company);
-		SalesValidator validator = new SalesValidator(context);
-		return validator.validateforCreate(object);
+		Sales sale = (Sales)object ;
+		sale.setCompany(company);
+		if(!sale.isReturn()) 
+		{
+			SalesValidator validator = new SalesValidator(context);
+			return validator.validateforCreate(object);
+		}else {
+			SalesReturnValidator validator = new SalesReturnValidator(context);
+			return validator.validateforCreate(object);
+		}
+		
 	}
 
 	@Override
@@ -110,9 +120,16 @@ public class SalesService extends AbstractionTransactionService implements ISale
 			CRMContext context) {
 		ICompanyService compService = (ICompanyService)SpringObjectFactory.INSTANCE.getInstance("ICompanyService");
 		Company company = (Company)compService.getById(context.getLoggedinCompany());
-		((Sales)object).setCompany(company);
-		SalesValidator validator = new SalesValidator(context);
-		return validator.validateforUpdate(object);
+		Sales sale = (Sales)object ;
+		sale.setCompany(company);
+		if(!sale.isReturn()) 
+		{
+			SalesValidator validator = new SalesValidator(context);
+			return validator.validateforCreate(object);
+		}else {
+			SalesReturnValidator validator = new SalesReturnValidator(context);
+			return validator.validateforCreate(object);
+		}
 	}
 
 	@Override
@@ -164,6 +181,9 @@ public class SalesService extends AbstractionTransactionService implements ISale
 			Territory territory  = (Territory)territoryService.getById(object.getTerritory().getId());
 			object.setTerritory(territory);
 		}
+		if (object.isReturn()) {
+			eliminate0LinesFromReturns(object);
+		}
 		
 		if(!Utils.isNullSet(object.getSalesLines())){
 			int lineNo=1;
@@ -205,14 +225,29 @@ public class SalesService extends AbstractionTransactionService implements ISale
 		return ans;
 	}
 
+	private void eliminate0LinesFromReturns(Sales sales)
+	{
+		Set<SalesLine> returnLines = new LinkedHashSet<SalesLine>();
+		sales.getSalesLines().forEach( salesLine ->  {
+			if(salesLine.getQty() > 0 )
+				  returnLines.add(salesLine) ;
+		});
+		sales.setSalesLines(returnLines);
+	}
+	
 	@Override
 	@Transactional
 	public TransactionResult create(CRMModelObject object, CRMContext context) {
 		Sales sales = (Sales)object ;
 		
 		if (Utils.isNull(sales.getBillNumber())) {
-			String bKey = NextUpGenerator.getNextNumber("Sales", context, sales.getDivision());
-			sales.setBillNumber(bKey);
+			if (!sales.isReturn() ) {
+				String bKey = NextUpGenerator.getNextNumber("Sales", context, sales.getDivision());
+				sales.setBillNumber(bKey);
+			}else {
+				String bKey = NextUpGenerator.getNextNumber("SalesReturns", context, sales.getDivision());
+				sales.setBillNumber(bKey);
+			}
 		}
 		if (!Utils.isNullSet(sales.getSalesLines())) {
 			int pk = GeneralSQLs.getNextPKValue("Sales") ;
