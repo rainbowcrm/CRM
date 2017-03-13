@@ -82,7 +82,7 @@ Controller = "com.rainbow.crm.sales.controller.SalesReturnListController">
 <Element label = ""  type = "UINote" Id = "idPhone"  property ="Customer.Phone" />
 </Column>
 <Column title ="Amount"  width ="31%" >
-<Element label = ""  type = "UINote" Id = "idAmt"  property ="netAmount" />
+<Element label = ""  type = "UINote" Id = "idAmt"  property ="absNetAmount" />
 </Column>
 </Columns>
 </ListSection>

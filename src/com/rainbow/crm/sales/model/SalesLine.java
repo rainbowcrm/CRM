@@ -114,6 +114,27 @@ public class SalesLine extends CRMItemLine {
 	}
 
 	@RadsPropertySet(excludeFromJSON = true, excludeFromMap = true, excludeFromXML = true)
+	public double getAbsLineTotal() {
+		return Math.abs(lineTotal);
+	}
+	
+	@RadsPropertySet(excludeFromJSON = true, excludeFromMap = true, excludeFromXML = true)
+	public void setAbsLineTotal(double linetotal) {
+		this.lineTotal = linetotal;
+	}
+
+	@RadsPropertySet(excludeFromJSON = true, excludeFromMap = true, excludeFromXML = true)
+	public int getAbsQty() {
+		return Math.abs(getQty());
+	}
+	
+	@RadsPropertySet(excludeFromJSON = true, excludeFromMap = true, excludeFromXML = true)
+	public void setAbsQty(int qty) {
+		setQty(qty);
+	}
+	
+	
+	@RadsPropertySet(excludeFromJSON = true, excludeFromMap = true, excludeFromXML = true)
 	public Sales getSalesDoc() {
 		return salesDoc;
 	}
@@ -162,6 +183,7 @@ public class SalesLine extends CRMItemLine {
 	public void setOriginalPrice(Double originalPrice) {
 		this.originalPrice = originalPrice;
 	}
+	
 	
 	
 

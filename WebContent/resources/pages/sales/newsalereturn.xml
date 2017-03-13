@@ -3,8 +3,8 @@
 Controller = "com.rainbow.crm.sales.controller.SalesController">
 <Template type= "Transaction"  name = "TransactionTemplate"></Template>
 <Forwards>
-<Forward key ="CANCEL">rdscontroller?page=sales</Forward>
-<Forward key ="SAVE">sales</Forward>
+<Forward key ="CANCEL">rdscontroller?page=salesreturns</Forward>
+<Forward key ="SAVE">salesreturns</Forward>
 </Forwards>
 <IncludeJS>./resources/js/RadsLib.js</IncludeJS>
 <IncludeJS>./scripts/CRMGeneral.js</IncludeJS>
@@ -106,9 +106,9 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 <Element type ="UITableCol" width = "5%"><Element label = ""  type = "UIText" Id = "txtOrigPrice"  property ="originalPrice" readonly="true"  size = "10" />  </Element>
 <Element type ="UITableCol" width = "5%"><Element label = ""  type = "UIText" Id = "txtOrigQty"  property ="originalQty" readonly="true"  size = "10"/>  </Element>
 <Element type ="UITableCol" width = "5%"><Element label = ""  type = "UIText" Id = "txtPrice"  property ="returnPrice"  isNumeric= "true" size = "10" />  </Element>
-<Element type ="UITableCol" width = "5%"><Element label = ""  type = "UIText" Id = "txtQty"  property ="Qty"   isNumeric= "true" 
- focusoutJS = "calculateAll()" size = "10"/>  </Element>
-<Element type ="UITableCol" width = "8%"><Element label = ""  type = "UIText" Id = "txtlineTotal"  property ="lineTotal" size = "10"  readonly="true" />  </Element>
+<Element type ="UITableCol" width = "5%"><Element label = ""  type = "UIText" Id = "txtQty"  property ="absQty"   isNumeric= "true" 
+ focusoutJS = "calculateAllforReturn()" size = "10"/>  </Element>
+<Element type ="UITableCol" width = "8%"><Element label = ""  type = "UIText" Id = "txtlineTotal"  property ="absLineTotal" size = "10"  readonly="true" />  </Element>
 
 <Element type ="UITableCol" width = "5%">
 
@@ -135,21 +135,20 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 </Element>
 </Section>
 <Section type ="footer">
-<Element label = "Discount"  type = "UIText" Id = "txtDiscount"   focusoutJS = "calculateAll()" property ="totalDisc"  isNumeric= "true" size = "10" />  
-<Element label = "Tax_Percent"  type = "UIText" Id = "txtTaxPerc"   focusoutJS = "calculateAll()"  property ="taxPerc" isNumeric= "true" size = "10" />
+<Element label = "Discount"  type = "UIText" Id = "txtDiscount"   focusoutJS = "calculateAllforReturn()" property ="totalDisc"  isNumeric= "true" size = "10" />  
+<Element label = "Tax_Percent"  type = "UIText" Id = "txtTaxPerc"   focusoutJS = "calculateAllforReturn()"  property ="taxPerc" isNumeric= "true" size = "10" />
 <Element label = "Tax_Amount"  type = "UIText" Id = "txtTaxAmt"   property ="taxAmount"  readonly="true" isNumeric= "true" size = "10" />
 <Element label = "Comments"  type = "UITextArea" Id = "txtComm"  property ="comments" >
 	 <rows>2</rows> <cols>30</cols>
 </Element>
 
-<Element label = "Total_Amount"  type = "UIText" Id = "txtTotalAmt"   property ="netAmount" isNumeric= "true" readonly="true" size = "10" />
+<Element label = "Total_Amount"  type = "UIText" Id = "txtTotalAmt"   property ="absNetAmount" isNumeric= "true" readonly="true" size = "10" />
 </Section>
 <Section type ="brk3"/>
 </CoreSection>
 <Section type ="summary">
 
 <Element caption = "Print_Invoice"  type = "UIButton"    Id = "btnInvoice"  style="button" onClickJS = "showPrintDialog('newprintpop','SalesInvoice');"  rendered = "Controller.isUpdateMode" />
-<Element caption = "Create_DO"  type = "UIButton"    Id = "btnInvoice"  style="button" rendered = "Controller.isUpdateMode" fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="createDO"   />
 </Section>
 <Section type ="copyRightSection"/>
 </UIForm>

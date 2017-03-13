@@ -121,6 +121,17 @@ public class Sales extends CRMBusinessModelObject{
 	public void setNetAmount(double netAmount) {
 		this.netAmount = netAmount;
 	}
+	@RadsPropertySet(excludeFromJSON = true, excludeFromMap = true, excludeFromXML = true)
+	public double getAbsNetAmount() {
+		return Math.abs(netAmount);
+	}
+	
+	@RadsPropertySet(excludeFromJSON = true, excludeFromMap = true, excludeFromXML = true)
+	public void setAbsNetAmount(double netAmount) {
+		this.netAmount = netAmount;
+	}
+	
+	
 	public boolean isCreditSales() {
 		return creditSales;
 	}

@@ -19,6 +19,8 @@ public class SalesListController extends CRMListController{
 
 	@Override
 	protected String getFilter(Filter filterData) {
+		if (filterData == null)
+			filterData  = new Filter();
 		FilterNode node =new FilterNode();
 		node.setField("return");
 		node.setOperater(FilterNode.Operator.EQUALS);

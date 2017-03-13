@@ -1,8 +1,11 @@
 package com.rainbow.crm.sales.controller;
 
+import org.apache.activemq.transport.LogWriter;
+
 import com.rainbow.crm.common.CRMGeneralController;
 import com.rainbow.crm.common.CRMValidator;
 import com.rainbow.crm.common.SpringObjectFactory;
+import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.sales.model.Sales;
 import com.rainbow.crm.sales.model.SalesReturnSearch;
 import com.rainbow.crm.sales.service.ISalesService;
@@ -14,22 +17,24 @@ import com.techtrade.rads.framework.utils.Utils;
 
 public class SalesReturnSearchController  extends CRMGeneralController{
 
-	private void prepareForReturn(Sales sales)  {
+	private void prepareForReturn(Sales sales) throws Exception  {
 		sales.setOriginalBillNo(sales.getBillNumber());
 		sales.setBillNumber(null);
-		sales.setOriginalDate(sales.getSalesDate().toLocaleString());
+		sales.setOriginalDate(Utils.dateToString(sales.getSalesDate(), "dd-mmm-yyyy"));
 		sales.setSalesDate(null);
 		sales.setOriginalSalesId(sales.getId());
 		sales.getSalesLines().forEach( salesLine ->  { 
 			salesLine.setOriginalPrice(salesLine.getUnitPrice());
 			salesLine.setOriginalQty(salesLine.getQty());
 			salesLine.setQty(0);
+			salesLine.setLineTotal(0);
 			salesLine.setReturnPrice(salesLine.getUnitPrice());
 		});
 	}
 	
 	@Override
 	public PageResult submit(ModelObject object) {
+		try {
 		SalesReturnSearch search = (SalesReturnSearch) object; 
 		if(search != null && !Utils.isNull(search.getOriginalBilllNumber())) {
 			ISalesService salesService = (ISalesService)SpringObjectFactory.INSTANCE.getInstance("ISalesService") ;
@@ -42,12 +47,13 @@ public class SalesReturnSearchController  extends CRMGeneralController{
 			}else
 			{
 				prepareForReturn(sales);
-				
 				result.setObject(sales);
 				result.setNextPageKey("newsalereturn");
 				return result;
-				
 			}
+		}
+		}catch(Exception ex) {
+			Logwriter.INSTANCE.error(ex);
 		}
 			
 		return new PageResult();

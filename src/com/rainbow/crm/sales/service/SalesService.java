@@ -134,8 +134,20 @@ public class SalesService extends AbstractionTransactionService implements ISale
 
 	@Override
 	protected ORMDAO getDAO() {
-//	return new SalesDAO();
 	return (SalesDAO) SpringObjectFactory.INSTANCE.getInstance("SalesDAO");
+	}
+
+	@Override
+	public List<RadsError> adaptToUI(CRMContext context, ModelObject object) {
+		Sales sales = (Sales) object;
+		if(sales.isReturn()) {
+ 		sales.getSalesLines().forEach(salesLine ->  {
+ 			salesLine.setQty(salesLine.getQty() * -1 );
+ 			salesLine.setLineTotal(salesLine.getLineTotal() * -1 );
+		} );
+ 		sales.setNetAmount(sales.getNetAmount() * -1 );
+		}
+		return null;
 	}
 
 	

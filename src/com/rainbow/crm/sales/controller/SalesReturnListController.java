@@ -20,6 +20,8 @@ public class SalesReturnListController  extends CRMListController{
 	@Override
 	protected String getFilter(Filter filterData) {
 		FilterNode node =new FilterNode();
+		if (filterData == null)
+			filterData = new Filter();
 		node.setField("return");
 		node.setOperater(FilterNode.Operator.EQUALS);
 		node.setValue(1);
@@ -62,7 +64,7 @@ public class SalesReturnListController  extends CRMListController{
 	@Override
 	public PageResult goToEdit(List<ModelObject> objects) {
 		PageResult result = new PageResult();
-		result.setNextPageKey("newsalesreturn");
+		result.setNextPageKey("newsalereturn");
 		return result;
 	}
 

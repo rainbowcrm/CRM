@@ -54,6 +54,7 @@ public class SalesReturnValidator extends CRMValidator {
 		if (Utils.isNullSet(sales.getSalesLines())) {
 		//	errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Line_Items"))) ;
 		}else {
+			double saleTotal =0;
 			for (SalesLine line : sales.getSalesLines()) {
 				if (line.getSku() == null ) {
 					errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Item"))) ;
@@ -70,8 +71,14 @@ public class SalesReturnValidator extends CRMValidator {
 				if (line.getReturnPrice() > line.getOriginalPrice()){
 					errors.add(getErrorforCode(SalesErrorCodes.RETURN_PRICE_EXCEEDS_ORIGINAL));
 				}	
-			
+				if (Utils.isNullList(errors)) {
+					line.setQty(line.getQty() * -1 );
+					line.setLineTotal(line.getQty() * line.getReturnPrice());
+					saleTotal += line.getQty() * line.getReturnPrice();
+				}
 			}
+			
+			sales.setNetAmount(saleTotal +  sales.getTotalDisc() - sales.getTaxAmount());
 		}
 	}
 
