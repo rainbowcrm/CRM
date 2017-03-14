@@ -206,3 +206,8 @@ function isNumberKey(evt)
 
    return true;
 }
+
+
+function submitwithSort(sort) {
+	console.log ('sorting with ' +  sort) ;
+}

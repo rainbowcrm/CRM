@@ -22,6 +22,7 @@ import com.techtrade.rads.framework.filter.FilterNode;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.transaction.TransactionResult;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
+import com.techtrade.rads.framework.ui.components.SortCriteria;
 import com.techtrade.rads.framework.utils.Utils;
 
 public abstract class CRMDataSheetController extends DataSheetController{
@@ -93,7 +94,7 @@ public abstract class CRMDataSheetController extends DataSheetController{
 	}
 	
 	@Override
-	public List<ModelObject> getData(int pageNumber, Filter filter) {
+	public List<ModelObject> getData(int pageNumber, Filter filter,SortCriteria sortCriteria) {
 		int from  = (pageNumber-1)*recordsPerPage ;
 		IBusinessService serv = (IBusinessService)getService();
 		return (List)serv.listData(from,  from + recordsPerPage, getFilter(filter),(CRMContext)getContext());

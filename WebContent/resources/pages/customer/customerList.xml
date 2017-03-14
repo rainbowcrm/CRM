@@ -62,10 +62,10 @@ Controller = "com.rainbow.crm.customer.controller.CustomerListController">
 <Element label = ""  type = "UICheckBox" Id = "idChkSel"  rendered="!Object.isDeleted" property ="Id" />
 <Element label = ""  type = "UIImage" Id = "idChkSel"  rendered="Object.isDeleted" height = "21" weight ="21" src= "./resources/images/deletedRow.jpg" />
 </SelectionColumn>
-<Column title ="First_Name"   width ="18%">
+<Column title ="First_Name"  sortField="firstName" width ="18%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="FirstName" />
 </Column>
-<Column title ="Last_Name"   width ="18%">
+<Column title ="Last_Name"   sortField="lastName" width ="18%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="LastName" />
 </Column>
 <Column title ="Phone"   width ="18%">
@@ -77,7 +77,7 @@ Controller = "com.rainbow.crm.customer.controller.CustomerListController">
 <Column title ="Pincode"   width ="10%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="ZipCode" />
 </Column>  
-<Column title ="City"   width ="18%">
+<Column title ="City"   sortField="city" width ="18%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="City" />
 </Column>
 </Columns>
