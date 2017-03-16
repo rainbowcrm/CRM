@@ -31,7 +31,7 @@ public class LookupItems implements ILookupService{
 			condition =  " where name like  '" + searchString + "'" ;
 		}
 		IItemService service = (IItemService) SpringObjectFactory.INSTANCE.getInstance("IItemService");
-		List<? extends CRMModelObject> items = service.listData(from, from  + noRecords, condition,(CRMContext)ctx);
+		List<? extends CRMModelObject> items = service.listData(from, from  + noRecords, condition,(CRMContext)ctx,null);
 		for (ModelObject obj :  items) {
 			ans.add(((Item)obj).getName());
 		}

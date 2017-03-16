@@ -16,6 +16,7 @@ import com.rainbow.crm.division.validator.DivisionValidator;
 import com.rainbow.crm.hibernate.ORMDAO;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.model.transaction.TransactionResult;
+import com.techtrade.rads.framework.ui.components.SortCriteria;
 import com.techtrade.rads.framework.utils.Utils;
 
 public class DivisionService extends AbstractService implements IDivisionService {
@@ -37,7 +38,7 @@ public class DivisionService extends AbstractService implements IDivisionService
 	}
 
 	@Override
-	public List<CRMModelObject> listData(int from, int to, String whereCondition,CRMContext context) {
+	public List<CRMModelObject> listData(int from, int to, String whereCondition,CRMContext context, SortCriteria sortCriteria) {
 		return super.listData("Division", from, to, whereCondition, context);
 	}
 

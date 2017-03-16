@@ -23,6 +23,7 @@ import com.rainbow.crm.inventory.validator.InventoryValidator;
 import com.rainbow.crm.item.model.Sku;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.model.transaction.TransactionResult;
+import com.techtrade.rads.framework.ui.components.SortCriteria;
 import com.techtrade.rads.framework.utils.Utils;
 
 public class InventoryService extends AbstractService implements  IInventoryService{
@@ -43,7 +44,7 @@ public class InventoryService extends AbstractService implements  IInventoryServ
 
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
-			String whereCondition, CRMContext context) {
+			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
 		return super.listData("Inventory", from, to, whereCondition, context);
 	}
 

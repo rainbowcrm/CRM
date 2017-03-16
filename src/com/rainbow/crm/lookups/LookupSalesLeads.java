@@ -28,7 +28,7 @@ public class LookupSalesLeads implements ILookupService{
 			condition =  " where docNumber like  '" + searchString + "'" ;
 		}
 		ISalesLeadService service = (ISalesLeadService) SpringObjectFactory.INSTANCE.getInstance("ISalesLeadService");
-		List<? extends CRMModelObject> slsLeads = service.listData(from, from  + noRecords, condition,(CRMContext)ctx);
+		List<? extends CRMModelObject> slsLeads = service.listData(from, from  + noRecords, condition,(CRMContext)ctx,null);
 		for (ModelObject obj :  slsLeads) {
 			ans.add(((SalesLead)obj).getDocNumber());
 		}

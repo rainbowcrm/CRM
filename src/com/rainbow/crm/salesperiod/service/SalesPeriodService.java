@@ -42,6 +42,7 @@ import com.rainbow.framework.nextup.NextUpGenerator;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.model.transaction.TransactionResult;
+import com.techtrade.rads.framework.ui.components.SortCriteria;
 import com.techtrade.rads.framework.utils.Utils;
 
 @Transactional
@@ -59,7 +60,7 @@ public class SalesPeriodService extends AbstractionTransactionService implements
 
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
-			String whereCondition, CRMContext context) {
+			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
 		return super.listData("SalesPeriod", from, to, whereCondition, context);
 	}
 

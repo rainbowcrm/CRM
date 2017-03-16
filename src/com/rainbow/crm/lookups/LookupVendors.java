@@ -30,7 +30,7 @@ public class LookupVendors implements ILookupService{
 			condition =  " where name like  '" + searchString + "'" ;
 		}
 		IVendorService service = (IVendorService) SpringObjectFactory.INSTANCE.getInstance("IVendorService");
-		List<? extends CRMModelObject> vendors = service.listData(from, from  + noRecords, condition,(CRMContext)ctx);
+		List<? extends CRMModelObject> vendors = service.listData(from, from  + noRecords, condition,(CRMContext)ctx,null);
 		for (ModelObject obj :  vendors) {
 			ans.add(((Vendor)obj).getName());
 		}

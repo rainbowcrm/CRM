@@ -29,7 +29,7 @@ public class LookupBrands implements ILookupService{
 			condition =  " where name like  '" + searchString + "'" ;
 		}
 		IBrandService service = (IBrandService) SpringObjectFactory.INSTANCE.getInstance("IBrandService");
-		List<? extends CRMModelObject> items = service.listData(from, from  + noRecords, condition,(CRMContext)ctx);
+		List<? extends CRMModelObject> items = service.listData(from, from  + noRecords, condition,(CRMContext)ctx,null);
 		for (ModelObject obj :  items) {
 			ans.add(((Brand)obj).getName());
 		}

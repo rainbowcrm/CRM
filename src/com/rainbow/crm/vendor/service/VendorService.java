@@ -13,6 +13,7 @@ import com.rainbow.crm.vendor.dao.VendorDAO;
 import com.rainbow.crm.vendor.model.Vendor;
 import com.rainbow.crm.vendor.validator.VendorValidator;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
+import com.techtrade.rads.framework.ui.components.SortCriteria;
 import com.techtrade.rads.framework.utils.Utils;
 
 public class VendorService extends AbstractService implements IVendorService{
@@ -29,7 +30,7 @@ public class VendorService extends AbstractService implements IVendorService{
 
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
-			String whereCondition, CRMContext context) {
+			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
 		return super.listData("Vendor", from, to, whereCondition, context);
 	}
 

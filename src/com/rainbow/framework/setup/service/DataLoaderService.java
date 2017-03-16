@@ -250,7 +250,7 @@ public class DataLoaderService implements IDataLoaderService {
 		if (!Utils.isNullString(service)) {
 			String whereCondition = dataLoader.isExcludeDeleted()?" where deleted='false'":null;
 			IBusinessService businessService = (IBusinessService)SpringObjectFactory.INSTANCE.getInstance(service) ;
-			List<? extends CRMModelObject> objects= businessService.listData(0, 20000, whereCondition, context);
+			List<? extends CRMModelObject> objects= businessService.listData(0, 20000, whereCondition, context,null);
 			buffer.append("<" + title + ">");
 			if (!Utils.isNullList(objects)) {
 				for (CRMModelObject modelObject : objects) {
@@ -281,7 +281,7 @@ public class DataLoaderService implements IDataLoaderService {
 			if (!Utils.isNullString(service)) {
 				String whereCondition = dataLoader.isExcludeDeleted()?" where deleted='false'":null;
 				IBusinessService businessService = (IBusinessService)SpringObjectFactory.INSTANCE.getInstance(service) ;
-				List<? extends CRMModelObject> objects= businessService.listData(0, 20000, whereCondition, context);
+				List<? extends CRMModelObject> objects= businessService.listData(0, 20000, whereCondition, context,null);
 				buffer.append("{ \n ");
 				buffer.append("\""+ title +"\":[\n");
 				if (!Utils.isNullList(objects)) {
@@ -345,7 +345,7 @@ public class DataLoaderService implements IDataLoaderService {
 			if (!Utils.isNullString(service)) {
 				String whereCondition = dataLoader.isExcludeDeleted()?" where deleted='false'":null;
 				IBusinessService businessService = (IBusinessService)SpringObjectFactory.INSTANCE.getInstance(service) ;
-				List<? extends CRMModelObject> objects= businessService.listData(0, 20000, whereCondition, context);
+				List<? extends CRMModelObject> objects= businessService.listData(0, 20000, whereCondition, context,null);
 				int rowCount= 0;
 				Row row= sheet.createRow(rowCount++);
 				if (!Utils.isNullList(objects)) {

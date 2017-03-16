@@ -16,6 +16,7 @@ import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.item.validator.ItemValidator;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.model.transaction.TransactionResult;
+import com.techtrade.rads.framework.ui.components.SortCriteria;
 
 public class ItemService extends AbstractService implements IItemService{
 
@@ -31,7 +32,7 @@ public class ItemService extends AbstractService implements IItemService{
 
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
-			String whereCondition, CRMContext context) {
+			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
 		 return super.listData("Item", from, to, whereCondition, context);
 
 	}

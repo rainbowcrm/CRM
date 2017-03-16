@@ -37,7 +37,7 @@ public class LookupUsers implements ILookupService{
 			condition.append("  division.id=" + lookupParam);
 		}
 		IUserService service = (IUserService) SpringObjectFactory.INSTANCE.getInstance("IUserService");
-		List<? extends CRMModelObject> users = service.listData(from, from  + noRecords, condition.toString(),(CRMContext)ctx);
+		List<? extends CRMModelObject> users = service.listData(from, from  + noRecords, condition.toString(),(CRMContext)ctx,null);
 		for (ModelObject obj :  users) {
 			ans.add(((User)obj).getUserId());
 		}

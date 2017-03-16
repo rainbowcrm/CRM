@@ -19,6 +19,7 @@ import com.rainbow.crm.hibernate.ORMDAO;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.model.transaction.TransactionResult;
 import com.techtrade.rads.framework.model.transaction.TransactionResult.Result;
+import com.techtrade.rads.framework.ui.components.SortCriteria;
 import com.techtrade.rads.framework.utils.Utils;
 
 public class BrandService extends AbstractService implements IBrandService{
@@ -40,7 +41,7 @@ public class BrandService extends AbstractService implements IBrandService{
 
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
-			String whereCondition, CRMContext context) {
+			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
 		return super.listData("Brand", from, to, whereCondition, context);
 	}
 

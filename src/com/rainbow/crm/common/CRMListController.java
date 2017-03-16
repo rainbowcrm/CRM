@@ -119,7 +119,7 @@ public abstract class CRMListController  extends ListController{
 	public List<ModelObject> getData(int pageNumber, Filter filter,SortCriteria  sortCriteria) {
 		int from  = (pageNumber-1)*recordsPerPage ;
 		IBusinessService serv = (IBusinessService)getService();
-		return (List)serv.listData(from,  from + recordsPerPage, getFilter(filter),(CRMContext)getContext());
+		return (List)serv.listData(from,  from + recordsPerPage, getFilter(filter),(CRMContext)getContext(),null);
 		
 	}
 	

@@ -14,6 +14,7 @@ import com.rainbow.crm.company.validator.CompanyValidator;
 import com.rainbow.crm.hibernate.ORMDAO;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.model.transaction.TransactionResult;
+import com.techtrade.rads.framework.ui.components.SortCriteria;
 
 public class CompanyService  extends AbstractService implements ICompanyService{
 
@@ -28,7 +29,7 @@ public class CompanyService  extends AbstractService implements ICompanyService{
 	}
 
 	@Override
-	public List<CRMModelObject> listData(int from, int to, String whereCondition,CRMContext context) {
+	public List<CRMModelObject> listData(int from, int to, String whereCondition,CRMContext context, SortCriteria sortCriteria) {
 		 return  getDAO().listData("Company" ,from, to, whereCondition);
 	}
 

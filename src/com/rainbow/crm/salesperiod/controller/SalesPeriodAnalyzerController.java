@@ -181,7 +181,7 @@ public class SalesPeriodAnalyzerController  extends CRMGeneralController{
 	}
 	public Map<String, String >  getSalePeriods() {
 		ISalesPeriodService service =  (ISalesPeriodService)SpringObjectFactory.INSTANCE.getInstance("ISalesPeriodService") ;
-		List<SalesPeriod> periods = (List<SalesPeriod>)service.listData(0, 1000, null, (CRMContext)getContext());
+		List<SalesPeriod> periods = (List<SalesPeriod>)service.listData(0, 1000, null, (CRMContext)getContext(),null);
 		Map<String, String> ans = new HashMap<String, String>();
 		if(!Utils.isNullList(periods)) {
 			for (SalesPeriod period : periods) {

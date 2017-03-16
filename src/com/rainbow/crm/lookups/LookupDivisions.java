@@ -30,7 +30,7 @@ public class LookupDivisions implements ILookupService{
 			condition =  " where name like  '" + searchString + "'" ;
 		}
 		IDivisionService service = (IDivisionService) SpringObjectFactory.INSTANCE.getInstance("IDivisionService");
-		List<? extends CRMModelObject> divisions = service.listData(from, from  + noRecords, condition,(CRMContext)ctx);
+		List<? extends CRMModelObject> divisions = service.listData(from, from  + noRecords, condition,(CRMContext)ctx,null);
 		for (ModelObject obj :  divisions) {
 			if (allowAll || ((Division)obj).getId() == ((CRMContext)ctx).getLoggedInUser().getDivision().getId())
 				ans.add(((Division)obj).getName());

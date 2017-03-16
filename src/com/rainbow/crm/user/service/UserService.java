@@ -19,6 +19,7 @@ import com.rainbow.crm.user.validator.UserValidator;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.model.transaction.TransactionResult;
+import com.techtrade.rads.framework.ui.components.SortCriteria;
 import com.techtrade.rads.framework.utils.Utils;
 
 public class UserService  extends AbstractService implements IUserService{
@@ -33,7 +34,7 @@ public class UserService  extends AbstractService implements IUserService{
 	}
 
 	@Override
-	public List<CRMModelObject> listData(int from, int to, String whereCondition,CRMContext context) {
+	public List<CRMModelObject> listData(int from, int to, String whereCondition,CRMContext context, SortCriteria sortCriteria) {
 		if(context.getLoggedinCompany() != 1) {
 			return super.listData("User", from, to, whereCondition, context);
 		}else

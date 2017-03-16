@@ -20,6 +20,7 @@ import com.rainbow.crm.product.validator.ProductValidator;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.model.transaction.TransactionResult;
 import com.techtrade.rads.framework.model.transaction.TransactionResult.Result;
+import com.techtrade.rads.framework.ui.components.SortCriteria;
 import com.techtrade.rads.framework.utils.Utils;
 
 public class ProductService extends AbstractService implements  IProductService{
@@ -40,7 +41,7 @@ public class ProductService extends AbstractService implements  IProductService{
 
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
-			String whereCondition, CRMContext context) {
+			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
 		return super.listData("Product",from, to, whereCondition, context);
 	}
 

@@ -7,6 +7,7 @@ import java.util.List;
 
 
 
+
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.AbstractService;
 import com.rainbow.crm.common.CRMConstants;
@@ -24,6 +25,7 @@ import com.rainbow.crm.enquiry.model.Enquiry;
 import com.rainbow.crm.enquiry.validator.EnquiryValidator;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.model.transaction.TransactionResult;
+import com.techtrade.rads.framework.ui.components.SortCriteria;
 import com.techtrade.rads.framework.utils.Utils;
 
 public class EnquiryService extends AbstractService implements IEnquiryService{
@@ -40,7 +42,7 @@ public class EnquiryService extends AbstractService implements IEnquiryService{
 
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
-			String whereCondition, CRMContext context) {
+			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
 		return super.listData("Enquiry", from, to, whereCondition, context);
 	}
 

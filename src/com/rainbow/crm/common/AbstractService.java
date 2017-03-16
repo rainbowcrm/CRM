@@ -13,6 +13,7 @@ import com.rainbow.crm.hibernate.ORMDAO;
 import com.rainbow.framework.setup.model.Metadata;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.model.transaction.TransactionResult;
+import com.techtrade.rads.framework.ui.components.SortCriteria;
 import com.techtrade.rads.framework.utils.Utils;
 
 @Transactional(rollbackFor = Exception.class)
@@ -42,7 +43,7 @@ public abstract class AbstractService implements IBusinessService{
 			}
 		}
 		if (condition.toString().equals(" where ")) return null;
-		List<? extends CRMModelObject> objects = listData(0, 2, condition.toString(), context);
+		List<? extends CRMModelObject> objects = listData(0, 2, condition.toString(), context,null);
 		if (!Utils.isNullList(objects))
 			return objects.get(0);
 		else
@@ -142,7 +143,7 @@ public abstract class AbstractService implements IBusinessService{
 	}
 	
 	public List<? extends CRMModelObject> listData(String className,int from, int to,
-			String whereCondition, String orderBy, CRMContext context) {
+			String whereCondition, String orderBy, CRMContext context, SortCriteria sortCriteria) {
 		 StringBuffer additionalCondition = new StringBuffer();
 		 if (Utils.isNullString(whereCondition) ){
 			 additionalCondition = additionalCondition.append(" where company.id = " +  context.getLoggedinCompany()) ;

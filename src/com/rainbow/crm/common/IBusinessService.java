@@ -9,6 +9,7 @@ import com.rainbow.crm.company.model.Company;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.model.transaction.TransactionResult;
+import com.techtrade.rads.framework.ui.components.SortCriteria;
 
 public interface IBusinessService {
 
@@ -19,7 +20,7 @@ public interface IBusinessService {
 	
 	public CRMModelObject getByBusinessKey(CRMModelObject object, CRMContext context);
 	
-	public List<? extends CRMModelObject> listData(int from , int to , String whereCondition, CRMContext context );
+	public List<? extends CRMModelObject> listData(int from , int to , String whereCondition, CRMContext context, SortCriteria sortCriteria );
 	
 	@Transactional
 	public TransactionResult create(CRMModelObject object, CRMContext context) ;

@@ -13,6 +13,7 @@ import com.rainbow.crm.customer.dao.CustomerDAO;
 import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.customer.validator.CustomerValidator;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
+import com.techtrade.rads.framework.ui.components.SortCriteria;
 import com.techtrade.rads.framework.utils.Utils;
 
 public class CustomerService extends AbstractService implements ICustomerService{
@@ -29,7 +30,7 @@ public class CustomerService extends AbstractService implements ICustomerService
 
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
-			String whereCondition, CRMContext context) {
+			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
 		return super.listData("Customer", from, to, whereCondition, context);
 	}
 

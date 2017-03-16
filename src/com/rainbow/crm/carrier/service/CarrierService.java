@@ -13,6 +13,7 @@ import com.rainbow.crm.carrier.dao.CarrierDAO;
 import com.rainbow.crm.carrier.model.Carrier;
 import com.rainbow.crm.carrier.validator.CarrierValidator;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
+import com.techtrade.rads.framework.ui.components.SortCriteria;
 import com.techtrade.rads.framework.utils.Utils;
 
 public class CarrierService extends AbstractService implements ICarrierService{
@@ -29,7 +30,7 @@ public class CarrierService extends AbstractService implements ICarrierService{
 
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
-			String whereCondition, CRMContext context) {
+			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
 		return super.listData("Carrier", from, to, whereCondition, context);
 	}
 

@@ -29,7 +29,7 @@ public class LookupCompanies implements ILookupService{
 			condition =  " where name like  '" + searchString + "'" ;
 		}
 		ICompanyService service = (ICompanyService) SpringObjectFactory.INSTANCE.getInstance("ICompanyService");
-		List<? extends CRMModelObject> companies = service.listData(from, from  + noRecords, condition,(CRMContext)ctx);
+		List<? extends CRMModelObject> companies = service.listData(from, from  + noRecords, condition,(CRMContext)ctx,null);
 		for (ModelObject obj :  companies) {
 			ans.add(((Company)obj).getName());
 		}

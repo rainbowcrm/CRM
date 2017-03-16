@@ -13,6 +13,7 @@ import com.rainbow.crm.contact.dao.ContactDAO;
 import com.rainbow.crm.contact.model.Contact;
 import com.rainbow.crm.contact.validator.ContactValidator;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
+import com.techtrade.rads.framework.ui.components.SortCriteria;
 import com.techtrade.rads.framework.utils.Utils;
 
 public class ContactService extends AbstractService implements IContactService{
@@ -29,7 +30,7 @@ public class ContactService extends AbstractService implements IContactService{
 
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
-			String whereCondition, CRMContext context) {
+			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
 		return super.listData("Contact", from, to, whereCondition, context);
 	}
 

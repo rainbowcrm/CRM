@@ -21,6 +21,7 @@ import com.rainbow.crm.address.model.Address;
 import com.rainbow.crm.address.validator.AddressValidator;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.model.transaction.TransactionResult;
+import com.techtrade.rads.framework.ui.components.SortCriteria;
 
 public class AddressService extends AbstractService implements IAddressService{
 
@@ -36,7 +37,7 @@ public class AddressService extends AbstractService implements IAddressService{
 
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
-			String whereCondition, CRMContext context) {
+			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
 		return super.listData("Address", from, to, whereCondition, context);
 	}
 
