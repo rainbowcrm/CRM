@@ -42,7 +42,7 @@ public class BrandService extends AbstractService implements IBrandService{
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
 			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
-		return super.listData("Brand", from, to, whereCondition, context);
+		return super.listData("Brand", from, to, whereCondition, context,sortCriteria);
 	}
 
 	@Override

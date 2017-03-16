@@ -53,7 +53,7 @@ public class ExpenseVoucherService extends AbstractionTransactionService impleme
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
 			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
-		return super.listData("ExpenseVoucher", from, to, whereCondition, context);
+		return super.listData("ExpenseVoucher", from, to, whereCondition, context,sortCriteria);
 	}
 
 	@Override

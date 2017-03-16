@@ -122,7 +122,7 @@ public class DistributionOrderService extends AbstractionTransactionService impl
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
 			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
-		return super.listData("DistributionOrder", from, to, whereCondition, context);
+		return super.listData("DistributionOrder", from, to, whereCondition, context,sortCriteria);
 	}
 
 	@Override

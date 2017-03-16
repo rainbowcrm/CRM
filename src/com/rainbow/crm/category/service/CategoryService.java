@@ -42,7 +42,7 @@ public class CategoryService extends AbstractService implements ICategoryService
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
 			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
-		return super.listData("Category", from, to, whereCondition, context);
+		return super.listData("Category", from, to, whereCondition, context,sortCriteria);
 	}
 
 	@Override

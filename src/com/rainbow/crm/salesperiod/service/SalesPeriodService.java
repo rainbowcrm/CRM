@@ -61,7 +61,7 @@ public class SalesPeriodService extends AbstractionTransactionService implements
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
 			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
-		return super.listData("SalesPeriod", from, to, whereCondition, context);
+		return super.listData("SalesPeriod", from, to, whereCondition, context,sortCriteria);
 	}
 
 	@Override

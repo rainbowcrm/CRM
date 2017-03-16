@@ -39,7 +39,7 @@ public class DivisionService extends AbstractService implements IDivisionService
 
 	@Override
 	public List<CRMModelObject> listData(int from, int to, String whereCondition,CRMContext context, SortCriteria sortCriteria) {
-		return super.listData("Division", from, to, whereCondition, context);
+		return super.listData("Division", from, to, whereCondition, context,sortCriteria);
 	}
 
 	

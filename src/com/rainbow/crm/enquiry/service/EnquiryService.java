@@ -43,7 +43,7 @@ public class EnquiryService extends AbstractService implements IEnquiryService{
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
 			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
-		return super.listData("Enquiry", from, to, whereCondition, context);
+		return super.listData("Enquiry", from, to, whereCondition, context,sortCriteria);
 	}
 
 	@Override

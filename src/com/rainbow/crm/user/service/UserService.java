@@ -36,7 +36,7 @@ public class UserService  extends AbstractService implements IUserService{
 	@Override
 	public List<CRMModelObject> listData(int from, int to, String whereCondition,CRMContext context, SortCriteria sortCriteria) {
 		if(context.getLoggedinCompany() != 1) {
-			return super.listData("User", from, to, whereCondition, context);
+			return super.listData("User", from, to, whereCondition, context,sortCriteria);
 		}else
 			return  getDAO().listData("User" ,from, to, whereCondition);
 	}

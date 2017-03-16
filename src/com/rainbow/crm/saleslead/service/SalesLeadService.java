@@ -92,7 +92,7 @@ public class SalesLeadService extends AbstractionTransactionService implements I
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
 			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
-		return super.listData("SalesLead", from, to, whereCondition, context);
+		return super.listData("SalesLead", from, to, whereCondition, context,sortCriteria);
 	}
 
 	@Override

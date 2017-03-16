@@ -58,7 +58,7 @@ public class PurchaseService extends AbstractionTransactionService implements IP
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
 			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
-		return super.listData("Purchase", from, to, whereCondition, context);
+		return super.listData("Purchase", from, to, whereCondition, context,sortCriteria);
 	}
 
 	@Override

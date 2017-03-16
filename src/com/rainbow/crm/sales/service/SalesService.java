@@ -95,7 +95,7 @@ public class SalesService extends AbstractionTransactionService implements ISale
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
 			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
-		return super.listData("Sales", from, to, whereCondition, context);
+		return super.listData("Sales", from, to, whereCondition, context,sortCriteria);
 	}
 
 	@Override

@@ -31,7 +31,7 @@ public class CustomerService extends AbstractService implements ICustomerService
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
 			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
-		return super.listData("Customer", from, to, whereCondition, context);
+		return super.listData("Customer", from, to, whereCondition, context,sortCriteria);
 	}
 
 	@Override

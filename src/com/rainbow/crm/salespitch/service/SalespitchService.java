@@ -43,7 +43,7 @@ public class SalespitchService extends AbstractService implements ISalespitchSer
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
 			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
-		return super.listData("Salespitch", from, to, whereCondition, context);
+		return super.listData("Salespitch", from, to, whereCondition, context,sortCriteria);
 	}
 
 	@Override

@@ -66,7 +66,7 @@ public class WishListService extends AbstractionTransactionService implements IW
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
 			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
-		return super.listData("WishList", from, to, whereCondition, context);
+		return super.listData("WishList", from, to, whereCondition, context,sortCriteria);
 	}
 
 	@Override

@@ -38,7 +38,7 @@ public class AddressService extends AbstractService implements IAddressService{
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
 			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
-		return super.listData("Address", from, to, whereCondition, context);
+		return super.listData("Address", from, to, whereCondition, context,sortCriteria);
 	}
 
 	@Override

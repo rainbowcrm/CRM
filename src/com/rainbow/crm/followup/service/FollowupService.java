@@ -43,7 +43,7 @@ public class FollowupService extends AbstractService implements IFollowupService
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
 			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
-		return super.listData("Followup", from, to, whereCondition, context);
+		return super.listData("Followup", from, to, whereCondition, context,sortCriteria);
 	}
 
 	@Override

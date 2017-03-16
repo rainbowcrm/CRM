@@ -31,7 +31,7 @@ public class CarrierService extends AbstractService implements ICarrierService{
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
 			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
-		return super.listData("Carrier", from, to, whereCondition, context);
+		return super.listData("Carrier", from, to, whereCondition, context,sortCriteria);
 	}
 
 	@Override

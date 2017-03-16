@@ -39,7 +39,7 @@ public class SkuService extends AbstractService implements ISkuService {
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
 			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
-		 return super.listData("Sku", from, to, whereCondition, context);
+		 return super.listData("Sku", from, to, whereCondition, context,sortCriteria);
 
 	}
 

@@ -33,7 +33,7 @@ public class ItemService extends AbstractService implements IItemService{
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
 			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
-		 return super.listData("Item", from, to, whereCondition, context);
+		 return super.listData("Item", from, to, whereCondition, context,sortCriteria);
 
 	}
 

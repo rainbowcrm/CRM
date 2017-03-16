@@ -42,7 +42,7 @@ public class ExpenseHeadService extends AbstractService implements IExpenseHeadS
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
 			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
-		return super.listData("ExpenseHead", from, to, whereCondition, context);
+		return super.listData("ExpenseHead", from, to, whereCondition, context,sortCriteria);
 	}
 
 	@Override

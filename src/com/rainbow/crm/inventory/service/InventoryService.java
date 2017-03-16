@@ -45,7 +45,7 @@ public class InventoryService extends AbstractService implements  IInventoryServ
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
 			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
-		return super.listData("Inventory", from, to, whereCondition, context);
+		return super.listData("Inventory", from, to, whereCondition, context,sortCriteria);
 	}
 
 	@Override

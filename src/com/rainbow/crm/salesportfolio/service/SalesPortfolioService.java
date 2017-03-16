@@ -95,7 +95,7 @@ public class SalesPortfolioService extends AbstractService implements
 	public List<CRMModelObject> listData(int from, int to,
 			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
 		return super.listData("SalesPortfolio", from, to, whereCondition,
-				context);
+				context,sortCriteria);
 	}
 
 	@Override

@@ -125,8 +125,18 @@ public abstract class AbstractService implements IBusinessService{
 		return new TransactionResult(result,errors);
 	}
 	
+	private String getOrderByCondition (SortCriteria sortCriteria)
+	{
+		StringBuffer buffer = new StringBuffer();
+		if(sortCriteria == null || Utils.isNullString(sortCriteria.getFieldName()) )
+			return " ";
+		else
+			return  " ORDER BY " +  sortCriteria.getFieldName() + " " + ( (sortCriteria.getDirection().equals(SortCriteria.DIRECTION.ASCENDING))?"ASC":"DESC");
+		
+	}
+	
 	public List<CRMModelObject> listData(String className,int from, int to,
-			String whereCondition, CRMContext context) {
+			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
 		 StringBuffer additionalCondition = new StringBuffer();
 		 boolean allowAllDiv = CommonUtil.allowAllDivisionAccess(context);
 		 Metadata metadata = CommonUtil.getMetaDataforClass(className);
@@ -138,6 +148,7 @@ public abstract class AbstractService implements IBusinessService{
 		 if (!allowAllDiv && metadata != null && metadata.isDivisionSpecific()) {
 			 additionalCondition = additionalCondition.append(" and division.id = "  +  context.getLoggedInUser().getDivision().getId());
 		 }
+		 additionalCondition.append(getOrderByCondition(sortCriteria));
 		 return  getDAO().listData(className ,from, to, additionalCondition.toString());
 
 	}
