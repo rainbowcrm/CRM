@@ -68,16 +68,16 @@ Controller = "com.rainbow.crm.customer.controller.CustomerListController">
 <Column title ="Last_Name"   sortField="lastName" width ="18%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="LastName" />
 </Column>
-<Column title ="Phone"   width ="18%">
+<Column title ="Phone"    sortField="Phone" width ="18%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="Phone" />
 </Column>
-<Column title ="Email"   width ="18%">
+<Column title ="Email"  sortField="Email"  width ="18%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="Email" />
 </Column>  
-<Column title ="Pincode"   width ="10%">
+<Column title ="Pincode"   sortField="lastName" width ="10%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="ZipCode" />
 </Column>  
-<Column title ="City"   sortField="city" width ="18%">
+<Column title ="City"   sortField="zipCode" width ="18%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="City" />
 </Column>
 </Columns>

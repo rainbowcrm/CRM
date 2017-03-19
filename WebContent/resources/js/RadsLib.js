@@ -41,7 +41,7 @@ function addRowofTable(tabl) {
 
 function deleteRow(ctrl) {
 	console.log('ctrl=' + ctrl ) ;
-	var row = ctrl.parentElement.parentElement;
+	var row = ctrl.parentElement.parentElement
 	console.log('row=' + row ) ;
 	var tabl = row.parentElement ;
 	console.log('tabl=' + tabl ) ;
@@ -207,10 +207,12 @@ function isNumberKey(evt)
    return true;
 }
 
-
 function submitwithSort(sort) {
 	console.log ('sorting with ' +  sort) ;
 	document.getElementById('rds_sortfield').value =sort;
-	document.getElementById('rds_sortdirection').value ='ASC';
+	if (document.getElementById('rds_sortdirection').value  ==''  || document.getElementById('rds_sortdirection').value == 'DESC')
+		document.getElementById('rds_sortdirection').value ='ASC';
+	else
+		document.getElementById('rds_sortdirection').value ='DESC';
 	document.forms[0].submit();
 }
