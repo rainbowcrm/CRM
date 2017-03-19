@@ -62,22 +62,22 @@ Controller = "com.rainbow.crm.carrier.controller.CarrierListController">
 <Element label = ""  type = "UICheckBox" Id = "idChkSel"  rendered="!Object.isDeleted" property ="Id" />
 <Element label = ""  type = "UIImage" Id = "idChkSel"  rendered="Object.isDeleted" height = "21" weight ="21" src= "./resources/images/deletedRow.jpg" />
 </SelectionColumn>
-<Column title ="Code"   width ="10%">
+<Column title ="Code"  sortField="carrier_code"  width ="10%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="Code" />
 </Column>
-<Column title ="Name"   width ="26%">
+<Column title ="Name" sortField="carrier_name"   width ="26%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="Name" />
 </Column>
-<Column title ="Phone"   width ="18%">
+<Column title ="Phone"  sortField="phone"  width ="18%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="Phone" />
 </Column>
-<Column title ="Email"   width ="18%">
+<Column title ="Email" sortField="email"  width ="18%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="Email" />
 </Column>  
-<Column title ="Pincode"   width ="10%">
+<Column title ="Pincode"   sortField="zipcode" width ="10%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="ZipCode" />
 </Column>  
-<Column title ="City"   width ="18%">
+<Column title ="City"  sortField="city"  width ="18%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="City" />
 </Column>
 </Columns>

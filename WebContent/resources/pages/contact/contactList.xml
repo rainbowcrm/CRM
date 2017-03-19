@@ -62,22 +62,22 @@ Controller = "com.rainbow.crm.contact.controller.ContactListController">
 <Element label = ""  type = "UICheckBox" Id = "idChkSel"  rendered="!Object.isDeleted" property ="Id" />
 <Element label = ""  type = "UIImage" Id = "idChkSel"  rendered="Object.isDeleted" height = "21" weight ="21" src= "./resources/images/deletedRow.jpg" />
 </SelectionColumn>
-<Column title ="First_Name"   width ="18%">
+<Column title ="First_Name"  sortField="first_name"  width ="18%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="FirstName" />
 </Column>
-<Column title ="Last_Name"   width ="18%">
+<Column title ="Last_Name" sortField="last_name"  width ="18%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="LastName" />
 </Column>
-<Column title ="Phone"   width ="18%">
+<Column title ="Phone"  sortField="phone" width ="18%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="Phone" />
 </Column>
-<Column title ="Email"   width ="18%">
+<Column title ="Email" sortField="email"  width ="18%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="Email" />
 </Column>  
-<Column title ="Type"  width ="18%" >
+<Column title ="Type" sortField="CONTACT_TYPE"  width ="18%" >
 <Element label = ""  type = "UINote" Id = "idCt"  property ="contactType.description" />
 </Column> 
-<Column title ="City"   width ="18%">
+<Column title ="City" sortField="city"   width ="18%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="City" />
 </Column>
 </Columns>

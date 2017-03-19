@@ -72,20 +72,20 @@ Controller = "com.rainbow.crm.division.controller.DivisionListController">
 <Element label = ""  type = "UICheckBox" Id = "idChkSel"  rendered="!Object.isDeleted" property ="Id" />
 <Element label = ""  type = "UIImage" Id = "idChkSel"  rendered="Object.isDeleted" height = "21" weight ="21" src= "./resources/images/deletedRow.jpg" />
 </SelectionColumn>
-<Column title ="Code"  width ="5%" >
-<Element label = ""  type = "UINote" Id = "idCodeNote"  property ="Code" />
+<Column title ="Code" sortField="division_code"  width ="5%" >
+<Element label = ""  type = "UINote" Id = "idCodeNote"   property ="Code" />
 </Column>
-<Column title ="Name" width ="35%" >
+<Column title ="Name" sortField="division_name"  width ="35%" >
 <Element label = ""  type = "UINote" Id = "idNameNote"  property ="Name" />
 </Column>
- <Column title ="Type"  width ="20%" >
+ <Column title ="Type"  sortField="div_type" width ="20%" >
   <Element label = ""  type = "UINote" Id = "idIndusNote"  property ="DivisionTypeDesc" />
  </Column>
-  <Column title ="Manager"  width ="20%" >
+  <Column title ="Manager" sortField="Manager" width ="20%" >
   <Element label = ""  type = "UINote" Id = "idIndusNote"  property ="Manager" />
  </Column>
-  <Column title ="City"  width ="20%" >
-  <Element label = ""  type = "UINote" Id = "idIndusNote"  property ="City" />
+  <Column title ="City" sortField="City" width ="20%" >
+  <Element label = ""  type = "UINote" Id = "idIndusNote"   property ="City" />
  </Column>
   </Columns>
 </ListSection>
