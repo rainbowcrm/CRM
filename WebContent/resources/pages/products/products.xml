@@ -34,13 +34,13 @@ Controller = "com.rainbow.crm.product.controller.ProductController">
 <Element label = ""  type = "UICheckBox" Id = "idChkSel"  rendered="!Object.isDeleted" property ="Id" />
 <Element label = ""  type = "UIImage" Id = "idChkSel"  rendered="Object.isDeleted" height = "21" weight ="21" src= "./resources/images/deletedRow.jpg" />
 </SelectionColumn>
-<Column title ="Product" width ="30%" >
+<Column title ="Product"  sortField="product_name" width ="30%" >
 <Element label = ""  type = "UINote" Id = "idNameNote"  property ="Name" />
 </Column>
-<Column title ="Description" width ="35%" >
+<Column title ="Description" sortField="description" width ="35%" >
 <Element label = ""  type = "UINote" Id = "idDescNote"  property ="Description" />
 </Column>
- <Column title ="Category"  width ="20%" >
+ <Column title ="Category" sortField="category.name" width ="20%" >
   <Element label = ""  type = "UINote" Id = "idIndusNote"  property ="Category.Name" />
  </Column>
   <Column title =""  width ="5%" >

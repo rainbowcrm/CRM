@@ -77,22 +77,22 @@ Controller = "com.rainbow.crm.item.controller.ItemListController">
 <Element label = ""  type = "UICheckBox" Id = "idChkSel"  rendered="!Object.isDeleted" property ="Id" />
 <Element label = ""  type = "UIImage" Id = "idChkSel"  rendered="Object.isDeleted" height = "21" weight ="21" src= "./resources/images/deletedRow.jpg" />
 </SelectionColumn>
-<Column title ="Code"  width ="5%" >
+<Column title ="Code"  sortField="item_code"   width ="5%" >
 <Element label = ""  type = "UINote" Id = "idCodeNote"  property ="Code" />
 </Column>
-<Column title ="Name" width ="35%" >
+<Column title ="Name" sortField="item_name"  width ="35%" >
 <Element label = ""  type = "UINote" Id = "idNameNote"  property ="Name" />
 </Column>
- <Column title ="Product"  width ="20%" >
+ <Column title ="Product" sortField="product.name"   width ="20%" >
   <Element label = ""  type = "UINote" Id = "idProdNote"  property ="Product.Name" />
  </Column>
- <Column title ="Item_Class"  width ="15%" >
+ <Column title ="Item_Class" sortField="item_class"   width ="15%" >
   <Element label = ""  type = "UINote" Id = "iditClsNote"  property ="itemClassDesc" />
  </Column>
-  <Column title ="Manufacturer"  width ="15%" >
+  <Column title ="Manufacturer" sortField="manufacturer"   width ="15%" >
   <Element label = ""  type = "UINote" Id = "idManuNote"  property ="Manufacturer" />
  </Column>
-  <Column title ="Retail_Price"  width ="10%" >
+  <Column title ="Retail_Price"  sortField="RETAIL_PRICE"  width ="10%" >
   <Element label = ""  type = "UINote" Id = "idPriceNote"  property ="RetailPrice" />
  </Column>
   </Columns>

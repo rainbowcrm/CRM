@@ -61,22 +61,22 @@ Controller = "com.rainbow.crm.custcategory.controller.CustCategoryListController
 <Element label = ""  type = "UICheckBox" Id = "idChkSel"  rendered="!Object.isDeleted" property ="Id" />
 <Element label = ""  type = "UIImage" Id = "idChkSel"  rendered="Object.isDeleted" height = "21" weight ="21" src= "./resources/images/deletedRow.jpg" />
 </SelectionColumn>
-<Column title ="Name"   width ="18%">
+<Column title ="Name"   sortField="name" width ="18%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="Name" />
 </Column>
-<Column title ="Eval_From"   width ="18%">
+<Column title ="Eval_From"  sortField="EVAL_FROM"  width ="18%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="evalFrom.description" />
 </Column>
-<Column title ="Eval_To"  width ="18%" >
+<Column title ="Eval_To"  sortField="EVAL_TO" width ="18%" >
 <Element label = ""  type = "UINote" Id = "idCt"  property ="evalFrom.description" />
 </Column> 
-<Column title ="Value LT"   width ="18%">
+<Column title ="Value LT" sortField="MIN_VALUE"  width ="18%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="minValue" />
 </Column>
-<Column title ="Value GT"   width ="18%">
+<Column title ="Value GT" sortField="MAX_VALUE"  width ="18%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="maxValue" />
 </Column>  
-<Column title ="Include_Returns"   width ="18%">
+<Column title ="Include_Returns" sortField="INCLUDE_RETURNS"  width ="18%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="incudeReturns" />
 </Column>
 </Columns>
