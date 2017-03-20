@@ -54,13 +54,13 @@ Controller = "com.rainbow.crm.territory.controller.TerritoryListController">
 <Element label = ""  type = "UICheckBox" Id = "idChkSel"  rendered="!Object.isDeleted" property ="Id" />
 <Element label = ""  type = "UIImage" Id = "idChkSel"  rendered="Object.isDeleted" height = "21" weight ="21" src= "./resources/images/deletedRow.jpg" />
 </SelectionColumn>
-<Column title ="Division"  width ="25%" >
+<Column title ="Division" sortField="division.name"  width ="25%" >
 <Element label = ""  type = "UINote" Id = "idDoc"  property ="Division.Name" />
 </Column>
-<Column title ="Territory"  width ="25%" >
+<Column title ="Territory"  sortField="territory" width ="25%" >
 <Element label = ""  type = "UINote" Id = "idDt"  property ="Territory" />
 </Column>
-<Column title ="Description"  width ="40%" >
+<Column title ="Description"  sortField="description" width ="40%" >
 <Element label = ""  type = "UINote" Id = "idCust"  property ="description" />
 </Column>
 </Columns>

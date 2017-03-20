@@ -57,19 +57,19 @@ Controller = "com.rainbow.crm.salesperiod.controller.SalesPeriodListController">
 <Element label = ""  type = "UICheckBox" Id = "idChkSel"  rendered="!Object.isVoided" property ="Id" />
 <Element label = ""  type = "UIImage" Id = "idChkSel"  rendered="Object.isVoided" height = "21" weight ="21" src= "./resources/images/deletedRow.jpg" />
 </SelectionColumn>
-<Column title ="Period"  width ="25%" >
+<Column title ="Period"  sortField="period"  width ="25%" >
 <Element label = ""  type = "UINote" Id = "idperiod"  property ="Period" />
 </Column>
-<Column title ="Division"  width ="25%" >
+<Column title ="Division" sortField="division.name"  width ="25%" >
 <Element label = ""  type = "UINote" Id = "idperiod"  property ="Division.Name" />
 </Column>
-<Column title ="From_Date"  width ="15%" >
+<Column title ="From_Date" sortField="from_date"   width ="15%" >
 <Element label = ""  type = "UINote" Id = "idfrmDate"  property ="FromDate" />
 </Column>
-<Column title ="To_Date"  width ="15%" >
+<Column title ="To_Date"  sortField="to_date"  width ="15%" >
 <Element label = ""  type = "UINote" Id = "idDoc"  property ="ToDate" />
 </Column>
-<Column title ="Total_Target"  width ="15%" >
+<Column title ="Total_Target"  sortField="TOTAL_TARGET"  width ="15%" >
 <Element label = ""  type = "UINote" Id = "idVend"  property ="totalTarget" />
 </Column>
 </Columns>

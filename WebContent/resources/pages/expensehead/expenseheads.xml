@@ -33,13 +33,13 @@ Controller = "com.rainbow.crm.expensehead.controller.ExpenseHeadController">
 <Element label = ""  type = "UICheckBox" Id = "idChkSel"  rendered="!Object.isDeleted" property ="Id" />
 <Element label = ""  type = "UIImage" Id = "idChkSel"  rendered="Object.isDeleted" height = "21" weight ="21" src= "./resources/images/deletedRow.jpg" />
 </SelectionColumn>
- <Column title ="Code"  width ="10%" >
+ <Column title ="Code"  sortField="code"  width ="10%" >
   <Element label = ""  type = "UINote" Id = "idIndusNote"  property ="Code" />
  </Column>
-<Column title ="Expense_Head" width ="35%" >
+<Column title ="Expense_Head"  sortField="name" width ="35%" >
 <Element label = ""  type = "UINote" Id = "idNameNote"  property ="Name" />
 </Column>
-<Column title ="Description" width ="40%" >
+<Column title ="Description"  sortField="description"  width ="40%" >
 <Element label = ""  type = "UINote" Id = "idDescNote"  property ="Description" />
 </Column>
 

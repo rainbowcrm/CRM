@@ -75,10 +75,10 @@ Controller = "com.rainbow.crm.wishlist.controller.WishListListController">
 <Column title ="Date" sortField="REQUESTED_DATE" width ="20%" >
 <Element label = ""  type = "UINote" Id = "idDt"  property ="wishListDate" />
 </Column>
-<Column title ="Customer" sortField="Customers.first_name"  width ="30%" >
+<Column title ="Customer" sortField="customer.firstName"  width ="30%" >
 <Element label = ""  type = "UINote" Id = "idCust"  property ="Customer.FirstName" />
 </Column>
-<Column title ="Phone"  sortField="Customers.Phone" width ="30%" >
+<Column title ="Phone"  sortField="customer.phone" width ="30%" >
 <Element label = ""  type = "UINote" Id = "idPhone"  property ="Customer.Phone" />
 </Column>
 <Column title ="Sales_Lead" sortField="SALES_LEAD_GEN"  width ="31%" >
