@@ -60,19 +60,19 @@ Controller = "com.rainbow.crm.salespitch.controller.SalespitchListController">
 <Element label = ""  type = "UICheckBox" Id = "idChkSel"  rendered="!Object.isDeleted" property ="Id" />
 <Element label = ""  type = "UIImage" Id = "idChkSel"  rendered="Object.isDeleted" height = "21" weight ="21" src= "./resources/images/deletedRow.jpg" />
 </SelectionColumn>
-<Column title ="Division"   width ="20%">
+<Column title ="Division"  sortField="division.name"   width ="20%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="Division.Name" />
 </Column>
-<Column title ="Sales_Associate"   width ="20%">
+<Column title ="Sales_Associate"   sortField="salesAssociate.userId"   width ="20%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="salesAssociate.userId" />
 </Column>
-<Column title ="Type"  width ="20%" >
+<Column title ="Type"  sortField="salespitchType.description"  width ="20%" >
 <Element label = ""  type = "UINote" Id = "idCt"  property ="salespitchType.description" />
 </Column> 
-<Column title ="Territory"   width ="20%">
+<Column title ="Territory" sortField="territory.territory"    width ="20%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="territory.territory" />
 </Column>
-<Column title ="Date"   width ="20%">
+<Column title ="Date"  sortField="pitchDate"   width ="20%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="pitchDate" />
 </Column>  
 

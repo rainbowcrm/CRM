@@ -58,22 +58,22 @@ Controller = "com.rainbow.crm.followup.controller.FollowupListController">
 <Element label = ""  type = "UICheckBox" Id = "idChkSel"  rendered="!Object.isDeleted" property ="Id" />
 <Element label = ""  type = "UIImage" Id = "idChkSel"  rendered="Object.isDeleted" height = "21" weight ="21" src= "./resources/images/deletedRow.jpg" />
 </SelectionColumn>
-<Column title ="Sales_Lead"   width ="18%">
+<Column title ="Sales_Lead"  sortField="lead.docNumber"  width ="18%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="Lead.docNumber" />
 </Column>
-<Column title ="Sales_Associate"   width ="18%">
+<Column title ="Sales_Associate"  sortField="salesAssociate"  width ="18%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="salesAssociate" />
 </Column>
-<Column title ="Confidence_Level"  width ="18%" >
+<Column title ="Confidence_Level"  sortField="confidenceLevel.description" width ="18%" >
 <Element label = ""  type = "UINote" Id = "idCt"  property ="confidenceLevel.description" />
 </Column> 
-<Column title ="Result"   width ="18%">
+<Column title ="Result"   sortField="result.description"  width ="18%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="Result.description" />
 </Column>
-<Column title ="Result_Reson"   width ="18%">
+<Column title ="Result_Reson"  sortField="resultReason.description"  width ="18%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="ResultReason.description" />
-</Column>  
-<Column title ="Next_Followup"   width ="18%">
+</Column>   
+<Column title ="Next_Followup"  sortField="nextFollwup" width ="18%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="nextFollwup" />
 </Column>
 </Columns>

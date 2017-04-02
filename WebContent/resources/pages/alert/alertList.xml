@@ -60,19 +60,19 @@ Controller = "com.rainbow.crm.alert.controller.AlertListController">
 <Element label = ""  type = "UICheckBox" Id = "idChkSel"  rendered="!Object.isDeleted" property ="Id" />
 <Element label = ""  type = "UIImage" Id = "idChkSel"  rendered="Object.isDeleted" height = "21" weight ="21" src= "./resources/images/deletedRow.jpg" />
 </SelectionColumn>
-<Column title ="Type"   width ="18%">
-<Element label = ""  type = "UINote" Id = "idIdNote"  property ="type.description" />
+<Column title ="Type"   width ="18%" sortField="type.description"  >
+<Element label = ""  type = "UINote" Id = "idIdNote"   property ="type.description" />
 </Column>
-<Column title ="Alert"   width ="28%">
+<Column title ="Alert"   width ="28%" sortField="url"  >
 <Element label = ""  type = "UIHyperLink" Id = "idIdNote"    property ="url"  supplementaryProperty="data"/>
 </Column>
-<Column title ="Owner"  width ="18%" >
+<Column title ="Owner"  width ="18%"  sortField="owner.userId"  >
 <Element label = ""  type = "UINote" Id = "idCt"  property ="owner.userId" />
 </Column> 
-<Column title ="Status"   width ="18%">
+<Column title ="Status"   width ="18%" sortField="status.description"  >
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="status.description" />
 </Column>
-<Column title ="Raised_By"   width ="18%">
+<Column title ="Raised_By"   width ="18%" sortField="RaisedBy"  >
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="RaisedBy" />
 </Column>  
 </Columns>
