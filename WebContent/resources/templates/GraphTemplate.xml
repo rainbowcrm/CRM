@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Template id ="GraphTemplate" type = "com.techtrade.rads.framework.ui.templates.TemplateType" >
  <DataType>  </DataType>
+ <MetaData>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+ </MetaData>
   <Renderers>
  <Renderer>
  <RendererType>HTML</RendererType>

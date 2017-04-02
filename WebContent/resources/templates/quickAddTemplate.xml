@@ -2,6 +2,9 @@
 <Template id ="simplecrud" type = "com.techtrade.rads.framework.ui.templates.CRUDTemplateType" >
  <DataType   > ModelObject
  </DataType>
+ <MetaData>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+ </MetaData>
  <Renderers>
  <Renderer>
  <RendererType>HTML</RendererType>

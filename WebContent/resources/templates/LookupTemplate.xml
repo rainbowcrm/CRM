@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Template id ="lookup" type = "com.techtrade.rads.framework.ui.templates.LookupTemplateType" >
+ <MetaData>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+ </MetaData>
  <Renderers>
  <Renderer>
  <RendererType>HTML</RendererType>

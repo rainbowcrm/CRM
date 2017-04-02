@@ -216,3 +216,49 @@ function submitwithSort(sort) {
 		document.getElementById('rds_sortdirection').value ='DESC';
 	document.forms[0].submit();
 }
+
+/*execute only those function that are critical during app launch */
+function bootstrap(){
+	var menuButton = document.querySelector('.topBar .menu');
+	var leftNav = document.querySelector('#leftsideBarApp');
+	menuButton.addEventListener('click',menuClickListener, false);
+}
+
+function menuClickListener(event){
+   displayOvelay();
+}
+
+function displayOvelay(){
+	var menuOverlay = document.querySelector('#menu-overlay');
+	if(!menuOverlay){
+      menuOverlay = document.createElement('div');
+      menuOverlay.id = 'menu-overlay';
+      menuOverlay.className = 'overlay';
+	  menuOverlay.addEventListener('click', hideMenu,false);
+      document.getElementsByTagName('body')[0].appendChild(menuOverlay);
+	}
+	if(menuOverlay.style.visibility == "visible"){
+		hideMenu();
+		menuOverlay.style.visibility = "hidden";
+	}
+	else{
+		displayMenu();
+		menuOverlay.style.visibility = "visible";
+	}
+}
+
+function displayMenu(){
+	var leftNav = document.querySelector('#leftsideBarApp');
+	leftNav.style.display = 'block';
+}
+
+function hideMenu(){
+	var menuOverlay = document.querySelector('#menu-overlay');
+    menuOverlay.style.visibility='hidden';
+	var leftNav = document.querySelector('#leftsideBarApp');
+	leftNav.style.display = 'none';
+}
+
+document.addEventListener("DOMContentLoaded", function(event) {
+    bootstrap();
+});

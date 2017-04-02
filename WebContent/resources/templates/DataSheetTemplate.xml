@@ -2,6 +2,9 @@
 <Template id ="simpleDataSheet"  type ="com.techtrade.rads.framework.ui.templates.DataSheetTemplateType">
  <DataType   > List
  </DataType>
+ <MetaData>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+ </MetaData>
  <Renderers>
  <Renderer>
  <RendererType>HTML</RendererType>

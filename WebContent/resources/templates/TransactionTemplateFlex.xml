@@ -2,6 +2,9 @@
 <Template id ="simpleTransFlex" type = "com.techtrade.rads.framework.ui.templates.TransactionTemplateType" >
  <DataType   > ModelObject
  </DataType>
+ <MetaData>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+ </MetaData>
  <Renderers>
  <Renderer>
  <RendererType>HTML</RendererType>
