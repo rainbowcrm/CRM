@@ -8,6 +8,11 @@
 body {
     background-color: rgb(230,230,230);
 }
+form {
+	> p {
+		margin: 0px;
+	}
+}
 
 div.pagestyle {
  position:absolute;

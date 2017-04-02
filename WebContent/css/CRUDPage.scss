@@ -11,9 +11,11 @@ body {
 	font-family: 'Roboto', sans-serif;
 }
 
-p {
+form {
+	> p {
 		margin: 0px;
 	}
+}
 
 
 div.pagestyle {

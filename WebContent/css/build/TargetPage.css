@@ -239,6 +239,9 @@ dialog.fixed {
 body {
   background-color: #e6e6e6; }
 
+form > p {
+  margin: 0px; }
+
 div.pagestyle {
   position: absolute;
   overflow: auto;

@@ -45,6 +45,9 @@ body {
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif; }
 
+form > p {
+  margin: 0px; }
+
 div.lookupPagesummaryStyle {
   text-align: right;
   position: relative;
