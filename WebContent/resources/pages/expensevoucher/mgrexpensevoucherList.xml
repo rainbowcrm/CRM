@@ -74,19 +74,19 @@ Controller = "com.rainbow.crm.expensevoucher.controller.MgrExpenseVoucherListCon
 <Element label = ""  type = "UICheckBox" Id = "idChkSel"  rendered="!Object.isDeleted" property ="Id" />
 <Element label = ""  type = "UIImage" Id = "idChkSel"  rendered="Object.isDeleted" height = "21" weight ="21" src= "./resources/images/deletedRow.jpg" />
 </SelectionColumn>
-<Column title ="Doc_Number"  width ="20%" >
+<Column title ="Doc_Number" sortField="docNumber"  width ="20%" >
 <Element label = ""  type = "UINote" Id = "idDoc"  property ="docNumber" />
 </Column>
-<Column title ="Date"  width ="20%" >
+<Column title ="Date" sortField="expenseDate"  width ="20%" >
 <Element label = ""  type = "UINote" Id = "idDt"  property ="expenseDate" />
 </Column>
-<Column title ="User"  width ="30%" >
+<Column title ="User"  sortField="salesAssoicate.userId"  width ="30%" >
 <Element label = ""  type = "UINote" Id = "idCust"  property ="salesAssoicate.userId" />
 </Column>
-<Column title ="Requested_Amount"  width ="10%" >
+<Column title ="Requested_Amount" sortField="requestedTotal"  width ="10%" >
 <Element label = ""  type = "UINote" Id = "idPhone"  property ="requestedTotal" />
 </Column>
-<Column title ="Status"  width ="25%" >
+<Column title ="Status" sortField="status.description"  width ="25%" >
 <Element label = ""  type = "UINote" Id = "idAmt"  property ="Status.description" />
 </Column>
 </Columns>

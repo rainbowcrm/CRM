@@ -70,19 +70,19 @@ Controller = "com.rainbow.crm.distributionorder.controller.DistributionOrderList
 <Element label = ""  type = "UICheckBox" Id = "idChkSel"  rendered="!Object.isVoided" property ="Id" />
 <Element label = ""  type = "UIImage" Id = "idChkSel"  rendered="Object.isVoided" height = "21" weight ="21" src= "./resources/images/deletedRow.jpg" />
 </SelectionColumn>
-<Column title ="Doc_Number"  width ="20%" >
+<Column title ="Doc_Number" sortField="docNumber" width ="20%" >
 <Element label = ""  type = "UINote" Id = "idDoc"  property ="DocNumber" />
 </Column>
-<Column title ="Date"  width ="20%" >
+<Column title ="Date" sortField="orderDate" width ="20%" >
 <Element label = ""  type = "UINote" Id = "idDt"  property ="orderDate" />
 </Column>
-<Column title ="Customer"  width ="30%" >
+<Column title ="Customer" sortField="customer.firstName" width ="30%" >
 <Element label = ""  type = "UINote" Id = "idCust"  property ="Customer.fullName" />
 </Column>
-<Column title ="Phone"  width ="10%" >
+<Column title ="Phone" sortField="customer.phone"  width ="10%" >
 <Element label = ""  type = "UINote" Id = "idPhone"  property ="Customer.Phone" />
 </Column>
-<Column title ="Status"  width ="25%" >
+<Column title ="Status" sortField="status.description" width ="25%" >
 <Element label = ""  type = "UINote" Id = "idAmt"  property ="Status.description" />
 </Column>
 </Columns>

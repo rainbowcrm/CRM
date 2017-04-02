@@ -56,25 +56,25 @@ Controller = "com.rainbow.crm.inventory.controller.InventoryController">
 <SelectionColumn  width ="5%"  >
 <Element label = ""  type = "UICheckBox" Id = "idChkSel"  rendered="!Object.isDeleted" property ="Id" />
 </SelectionColumn>
-<Column title ="Division" width ="22%" >
+<Column title ="Division"   sortField="division.name"  width ="22%" >
 <Element label = ""  type = "UINote" Id = "idNameNote"  property ="Division.Name" />
 </Column>
-<Column title ="Item_Code" width ="15%" >
+<Column title ="Item_Code"   sortField="sku.code"  width ="15%" >
 <Element label = ""  type = "UINote" Id = "idItemCd"  property ="Sku.Code" />
 </Column>
-<Column title ="Item" width ="22%" >
+<Column title ="Item"  sortField="sku.name"  width ="22%" >
 <Element label = ""  type = "UINote" Id = "idItem"  property ="Sku.Name" />
 </Column>
- <Column title ="Opening_Qty"  width ="8%" >
+ <Column title ="Opening_Qty"  sortField="opQty"   width ="8%" >
   <Element label = ""  type = "UINote" Id = "idOpQty"  property ="opQty" />
  </Column>
-  <Column title ="Current_Qty"  width ="8%" >
+  <Column title ="Current_Qty"  sortField="currentQty"   width ="8%" >
   <Element label = ""  type = "UINote" Id = "idCRQty"  property ="currentQty" />
  </Column>
-   <Column title ="Reserved_Qty"  width ="8%" >
+   <Column title ="Reserved_Qty"   sortField="reservedQty"  width ="8%" >
   <Element label = ""  type = "UINote" Id = "idRsQty"  property ="reservedQty" />
  </Column>
-    <Column title ="Damaged_Qty"  width ="8%" >
+    <Column title ="Damaged_Qty"  sortField="damagedQty"   width ="8%" >
   <Element label = ""  type = "UINote" Id = "iddmgQty"  property ="damagedQty" />
  </Column>
   <Column title =""  width ="7%" >
