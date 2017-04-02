@@ -14,6 +14,7 @@
  <FixedActionParamField>hdnFixedActionParam</FixedActionParamField>
  <IncludeJS>./resources/js/RadsLib.js</IncludeJS>
  <IncludeJS>./resources/js/dialog-polyfill.js</IncludeJS>
+ <IncludeJS>./resources/js/date-polyfill.js</IncludeJS>
  <MandatoryFieldMarker>*</MandatoryFieldMarker>
  <CRUDFieldMarker>:</CRUDFieldMarker>
  <Errors showin ="detail"  style ="errorStyle" showinTable = "true" tabStyle ="errorStyle">
