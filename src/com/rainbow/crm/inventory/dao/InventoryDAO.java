@@ -36,6 +36,15 @@ public class InventoryDAO extends SpringHibernateDAO{
 		return inventory;
 	}
 	
+	public List<Inventory> getByItem(int item) {
+		Session session = openSession(false);
+		Query query = session.createQuery(" from Inventory where sku.id = :sku    " ) ;
+		query.setParameter("sku", item);
+		List lst = query.list();
+		closeSession(session, false);
+		return lst;
+	}
+	
 	@Override
 	public void batchCreate(List<CRMModelObject> objects) throws DatabaseException{
 		if(!Utils.isNullList(objects)) {

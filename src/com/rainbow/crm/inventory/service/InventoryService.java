@@ -86,6 +86,12 @@ public class InventoryService extends AbstractService implements  IInventoryServ
 		Inventory inv = ((InventoryDAO)getDAO()).getByItemandDivision(item.getId(), division.getId());
 		return inv;
 	}
+	
+
+	@Override
+	public List<Inventory> getByItem(Sku item) {
+		return ((InventoryDAO)getDAO()).getByItem(item.getId());
+	}
 
 	@Override
 	@Transactional

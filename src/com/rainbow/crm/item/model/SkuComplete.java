@@ -1,6 +1,9 @@
 package com.rainbow.crm.item.model;
 
+import java.util.List;
+
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
+import com.rainbow.crm.inventory.model.Inventory;
 
 public class SkuComplete  extends Sku{
 
@@ -8,7 +11,7 @@ public class SkuComplete  extends Sku{
 	private String image2URL;
 	private String image3URL;
 	
-	
+	List<Inventory> inventory;
 	
 	public String getImage1URL() {
 		return image1URL;
@@ -55,5 +58,13 @@ public class SkuComplete  extends Sku{
 		 setUom(sku.getUom());
 		 setUomId(sku.getUomId());
 	}
+	public List<Inventory> getInventory() {
+		return inventory;
+	}
+	public void setInventory(List<Inventory> inventory) {
+		this.inventory = inventory;
+	}
+	
+	
 	
 }

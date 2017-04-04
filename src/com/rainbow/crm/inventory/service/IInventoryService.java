@@ -24,6 +24,8 @@ public interface IInventoryService extends IBusinessService{
 	@Transactional
 	public void updateInventory(InventoryUpdateObject inventoryObject) ;
 	
+	public List<Inventory> getByItem(Sku item);
+	
 	
 
 }
