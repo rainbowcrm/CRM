@@ -19,7 +19,7 @@ public class QueryValidator extends CRMValidator {
 		Query query  = ( Query) object;
 		if(Utils.isNullString(query.getEntity()))
 				errors.add(getErrorforCode(UserErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Transaction"))) ;
-		if (Utils.isNullList(query.getConditions()))
+		if (Utils.isNullSet(query.getConditions()))
 			errors.add(getErrorforCode(UserErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Conditions"))) ;
 		if(Utils.isNullString(query.getDateValueType()))
 			errors.add(getErrorforCode(UserErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Date_Criteria"))) ;
@@ -46,7 +46,7 @@ public class QueryValidator extends CRMValidator {
 		}
 				
 		
-		if (!Utils.isNullList(query.getConditions())) {
+		if (!Utils.isNullSet(query.getConditions())) {
 			AtomicInteger openBrackets = new AtomicInteger (0);
 			AtomicInteger closeBrackets = new AtomicInteger (0);
 			query.getConditions().forEach( condition ->  { 

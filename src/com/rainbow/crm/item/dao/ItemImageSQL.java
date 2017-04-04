@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.rainbow.crm.common.CRMAppConfig;
 import com.rainbow.crm.common.CRMContext;
@@ -120,6 +122,29 @@ public class ItemImageSQL {
 			}
 		 }
 	
+	 public  static List<String> getAllItemImages(int skuid) {
+		 Connection connection = null;
+			PreparedStatement statement = null;
+			ResultSet rs  = null ;
+			List<String> images = new ArrayList<> ();
+			try {
+				connection  = ConnectionCreater.getConnection() ;
+				String sql =   "SELECT IMG.IMAGE_FILE FROM ITEM_IMAGES IMG, SKUS IT where IMG.SKU_ID = ?   AND IMG.SKU_ID = IT.ID" ;
+				statement = connection.prepareStatement(sql);
+				statement.setInt(1, skuid);
+				rs = statement.executeQuery() ;
+				while (rs.next()) {
+					String fileName = rs.getString(1);
+					images.add(fileName);
+				}
+			}catch(SQLException ex) {
+				Logwriter.INSTANCE.error(ex);
+			}finally {
+				ConnectionCreater.close(connection, statement, rs);	
+			}
+			return images;
+	 }
+	 
 	 public static ItemImage getItemImage (int itemId, char suffix) {
 	 	Connection connection = null;
 		PreparedStatement statement = null;

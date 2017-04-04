@@ -50,6 +50,7 @@ import com.rainbow.crm.user.model.User;
 import com.rainbow.crm.vendor.model.Vendor;
 import com.rainbow.crm.wishlist.model.WishList;
 import com.rainbow.crm.wishlist.model.WishListLine;
+import com.rainbow.framework.query.model.QueryCondition;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.utils.Utils;
 
@@ -103,6 +104,8 @@ public  abstract class HibernateDAO  extends ORMDAO{
     		configuration.addClass(Inventory.class).addResource("com/rainbow/crm/inventory/model/Inventory.hbm.xml");
     		configuration.addClass(Purchase.class).addResource("com/rainbow/crm/purchase/model/Purchase.hbm.xml");
     		configuration.addClass(PurchaseLine.class).addResource("com/rainbow/crm/purchase/model/PurchaseLine.hbm.xml");
+    		configuration.addClass(com.rainbow.framework.query.model.Query.class).addResource("com/rainbow/framework/query/model/Query.hbm.xml");
+    		configuration.addClass(QueryCondition.class).addResource("com/rainbow/framework/query/model/QueryCondition.hbm.xml");
     		configuration.addClass(SalesPeriod.class).addResource("com/rainbow/crm/salesperiod/model/SalesPeriod.hbm.xml");
     		configuration.addClass(SalesPeriodLine.class).addResource("com/rainbow/crm/salesperiod/model/SalesPeriodLine.hbm.xml");
     		configuration.addClass(SalesPeriodAssociate.class).addResource("com/rainbow/crm/salesperiod/model/SalesPeriodAssociate.hbm.xml");
