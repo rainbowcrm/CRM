@@ -9,6 +9,8 @@ public class QueryCondition  extends CRMBusinessModelObject{
 	int noOpenBrackets;
 	int noCloseBrackets;
 
+	int lineNumber ;
+	
 	String openBrackets;
 	String closeBrackets;
 	
@@ -21,6 +23,7 @@ public class QueryCondition  extends CRMBusinessModelObject{
 	
 	String postCondition;
 
+	Query query;
 	
 	@Override
 	public String toString() 
@@ -115,6 +118,19 @@ public class QueryCondition  extends CRMBusinessModelObject{
 	public void setCloseBrackets(String closeBrackets) {
 		this.closeBrackets = closeBrackets;
 	}
+	public Query getQuery() {
+		return query;
+	}
+	public void setQuery(Query query) {
+		this.query = query;
+	}
+	public int getLineNumber() {
+		return lineNumber;
+	}
+	public void setLineNumber(int lineNumber) {
+		this.lineNumber = lineNumber;
+	}
+	
 	
 	
 

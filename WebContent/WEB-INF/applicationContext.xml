@@ -227,6 +227,8 @@
         <value>com/rainbow/crm/contact/model/Contact.hbm.xml</value>
         <value>com/rainbow/crm/purchase/model/Purchase.hbm.xml</value>
         <value>com/rainbow/crm/purchase/model/PurchaseLine.hbm.xml</value>
+        <value>com/rainbow/framework/query/model/Query.hbm.xml</value>
+        <value>com/rainbow/framework/query/model/QueryCondition.hbm.xml</value>
         <value>com/rainbow/crm/territory/model/Territory.hbm.xml</value>
         <value>com/rainbow/crm/territory/model/TerritoryLine.hbm.xml</value>
         <value>com/rainbow/crm/salesperiod/model/SalesPeriod.hbm.xml</value>

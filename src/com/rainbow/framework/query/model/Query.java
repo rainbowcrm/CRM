@@ -2,11 +2,14 @@ package com.rainbow.framework.query.model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.division.model.Division;
+import com.rainbow.crm.user.model.User;
 
 public class Query extends CRMBusinessModelObject{
 
@@ -22,14 +25,17 @@ public class Query extends CRMBusinessModelObject{
 	String resultType; 
 	
 	String selectedFields[];
+	String selectedFiedsBlob;
 	String sortField;
 	String sortDesc;
 	
 	String reportData;
 	AggregationFields aggregationFields;
+	
+	User owner;
 
 
-	List<QueryCondition> conditions;
+	Set<QueryCondition> conditions;
 	boolean isDateExcluded ;
 
 	
@@ -65,17 +71,17 @@ public class Query extends CRMBusinessModelObject{
 		this.toDate = toDate;
 	}
 
-	public List<QueryCondition> getConditions() {
+	public Set<QueryCondition> getConditions() {
 		return conditions;
 	}
 
-	public void setConditions(List<QueryCondition> conditions) {
+	public void setConditions(Set<QueryCondition> conditions) {
 		this.conditions = conditions;
 	}
 
 	public void addCondition(QueryCondition condition) {
 		if (conditions == null)
-			conditions = new ArrayList<QueryCondition>();
+			conditions = new LinkedHashSet<QueryCondition>();
 		this.conditions.add(condition);
 	}
 
@@ -158,9 +164,47 @@ public class Query extends CRMBusinessModelObject{
 	public void setDateExcluded(boolean isDateExcluded) {
 		this.isDateExcluded = isDateExcluded;
 	}
+
+	public User getOwner() {
+		return owner;
+	}
+
+	public void setOwner(User owner) {
+		this.owner = owner;
+	}
+
+	public String getSelectedFiedsBlob() {
+		return selectedFiedsBlob;
+	}
+
+	public void setSelectedFiedsBlob(String selectedFiedsBlob) {
+		this.selectedFiedsBlob = selectedFiedsBlob;
+	}
 	
 	
-	
+	public String getGroupByField() {
+		return aggregationFields.getGroupByField();
+	}
+
+	public void setGroupByField(String groupByField) {
+		aggregationFields.setGroupByField(groupByField);
+	}
+
+	public String getAggredatedField() {
+		return aggregationFields.getAggredatedField();
+	}
+
+	public void setAggredatedField(String aggredatedField) {
+		aggregationFields.setAggredatedField(aggredatedField);
+	}
+
+	public String getAggregationType() {
+		return aggregationFields.getAggregationType();
+	}
+
+	public void setAggregationType(String aggregationType) {
+		aggregationFields.setAggregationType(aggregationType);
+	}
 
 	
 	

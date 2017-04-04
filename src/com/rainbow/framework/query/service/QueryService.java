@@ -166,13 +166,21 @@ public class QueryService implements IQueryService{
 			  conditions.add( field.getJoinCondition()) ;
 		}
 		
-		for (int i = 0 ; i  < query.getConditions().size() ; i ++ )  {
+		query.getConditions().forEach( cond -> {
+			EntityField fieldCond = MetadataSQL.getEntityField(query.getEntity(),cond.getField());
+			if(!Utils.isNullString(fieldCond.getHqljoinClause())) { 
+				  joins.add(fieldCond.getHqljoinClause() + " " );
+			}
+			
+		});
+		
+		/*for (int i = 0 ; i  < query.getConditions().size() ; i ++ )  {
 			QueryCondition cond = (QueryCondition)query.getConditions().get(i);
 			EntityField fieldCond = MetadataSQL.getEntityField(query.getEntity(),cond.getField());
 			if(!Utils.isNullString(fieldCond.getHqljoinClause())) { 
 				  joins.add(fieldCond.getHqljoinClause() + " " );
 			}
-		}
+		}*/
 		
 		selectFields.append( " " + query.getAggregationFields().getAggregationType() + "(" + query.getAggregationFields().getAggredatedField()  + "), ");
 		selectFields.append(query.getAggregationFields().getGroupByField() + " ");
