@@ -49,9 +49,13 @@ public class QueryValidator extends CRMValidator {
 		if (!Utils.isNullSet(query.getConditions())) {
 			AtomicInteger openBrackets = new AtomicInteger (0);
 			AtomicInteger closeBrackets = new AtomicInteger (0);
+			AtomicInteger lineNumber  = new AtomicInteger(1);
 			query.getConditions().forEach( condition ->  { 
 				EntityField field = MetadataSQL.getEntityField(query.getEntity(),condition.getField());
 				condition.setDataType(field.getDataType());
+				condition.setCompany(query.getCompany());
+				condition.setQuery(query);
+				condition.setLineNumber(lineNumber.getAndIncrement());
 				int  opCount  = (condition.getOpenBrackets()!= null)?condition.getOpenBrackets().trim().length():0;
 				condition.setNoOpenBrackets(opCount);
 				int cloCount =  (condition.getCloseBrackets()!= null)?condition.getCloseBrackets().trim().length():0;

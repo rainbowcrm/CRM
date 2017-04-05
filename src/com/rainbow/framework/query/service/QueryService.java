@@ -19,8 +19,10 @@ import com.rainbow.crm.common.Externalize;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.customer.dao.CustomerDAO;
+import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.hibernate.ORMDAO;
 import com.rainbow.crm.logger.Logwriter;
+import com.rainbow.crm.sales.model.SalesLine;
 import com.rainbow.crm.user.model.User;
 import com.rainbow.crm.user.service.IUserService;
 import com.rainbow.framework.query.dao.QueryDAO;
@@ -55,6 +57,28 @@ public class QueryService implements IQueryService{
 	}
 	
 	
+	
+	@Override
+	public Query saveQuery(Query query, CRMContext context) {
+		QueryDAO dao = (QueryDAO)getDAO();
+		if (query.getId()  <= 0 ) {
+			if (!Utils.isNullSet(query.getConditions())) {
+				int pk = GeneralSQLs.getNextPKValue("Queries") ;
+				query.setId(pk);
+				for (QueryCondition  line : query.getConditions()) {
+					int linePK = GeneralSQLs.getNextPKValue( "Query_Condition") ;
+					line.setId(linePK);
+					line.setQuery(query);
+				}
+			}
+			dao.create(query);
+		}else
+			dao.update(query);
+		return null;
+	}
+
+
+
 	@Override
 	public QueryReport getResult(Query query, CRMContext context) {
 		String queryString = "";

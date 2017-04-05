@@ -60,9 +60,9 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 
 <Element type = "UITableCol"   >
 
-<Element label = "Query_Name"  type = "UIText" Id = "txtQryName"  >
-	
-</Element>
+<Element label = ""  type = "UIHidden" Id = "hdnQryId" property ="id" />
+<Element label = "Query_Name"  type = "UIText" Id = "txtQryName" property ="name" />
+
 </Element>
 <Element type = "UITableCol"   >
 
@@ -270,6 +270,7 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
  
  <Section type ="summary"  >
 <Element caption = "Query"  type = "UIButton" Id = "btdwLoad"  style="button"  onClickJS="submitWithParam('runQuery')"   />
+<Element caption = "Save"  type = "UIButton" Id = "btdwSave"  style="button"  onClickJS="submitWithParam('saveQuery')"   />
  </Section>
 
 

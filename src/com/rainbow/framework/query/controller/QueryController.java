@@ -10,6 +10,7 @@ import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMGeneralController;
 import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.SpringObjectFactory;
+import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.division.service.IDivisionService;
@@ -47,16 +48,26 @@ public class QueryController extends CRMGeneralController {
 	@Override
 	public PageResult submit(ModelObject object, String actionParam) {
 		Query query = (Query)object;
+		Company company = CommonUtil.getCompany(((CRMContext  )getContext()).getLoggedinCompany());
+		query.setCompany(company);
+		query.setOwner(((CRMContext  )getContext()).getLoggedInUser());
 		if ("entitychanged".equals(actionParam)) {
 			return new PageResult();
-		}else if ("runQuery".equalsIgnoreCase(actionParam)){
+		}else if ("runQuery".equalsIgnoreCase(actionParam) || "saveQuery".equalsIgnoreCase(actionParam)){
 			IQueryService service= getService();
 			List<RadsError> errors = service.validate(query, (CRMContext  )getContext());
+			
 			if(Utils.isNullList(errors)) {
-				QueryReport report =service.getResult(query, (CRMContext  )getContext());
-				resultFetched = true;
-				String reportData= service.getVelocityConverted(report,  (CRMContext  )getContext());
-				query.setReportData(reportData);
+				if ("runQuery".equalsIgnoreCase(actionParam)){
+					QueryReport report =service.getResult(query, (CRMContext  )getContext());
+					resultFetched = true;
+					String reportData= service.getVelocityConverted(report,  (CRMContext  )getContext());
+					query.setReportData(reportData);
+				} else {
+					if(query.getDivision() != null && query.getDivision().getId() < 0 )
+						  query.setDivision(null);
+					service.saveQuery(query, (CRMContext  )getContext());
+				}
 			}
 			else {
 				PageResult result = new PageResult();

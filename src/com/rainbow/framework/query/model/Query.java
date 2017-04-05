@@ -13,6 +13,7 @@ import com.rainbow.crm.user.model.User;
 
 public class Query extends CRMBusinessModelObject{
 
+	String name ;
 	String entity;
 	Division division;
 	Date fromDate;
@@ -204,6 +205,14 @@ public class Query extends CRMBusinessModelObject{
 
 	public void setAggregationType(String aggregationType) {
 		aggregationFields.setAggregationType(aggregationType);
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	
