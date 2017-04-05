@@ -221,7 +221,8 @@ function submitwithSort(sort) {
 function bootstrap(){
 	var menuButton = document.querySelector('.topBar .menu');
 	var leftNav = document.querySelector('#leftsideBarApp');
-	menuButton.addEventListener('click',menuClickListener, false);
+	if(menuButton)
+	  menuButton.addEventListener('click',menuClickListener, false);
 }
 
 function menuClickListener(event){
