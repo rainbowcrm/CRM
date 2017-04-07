@@ -52,7 +52,7 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 <Element type = "UITableRow"   >
 <Element type = "UITableCol"   align="left" >
 
-<Element label = "Saved_Queries"  type = "UIList" Id = "lstQueries" >
+<Element label = "Saved_Queries"  type = "UIList" Id = "lstQueries"  property ="id">
 	<options populator =  "getAllSavedQueries"> 
 	</options>
 </Element>
@@ -60,7 +60,7 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 
 <Element type = "UITableCol"   >
 
-<Element label = ""  type = "UIHidden" Id = "hdnQryId" property ="id" />
+<Element label = ""  type = "UIHidden" Id = "hdnQryId"  />
 <Element label = "Query_Name"  type = "UIText" Id = "txtQryName" property ="name" />
 
 </Element>
@@ -269,6 +269,8 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 </CoreSection>
  
  <Section type ="summary"  >
+ <Element caption = "Fetch"  type = "UIButton" Id = "btdwFetch"  style="button"  onClickJS="submitWithParam('fetchQuery')"   />
+ <Element caption = "clear"  type = "UIButton" Id = "btdwClear"  style="button"  onClickJS="submitWithParam('clear')"   />
 <Element caption = "Query"  type = "UIButton" Id = "btdwLoad"  style="button"  onClickJS="submitWithParam('runQuery')"   />
 <Element caption = "Save"  type = "UIButton" Id = "btdwSave"  style="button"  onClickJS="submitWithParam('saveQuery')"   />
  </Section>

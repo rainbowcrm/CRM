@@ -19,5 +19,7 @@
       <property name="field" column="FIELD" type="string"/>
       <property name="operator" column="OPERATOR" type="string"/>
       <property name="value" column="VALUE" type="string"/>
+      <property name="postCondition" column="POST_CONDITION" type="string"/>
+      <property name="deleted" column="IS_DELETED" type="boolean"/>
 </class>
 </hibernate-mapping>

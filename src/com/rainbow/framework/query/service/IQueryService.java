@@ -16,5 +16,9 @@ public interface IQueryService {
 	public String getVelocityConverted(QueryReport query , CRMContext context);
 	
 	public Query saveQuery(Query query , CRMContext context);
+	
+	public Query getQuery(int id);
+	
+	public List<Query> getAllQueriesforOwner(CRMContext context);
 
 }

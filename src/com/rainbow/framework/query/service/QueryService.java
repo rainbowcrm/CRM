@@ -4,13 +4,16 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.StringTokenizer;
 
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
+import org.springframework.util.StringUtils;
 
 import com.rainbow.crm.common.CRMAppConfig;
 import com.rainbow.crm.common.CRMContext;
@@ -22,6 +25,7 @@ import com.rainbow.crm.customer.dao.CustomerDAO;
 import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.hibernate.ORMDAO;
 import com.rainbow.crm.logger.Logwriter;
+import com.rainbow.crm.sales.model.Sales;
 import com.rainbow.crm.sales.model.SalesLine;
 import com.rainbow.crm.user.model.User;
 import com.rainbow.crm.user.service.IUserService;
@@ -57,10 +61,85 @@ public class QueryService implements IQueryService{
 	}
 	
 	
+	private String getSelectedFieldsBlob(String [] selectedField )
+	{ 
+		StringBuffer buffer = new StringBuffer();
+		if (selectedField != null ) { 
+			for(int i = 0 ; i < selectedField.length ; i ++) 
+			{
+				buffer.append(selectedField[i]) ;
+				if (i < selectedField.length - 1)
+					buffer.append(",");
+			}
+		}
+		return buffer.toString();
+	}
 	
+	private String[] getSelectedFieldArrayFromBlob(String selectedFieldBlob)
+	{
+		if (Utils.isNullString(selectedFieldBlob)) return  null;
+		int ct = StringUtils.countOccurrencesOf(selectedFieldBlob, ",");
+		String ans[] = new String[ct+1];
+		int  i = 0 ;
+		StringTokenizer tokenizer = new StringTokenizer(selectedFieldBlob,",");
+		while(tokenizer.hasMoreElements()) {
+			ans[i ++] = tokenizer.nextToken();
+		}
+		return ans ;
+	}
+	
+	@Override
+	public Query getQuery(int id) {
+		QueryDAO dao = (QueryDAO)getDAO();
+		Query query = dao.getQuery(id);
+		query.setSelectedFields(getSelectedFieldArrayFromBlob(query.getSelectedFiedsBlob()));
+		return query; 
+		
+	}
+
+
+
+
+	@Override
+	public List<Query> getAllQueriesforOwner(CRMContext context) {
+		QueryDAO dao = (QueryDAO)getDAO();
+		return dao.getAllQueriesforOwner(context.getLoggedinCompany(), context.getLoggedInUser().getUserId());
+	}
+
+
+	private void resetQueryCondition (Query query, CRMContext context)
+	{
+		Query oldObject = (Query)getQuery(query.getId());
+		if (!Utils.isNullSet(query.getConditions())) {
+			int  ct = 0;
+			Iterator it = oldObject.getConditions().iterator() ;
+			for (QueryCondition  line : query.getConditions()) {
+				QueryCondition oldLine = null ;
+				if (it.hasNext()) {
+					oldLine= (QueryCondition) it.next() ;
+				}
+				line.setQuery(query);
+				if (oldLine != null) {
+					line.setId(oldLine.getId());
+					
+				}else {
+					int linePK = GeneralSQLs.getNextPKValue( "Sales_Lines") ;
+					line.setId(linePK);
+				}
+			}
+			/*while (it.hasNext()) {
+				QueryCondition oldLine= (QueryCondition) it.next() ;
+				oldLine.setDeleted(true);
+				sales.addSalesLine(oldLine);
+			}*/
+		}
+		
+	}
+
 	@Override
 	public Query saveQuery(Query query, CRMContext context) {
 		QueryDAO dao = (QueryDAO)getDAO();
+		query.setSelectedFiedsBlob(getSelectedFieldsBlob(query.getSelectedFields()));
 		if (query.getId()  <= 0 ) {
 			if (!Utils.isNullSet(query.getConditions())) {
 				int pk = GeneralSQLs.getNextPKValue("Queries") ;
@@ -72,8 +151,10 @@ public class QueryService implements IQueryService{
 				}
 			}
 			dao.create(query);
-		}else
+		}else{
+			resetQueryCondition(query,context);
 			dao.update(query);
+		}
 		return null;
 	}
 

@@ -31,7 +31,7 @@ public class Query extends CRMBusinessModelObject{
 	String sortDesc;
 	
 	String reportData;
-	AggregationFields aggregationFields;
+	AggregationFields aggregationFields = new AggregationFields();
 	
 	User owner;
 

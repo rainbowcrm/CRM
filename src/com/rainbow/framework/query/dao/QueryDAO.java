@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.rainbow.crm.logger.Logwriter;
+import com.rainbow.crm.sales.model.Sales;
 import com.rainbow.framework.query.model.QueryReport;
 import com.techtrade.rads.framework.utils.Utils;
 
@@ -16,10 +17,47 @@ public class QueryDAO  extends SpringHibernateDAO{
 
 	@Override
 	public Object getById(Object PK) {
-		// TODO Auto-generated method stub
-		return null;
+		int queryId = Integer.parseInt(String.valueOf(PK));
+		Session session = openSession(false);
+		Object obj = session.get(Query.class, queryId);
+		closeSession(session, false);
+		return obj;
 	}
 	
+	
+	public  com.rainbow.framework.query.model.Query getQuery(int queryId)  {
+		Session session = openSession(false);
+		try {
+		String queryString  = " from Query where id =:id and  deleted = false" ;
+		Query query = session.createQuery( queryString  ) ;
+		query.setParameter("id", queryId);
+		List<com.rainbow.framework.query.model.Query> lst = query.list();
+		return lst.get(0);
+		}catch(Exception ex) {
+			Logwriter.INSTANCE.error(ex);
+		}finally {
+			closeSession(session,false);
+		}
+		return null;
+	}
+	public List<com.rainbow.framework.query.model.Query> getAllQueriesforOwner(int company,String owner)
+	{
+		Session session = openSession(false);
+		try {
+		String queryString  = " from Query where company.id = :company and owner.userId = :owner and deleted = false" ;
+		Query query = session.createQuery( queryString  ) ;
+		query.setParameter("company", company);
+		query.setParameter("owner", owner);
+		List lst = query.list();
+		return lst;
+		}catch(Exception ex) {
+			Logwriter.INSTANCE.error(ex);
+		}finally {
+			closeSession(session,false);
+		}
+		return null;
+	
+	}
 	public List getQueryRecord(String queryString, int company, Date fromDate, Date toDate)
 	{
 		Session session = openSession(false);

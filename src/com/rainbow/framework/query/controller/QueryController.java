@@ -51,10 +51,24 @@ public class QueryController extends CRMGeneralController {
 		Company company = CommonUtil.getCompany(((CRMContext  )getContext()).getLoggedinCompany());
 		query.setCompany(company);
 		query.setOwner(((CRMContext  )getContext()).getLoggedInUser());
-		if ("entitychanged".equals(actionParam)) {
-			return new PageResult();
+		IQueryService service= getService();
+		if ("clear".equals(actionParam)) {
+			query = new Query();
+			PageResult result =  new PageResult();
+			result.setObject(query);
+			return result;
+		}else if ("entitychanged".equals(actionParam) ) {
+			PageResult result =  new PageResult();
+			return result;
+		}else if ("fetchQuery".equalsIgnoreCase(actionParam)) {
+			int queryId = query.getId();
+			query = service.getQuery(queryId);
+			setObject(query);
+			PageResult result =  new PageResult();
+			result.setObject(query);
+			return result;
 		}else if ("runQuery".equalsIgnoreCase(actionParam) || "saveQuery".equalsIgnoreCase(actionParam)){
-			IQueryService service= getService();
+			
 			List<RadsError> errors = service.validate(query, (CRMContext  )getContext());
 			
 			if(Utils.isNullList(errors)) {
@@ -89,7 +103,8 @@ public class QueryController extends CRMGeneralController {
 	
 	public Map <String, String > getAllEntities() {
 		List<Metadata> metaDatas = MetadataSQL.getTransactionEntities();
-		Map<String, String> ans = new HashMap<String, String>();
+		Map<String, String> ans = new LinkedHashMap<String, String>();
+		ans.put("null", "---Select one---") ;
 		metaDatas.forEach( metaData ->  { 
 			ans.put(metaData.getObjectName(),metaData.getObjectName());
 			
@@ -116,7 +131,13 @@ public class QueryController extends CRMGeneralController {
 	}
 	
 	public Map <String, String > getAllSavedQueries() {
-		Map<String, String> ans = new HashMap<String, String>();
+		IQueryService service= getService();
+		List<Query> queries = service.getAllQueriesforOwner((CRMContext)getContext());
+		Map<String, String> ans = new LinkedHashMap<String, String>();
+		ans.put("null", "---Select one---") ;
+		queries.forEach(query ->  {
+			ans.put(String.valueOf(query.getId()), query.getName());
+		});
 		return ans;
 	}
 	
