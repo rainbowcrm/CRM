@@ -1,11 +1,13 @@
 package com.rainbow.crm.custcategory.model;
 
 import java.util.Date;
+import java.util.Set;
 
 import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.company.model.Company;
+import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.saleslead.model.SalesLead;
 import com.techtrade.rads.framework.annotations.RadsPropertySet;
 import com.techtrade.rads.framework.utils.Utils;
@@ -14,19 +16,23 @@ import com.techtrade.rads.framework.utils.Utils;
 public class CustCategory extends CRMBusinessModelObject{
    
 	String name ;
+	Division division ;
 	FiniteValue evalFrom;
 	FiniteValue evalTo ;
-	FiniteValue evalCriteria;
-	double minValue;
-	double maxValue;
 	boolean incudeReturns;
-	String excludedCustomers;
+	Set<CustCategoryCondition> conditions;
 	
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public Division getDivision() {
+		return division;
+	}
+	public void setDivision(Division division) {
+		this.division = division;
 	}
 	public FiniteValue getEvalFrom() {
 		return evalFrom;
@@ -40,36 +46,21 @@ public class CustCategory extends CRMBusinessModelObject{
 	public void setEvalTo(FiniteValue evalTo) {
 		this.evalTo = evalTo;
 	}
-	public FiniteValue getEvalCriteria() {
-		return evalCriteria;
-	}
-	public void setEvalCriteria(FiniteValue evalCriteria) {
-		this.evalCriteria = evalCriteria;
-	}
-	public double getMinValue() {
-		return minValue;
-	}
-	public void setMinValue(double minValue) {
-		this.minValue = minValue;
-	}
-	public double getMaxValue() {
-		return maxValue;
-	}
-	public void setMaxValue(double maxValue) {
-		this.maxValue = maxValue;
-	}
 	public boolean isIncudeReturns() {
 		return incudeReturns;
 	}
 	public void setIncudeReturns(boolean incudeReturns) {
 		this.incudeReturns = incudeReturns;
 	}
-	public String getExcludedCustomers() {
-		return excludedCustomers;
+	public Set<CustCategoryCondition> getConditions() {
+		return conditions;
 	}
-	public void setExcludedCustomers(String excludedCustomers) {
-		this.excludedCustomers = excludedCustomers;
+	public void setConditions(Set<CustCategoryCondition> conditions) {
+		this.conditions = conditions;
 	}
+	
+	
+	
 	
 	
 

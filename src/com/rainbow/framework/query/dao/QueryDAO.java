@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import com.rainbow.crm.common.DatabaseException;
 import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.rainbow.crm.logger.Logwriter;
@@ -83,6 +84,29 @@ public class QueryDAO  extends SpringHibernateDAO{
 		return  null;
 	}
 	
+	
+	public void deleteOrphanedRecords(com.rainbow.framework.query.model.Query query )
+	{
+		Session session = openSession(true);
+		boolean success = false; 
+		try { 
+			query.getConditions().forEach(  condition ->  {    
+				if (condition.isDeleted()) {
+					session.delete(condition );
+					query.getConditions().remove(condition);
+				}
+				
+			} );
+			session.flush();
+			success = true; 
+			
+		}catch(Exception ex) {
+			Logwriter.INSTANCE.error(ex);
+			throw new DatabaseException(ex,DatabaseException.DIRTY_READ_ERROR);
+		}finally {
+			closeSession(session,success);
+		}
+	}
 
 	
 

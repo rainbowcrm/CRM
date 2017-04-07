@@ -127,11 +127,11 @@ public class QueryService implements IQueryService{
 					line.setId(linePK);
 				}
 			}
-			/*while (it.hasNext()) {
+			while (it.hasNext()) {
 				QueryCondition oldLine= (QueryCondition) it.next() ;
 				oldLine.setDeleted(true);
-				sales.addSalesLine(oldLine);
-			}*/
+				query.addCondition(oldLine);
+			}
 		}
 		
 	}
@@ -153,6 +153,7 @@ public class QueryService implements IQueryService{
 			dao.create(query);
 		}else{
 			resetQueryCondition(query,context);
+			dao.deleteOrphanedRecords(query);
 			dao.update(query);
 		}
 		return null;
