@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -106,10 +107,10 @@ public class MetadataSQL {
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet rs  = null ;
-		Map<String,String> ans = new HashMap<String, String>();
+		Map<String,String> ans = new LinkedHashMap<String, String>();
 		try {
 			connection  = ConnectionCreater.getConnection() ;
-			String sql =   " SELECT * FROM ENTITY_FIELDS WHERE ENTITY = ? " ;
+			String sql =   " SELECT * FROM ENTITY_FIELDS WHERE ENTITY = ? ORDER BY JOIN_HQL_CLAUSE  " ;
 			statement = connection.prepareStatement(sql);
 			statement.setString(1, entity);
 			rs = statement.executeQuery() ;

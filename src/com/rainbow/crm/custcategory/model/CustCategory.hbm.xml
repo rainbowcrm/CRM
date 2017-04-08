@@ -17,6 +17,7 @@
       <many-to-one name="evalFrom" column ="EVAL_FROM" not-null="false" lazy="false" ></many-to-one>
       <many-to-one name="evalTo" column ="EVAL_TO" not-null="false" lazy="false" ></many-to-one>
       <property name="incudeReturns" column="INCLUDE_RETURNS" type="boolean"/>
+      <property name="comments" column="comments" type="string"/>
       <property name="deleted" column="is_deleted" type="boolean"/>
       <property name="createdDate" column="created_date" type="timestamp" update="false"/>
       <property name="lastUpdateDate" column="last_updated_date" type="timestamp"/>

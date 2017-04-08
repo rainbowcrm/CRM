@@ -20,6 +20,8 @@ public class CustCategory extends CRMBusinessModelObject{
 	FiniteValue evalFrom;
 	FiniteValue evalTo ;
 	boolean incudeReturns;
+	String comments;
+	
 	Set<CustCategoryCondition> conditions;
 	
 	public String getName() {
@@ -58,10 +60,12 @@ public class CustCategory extends CRMBusinessModelObject{
 	public void setConditions(Set<CustCategoryCondition> conditions) {
 		this.conditions = conditions;
 	}
-	
-	
-	
-	
+	public String getComments() {
+		return comments;
+	}
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
 	
 
 }

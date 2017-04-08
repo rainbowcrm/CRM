@@ -8,6 +8,8 @@ import java.util.List;
 
 
 
+
+
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.AbstractService;
 import com.rainbow.crm.common.CRMConstants;
@@ -23,6 +25,8 @@ import com.rainbow.crm.saleslead.service.ISalesLeadService;
 import com.rainbow.crm.custcategory.dao.CustCategoryDAO;
 import com.rainbow.crm.custcategory.model.CustCategory;
 import com.rainbow.crm.custcategory.validator.CustCategoryValidator;
+import com.rainbow.crm.customer.model.Customer;
+import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.model.transaction.TransactionResult;
 import com.techtrade.rads.framework.ui.components.SortCriteria;
@@ -44,6 +48,18 @@ public class CustCategoryService extends AbstractService implements ICustCategor
 	public List<CRMModelObject> listData(int from, int to,
 			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
 		return super.listData("CustCategory", from, to, whereCondition, context,sortCriteria);
+	}
+	
+	
+
+	@Override
+	public List<Customer> checCustomers(CustCategory custCategory) {
+		
+		custCategory.getConditions().forEach( condition ->  {  
+			selectFields.append( condition.toString() );
+		});
+		
+		return null;
 	}
 
 	@Override
@@ -67,19 +83,21 @@ public class CustCategoryService extends AbstractService implements ICustCategor
 	}
 
 
-	
+	@Override
+	public List<RadsError> adaptfromUI(CRMContext context, ModelObject object) {
+		return null;
+	}
+
+	@Override
+	public List<RadsError> adaptToUI(CRMContext context, ModelObject object) {
+		return null;
+	}
 
 	@Override
 	protected ORMDAO getDAO() {
 		return (CustCategoryDAO) SpringObjectFactory.INSTANCE.getInstance("CustCategoryDAO");
 	}
 
-
-	
-	
-
-
-	
 	
 
 }

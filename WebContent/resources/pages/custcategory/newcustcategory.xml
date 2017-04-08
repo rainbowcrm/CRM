@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Page id = "newContact" showinFrame ="true" title ="New Customer Category | Rainbow CRM" Object = "com.rainbow.crm.custcategory.model.CustCategory" 
 Controller = "com.rainbow.crm.custcategory.controller.CustCategoryController">
-<Template type= "CRUD"  name = "CRUDTemplate"></Template>
+<Template type= "Transaction"  name = "TransactionTemplate"></Template>
 <Forwards>
 <Forward key ="CANCEL">rdscontroller?page=custcategories</Forward>
 <Forward key ="SAVE">custcategories</Forward>
@@ -15,12 +15,17 @@ Controller = "com.rainbow.crm.custcategory.controller.CustCategoryController">
 <CoreSection>
 <ErrorSection>
 </ErrorSection>
-<Section type ="detail">
+<Section type ="header">
 	<Element label = "" type = "UIHidden" Id = "hdnVersion" property ="ObjectVersion" />
 	<Element label = ""  type = "UIHidden" Id = "hdnUserID"  property ="Id" />
-	<Element label = "Name"  type = "UIText" Id = "txtName"  isMandatory="true" size="30" property ="Name"  >
+	<Element label = "Name"  type = "UIText" Id = "txtName"  isMandatory="true" size="30" property ="Name"  />
+	
+	<Element label = "Division"  type = "UIList" Id = "lstInvDivision"  isMandatory="true" property ="Division.Id" >
+	<options populator =  "getAllDivisions"> 
+	</options>
+	</Element>
   
-  	</Element>
+  	
 	<Element label = "Eval_from"  type = "UIList" Id = "lstFrom"   property ="evalFrom.code"  externalise= "true">
 		<options populator =  "getEvaluationPeriods"> 
 		</options>
@@ -29,25 +34,98 @@ Controller = "com.rainbow.crm.custcategory.controller.CustCategoryController">
 		<options populator =  "getEvaluationPeriods"> 
 		</options>
 	</Element>
-	<Element label = "Criteria"  type = "UIList" Id = "lstCriteria"   property ="evalCriteria.code"  externalise= "true">
-		<options populator =  "getEvalCriteria"> 
-		</options>
-	</Element>
-	<Element label = "Min_Value"  type = "UIText" Id = "txtMin"   property ="minValue"  externalise= "true">
-	</Element>
-		<Element label = "Max_Value"  type = "UIText" Id = "txtMax"   property ="maxValue"  externalise= "true">
-	</Element>
+	
 	<Element label = "Include_Returns"  type = "UICheckBox" Id = "chkReturns" size="30" property ="incudeReturns" >
 		<options> 
 	  <option key ="true">  </option>
 	 </options>
 	</Element>
-	<Element label = "Excluded_Customers"  type = "UITextArea" Id = "txtexcluded"   property ="excludedCustomers" >
-	 <rows>5</rows> <cols>30</cols>
+	
+	<Element label = "Comments"  type = "UITextArea" Id = "txtComm"  property ="comments" >
+	 <rows>2</rows> <cols>30</cols>
 	</Element>
+</Section>
+<Section type ="detail">
+
+<Element type = "UITable" rows = "1" cols = "8" style = "grid" applyStyleonChildren ="true" Id  ="tblTrans" property ="conditions[]" >
+<Element type = "UITableHead" style ="listPageTitle">
+ <Element type = "UITableRow">
+ <Element type ="UITableCol" width = "3%" ><Element label = ""  type = "UILabel" Id = "lblTit1" value ="(" /></Element>
+ <Element type ="UITableCol" width = "20%" ><Element label = ""  type = "UILabel" Id = "lblTit2" value ="Field" /></Element>
+ <Element type ="UITableCol" width = "3%" ><Element label = ""  type = "UILabel" Id = "lblTit3" value ="Op" /></Element>
+ <Element type ="UITableCol" width = "20%" ><Element label = ""  type = "UILabel" Id = "lblTit4" value ="Value" /></Element>
+ <Element type ="UITableCol" width = "3%" ><Element label = ""  type = "UILabel" Id = "lblTit1" value =")" /></Element>
+ <Element type ="UITableCol" width = "10%" ><Element label = ""  type = "UILabel" Id = "lblTit4" value ="AND/OR" /></Element>
+  <Element type ="UITableCol" width = "20%" ><Element label = ""  type = "UILabel" Id = "lblTit5" value =".." /></Element>
+</Element>
+</Element>
+<Element type = "UITableRow"  dataType = "com.rainbow.framework.query.model.QueryCondition" >
+
+<Element type ="UITableCol" width = "3%" ><Element type = "UIText"  size="3"  Id= "txtOpBrac"  property ="openBrackets"   /></Element>
+
+<Element type ="UITableCol" width = "20%" >
+<Element type = "UIList"    Id= "lstCritFieldsEntity"   property ="field" >
+<options populator =  "getAllEntityFields"> 
+	</options>
+</Element>
+</Element>
+
+<Element type ="UITableCol" width = "3%" >
+<Element type = "UIList"    Id= "lstOpts"   property ="operator" >
+<options populator =  "getOperators"> 
+	</options>
+</Element>
+</Element>
+
+<Element type ="UITableCol" width = "20%" ><Element type = "UIText"   size ="15" Id= "txtVales" property ="value"   /></Element>
+<Element type ="UITableCol" width = "3%" ><Element type = "UIText"  size="3"  Id= "txtCloseBrac" property ="closeBrackets"   /></Element>
+<Element type ="UITableCol" width = "10%" ><Element type = "UIText" size="5"   Id= "txtandor"  property ="postCondition"   /></Element>
+
+
+
+<Element type ="UITableCol" width = "10%">
+	<Element caption = "AND"  type = "UIButton" Id = "btnAddRow"   onClickJS="addRowQuery(this, ' AND ')"/>
+	<Element caption = "OR"  type = "UIButton" Id = "btnAddORRow"    onClickJS="addRowQuery(this,' OR ')"/>
+	<Element caption = "-"  type = "UIButton" Id = "btnDelRow"    onClickJS="deleteRow(this)"/>
+</Element>
+</Element>
+</Element>
+
+<Element type ="UIDialog" Id = "newprintpop" style= "fullpagepopup" rendered = "Controller.getResultFetched">
+<Element type = "UILabel" Id = "testing" style="fullpage" property = "reportData"></Element>
+
+<Element type = "UIBreak"/>
+
+<Element type = "UITable" rows = "1" cols = "1">
+<Element type = "UITableRow">
+<Element type ="UITableCol" align="right">
+
+<Element caption = "Close"  type = "UIButton" Id = "btClose"   style="button" onClickJS = "closeDialog('newprintpop');"  />
+<Element caption = "Print"  type = "UIButton" Id = "btPrintNew"   style="button" onClickJS = "window.print();"  />
+</Element>
+</Element>
+</Element>
+
+<Element type = "UIStaticText" Id = "static" >
+ &lt;script&gt;
+ var dialog = document.getElementById('newprintpop');
+ if(!dialog.showModal)
+	{
+		dialogPolyfill.registerDialog(dialog);
+	}
+	dialog.showModal();
+ 
+ &lt;/script&gt;
+
+ 
+</Element>
+
+</Element>
+
 </Section>
 </CoreSection>
 <Section type ="summary">
+<Element caption = "View Customers"  type = "UIButton" Id = "btdwLoad"  style="button"  onClickJS="submitWithParam('runQuery')"   />
 </Section>
 <Section type ="copyRightSection"/>
 </UIForm>
