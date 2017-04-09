@@ -123,7 +123,7 @@ public class QueryService implements IQueryService{
 					line.setId(oldLine.getId());
 					
 				}else {
-					int linePK = GeneralSQLs.getNextPKValue( "Sales_Lines") ;
+					int linePK = GeneralSQLs.getNextPKValue( "QUERY_CONDITION") ;
 					line.setId(linePK);
 				}
 			}

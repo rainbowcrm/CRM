@@ -69,11 +69,6 @@ public class CustCategoryController extends CRMTransactionController{
 	
 	
 	
-	@Override
-	public PageResult submit(ModelObject object) {
-		
-		return submit(object,"runQuery");
-	}
 
 	@Override
 	public PageResult submit(ModelObject object, String actionParam) {

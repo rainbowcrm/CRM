@@ -15,9 +15,7 @@ Controller = "com.rainbow.crm.custcategory.controller.CustCategoryListController
 <responseElement key = "FilterName" >txtFilterName</responseElement>
 
 <responseElement key = "Name" >txtCategory</responseElement>
-<responseElement key = "Criteria" >lstCriteria</responseElement>
-<responseElement key = "ValueLT" >txtValLT</responseElement>
-<responseElement key = "ValueGt" >txtValGT</responseElement>
+<responseElement key = "Division.Name" >txtDivision</responseElement>
 </responseElements>
 </AjaxGroup>
 </AjaxGroups>
@@ -42,18 +40,14 @@ Controller = "com.rainbow.crm.custcategory.controller.CustCategoryListController
 <FilterNode>
    	<Element label = "Name"  type = "UIText" Id = "txtCategory"  property ="Name" />
  </FilterNode>
- <FilterNode>
-   	<Element label = "Criteria"  type = "UIList" Id = "lstCriteria"  property ="evalCriteria.code" >
-	<options populator =  "getEvalCriteria"> 
-		</options>
-	</Element>
- </FilterNode>
 <FilterNode>
-   	<Element label = "Value LT"  type = "UIText" Id = "txtValLT"  property ="minValue" />
- </FilterNode>
- <FilterNode>
-   	<Element label = "Value GT"  type = "UIText" Id = "txtValGT"  property ="maxValue" />
- </FilterNode>
+<Element label = "Division"  type = "UILookupText"  Id = "txtDivision"  property ="Division.Name" showLookupAsDialog="true" dialogId="dlgComp"
+  dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
+	 <lookupType>division</lookupType>
+	 <height>300</height>
+	 <width>290</width>
+</Element>
+</FilterNode>
 </FilterSection>
 <ListSection >
 <Columns allowrowselection ="Multiple" uniqueproperty = "Id">
@@ -68,14 +62,12 @@ Controller = "com.rainbow.crm.custcategory.controller.CustCategoryListController
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="evalFrom.description" />
 </Column>
 <Column title ="Eval_To"  sortField="EVAL_TO" width ="18%" >
-<Element label = ""  type = "UINote" Id = "idCt"  property ="evalFrom.description" />
+<Element label = ""  type = "UINote" Id = "idCt"  property ="evalTo.description" />
 </Column> 
-<Column title ="Value LT" sortField="MIN_VALUE"  width ="18%">
-<Element label = ""  type = "UINote" Id = "idIdNote"  property ="minValue" />
-</Column>
-<Column title ="Value GT" sortField="MAX_VALUE"  width ="18%">
-<Element label = ""  type = "UINote" Id = "idIdNote"  property ="maxValue" />
-</Column>  
+<Column title ="Division"  sortField="division.name" width ="18%" >
+<Element label = ""  type = "UINote" Id = "idCt"  property ="division.Name" />
+</Column> 
+
 <Column title ="Include_Returns" sortField="INCLUDE_RETURNS"  width ="18%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="incudeReturns" />
 </Column>

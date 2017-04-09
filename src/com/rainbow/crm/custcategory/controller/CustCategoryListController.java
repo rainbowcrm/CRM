@@ -51,7 +51,7 @@ public class CustCategoryListController extends CRMListController{
 	@Override
 	public PageResult goToEdit(List<ModelObject> objects) {
 		PageResult result = new PageResult();
-		result.setNextPageKey("newcustCategory");
+		result.setNextPageKey("newcustcategory");
 		return result;
 	}
 	

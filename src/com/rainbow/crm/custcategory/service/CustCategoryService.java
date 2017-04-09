@@ -1,5 +1,6 @@
 package com.rainbow.crm.custcategory.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -13,11 +14,18 @@ import java.util.List;
 
 
 
+import java.util.concurrent.atomic.AtomicInteger;
+
+import org.springframework.transaction.annotation.Transactional;
+
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.AbstractService;
 import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
+import com.rainbow.crm.common.CRMDBException;
+import com.rainbow.crm.common.CRMValidator;
 import com.rainbow.crm.common.CommonUtil;
+import com.rainbow.crm.common.DatabaseException;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.company.model.Company;
@@ -31,6 +39,8 @@ import com.rainbow.crm.custcategory.model.CustCategory;
 import com.rainbow.crm.custcategory.sql.CustCategorySQLs;
 import com.rainbow.crm.custcategory.validator.CustCategoryValidator;
 import com.rainbow.crm.customer.model.Customer;
+import com.rainbow.crm.database.GeneralSQLs;
+import com.rainbow.crm.division.model.Division;
 import com.rainbow.framework.query.model.Query;
 import com.rainbow.framework.query.model.QueryRecord;
 import com.rainbow.framework.query.model.QueryReport;
@@ -58,7 +68,35 @@ public class CustCategoryService extends AbstractService implements ICustCategor
 		return super.listData("CustCategory", from, to, whereCondition, context,sortCriteria);
 	}
 	
-	
+	@Transactional 
+	public TransactionResult create(CRMModelObject object,CRMContext context)  {
+		List<RadsError> errors  = new ArrayList<RadsError>(); 
+		TransactionResult.Result result = TransactionResult.Result.SUCCESS;
+		try {
+			CustCategory custCategory = (CustCategory) object ;
+			int pk = GeneralSQLs.getNextPKValue("CUSTOMER_CATEGORIES") ;
+			custCategory.setId(pk);
+			
+			custCategory.getConditions().forEach( condition ->  {
+				int linePK = GeneralSQLs.getNextPKValue( "CUSTOMER_CATEGORY_CONDITION") ;
+				condition.setId(linePK ++ );
+				condition.setCategory(custCategory);
+				
+			});
+			
+			
+			object.setObjectVersion(1);
+			object.setCreatedDate(new java.sql.Timestamp(new java.util.Date().getTime()));
+			object.setCreatedUser(context.getUser());
+			getDAO().create(object);
+		}catch(DatabaseException ex) {
+			RadsError error = CRMValidator.getErrorforCode(context.getLocale(),CRMDBException.ERROR_UNABLE_TO_CREATE);
+			errors.add(error);
+			result = TransactionResult.Result.FAILURE ;
+			throw new RuntimeException(ex) ;
+		}
+		return new TransactionResult(result,errors);
+	}
 
 	@Override
 	public QueryReport checCustomers(CustCategory custCategory,
@@ -108,9 +146,6 @@ public class CustCategoryService extends AbstractService implements ICustCategor
 	@Override
 	public List<RadsError> validateforCreate(CRMModelObject object,
 			CRMContext context) {
-		ICompanyService compService = (ICompanyService)SpringObjectFactory.INSTANCE.getInstance("ICompanyService");
-		Company company = (Company)compService.getById(context.getLoggedinCompany());
-		((CustCategory)object).setCompany(company);
 		CustCategoryValidator validator = new CustCategoryValidator(context);
 		return validator.validateforCreate(object);
 	}
@@ -128,6 +163,18 @@ public class CustCategoryService extends AbstractService implements ICustCategor
 
 	@Override
 	public List<RadsError> adaptfromUI(CRMContext context, ModelObject object) {
+		CustCategory custCategory  = (CustCategory)object ;
+		ICompanyService compService = (ICompanyService)SpringObjectFactory.INSTANCE.getInstance("ICompanyService");
+		Company company = (Company)compService.getById(context.getLoggedinCompany());
+		Division division = CommonUtil.getDivisionObect(context, custCategory.getDivision());
+		custCategory.setDivision(division);
+		((CustCategory)object).setCompany(company);
+		AtomicInteger lineNumber = new AtomicInteger(1);
+		custCategory.getConditions().forEach( condition ->  {  
+			condition.setCategory(custCategory);
+			condition.setCompany(custCategory.getCompany());
+			condition.setLineNumber(lineNumber.getAndIncrement());
+		});
 		return null;
 	}
 

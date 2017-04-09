@@ -123,6 +123,9 @@ Controller = "com.rainbow.crm.custcategory.controller.CustCategoryController">
 
 </Element>
 
+
+
+
 </Section>
 </CoreSection>
 <Section type ="summary">
