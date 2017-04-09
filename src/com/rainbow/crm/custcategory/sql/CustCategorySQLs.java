@@ -35,5 +35,30 @@ public class CustCategorySQLs {
 		}
 		return ans;
 	}
+	
+	public static String getDataType( String entity, String hqlKeyField)
+	{
+		Connection connection = null ;
+		PreparedStatement statement = null;
+		ResultSet rs  = null ;
+		Map<String,String> ans = new LinkedHashMap<String, String>();
+		try {
+			connection  = ConnectionCreater.getConnection() ;
+			String sql =   " SELECT * FROM CUST_CATEGORY_COMPONENTS WHERE ENTITY = ? AND  HQL_KEY_FIELD = ?  " ;
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, entity);
+			statement.setString(2, hqlKeyField);
+			rs = statement.executeQuery() ;
+			if (rs.next()) {
+				String dataType = rs.getString("DATA_TYPE");
+				return dataType;
+			}
+		}catch(SQLException ex) {
+			Logwriter.INSTANCE.error(ex);
+		}finally {
+			ConnectionCreater.close(connection, statement, rs);	
+		}
+		return "STR";
+	}
 
 }

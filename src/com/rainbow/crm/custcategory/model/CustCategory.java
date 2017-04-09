@@ -22,6 +22,8 @@ public class CustCategory extends CRMBusinessModelObject{
 	boolean incudeReturns;
 	String comments;
 	
+	private String reportData;
+	
 	Set<CustCategoryCondition> conditions;
 	
 	public String getName() {
@@ -65,6 +67,12 @@ public class CustCategory extends CRMBusinessModelObject{
 	}
 	public void setComments(String comments) {
 		this.comments = comments;
+	}
+	public String getReportData() {
+		return reportData;
+	}
+	public void setReportData(String reportData) {
+		this.reportData = reportData;
 	}
 	
 

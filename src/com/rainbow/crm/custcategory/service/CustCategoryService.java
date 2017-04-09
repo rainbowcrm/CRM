@@ -10,10 +10,14 @@ import java.util.List;
 
 
 
+
+
+
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.AbstractService;
 import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
+import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.company.model.Company;
@@ -24,8 +28,12 @@ import com.rainbow.crm.saleslead.model.SalesLeadLine;
 import com.rainbow.crm.saleslead.service.ISalesLeadService;
 import com.rainbow.crm.custcategory.dao.CustCategoryDAO;
 import com.rainbow.crm.custcategory.model.CustCategory;
+import com.rainbow.crm.custcategory.sql.CustCategorySQLs;
 import com.rainbow.crm.custcategory.validator.CustCategoryValidator;
 import com.rainbow.crm.customer.model.Customer;
+import com.rainbow.framework.query.model.Query;
+import com.rainbow.framework.query.model.QueryRecord;
+import com.rainbow.framework.query.model.QueryReport;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.model.transaction.TransactionResult;
@@ -53,13 +61,48 @@ public class CustCategoryService extends AbstractService implements ICustCategor
 	
 
 	@Override
-	public List<Customer> checCustomers(CustCategory custCategory) {
+	public QueryReport checCustomers(CustCategory custCategory,
+			CRMContext context) {
+		StringBuffer criteriaFields = new StringBuffer("");
+		String hqlPrefix = " select customer from Sales Sales where Sales.voided = false and Sales.salesDate>= :fromDate and Sales.salesDate <= :toDate and Sales.company.id= "
+				+ context.getLoggedinCompany() + "  group by Sales.customer.id  ";
+		Date fromDate   = CommonUtil.getRelativeDate(custCategory.getEvalFrom());
+		Date toDate   = CommonUtil.getRelativeDate(custCategory.getEvalTo());
 		
-		custCategory.getConditions().forEach( condition ->  {  
-			selectFields.append( condition.toString() );
+		custCategory.getConditions().forEach(condition -> {
+			String dataType = CustCategorySQLs.getDataType("SALES", condition.getField());
+			condition.setDataType(new FiniteValue(dataType));
+			criteriaFields.append(condition.toString());
 		});
-		
-		return null;
+		CustCategoryDAO dao = (CustCategoryDAO)getDAO();
+		List<Customer > customers = dao.getCustomersforRule(hqlPrefix +  " having " + criteriaFields.toString(),fromDate,toDate );
+		QueryReport report = generateReport(custCategory, customers);
+		return report;
+	}
+	
+	private QueryReport generateReport(CustCategory category, List  list) {
+		QueryReport report = new QueryReport();
+		String [] titles=   {"First Name" , "Last Name" , "Phone" , "Email"  } ;
+		report.setTitles(titles);
+		/*if(getQuerySelDate(query,"From")!=null)  {
+		report.setFrom(getQuerySelDate(query,"From").toLocaleString());
+		report.setTo(getQuerySelDate(query,"To").toLocaleString());
+		}*/
+		if(!Utils.isNullList(list)) {
+			for(int i = 0 ; i < list.size() ; i ++ ) {
+				QueryRecord record= new QueryRecord();
+				Customer cust =(Customer) list.get(i);
+				String  []actValues = new String[4];
+				actValues[0] = cust.getFirstName();
+				actValues[1] = cust.getLastName();
+				actValues[2] = cust.getPhone() ;
+				actValues[3] = cust.getEmail();
+				record.setFields(actValues);
+				record.setFieldCount(4);
+				report.addRecord(record);
+			}
+		}
+		return report;
 	}
 
 	@Override

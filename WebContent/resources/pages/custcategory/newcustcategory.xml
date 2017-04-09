@@ -8,6 +8,7 @@ Controller = "com.rainbow.crm.custcategory.controller.CustCategoryController">
 </Forwards>
 <IncludeJS>./resources/js/RadsLib.js</IncludeJS>
 <IncludeJS>./scripts/CRMGeneral.js</IncludeJS>
+<IncludeJS>./scripts/query/QueryFunc.js</IncludeJS>
 <Elements>
 <UIForm Id ="cust" method = "POST" >
 <Section type ="topBar"></Section> 
@@ -59,7 +60,7 @@ Controller = "com.rainbow.crm.custcategory.controller.CustCategoryController">
   <Element type ="UITableCol" width = "20%" ><Element label = ""  type = "UILabel" Id = "lblTit5" value =".." /></Element>
 </Element>
 </Element>
-<Element type = "UITableRow"  dataType = "com.rainbow.framework.query.model.QueryCondition" >
+<Element type = "UITableRow"  dataType = "com.rainbow.crm.custcategory.model.CustCategoryCondition" >
 
 <Element type ="UITableCol" width = "3%" ><Element type = "UIText"  size="3"  Id= "txtOpBrac"  property ="openBrackets"   /></Element>
 
@@ -125,7 +126,7 @@ Controller = "com.rainbow.crm.custcategory.controller.CustCategoryController">
 </Section>
 </CoreSection>
 <Section type ="summary">
-<Element caption = "View Customers"  type = "UIButton" Id = "btdwLoad"  style="button"  onClickJS="submitWithParam('runQuery')"   />
+<Element caption = "View Customers"  type = "UIButton" Id = "btdwLoad"  style="button"  fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam =  "runQuery"    />
 </Section>
 <Section type ="copyRightSection"/>
 </UIForm>

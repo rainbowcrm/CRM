@@ -16,16 +16,28 @@ import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.custcategory.model.CustCategory;
 import com.rainbow.crm.custcategory.service.ICustCategoryService;
 import com.rainbow.crm.custcategory.sql.CustCategorySQLs;
+import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.division.service.IDivisionService;
 import com.rainbow.framework.query.model.Query;
+import com.rainbow.framework.query.model.QueryReport;
+import com.rainbow.framework.query.service.IQueryService;
 import com.rainbow.framework.setup.sql.MetadataSQL;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
+import com.techtrade.rads.framework.model.transaction.TransactionResult;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
+import com.techtrade.rads.framework.ui.abstracts.PageResult.ResponseAction;
 import com.techtrade.rads.framework.utils.Utils;
 
 public class CustCategoryController extends CRMTransactionController{
+	
+	private boolean resultFetched;
+	
+	public boolean getResultFetched()
+	{
+		return resultFetched;
+	}
 	
 	public ITransactionService getService() {
 		ICustCategoryService serv = (ICustCategoryService) SpringObjectFactory.INSTANCE.getInstance("ICustCategoryService");
@@ -54,10 +66,30 @@ public class CustCategoryController extends CRMTransactionController{
 	}
 	
 	
+	
+	
+	
+	@Override
+	public PageResult submit(ModelObject object) {
+		
+		return submit(object,"runQuery");
+	}
+
 	@Override
 	public PageResult submit(ModelObject object, String actionParam) {
 		if("runQuery".equals(actionParam)) 
 		{
+			ICustCategoryService service  =(ICustCategoryService)getService();
+			QueryReport queryReport = service.checCustomers((CustCategory) object ,(CRMContext) getContext());
+			IQueryService queryService = (IQueryService)SpringObjectFactory.INSTANCE.getInstance("IQueryService") ;
+			String reportData= queryService.getVelocityConverted(queryReport,  (CRMContext  )getContext());
+			((CustCategory) object).setReportData(reportData);
+			resultFetched = true;
+			PageResult result = new PageResult();
+			result.setNextPageKey("newcustcategory");
+			result.setObject(object);
+			result.setResponseAction(ResponseAction.FULLRELOAD);
+			return result;
 			
 		}
 		return super.submit(object, actionParam);
