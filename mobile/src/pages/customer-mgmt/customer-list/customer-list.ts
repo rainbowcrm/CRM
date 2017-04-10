@@ -19,13 +19,15 @@ export class CustomerListPage {
   private response: CustomerSearchResponse;
   private filter: Array<Object>;
   private pageNumber: number;
+  private hasMoreResults: boolean;
 
   constructor(private params: NavParams,private http:HTTPService,
               private navCtrl: NavController, private loader:Loader,
               private toastCtrl: ToastController, private alertCtrl:AlertController) {
     this.customers = this.params.get('customers');
     this.filter = this.params.get('filter');
-    this.pageNumber = 1;
+    this.pageNumber = 0;
+    this.hasMoreResults = true;
   }
 
   ionViewDidLoad() {
@@ -50,10 +52,14 @@ export class CustomerListPage {
   }
 
   doSearchMoreCustomer(infiniteScroll) {
+      if(!this.hasMoreResults){
+        infiniteScroll.complete();
+        return;
+      }
       this.request = new CustomerSearchRequest();
       this.request.currentmode = 'READ';
       this.request.fixedAction = "FixedAction.NAV_NEXTPAGE";
-      this.request.pageNumber = ++this.pageNumber;
+      this.request.hdnPage = ++this.pageNumber;
       this.request.pageID = "customers";
       this.request.filter = this.filter;
       this.http.processServerRequest("post",this.request, true).subscribe(
@@ -68,6 +74,7 @@ export class CustomerListPage {
        return ;
     }
     if(this.response.dataObject.length == 0){
+      this.hasMoreResults = false;
       infiniteScroll.complete();
        return ;
     }
@@ -82,6 +89,9 @@ export class CustomerListPage {
   }
 
   editCustomer(customer: Customer){
+    if(customer.Deleted == "true"){
+      return;
+    }
      this.navCtrl.push(CustomerAddPage,{customer: customer});
   }
 
@@ -111,10 +121,10 @@ export class CustomerListPage {
   deleteCustomerRequest(customer: Customer){
       this.loader.dismissLoader();
       this.request = new CustomerSearchRequest();
-      this.request.currentmode = 'DELETE';
-      this.request.dataObject = customer;
+      this.request.currentmode = 'READ';
+      this.request.rds_selectedids = customer.Id;
       this.request.fixedAction = "FixedAction.ACTION_DELETE";
-      this.request.pageID = "deletecustomer";
+      this.request.pageID = "customers";
       this.http.processServerRequest("post",this.request, true).subscribe(
                      res => this.customerDeleteSuccess(customer),
                      error =>  this.customerDeleteError(error)); 
@@ -127,6 +137,7 @@ export class CustomerListPage {
     }
     else{
       this.customerDeletedToast();
+      this.navCtrl.pop();
     }
   }
 

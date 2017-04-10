@@ -1,3 +1,4 @@
+import { BaseSearchRequest } from '../../../providers/';
 export class Product{
     Name:string
 }
@@ -34,11 +35,7 @@ export class ItemBrand{
     Name: string;
 }
 
-export class ItemSearchRequest{
-    fixedAction:string;
-    pageID:string;
-    currentmode:string;
-    filter:Array<ItemSearchFilter>;
+export class ItemSearchRequest extends BaseSearchRequest{
 }
 
 export class ItemSearchResponse{

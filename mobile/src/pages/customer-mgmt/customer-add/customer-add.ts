@@ -19,25 +19,30 @@ export class CustomerAddPage {
   private response: CustomerAddResponse;
   private errorMessage:string;
   private isEdit: boolean;
+  private pageTitle: string;
 
   constructor(public navCtrl: NavController,private http:HTTPService,
     private loader:Loader, private toastCtrl: ToastController,
     private params: NavParams) {
       this.model = this.params.get('customer');
-      if(!this.model) this.model = new Customer();
+      if(this.model) {
+        this.isEdit = true;
+      }else{
+        this.model = new Customer();
+      }
     }
 
   ionViewDidLoad() {
-    console.log('Hello CustomerAdd Page');
+    this.pageTitle = this.isEdit?"Edit Customer": "Add Customer";
   }
 
   addCustomer():void{
     this.loader.presentLoader();
     this.errorMessage = null;
     let addCustomerReq = new CustomerAddRequest();
-    addCustomerReq.fixedAction = "FixedAction.ACTION_CREATE";
+    addCustomerReq.fixedAction = this.isEdit?"FixedAction.ACTION_UPDATE":"FixedAction.ACTION_CREATE";
     addCustomerReq.pageID = 'newcustomer';
-    addCustomerReq.currentmode = "CREATE";
+    addCustomerReq.currentmode = this.isEdit?"UPDATE":"CREATE";
     addCustomerReq.dataObject = this.model;
     this.http.processServerRequest("post",addCustomerReq, true).subscribe(
                      res => this.customerAddSuccess(res),
@@ -52,7 +57,11 @@ export class CustomerAddPage {
     }
     this.response = response.dataObject;
     this.showSuccessToast();
-    
+    if(this.isEdit){
+      this.navCtrl.popToRoot();
+      return;
+    }
+    this.navCtrl.pop();
   }
 
   showSuccessToast():any{

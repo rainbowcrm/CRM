@@ -22,5 +22,8 @@
     <div *ngIf="item.Description"><strong>Phone:</strong>{{item.Description}}</div>
   </ion-card-content>
  </ion-card> 
+ <ion-infinite-scroll (ionInfinite)="doSearchMoreItems($event)">
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
 </ion-content>
 

@@ -1,3 +1,4 @@
+import { BaseSearchRequest } from '../../../providers/';
 export class Customer{
     Description:string;
     FullName:string;
@@ -12,15 +13,15 @@ export class Customer{
     CreditLimit:string;
     Landmark:string;
     AlternatePhone:string;
+    Id: string;
+    Deleted: string;
 }
 
-export class CustomerSearchRequest{
-    fixedAction:string;
-    pageID:string;
-    currentmode:string;
-    filter:Array<any>;
-    pageNumber: number;
-    dataObject: Customer;
+export class CustomerSearchRequest extends BaseSearchRequest{
+    
+}
+
+export class CustomerDeleteRequest extends BaseSearchRequest{
 }
 
 export class CustomerSearchResponse{
