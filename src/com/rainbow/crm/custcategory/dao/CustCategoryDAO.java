@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.salesperiod.model.SalesPeriod;
+import com.rainbow.crm.common.DatabaseException;
 import com.rainbow.crm.custcategory.model.CustCategory;
 import com.rainbow.crm.customer.model.Customer;
 import com.techtrade.rads.framework.utils.Utils;
@@ -47,6 +48,28 @@ public class CustCategoryDAO extends SpringHibernateDAO {
 	}
 	
 
+	public void deleteOrphanedRecords(CustCategory custCategory )
+	{
+		Session session = openSession(true);
+		boolean success = false; 
+		try { 
+			custCategory.getConditions().forEach(  condition ->  {    
+				if (condition.isDeleted()) {
+					session.delete(condition );
+					custCategory.getConditions().remove(condition);
+				}
+				
+			} );
+			session.flush();
+			success = true; 
+			
+		}catch(Exception ex) {
+			Logwriter.INSTANCE.error(ex);
+			throw new DatabaseException(ex,DatabaseException.DIRTY_READ_ERROR);
+		}finally {
+			closeSession(session,success);
+		}
+	}
 	
 
 }

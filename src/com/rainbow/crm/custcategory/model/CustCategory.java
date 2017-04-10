@@ -1,6 +1,7 @@
 package com.rainbow.crm.custcategory.model;
 
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
@@ -62,6 +63,13 @@ public class CustCategory extends CRMBusinessModelObject{
 	public void setConditions(Set<CustCategoryCondition> conditions) {
 		this.conditions = conditions;
 	}
+	public void addCondition(CustCategoryCondition condition)
+	{
+		if(conditions == null)
+			 conditions = new LinkedHashSet<CustCategoryCondition> ();
+		conditions.add(condition);
+	}
+	
 	public String getComments() {
 		return comments;
 	}

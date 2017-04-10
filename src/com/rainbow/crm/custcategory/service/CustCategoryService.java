@@ -36,12 +36,14 @@ import com.rainbow.crm.saleslead.model.SalesLeadLine;
 import com.rainbow.crm.saleslead.service.ISalesLeadService;
 import com.rainbow.crm.custcategory.dao.CustCategoryDAO;
 import com.rainbow.crm.custcategory.model.CustCategory;
+import com.rainbow.crm.custcategory.model.CustCategoryCondition;
 import com.rainbow.crm.custcategory.sql.CustCategorySQLs;
 import com.rainbow.crm.custcategory.validator.CustCategoryValidator;
 import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.framework.query.model.Query;
+import com.rainbow.framework.query.model.QueryCondition;
 import com.rainbow.framework.query.model.QueryRecord;
 import com.rainbow.framework.query.model.QueryReport;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
@@ -187,7 +189,53 @@ public class CustCategoryService extends AbstractService implements ICustCategor
 	protected ORMDAO getDAO() {
 		return (CustCategoryDAO) SpringObjectFactory.INSTANCE.getInstance("CustCategoryDAO");
 	}
-
 	
+	@Transactional
+	public TransactionResult update(CRMModelObject object,CRMContext context) {
+		List<RadsError> errors  = new ArrayList<RadsError>(); 
+		TransactionResult.Result result = TransactionResult.Result.SUCCESS;
+		try {
+			resetCategoryCondition((CustCategory)object, context);
+			object.setLastUpdateDate(new java.sql.Timestamp(new java.util.Date().getTime()));
+			object.setLastUpdateUser(context.getUser());
+			((CustCategoryDAO)getDAO()).deleteOrphanedRecords((CustCategory)object);
+			getDAO().update(object); 
+		}catch(DatabaseException ex) {
+			RadsError error = CRMValidator.getErrorforCode(context.getLocale(),CRMDBException.ERROR_DIRTY_READ);
+			errors.add(error);
+			result = TransactionResult.Result.FAILURE ;
+			throw new CRMDBException(error) ;
+		}
+		return new TransactionResult(result,errors);
+	}
+
+	private void resetCategoryCondition (CustCategory category, CRMContext context)
+	{
+		CustCategory oldObject = (CustCategory)getById(category.getId());
+		if (!Utils.isNullSet(category.getConditions())) {
+			int  ct = 0;
+			Iterator it = oldObject.getConditions().iterator() ;
+			for (CustCategoryCondition  line : category.getConditions()) {
+				CustCategoryCondition oldLine = null ;
+				if (it.hasNext()) {
+					oldLine= (CustCategoryCondition) it.next() ;
+				}
+				line.setCategory(category);
+				if (oldLine != null) {
+					line.setId(oldLine.getId());
+					
+				}else {
+					int linePK = GeneralSQLs.getNextPKValue( "CUSTOMER_CATEGORY_CONDITION") ;
+					line.setId(linePK);
+				}
+			}
+			while (it.hasNext()) {
+				CustCategoryCondition oldLine= (CustCategoryCondition) it.next() ;
+				oldLine.setDeleted(true);
+				category.addCondition(oldLine);
+			}
+		}
+		
+	}
 
 }
