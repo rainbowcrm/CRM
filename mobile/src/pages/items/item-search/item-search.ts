@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, ToastController } from 'ionic-angular';
-import { Item, Product, ItemSearchRequest, ItemSearchResponse } from '../';
+import { Item, Product, ItemSearchRequest, ItemSearchResponse, ItemSearchFilter } from '../';
 import { HTTPService, Loader } from '../../../providers/';
 import { HomePage } from '../../home/home';
+import { ItemSearchResult } from '../';
 
 /*
   Generated class for the ItemSearch page.
@@ -16,6 +17,7 @@ import { HomePage } from '../../home/home';
 })
 export class ItemSearch {
   private model:Item = new Item();
+  private searchString:string;
   private request: ItemSearchRequest;
   private response: ItemSearchResponse;
   private errorMessage:string;
@@ -49,6 +51,12 @@ export class ItemSearch {
       this.request.fixedAction = "FixedAction.NAV_FIRSTPAGE";
       this.request.pageID = "items";
       this.request.filter = [];
+      let filter = new ItemSearchFilter();
+      filter.field = "Product.Name";
+      filter.operator = "EQUALS";
+      filter.value = this.searchString;
+      this.request.filter.push(filter);
+
       this.http.processServerRequest("post",this.request, true).subscribe(
                      res => this.itemSearchSuccess(res),
                      error =>  this.itemSearchError(error));  
@@ -77,8 +85,7 @@ export class ItemSearch {
        this.NoItemsFoundToast();
        return ;
     }
-    debugger
-    //this.navCtrl.push(CustomerListPage, {customers:this.response.dataObject});
+    this.navCtrl.push(ItemSearchResult, {items:this.response.dataObject});
   }
  
 

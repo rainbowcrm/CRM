@@ -57,7 +57,7 @@ export class CustomerHomePage {
   getFilters():Array<any>{
       let filters = [];
       for(let data in this.model){
-        if(this.model[data] && this.model[data].length>0)
+        if(this.model[data])
            filters.push({
 	      	  "field" :data ,
 	   	      "operator" :"EQUALS",
@@ -77,7 +77,7 @@ export class CustomerHomePage {
        this.NoCustomersFoundToast();
        return ;
     }
-    this.navCtrl.push(CustomerListPage, {customers:this.response.dataObject});
+    this.navCtrl.push(CustomerListPage, {customers:this.response.dataObject, filter:this.request.filter});
   }
  
 

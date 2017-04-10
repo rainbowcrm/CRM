@@ -7,6 +7,7 @@ export class Item{
     Description: string;
     RetailPrice: number;
     WholeSalePrice: number;
+    ItemClassDesc: string;
     Size: number;
     Color: string;
     Product: Product;
@@ -25,17 +26,28 @@ export class Item{
     Manufacturer: string;
     Id: string;
     Deleted: string;
-    MaxPrice: number
+    MaxPrice: number;
+    Brand:ItemBrand;
+}
+
+export class ItemBrand{
+    Name: string;
 }
 
 export class ItemSearchRequest{
     fixedAction:string;
     pageID:string;
     currentmode:string;
-    filter:Array<any>;
+    filter:Array<ItemSearchFilter>;
 }
 
 export class ItemSearchResponse{
     result: string;
     dataObject:Array<Item>;
+}
+
+export class ItemSearchFilter{
+    field: string;
+    operator: string;
+    value: string;
 }

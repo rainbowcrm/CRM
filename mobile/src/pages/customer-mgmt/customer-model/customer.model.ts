@@ -19,6 +19,8 @@ export class CustomerSearchRequest{
     pageID:string;
     currentmode:string;
     filter:Array<any>;
+    pageNumber: number;
+    dataObject: Customer;
 }
 
 export class CustomerSearchResponse{
