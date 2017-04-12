@@ -3,6 +3,7 @@ package com.rainbow.crm.custcategory.service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 
@@ -14,9 +15,12 @@ import java.util.List;
 
 
 
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
+
 import org.springframework.transaction.annotation.Transactional;
+
 
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.AbstractService;
@@ -36,6 +40,7 @@ import com.rainbow.crm.saleslead.model.SalesLeadLine;
 import com.rainbow.crm.saleslead.service.ISalesLeadService;
 import com.rainbow.crm.custcategory.dao.CustCategoryDAO;
 import com.rainbow.crm.custcategory.model.CustCategory;
+import com.rainbow.crm.custcategory.model.CustCategoryComponent;
 import com.rainbow.crm.custcategory.model.CustCategoryCondition;
 import com.rainbow.crm.custcategory.sql.CustCategorySQLs;
 import com.rainbow.crm.custcategory.validator.CustCategoryValidator;
@@ -103,19 +108,28 @@ public class CustCategoryService extends AbstractService implements ICustCategor
 	@Override
 	public QueryReport checCustomers(CustCategory custCategory,
 			CRMContext context) {
-		StringBuffer criteriaFields = new StringBuffer("");
+		StringBuffer havingFields = new StringBuffer("");
+		StringBuffer whereFields = new StringBuffer("");
+		custCategory.getConditions().forEach(condition -> {
+			CustCategoryComponent component = CustCategorySQLs.getComponentByKey("SALES", condition.getField());
+			condition.setDataType(new FiniteValue(component.getDataType()));
+			if  ( component.isAggregated()) {
+				havingFields.append(condition.toString());
+			} else  {
+				whereFields.append(condition.toString());
+			}
+		});
+	
 		String hqlPrefix = " select customer from Sales Sales where Sales.voided = false and Sales.salesDate>= :fromDate and Sales.salesDate <= :toDate and Sales.company.id= "
-				+ context.getLoggedinCompany() + "  group by Sales.customer.id  ";
+				+ context.getLoggedinCompany() + "    ";
 		Date fromDate   = CommonUtil.getRelativeDate(custCategory.getEvalFrom());
 		Date toDate   = CommonUtil.getRelativeDate(custCategory.getEvalTo());
 		
-		custCategory.getConditions().forEach(condition -> {
-			String dataType = CustCategorySQLs.getDataType("SALES", condition.getField());
-			condition.setDataType(new FiniteValue(dataType));
-			criteriaFields.append(condition.toString());
-		});
 		CustCategoryDAO dao = (CustCategoryDAO)getDAO();
-		List<Customer > customers = dao.getCustomersforRule(hqlPrefix +  " having " + criteriaFields.toString(),fromDate,toDate );
+		String whereClause =  whereFields.length()>1?" and " + whereFields.toString()  : " ";
+		String havingClause =  havingFields.length()>1?" having  " + havingFields.toString()  : " ";
+		String groupByClause = havingFields.length()>1?" group by Sales.customer.id ": " ";
+		List<Customer > customers = dao.getCustomersforRule(hqlPrefix + whereClause +  groupByClause +    havingClause  ,fromDate,toDate );
 		QueryReport report = generateReport(custCategory, customers);
 		return report;
 	}
