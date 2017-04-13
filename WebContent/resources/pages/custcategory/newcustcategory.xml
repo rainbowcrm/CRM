@@ -48,7 +48,11 @@ Controller = "com.rainbow.crm.custcategory.controller.CustCategoryController">
 </Section>
 <Section type ="detail">
 
-<Element type = "UITable" rows = "1" cols = "8" style = "grid" applyStyleonChildren ="true" Id  ="tblTrans" property ="conditions[]" >
+<Element type ="UITabset" Id = "configSet" style = "uitabstyle" selectedTabStyle= "titleStyleSelected active nav-link" unSelectedTabStyle ="titleStyleUnSelected nav-link" >
+
+<Element type ="UITab" Id= "idGeneral" title = "Aggregates"   >
+
+<Element type = "UITable" rows = "1" cols = "8" style = "grid" applyStyleonChildren ="true" Id  ="tblTrans" property ="aggregateConditions[]" >
 <Element type = "UITableHead" style ="listPageTitle">
  <Element type = "UITableRow">
  <Element type ="UITableCol" width = "3%" ><Element label = ""  type = "UILabel" Id = "lblTit1" value ="(" /></Element>
@@ -91,6 +95,57 @@ Controller = "com.rainbow.crm.custcategory.controller.CustCategoryController">
 </Element>
 </Element>
 </Element>
+</Element> <!--  end aggregates -->
+
+<Element type ="UITab" Id= "idWhere" title ="Conditions"   >
+
+<Element type = "UITable" rows = "1" cols = "8" style = "grid" applyStyleonChildren ="true" Id  ="tblWhereTrans" property ="whereConditions[]" >
+<Element type = "UITableHead" style ="listPageTitle">
+ <Element type = "UITableRow">
+ <Element type ="UITableCol" width = "3%" ><Element label = ""  type = "UILabel" Id = "lblWTit1" value ="(" /></Element>
+ <Element type ="UITableCol" width = "20%" ><Element label = ""  type = "UILabel" Id = "lblWTit2" value ="Field" /></Element>
+ <Element type ="UITableCol" width = "3%" ><Element label = ""  type = "UILabel" Id = "lblWTit3" value ="Op" /></Element>
+ <Element type ="UITableCol" width = "20%" ><Element label = ""  type = "UILabel" Id = "lblWTit4" value ="Value" /></Element>
+ <Element type ="UITableCol" width = "3%" ><Element label = ""  type = "UILabel" Id = "lblWTit1" value =")" /></Element>
+ <Element type ="UITableCol" width = "10%" ><Element label = ""  type = "UILabel" Id = "lblWTit4" value ="AND/OR" /></Element>
+  <Element type ="UITableCol" width = "20%" ><Element label = ""  type = "UILabel" Id = "lblWTit5" value =".." /></Element>
+</Element>
+</Element>
+<Element type = "UITableRow"  dataType = "com.rainbow.crm.custcategory.model.CustCategoryCondition" >
+
+<Element type ="UITableCol" width = "3%" ><Element type = "UIText"  size="3"  Id= "txtWhOpBrac"  property ="openBrackets"   /></Element>
+
+<Element type ="UITableCol" width = "20%" >
+<Element type = "UIList"    Id= "lstWhCritFieldsEntity"   property ="field" >
+<options populator =  "getAllEntityFields"> 
+	</options>
+</Element>
+</Element>
+
+<Element type ="UITableCol" width = "3%" >
+<Element type = "UIList"    Id= "lstWhOpts"   property ="operator" >
+<options populator =  "getOperators"> 
+	</options>
+</Element>
+</Element>
+
+<Element type ="UITableCol" width = "20%" ><Element type = "UIText"   size ="15" Id= "txtWhVales" property ="value"   /></Element>
+<Element type ="UITableCol" width = "3%" ><Element type = "UIText"  size="3"  Id= "txtWhCloseBrac" property ="closeBrackets"   /></Element>
+<Element type ="UITableCol" width = "10%" ><Element type = "UIText" size="5"   Id= "txtWhandor"  property ="postCondition"   /></Element>
+
+
+
+<Element type ="UITableCol" width = "10%">
+	<Element caption = "AND"  type = "UIButton" Id = "btnWhAddRow"   onClickJS="addRowQuery(this, ' AND ')"/>
+	<Element caption = "OR"  type = "UIButton" Id = "btnWhAddORRow"    onClickJS="addRowQuery(this,' OR ')"/>
+	<Element caption = "-"  type = "UIButton" Id = "btnWhDelRow"    onClickJS="deleteRow(this)"/>
+</Element>
+</Element>
+</Element>
+</Element> <!--  end whre conditions -->
+
+
+</Element>  <!--  end tab set -->
 
 <Element type ="UIDialog" Id = "newprintpop" style= "fullpagepopup" rendered = "Controller.getResultFetched">
 <Element type = "UILabel" Id = "testing" style="fullpage" property = "reportData"></Element>

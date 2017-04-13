@@ -494,3 +494,6 @@ INSERT INTO CUST_CATEGORY_COMPONENTS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TY
 
 INSERT INTO CUST_CATEGORY_COMPONENTS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,IS_AGGREGATED_FIELD) values ('SALES','Order Type','Sales.orderType.code','FINVAL',false);
 INSERT INTO CUST_CATEGORY_COMPONENTS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE,IS_AGGREGATED_FIELD) values ('SALES','Sales Line SKU','salesLine.sku.name','STR','left outer join  Sales.salesLines salesLine',false);
+INSERT INTO CUST_CATEGORY_COMPONENTS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE,IS_AGGREGATED_FIELD) values ('SALES','Sales Line Brand','salesLine.sku.item.brand.name','STR','left outer join  Sales.salesLines salesLine',false);
+INSERT INTO CUST_CATEGORY_COMPONENTS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE,IS_AGGREGATED_FIELD) values ('SALES','Sales Line Category','salesLine.sku.product.category.name','STR','left outer join  Sales.salesLines salesLine',false);
+INSERT INTO CUST_CATEGORY_COMPONENTS (ENTITY , KEY_FIELD , HQL_KEY_FIELD,DATA_TYPE,JOIN_HQL_CLAUSE,IS_AGGREGATED_FIELD) values ('SALES','Sales Line Product','salesLine.sku.product.name','STR','left outer join  Sales.salesLines salesLine',false);

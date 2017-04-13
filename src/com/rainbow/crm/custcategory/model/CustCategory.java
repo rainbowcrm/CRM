@@ -27,6 +27,10 @@ public class CustCategory extends CRMBusinessModelObject{
 	
 	Set<CustCategoryCondition> conditions;
 	
+	Set<CustCategoryCondition> aggregateConditions;
+	
+	Set<CustCategoryCondition> whereConditions;
+	
 	public String getName() {
 		return name;
 	}
@@ -69,6 +73,35 @@ public class CustCategory extends CRMBusinessModelObject{
 			 conditions = new LinkedHashSet<CustCategoryCondition> ();
 		conditions.add(condition);
 	}
+	
+		
+	public Set<CustCategoryCondition> getAggregateConditions() {
+		return aggregateConditions;
+	}
+	public void setAggregateConditions(
+			Set<CustCategoryCondition> aggregateConditions) {
+		this.aggregateConditions = aggregateConditions;
+	}
+	public void addAggregateCondition(
+			CustCategoryCondition aggregateCondition) {
+		if(aggregateConditions == null)
+			aggregateConditions = new LinkedHashSet<CustCategoryCondition> ();
+		this.aggregateConditions.add(aggregateCondition);
+	}
+	
+	public Set<CustCategoryCondition> getWhereConditions() {
+		return whereConditions;
+	}
+	public void setWhereConditions(Set<CustCategoryCondition> whereConditions) {
+		this.whereConditions = whereConditions;
+	}
+	public void addWhereCondition(
+			CustCategoryCondition whereCondition) {
+		if(whereConditions == null)
+			whereConditions = new LinkedHashSet<CustCategoryCondition> ();
+		this.whereConditions.add(whereCondition);
+	}
+	
 	
 	public String getComments() {
 		return comments;

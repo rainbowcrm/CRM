@@ -113,7 +113,33 @@ public class CustCategoryService extends AbstractService implements ICustCategor
 		StringBuffer havingFields = new StringBuffer("");
 		StringBuffer whereFields = new StringBuffer("");
 		Set<String> joins= new LinkedHashSet<String>();
-		custCategory.getConditions().forEach(condition -> {
+		
+		if(!Utils.isNullSet(custCategory.getAggregateConditions())) {
+		custCategory.getAggregateConditions().forEach(condition -> {
+			if (! Utils.isNullString( condition.getValue())) {
+			CustCategoryComponent component = CustCategorySQLs.getComponentByKey("SALES", condition.getField());
+			condition.setDataType(new FiniteValue(component.getDataType()));
+			if  ( component.isAggregated()) {
+				havingFields.append(condition.toString());
+			} 
+			}
+		});
+		}
+		
+		if(!Utils.isNullSet(custCategory.getWhereConditions())) { 
+		custCategory.getWhereConditions().forEach(condition -> {
+			if (! Utils.isNullString( condition.getValue())) {
+			CustCategoryComponent component = CustCategorySQLs.getComponentByKey("SALES", condition.getField());
+			condition.setDataType(new FiniteValue(component.getDataType()));
+			whereFields.append(condition.toString());
+			if( !Utils.isNullString( component.getJoinHqlClause()))  {
+				joins.add(component.getJoinHqlClause());
+			}
+			}
+		});
+		}
+		
+		/*custCategory.getConditions().forEach(condition -> {
 			CustCategoryComponent component = CustCategorySQLs.getComponentByKey("SALES", condition.getField());
 			condition.setDataType(new FiniteValue(component.getDataType()));
 			if  ( component.isAggregated()) {
@@ -125,7 +151,7 @@ public class CustCategoryService extends AbstractService implements ICustCategor
 				}
 						
 			}
-		});
+		});*/
 		
 		StringBuffer joinClause = new StringBuffer("") ;
 		joins.forEach( hqlClause  ->  { 
@@ -139,7 +165,8 @@ public class CustCategoryService extends AbstractService implements ICustCategor
 		CustCategoryDAO dao = (CustCategoryDAO)getDAO();
 		String whereClause =  whereFields.length()>1?" and " + whereFields.toString()  : " ";
 		String havingClause =  havingFields.length()>1?" having  " + havingFields.toString()  : " ";
-		String groupByClause = havingFields.length()>1?" group by Sales.customer.id ": " ";
+		//String groupByClause = havingFields.length()>1?" group by Sales.customer.id ": " ";
+		String groupByClause = " group by Sales.customer.id ";
 		List<Customer > customers = dao.getCustomersforRule(hqlPrefix + whereClause +  groupByClause +    havingClause  ,fromDate,toDate );
 		QueryReport report = generateReport(custCategory, customers);
 		return report;
@@ -196,6 +223,7 @@ public class CustCategoryService extends AbstractService implements ICustCategor
 		Division division = CommonUtil.getDivisionObect(context, custCategory.getDivision());
 		custCategory.setDivision(division);
 		((CustCategory)object).setCompany(company);
+		combineConditions(custCategory);
 		AtomicInteger lineNumber = new AtomicInteger(1);
 		custCategory.getConditions().forEach( condition ->  {  
 			condition.setCategory(custCategory);
@@ -207,6 +235,7 @@ public class CustCategoryService extends AbstractService implements ICustCategor
 
 	@Override
 	public List<RadsError> adaptToUI(CRMContext context, ModelObject object) {
+		splitConditions((CustCategory) object);
 		return null;
 	}
 
@@ -262,5 +291,40 @@ public class CustCategoryService extends AbstractService implements ICustCategor
 		}
 		
 	}
+	
+	private void combineConditions(CustCategory custCategory)
+	{
+		custCategory.setConditions(null);
+		if(!Utils.isNullSet(custCategory.getAggregateConditions())) {
+			custCategory.getAggregateConditions().forEach(condition -> {
+				if (! Utils.isNullString( condition.getValue())) {
+				custCategory.addCondition(condition);
+				}
+			});
+			}
+			
+			if(!Utils.isNullSet(custCategory.getWhereConditions())) { 
+			custCategory.getWhereConditions().forEach(condition -> {
+				if (! Utils.isNullString( condition.getValue())) {
+					custCategory.addCondition(condition);
+				}
+			});
+			}
+		
+	}
+	
+	private  void splitConditions(CustCategory custCategory)
+	{
+		custCategory.getConditions().forEach(condition -> {
+			CustCategoryComponent component = CustCategorySQLs.getComponentByKey("SALES", condition.getField());
+			condition.setDataType(new FiniteValue(component.getDataType()));
+			if  ( component.isAggregated()) {
+				custCategory.addAggregateCondition(condition);
+			} else  {
+				custCategory.addWhereCondition(condition);
+			}
+		});
+	}
+	
 
 }
