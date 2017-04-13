@@ -19,7 +19,9 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
+
 import org.springframework.transaction.annotation.Transactional;
+
 
 
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
@@ -110,6 +112,7 @@ public class CustCategoryService extends AbstractService implements ICustCategor
 			CRMContext context) {
 		StringBuffer havingFields = new StringBuffer("");
 		StringBuffer whereFields = new StringBuffer("");
+		Set<String> joins= new LinkedHashSet<String>();
 		custCategory.getConditions().forEach(condition -> {
 			CustCategoryComponent component = CustCategorySQLs.getComponentByKey("SALES", condition.getField());
 			condition.setDataType(new FiniteValue(component.getDataType()));
@@ -117,10 +120,18 @@ public class CustCategoryService extends AbstractService implements ICustCategor
 				havingFields.append(condition.toString());
 			} else  {
 				whereFields.append(condition.toString());
+				if( !Utils.isNullString( component.getJoinHqlClause()))  {
+					joins.add(component.getJoinHqlClause());
+				}
+						
 			}
 		});
-	
-		String hqlPrefix = " select customer from Sales Sales where Sales.voided = false and Sales.salesDate>= :fromDate and Sales.salesDate <= :toDate and Sales.company.id= "
+		
+		StringBuffer joinClause = new StringBuffer("") ;
+		joins.forEach( hqlClause  ->  { 
+			joinClause.append(" " +  hqlClause + " ");
+		} );
+		String hqlPrefix = " select Sales.customer from Sales Sales " + joinClause  +  " where Sales.voided = false and Sales.salesDate>= :fromDate and Sales.salesDate <= :toDate and Sales.company.id= "
 				+ context.getLoggedinCompany() + "    ";
 		Date fromDate   = CommonUtil.getRelativeDate(custCategory.getEvalFrom());
 		Date toDate   = CommonUtil.getRelativeDate(custCategory.getEvalTo());
