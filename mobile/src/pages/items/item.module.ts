@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { ItemSearch } from './';
+import { ItemSearch, ItemSearchResult } from './';
 import { IonicModule } from 'ionic-angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule }   from '@angular/forms';
@@ -8,7 +8,8 @@ import { CommonPSModule }   from '../../common/common-ps.module';
 
 @NgModule({
   declarations: [
-    ItemSearch
+    ItemSearch,
+    ItemSearchResult
   ],
   imports: [
     IonicModule,
@@ -17,7 +18,8 @@ import { CommonPSModule }   from '../../common/common-ps.module';
     CommonPSModule
   ],
   entryComponents: [
-    ItemSearch
+    ItemSearch,
+    ItemSearchResult
   ],
   providers: []
 })

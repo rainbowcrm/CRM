@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, ToastController } from 'ionic-angular';
-import { Item, Product, ItemSearchRequest, ItemSearchResponse } from '../';
+import { Item, Product, ItemSearchRequest, ItemSearchResponse, ItemSearchFilter } from '../';
 import { HTTPService, Loader } from '../../../providers/';
 import { HomePage } from '../../home/home';
+import { ItemSearchResult } from '../';
 
 /*
   Generated class for the ItemSearch page.
@@ -16,9 +17,11 @@ import { HomePage } from '../../home/home';
 })
 export class ItemSearch {
   private model:Item = new Item();
+  private searchString:string;
   private request: ItemSearchRequest;
   private response: ItemSearchResponse;
   private errorMessage:string;
+  
 
   constructor(public navCtrl: NavController, private http:HTTPService,
     private loader:Loader,  private toastCtrl: ToastController) {
@@ -49,24 +52,19 @@ export class ItemSearch {
       this.request.fixedAction = "FixedAction.NAV_FIRSTPAGE";
       this.request.pageID = "items";
       this.request.filter = [];
+      let filter = new ItemSearchFilter();
+      filter.field = "Product.Name";
+      filter.operator = "EQUALS";
+      filter.value = this.searchString;
+      this.request.filter.push(filter);
+
       this.http.processServerRequest("post",this.request, true).subscribe(
-                     res => this.itemSearchSuccess(res),
+                     res => this.itemSearchSuccess(res, this.request.filter.slice(0)),
                      error =>  this.itemSearchError(error));  
   }
 
-  getFilters():Array<any>{
-      let filters = [];
-      for(let data in this.model){
-        if(this.model[data] && this.model[data].length>0)
-           filters.push({
-	      	  "field" :data ,
-	   	      "operator" :"EQUALS",
-	   	      "value":this.model[data]
-	         });
-      }
-      return filters;
-  }
-  itemSearchSuccess(response):void{
+
+  itemSearchSuccess(response, filter):void{
     this.loader.dismissLoader();
     this.response = response;
     if(this.response.result == "failure"){
@@ -77,8 +75,7 @@ export class ItemSearch {
        this.NoItemsFoundToast();
        return ;
     }
-    debugger
-    //this.navCtrl.push(CustomerListPage, {customers:this.response.dataObject});
+    this.navCtrl.push(ItemSearchResult, {items:this.response.dataObject, filter:filter});
   }
  
 

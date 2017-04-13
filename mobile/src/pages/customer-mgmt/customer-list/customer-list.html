@@ -13,17 +13,20 @@
 
 
 <ion-content padding>
- <ion-card *ngFor="let customer of customers" >
-  <ion-card-header [class.deleted-customer]="customer.deleted">
+ <ion-card *ngFor="let customer of customers">
+  <ion-card-header [class.deleted-customer]="customer.Deleted == 'true'">
     <ion-icon name="person"></ion-icon>
     {{customer.FullName}}
-    <ion-icon name="create" *ngIf="!customer.deleted" class="align-right" (click)="editCustomer(customer)"></ion-icon>
+    <ion-icon name="trash" *ngIf="customer.Deleted!='true'" class="align-right" (click)="deleteCustomer(customer)"></ion-icon>
   </ion-card-header>
-  <ion-card-content>
+  <ion-card-content (click)="editCustomer(customer)">
     <div *ngIf="customer.Email"><strong>Email:</strong>{{customer.Email}}</div>
     <div *ngIf="customer.Phone"><strong>Phone:</strong>{{customer.Phone}}</div>
     <div><strong>Address:</strong>{{getCustomerAddress(customer)}}</div>
     <div *ngIf="customer.Description"><strong>Phone:</strong>{{customer.Description}}</div>
   </ion-card-content>
  </ion-card> 
+ <ion-infinite-scroll (ionInfinite)="doSearchMoreCustomer($event)">
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
 </ion-content>
