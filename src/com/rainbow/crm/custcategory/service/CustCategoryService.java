@@ -68,7 +68,9 @@ public class CustCategoryService extends AbstractService implements ICustCategor
 
 	@Override
 	public Object getById(Object PK) {
-		return getDAO().getById(PK);
+		CustCategory category =(CustCategory) getDAO().getById(PK);
+		splitConditions(category);		
+		return category ;
 	}
 
 	@Override
