@@ -50,6 +50,8 @@
 </Page>
 <Page id = "enquiries" definition ="/resources/pages/enquiry/enquiryList.xml" modelclass = "com.rainbow.crm.enquiry.model.Enquiry" >
 </Page>
+<Page id = "documents" definition ="/resources/pages/documents/documentList.xml" modelclass = "com.rainbow.crm.document.model.Document" >
+</Page>
 <Page id = "salespitches" definition ="/resources/pages/salespitch/salespitchList.xml" modelclass = "com.rainbow.crm.salespitch.model.Salespitch" >
 </Page>
 <Page id = "dashboard" definition ="/resources/pages/dashboards/salesdashboard.xml" modelclass = "com.rainbow.crm.dashboard.model.SalesDashBoard" >
@@ -121,6 +123,8 @@
 <Page id = "newfollowup" definition ="/resources/pages/followup/newfollowup.xml" modelclass = "com.rainbow.crm.followup.model.Followup" >
 </Page>
 <Page id = "newenquiry" definition ="/resources/pages/enquiry/newenquiry.xml" modelclass = "com.rainbow.crm.enquiry.model.Enquiry" >
+</Page>
+<Page id = "newdocument" definition ="/resources/pages/documents/newdocument.xml" modelclass = "com.rainbow.crm.document.model.Document" >
 </Page>
 <Page id = "newsalespitch" definition ="/resources/pages/salespitch/newsalespitch.xml" modelclass = "com.rainbow.crm.salespitch.model.Salespitch" >
 </Page>
@@ -253,6 +257,7 @@
  </Element>
  <Element label = "" type = "UIMenu" Id = "menu30" style="menustyleParent" title="Salesforce_WorkBench" groupId= "menuGRP004"  >
  	<Element label = "" type = "UIMenu" Id = "menu301" style="menustyle" title="Alerts" link = "rdscontroller?page=alerts"   />
+ 	<Element label = "" type = "UIMenu" Id = "menu302" style="menustyle" title="Documents" link = "rdscontroller?page=documents"   />
 	<Element label = "" type = "UIMenu" Id = "menu34" style="menustyle" title="Sales_Leads" link = "rdscontroller?page=saleslead"   />
 	<Element label = "" type = "UIMenu" Id = "menu35" style="menustyle" title="Followups" link = "rdscontroller?page=followups"   />
 	<Element label = "" type = "UIMenu" Id = "menu36" style="menustyle" title="Expense_Vouchers" link = "rdscontroller?page=expensevouchers"   />

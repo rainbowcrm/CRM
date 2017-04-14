@@ -72,6 +72,8 @@
     </bean>
     <bean id="IEnquiryService" class="com.rainbow.crm.enquiry.service.EnquiryService">
     </bean>
+    <bean id="IDocumentService" class="com.rainbow.crm.document.service.DocumentService">
+    </bean>
     <bean id="ISalespitchService" class="com.rainbow.crm.salespitch.service.SalespitchService">
     </bean>
     <bean id="IDashBoardService" class="com.rainbow.crm.dashboard.service.DashBoardService">
@@ -150,6 +152,9 @@
     <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
     <bean id="EnquiryDAO" class="com.rainbow.crm.enquiry.dao.EnquiryDAO">
+    <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean id="DocumentDAO" class="com.rainbow.crm.document.dao.DocumentDAO">
     <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
     <bean id="SalespitchDAO" class="com.rainbow.crm.salespitch.dao.SalespitchDAO">
@@ -249,6 +254,7 @@
         <value>com/rainbow/crm/distributionorder/model/DistributionOrderLine.hbm.xml</value>
         <value>com/rainbow/crm/followup/model/Followup.hbm.xml</value>  
         <value>com/rainbow/crm/enquiry/model/Enquiry.hbm.xml</value>
+        <value>com/rainbow/crm/document/model/Document.hbm.xml</value>
         <value>com/rainbow/crm/salespitch/model/Salespitch.hbm.xml</value>
         <value>com/rainbow/crm/custcategory/model/CustCategory.hbm.xml</value>
         <value>com/rainbow/crm/custcategory/model/CustCategoryCondition.hbm.xml</value>  

@@ -27,6 +27,7 @@ public class CRMConstants {
 	public final static String FV_EXP_VOUCHER_STATUS = "EXPSTATUS";
 	public final static String FV_ENQUIRY_TYPE = "ENQTYPE";
 	public final static String FV_SPITCH_TYPE = "PITCHTYPE";
+	public final static String FV_DOC_TYPE = "DOCTYPE";;
 	
 	public final static class RELDATE {
 		public final static String TODAY ="TODAY";

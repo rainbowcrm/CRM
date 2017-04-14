@@ -21,6 +21,7 @@ import com.rainbow.crm.contact.model.Contact;
 import com.rainbow.crm.custcategory.model.CustCategory;
 import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.division.model.Division;
+import com.rainbow.crm.document.model.Document;
 import com.rainbow.crm.enquiry.model.Enquiry;
 import com.rainbow.crm.expensehead.model.ExpenseHead;
 import com.rainbow.crm.filter.model.CRMFilter;
@@ -126,6 +127,7 @@ public  abstract class HibernateDAO  extends ORMDAO{
     		configuration.addClass(SalesLine.class).addResource("com/rainbow/crm/distributionorder/model/DistributionOrderLine.hbm.xml");
     		configuration.addClass(Followup.class).addResource("com/rainbow/crm/followup/model/Followup.hbm.xml");
     		configuration.addClass(Enquiry.class).addResource("com/rainbow/crm/enquiry/model/Enquiry.hbm.xml");
+    		configuration.addClass(Document.class).addResource("com/rainbow/crm/document/model/Document.hbm.xml");
     		configuration.addClass(Salespitch.class).addResource("com/rainbow/crm/salespitch/model/Salespitch.hbm.xml");
     		configuration.addClass(CustCategory.class).addResource("com/rainbow/crm/custcategory/model/CustCategory.hbm.xml");
     		configuration.addClass(CustCategory.class).addResource("com/rainbow/crm/custcategory/model/CustCategoryCondition.hbm.xml");
