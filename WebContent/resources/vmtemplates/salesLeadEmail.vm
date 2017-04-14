@@ -4,15 +4,15 @@ Hello $customerName <br>
  
  <br> <br>
  #foreach ($line in $lines)
-    <B>$line.item.name </B> with new price $line.item.retailPrice
+    <B>$line.sku.name </B> with new price $line.sku.item.retailPrice
 	<br>
-	$line.item.specification from $line.item.manufacturer
+	$line.sku.item.specification from $line.sku.item.manufacturer
 	<br>
-	#*
-	<img id="profileImage1" src="data:image/jpg;base64, $line.imgBytes1Str"/>
-	<img id="profileImage2" src="data:image/jpg;base64, $line.imgBytes2Str"/>
-	<img id="profileImage3" src="data:image/jpg;base64, $line.imgBytes3Str"/>
-	*#
+	
+	<img id="profileImage1" src="$line.image1URL" height="200" width ="200" />
+	<img id="profileImage2" src="$line.image2URL"  height="200" width ="200" />
+	<img id="profileImage3" src="$line.image3URL"  height="200" width ="200"/>
+	
 	<br>
 	<br>
 #end

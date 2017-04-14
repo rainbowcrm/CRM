@@ -23,7 +23,8 @@ public class SalesLeadLine extends CRMItemLine{
 	double negotiatedPrice ;
 	
 	SalesLead salesLeadDoc;
-	
+
+
 	public SalesLeadLine() {
 	
 	}

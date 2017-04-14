@@ -17,7 +17,9 @@ public  class CRMItemLine extends CRMBusinessModelObject {
 	private byte [] imgBytes3 ;
 	
 	
-	
+	String image1URL;
+	String image2URL;
+	String image3URL;
 	
 	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
 	public Sku getSku() {
@@ -79,6 +81,24 @@ public  class CRMItemLine extends CRMBusinessModelObject {
 	@RadsPropertySet(excludeFromJSON=true,excludeFromXML=true,excludeFromMap=true)
 	public void setImgBytes3(byte[] imgBytes3) {
 		this.imgBytes3 = imgBytes3;
+	}
+	public String getImage1URL() {
+		return image1URL;
+	}
+	public void setImage1URL(String image1url) {
+		image1URL = image1url;
+	}
+	public String getImage2URL() {
+		return image2URL;
+	}
+	public void setImage2URL(String image2url) {
+		image2URL = image2url;
+	}
+	public String getImage3URL() {
+		return image3URL;
+	}
+	public void setImage3URL(String image3url) {
+		image3URL = image3url;
 	}
 	
 	

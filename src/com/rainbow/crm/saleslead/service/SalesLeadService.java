@@ -362,25 +362,30 @@ public class SalesLeadService extends AbstractionTransactionService implements I
  			ItemImage image1 = ItemImageSQL.getItemImage(line.getSku().getId(), 'a');
  			ItemImage image2 = ItemImageSQL.getItemImage(line.getSku().getId(), 'b');
  			ItemImage image3 = ItemImageSQL.getItemImage(line.getSku().getId(), 'c');
- 			String filePath = realPath + "\\"  + CRMAppConfig.INSTANCE.getProperty("Image_Path");
+ 			String filePath = CRMAppConfig.INSTANCE.getProperty("doc_server");
 			String code = context.getLoggedinCompanyCode();
 			if (image1 != null && image1.getFileName() != null  ) {
-				String fname1 =  filePath + "\\" +  code  + "\\" + image1.getFileName();
-				FileInputStream fis  = new FileInputStream(fname1);
+				String fname1 =  filePath + "\\" +  code  + "\\itemimages\\" + image1.getFileName();
+				line.setImage1URL(fname1);
+				/*FileInputStream fis  = new FileInputStream(fname1);
 				byte[] array1 = IOUtils.toByteArray(fis);
-				line.setImgBytes1(array1);
+				line.setImgBytes1(array1);*/
+				
 			}
 			if (image2 != null && image2.getFileName() != null  ) {
-				String fname2 = filePath + "\\" +  code  + "\\" + image2.getFileName();
-				FileInputStream fis  = new FileInputStream(fname2);
+				String fname2 = filePath + "\\" +  code  + "\\itemimages\\" + image2.getFileName();
+				line.setImage2URL(fname2);
+				/*FileInputStream fis  = new FileInputStream(fname2);
 				byte[] array = IOUtils.toByteArray(fis);
-				line.setImgBytes2(array);
+				line.setImgBytes2(array);*/
+				
 			}
 			if (image3 != null && image3.getFileName() != null  ) {
-				String fname3 = filePath + "\\" +  code  + "\\" + image3.getFileName();
-				FileInputStream fis  = new FileInputStream(fname3);
+				String fname3 = filePath + "\\" +  code  + "\\itemimages\\" + image3.getFileName();
+				line.setImage3URL(fname3);
+			/*	FileInputStream fis  = new FileInputStream(fname3);
 				byte[] array = IOUtils.toByteArray(fis);
-				line.setImgBytes3(array);
+				line.setImgBytes3(array);*/
 			}
 			
  		}

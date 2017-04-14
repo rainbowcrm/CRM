@@ -95,20 +95,19 @@ public class ItemImageController extends CRMGeneralController{
 			ISkuService service = (ISkuService)SpringObjectFactory.INSTANCE.getInstance("ISkuService") ;
 			Sku item = service.getByName(((CRMContext) getContext()).getLoggedinCompany(), imageSet.getSku().getName());
 			//String filePath = CRMAppConfig.INSTANCE.getProperty("Image_Path");
-			String filePath = ConfigurationManager.getConfig(
-					ConfigurationManager.IMAGE_SERVER_URL, (CRMContext)getContext());
+			String filePath = CRMAppConfig.INSTANCE.getProperty("doc_server");
 			String code = ((CRMContext) getContext()).getLoggedinCompanyCode();
 			ItemImage dbRecord1 = ItemImageSQL.getItemImage(item.getId(), 'a');
 			if (dbRecord1 != null ) {
-				imageSet.setFilewithPath1(filePath + "\\" +  code  + "\\" + dbRecord1.getFileName());
+				imageSet.setFilewithPath1(filePath + "\\" +  code  + "\\itemimages\\" +  dbRecord1.getFileName());
 			}
 			ItemImage dbRecord2 = ItemImageSQL.getItemImage(item.getId(), 'b');
 			if (dbRecord2 != null ) {
-				imageSet.setFilewithPath2(filePath + "\\" +  code  + "\\" + dbRecord2.getFileName());
+				imageSet.setFilewithPath2(filePath + "\\" +  code  + "\\itemimages\\" + dbRecord2.getFileName());
 			}
 			ItemImage dbRecord3 = ItemImageSQL.getItemImage(item.getId(), 'c');
 			if (dbRecord3 != null ) {
-				imageSet.setFilewithPath3(filePath + "\\" +  code  + "\\" + dbRecord3.getFileName());
+				imageSet.setFilewithPath3(filePath + "\\" +  code  + "\\itemimages\\" + dbRecord3.getFileName());
 			}
 		}catch(Exception ex) {
 			
@@ -141,14 +140,10 @@ public class ItemImageController extends CRMGeneralController{
 		JSch jsch = new JSch();
 		/* String privateKey = "~/.ssh/id_rsa";
 		 jsch.addIdentity(privateKey);*/ 
-		String host = ConfigurationManager.getConfig(
-				ConfigurationManager.IMAGE_SERVER_HOST, context);
-		String user = ConfigurationManager.getConfig(
-				ConfigurationManager.IMAGE_SERVER_USER, context);
-		String pass = ConfigurationManager.getConfig(
-				ConfigurationManager.IMAGE_SERVER_PASSWORD, context);
-		String port = ConfigurationManager.getConfig(
-				ConfigurationManager.IMAGE_SERVER_PORT, context);
+		String host = CRMAppConfig.INSTANCE.getProperty("doc_server_host");
+		String user = CRMAppConfig.INSTANCE.getProperty("doc_server_user");
+		String pass = CRMAppConfig.INSTANCE.getProperty("doc_server_password");
+		String port = CRMAppConfig.INSTANCE.getProperty("doc_server_port");
 	    Session session = jsch.getSession( user, host, Integer.parseInt(port) );
 	    session.setConfig( "PreferredAuthentications", "password" );
 	    session.setConfig("StrictHostKeyChecking", "no"); 
@@ -165,21 +160,35 @@ public class ItemImageController extends CRMGeneralController{
 			ex.printStackTrace();
 		}
 	}
+	private boolean changeFolder(FTPClient ftpClient, String companyCode) throws Exception
+	{
+		  ftpClient.changeWorkingDirectory(companyCode);
+		  int  returnCode = ftpClient.getReplyCode();
+		    if (returnCode == 550) {
+		    	ftpClient.makeDirectory(companyCode) ;
+		    	 ftpClient.changeWorkingDirectory(companyCode);
+		    }
+		    ftpClient.changeWorkingDirectory("itemimages"); 
+		  returnCode = ftpClient.getReplyCode();
+		    if (returnCode == 550) {
+		    	ftpClient.makeDirectory("itemimages") ;
+		    	 ftpClient.changeWorkingDirectory("itemimages");
+		    	
+		    }
+		    return true ;
+	}
 	
 	private void ftpAPFile(byte[] bytes, String filepath, String fileName,
 			CRMContext context) {
 		if (Utils.isNullString(fileName))
 			return;
-		String host = ConfigurationManager.getConfig(
-				ConfigurationManager.IMAGE_SERVER_HOST, context);
-		String user = ConfigurationManager.getConfig(
-				ConfigurationManager.IMAGE_SERVER_USER, context);
-		String pass = ConfigurationManager.getConfig(
-				ConfigurationManager.IMAGE_SERVER_PASSWORD, context);
-		String port = ConfigurationManager.getConfig(
-				ConfigurationManager.IMAGE_SERVER_PORT, context);
+		
 		FTPClient  ftpClient = new FTPClient ();
 		try {
+			String host = CRMAppConfig.INSTANCE.getProperty("doc_server_host");
+			String user = CRMAppConfig.INSTANCE.getProperty("doc_server_user");
+			String pass = CRMAppConfig.INSTANCE.getProperty("doc_server_password");
+			String port = CRMAppConfig.INSTANCE.getProperty("doc_server_port");
 			ftpClient.setDefaultTimeout(100000);
 			if (Integer.parseInt(port) > 0)
 				ftpClient.connect(host,Integer.parseInt(port));
@@ -197,7 +206,7 @@ public class ItemImageController extends CRMGeneralController{
 				ByteArrayInputStream inputStream = new ByteArrayInputStream(
 						bytes);
 				System.out.println("Start uploading first file");
-				boolean success = ftpClient.changeWorkingDirectory( context.getLoggedinCompanyCode());
+				changeFolder(ftpClient, context.getLoggedinCompanyCode());
 				boolean done = ftpClient.storeFile(fileName, inputStream);
 				inputStream.close();
 /*				InputStream st2 = ftpClient.retrieveFileStream("/public_html/pics/MP003-a.jpg");
@@ -223,16 +232,18 @@ public class ItemImageController extends CRMGeneralController{
 
 	private void ftpFile (byte [] bytes , String filepath, String fileName, CRMContext context) {
 		String ftpUrl = "ftp://%s:%s@%s;type=i";
+		try {
 		if (Utils.isNullString(fileName)) return ;
-		String host = ConfigurationManager.getConfig(ConfigurationManager.IMAGE_SERVER_HOST, context);
-		String user = ConfigurationManager.getConfig(ConfigurationManager.IMAGE_SERVER_USER, context);
-		String pass = ConfigurationManager.getConfig(ConfigurationManager.IMAGE_SERVER_PASSWORD, context);
+		String host = CRMAppConfig.INSTANCE.getProperty("doc_server_host");
+		String user = CRMAppConfig.INSTANCE.getProperty("doc_server_user");
+		String pass = CRMAppConfig.INSTANCE.getProperty("doc_server_password");
+		String port = CRMAppConfig.INSTANCE.getProperty("doc_server_port");
 		String uploadPath = fileName;
 		
 		ftpUrl = String.format(ftpUrl, user, pass, host);
 		System.out.println("Upload URL: " + ftpUrl);
 
-		try {
+		
 		URL url = new URL(ftpUrl);
 		URLConnection conn = url.openConnection();
 		OutputStream outputStream = conn.getOutputStream();
@@ -276,9 +287,9 @@ public class ItemImageController extends CRMGeneralController{
 		ISkuService service = (ISkuService)SpringObjectFactory.INSTANCE.getInstance("ISkuService") ;
 		Sku item = service.getByName(((CRMContext) getContext()).getLoggedinCompany(), set.getSku().getName());
 		try  {
-			//String filePath = CRMAppConfig.INSTANCE.getProperty("Image_Path");
-			String filePath = ConfigurationManager.getConfig(
-					ConfigurationManager.IMAGE_SERVER_URL, context);
+			String filePath = CRMAppConfig.INSTANCE.getProperty("doc_server");
+			/*String filePath = ConfigurationManager.getConfig(
+					ConfigurationManager.IMAGE_SERVER_URL, context);*/
 			String code = context.getLoggedinCompanyCode();
 			if(set.getImage1() != null ) {
 				ItemImage image = new ItemImage();
