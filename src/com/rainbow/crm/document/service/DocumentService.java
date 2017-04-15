@@ -15,6 +15,8 @@ import java.util.List;
 
 
 
+
+
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.AbstractService;
 import com.rainbow.crm.common.CRMAppConfig;
@@ -31,6 +33,8 @@ import com.rainbow.crm.hibernate.ORMDAO;
 import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.item.service.IItemService;
 import com.rainbow.crm.logger.Logwriter;
+import com.rainbow.crm.sales.model.Sales;
+import com.rainbow.crm.sales.service.ISalesService;
 import com.rainbow.crm.saleslead.model.SalesLead;
 import com.rainbow.crm.saleslead.model.SalesLeadLine;
 import com.rainbow.crm.saleslead.service.ISalesLeadService;
@@ -94,7 +98,11 @@ public class DocumentService extends AbstractService implements IDocumentService
 			document.setLead(lead);
 		}
 		
-			
+		if(document.getSales() != null )  {
+			ISalesService salesService = 	(ISalesService) SpringObjectFactory.INSTANCE.getInstance("ISalesService");
+			Sales sales =(Sales) salesService.getByBusinessKey(document.getLead(), context);
+			document.setSales(sales);
+		}	
 	}
 	
 	@Override
@@ -122,7 +130,12 @@ public class DocumentService extends AbstractService implements IDocumentService
 
 	private boolean uploadFile(Document doc, CRMContext context)
 	{
-		CommonUtil.uploadFile(doc.getDocData(), doc.getDocName(), context, "docs");
+		String fileExtn = CommonUtil.getFileExtn(doc.getFileName1());
+		String fileName =  new String(doc.getDocName());
+		fileName.replace(" ", "_")    ; 
+	//	doc.setDocName(fileName +  "."  + fileExtn);
+		doc.setDocPath( "//" +  context.getLoggedinCompanyCode() +  "//docs//" + fileName +  "."  + fileExtn );
+		CommonUtil.uploadFile(doc.getDocData(), fileName +  "."  + fileExtn  , context, "docs");
 		return true;
 	}
 	
@@ -131,7 +144,7 @@ public class DocumentService extends AbstractService implements IDocumentService
 	public TransactionResult create(CRMModelObject object, CRMContext context) {
 		Document document = (Document) object ;
 		uploadFile(document, context);
-		document.setDocPath( "//" +  context.getLoggedinCompanyCode() +  "//docs//" + document.getDocName() );
+		
 		TransactionResult result=  super.create(object, context);
 		return result; 
 	}

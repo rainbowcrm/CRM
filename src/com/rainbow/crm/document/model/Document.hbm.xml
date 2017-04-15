@@ -17,6 +17,7 @@
       <property name="docPath" column="DOC_PATH" type="string"/>
       <many-to-one name="owner" column ="OWNER"   lazy="false" ></many-to-one>
       <many-to-one name="lead" column ="SALES_LEAD_ID"  lazy="false" ></many-to-one>
+      <many-to-one name="sales" column ="SALES_ID"  lazy="false" ></many-to-one>
       <many-to-one name="item" column ="ITEM_ID"  lazy="false" ></many-to-one>
       <many-to-one name="customer" column ="CUSTOMER_ID"  lazy="false" ></many-to-one>
   	  <property name="comments" column="COMMENTS" type="string"/>

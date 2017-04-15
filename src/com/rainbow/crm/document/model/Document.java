@@ -11,6 +11,7 @@ import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.item.model.Sku;
+import com.rainbow.crm.sales.model.Sales;
 import com.rainbow.crm.saleslead.model.SalesLead;
 import com.rainbow.crm.territory.model.Territory;
 import com.rainbow.crm.user.model.User;
@@ -28,6 +29,7 @@ public class Document extends CRMBusinessModelObject{
 	User owner; 
 	String comments;
 	SalesLead lead;
+	Sales sales;
 	
 	byte[] docData ;
 	String fileName1;
@@ -103,6 +105,12 @@ public class Document extends CRMBusinessModelObject{
 	}
 	public void setFileWithLink(String fileWithLink) {
 		this.fileWithLink = fileWithLink;
+	}
+	public Sales getSales() {
+		return sales;
+	}
+	public void setSales(Sales sales) {
+		this.sales = sales;
 	}
 	
 	

@@ -49,11 +49,17 @@ Controller = "com.rainbow.crm.document.controller.DocumentController">
 	 <height>300</height>
 	 <width>290</width>
 	</Element>
+	<Element label = "Sales"  type = "UILookupText" Id = "txtSLSBilNumer"   size="30" property ="sales.bilNumber"  showLookupAsDialog="true" dialogId="dlgSLSBill"
+ 	dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle"  >
+ 	<lookupType>sales</lookupType>
+	 <height>300</height>
+	 <width>290</width>
+	</Element>
 	<Element label = "Comments"  type = "UITextArea" Id = "txtComments"   property ="comments" >
 	 <rows>5</rows> <cols>30</cols>
 	</Element>
 	
-	<Element label = ""  type = "UILabel" Id = "hggn"    />
+	
 	
 	<Element label = "Document" type = "UIFileUpload" Id = "txtPhoto3" property ="docData" maxSize="60720"
    multiple ="false"  fileNameProperty="fileName1"  accept= ".png, .jpg, .jpeg , .doc , .xls , .pdf , .txt , .pps, .ppt , .* "  />

@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
+
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
@@ -58,6 +59,14 @@ public class CommonUtil {
 		return colors;
 	}
 
+	public static String getFileExtn(String fullName) {
+		if (fullName.contains(".")) {
+			String laterPart = fullName.substring(fullName.indexOf(".")+1,fullName.length());
+			return laterPart;
+		}
+		return "";
+	}
+	
 	private static boolean changeFolder(FTPClient ftpClient, String companyCode, String subFolder) throws Exception
 	{
 		  ftpClient.changeWorkingDirectory(companyCode);

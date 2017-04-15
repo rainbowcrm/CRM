@@ -322,6 +322,9 @@
 <Lookup type ="saleslead" lookupservice="com.rainbow.crm.lookups.LookupSalesLeads" 
  lookuppage= "lookup">
 </Lookup>
+<Lookup type ="sales" lookupservice="com.rainbow.crm.lookups.LookupSales" 
+ lookuppage= "lookup">
+</Lookup>
 <Lookup type ="user" lookupservice="com.rainbow.crm.lookups.LookupUsers" 
  lookuppage= "lookup">
 </Lookup>
