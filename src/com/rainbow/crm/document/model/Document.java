@@ -29,6 +29,11 @@ public class Document extends CRMBusinessModelObject{
 	String comments;
 	SalesLead lead;
 	
+	byte[] docData ;
+	String fileName1;
+	
+	String fileWithLink; 
+	
 	public FiniteValue getDocType() {
 		return docType;
 	}
@@ -80,6 +85,24 @@ public class Document extends CRMBusinessModelObject{
 	}
 	public void setLead(SalesLead lead) {
 		this.lead = lead;
+	}
+	public byte[] getDocData() {
+		return docData;
+	}
+	public void setDocData(byte[] docData) {
+		this.docData = docData;
+	}
+	public String getFileName1() {
+		return fileName1;
+	}
+	public void setFileName1(String fileName1) {
+		this.fileName1 = fileName1;
+	}
+	public String getFileWithLink() {
+		return fileWithLink;
+	}
+	public void setFileWithLink(String fileWithLink) {
+		this.fileWithLink = fileWithLink;
 	}
 	
 	

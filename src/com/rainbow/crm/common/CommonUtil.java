@@ -1,5 +1,7 @@
 package com.rainbow.crm.common;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +22,14 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
+
+
+
+
+import org.apache.commons.net.ftp.FTP;
+import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPReply;
+
 import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
@@ -29,6 +39,7 @@ import com.rainbow.crm.config.service.ConfigurationManager;
 import com.rainbow.crm.database.LoginSQLs;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.division.service.IDivisionService;
+import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.user.model.User;
 import com.rainbow.crm.user.service.IUserService;
 import com.rainbow.framework.setup.model.Metadata;
@@ -45,6 +56,76 @@ public class CommonUtil {
 	
 	public static String [] getGraphColors() {
 		return colors;
+	}
+
+	private static boolean changeFolder(FTPClient ftpClient, String companyCode, String subFolder) throws Exception
+	{
+		  ftpClient.changeWorkingDirectory(companyCode);
+		  int  returnCode = ftpClient.getReplyCode();
+		    if (returnCode == 550) {
+		    	ftpClient.makeDirectory(companyCode) ;
+		    	 ftpClient.changeWorkingDirectory(companyCode);
+		    }
+		    ftpClient.changeWorkingDirectory(subFolder); 
+		  returnCode = ftpClient.getReplyCode();
+		    if (returnCode == 550) {
+		    	ftpClient.makeDirectory(subFolder) ;
+		    	 ftpClient.changeWorkingDirectory(subFolder);
+		    	
+		    }
+		    return true ;
+	}
+	
+	public static void uploadFile (byte[] bytes, String fileName, CRMContext context, String subFolder )
+	{
+		if (Utils.isNullString(fileName))
+			return;
+		
+		FTPClient  ftpClient = new FTPClient ();
+		try {
+			String host = CRMAppConfig.INSTANCE.getProperty("doc_server_host");
+			String user = CRMAppConfig.INSTANCE.getProperty("doc_server_user");
+			String pass = CRMAppConfig.INSTANCE.getProperty("doc_server_password");
+			String port = CRMAppConfig.INSTANCE.getProperty("doc_server_port");
+			ftpClient.setDefaultTimeout(100000);
+			if (Integer.parseInt(port) > 0)
+				ftpClient.connect(host,Integer.parseInt(port));
+			else
+				ftpClient.connect(host);
+			ftpClient.enterLocalPassiveMode();
+			int reply = ftpClient.getReplyCode();
+			if (FTPReply.isPositiveCompletion(reply)) {
+				
+				ftpClient.login(user, pass);
+				//FTPFile[] files = ftpClient.listFiles(directory);
+				 
+				//ftpClient.enterLocalPassiveMode();
+				ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+				ByteArrayInputStream inputStream = new ByteArrayInputStream(
+						bytes);
+				System.out.println("Start uploading first file");
+				changeFolder(ftpClient, context.getLoggedinCompanyCode(),subFolder);
+				boolean done = ftpClient.storeFile(fileName, inputStream);
+				inputStream.close();
+/*				InputStream st2 = ftpClient.retrieveFileStream("/public_html/pics/MP003-a.jpg");
+				if (done) {
+					System.out
+							.println("The first file is uploaded successfully.");
+				}
+*/			}
+
+		} catch (Exception ex) {
+			Logwriter.INSTANCE.error(ex);
+		} finally {
+			try {
+				if (ftpClient.isConnected()) {
+					ftpClient.logout();
+					ftpClient.disconnect();
+				}
+			} catch (IOException ex) {
+				Logwriter.INSTANCE.error(ex);
+			}
+		}
 	}
 	
 	public static Date getRelativeDate(FiniteValue dateValue) {

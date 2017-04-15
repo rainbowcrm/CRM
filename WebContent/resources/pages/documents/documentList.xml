@@ -54,8 +54,8 @@ Controller = "com.rainbow.crm.document.controller.DocumentListController">
 <Element label = ""  type = "UICheckBox" Id = "idChkSel"  rendered="!Object.isDeleted" property ="Id" />
 <Element label = ""  type = "UIImage" Id = "idChkSel"  rendered="Object.isDeleted" height = "21" weight ="21" src= "./resources/images/deletedRow.jpg" />
 </SelectionColumn>
-<Column title ="Division"  sortField="division.name"    width ="20%">
-<Element label = ""  type = "UINote" Id = "idIdNote"  property ="Division.Name" />
+<Column title ="Document_Name"  sortField="docName"    width ="20%">
+<Element label = ""  type = "UINote" Id = "idIdNote"  property ="docName" />
 </Column>
 <Column title ="Owner" sortField="owner.userId"   width ="20%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="owner.userId" />

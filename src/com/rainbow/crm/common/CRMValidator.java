@@ -29,7 +29,17 @@ public  abstract class CRMValidator {
 		return errors;
 	}
 	
+	public List< RadsError> validateforDelete (ModelObject object) {
+		checkforDeleteEligibility(object);
+		return errors;
+	}
+	
 	protected abstract void checkforUpdateErrors(ModelObject object) ;
+	
+	protected  void checkforDeleteEligibility(ModelObject object) 
+	{
+		
+	}
 
 	public static  RadsError getErrorforCode(Locale locale ,int errorCode,String ... params) {
 		if (resourceBundle == null) {

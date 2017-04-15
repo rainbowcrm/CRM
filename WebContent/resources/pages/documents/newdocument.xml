@@ -12,7 +12,7 @@ Controller = "com.rainbow.crm.document.controller.DocumentController">
 
 </AjaxGroups>
 <Elements>
-<UIForm Id ="cust" method = "POST" >
+<UIForm Id ="cust" method = "POST"   enctype="multipart/form-data" >
 <Section type ="topBar"></Section> 
 <Section type ="leftsideBarApp"></Section>
 <CoreSection>
@@ -21,13 +21,16 @@ Controller = "com.rainbow.crm.document.controller.DocumentController">
 <Section type ="detail">
 	<Element label = "" type = "UIHidden" Id = "hdnVersion" property ="ObjectVersion" />
 	<Element label = ""  type = "UIHidden" Id = "hdnUserID"  property ="Id" />
-	<Element label = "Owner"  type = "UIText" Id = "txtLName"  isMandatory="true" size="30" property ="salesAssociate.userId" readonly="true"  />
+	
  	<Element label = "Doc Name"  type = "UIText" Id = "txtxDocName"  isMandatory="true" size="30" property ="docName"   />
+	<Element label = "Owner"  type = "UIText" Id = "txtLName"  isMandatory="true" size="30" property ="owner.userId" readonly="true"  />
+	
 	<Element label = "Document_Type"  type = "UIList" Id = "lstEnqType"   property ="docType.code"  externalise= "true">
 		<options populator =  "getDocumentTypes"> 
 		</options>
 	</Element>
 	
+   
 	<Element label = "Item"  type = "UILookupText" Id = "txtITNearLName"   size="30" property ="item.name"  showLookupAsDialog="true" dialogId="dlgNearItem"
  	dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle"  >
  	<lookupType>item</lookupType>
@@ -49,6 +52,14 @@ Controller = "com.rainbow.crm.document.controller.DocumentController">
 	<Element label = "Comments"  type = "UITextArea" Id = "txtComments"   property ="comments" >
 	 <rows>5</rows> <cols>30</cols>
 	</Element>
+	
+	<Element label = ""  type = "UILabel" Id = "hggn"    />
+	
+	<Element label = "Document" type = "UIFileUpload" Id = "txtPhoto3" property ="docData" maxSize="60720"
+   multiple ="false"  fileNameProperty="fileName1"  accept= ".png, .jpg, .jpeg , .doc , .xls , .pdf , .txt , .pps, .ppt , .* "  />
+	<If check  = "Controller.isUpdateMode" >
+	<Element label = ""  type = "UIHyperLink" Id = "txtlink"    size="10" property ="fileWithLink" externalise ="false" />
+	</If>
 </Section>
 </CoreSection>
 <Section type ="summary">

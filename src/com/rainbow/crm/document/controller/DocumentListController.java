@@ -38,7 +38,7 @@ public class DocumentListController extends CRMListController{
 
 	@Override
 	public List<RadsError> validateforDelete(List<ModelObject> objects) {
-		// TODO Auto-generated method stub
+		DocumentValidator validator = new DocumentValidator(((CRMContext)getContext()));
 		return null;
 	}
 

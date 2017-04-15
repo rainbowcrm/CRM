@@ -43,6 +43,32 @@ public class DocumentValidator extends CRMValidator {
 		if(exist != null && exist.getId() != document.getId() ) {
 			errors.add(getErrorforCode(CommonErrorCodes.UNIQUE_VAL_EXISTS,externalize.externalize(context, "Document_Name"))) ;
 		}
+		if(exist != null && !exist.getOwner().getUserId().equals(context.getUser())  && !CommonUtil.isManagerRole(context.getLoggedInUser()) ){
+			errors.add(getErrorforCode(DocumentErrorCodes.DOCUMENT_UNEDITABLE)) ;
+		}
+	}
+	
+	
+	
+	@Override
+	protected void checkforDeleteEligibility(ModelObject object) {
+		IDocumentService  service = (IDocumentService) SpringObjectFactory.INSTANCE.getInstance("IDocumentService");
+		Document  exist = (Document)service.getByBusinessKey(document, context)	;
+		if(exist != null && !exist.getOwner().getUserId().equals(context.getUser())  && !CommonUtil.isManagerRole(context.getLoggedInUser()) ){
+			errors.add(getErrorforCode(DocumentErrorCodes.DOCUMENT_UNEDITABLE)) ;
+		}
+	}
+
+	protected void checkforDeleteErrors(ModelObject object) {
+		checkforErrors(object);
+		IDocumentService  service = (IDocumentService) SpringObjectFactory.INSTANCE.getInstance("IDocumentService");
+		Document  exist = (Document)service.getByBusinessKey(document, context)	;
+		if(exist != null && exist.getId() != document.getId() ) {
+			errors.add(getErrorforCode(CommonErrorCodes.UNIQUE_VAL_EXISTS,externalize.externalize(context, "Document_Name"))) ;
+		}
+		if(exist != null && !exist.getOwner().getUserId().equals(context.getUser())  && !CommonUtil.isManagerRole(context.getLoggedInUser()) ){
+			errors.add(getErrorforCode(CommonErrorCodes.UNIQUE_VAL_EXISTS,externalize.externalize(context, "DOCUMENT_UNEDITABLE"))) ;
+		}
 	}
 	
 	protected void checkforErrors(ModelObject object) {
