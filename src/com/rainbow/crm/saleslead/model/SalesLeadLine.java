@@ -17,7 +17,6 @@ public class SalesLeadLine extends CRMItemLine{
 	String comments;
 	boolean salesWon;
 	Sales sales;
-	boolean voided;
 	String reasonCode;
 	double price;
 	double negotiatedPrice ;
@@ -88,12 +87,7 @@ public class SalesLeadLine extends CRMItemLine{
 	public void setDivision(Division division) {
 		this.division = division;
 	}
-	public boolean isVoided() {
-		return voided;
-	}
-	public void setVoided(boolean voided) {
-		this.voided = voided;
-	}
+	
 	public String getReasonCode() {
 		return reasonCode;
 	}

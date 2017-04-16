@@ -17,6 +17,7 @@ import java.util.List;
 
 
 
+
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.AbstractService;
 import com.rainbow.crm.common.CRMAppConfig;
@@ -29,6 +30,7 @@ import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
 import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.customer.service.ICustomerService;
+import com.rainbow.crm.followup.model.Followup;
 import com.rainbow.crm.hibernate.ORMDAO;
 import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.item.service.IItemService;
@@ -162,8 +164,14 @@ public class DocumentService extends AbstractService implements IDocumentService
 		return (DocumentDAO) SpringObjectFactory.INSTANCE.getInstance("DocumentDAO");
 	}
 
-	
+	@Override
+	public List<Document> findAllBySalesLead(SalesLead lead) {
+		DocumentDAO dao = (DocumentDAO) getDAO();
+		return dao.getDocumentsforSalesLead(lead.getId());
+	}
 
+	
+   
 
 	
 	

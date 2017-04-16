@@ -122,6 +122,13 @@ public class FollowupService extends AbstractService implements IFollowupService
 		
 		return dao.getFollowupsforDayforAlerts(startDt, 1000 * 60 * 60 * 12);
 	}
+
+	@Override
+	public List<Followup> findBySalesLead(SalesLead lead) {
+		FollowupDAO dao = (FollowupDAO)getDAO();
+		return		dao.getFollowupsforSalesLead(lead.getId());
+		
+	}
 	
 	
 

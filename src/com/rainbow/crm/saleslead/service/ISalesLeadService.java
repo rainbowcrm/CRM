@@ -9,6 +9,7 @@ import com.rainbow.crm.common.ITransactionService;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.saleslead.model.SalesLead;
+import com.rainbow.crm.saleslead.model.SalesLeadExtended;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 
 public interface ISalesLeadService extends ITransactionService{
@@ -18,5 +19,7 @@ public interface ISalesLeadService extends ITransactionService{
 	public List<RadsError> startSalesCycle(SalesLead salesLead) ;
 	
 	public List<RadsError> sendEmail(SalesLead salesLead,CRMContext context,String realPath) ;
+	
+	public SalesLeadExtended getSalesLeadWithExtension( int leadId,CRMContext context) ;
 
 }

@@ -7,3 +7,8 @@ function sendemail(){
 	document.frmList.submitAction.value ="sendemail" ;
 	document.frmList.submit();
 }
+
+function viewconsole(){
+	document.frmList.submitAction.value ="viewConsole" ;
+	document.frmList.submit();
+}

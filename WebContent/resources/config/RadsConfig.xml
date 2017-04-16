@@ -170,6 +170,8 @@
 </Page>
 <Page id = "newsaleslead" definition ="/resources/pages/saleslead/newsaleslead.xml" modelclass = "com.rainbow.crm.saleslead.model.SalesLead" >
 </Page>
+<Page id = "salesleadconsole" definition ="/resources/pages/saleslead/salesleadconsole.xml" modelclass = "com.rainbow.crm.saleslead.model.SalesLeadExtended" >
+</Page>
 <Page id = "newterritory" definition ="/resources/pages/territory/newterritory.xml" modelclass = "com.rainbow.crm.territory.model.Territory" >
 </Page>
 <Page id = "newdistributionorder" definition ="/resources/pages/distributionorder/newdistributionorder.xml" modelclass = "com.rainbow.crm.distributionorder.model.DistributionOrder" >

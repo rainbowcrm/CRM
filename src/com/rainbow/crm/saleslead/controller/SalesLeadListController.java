@@ -11,6 +11,7 @@ import com.rainbow.crm.common.IBusinessService;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.database.LoginSQLs;
 import com.rainbow.crm.saleslead.model.SalesLead;
+import com.rainbow.crm.saleslead.model.SalesLeadExtended;
 import com.rainbow.crm.saleslead.service.ISalesLeadService;
 import com.rainbow.crm.saleslead.validator.SalesLeadValidator;
 import com.techtrade.rads.framework.context.IRadsContext;
@@ -40,16 +41,23 @@ public class SalesLeadListController extends CRMListController{
 		return salesLead.getId();
 				
 	}
+	
+
+	
 
 	@Override
 	public PageResult submit(List<ModelObject> objects, String submitAction) {
 		PageResult result = new PageResult();
 		ISalesLeadService service = (ISalesLeadService) getService();
-
 		for (ModelObject lead : objects) {
 			if("promote".equals(submitAction))
 				service.startSalesCycle((SalesLead)lead);
-			else
+			else   if ("viewConsole".equalsIgnoreCase(submitAction)) { 
+				result.setNextPageKey("salesleadconsole");
+				SalesLeadExtended leadExtended = service.getSalesLeadWithExtension(((SalesLead)lead).getId(), (CRMContext)getContext());
+				result.setObject(leadExtended);
+				return result;
+			}else 
 				service.sendEmail((SalesLead)lead,(CRMContext) getContext(),realPath);
 				
 		}

@@ -27,10 +27,10 @@ public class DocumentDAO extends SpringHibernateDAO {
 	}
 	
 	
-	public List<Document> getDocumentsforDayforAlerts(Date startDt, long interval) {
+	public List<Document> getDocumentsforSalesLead(int lead) {
 		Session session = openSession(false);
-		Query query = session.createQuery(" from Document where nextFollwup < :nextFollwup    and alerted = false  " ) ;
-		query.setParameter("nextFollwup", new Timestamp(startDt.getTime() + interval));
+		Query query = session.createQuery(" from Document where lead.id = :lead    and deleted = false  " ) ;
+		query.setParameter("lead", lead);
 		List<Document> lst = query.list();
 		closeSession(session, false);
 		return lst;

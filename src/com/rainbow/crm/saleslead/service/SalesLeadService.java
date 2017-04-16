@@ -50,6 +50,10 @@ import com.rainbow.crm.customer.service.ICustomerService;
 import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.division.service.IDivisionService;
+import com.rainbow.crm.document.model.Document;
+import com.rainbow.crm.document.service.IDocumentService;
+import com.rainbow.crm.followup.model.Followup;
+import com.rainbow.crm.followup.service.IFollowupService;
 import com.rainbow.crm.hibernate.ORMDAO;
 import com.rainbow.crm.inventory.model.InventoryUpdateObject;
 import com.rainbow.crm.item.dao.ItemImageSQL;
@@ -60,6 +64,7 @@ import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.product.validator.ProductValidator;
 import com.rainbow.crm.saleslead.dao.SalesLeadDAO;
 import com.rainbow.crm.saleslead.model.SalesLead;
+import com.rainbow.crm.saleslead.model.SalesLeadExtended;
 import com.rainbow.crm.saleslead.model.SalesLeadLine;
 import com.rainbow.crm.saleslead.validator.SalesLeadErrorCodes;
 import com.rainbow.crm.saleslead.validator.SalesLeadValidator;
@@ -422,6 +427,23 @@ public class SalesLeadService extends AbstractionTransactionService implements I
         }
         return "";
 
+	}
+
+	@Override
+	public SalesLeadExtended getSalesLeadWithExtension(int leadId,CRMContext context) {
+		SalesLead lead = (SalesLead)getById(leadId);
+		String leadJSON = lead.toJSON();
+		SalesLeadExtended extenstion  = (SalesLeadExtended) SalesLeadExtended.instantiateObjectfromJSON(leadJSON, 
+				"com.rainbow.crm.saleslead.model.SalesLeadExtended", context);
+		
+		IFollowupService followUpService  = (IFollowupService)SpringObjectFactory.INSTANCE.getInstance("IFollowupService");
+		List<Followup> followups = followUpService.findBySalesLead(lead);
+		extenstion.setFollowups(followups);	
+		
+		IDocumentService documentService  = (IDocumentService)SpringObjectFactory.INSTANCE.getInstance("IDocumentService");
+		List<Document> documents =  documentService.findAllBySalesLead(lead);
+		extenstion.setDocuments(documents);
+		return extenstion;
 	}
 	
 	
