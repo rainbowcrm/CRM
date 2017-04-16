@@ -40,6 +40,7 @@ import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMDBException;
 import com.rainbow.crm.common.CRMValidator;
 import com.rainbow.crm.common.CommonErrorCodes;
+import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.Externalize;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
@@ -216,6 +217,10 @@ public class SalesLeadService extends AbstractionTransactionService implements I
 		  alert.setType (new FiniteValue( CRMConstants.ALERT_TYPE.SALESLEAD));
 		  alert.setActionDate(lead.getReleasedDate());
 		  alert.setDivision(lead.getDivision());
+		  if (!Utils.isNullString(lead.getSalesAssociate()))  {
+		  User user  = CommonUtil.getUser(context, lead.getSalesAssociate());
+		  alert.setOwner(user);
+		  }
 		  alert.setRaisedDate(new java.util.Date());
 		  alert.setData("New Sales Lead-" +  lead.getDocNumber());
 		  alert.setUrl("./rdscontroller?page=newsaleslead&id="+lead.getId() +"&hdnFixedAction=FixedAction.ACTION_GOEDITMODE");
@@ -436,7 +441,9 @@ public class SalesLeadService extends AbstractionTransactionService implements I
 		String leadJSON = lead.toJSON();
 		SalesLeadExtended extenstion  = (SalesLeadExtended) SalesLeadExtended.instantiateObjectfromJSON(leadJSON, 
 				"com.rainbow.crm.saleslead.model.SalesLeadExtended", context);
-		
+		extenstion.setCustomer(lead.getCustomer());
+		extenstion.setCompany(lead.getCompany());
+		extenstion.setDivision(lead.getDivision());
 		IFollowupService followUpService  = (IFollowupService)SpringObjectFactory.INSTANCE.getInstance("IFollowupService");
 		List<Followup> followups = followUpService.findBySalesLead(lead);
 		extenstion.setFollowups(followups);	
