@@ -39,7 +39,7 @@ public class FollowupDAO extends SpringHibernateDAO {
 
 	public List<Followup> getFollowupsforSalesLead(int lead) {
 		Session session = openSession(false);
-		Query query = session.createQuery(" from Followup where lead.id = :leadId    and deleted = false  " ) ;
+		Query query = session.createQuery(" from Followup where lead.id = :leadId    and deleted = false  order by followupDate " ) ;
 		query.setParameter("leadId", lead);
 		List<Followup> lst = query.list();
 		closeSession(session, false);

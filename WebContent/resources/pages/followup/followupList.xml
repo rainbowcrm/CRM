@@ -73,8 +73,8 @@ Controller = "com.rainbow.crm.followup.controller.FollowupListController">
 <Column title ="Result_Reson"  sortField="resultReason.description"  width ="18%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="ResultReason.description" />
 </Column>   
-<Column title ="Next_Followup"  sortField="nextFollwup" width ="18%">
-<Element label = ""  type = "UINote" Id = "idIdNote"  property ="nextFollwup" />
+<Column title ="Followup_Date"  sortField="followupDate" width ="18%">
+<Element label = ""  type = "UINote" Id = "idIdNote"  property ="followupDate" />
 </Column>
 </Columns>
 </ListSection>

@@ -30,6 +30,7 @@ Controller = "com.rainbow.crm.followup.controller.FollowupController">
 	 <height>300</height>
 	 <width>290</width>
 	</Element>
+	<Element label = "Date"  type = "UIDate" Id = "txtFLPDate" size="30" property ="followupDate" />
 	<Element label = "Finalized"  type = "UICheckBox" Id = "txtAdd2" size="30" property ="finalFollowup" >
 	<options> 
 	  <option key ="true">  </option>

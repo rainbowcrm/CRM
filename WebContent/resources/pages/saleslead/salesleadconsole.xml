@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Page id = "nsalesleadconsole" showinFrame ="true" title ="New Sales Lead | Rainbow CRM" Object = "com.rainbow.crm.saleslead.model.SalesLead" 
-Controller = "com.rainbow.crm.saleslead.controller.SalesLeadController">
+<Page id = "salesleadconsole" showinFrame ="true" title ="New Sales Lead | Rainbow CRM" Object = "com.rainbow.crm.saleslead.model.SalesLeadExtended" 
+Controller = "com.rainbow.crm.saleslead.controller.SalesLeadExtendedController">
 <Template type= "Transaction"  name = "TransactionTemplate"></Template>
 <Forwards>
 <Forward key ="CANCEL">rdscontroller?page=saleslead</Forward>
@@ -132,11 +132,11 @@ Controller = "com.rainbow.crm.saleslead.controller.SalesLeadController">
 </Element>  
  </Element>
 
-<Element type = "UITableRow"  dataType = "com.rainbow.crm.followup.model.Followup" rendered = "!Object.getVoided">
+<Element type = "UITableRow"  dataType = "com.rainbow.crm.followup.model.Followup" rendered = "!Object.isDeleted">
 
 <Element type ="UITableCol" width = "20%"><Element label = ""  type = "UIText" Id = "txtFLCode" size  = "20"  readonly = "true" property ="communicationMode.description" /> </Element>
-<Element type ="UITableCol" width = "10%"><Element label = ""  type = "UIText"  Id = "txtFLItName"  size  = "20" readonly = "true" property ="createdDate" /></Element>
-<Element type ="UITableCol" width = "20%"><Element label = ""  type = "UIText" Id = "txtFLComments"  property ="confidenceLevel.description" readonly = "true" size = "230" />  </Element>
+<Element type ="UITableCol" width = "10%"><Element label = ""  type = "UIDate"  Id = "txtFLItName"  size  = "20" readonly = "true" property ="followupDate" /></Element>
+<Element type ="UITableCol" width = "20%"><Element label = ""  type = "UIText" Id = "txtFLComments"  property ="confidenceLevel.description" readonly = "true" size = "20" />  </Element>
 <Element type ="UITableCol" width = "10%"><Element label = ""  type = "UIText" Id = "txtFLPrice"  property ="offeredPrice"  readonly = "true" size = "10" />  </Element>
 <Element type ="UITableCol" width = "20%"><Element label = ""  type = "UIText" Id = "txtFLQty"  property ="result.description"  readonly = "true"  size = "20"/>  </Element>
 <Element type ="UITableCol" width = "20%"><Element label = ""  type = "UIText" Id = "txtFLlineDisc"  property ="resultReason.description"  readonly = "true" size = "20" />  </Element>

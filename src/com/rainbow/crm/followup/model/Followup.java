@@ -15,7 +15,9 @@ public class Followup extends CRMBusinessModelObject{
    
 	SalesLead lead;
 	String conversation;
+	Date followupDate ;
 	FiniteValue confidenceLevel;
+	
 	FiniteValue communicationMode;
 	Double offeredPrice;
 	String salesAssociate ;
@@ -107,6 +109,12 @@ public class Followup extends CRMBusinessModelObject{
 	}
 	public void setAlerted(boolean alerted) {
 		this.alerted = alerted;
+	}
+	public Date getFollowupDate() {
+		return followupDate;
+	}
+	public void setFollowupDate(Date followupDate) {
+		this.followupDate = followupDate;
 	}
 	
 
