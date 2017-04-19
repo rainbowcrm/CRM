@@ -1,5 +1,9 @@
 package com.rainbow.crm.saleslead.controller;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.OutputStream;
 
 import javax.servlet.ServletContext;
@@ -9,19 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 import com.rainbow.crm.common.CRMTransactionController;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.database.LoginSQLs;
+import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.saleslead.model.SalesLead;
 import com.rainbow.crm.saleslead.service.ISalesLeadService;
 import com.techtrade.rads.framework.context.IRadsContext;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
 
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRExporter;
-import net.sf.jasperreports.engine.JRExporterParameter;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.export.JRPdfExporter;
 
 public class SalesLeadExtendedController extends CRMTransactionController{
 
@@ -41,16 +39,22 @@ public class SalesLeadExtendedController extends CRMTransactionController{
 	@Override
 	public PageResult submit(ModelObject object, String actionParam) {
 		if("printquote".equals(actionParam)) {
+			try {
 			ISalesLeadService service= getService();
-			OutputStream stream =service.printQuotation((SalesLead) object) ;
+			byte[] byteArray = service.printQuotation((SalesLead) object) ;
 			resp.setContentType("application/xls");
 			resp.setHeader("Content-Disposition","attachment; filename=quote.pdf" );
-			//OutputStream responseOutputStream = resp.getOutputStream();
-            /*int bytes;
-            stream.b
-            while ((bytes = stream.read()) != -1) {
-                responseOutputStream.write(bytes);
-            }*/
+			
+			OutputStream responseOutputStream = resp.getOutputStream();
+			responseOutputStream.write(byteArray);
+			responseOutputStream.close();
+			PageResult result = new PageResult();
+			result.setResponseAction(PageResult.ResponseAction.FILEDOWNLOAD);
+			return result;
+			}catch(Exception ex)
+			{
+				Logwriter.INSTANCE.error(ex);
+			}
 		}
 		return super.submit(object, actionParam);
 	}

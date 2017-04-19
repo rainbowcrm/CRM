@@ -2,8 +2,10 @@ package com.rainbow.crm.saleslead.service;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.StringWriter;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -27,9 +29,14 @@ import javax.mail.internet.MimeMessage;
 import net.sf.jasperreports.engine.JRExporter;
 import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.velocity.Template;
@@ -102,7 +109,7 @@ public class SalesLeadService extends AbstractionTransactionService implements I
 	
 	
 	@Override
-	public OutputStream printQuotation(SalesLead lead) {
+	public byte[] printQuotation(SalesLead lead) {
 		try { 
 			Map<String, Object> parameters = new HashMap<String, Object>();
 			parameters.put("TermsAndCond"," Goods once sold would not be taken back");
@@ -110,14 +117,28 @@ public class SalesLeadService extends AbstractionTransactionService implements I
 			parameters.put("HeaderNote","Please find the quotation based on our reference");
 			parameters.put("LeadId", lead.getId());
 			Connection connection  = ConnectionCreater.getConnection() ;
-			JasperCompileManager.compileReportToFile( "jaspertemplates/QuotationFormat1.jrxml");
-			JasperPrint print = JasperFillManager.fillReport("QuotationFormat1.jasper", parameters, connection);
+			URL resource = this.getClass().getResource("/jaspertemplates/QuotationFormat1.jrxml");
+			
+			JasperDesign jasperDesign = JRXmlLoader.load(resource.getPath());
+	        JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign); 
+	        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, connection);
+	        byte[] output = JasperExportManager.exportReportToPdf(jasperPrint); 
+	        JasperViewer.viewReport(jasperPrint); 
+	        return output; 
+	        
+			
+			/*InputStream input = this.getClass().getResourceAsStream("jaspertemplates/QuotationFormat1.jrxml");
+            JasperDesign design = JRXmlLoader.load(input);
+            JasperReport report = JasperCompileManager.compileReport(design);
+            
+			
+			JasperPrint print = JasperFillManager.fillReport(report, parameters, connection);
 			FileOutputStream fos =  new FileOutputStream("QuotationFormat1.pdf");
 			JRExporter exporter = new JRPdfExporter();
 			exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);
 			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM,fos); // your output goes here
 			exporter.exportReport();
-			return fos;
+			return fos;*/
 		}catch(Exception ex) {
 			Logwriter.INSTANCE.error(ex);
 		}

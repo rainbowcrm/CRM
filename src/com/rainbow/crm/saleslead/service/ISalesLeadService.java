@@ -24,6 +24,6 @@ public interface ISalesLeadService extends ITransactionService{
 	public SalesLeadExtended getSalesLeadWithExtension( int leadId,CRMContext context) ;
 	
 	
-	public OutputStream printQuotation(SalesLead lead) ;
+	public byte[] printQuotation(SalesLead lead) ;
 
 }
