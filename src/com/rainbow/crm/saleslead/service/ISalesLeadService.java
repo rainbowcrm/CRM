@@ -1,5 +1,6 @@
 package com.rainbow.crm.saleslead.service;
 
+import java.io.OutputStream;
 import java.util.Date;
 import java.util.List;
 
@@ -21,5 +22,8 @@ public interface ISalesLeadService extends ITransactionService{
 	public List<RadsError> sendEmail(SalesLead salesLead,CRMContext context,String realPath) ;
 	
 	public SalesLeadExtended getSalesLeadWithExtension( int leadId,CRMContext context) ;
+	
+	
+	public OutputStream printQuotation(SalesLead lead) ;
 
 }

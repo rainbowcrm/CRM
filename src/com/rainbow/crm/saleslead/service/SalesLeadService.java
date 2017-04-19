@@ -2,12 +2,16 @@ package com.rainbow.crm.saleslead.service;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.io.StringWriter;
 import java.net.URLEncoder;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
@@ -19,6 +23,13 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+
+import net.sf.jasperreports.engine.JRExporter;
+import net.sf.jasperreports.engine.JRExporterParameter;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.velocity.Template;
@@ -49,6 +60,7 @@ import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
 import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.customer.service.ICustomerService;
+import com.rainbow.crm.database.ConnectionCreater;
 import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.division.service.IDivisionService;
@@ -85,6 +97,32 @@ import com.techtrade.rads.framework.utils.Utils;
 
 @Transactional
 public class SalesLeadService extends AbstractionTransactionService implements ISalesLeadService{
+
+	
+	
+	
+	@Override
+	public OutputStream printQuotation(SalesLead lead) {
+		try { 
+			Map<String, Object> parameters = new HashMap<String, Object>();
+			parameters.put("TermsAndCond"," Goods once sold would not be taken back");
+			parameters.put("FooterNote","Looking forward for business with you");
+			parameters.put("HeaderNote","Please find the quotation based on our reference");
+			parameters.put("LeadId", lead.getId());
+			Connection connection  = ConnectionCreater.getConnection() ;
+			JasperCompileManager.compileReportToFile( "jaspertemplates/QuotationFormat1.jrxml");
+			JasperPrint print = JasperFillManager.fillReport("QuotationFormat1.jasper", parameters, connection);
+			FileOutputStream fos =  new FileOutputStream("QuotationFormat1.pdf");
+			JRExporter exporter = new JRPdfExporter();
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM,fos); // your output goes here
+			exporter.exportReport();
+			return fos;
+		}catch(Exception ex) {
+			Logwriter.INSTANCE.error(ex);
+		}
+		return null;
+	}
 
 	@Override
 	public long getTotalRecordCount(CRMContext context) {

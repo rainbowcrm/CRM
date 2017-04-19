@@ -137,6 +137,7 @@ Controller = "com.rainbow.crm.saleslead.controller.SalesLeadExtendedController">
 <Section type ="brk3"/>
 </CoreSection>
 <Section type ="optionalsummary">
+<Element caption = "Print_Quote"  type = "UIButton"    Id = "btnShipped"  style="button"  fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="printquote"   />
 </Section>
 <Section type ="copyRightSection"/>
 </UIForm>
