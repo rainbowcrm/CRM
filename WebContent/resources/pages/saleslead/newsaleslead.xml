@@ -73,6 +73,7 @@ Controller = "com.rainbow.crm.saleslead.controller.SalesLeadController">
 	 <width>290</width>
 </Element>
 	<Element label = "Sales_Bill"  type = "UIText" Id = "txtSale"   property ="Sale.BillNumber" />
+	<Element label = "Status"  type = "UIHidden" Id = "hdnStatsCode"  readonly="true"  property ="Status.code" />
 	<Element label = "Status"  type = "UIText" Id = "txtStatus"  readonly="true"  property ="Status.description" />
 	<Element label = ""  type = "UILabel" Id = "lblCustTitle"   value ="Customer" />
 	<Element label = ""  type = "UILabel" Id = "lblFree1"  style="bigTitle" value ="" />

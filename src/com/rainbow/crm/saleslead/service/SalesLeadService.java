@@ -123,22 +123,11 @@ public class SalesLeadService extends AbstractionTransactionService implements I
 	        JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign); 
 	        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, connection);
 	        byte[] output = JasperExportManager.exportReportToPdf(jasperPrint); 
-	        JasperViewer.viewReport(jasperPrint); 
+	      // JasperViewer.viewReport(jasperPrint); 
 	        return output; 
 	        
 			
-			/*InputStream input = this.getClass().getResourceAsStream("jaspertemplates/QuotationFormat1.jrxml");
-            JasperDesign design = JRXmlLoader.load(input);
-            JasperReport report = JasperCompileManager.compileReport(design);
-            
-			
-			JasperPrint print = JasperFillManager.fillReport(report, parameters, connection);
-			FileOutputStream fos =  new FileOutputStream("QuotationFormat1.pdf");
-			JRExporter exporter = new JRPdfExporter();
-			exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);
-			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM,fos); // your output goes here
-			exporter.exportReport();
-			return fos;*/
+
 		}catch(Exception ex) {
 			Logwriter.INSTANCE.error(ex);
 		}
