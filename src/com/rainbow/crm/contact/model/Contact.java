@@ -27,7 +27,7 @@ public class Contact extends CRMBusinessModelObject{
 	
 	public String getFullName() {
 		if (Utils.isNullString(fullName)) {
-			fullName = firstName + " " + lastName; 
+			fullName = firstName + " " + lastName + " - " + phone; 
 		}
 		return fullName;
 	}

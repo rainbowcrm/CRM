@@ -65,6 +65,7 @@ import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.common.messaging.CRMMessageSender;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
+import com.rainbow.crm.contact.service.IContactService;
 import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.customer.service.ICustomerService;
 import com.rainbow.crm.database.ConnectionCreater;
@@ -209,6 +210,12 @@ public class SalesLeadService extends AbstractionTransactionService implements I
 				 object.setCustomer(customer);
 		}
 		
+		if(object.getReferall() != null && !Utils.isNullString(object.getReferall().getFullName()))
+		{
+			IContactService contactService = (IContactService) SpringObjectFactory.INSTANCE.getInstance("IContactService");
+			contactService.getByFullName(context.getLoggedinCompany(), object.getReferall().getFullName());
+	
+		}
 		
 		Externalize externalize = new Externalize(); ;
 		if(object.getTerritory() != null) {

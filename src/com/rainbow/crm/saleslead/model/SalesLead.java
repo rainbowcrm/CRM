@@ -9,6 +9,7 @@ import java.util.Set;
 
 import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
+import com.rainbow.crm.contact.model.Contact;
 import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.sales.model.Sales;
@@ -21,9 +22,12 @@ public class SalesLead extends CRMBusinessModelObject{
 	Division division;
 	String docNumber;
 	Customer customer;
+	Contact referall; 
 	Territory territory;
 	Date releasedDate ;
 	boolean salesWon;
+	String refNo;
+	Date refDate; 
 	Sales sales ;
 	boolean voided;
 	String comments;
@@ -138,5 +142,25 @@ public class SalesLead extends CRMBusinessModelObject{
 	public void setTerritory(Territory territory) {
 		this.territory = territory;
 	}
+	public Contact getReferall() {
+		return referall;
+	}
+	public void setReferall(Contact referall) {
+		this.referall = referall;
+	}
+	public String getRefNo() {
+		return refNo;
+	}
+	public void setRefNo(String refNo) {
+		this.refNo = refNo;
+	}
+	public Date getRefDate() {
+		return refDate;
+	}
+	public void setRefDate(Date refDate) {
+		this.refDate = refDate;
+	}
+	
+	
 	
 }

@@ -54,6 +54,25 @@ public class ContactService extends AbstractService implements IContactService{
 		return validator.validateforUpdate(object);
 	}
 
+	
+	
+	
+	@Override
+	public Contact getByFullName(int company, String fullName) {
+		if( fullName.contains(" - ")) {
+			String firstName = fullName.substring(0, fullName.indexOf(' '));
+			String lastName   =  fullName.substring(fullName.indexOf(' ')+1, fullName.indexOf('-')-1);
+			String phone =  fullName.substring(fullName.indexOf('-')+2,fullName.length());
+			
+		}else
+		{
+			String firstName = fullName.substring(0, fullName.indexOf(' '));
+			String lastName   = fullName.substring(fullName.indexOf(' ')+1,fullName.length());
+		}
+			
+		return null;
+	}
+
 	/**
 	@Override
 	public Contact getByCode(int company, String code) {
