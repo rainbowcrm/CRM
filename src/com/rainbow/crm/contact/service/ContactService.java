@@ -59,18 +59,21 @@ public class ContactService extends AbstractService implements IContactService{
 	
 	@Override
 	public Contact getByFullName(int company, String fullName) {
+		ContactDAO dao = (ContactDAO) getDAO();
 		if( fullName.contains(" - ")) {
 			String firstName = fullName.substring(0, fullName.indexOf(' '));
 			String lastName   =  fullName.substring(fullName.indexOf(' ')+1, fullName.indexOf('-')-1);
 			String phone =  fullName.substring(fullName.indexOf('-')+2,fullName.length());
-			
+			Contact contact = dao.findByfullNameAndPhone(company, firstName, lastName, phone);
+			return contact;
 		}else
 		{
 			String firstName = fullName.substring(0, fullName.indexOf(' '));
 			String lastName   = fullName.substring(fullName.indexOf(' ')+1,fullName.length());
+			Contact contact = dao.findByfullName(company, firstName, lastName);
+			return contact;
 		}
 			
-		return null;
 	}
 
 	/**

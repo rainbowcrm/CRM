@@ -65,8 +65,9 @@ Controller = "com.rainbow.crm.saleslead.controller.SalesLeadExtendedController">
 	<Element label = "Sales_Bill"  type = "UIText" Id = "txtSale"   property ="Sale.BillNumber" />
 	<Element label = "Status"  type = "UIText" Id = "txtStatus"  readonly="true"  property ="Status.description" />
 	<Element label = ""  type = "UILabel" Id = "lblCustTitle"   value ="Customer" />
-	<Element label = ""  type = "UILabel" Id = "lblFree1"  style="bigTitle" value ="" />
-	<Element label = ""  type = "UILabel" Id = "lblFree2"  style="bigTitle" value ="" />
+	<Element label = "Ref_No"  type = "UIText" Id = "txtRefNo"    readonly="true" property ="refNo" />
+	<Element label = "Ref_Date"  type = "UIDate" Id = "txtREfDate" readonly="true"  property ="refDate" />
+	<!-- <Element label = ""  type = "UILabel" Id = "lblFree2"  style="bigTitle" value ="" />  -->
 	<Element label = "Phone"  type = "UIText" Id = "txtPhone"   readonly="true" property ="Customer.Phone" />
 	<Element label = "Email"  type = "UIText" Id = "txtEmail"   readonly="true"  property ="Customer.Email" />
 	 <Element label = "Name"  type = "UIText"  Id = "txtCustomerName"  isMandatory="true" property ="Customer.FullName">

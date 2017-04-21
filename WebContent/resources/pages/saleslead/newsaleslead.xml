@@ -74,7 +74,7 @@ Controller = "com.rainbow.crm.saleslead.controller.SalesLeadController">
 </Element>
 	<Element label = "Ref_No"  type = "UIText" Id = "txtRefNo"   property ="refNo" />
 	<Element label = "Ref_Date"  type = "UIDate" Id = "txtrefDate"   property ="refDate" />
-	<Element label = "Referred_By"  type = "UILookupText"  Id = "txtRefera"  property ="referall.fullName" showLookupAsDialog="true" dialogId="dlgREFerral"
+	<Element label = "Referred_By"  type = "UILookupText"  Id = "txtRefera"  property ="referall.identifierName" showLookupAsDialog="true" dialogId="dlgREFerral"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" additionalInputControl = "lstInvDivision">
 	 <lookupType>contact</lookupType>
 	 <height>300</height>

@@ -65,6 +65,7 @@ import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.common.messaging.CRMMessageSender;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
+import com.rainbow.crm.contact.model.Contact;
 import com.rainbow.crm.contact.service.IContactService;
 import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.customer.service.ICustomerService;
@@ -210,10 +211,14 @@ public class SalesLeadService extends AbstractionTransactionService implements I
 				 object.setCustomer(customer);
 		}
 		
-		if(object.getReferall() != null && !Utils.isNullString(object.getReferall().getFullName()))
+		if(object.getReferall() != null && !Utils.isNullString(object.getReferall().getIdentifierName()))
 		{
 			IContactService contactService = (IContactService) SpringObjectFactory.INSTANCE.getInstance("IContactService");
-			contactService.getByFullName(context.getLoggedinCompany(), object.getReferall().getFullName());
+			Contact contact = contactService.getByFullName(context.getLoggedinCompany(), object.getReferall().getIdentifierName());
+			if (contact != null)
+				  object.setReferall(contact);
+			else
+				ans.add(CRMValidator.getErrorforCode(context.getLocale(), SalesLeadErrorCodes.FIELD_NOT_VALID , "Referral"));
 	
 		}
 		

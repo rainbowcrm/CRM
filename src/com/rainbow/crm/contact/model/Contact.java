@@ -14,6 +14,7 @@ public class Contact extends CRMBusinessModelObject{
 	String firstName;
 	String lastName;
 	String fullName;
+	String identifierName ;
 	String description;
 	String address1;
 	String address2;
@@ -27,7 +28,7 @@ public class Contact extends CRMBusinessModelObject{
 	
 	public String getFullName() {
 		if (Utils.isNullString(fullName)) {
-			fullName = firstName + " " + lastName + " - " + phone; 
+			fullName = firstName + " " + lastName ; 
 		}
 		return fullName;
 	}
@@ -35,6 +36,19 @@ public class Contact extends CRMBusinessModelObject{
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
 	}
+	
+	
+	public String getIdentifierName() {
+		if(Utils.isNullString(identifierName)) {
+			identifierName = firstName + " " + lastName + " - " + phone; 
+		}
+		return identifierName;
+	}
+
+	public void setIdentifierName(String identifierName) {
+		this.identifierName = identifierName;
+	}
+
 	@RadsPropertySet(jsonTag="FirstName",xmlTag="FirstName")
 	public String getFirstName() {
 		return firstName;

@@ -27,11 +27,11 @@ public class ContactDAO extends SpringHibernateDAO {
 	public Contact findByEmail(int company, String email) {
 		Contact contact = null;
 		Session session = openSession(false);
-		Query query = session.createQuery(" from Contact where email = :email and company.id =:company  " ) ;
+		Query query = session.createQuery(" from Contact where email = :email and company.id =:company  and deleted = false" ) ;
 		query.setParameter("email", email);
 		query.setParameter("company", company);
 		List lst = query.list();
-		if (!Utils.isNullList(lst)) {
+		if (!Utils.isNullList(lst)) { 
 			contact = (Contact) lst.get(0) ;
 			contact.setFullName(contact.getFirstName() + " " + contact.getLastName());
 		}
@@ -43,8 +43,41 @@ public class ContactDAO extends SpringHibernateDAO {
 	public Contact findByPhone(int company, String phone) {
 		Contact contact = null;
 		Session session = openSession(false);
-		Query query = session.createQuery(" from Contact where phone = :phone and company.id =:company  " ) ;
+		Query query = session.createQuery(" from Contact where phone = :phone and company.id =:company and deleted = false  " ) ;
 		query.setParameter("phone", phone);
+		query.setParameter("company", company);
+		List lst = query.list();
+		if (!Utils.isNullList(lst)){
+			contact = (Contact) lst.get(0) ;
+			contact.setFullName(contact.getFirstName() + " " + contact.getLastName());
+		}
+		closeSession(session, false);
+		return contact;
+	}
+	
+	public Contact findByfullNameAndPhone(int company, String firstName , String lastName,  String phone) {
+		Contact contact = null;
+		Session session = openSession(false);
+		Query query = session.createQuery(" from Contact where firstName =:firstName and lastName =:lastName and  phone = :phone and company.id =:company and deleted = false  " ) ;
+		query.setParameter("firstName", firstName);
+		query.setParameter("lastName", lastName);
+		query.setParameter("phone", phone);
+		query.setParameter("company", company);
+		List lst = query.list();
+		if (!Utils.isNullList(lst)){
+			contact = (Contact) lst.get(0) ;
+			contact.setFullName(contact.getFirstName() + " " + contact.getLastName());
+		}
+		closeSession(session, false);
+		return contact;
+	}
+	
+	public Contact findByfullName(int company, String firstName , String lastName) {
+		Contact contact = null;
+		Session session = openSession(false);
+		Query query = session.createQuery(" from Contact where firstName =:firstName and lastName =:lastName  and company.id =:company and deleted = false  " ) ;
+		query.setParameter("firstName", firstName);
+		query.setParameter("lastName", lastName);
 		query.setParameter("company", company);
 		List lst = query.list();
 		if (!Utils.isNullList(lst)){
@@ -56,3 +89,4 @@ public class ContactDAO extends SpringHibernateDAO {
 	}
 
 }
+
