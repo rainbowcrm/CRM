@@ -12,6 +12,7 @@
   <fixedActionField>hdnFixedAction</fixedActionField>
  <SubmitActionField>submitAction</SubmitActionField>
  <FixedActionParamField>hdnFixedActionParam</FixedActionParamField>
+  <IncludeJS>./resources/js/RadsLib.js</IncludeJS>
  <Sections>
  <Section Id="querySection" style= "lookupPagesummaryStyle">
  </Section>

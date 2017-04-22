@@ -71,7 +71,7 @@ Controller = "com.rainbow.crm.saleslead.controller.SalesLeadController">
 	 <lookupType>user</lookupType>
 	 <height>300</height>
 	 <width>290</width>
-</Element>
+	</Element>
 	<Element label = "Ref_No"  type = "UIText" Id = "txtRefNo"   property ="refNo" />
 	<Element label = "Ref_Date"  type = "UIDate" Id = "txtrefDate"   property ="refDate" />
 	<Element label = "Referred_By"  type = "UILookupText"  Id = "txtRefera"  property ="referall.identifierName" showLookupAsDialog="true" dialogId="dlgREFerral"
@@ -92,6 +92,16 @@ Controller = "com.rainbow.crm.saleslead.controller.SalesLeadController">
 	 <lookupType>customer</lookupType>
 	 <height>300</height>
 	 <width>290</width>
+	 <SupplementaryFields>
+	     <Field>
+	        <property>phone</property>
+	        <control>txtPhone</control>
+	     </Field>
+	     <Field>
+	        <property>email</property>
+	        <control>txtEmail</control>
+	     </Field>
+	 </SupplementaryFields>
 	</Element>
 	<Element caption = "New Customer"  type = "UIButton"    Id = "btnNewCustomer"  style="button" onClickJS = "createNewCustomer('newcustDL',this);"  />
 	<Element type ="UIDialog" Id = "newcustDL" style= "widepopup" >

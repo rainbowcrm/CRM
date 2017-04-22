@@ -97,6 +97,77 @@ function showLookupDialog(id,curControl,additionalControl) {
 	dialog.showModal();
 	
  }
+ 
+ function closeLookupDialogWithAdditions(dialogId,parentControl, valueControl,additionalDisplayFields) { 
+	 var clkCell = window.parent.clickedCellIndex;
+	 
+	 console.log('additionalFields overloaded=' +additionalDisplayFields );
+	 var  selectedValue = document.getElementById(valueControl).value;
+	 var  splittedValue = selectedValue.split('|');
+	 if (document.getElementById(valueControl).value != '' ){ 
+	if (clkCell <= 0) { 
+	 window.parent.document.getElementById(parentControl).value = splittedValue[0]; 
+	 window.parent.document.getElementById(dialogId).close(); 
+	  window.parent.document.getElementById(parentControl).focus(); 
+	 }else { 
+	 window.parent.document.getElementsByName(parentControl)[clkCell].value = splittedValue[0]; 
+	 window.parent.document.getElementById(dialogId).close(); 
+	  window.parent.document.getElementsByName(parentControl)[clkCell].focus(); 
+	 } 
+	} 
+	} 
+
+function closeLookupDialog(dialogId,parentControl, valueControl) { 
+	 var clkCell = window.parent.clickedCellIndex;
+	 console.log('clkCell =' + clkCell + "dialogId = "+dialogId);
+	 var additionalDisplayFields =  document.getElementById('additionalFields').value; 
+	 console.log('closeLookupDialog - document=' +additionalDisplayFields );
+	 if ( additionalDisplayFields != null && additionalDisplayFields !='' && additionalDisplayFields !='null'  && additionalDisplayFields !='undefined' ) {
+		closeLookupDialogWithAdditions(dialogId,parentControl , valueControl,additionalDisplayFields);
+		return;
+	 }
+	 if (document.getElementById(valueControl).value != '' ){ 
+	if (clkCell <= 0) { 
+	 window.parent.document.getElementById(parentControl).value = document.getElementById(valueControl).value; 
+	 window.parent.document.getElementById(dialogId).close(); 
+	  window.parent.document.getElementById(parentControl).focus(); 
+	 }else { 
+	 window.parent.document.getElementsByName(parentControl)[clkCell].value = document.getElementById(valueControl).value; 
+	 window.parent.document.getElementById(dialogId).close(); 
+	  window.parent.document.getElementsByName(parentControl)[clkCell].focus(); 
+	 } 
+	} 
+	} 
+
+function showLookupDialogWithAdditionalFields(id,curControl,additionalControl,additionalCtrls, additionalFields) {
+	var index  = getCurrentObjectIndex(curControl);  
+	console.log('additionalFields=' + additionalFields + ": id=" + id); 
+	clickedCellIndex= index;
+	var dialog = document.getElementById(id);  
+
+	if( additionalControl != null &&  additionalControl != '' &&  additionalControl != 'undefined' && additionalControl != 'null')
+		document.getElementById('idFRM' +id).contentWindow.document.getElementById('additionalParam').value = document.getElementById(additionalControl).value;
+	
+	if( additionalCtrls != null &&  additionalCtrls != '' &&  additionalCtrls != 'undefined' && additionalCtrls != 'null') {
+		document.getElementById('idFRM' +id).contentWindow.document.getElementById('additionalControls').value = additionalCtrls;
+	}
+	if( additionalFields != null &&  additionalFields != '' &&  additionalFields != 'undefined' && additionalFields != 'null') {
+		document.getElementById('idFRM' +id).contentWindow.document.getElementById('additionalFields').value = additionalFields;
+	}
+	document.getElementById('idFRM' +id).contentDocument.clickedCellIndex = index;
+	document.getElementById('idFRM' +id).contentWindow.document.forms[0].submit();
+	if(!dialog.showModal)
+	{
+		dialogPolyfill.registerDialog(dialog);
+	}
+	dialog.showModal();
+	
+ }
+ 
+ 
+ 
+ 
+ 
 function fireAjaxRequest (service, requestCtrls, responseCtrls, currentCtrl) {
 	var requestStr = appURL + "rdscontroller?ajxService=" + service;
 	var index  = getCurrentObjectIndex(currentCtrl);
