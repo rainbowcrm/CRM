@@ -102,15 +102,24 @@ function closeLookupDialogWithAdditions(dialogId,parentControl, valueControl,add
 	 var clkCell = window.parent.clickedCellIndex;
 	 
 	 console.log('additionalFields overloaded=' +additionalDisplayFields );
+	 console.log('type fof ' + typeof additionalDisplayFields);
 	 var  selectedValue = document.getElementById(valueControl).value;
 	 var  splittedValue = selectedValue.split('|');
+	 var splittedControls = additionalDisplayFields.split(',');
 	 if (document.getElementById(valueControl).value != '' ){ 
 	if (clkCell <= 0) { 
 	 window.parent.document.getElementById(parentControl).value = splittedValue[0]; 
+	 for (var i =0 ; i < splittedControls.length ; i ++ ) {
+	  window.parent.document.getElementById(splittedControls[i]).value = splittedValue[i+1];
+	 }
+	 
 	 window.parent.document.getElementById(dialogId).close(); 
 	  window.parent.document.getElementById(parentControl).focus(); 
 	 }else { 
 	 window.parent.document.getElementsByName(parentControl)[clkCell].value = splittedValue[0]; 
+	 for (var i =0 ; i < splittedControls.length ; i ++ ) {
+	 window.parent.document.getElementById(splittedControls[i])[clkCell].value = splittedValue[i+1];
+	 }
 	 window.parent.document.getElementById(dialogId).close(); 
 	  window.parent.document.getElementsByName(parentControl)[clkCell].focus(); 
 	 } 
@@ -120,7 +129,7 @@ function closeLookupDialogWithAdditions(dialogId,parentControl, valueControl,add
 function closeLookupDialog(dialogId,parentControl, valueControl) { 
 	 var clkCell = window.parent.clickedCellIndex;
 	 console.log('clkCell =' + clkCell + "dialogId = "+dialogId);
-	 var additionalDisplayFields =  document.getElementById('additionalFields').value; 
+	 var additionalDisplayFields =  document.getElementById('additionalControls').value; 
 	 console.log('closeLookupDialog - document=' +additionalDisplayFields );
 	 if ( additionalDisplayFields != null && additionalDisplayFields !='' && additionalDisplayFields !='null'  && additionalDisplayFields !='undefined' ) {
 		closeLookupDialogWithAdditions(dialogId,parentControl , valueControl,additionalDisplayFields);

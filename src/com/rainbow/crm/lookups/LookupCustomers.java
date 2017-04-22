@@ -33,7 +33,12 @@ public class LookupCustomers implements ILookupService{
 		ICustomerService service = (ICustomerService) SpringObjectFactory.INSTANCE.getInstance("ICustomerService");
 		List<? extends CRMModelObject> customers = service.listData(from, from  + noRecords, condition,(CRMContext)ctx,null);
 		for (ModelObject obj :  customers) {
-			ans.put(((Customer)obj).getFullName(),((Customer)obj).getFullName());
+			StringBuffer key = new StringBuffer(((Customer)obj).getFullName());
+			if(additionalFields != null && additionalFields.contains("phone") )
+				 key.append("|" + ((Customer)obj).getPhone());
+			if(additionalFields != null && additionalFields.contains("email") )
+				 key.append("|" + ((Customer)obj).getEmail());
+			ans.put(key.toString(),((Customer)obj).getFullName() + " - " + ((Customer)obj).getPhone() );
 		}
 
 		return ans;
