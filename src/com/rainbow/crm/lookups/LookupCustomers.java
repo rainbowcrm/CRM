@@ -1,7 +1,9 @@
 package com.rainbow.crm.lookups;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,8 +22,9 @@ import com.techtrade.rads.framework.utils.Utils;
 public class LookupCustomers implements ILookupService{
 	
 	@Override
-	public List<Object> lookupData(IRadsContext ctx,String searchString, int from, int noRecords, String lookupParam) {
-		List<Object> ans = new ArrayList<Object>();
+	public Map<String,String> lookupData(IRadsContext ctx, String searchString,
+			int from, int noRecords, String lookupParam,List<String > additionalFields) {
+		Map<String,String> ans = new LinkedHashMap<String,String> ();
 		String condition = null;
 		if (!Utils.isNull(searchString)) { 
 			searchString = searchString.replace("*", "%");
@@ -30,7 +33,7 @@ public class LookupCustomers implements ILookupService{
 		ICustomerService service = (ICustomerService) SpringObjectFactory.INSTANCE.getInstance("ICustomerService");
 		List<? extends CRMModelObject> customers = service.listData(from, from  + noRecords, condition,(CRMContext)ctx,null);
 		for (ModelObject obj :  customers) {
-			ans.add(((Customer)obj).getFullName());
+			ans.put(((Customer)obj).getFullName(),((Customer)obj).getFullName());
 		}
 
 		return ans;

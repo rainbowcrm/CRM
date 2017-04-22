@@ -1,7 +1,9 @@
 package com.rainbow.crm.lookups;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,9 +22,9 @@ import com.techtrade.rads.framework.utils.Utils;
 public class LookupDivisions implements ILookupService{
 
 	@Override
-	public List<Object> lookupData(IRadsContext ctx, String searchString,
-			int from, int noRecords, String lookupParam) {
-		List<Object> ans = new ArrayList<Object>();
+	public Map<String,String> lookupData(IRadsContext ctx, String searchString,
+			int from, int noRecords, String lookupParam,List<String > additionalFields) {
+		Map<String,String> ans = new LinkedHashMap<String,String> ();
 		boolean allowAll =CommonUtil.allowAllDivisionAccess((CRMContext)ctx);
 		String condition = null;
 		if (!Utils.isNull(searchString)) { 
@@ -33,7 +35,7 @@ public class LookupDivisions implements ILookupService{
 		List<? extends CRMModelObject> divisions = service.listData(from, from  + noRecords, condition,(CRMContext)ctx,null);
 		for (ModelObject obj :  divisions) {
 			if (allowAll || ((Division)obj).getId() == ((CRMContext)ctx).getLoggedInUser().getDivision().getId())
-				ans.add(((Division)obj).getName());
+				ans.put(((Division)obj).getName(),((Division)obj).getName());
 		}
 
 		return ans;

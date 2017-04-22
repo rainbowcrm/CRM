@@ -1,7 +1,9 @@
 package com.rainbow.crm.lookups;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,8 +24,9 @@ import com.techtrade.rads.framework.utils.Utils;
 public class LookupVendors implements ILookupService{
 	
 	@Override
-	public List<Object> lookupData(IRadsContext ctx,String searchString, int from, int noRecords, String lookupParam) {
-		List<Object> ans = new ArrayList<Object>();
+	public Map<String,String> lookupData(IRadsContext ctx, String searchString,
+			int from, int noRecords, String lookupParam,List<String > additionalFields) {
+		Map<String,String> ans = new LinkedHashMap<String,String> ();
 		String condition = null;
 		if (!Utils.isNull(searchString)) { 
 			searchString = searchString.replace("*", "%");
@@ -32,7 +35,7 @@ public class LookupVendors implements ILookupService{
 		IVendorService service = (IVendorService) SpringObjectFactory.INSTANCE.getInstance("IVendorService");
 		List<? extends CRMModelObject> vendors = service.listData(from, from  + noRecords, condition,(CRMContext)ctx,null);
 		for (ModelObject obj :  vendors) {
-			ans.add(((Vendor)obj).getName());
+			ans.put(((Vendor)obj).getName(),((Vendor)obj).getName());
 		}
 
 		return ans;
