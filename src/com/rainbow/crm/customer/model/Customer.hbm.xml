@@ -20,6 +20,8 @@
       <property name="city" column="city" type="string"/>
       <property name="phone" column="phone" type="string"/>
       <property name="email" column="email" type="string"/>
+	  <property name="photoFile" column="PHOTO" type="string"/>
+	  <property name="loyaltyPoint" column="LOYALTY_POINT" type="double"/>
 	  <property name="landmark" column="landmark" type="string"/>
 	  <property name="alternatePhone" column="alternatephone" type="string"/>
       <many-to-one name="company" column ="company_id" not-null="true" lazy="false" ></many-to-one>

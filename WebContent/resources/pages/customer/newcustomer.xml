@@ -8,8 +8,9 @@ Controller = "com.rainbow.crm.customer.controller.CustomerController">
 </Forwards>
 <IncludeJS>./resources/js/RadsLib.js</IncludeJS>
 <IncludeJS>./scripts/CRMGeneral.js</IncludeJS>
+<IncludeJS>./resources/js/ImageUpload.js</IncludeJS>
 <Elements>
-<UIForm Id ="cust" method = "POST" >
+<UIForm Id ="cust" method = "POST" enctype="multipart/form-data" >
 <Section type ="topBar"></Section> 
 <Section type ="leftsideBarApp"></Section>
 <CoreSection>
@@ -26,7 +27,11 @@ Controller = "com.rainbow.crm.customer.controller.CustomerController">
 	<Element label = "Pin_code"  type = "UIText" Id = "txtPinCode" size="7" property ="ZipCode" />
 	<Element label = "Email"  type = "UIText" Id = "txtemail" size="30" isMandatory="true" property ="Email" />
 	<Element label = "Phone"  type = "UIText" Id = "txtPhone" size="30" isMandatory="true" property ="Phone" />
+	<Element label = "Loyalty_Point"  type = "UIText" Id = "txtLPoint" size="30"  readonly="true" property ="loyaltyPoint" />
 	<Element label = "Credit_Limit"  type = "UIText" Id = "txtCreditLimit" size="30"  isNumeric="true"  property ="CreditLimit" />
+	<Element label = "Photo" type = "UIFileUpload" Id = "txtPhoto3" property ="image" maxSize="300720"
+   multiple ="false"  fileNameProperty="fileName"   onChangeJS ="readURL(this,'idIMG3')" accept= ".png, .jpg, .jpeg"  />
+   <Element label = ""  type = "UIImage" Id = "idIMG3"  height = "200" weight ="200" src= "#" property ="fileWithLink" />
 </Section>
 </CoreSection>
 <Section type ="summary">

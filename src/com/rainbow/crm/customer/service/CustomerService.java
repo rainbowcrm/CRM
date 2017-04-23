@@ -2,17 +2,24 @@ package com.rainbow.crm.customer.service;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.AbstractService;
+import com.rainbow.crm.common.CRMAppConfig;
 import com.rainbow.crm.common.CRMContext;
+import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
 import com.rainbow.crm.hibernate.ORMDAO;
+import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.customer.dao.CustomerDAO;
 import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.customer.validator.CustomerValidator;
+import com.rainbow.crm.document.model.Document;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
+import com.techtrade.rads.framework.model.transaction.TransactionResult;
 import com.techtrade.rads.framework.ui.components.SortCriteria;
 import com.techtrade.rads.framework.utils.Utils;
 
@@ -25,13 +32,56 @@ public class CustomerService extends AbstractService implements ICustomerService
 
 	@Override
 	public Object getById(Object PK) {
-		return getDAO().getById(PK);
+		Customer customer = (Customer) getDAO().getById(PK);
+		loadSupplymentoryURL(customer);
+		return customer;
+		
 	}
 
+	private boolean uploadFile(Customer customer, CRMContext context)
+	{
+		String fileExtn = CommonUtil.getFileExtn(customer.getFileName());
+		String fileName =  new String("cs" + customer.getId());
+		fileName.replace(" ", "_")    ; 
+	//	doc.setDocName(fileName +  "."  + fileExtn);
+		customer.setPhotoFile( "//" +  context.getLoggedinCompanyCode() +  "//custs//" + fileName +  "."  + fileExtn );
+		//customer.setPhotoFile(fileName +  "."  + fileExtn );
+		CommonUtil.uploadFile(customer.getImage(), fileName +  "."  + fileExtn  , context, "custs");
+		return true;
+	}
+	private void loadSupplymentoryURL(Customer customer)
+	{
+		try { 
+			String serverURL = CRMAppConfig.INSTANCE.getProperty("doc_server");
+			customer.setFileWithLink(serverURL + customer.getPhotoFile());
+		
+		}catch(Exception ex) 
+		{
+		  Logwriter.INSTANCE.error(ex);	
+		}
+	}
+	
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
 			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
 		return super.listData("Customer", from, to, whereCondition, context,sortCriteria);
+	}
+
+	
+	@Override
+	@Transactional 
+	public TransactionResult create(CRMModelObject object, CRMContext context) {
+		if (((Customer)object).getImage()  != null )
+			  uploadFile(((Customer)object), context);
+		return super.create(object, context);
+	}
+
+	@Override
+	@Transactional 
+	public TransactionResult update(CRMModelObject object, CRMContext context) {
+		if (((Customer)object).getImage()  != null )
+			  uploadFile(((Customer)object), context);
+		return super.update(object, context);
 	}
 
 	@Override

@@ -25,8 +25,11 @@ public class Customer extends CRMBusinessModelObject{
 	String landmark;
 	String alternatePhone;
 	
-	
-	
+	Double loyaltyPoint;
+	String photoFile;
+	byte[] image;
+	String fileName;
+	String fileWithLink;
 	
 	
 	public String getFullName() {
@@ -121,6 +124,47 @@ public class Customer extends CRMBusinessModelObject{
 	public void setAlternatePhone(String alternatePhone) {
 		this.alternatePhone = alternatePhone;
 	}
+
+	public Double getLoyaltyPoint() {
+		return loyaltyPoint;
+	}
+
+	public void setLoyaltyPoint(Double loyaltyPoint) {
+		this.loyaltyPoint = loyaltyPoint;
+	}
+
+	public String getPhotoFile() {
+		return photoFile;
+	}
+
+	public void setPhotoFile(String photoFile) {
+		this.photoFile = photoFile;
+	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+
+	public String getFileWithLink() {
+		return fileWithLink;
+	}
+
+	public void setFileWithLink(String fileWithLink) {
+		this.fileWithLink = fileWithLink;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	
 	
 	
 
