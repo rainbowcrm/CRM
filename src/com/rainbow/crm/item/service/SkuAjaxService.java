@@ -34,13 +34,13 @@ public class SkuAjaxService implements IAjaxLookupService {
 		ISkuService service = (ISkuService) SpringObjectFactory.INSTANCE
 				.getInstance("ISkuService");
 		Sku item = null;
-		if (!Utils.isNull(itName)) {
-			item = service.getByName(context.getLoggedinCompany(), itName);
-		} else if (!Utils.isNull(code)) {
+		if (!Utils.isNull(code)) {
 			item = service.getByCode(context.getLoggedinCompany(), code);
 		} else if (!Utils.isNull(barCode)) {
 			item = service.getByBarCode(context.getLoggedinCompany(), barCode);
-		}
+		}else if (!Utils.isNull(itName)) {
+			item = service.getByName(context.getLoggedinCompany(), itName);
+		}  
 		try {
 			if (item != null) {
 				JSONObject json = new JSONObject();

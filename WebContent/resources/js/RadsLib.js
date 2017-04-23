@@ -118,7 +118,8 @@ function closeLookupDialogWithAdditions(dialogId,parentControl, valueControl,add
 	 }else { 
 	 window.parent.document.getElementsByName(parentControl)[clkCell].value = splittedValue[0]; 
 	 for (var i =0 ; i < splittedControls.length ; i ++ ) {
-	 window.parent.document.getElementById(splittedControls[i])[clkCell].value = splittedValue[i+1];
+	 console.log('splittedControls[i]=' + splittedControls[i] + ':clkCell=' + clkCell); 
+	 window.parent.document.getElementsByName(splittedControls[i])[clkCell].value = splittedValue[i+1];
 	 }
 	 window.parent.document.getElementById(dialogId).close(); 
 	  window.parent.document.getElementsByName(parentControl)[clkCell].focus(); 

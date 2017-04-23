@@ -38,7 +38,7 @@ public class LookupCustomers implements ILookupService{
 				 key.append("|" + ((Customer)obj).getPhone());
 			if(additionalFields != null && additionalFields.contains("email") )
 				 key.append("|" + ((Customer)obj).getEmail());
-			ans.put(key.toString(),((Customer)obj).getFullName() + " - " + ((Customer)obj).getPhone() );
+			ans.put(key.toString(),((Customer)obj).getFullName()  );
 		}
 
 		return ans;

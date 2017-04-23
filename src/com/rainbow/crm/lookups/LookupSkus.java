@@ -34,7 +34,10 @@ public class LookupSkus implements ILookupService{
 		ISkuService service = (ISkuService) SpringObjectFactory.INSTANCE.getInstance("ISkuService");
 		List<? extends CRMModelObject> items = service.listData(from, from  + noRecords, condition,(CRMContext)ctx,null);
 		for (ModelObject obj :  items) {
-			ans.put(((Sku)obj).getName(),((Sku)obj).getName());
+			StringBuffer key  = new StringBuffer(((Sku)obj).getName());
+			if(additionalFields != null && additionalFields.contains("code") )
+				 key.append("|" + ((Sku)obj).getCode());
+			ans.put(key.toString(),((Sku)obj).getName());
 		}
 
 		return ans;

@@ -60,9 +60,19 @@ Controller = "com.rainbow.crm.wishlist.controller.WishListController">
 	<Element label = "Email"  type = "UIText" Id = "txtEmail"   property ="Customer.Email" />
 	 <Element label = "Name"  type = "UILookupText"  Id = "txtCustomerName"  isMandatory="true" property ="Customer.FullName" showLookupAsDialog="true" dialogId="dlgComp"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
-	 <lookupType>vendor</lookupType>
+	 <lookupType>customer</lookupType>
 	 <height>300</height>
 	 <width>290</width>
+	 <SupplementaryFields>
+	     <Field>
+	        <property>phone</property>
+	        <control>txtPhone</control>
+	     </Field>
+	     <Field>
+	        <property>email</property>
+	        <control>txtEmail</control>
+	     </Field>
+	 </SupplementaryFields>
 	</Element>
 	<Element caption = "New_Customer"  type = "UIButton"    Id = "btnNewCustomer"  style="button" onclickJS = "createNewCustomer('newcustDL',this);"  />
 	
@@ -92,6 +102,12 @@ Controller = "com.rainbow.crm.wishlist.controller.WishListController">
 	 <lookupType>item</lookupType>
 	 <height>300</height>
 	 <width>290</width>
+	 <SupplementaryFields>
+	     <Field>
+	        <property>code</property>
+	        <control>txtCode</control>
+	     </Field>
+	 </SupplementaryFields>
 </Element>
  </Element>
 <Element type ="UITableCol" width = "18%"><Element label = ""  type = "UIText" Id = "txtLineCo"  property ="Comments" size = "30" />  </Element>
