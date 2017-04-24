@@ -30,6 +30,7 @@ import com.rainbow.crm.followup.model.Followup;
 import com.rainbow.crm.inventory.model.Inventory;
 import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.item.model.Sku;
+import com.rainbow.crm.loyalty.model.Loyalty;
 import com.rainbow.crm.product.model.Product;
 import com.rainbow.crm.purchase.model.Purchase;
 import com.rainbow.crm.purchase.model.PurchaseLine;
@@ -133,6 +134,7 @@ public  abstract class HibernateDAO  extends ORMDAO{
     		configuration.addClass(CustCategory.class).addResource("com/rainbow/crm/custcategory/model/CustCategoryCondition.hbm.xml");
     		configuration.addClass(Contact.class).addResource("com/rainbow/crm/contact/model/Contact.hbm.xml");
     		configuration.addClass(Alert.class).addResource("com/rainbow/crm/alert/model/Alert.hbm.xml");
+    		configuration.addClass(Loyalty.class).addResource("com/rainbow/crm/loyalty/model/Loyalty.hbm.xml");
     		sessionFactory = configuration.configure().buildSessionFactory();
     		
     		//sessionFactory.getAllClassMetadata().put(key, value)

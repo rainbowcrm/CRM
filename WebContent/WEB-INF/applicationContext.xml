@@ -82,6 +82,8 @@
     </bean>
     <bean id="IAlertService" class="com.rainbow.crm.alert.service.AlertService">
     </bean>
+    <bean id="ILoyaltyService" class="com.rainbow.crm.loyalty.service.LoyaltyService">
+    </bean>
     <bean id="IPurchaseService" class="com.rainbow.crm.purchase.service.PurchaseService">
     </bean>
     <bean id="ISalesPeriodService" class="com.rainbow.crm.salesperiod.service.SalesPeriodService">
@@ -164,6 +166,9 @@
     <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
      <bean id="AlertDAO" class="com.rainbow.crm.alert.dao.AlertDAO">
+    <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean id="LoyaltyDAO" class="com.rainbow.crm.loyalty.dao.LoyaltyDAO">
     <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
      <bean id="PurchaseDAO" class="com.rainbow.crm.purchase.dao.PurchaseDAO">
@@ -258,7 +263,8 @@
         <value>com/rainbow/crm/salespitch/model/Salespitch.hbm.xml</value>
         <value>com/rainbow/crm/custcategory/model/CustCategory.hbm.xml</value>
         <value>com/rainbow/crm/custcategory/model/CustCategoryCondition.hbm.xml</value>  
-        <value>com/rainbow/crm/alert/model/Alert.hbm.xml</value>  
+        <value>com/rainbow/crm/alert/model/Alert.hbm.xml</value>
+        <value>com/rainbow/crm/loyalty/model/Loyalty.hbm.xml</value>    
         </list>  
         </property>  
         

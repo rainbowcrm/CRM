@@ -16,7 +16,7 @@ public class ConfigurationManager {
 	public static final String IMAGE_SERVER_PORT = "IMGSRVPRT";
 	public static final String IMAGE_SERVER_URL = "IMGSRVURL";
 	
-	public static final String LOYALTY = "LOYALTY";
+	public static final String SLS_AMOUNT_UNIT_LOYALTY = "LOYALTY";
 	public static final String REDEEM_LOYALTY = "RDMLOYALTY";
 	public static final String REDUCE_LOYALTY_RETURNS = "RDCLYLTRT";
 	public static final String LEAD_EMAIL_TEMPLATE = "LDEMAIL";
