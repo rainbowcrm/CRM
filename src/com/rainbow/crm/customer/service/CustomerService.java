@@ -71,9 +71,15 @@ public class CustomerService extends AbstractService implements ICustomerService
 	@Override
 	@Transactional 
 	public TransactionResult create(CRMModelObject object, CRMContext context) {
-		if (((Customer)object).getImage()  != null )
-			  uploadFile(((Customer)object), context);
-		return super.create(object, context);
+		TransactionResult result  = super.create(object, context);
+		if (((Customer)object).getImage()  != null )  {
+			Customer loadedCust = (Customer) getByBusinessKey(object, context);
+			((Customer)object).setId(loadedCust.getId());
+			uploadFile(((Customer)object), context); 
+			loadedCust.setPhotoFile(((Customer)object).getPhotoFile());
+			super.update(loadedCust, context);
+		}
+		return result;
 	}
 
 	@Override

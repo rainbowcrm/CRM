@@ -19,7 +19,7 @@ public class InventoryUpdateObject extends CRMBusinessModelObject implements Ser
 	boolean fulFilll ;
 	
 	boolean addLoyalty;
-	long salesId;
+	String  salesDoc;
 	
 	Set <? extends CRMItemLine> itemLines;
 	public Division getDivision() {
@@ -70,12 +70,13 @@ public class InventoryUpdateObject extends CRMBusinessModelObject implements Ser
 	public void setAddLoyalty(boolean addLoyalty) {
 		this.addLoyalty = addLoyalty;
 	}
-	public long getSalesId() {
-		return salesId;
+	public String getSalesDoc() {
+		return salesDoc;
 	}
-	public void setSalesId(long salesId) {
-		this.salesId = salesId;
+	public void setSalesDoc(String salesDoc) {
+		this.salesDoc = salesDoc;
 	}
+	
 	
 	
 	

@@ -10,7 +10,7 @@ import com.techtrade.rads.framework.model.abstracts.RadsError;
 public interface ILoyaltyService extends IBusinessService{
 
 	  
-	public void addToLoyalty(int salesId,CRMContext context) ;
+	public void addToLoyalty(String salesDoc,CRMContext context) ;
 	
 
 }

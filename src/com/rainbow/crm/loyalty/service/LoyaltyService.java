@@ -12,6 +12,9 @@ import java.util.List;
 
 
 
+
+
+
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.AbstractService;
 import com.rainbow.crm.common.CRMConstants;
@@ -21,6 +24,8 @@ import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
 import com.rainbow.crm.config.service.ConfigurationManager;
+import com.rainbow.crm.customer.model.Customer;
+import com.rainbow.crm.customer.service.ICustomerService;
 import com.rainbow.crm.hibernate.ORMDAO;
 import com.rainbow.crm.sales.model.Sales;
 import com.rainbow.crm.sales.service.ISalesService;
@@ -58,9 +63,11 @@ public class LoyaltyService extends AbstractService implements ILoyaltyService{
 	
 
 	@Override
-	public void addToLoyalty(int salesId,CRMContext context) {
+	public void addToLoyalty(String salesDoc,CRMContext context) {
 		ISalesService salesService = (ISalesService)SpringObjectFactory.INSTANCE.getInstance("ISalesService");
-		Sales sales = (Sales) salesService.getById(salesId);
+		Sales sales = new Sales();
+		sales.setBillNumber(salesDoc);
+		sales = (Sales) salesService.getByBusinessKey(sales, context);
 		if(sales.getCustomer() == null) return;
 		
 		Double amount  = sales.getNetAmount() ;
@@ -79,11 +86,32 @@ public class LoyaltyService extends AbstractService implements ILoyaltyService{
 			
 			loyalty.setRedeemed(false);
 			create(loyalty, context);
-			
+			addToCustomerRecords(loyalty,context);
 		}
+	}
+	
+	
+	private void addToCustomerRecords(Loyalty loyalty,CRMContext context)
+	{
+		ICustomerService service = (ICustomerService) SpringObjectFactory.INSTANCE.getInstance("ICustomerService");
+		Customer customer = (Customer)service.getById(loyalty.getCustomer().getId());
+		customer.setLoyaltyPoint((customer.getLoyaltyPoint()==null?0:customer.getLoyaltyPoint().doubleValue()) +  loyalty.getPoints());
+		service.update(customer, context) ;
 		
+	}
+
+	
+	
+	@Override
+	public TransactionResult create(CRMModelObject object, CRMContext context) {
+		Loyalty loyalty = (Loyalty) object ;
 		
-		
+		return super.create(object, context);
+	}
+
+	@Override
+	public TransactionResult update(CRMModelObject object, CRMContext context) {
+		return super.update(object, context);
 	}
 
 	@Override

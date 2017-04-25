@@ -184,6 +184,7 @@ public class CommonUtil {
 	}
 	
 	private static boolean isCorporateUser(User user) {
+		
 		if (CRMConstants.ROLETYPE.CORPADMIN.equals(user.getRoleType())  ||  CRMConstants.ROLETYPE.SYSADMIN.equals(user.getRoleType()))
 				return true;
 		else
@@ -191,6 +192,7 @@ public class CommonUtil {
 	}
 	
 	public static boolean allowAllDivisionAccess(CRMContext ctx)  {
+		if (ctx.isBackgroundProcess() ) return true;
 		User user = ctx.getLoggedInUser();
 		if (isCorporateUser(user)) return true;
 		String allow = isManagerRole(user) ? ConfigurationManager

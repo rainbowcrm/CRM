@@ -1,5 +1,6 @@
 package com.rainbow.crm.hibernate;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.Query;

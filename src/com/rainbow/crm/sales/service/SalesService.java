@@ -281,6 +281,7 @@ public class SalesService extends AbstractionTransactionService implements ISale
 		invObject.setItemLines(sales.getSalesLines());
 		if(sales.getCustomer() != null) {
 			invObject.setAddLoyalty(true);
+			invObject.setSalesDoc(sales.getBillNumber());
 		}
 		CRMMessageSender.sendMessage(invObject);
 		

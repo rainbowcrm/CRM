@@ -19,6 +19,10 @@ public class CRMContext implements IRadsContext,Serializable{
 	Locale locale = Locale.US;
 	User loggedInUser; 
 	
+	boolean fetchDeletedToo;
+	boolean backgroundProcess; 
+
+	
 	@Override
 	public String getUser() {
 		return user;
@@ -106,6 +110,22 @@ public class CRMContext implements IRadsContext,Serializable{
 
 	public void setLoggedInUser(User loggedInUser) {
 		this.loggedInUser = loggedInUser;
+	}
+
+	public boolean isFetchDeletedToo() {
+		return fetchDeletedToo;
+	}
+
+	public void setFetchDeletedToo(boolean fetchDeletedToo) {
+		this.fetchDeletedToo = fetchDeletedToo;
+	}
+
+	public boolean isBackgroundProcess() {
+		return backgroundProcess;
+	}
+
+	public void setBackgroundProcess(boolean backgroundProcess) {
+		this.backgroundProcess = backgroundProcess;
 	}
 	
 	

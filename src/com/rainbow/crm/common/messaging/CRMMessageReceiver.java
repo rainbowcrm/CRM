@@ -14,7 +14,9 @@ import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.inventory.model.InventoryUpdateObject;
 import com.rainbow.crm.inventory.service.IInventoryService;
 import com.rainbow.crm.logger.Logwriter;
+import com.rainbow.crm.loyalty.service.ILoyaltyService;
 import com.rainbow.crm.wishlist.service.IWishListService;
+import com.techtrade.rads.framework.utils.Utils;
 
 public class CRMMessageReceiver implements MessageListener {
 
@@ -39,6 +41,11 @@ public class CRMMessageReceiver implements MessageListener {
 					else
 						wishService.generateSalesLead(inventoryObject, "LOWPRICE");
 				}
+				if (!Utils.isNullString( inventoryObject.getSalesDoc())){
+					ILoyaltyService loyaltyService = (ILoyaltyService)SpringObjectFactory.INSTANCE.getInstance("ILoyaltyService");
+					loyaltyService.addToLoyalty(inventoryObject.getSalesDoc(), makeContext(inventoryObject));
+				}
+				
 			}
 		}catch(Exception ex) {
 			Logwriter.INSTANCE.error(ex);
@@ -46,11 +53,15 @@ public class CRMMessageReceiver implements MessageListener {
 		
 	}
 	
+	
+	
+	
 	private CRMContext makeContext(CRMBusinessModelObject model) {
 		CRMContext context = new CRMContext();
 		context.setLoggedinCompany(model.getCompany().getId());
 		context.setAuthenticated(true);
 		context.setUser(model.getLastUpdateUser());
+		context.setBackgroundProcess(true);
 		return context ;
 	}
 	
