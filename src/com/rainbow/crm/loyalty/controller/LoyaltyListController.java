@@ -56,42 +56,10 @@ public class LoyaltyListController extends CRMListController{
 
 	@Override
 	public PageResult goToEdit(List<ModelObject> objects) {
-		PageResult result = new PageResult();
-		result.setNextPageKey("newloyalty");
-		return result;
-	}
-	
-	public Map <String, String > getTypes() {
-		Map<String, String> ans = new LinkedHashMap<String, String> ();
-		ans.put("null", "---Select one---") ;
-		ans.putAll(GeneralSQLs.getFiniteValues(CRMConstants.FV_ALERT_TYPE));
-		return ans;
-	}
-	
-	public Map <String, String > getStatuses() {
-		Map<String, String> ans = new LinkedHashMap<String, String> ();
-		ans.put("null", "---Select one---") ;
-		ans.putAll(GeneralSQLs.getFiniteValues(CRMConstants.FV_ALERT_STATUS));
-		return ans;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	
-	
-	protected String getFilter(Filter filterData ) {
-		StringBuffer whereCondition = new  StringBuffer();
-		if (filterData!=null  && !Utils.isNullList(filterData.getNodeList()) ) {
-			for (FilterNode node : filterData.getNodeList()) {
-				if (!Utils.isNullString(String.valueOf(node.getValue())) && !"FilterName".equals(node.getField())) {
-					if (whereCondition.length() < 1)
-						whereCondition.append( " where  "  + Utils.initlower(node.getField())  + getOperator(node) +  "'" +  node.getValue() + "'");
-					else
-						whereCondition.append( " and  "  + Utils.initlower(node.getField())  +  getOperator(node) + "'" +  node.getValue() + "'");
-				}
-			}
-		}else {
-			whereCondition.append( " where  status='" + CRMConstants.ALERT_STATUS.OPEN + "' and  (owner is null or owner ='" + getContext().getUser() + "')");
-		}
-		return whereCondition.toString();
-	}
-	
+
+		
 }

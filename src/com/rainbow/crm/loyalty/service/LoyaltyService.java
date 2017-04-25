@@ -79,6 +79,7 @@ public class LoyaltyService extends AbstractService implements ILoyaltyService{
 			loyalty.setCompany(sales.getCompany());
 			loyalty.setDivision(sales.getDivision());
 			loyalty.setCustomer(sales.getCustomer());
+			loyalty.setSales(sales);
 			if(sales.isReturn())  {
 				loyalty.setPoints(loyatyforSale *  -1 );
 			}else
