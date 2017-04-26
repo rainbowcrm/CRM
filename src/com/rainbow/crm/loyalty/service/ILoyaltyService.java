@@ -12,5 +12,8 @@ public interface ILoyaltyService extends IBusinessService{
 	  
 	public void addToLoyalty(String salesDoc,CRMContext context) ;
 	
+	public void editLoyalty(String salesDoc,CRMContext context) ;
+
+	public Loyalty getBySalesBill(String billNumber, CRMContext context) ;
 
 }

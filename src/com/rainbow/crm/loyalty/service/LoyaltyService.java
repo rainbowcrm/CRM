@@ -15,6 +15,7 @@ import java.util.List;
 
 
 
+
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.AbstractService;
 import com.rainbow.crm.common.CRMConstants;
@@ -59,8 +60,41 @@ public class LoyaltyService extends AbstractService implements ILoyaltyService{
 			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
 		return super.listData("Loyalty", from, to, whereCondition, context,sortCriteria);
 	}
+
 	
 	
+	@Override
+	public Loyalty getBySalesBill(String billNumber, CRMContext context) {
+		LoyaltyDAO dao  =(LoyaltyDAO)getDAO();
+		return dao.findBySalesBill(context.getLoggedinCompany(), billNumber, false) ;	
+	}
+
+	@Override
+	public void editLoyalty(String salesDoc,CRMContext context) {
+		ISalesService salesService = (ISalesService)SpringObjectFactory.INSTANCE.getInstance("ISalesService");
+		Sales sales = new Sales();
+		sales.setBillNumber(salesDoc);
+		sales = (Sales) salesService.getByBusinessKey(sales, context);
+		Loyalty existingRecord = getBySalesBill(salesDoc, context);
+		existingRecord.setPoints( existingRecord.getPoints() * -1 ) ;
+		addToCustomerRecords(existingRecord, context);
+		if(sales.getCustomer() == null) return;
+		Double amount  = sales.getNetAmount() ;
+		String amountforLoyaltySTR = ConfigurationManager.getConfig(ConfigurationManager.SLS_AMOUNT_UNIT_LOYALTY,context);
+		if (Utils.isPositiveInt(amountforLoyaltySTR))   {
+			Double  amountforLoyalty = Double.parseDouble(amountforLoyaltySTR);
+			Double loyatyforSale = amount/amountforLoyalty;
+			existingRecord.setDivision(sales.getDivision());
+			existingRecord.setCustomer(sales.getCustomer());
+			if(sales.isReturn())  {
+				existingRecord.setPoints(loyatyforSale *  -1 );
+			}else
+				existingRecord.setPoints(loyatyforSale);
+			existingRecord.setRedeemed(false);
+			update(existingRecord, context);
+			addToCustomerRecords(existingRecord,context);
+		}
+	}
 
 	@Override
 	public void addToLoyalty(String salesDoc,CRMContext context) {

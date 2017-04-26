@@ -24,6 +24,23 @@ public class LoyaltyDAO extends SpringHibernateDAO {
 		return obj;
 	}
 	
+	public Loyalty findBySalesBill(int company , String billNumber, boolean includeDeleted)
+	{
+		
+		Loyalty loyalty = null;
+		Session session = openSession(false);
+		Query query = session.createQuery(" from Loyalty where sales.billNumber = :billNumber and company.id =:company and  deleted= :deleted "   ) ;
+		query.setParameter("billNumber", billNumber);
+		query.setParameter("company", company);
+		query.setParameter("deleted", includeDeleted);
+		List lst = query.list();
+		if (!Utils.isNullList(lst)) {
+			loyalty = (Loyalty) lst.get(0) ;
+		}
+		closeSession(session, false);
+		return loyalty;
+	}
+	
 	public Loyalty findByOwner(int company, String owner , FiniteValue status) {
 		Loyalty loyalty = null;
 		Session session = openSession(false);

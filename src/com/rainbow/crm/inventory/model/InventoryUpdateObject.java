@@ -6,6 +6,7 @@ import java.util.Set;
 
 import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
 import com.rainbow.crm.abstratcs.model.CRMItemLine;
+import com.rainbow.crm.common.BusinessAction;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.division.model.Division;
 
@@ -20,6 +21,8 @@ public class InventoryUpdateObject extends CRMBusinessModelObject implements Ser
 	
 	boolean addLoyalty;
 	String  salesDoc;
+	
+	BusinessAction action ;
 	
 	Set <? extends CRMItemLine> itemLines;
 	public Division getDivision() {
@@ -75,6 +78,12 @@ public class InventoryUpdateObject extends CRMBusinessModelObject implements Ser
 	}
 	public void setSalesDoc(String salesDoc) {
 		this.salesDoc = salesDoc;
+	}
+	public BusinessAction getAction() {
+		return action;
+	}
+	public void setAction(BusinessAction action) {
+		this.action = action;
 	}
 	
 	

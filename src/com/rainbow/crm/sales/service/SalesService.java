@@ -22,6 +22,7 @@ import com.rainbow.crm.address.model.Address;
 import com.rainbow.crm.address.service.IAddressService;
 import com.rainbow.crm.common.AbstractService;
 import com.rainbow.crm.common.AbstractionTransactionService;
+import com.rainbow.crm.common.BusinessAction;
 import com.rainbow.crm.common.CRMAppConfig;
 import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
@@ -279,6 +280,7 @@ public class SalesService extends AbstractionTransactionService implements ISale
 		invObject.setDivision(sales.getDivision());
 		invObject.setAddition(false);
 		invObject.setItemLines(sales.getSalesLines());
+		invObject.setAction(BusinessAction.CREATE);
 		if(sales.getCustomer() != null) {
 			invObject.setAddLoyalty(true);
 			invObject.setSalesDoc(sales.getBillNumber());
