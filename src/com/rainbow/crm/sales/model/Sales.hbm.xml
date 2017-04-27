@@ -28,6 +28,8 @@
       <property name="taxAmount" column="TAX_AMOUNT" type="double"/>
       <property name="netAmount" column="NET_AMOUNT" type="double"/>
       <property name="creditSales" column="CREDIT_SALES" type="boolean"/>
+      <property name="loyaltyRedeemed" column="LOYALTY_REDEMMED" type="java.lang.Double"/>
+      <property name="loyaltyDiscount" column="LOYALTY_DISCOUNT" type="java.lang.Double"/>
       <property name="settled" column="IS_SETTLED" type="boolean"/>
       <property name="voided" column="IS_CANCELLED" type="boolean"/>
       <property name="returned" column="IS_RETURNED" type="boolean"/>

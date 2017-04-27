@@ -19,6 +19,7 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 <responseElement key = "Phone">txtPhone</responseElement>
 <responseElement key = "Email">txtEmail</responseElement>
 <responseElement key = "FullName">txtCustomerName</responseElement>
+<responseElement key = "LoyaltyPoint">txtavailLoyaty</responseElement>
 </responseElements>
 </AjaxGroup>
 <AjaxGroup service ="divisionTerritorySearch">
@@ -198,10 +199,12 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 <Element label = "Comments"  type = "UITextArea" Id = "txtComm"  property ="comments" >
 	 <rows>2</rows> <cols>30</cols>
 </Element>
-
+<Element label = "Available_Loyalty"  type = "UIText" Id = "txtavailLoyaty"  readonly="true" property ="availableLoyalty"  isNumeric= "true" size = "10" />
+<Element label = "Loyalty_Redeemed"  type = "UIText" Id = "txtredeemLoyaty"  property ="loyaltyRedeemed"  isNumeric= "true" size = "10" />
+<Element label = "Loyalty_Discount"  type = "UIText" Id = "txtDiscountLoyaty"  property ="loyaltyDiscount"  isNumeric= "true" size = "10" />
 <Element label = "Total_Amount"  type = "UIText" Id = "txtTotalAmt"   property ="netAmount" isNumeric= "true" readonly="true" size = "10" />
 </Section>
-<Section type ="brk3"/>
+
 </CoreSection>
 <Section type ="summary">
 

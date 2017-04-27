@@ -38,6 +38,11 @@ public class Sales extends CRMBusinessModelObject{
 	boolean voided;
 	boolean returned;
 	String commments;
+	
+	Double loyaltyRedeemed;
+	Double loyaltyDiscount;
+	Double availableLoyalty; 
+	
 	Set<SalesLine> salesLines;
 	
 	boolean isFutureDelivery;
@@ -257,6 +262,24 @@ public class Sales extends CRMBusinessModelObject{
 	}
 	public void setOriginalDate(String originalDate) {
 		this.originalDate = originalDate;
+	}
+	public Double getLoyaltyRedeemed() {
+		return loyaltyRedeemed;
+	}
+	public void setLoyaltyRedeemed(Double loyaltyRedeemed) {
+		this.loyaltyRedeemed = loyaltyRedeemed;
+	}
+	public Double getLoyaltyDiscount() {
+		return loyaltyDiscount;
+	}
+	public void setLoyaltyDiscount(Double loyaltyDiscount) {
+		this.loyaltyDiscount = loyaltyDiscount;
+	}
+	public Double getAvailableLoyalty() {
+		return availableLoyalty;
+	}
+	public void setAvailableLoyalty(Double availableLoyalty) {
+		this.availableLoyalty = availableLoyalty;
 	}
 	
 	
