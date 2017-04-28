@@ -118,8 +118,13 @@ public class LoyaltyService extends AbstractService implements ILoyaltyService{
 				loyalty.setPoints(loyatyforSale *  -1 );
 			}else
 				loyalty.setPoints(loyatyforSale);
-			
-			loyalty.setRedeemed(false);
+			if (sales.getLoyaltyDiscount() < 0 )
+				loyalty.setRedeemed(false);
+			else {
+				loyalty.setRedeemed(true);
+				double redeemedLoyalty = sales.getLoyaltyRedeemed();
+				loyalty.setPoints(loyalty.getPoints() - redeemedLoyalty);
+			}
 			create(loyalty, context);
 			addToCustomerRecords(loyalty,context);
 		}

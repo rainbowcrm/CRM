@@ -91,6 +91,10 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 	        <property>email</property>
 	        <control>txtEmail</control>
 	     </Field>
+	      <Field>
+	        <property>loyaltyPoint</property>
+	        <control>txtavailLoyaty</control>
+	     </Field>
 	 </SupplementaryFields>
 	</Element>
 	<Element caption = "New_Customer"  type = "UIButton"    Id = "btnNewCustomer" showInPrevCol ="true" style="button" onClickJS = "createNewCustomer('newcustDL',this);"  />
@@ -207,7 +211,7 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 
 </CoreSection>
 <Section type ="summary">
-
+<Element caption = "Get_Loyalty_Discount"  type = "UIButton"    Id = "btnInvoice"  style="button"  fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="getLoayltyDiscount"   />
 <Element caption = "Print_Invoice"  type = "UIButton"    Id = "btnInvoice"  style="button" onClickJS = "showPrintDialog('newprintpop','SalesInvoice');"  rendered = "Controller.isUpdateMode" />
 <Element caption = "Create_DO"  type = "UIButton"    Id = "btnInvoice"  style="button" rendered = "Controller.isUpdateMode" fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="createDO"   />
 </Section>

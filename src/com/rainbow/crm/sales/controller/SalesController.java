@@ -16,9 +16,11 @@ import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMDBException;
 import com.rainbow.crm.common.CRMTransactionController;
+import com.rainbow.crm.common.CRMValidator;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
+import com.rainbow.crm.config.service.ConfigurationManager;
 import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.database.LoginSQLs;
 import com.rainbow.crm.distributionorder.service.IDistributionOrderService;
@@ -27,6 +29,7 @@ import com.rainbow.crm.division.service.IDivisionService;
 import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.sales.model.Sales;
 import com.rainbow.crm.sales.service.ISalesService;
+import com.rainbow.crm.sales.validator.SalesErrorCodes;
 import com.rainbow.crm.user.model.User;
 import com.rainbow.crm.user.service.IUserService;
 import com.techtrade.rads.framework.context.IRadsContext;
@@ -57,7 +60,26 @@ public class SalesController extends CRMTransactionController{
 			Sales sales =(Sales)getService().getById(object.getPK());
 			distributionservice.createDOfromSalesOrder(sales, (CRMContext)getContext()) ;
 			return new PageResult();
-		}else 
+		}else if ( "getLoayltyDiscount".equals(actionParam)  ) {
+			 Sales sales = (Sales) object ;
+			 if(sales.getLoyaltyRedeemed() != null && sales.getLoyaltyRedeemed().doubleValue() > 0 ) {
+				 PageResult result =new PageResult();
+				 double loyaltyRedeeming = sales.getLoyaltyRedeemed().doubleValue();
+				 double avaibaleLoyalty = sales.getAvailableLoyalty();
+				 if (loyaltyRedeeming > avaibaleLoyalty)  {
+					 RadsError error  = CRMValidator.getErrorforCode(((CRMContext)getContext()).getLocale(),
+							 SalesErrorCodes.REDEEM_LOYALTY_GREATER_THAN_AVLBLE);
+					 result.addError(error);
+					 return result;
+				 }
+				 String loyaltyDiscount = ConfigurationManager.getConfig(ConfigurationManager.REDEEM_LOYALTY,(CRMContext)getContext());
+				 Double loyaltDiscAmount = Double.parseDouble(loyaltyDiscount) * loyaltyRedeeming ;
+				 sales.setLoyaltyDiscount(loyaltDiscAmount);
+				 result.setObject(sales);
+				 return result;
+			 }
+			 return new PageResult();
+		}else
 			return super.submit(object, actionParam);
 	}
 

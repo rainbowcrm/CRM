@@ -9,6 +9,10 @@ function calculateAll() {
 	var totDiscElem = document.getElementById('txtDiscount');
 	netPrice -=  totDiscElem.value;
 	
+	
+	var loyaltyDiscElement = document.getElementById('txtDiscountLoyaty');
+	netPrice -=  loyaltyDiscElement.value;
+	
 	var taxPercent = document.getElementById('txtTaxPerc').value;
 	var taxAmt = netPrice * taxPercent / 100;
 	document.getElementById('txtTaxAmt').value = taxAmt;
