@@ -1,0 +1,17 @@
+<Context  >
+
+<Resource name="jdbc/mysqldb"
+      auth="Container"
+  factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+      type="javax.sql.DataSource"
+      driverClassName="com.mysql.jdbc.Driver"
+      url="jdbc:mysql://primuscrm.cneztatzjlvl.ap-south-1.rds.amazonaws.com:3306/CRMSAAS"
+      username="crmadmin"
+      password="dbadmin888"
+      maxActive="20"
+      maxIdle="30"
+      maxWait="5"
+	  
+  />
+  
+  </Context>

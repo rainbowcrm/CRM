@@ -53,6 +53,8 @@ id="WebApp_ID" version="3.0">
        <res-auth>Container</res-auth>     
  </resource-ref>
 
+
+
 	<!-- <filter>
         <filter-name>log4jServletFilter</filter-name>
         <filter-class>org.apache.logging.log4j.web.Log4jServletFilter</filter-class>
@@ -86,4 +88,10 @@ id="WebApp_ID" version="3.0">
         <param-value>appWithJndiSelector</param-value>
     </context-param>
      -->
+     
+  <error-page>
+    <!-- Uncaught exception -->
+    <error-code>500</error-code>
+    <location>/rdscontroller?page=login</location>
+</error-page>   
 </web-app>
