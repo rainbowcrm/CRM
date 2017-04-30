@@ -5,6 +5,7 @@
 </ExternalizeFacade>
 <Properties>
 <appURL>http://localhost:8080/</appURL>
+<portalPrefix>primuscrm</portalPrefix>
 <bootstrapFolder>./bootstrap</bootstrapFolder>
 <useGoogleforGraphs>false</useGoogleforGraphs>
 </Properties>
