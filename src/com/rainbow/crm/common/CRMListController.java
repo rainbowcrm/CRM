@@ -106,6 +106,13 @@ public abstract class CRMListController  extends ListController{
 		return ans;
 	}
 	
+	
+	@Override
+	public long getTotalNumberofRecords() {
+		long totalRecords = getService().getTotalRecordCount((CRMContext) getContext());
+		return totalRecords;
+	}
+	
 	public int getTotalNumberofPages() {
 		long totalRecords = getService().getTotalRecordCount((CRMContext) getContext());
 		int rem = (int)totalRecords % recordsPerPage ;

@@ -6,6 +6,8 @@
 <Properties>
 <appURL>http://localhost:8080/</appURL>
 <portalPrefix></portalPrefix>
+<!-- AWS entry <appURL>http://ec2-35-154-225-199.ap-south-1.compute.amazonaws.com:8080/</appURL>
+<portalPrefix>primuscrm</portalPrefix>  -->
 <bootstrapFolder>./bootstrap</bootstrapFolder>
 <useGoogleforGraphs>false</useGoogleforGraphs>
 </Properties>
@@ -138,6 +140,8 @@
 <Page id = "newitem" definition ="/resources/pages/item/newitem.xml" modelclass = "com.rainbow.crm.item.model.Item" >
 </Page>
 <Page id = "items" definition ="/resources/pages/item/itemList.xml" modelclass = "com.rainbow.crm.item.model.Item" >
+</Page>
+<Page id = "skucompletelist" definition ="/resources/pages/item/skucompletelist.xml" modelclass = "com.rainbow.crm.item.model.SkuComplete" >
 </Page>
 <Page id = "itemimages" definition ="/resources/pages/item/itemimages.xml" modelclass = "com.rainbow.crm.item.model.ItemImageSet" >
 </Page>

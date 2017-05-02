@@ -137,9 +137,11 @@ public class Sku  extends CRMBusinessModelObject{
 	public void setPromotionPrice(Double promotionPrice) {
 		this.promotionPrice = promotionPrice;
 	}
+	@RadsPropertySet(excludeFromJSON=true)
 	public String getSpecification() {
 		return specification;
 	}
+	@RadsPropertySet(excludeFromJSON=true)
 	public void setSpecification(String specification) {
 		this.specification = specification;
 	}
@@ -170,10 +172,12 @@ public class Sku  extends CRMBusinessModelObject{
 		return FiniteValueManager.INSTANCE.getFiniteValueDesc(itemClass);
 	}
 
+	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
 	public Item getItem() {
 		return item;
 	}
 
+	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
 	public void setItem(Item item) {
 		this.item = item;
 	}
