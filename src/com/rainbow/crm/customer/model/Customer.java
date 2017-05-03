@@ -31,6 +31,7 @@ public class Customer extends CRMBusinessModelObject{
 	String fileName;
 	String fileWithLink;
 	
+	String base64Image; 
 	
 	public String getFullName() {
 		if (Utils.isNullString(fullName)) {
@@ -163,6 +164,14 @@ public class Customer extends CRMBusinessModelObject{
 
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}
+
+	public String getBase64Image() {
+		return base64Image;
+	}
+
+	public void setBase64Image(String base64Image) {
+		this.base64Image = base64Image;
 	}
 	
 	
