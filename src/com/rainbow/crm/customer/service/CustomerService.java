@@ -84,7 +84,14 @@ public class CustomerService extends AbstractService implements ICustomerService
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
 			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
-		return super.listData("Customer", from, to, whereCondition, context,sortCriteria);
+		List<CRMModelObject> customers = super.listData("Customer", from, to, whereCondition, context,sortCriteria);
+		customers.forEach( customer ->  {  
+			if (!Utils.isNullString(((Customer)customer).getPhotoFile()))  {
+			loadSupplymentoryURL((Customer)customer);
+			}
+		});
+		
+		return customers;
 	}
 
 	
@@ -105,7 +112,7 @@ public class CustomerService extends AbstractService implements ICustomerService
 	@Override
 	@Transactional 
 	public TransactionResult update(CRMModelObject object, CRMContext context) {
-		if (((Customer)object).getImage()  != null )
+		if (((Customer)object).getImage()  != null || !Utils.isNullString(((Customer)object).getBase64Image()) )
 			  uploadFile(((Customer)object), context);
 		return super.update(object, context);
 	}

@@ -53,6 +53,25 @@ public class LoginSQLs {
 	}
 	
 
+	public static void updateMobileLogin(String user, String notificiationID, String authToken){
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet rs  = null ;
+		try {
+			connection  = ConnectionCreater.getConnection() ;
+			String sql = " UPDATE LOGIN_RECORDS SET MOBILE_NOTIFICATION_ID = ? , IS_MOBILE_LOGIN = true WHERE USER_ID = ? AND TOKEN_ID = ? " ;
+			statement = connection.prepareStatement(sql) ;
+			statement.setString(1,notificiationID);
+			statement.setString(2,user);
+			statement.setString(3, authToken);
+			statement.executeUpdate() ;
+			Logwriter.INSTANCE.debug("Updating notification ID for user" + user);
+		}catch(SQLException ex) {
+			Logwriter.INSTANCE.error(ex);
+		}finally {
+			ConnectionCreater.close(connection, statement, rs);	
+		}
+	}
 	
 	
 	public static void updateLogin(String user, String token, String session){
