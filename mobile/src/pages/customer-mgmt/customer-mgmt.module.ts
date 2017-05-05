@@ -4,6 +4,9 @@ import { IonicModule } from 'ionic-angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule }   from '@angular/forms';
 import { CommonPSModule }   from '../../common/common-ps.module';
+import { Contacts} from '@ionic-native/contacts';
+import { Camera} from '@ionic-native/camera';
+import { ImagePickerService } from '../../plugins/';
 
 
 @NgModule({
@@ -23,6 +26,6 @@ import { CommonPSModule }   from '../../common/common-ps.module';
     CustomerAddPage,
     CustomerListPage
   ],
-  providers: []
+  providers: [Contacts, Camera, ImagePickerService]
 })
 export class CustomerMgmtModule {}

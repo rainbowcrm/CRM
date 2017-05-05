@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NavParams, NavController, ToastController, AlertController } from 'ionic-angular';
-
 import { Customer, CustomerAddPage, CustomerSearchRequest, CustomerSearchResponse } from '../';
 import { HTTPService, Loader } from '../../../providers/';
+import { ContactService } from '../../../plugins/';
 
 /*
 
@@ -19,15 +19,18 @@ export class CustomerListPage {
   private response: CustomerSearchResponse;
   private filter: Array<Object>;
   private pageNumber: number;
-  private hasMoreResults: boolean;
+  private fetchedResults: number;
+  private numberOfResults: number;
 
   constructor(private params: NavParams,private http:HTTPService,
               private navCtrl: NavController, private loader:Loader,
-              private toastCtrl: ToastController, private alertCtrl:AlertController) {
+              private toastCtrl: ToastController, private alertCtrl:AlertController,
+              private contactService: ContactService) {
     this.customers = this.params.get('customers');
     this.filter = this.params.get('filter');
     this.pageNumber = 0;
-    this.hasMoreResults = true;
+    this.fetchedResults = this.params.get('fetchedResults');
+    this.numberOfResults = this.params.get('numberOfResults');
   }
 
   ionViewDidLoad() {
@@ -52,7 +55,7 @@ export class CustomerListPage {
   }
 
   doSearchMoreCustomer(infiniteScroll) {
-      if(!this.hasMoreResults){
+      if(this.fetchedResults >= this.numberOfResults ){
         infiniteScroll.complete();
         return;
       }
@@ -74,11 +77,11 @@ export class CustomerListPage {
        return ;
     }
     if(this.response.dataObject.length == 0){
-      this.hasMoreResults = false;
       infiniteScroll.complete();
        return ;
     }
     this.customers = this.customers.concat(this.response.dataObject);
+    this.fetchedResults += this.response.fetchedRecords;
     infiniteScroll.complete();
   }
  
@@ -93,6 +96,10 @@ export class CustomerListPage {
       return;
     }
      this.navCtrl.push(CustomerAddPage,{customer: customer});
+  }
+
+  saveCustomer(customer: Customer){
+     this.contactService.saveContact(customer);
   }
 
   deleteCustomer(customer: Customer){

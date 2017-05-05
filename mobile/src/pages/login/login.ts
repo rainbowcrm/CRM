@@ -21,7 +21,7 @@ export class LoginPage {
   constructor(public navCtrl: NavController,private http:HTTPService,
     private loader:Loader) {
       this.model.password="abc123";
-      this.model.username="sonu@atstar";
+      this.model.username="manager@atstar";
     }
 
   ionViewDidLoad() {
