@@ -1,8 +1,13 @@
 package com.rainbow.crm.customer.service;
 
+import java.io.ByteArrayInputStream;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+
 import org.springframework.transaction.annotation.Transactional;
+
+import sun.misc.BASE64Decoder;
 
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.AbstractService;
@@ -40,13 +45,28 @@ public class CustomerService extends AbstractService implements ICustomerService
 
 	private boolean uploadFile(Customer customer, CRMContext context)
 	{
+		
 		String fileExtn = CommonUtil.getFileExtn(customer.getFileName());
 		String fileName =  new String("cs" + customer.getId());
 		fileName.replace(" ", "_")    ; 
 	//	doc.setDocName(fileName +  "."  + fileExtn);
 		customer.setPhotoFile( "//" +  context.getLoggedinCompanyCode() +  "//custs//" + fileName +  "."  + fileExtn );
 		//customer.setPhotoFile(fileName +  "."  + fileExtn );
-		CommonUtil.uploadFile(customer.getImage(), fileName +  "."  + fileExtn  , context, "custs");
+		if(customer.getImage() != null) 
+			CommonUtil.uploadFile(customer.getImage(), fileName +  "."  + fileExtn  , context, "custs");
+		else{
+			byte[] imageByte;
+			try  {
+				BASE64Decoder decoder = new BASE64Decoder();
+				imageByte = decoder.decodeBuffer(customer.getBase64Image());
+				ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
+				bis.close();
+				CommonUtil.uploadFile(imageByte, fileName +  "."  + fileExtn  , context, "custs");
+			}catch(Exception ex) {
+				Logwriter.INSTANCE.error(ex);
+			}
+		}
+			
 		return true;
 	}
 	private void loadSupplymentoryURL(Customer customer)
@@ -64,7 +84,14 @@ public class CustomerService extends AbstractService implements ICustomerService
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
 			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
-		return super.listData("Customer", from, to, whereCondition, context,sortCriteria);
+		List<CRMModelObject> customers = super.listData("Customer", from, to, whereCondition, context,sortCriteria);
+		customers.forEach( customer ->  {  
+			if (!Utils.isNullString(((Customer)customer).getPhotoFile()))  {
+			loadSupplymentoryURL((Customer)customer);
+			}
+		});
+		
+		return customers;
 	}
 
 	
@@ -72,7 +99,7 @@ public class CustomerService extends AbstractService implements ICustomerService
 	@Transactional 
 	public TransactionResult create(CRMModelObject object, CRMContext context) {
 		TransactionResult result  = super.create(object, context);
-		if (((Customer)object).getImage()  != null )  {
+		if (((Customer)object).getImage()  != null || !Utils.isNullString(((Customer)object).getBase64Image()))  {
 			Customer loadedCust = (Customer) getByBusinessKey(object, context);
 			((Customer)object).setId(loadedCust.getId());
 			uploadFile(((Customer)object), context); 
@@ -85,7 +112,7 @@ public class CustomerService extends AbstractService implements ICustomerService
 	@Override
 	@Transactional 
 	public TransactionResult update(CRMModelObject object, CRMContext context) {
-		if (((Customer)object).getImage()  != null )
+		if (((Customer)object).getImage()  != null || !Utils.isNullString(((Customer)object).getBase64Image()) )
 			  uploadFile(((Customer)object), context);
 		return super.update(object, context);
 	}

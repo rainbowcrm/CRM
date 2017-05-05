@@ -28,6 +28,7 @@ import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMDBException;
 import com.rainbow.crm.common.CRMValidator;
+import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.Externalize;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.common.documents.PrintDocument;
@@ -366,14 +367,11 @@ public class SalesService extends AbstractionTransactionService implements ISale
 
 	@Override
 	public String generateInvoice(Sales sales,CRMContext context) {
-		VelocityEngine ve = new VelocityEngine();
 		Externalize externalize = new Externalize();
         try {
         IUserService userService = (IUserService)SpringObjectFactory.INSTANCE.getInstance("IUserService");
         User user = (User)userService.getById(context.getUser());
-        String path = CRMAppConfig.INSTANCE.getProperty("VelocityTemplatePath");
-        ve.setProperty("file.resource.loader.path", path);
-        ve.init();
+        VelocityEngine ve = CommonUtil.getVelocityEngine();
         Template t = ve.getTemplate("salesInvoice.vm" );
         VelocityContext velocityContext = new VelocityContext();
         velocityContext.put("companyName", sales.getCompany().getName());

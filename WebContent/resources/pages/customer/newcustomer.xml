@@ -29,7 +29,7 @@ Controller = "com.rainbow.crm.customer.controller.CustomerController">
 	<Element label = "Phone"  type = "UIText" Id = "txtPhone" size="30" isMandatory="true" property ="Phone" />
 	<Element label = "Loyalty_Point"  type = "UIText" Id = "txtLPoint" size="30"  readonly="true" property ="loyaltyPoint" />
 	<Element label = "Credit_Limit"  type = "UIText" Id = "txtCreditLimit" size="30"  isNumeric="true"  property ="CreditLimit" />
-	<Element label = "Photo" type = "UIFileUpload" Id = "txtPhoto3" property ="image" maxSize="300720"
+	<Element label = "Photo" type = "UIFileUpload" Id = "txtPhoto3" property ="image" maxSize="30720"
    multiple ="false"  fileNameProperty="fileName"   onChangeJS ="readURL(this,'idIMG3')" accept= ".png, .jpg, .jpeg"  />
    <Element label = ""  type = "UIImage" Id = "idIMG3"  height = "200" weight ="200" src= "#" property ="fileWithLink" />
 </Section>

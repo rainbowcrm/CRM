@@ -126,9 +126,11 @@ public class Item extends CRMBusinessModelObject{
 	public void setMaxDiscount(Double maxDiscount) {
 		this.maxDiscount = maxDiscount;
 	}
+	@RadsPropertySet(excludeFromJSON =true)
 	public String getSpecification() {
 		return specification;
 	}
+	@RadsPropertySet(excludeFromJSON =true)
 	public void setSpecification(String specification) {
 		this.specification = specification;
 	}

@@ -17,6 +17,7 @@ import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMDBException;
 import com.rainbow.crm.common.CRMTransactionController;
 import com.rainbow.crm.common.CRMValidator;
+import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
@@ -87,7 +88,7 @@ public class SalesController extends CRMTransactionController{
 	public IRadsContext generateContext(HttpServletRequest request,HttpServletResponse response) {
 		ctx =  request.getServletContext() ;
 		resp = response ;
-		return LoginSQLs.loggedInUser(request.getSession().getId());
+		return CommonUtil.generateContext(request.getSession().getId());
 	}
 	
 	public ISalesService getService() {

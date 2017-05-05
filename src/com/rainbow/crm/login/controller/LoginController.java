@@ -47,6 +47,25 @@ public class LoginController extends  GeneralController{
 		LoginSQLs.registerLogin(context);
 	}
 	
+
+	
+	
+	
+	@Override
+	public PageResult submit(ModelObject object, String actionParam) {
+		if (Utils.isNullString(actionParam))
+			return submit(object);
+		else if("regMobileNotificationID".equalsIgnoreCase(actionParam)) {
+			PageResult result = new PageResult();
+			Login login=(Login) object;
+			login.setMobileLogin(true);
+			LoginSQLs.updateMobileLogin(login.getUsername(), login.getMobileNotificationId(),login.getAuthToken());
+			result.setObject(login);
+			return result;
+		}
+		return super.submit(object, actionParam);
+	}
+
 	@Override
 	public PageResult submit(ModelObject object) {
 		PageResult res = new PageResult(); 

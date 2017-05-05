@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.category.model.Category;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.rainbow.crm.item.model.Sku;
@@ -69,4 +70,7 @@ public class SkuDAO extends SpringHibernateDAO {
 		return lst;
 	}
 
+	
+	
+	
 }
