@@ -323,14 +323,11 @@ public class QueryService implements IQueryService{
 	
 	@Override
 	public String getVelocityConverted(QueryReport report, CRMContext context) {
-		VelocityEngine ve = new VelocityEngine();
 		Externalize externalize = new Externalize();
         try {
         User user = context.getLoggedInUser();
         Company company= CommonUtil.getCompany(context.getLoggedinCompany());
-        String path = CRMAppConfig.INSTANCE.getProperty("VelocityTemplatePath");
-        ve.setProperty("file.resource.loader.path", path);
-        ve.init();
+        VelocityEngine ve = CommonUtil.getVelocityEngine();
         Template t = ve.getTemplate("queryResult.vm" );
         VelocityContext velocityContext = new VelocityContext();
         velocityContext.put("companyName", company.getName());

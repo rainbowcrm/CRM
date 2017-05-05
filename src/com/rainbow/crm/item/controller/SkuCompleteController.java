@@ -31,8 +31,7 @@ public class SkuCompleteController  extends SkuController{
 		SkuComplete itemComplete = new SkuComplete((Sku) thisObject);
 		List<String > imageURLs = ItemImageSQL.getAllItemImages(itemComplete.getId());
 		if(!Utils.isNullList(imageURLs)) {
-			String path = ConfigurationManager.getConfig(
-					ConfigurationManager.IMAGE_SERVER_URL, (CRMContext)getContext());
+			String path = CRMAppConfig.INSTANCE.getProperty("doc_server");
 			itemComplete.setImage1URL(path + "/" + imageURLs.get(0).toString());
 			if(imageURLs.size() > 1) 
 				itemComplete.setImage2URL(path + "/" + imageURLs.get(1).toString());

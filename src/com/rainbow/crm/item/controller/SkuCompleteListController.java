@@ -35,11 +35,11 @@ public class SkuCompleteListController extends SkuListController {
 					try  {
 					String path = CRMAppConfig.INSTANCE.getProperty("doc_server");
 					String companyCode = ((CRMContext) getContext()).getLoggedinCompanyCode();
-					itemComplete.setImage1URL(path +"/" + companyCode+ "/" + "itemimages/" + "/" + imageURLs.get(0).toString());
+					itemComplete.setImage1URL(path +"/" + companyCode+ "/" + "itemimages/"  + imageURLs.get(0).toString());
 					if(imageURLs.size() > 1) 
-						itemComplete.setImage2URL(path +"/" + companyCode+ "/" + "itemimages/" + "/" + imageURLs.get(1).toString());
+						itemComplete.setImage2URL(path +"/" + companyCode+ "/" + "itemimages/"  + imageURLs.get(1).toString());
 					if(imageURLs.size() > 2) 
-						itemComplete.setImage3URL(path +"/" + companyCode+ "/" + "itemimages/" + "/" + imageURLs.get(2).toString());
+						itemComplete.setImage3URL(path +"/" + companyCode+ "/" + "itemimages/"  + imageURLs.get(2).toString());
 					}catch(Exception ex) {
 						Logwriter.INSTANCE.error(ex);
 					}

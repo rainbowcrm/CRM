@@ -27,9 +27,12 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
+
+
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
+import org.apache.velocity.app.VelocityEngine;
 
 import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
@@ -83,6 +86,25 @@ public class CommonUtil {
 		    	
 		    }
 		    return true ;
+	}
+	
+	public static VelocityEngine getVelocityEngine()
+	{
+		VelocityEngine ve = new VelocityEngine();
+		try {
+		
+		 String path = CRMAppConfig.INSTANCE.getProperty("VelocityTemplatePath");
+        ve.setProperty("file.resource.loader.path", path);
+        ve.setProperty("runtime.log.logsystem.class", "org.apache.velocity.runtime.log.SimpleLog4JLogSystem");
+        ve.setProperty("runtime.log.logsystem.log4j.category", "velocity");
+        ve.setProperty("runtime.log.logsystem.log4j.logger", "velocity");
+        ve.init();
+		}catch(Exception ex)
+		{
+			Logwriter.INSTANCE.error(ex);
+		}
+	    return ve;     
+		
 	}
 	
 	public static void uploadFile (byte[] bytes, String fileName, CRMContext context, String subFolder )
