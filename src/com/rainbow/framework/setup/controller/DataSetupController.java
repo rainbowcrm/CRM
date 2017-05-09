@@ -14,12 +14,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.rainbow.crm.common.CRMAppConfig;
 import com.rainbow.crm.common.CRMContext;
+import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.IBusinessService;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
 import com.rainbow.crm.database.LoginSQLs;
 import com.rainbow.crm.logger.Logwriter;
+import com.rainbow.crm.user.model.User;
 import com.rainbow.framework.setup.dao.DataSetupSQL;
 import com.rainbow.framework.setup.model.DataLoader;
 import com.rainbow.framework.setup.model.Metadata;
@@ -112,14 +114,15 @@ public class DataSetupController extends GeneralController{
 	public IRadsContext generateContext(HttpServletRequest request,HttpServletResponse response) {
 		ctx =  request.getServletContext() ;
 		resp = response ;
-		return LoginSQLs.loggedInUser(request.getSession().getId());
+		return CommonUtil.generateContext(request, response);
 	}
 	
 	
 	
 	@Override
 	public IRadsContext generateContext(String authToken) {
-		return LoginSQLs.loggedInUser(authToken);
+		return CommonUtil.generateContext(authToken) ;
+		//return LoginSQLs.loggedInUser(authToken);
 	}
 
 	public String getCompanyName() {
