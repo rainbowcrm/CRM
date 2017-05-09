@@ -14,19 +14,46 @@
 
 <ion-content padding>
  <ion-card *ngFor="let customer of customers">
-  <ion-card-header [class.deleted-customer]="customer.Deleted == 'true'">
-    <ion-icon name="person"></ion-icon>
-    {{customer.FullName}}
-    <ion-icon name="trash" *ngIf="customer.Deleted!='true'" class="align-right" (click)="deleteCustomer(customer)"></ion-icon>
-  </ion-card-header>
-  <ion-card-content (click)="editCustomer(customer)">
+
+  <ion-item>
+    <ion-avatar item-left>
+      <img src="customer.Image" *ngIf="customer.Image && customer.Image.length>0">
+      <img src="assets/img/no_image.png" *ngIf="!customer.Image || customer.Image.length==0">
+    </ion-avatar>
+    <h2>{{customer.FullName}}</h2>
+    <p *ngIf="customer.Deleted=='true'">Deleted</p>
+  </ion-item>
+
+
+  <ion-card-content>
     <div *ngIf="customer.Email"><strong>Email:</strong>{{customer.Email}}</div>
     <div *ngIf="customer.Phone"><strong>Phone:</strong>{{customer.Phone}}</div>
     <div><strong>Address:</strong>{{getCustomerAddress(customer)}}</div>
     <div *ngIf="customer.Description"><strong>Phone:</strong>{{customer.Description}}</div>
   </ion-card-content>
- </ion-card> 
- <ion-infinite-scroll (ionInfinite)="doSearchMoreCustomer($event)">
+
+  <ion-row>
+    <ion-col *ngIf="customer.Deleted!='true'" (click)="deleteCustomer(customer)">
+      <button ion-button icon-left clear small>
+        <ion-icon name="trash"></ion-icon>
+        <div>Delete</div>
+      </button>
+    </ion-col>
+    <ion-col *ngIf="customer.Deleted!='true'" (click)="editCustomer(customer)">
+      <button ion-button icon-left clear small>
+        <ion-icon name="create"></ion-icon>
+        <div>Edit</div>
+      </button>
+    </ion-col>
+    <ion-col *ngIf="customer.Deleted!='true'" (click)="saveCustomer(customer)">
+      <button ion-button icon-left clear small>
+        <ion-icon name="share-alt"></ion-icon>
+        <div>Save</div>
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-card>
+ <ion-infinite-scroll (ionInfinite)="doSearchMoreCustomer($event)" *ngIf="fetchedResults < numberOfResults" >
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
  </ion-infinite-scroll>
 </ion-content>

@@ -15,7 +15,7 @@ export class HTTPService {
   private url; 
   private authToken;
   constructor(public http: Http) {
-    this.url = 'http://localhost:8080/rdscontroller';//TO BE REMOVED.. may be config
+    this.url = 'http://ec2-35-154-225-199.ap-south-1.compute.amazonaws.com:8080/primuscrm/rdscontroller';//TO BE REMOVED.. may be config
   }
   processServerRequest (restType:string,data:any,auth?:boolean): Observable<any[]> {
     if(auth){
@@ -23,7 +23,6 @@ export class HTTPService {
     }
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-     console.log(JSON.stringify(data));
     switch(restType){
       case "get": return this.http.get(this.url)
                     .map(this.extractData)

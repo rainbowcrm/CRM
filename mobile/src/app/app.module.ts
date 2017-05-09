@@ -9,6 +9,10 @@ import { HomePage } from '../pages/home/home';
 import { ContactMgmtModule } from '../pages/contact-mgmt/contact-mgmt.module';
 
 import { HTTPService,Loader } from '../providers/';
+import { ContactService, PushService, SecureStorageService } from '../plugins/';
+import { Push} from '@ionic-native/push';
+import { SecureStorage } from '@ionic-native/secure-storage';
+import { SplashScreen } from '@ionic-native/splash-screen';
 
 @NgModule({
   declarations: [
@@ -27,6 +31,7 @@ import { HTTPService,Loader } from '../providers/';
     PSApp,
     HomePage
   ],
-  providers: [HTTPService, Loader]
+  providers: [HTTPService, Loader, ContactService, SecureStorage, SecureStorageService,
+                Push,PushService, SplashScreen]
 })
 export class AppModule {}

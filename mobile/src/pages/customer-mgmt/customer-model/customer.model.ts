@@ -15,10 +15,11 @@ export class Customer{
     AlternatePhone:string;
     Id: string;
     Deleted: string;
+    Base64Image: string;
+    Filename: string;
 }
 
 export class CustomerSearchRequest extends BaseSearchRequest{
-    
 }
 
 export class CustomerDeleteRequest extends BaseSearchRequest{
@@ -27,6 +28,8 @@ export class CustomerDeleteRequest extends BaseSearchRequest{
 export class CustomerSearchResponse{
     result: string;
     dataObject:Array<Customer>;
+    fetchedRecords: number;   
+    availableRecords: number;
 }
 
 export class CustomerAddRequest{

@@ -3,6 +3,7 @@ import { NavController, ToastController , NavParams} from 'ionic-angular';
 
 import { Customer, CustomerAddRequest, CustomerAddResponse } from '../';
 import { HTTPService, Loader } from '../../../providers/';
+import { ImagePickerService } from '../../../plugins/';
 
 /*
   Generated class for the CustomerAdd page.
@@ -20,16 +21,22 @@ export class CustomerAddPage {
   private errorMessage:string;
   private isEdit: boolean;
   private pageTitle: string;
+  private customerImage: string;
 
   constructor(public navCtrl: NavController,private http:HTTPService,
     private loader:Loader, private toastCtrl: ToastController,
-    private params: NavParams) {
+    private params: NavParams, private imagePicker: ImagePickerService) {
       this.model = this.params.get('customer');
       if(this.model) {
         this.isEdit = true;
+        if(this.model.Base64Image && this.model.Base64Image.length > 0){
+           let base64Image = 'data:image/jpeg;base64,' + this.model.Base64Image;
+           this.customerImage = base64Image;
+        }
       }else{
         this.model = new Customer();
       }
+      this.model.Filename = "test.jpg"
     }
 
   ionViewDidLoad() {
@@ -47,6 +54,21 @@ export class CustomerAddPage {
     this.http.processServerRequest("post",addCustomerReq, true).subscribe(
                      res => this.customerAddSuccess(res),
                      error =>  this.customerAddError(error));  
+  }
+
+  addCustomerImage():void{
+    this.imagePicker.getOnePicture(100, 100).then((result)=>{
+      let base64Image = 'data:image/jpeg;base64,' + result;
+      this.customerImage = base64Image;
+      this.model.Base64Image = result;
+    },(err)=>{
+        let toast = this.toastCtrl.create({
+        message: 'Failed to load the image',
+        duration: 2000,
+        position: 'top'
+       });
+       toast.present();
+    })
   }
 
   customerAddSuccess(response):void{

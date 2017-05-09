@@ -43,6 +43,7 @@ export class CustomerHomePage {
   }
 
   doSearch():void{
+      this.loader.presentLoader();
       this.errorMessage = null;
       this.request = new CustomerSearchRequest();
       this.request.currentmode = 'READ';
@@ -77,7 +78,9 @@ export class CustomerHomePage {
        this.NoCustomersFoundToast();
        return ;
     }
-    this.navCtrl.push(CustomerListPage, {customers:this.response.dataObject, filter:this.request.filter});
+    this.navCtrl.push(CustomerListPage, {customers:this.response.dataObject, 
+                                          filter:this.request.filter, fetchedResults: this.response.fetchedRecords,
+                                        numberOfResults:this.response.availableRecords});
   }
  
 

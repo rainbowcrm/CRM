@@ -1,6 +1,6 @@
 {
-  "name": "ionic-app-base",
-  "author": "Ionic Framework",
+  "name": "Primus_Solution",
+  "author": "Sandeep Pande",
   "homepage": "http://ionicframework.com/",
   "private": true,
   "scripts": {
@@ -22,12 +22,16 @@
     "@angular/platform-browser": "2.4.8",
     "@angular/platform-browser-dynamic": "2.4.8",
     "@angular/platform-server": "2.4.8",
-    "@ionic-native/core": "3.1.0",
-    "@ionic-native/splash-screen": "3.1.0",
-    "@ionic-native/status-bar": "3.1.0",
+    "@ionic-native/camera": "^3.6.1",
+    "@ionic-native/contacts": "^3.6.1",
+    "@ionic-native/core": "3.6.1",
+    "@ionic-native/push": "^3.6.1",
+    "@ionic-native/secure-storage": "^3.6.1",
+    "@ionic-native/splash-screen": "^3.1.0",
+    "@ionic-native/status-bar": "^3.1.0",
     "@ionic/storage": "2.0.0",
     "ionic-angular": "2.3.0",
-    "ionic-native": "^2.9.0",
+    "ionic-native": "^3.5.0",
     "ionicons": "3.0.0",
     "rxjs": "5.0.1",
     "sw-toolbox": "3.4.0",
@@ -36,5 +40,31 @@
   "devDependencies": {
     "@ionic/app-scripts": "1.1.4",
     "typescript": "2.0.3"
-  }
+  },
+  "cordovaPlugins": [
+    "cordova-plugin-contacts",
+    "cordova-plugin-compat",
+    "cordova-plugin-statusbar",
+    {
+      "locator": "https://github.com/apache/cordova-plugin-whitelist.git",
+      "id": "cordova-plugin-whitelist"
+    },
+    {
+      "id": "phonegap-plugin-push",
+      "locator": "phonegap-plugin-push",
+      "variables": {
+        "SENDER_ID": "81761108581"
+      }
+    },
+    "cordova-plugin-secure-storage",
+    "cordova-plugin-splashscreen",
+    "cordova-plugin-camera"
+  ],
+  "cordovaPlatforms": [
+    {
+      "platform": "android",
+      "version": "",
+      "locator": "android"
+    }
+  ]
 }

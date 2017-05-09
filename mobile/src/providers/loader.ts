@@ -14,11 +14,13 @@ export class Loader {
   constructor(private loadingCtrl: LoadingController) { }
 
   presentLoader():void{
-    this.loader = this.loadingCtrl.create({
-      spinner: 'crescent',
-      content: 'Please Wait...',
-      dismissOnPageChange: true
+    if(!this.loader){
+      this.loader = this.loadingCtrl.create({
+        spinner: 'crescent',
+        content: 'Please Wait...'
+       // dismissOnPageChange: true //buggy.. Hang the person!!!!
      });
+    }
      this.loader.present();
   }
 

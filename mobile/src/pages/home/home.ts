@@ -3,6 +3,9 @@ import { NavController } from 'ionic-angular';
 import { CustomerHomePage } from '../customer-mgmt';
 import { ContactHomePage } from '../contact-mgmt';
 import { ItemSearch } from '../items';
+import { PushService,SecureStorageService } from '../../plugins/';
+import { PushObject } from '@ionic-native/push';
+
 
 /*
   Generated class for the Home page.
@@ -42,12 +45,23 @@ export class HomePage {
                        {"label":"Product Analysis", "page":'rdscontroller?page=productanalysis'},
                        {"label":"Salesforce_Analysis", "page":'rdscontroller?page=salesforceanalysis'}
                     ]};
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, private pushService: PushService, private storageService: SecureStorageService) {
     this.isRoot = true;
   }
 
   ionViewDidLoad() {
-    console.log('Hello Home Page');
+    this.pushService.init();
+    this.pushService.onNotification.subscribe(notification => this.onNotification(notification));
+    this.pushService.onNotificationRegistered.subscribe(registration => this.onNotificationRegistered(registration));
+  }
+
+  onNotification(notification){
+    //TO DO may be page navigation
+    alert("onNotification");
+  }
+
+  onNotificationRegistered(registration){
+    console.log(registration)
   }
 
   displaySubmenu(index, rootPage):void{
