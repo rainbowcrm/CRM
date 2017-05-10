@@ -153,4 +153,27 @@ public class LoginSQLs {
 		return null;
 	}
 	
+	public static String getNotificationIDforUser(String userID)
+	{
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet rs  = null ;
+		try {
+			connection  = ConnectionCreater.getConnection() ;
+			String sql =   "SELECT  MOBILE_NOTIFICATION_ID FROM LOGIN_RECORDS  WHERE USER_ID = ? ";
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, userID);
+			rs = statement.executeQuery() ;
+			if (rs.next()) {
+				return  rs.getString("MOBILE_NOTIFICATION_ID") ;
+			}
+			return "";
+		}catch(SQLException ex) {
+			Logwriter.INSTANCE.error(ex);
+		}finally {
+			ConnectionCreater.close(connection, statement, rs);	
+		}
+		return null;
+	}
+	
 }

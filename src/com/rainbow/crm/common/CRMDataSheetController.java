@@ -47,6 +47,11 @@ public abstract class CRMDataSheetController extends DataSheetController{
 	}
 	
 	
+	@Override
+	public long getTotalNumberofRecords() {
+		long totalRecords = getService().getTotalRecordCount((CRMContext) getContext());
+		return totalRecords;
+	}
 	
 	private static String getOperator(FilterNode node) {
 		if (node.getOperater() == null || node.getOperater() == FilterNode.Operator.EQUALS) {

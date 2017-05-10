@@ -9,6 +9,14 @@ import java.util.List;
 
 
 
+
+
+
+
+
+import com.google.android.gcm.server.Message;
+import com.google.android.gcm.server.Result;
+import com.google.android.gcm.server.Sender;
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.AbstractService;
 import com.rainbow.crm.common.CRMConstants;
@@ -17,7 +25,9 @@ import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
+import com.rainbow.crm.database.LoginSQLs;
 import com.rainbow.crm.hibernate.ORMDAO;
+import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.saleslead.model.SalesLead;
 import com.rainbow.crm.saleslead.model.SalesLeadLine;
 import com.rainbow.crm.saleslead.service.ISalesLeadService;
@@ -96,6 +106,44 @@ public class AlertService extends AbstractService implements IAlertService{
 		alert.setAcknowDate(new java.util.Date());
 		getDAO().update(alert);
 		return null;
+	}
+
+	@Override
+	public List<RadsError> pushAlertNotifictions(Alert alert, CRMContext context) {
+		if(alert.getOwner() != null) {
+			String notificationID= LoginSQLs.getNotificationIDforUser(alert.getOwner().getUserId());
+			pushNotification(alert, notificationID);
+		}else {
+			IUserService  userService = (IUserService)SpringObjectFactory.INSTANCE.getInstance("IUserService");
+			List<User> users = userService.getByDivision(alert.getDivision(), context);
+			if(!Utils.isNullList(users)) {
+				users.forEach( user ->  {  
+					String notificationID= LoginSQLs.getNotificationIDforUser(alert.getOwner().getUserId());
+					pushNotification(alert, notificationID);
+				});
+			}
+		}
+		
+		return null;
+	}
+	
+	public void pushNotification(Alert alert, String notificationID )
+	{
+		try {
+		Sender sender = new  Sender(notificationID);
+		Message message = new Message.Builder()
+          .collapseKey("message")
+          .timeToLive(3)
+          .delayWhileIdle(true)
+          .addData("message",alert.getUrl()) 
+          .build();  
+		Result result = sender.send(message,notificationID, 1);
+		}catch(Exception ex)
+		{
+			Logwriter.INSTANCE.error(ex);
+		}
+		
+		
 	}
 	
 	
