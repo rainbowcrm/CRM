@@ -14,7 +14,10 @@ import com.rainbow.crm.topic.model.TopicLine;
 import com.rainbow.crm.topic.model.TopicSet;
 import com.rainbow.crm.topic.service.ITopicService;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
+import com.techtrade.rads.framework.model.abstracts.RadsError;
+import com.techtrade.rads.framework.model.transaction.TransactionResult.Result;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
+import com.techtrade.rads.framework.utils.Utils;
 
 public class TopicSetController extends CRMGeneralController{
 
@@ -23,6 +26,17 @@ public class TopicSetController extends CRMGeneralController{
 		return new PageResult();
 	}
 
+	private List<RadsError> createNewTopic(Topic newTopic, CRMContext context)
+	{
+		ITopicService service  =  getService() ;
+		List errors = service.validateforCreate(newTopic, context);
+		if(!Utils.isNullList(errors))
+			return errors;
+		service.create(newTopic, context);
+		return null;			
+				
+	}
+	
 	@Override
 	public PageResult submit(ModelObject object, String actionParam) {
 		TopicSet topicSet = (TopicSet) object;
@@ -39,6 +53,14 @@ public class TopicSetController extends CRMGeneralController{
 				List<TopicLine> updatedReplies=  service.getUpdatedReplies(topic, readReply, (CRMContext)getContext());
 				topicSet.setNewReplies(updatedReplies);
 			}
+		}else if("newTopic".equalsIgnoreCase(actionParam)) {
+			PageResult result  = new PageResult();
+			List<RadsError>  errors = createNewTopic(topicSet.getNewTopic(),(CRMContext) getContext());
+			if (errors != null) {
+				result.setErrors(errors);
+				result.setResult(Result.FAILURE);
+				return result;
+			}
 		}
 		return super.submit(object, actionParam);
 	}
@@ -48,12 +70,21 @@ public class TopicSetController extends CRMGeneralController{
 		ITopicService service  =  getService() ;
 		List<Topic> topics = service.getOpenTopics((CRMContext)getContext());
 		Map<String, String> ans = new LinkedHashMap<String,String> ();
-		
+		if (topics != null ) {
+			topics.forEach( topic -> { 
+				ans.put(String.valueOf( topic.getId()),topic.getTitle());
+			} ); 
+		}
 		return ans;
 	}
 	public ITopicService getService() {
 		ITopicService serv = (ITopicService) SpringObjectFactory.INSTANCE.getInstance("ITopicService");
 		return serv;
+	}
+	
+	public Map <String, String > getAllTypes() {
+		Map<String, String> ans = GeneralSQLs.getFiniteValues(CRMConstants.FV_SPFTYPE);
+		return ans;
 	}
 
 }

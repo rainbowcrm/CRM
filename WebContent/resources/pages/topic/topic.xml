@@ -16,7 +16,7 @@ Controller = "com.rainbow.crm.topic.controller.TopicSetController">
 <ErrorSection>
 </ErrorSection>
 <Section type= "mainSection">
-<Element type = "UITable" rows = "1" cols = "3"  style = "outlinedTable">
+<Element type = "UITable" rows = "1" cols = "4"  style = "outlinedTable">
 	<Element type = "UITableRow">
 	<Element type ="UITableCol">
 		<Element label = ""  type = "UIList" Id = "txtKeyCode" onChangeJS = "selectPFKeyType(this);" property ="newTopic.portfolioType.code" > 
@@ -33,26 +33,36 @@ Controller = "com.rainbow.crm.topic.controller.TopicSetController">
 	</Element>
 	</Element>
 	<Element type ="UITableCol">
+		<Element label = "Title"  type = "UIText" Id = "txtTitle" property ="newTopic.title"  />
+	</Element>
+	<Element type ="UITableCol">
 	  <Element label = "Question"  type = "UITextArea" Id = "txtSpecification" property ="newTopic.question"  > 
 		<rows>5</rows> <cols>40</cols>
 	</Element> 
 	</Element>
+	</Element>
+	<Element type= "UITableRow">
+	 <Element type = "UITableCol">
+	 <Element caption = "Post_Topic"  type = "UIButton" Id = "btdwLoad"  style="button"  fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam =  "newTopic" />
+	 </Element>
+	
 	</Element>
 </Element>
 <Element type = "UIDiv" style="childSectionStyle">
 <Element type = "UITable" rows = "1" cols = "3"  style = "outlinedTable">
 <Element type = "UITableRow">
 <Element type ="UITableCol"  width = "20%">
-  <Element type = "UIList"  size ="10" Id  ="lstAllTopics" property = "currentTopic"> 
+  <Element type = "UIList"  size ="20" Id  ="lstAllTopics" property = "currentTopic"> 
   	<options populator =  "getAllOpenTopics"> 
 	</options>
    </Element>
   
 </Element>
 <Element type ="UITableCol"  width = "80%">
-  <Element label = "Image2" type = "UIFileUpload" Id = "txtPhoto2" fileNameProperty="fileName2" 
-  property ="Image2" maxSize ="30720" multiple ="false" onChangeJS ="readURL(this,'idIMG2')" accept= ".png, .jpg, .jpeg" />
-    <Element label = ""  type = "UIImage" Id = "idIMG2"  height = "200" weight ="200" src= "#" property ="filewithPath2"  /> 
+<Element label = ""  type = "UITextArea" Id = "txtdiscussion" property ="completeDiscussion"  > 
+		<rows>20</rows> <cols>40</cols>
+	</Element>
+ 
 </Element>
 </Element>
 </Element>

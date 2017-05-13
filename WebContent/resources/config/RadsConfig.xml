@@ -149,6 +149,8 @@
 </Page>
 <Page id = "setup" definition ="/resources/pages/datasetup/datasetup.xml" modelclass = "com.rainbow.framework.setup.model.DataLoader" >
 </Page>
+<Page id = "topic" definition ="/resources/pages/topic/topic.xml" modelclass = "com.rainbow.crm.topic.model.TopicSet" >
+</Page>
 <Page id = "newdivision" definition ="/resources/pages/division/newDivision.xml" modelclass = "com.rainbow.crm.division.model.Division" >
 </Page>
 <Page id = "newvendor" definition ="/resources/pages/vendor/newVendor.xml" modelclass = "com.rainbow.crm.vendor.model.Vendor" >
@@ -266,6 +268,7 @@
  </Element>
  <Element label = "" type = "UIMenu" Id = "menu30" style="menustyleParent" title="Salesforce_WorkBench" groupId= "menuGRP004"  >
  	<Element label = "" type = "UIMenu" Id = "menu301" style="menustyle" title="Alerts" link = "rdscontroller?page=alerts"   />
+ 	<Element label = "" type = "UIMenu" Id = "menu3011" style="menustyle" title="Discussions" link = "rdscontroller?page=topic"   />
  	<Element label = "" type = "UIMenu" Id = "menu302" style="menustyle" title="Documents" link = "rdscontroller?page=documents"   />
 	<Element label = "" type = "UIMenu" Id = "menu34" style="menustyle" title="Sales_Leads" link = "rdscontroller?page=saleslead"   />
 	<Element label = "" type = "UIMenu" Id = "menu35" style="menustyle" title="Followups" link = "rdscontroller?page=followups"   />

@@ -116,6 +116,10 @@ public class TopicService extends AbstractService implements
 		Company company = (Company) compService.getById(context
 				.getLoggedinCompany());
 		((Topic) object).setCompany(company);
+		((Topic) object).setOwner(context.getLoggedInUser());
+		((Topic) object).setDivision(context.getLoggedInUser().getDivision());
+		((Topic) object).setClosed(false);
+		((Topic) object).setTopicDate(new java.util.Date());
 		TopicValidator validator = new TopicValidator(context);
 		return validator.validateforCreate(object);
 	}
@@ -341,6 +345,8 @@ public class TopicService extends AbstractService implements
 				line.setTopic(topic);
 			}
 		}
+		String bKey = NextUpGenerator.getNextNumber("Discussion Topics", context, topic.getDivision());
+		topic.setRefNo(bKey);
 		TransactionResult result = super.create(object, context);
 		return result;
 	}

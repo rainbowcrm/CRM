@@ -17,6 +17,7 @@ public class TopicSet  extends CRMBusinessModelObject{
 
 	Topic newTopic;
 	
+	String completeDiscussion;
 
 	public List<Topic> getOpenTopics() {
 		return openTopics;
@@ -67,6 +68,14 @@ public class TopicSet  extends CRMBusinessModelObject{
 
 	public void setNewTopic(Topic newTopic) {
 		this.newTopic = newTopic;
+	}
+
+	public String getCompleteDiscussion() {
+		return completeDiscussion;
+	}
+
+	public void setCompleteDiscussion(String completeDiscussion) {
+		this.completeDiscussion = completeDiscussion;
 	}
 	
 	

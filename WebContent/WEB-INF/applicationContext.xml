@@ -88,6 +88,8 @@
     </bean>
     <bean id="ISalesPeriodService" class="com.rainbow.crm.salesperiod.service.SalesPeriodService">
     </bean>
+    <bean id="ITopicService" class="com.rainbow.crm.topic.service.TopicService">
+    </bean>
     <bean id="ISalesPortfolioService" class="com.rainbow.crm.salesportfolio.service.SalesPortfolioService">
     </bean>
     <bean id="ISalesService" class="com.rainbow.crm.sales.service.SalesService">
@@ -133,6 +135,9 @@
     </bean>    
       
    <bean id="VendorDAO" class="com.rainbow.crm.vendor.dao.VendorDAO">
+    <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean id="TopicDAO" class="com.rainbow.crm.topic.dao.TopicDAO">
     <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
    <bean id="CompanyDAO" class="com.rainbow.crm.company.dao.CompanyDAO">

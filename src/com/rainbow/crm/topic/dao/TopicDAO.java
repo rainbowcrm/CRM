@@ -38,7 +38,7 @@ public class TopicDAO  extends SpringHibernateDAO{
 	
 	public List<Topic> getOpenTopics(int company ) {
 		Session session = openSession(false);
-		Query query = session.createQuery(" from Topic where company < :company    and closed = false and deleted  = false " ) ;
+		Query query = session.createQuery(" from Topic where company.id = :company    and closed = false and deleted  = false " ) ;
 		query.setParameter("company", company);
 		List<Topic> lst = query.list();
 		closeSession(session, false);
