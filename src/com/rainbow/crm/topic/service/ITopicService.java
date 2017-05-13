@@ -7,13 +7,16 @@ import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.ITransactionService;
 import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.topic.model.Topic;
+import com.rainbow.crm.topic.model.TopicLine;
 
 public interface ITopicService extends ITransactionService{
 
-	public List<Topic> getPortfoliosforExpiry(Date date) ;
 	
 	public List<Topic> getUsersforItem (Sku sku, int divisionId, Date date) ;
 
+	public List<Topic> getOpenTopics(CRMContext context) ;
+	
+	public List<TopicLine> getUpdatedReplies(Topic topic, int replyRead , CRMContext context);
 
   
 }

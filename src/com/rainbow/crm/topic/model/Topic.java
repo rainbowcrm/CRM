@@ -23,6 +23,7 @@ public class Topic extends CRMBusinessModelObject {
 	Date topicDate;
 	FiniteValue portfolioType;
 	String portfolioKey;
+	String portfolioValue;
 	String title;
 	String question;
 	String comments;
@@ -153,4 +154,13 @@ public class Topic extends CRMBusinessModelObject {
 		this.closed = closed;
 	}
 
+	public String getPortfolioValue() {
+		return portfolioValue;
+	}
+
+	public void setPortfolioValue(String portfolioValue) {
+		this.portfolioValue = portfolioValue;
+	}
+
+	
 }

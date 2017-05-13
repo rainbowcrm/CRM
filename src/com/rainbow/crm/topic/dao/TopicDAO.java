@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import com.rainbow.crm.filter.model.CRMFilter;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.rainbow.crm.topic.model.Topic;
+import com.rainbow.crm.topic.model.TopicLine;
 
 public class TopicDAO  extends SpringHibernateDAO{
 
@@ -23,11 +24,22 @@ public class TopicDAO  extends SpringHibernateDAO{
 	}
 
 	
-	
-	public List<Topic> getPortfoliosforExpiry(Date date) {
+	public List<TopicLine> getUpdatedReplies (int topicId, int readReply)
+	{
 		Session session = openSession(false);
-		Query query = session.createQuery(" from Topic where endDate < :endDate    and expired = false  " ) ;
-		query.setParameter("endDate", new Timestamp(date.getTime() ));
+		Query query = session.createQuery(" from TopicLine where id = :topicId and lineNumber > :readReply and     deleted = false" ) ;
+		query.setParameter("topicId", topicId);
+		query.setParameter("readReply", readReply);
+		List<TopicLine> lst = query.list();
+		closeSession(session, false);
+		return lst;
+	}
+	
+	
+	public List<Topic> getOpenTopics(int company ) {
+		Session session = openSession(false);
+		Query query = session.createQuery(" from Topic where company < :company    and closed = false and deleted  = false " ) ;
+		query.setParameter("company", company);
 		List<Topic> lst = query.list();
 		closeSession(session, false);
 		return lst;

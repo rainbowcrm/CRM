@@ -74,10 +74,20 @@ public class TopicService extends AbstractService implements
 		return results;
 	}
 
+	
 	@Override
-	public List<Topic> getPortfoliosforExpiry(Date date) {
-		return ((TopicDAO) getDAO()).getPortfoliosforExpiry(date);
+	public List<Topic> getOpenTopics(CRMContext context) {
+		TopicDAO topicDAO =(TopicDAO) getDAO();
+		return topicDAO.getOpenTopics(context.getLoggedinCompany());
 	}
+
+	@Override
+	public List<TopicLine> getUpdatedReplies(Topic topic, int replyRead,
+			CRMContext context) {
+		TopicDAO topicDAO =(TopicDAO) getDAO();
+		return topicDAO.getUpdatedReplies(topic.getId(), replyRead) ;
+	}
+
 
 	@Override
 	public long getTotalRecordCount(CRMContext context) {
@@ -132,11 +142,8 @@ public class TopicService extends AbstractService implements
 	@Override
 	public List<RadsError> adaptToUI(CRMContext context, ModelObject object) {
 		Topic topic = (Topic) object;
-		for (TopicLine line : topic.getTopicLines()) {
-			String value = getTopicValue(line.getPortfolioType(),
-					line.getPortfolioKey());
-			line.setPortfolioValue(value);
-		}
+			String value = getTopicValue(topic.getPortfolioType(),
+					topic.getPortfolioKey());
 		return null;
 	}
 
@@ -173,17 +180,41 @@ public class TopicService extends AbstractService implements
 		}
 		Externalize externalize = new Externalize();
 		;
-		if (object.getUser() != null
-				&& !Utils.isNullString(object.getUser().getUserId())) {
+		if (object.getOwner() != null
+				&& !Utils.isNullString(object.getOwner().getUserId())) {
 			IUserService userService = (IUserService) SpringObjectFactory.INSTANCE
 					.getInstance("IUserService");
 			User user = (User) userService
-					.getById(object.getUser().getUserId());
-			object.setUser(user);
+					.getById(object.getOwner().getUserId());
+			object.setOwner(user);
 		} else {
 			ans.add(CRMValidator.getErrorforCode(context.getLocale(),
 					TopicErrorCodes.FIELD_EMPTY,
 					externalize.externalize(context, "User")));
+		}
+
+		if (object.getPortfolioType() == null
+				|| object.getPortfolioType().getCode() == null) {
+			ans.add(CRMValidator.getErrorforCode(context.getLocale(),
+					TopicErrorCodes.FIELD_EMPTY,
+					externalize.externalize(context, "Type")));
+		}
+		if (Utils.isNullString(object.getPortfolioValue())) {
+			ans.add(CRMValidator.getErrorforCode(context.getLocale(),
+					TopicErrorCodes.FIELD_EMPTY,
+					externalize.externalize(context, "Value")));
+		} else {
+
+			String portfolioKey = getTopicKey(
+					object.getPortfolioType(), object.getPortfolioValue(),
+					context);
+			if ("-1".equalsIgnoreCase(portfolioKey)) {
+				ans.add(CRMValidator.getErrorforCode(
+						context.getLocale(),
+						TopicErrorCodes.VALUE_NOT_FOUND,
+						externalize.externalize(context, "Value")));
+			} else
+				object.setPortfolioKey(portfolioKey);
 		}
 
 		if (!Utils.isNullSet(object.getTopicLines())) {
@@ -191,29 +222,6 @@ public class TopicService extends AbstractService implements
 			for (TopicLine line : object.getTopicLines()) {
 				line.setCompany(company);
 				line.setLineNumber(lineNo++);
-				if (line.getPortfolioType() == null
-						|| line.getPortfolioType().getCode() == null) {
-					ans.add(CRMValidator.getErrorforCode(context.getLocale(),
-							TopicErrorCodes.FIELD_EMPTY,
-							externalize.externalize(context, "Type")));
-				}
-				if (Utils.isNullString(line.getPortfolioValue())) {
-					ans.add(CRMValidator.getErrorforCode(context.getLocale(),
-							TopicErrorCodes.FIELD_EMPTY,
-							externalize.externalize(context, "Value")));
-				} else {
-
-					String portfolioKey = getTopicKey(
-							line.getPortfolioType(), line.getPortfolioValue(),
-							context);
-					if ("-1".equalsIgnoreCase(portfolioKey)) {
-						ans.add(CRMValidator.getErrorforCode(
-								context.getLocale(),
-								TopicErrorCodes.VALUE_NOT_FOUND,
-								externalize.externalize(context, "Value")));
-					} else
-						line.setPortfolioKey(portfolioKey);
-				}
 			}
 		}
 		return ans;
@@ -330,7 +338,7 @@ public class TopicService extends AbstractService implements
 					.getTopicLines()) {
 				int linePK = GeneralSQLs.getNextPKValue("Topic_Lines");
 				line.setId(linePK);
-				line.setTopicDoc(topic);
+				line.setTopic(topic);
 			}
 		}
 		TransactionResult result = super.create(object, context);
@@ -351,7 +359,7 @@ public class TopicService extends AbstractService implements
 				if (it.hasNext()) {
 					oldLine = (TopicLine) it.next();
 				}
-				line.setTopicDoc(topic);
+				line.setTopic(topic);
 				if (oldLine != null) {
 					line.setId(oldLine.getId());
 					line.setObjectVersion(oldLine.getObjectVersion());
@@ -363,7 +371,7 @@ public class TopicService extends AbstractService implements
 			}
 			while (it.hasNext()) {
 				TopicLine oldLine = (TopicLine) it.next();
-				oldLine.setVoided(true);
+				oldLine.setDeleted(true);
 				topic.addTopicLine(oldLine);
 			}
 		}

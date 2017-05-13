@@ -4,15 +4,19 @@
  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
 
 <hibernate-mapping>
-<class name="com.rainbow.crm.topic.model.TopicLine" table="SAPORTFOLIO_LINES" lazy="false">
+<class name="com.rainbow.crm.topic.model.TopicLine" table="TOPIC_LINES" lazy="false">
 	<meta attribute="class-description">
-         This class contains the Sales Period Lines 
+         This class contains the Sales Period LinesTopic Lines 
       </meta>
        <id name="id" type="int" column="id">
       </id>
       <version name="objectVersion" column="version" type="integer"></version>
       <many-to-one name="company" column ="company_id" not-null="true" lazy="false" ></many-to-one>
       <property name="lineNumber" column="LINE_NUMBER" type="integer"/>
+      <property name="reply" column="REPLY" type="string"/>
+      <property name="replyDate" column="REPLY_DATE" type="string"/>
+      <many-to-one name="repliedBy" column="REPLIED_BY" not-null="true" lazy="false" ></many-to-one>
+      <property name="replyUseful" column="REPLY_USEFUL" type="boolean"/>
       <property name="comments" column="comments" type="string"/>
       <property name="deleted" column="IS_DELETED" type="boolean"/>
       <property name="createdDate" column="created_date" type="timestamp" update="false"/>

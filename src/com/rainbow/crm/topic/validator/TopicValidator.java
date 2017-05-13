@@ -41,20 +41,19 @@ public class TopicValidator extends CRMValidator {
 			errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Company"))) ;
 		}
 		
-		if(Utils.isNull(topic.getStartDate()) ){
+		if(Utils.isNull(topic.getTopicDate()) ){
 			errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Start_Date"))) ;
 		}
 		
 		if (Utils.isNullSet(topic.getTopicLines())) {
 			errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Portfolio_Items"))) ;
 		}else {
-			for (TopicLine line : topic.getTopicLines()) {
-				if (line.getPortfolioKey() == null ) {
-					errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Portfolio_key"))) ;
-				}
-				if (line.getPortfolioType()== null ) {
-					errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Portfolio_Type"))) ;
-				}
+			
+			if (topic.getPortfolioKey() == null ) {
+				errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Portfolio_key"))) ;
+			}
+			if (topic.getPortfolioType()== null ) {
+				errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Portfolio_Type"))) ;
 			}
 		}
 	}

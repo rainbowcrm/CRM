@@ -255,6 +255,8 @@
         <value>com/rainbow/crm/expensevoucher/model/ExpenseVoucherLine.hbm.xml</value>
         <value>com/rainbow/crm/saleslead/model/SalesLead.hbm.xml</value>
         <value>com/rainbow/crm/saleslead/model/SalesLeadLine.hbm.xml</value>
+        <value>com/rainbow/crm/topic/model/Topic.hbm.xml</value>
+        <value>com/rainbow/crm/topic/model/TopicLine.hbm.xml</value>
         <value>com/rainbow/crm/distributionorder/model/DistributionOrder.hbm.xml</value>
         <value>com/rainbow/crm/distributionorder/model/DistributionOrderLine.hbm.xml</value>
         <value>com/rainbow/crm/followup/model/Followup.hbm.xml</value>  

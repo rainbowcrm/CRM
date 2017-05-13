@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Page id = "topics" showinFrame ="true"  title ="Topics | Rainbow CRM" Object = "com.rainbow.crm.topic.model.TopicSet" 
+Controller = "com.rainbow.crm.topic.controller.TopicSetController">
+<Template type= "General"  name = "generalTemplate"></Template>
+<IncludeJS>./resources/js/RadsLib.js</IncludeJS>
+<IncludeJS>./scripts/CRMGeneral.js</IncludeJS>
+<IncludeJS>./scripts/salesportfolio/SalesPortFolio.js</IncludeJS>
+<AjaxGroups>
+</AjaxGroups>
+
+<Elements>
+<UIForm Id ="cust" method = "POST" enctype="POST" >
+<Section type ="topBar"></Section> 
+<Section type ="leftsideBarApp"></Section>
+<CoreSection>
+<ErrorSection>
+</ErrorSection>
+<Section type= "mainSection">
+<Element type = "UITable" rows = "1" cols = "3"  style = "outlinedTable">
+	<Element type = "UITableRow">
+	<Element type ="UITableCol">
+		<Element label = ""  type = "UIList" Id = "txtKeyCode" onChangeJS = "selectPFKeyType(this);" property ="newTopic.portfolioType.code" > 
+		<options populator =  "getAllTypes"> 
+		</options>
+		</Element>
+	</Element>
+	<Element type ="UITableCol">
+		<Element label = ""  type = "UILookupText"  Id = "txtportkeyName"  size  = "40" property ="newTopic.portfolioValue" showLookupAsDialog="true" dialogId="dlgItportkey"
+	  dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
+		 <lookupType>salesportfoliokey</lookupType>
+		 <height>300</height>
+		 <width>290</width>
+	</Element>
+	</Element>
+	<Element type ="UITableCol">
+	  <Element label = "Question"  type = "UITextArea" Id = "txtSpecification" property ="newTopic.question"  > 
+		<rows>5</rows> <cols>40</cols>
+	</Element> 
+	</Element>
+	</Element>
+</Element>
+<Element type = "UIDiv" style="childSectionStyle">
+<Element type = "UITable" rows = "1" cols = "3"  style = "outlinedTable">
+<Element type = "UITableRow">
+<Element type ="UITableCol"  width = "20%">
+  <Element type = "UIList"  size ="10" Id  ="lstAllTopics" property = "currentTopic"> 
+  	<options populator =  "getAllOpenTopics"> 
+	</options>
+   </Element>
+  
+</Element>
+<Element type ="UITableCol"  width = "80%">
+  <Element label = "Image2" type = "UIFileUpload" Id = "txtPhoto2" fileNameProperty="fileName2" 
+  property ="Image2" maxSize ="30720" multiple ="false" onChangeJS ="readURL(this,'idIMG2')" accept= ".png, .jpg, .jpeg" />
+    <Element label = ""  type = "UIImage" Id = "idIMG2"  height = "200" weight ="200" src= "#" property ="filewithPath2"  /> 
+</Element>
+</Element>
+</Element>
+</Element>
+</Section>
+</CoreSection>
+<Section type= "summary">
+
+
+</Section> 
+<Section type ="copyRightSection"/>
+</UIForm>
+</Elements>
+</Page>
