@@ -5,18 +5,21 @@ Controller = "com.rainbow.crm.topic.controller.TopicSetController">
 <IncludeJS>./resources/js/RadsLib.js</IncludeJS>
 <IncludeJS>./scripts/CRMGeneral.js</IncludeJS>
 <IncludeJS>./scripts/salesportfolio/SalesPortFolio.js</IncludeJS>
+<IncludeJS>./scripts/topic/topic.js</IncludeJS>
 <AjaxGroups>
 </AjaxGroups>
 
 <Elements>
-<UIForm Id ="cust" method = "POST" enctype="POST" >
+<UIForm Id ="topicfrm" method = "POST" enctype="POST" >
 <Section type ="topBar"></Section> 
 <Section type ="leftsideBarApp"></Section>
 <CoreSection>
 <ErrorSection>
 </ErrorSection>
 <Section type= "mainSection">
+<Element label = ""  type = "UIHidden" Id = "hdnreplyRead"  property ="readReply"  />
 <Element type = "UITable" rows = "1" cols = "4"  style = "outlinedTable">
+
 	<Element type = "UITableRow">
 	<Element type ="UITableCol">
 		<Element label = ""  type = "UIList" Id = "txtKeyCode" onChangeJS = "selectPFKeyType(this);" property ="newTopic.portfolioType.code" > 
@@ -25,7 +28,7 @@ Controller = "com.rainbow.crm.topic.controller.TopicSetController">
 		</Element>
 	</Element>
 	<Element type ="UITableCol">
-		<Element label = ""  type = "UILookupText"  Id = "txtportkeyName"  size  = "40" property ="newTopic.portfolioValue" showLookupAsDialog="true" dialogId="dlgItportkey"
+		<Element label = ""  type = "UILookupText"  Id = "txtportkeyName"  size  = "25" property ="newTopic.portfolioValue" showLookupAsDialog="true" dialogId="dlgItportkey"
 	  dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 		 <lookupType>salesportfoliokey</lookupType>
 		 <height>300</height>
@@ -33,7 +36,7 @@ Controller = "com.rainbow.crm.topic.controller.TopicSetController">
 	</Element>
 	</Element>
 	<Element type ="UITableCol">
-		<Element label = "Title"  type = "UIText" Id = "txtTitle" property ="newTopic.title"  />
+		<Element label = "Title"  type = "UIText" Id = "txtTitle" size  = "35" property ="newTopic.title"  />
 	</Element>
 	<Element type ="UITableCol">
 	  <Element label = "Question"  type = "UITextArea" Id = "txtSpecification" property ="newTopic.question"  > 
@@ -52,21 +55,33 @@ Controller = "com.rainbow.crm.topic.controller.TopicSetController">
 <Element type = "UITable" rows = "1" cols = "3"  style = "outlinedTable">
 <Element type = "UITableRow">
 <Element type ="UITableCol"  width = "20%">
-  <Element type = "UIList"  size ="20" Id  ="lstAllTopics" property = "currentTopic"> 
+  <Element type = "UIList"  size ="12" Id  ="lstAllTopics" onChangeJS = "getReplies()" property = "currentTopic"> 
   	<options populator =  "getAllOpenTopics"> 
 	</options>
    </Element>
   
 </Element>
 <Element type ="UITableCol"  width = "80%">
-<Element label = ""  type = "UITextArea" Id = "txtdiscussion" property ="completeDiscussion"  > 
-		<rows>20</rows> <cols>40</cols>
+<Element label = ""  type = "UILabel" Id = "txtdiscussion" property ="completeDiscussion"  > 
 	</Element>
  
 </Element>
 </Element>
 </Element>
 </Element>
+
+<Element type = "UITable" rows = "1" cols = "4"  style = "outlinedTable">
+	<Element type = "UITableRow">
+	<Element type ="UITableCol">
+	<Element label = ""  type = "UITextArea" Id = "txtnewReply" property ="postedReply"  > 
+		<rows>5</rows> <cols>40</cols>
+	</Element>
+	<Element caption = "Reply"  type = "UIButton" Id = "Reply"  style="button"  onClickJS="postReply();" />
+	
+</Element>
+</Element>
+</Element>
+
 </Section>
 </CoreSection>
 <Section type= "summary">

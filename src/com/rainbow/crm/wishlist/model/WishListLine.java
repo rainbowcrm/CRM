@@ -19,7 +19,6 @@ public class WishListLine extends CRMItemLine{
 	boolean salesLeadGenerated;
 	SalesLead salesLead;
 	boolean fulfilled;
-	boolean voided;
 	boolean expired;
 	String reasonCode;
 	double desiredPrice;
@@ -88,12 +87,7 @@ public class WishListLine extends CRMItemLine{
 	public void setFulfilled(boolean fulfilled) {
 		this.fulfilled = fulfilled;
 	}
-	public boolean isVoided() {
-		return voided;
-	}
-	public void setVoided(boolean voided) {
-		this.voided = voided;
-	}
+
 	public boolean isExpired() {
 		return expired;
 	}

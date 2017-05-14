@@ -69,14 +69,17 @@ public class TopicLine extends CRMBusinessModelObject {
 		this.reply = reply;
 	}
 
+	@RadsPropertySet(useBKForJSON =true, useBKForXML= true, useBKForMap=true)
 	public User getRepliedBy() {
 		return repliedBy;
 	}
 
+	@RadsPropertySet(useBKForJSON =true, useBKForXML= true, useBKForMap=true)
 	public void setRepliedBy(User repliedBy) {
 		this.repliedBy = repliedBy;
 	}
 
+	
 	public Boolean getReplyUseful() {
 		return replyUseful;
 	}

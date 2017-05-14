@@ -335,6 +335,17 @@ public class TopicService extends AbstractService implements
 	@Override
 	public TransactionResult create(CRMModelObject object, CRMContext context) {
 		Topic topic = (Topic) object;
+		String bKey = NextUpGenerator.getNextNumber("Discussion Topics", context, topic.getDivision());
+		topic.setRefNo(bKey);
+		if (Utils.isNullSet(topic.getTopicLines())) {
+			TopicLine line= new TopicLine();
+			line.setCompany(topic.getCompany());
+			line.setRepliedBy(topic.getOwner());
+			line.setReply(topic.getQuestion());
+			line.setLineNumber(1);
+			line.setReplyDate(topic.getTopicDate());
+			topic.addTopicLine(line);
+		}
 		if (!Utils.isNullSet(topic.getTopicLines())) {
 			int pk = GeneralSQLs.getNextPKValue("Topics");
 			topic.setId(pk);
@@ -345,8 +356,7 @@ public class TopicService extends AbstractService implements
 				line.setTopic(topic);
 			}
 		}
-		String bKey = NextUpGenerator.getNextNumber("Discussion Topics", context, topic.getDivision());
-		topic.setRefNo(bKey);
+
 		TransactionResult result = super.create(object, context);
 		return result;
 	}
@@ -371,7 +381,7 @@ public class TopicService extends AbstractService implements
 					line.setObjectVersion(oldLine.getObjectVersion());
 				} else {
 					int linePK = GeneralSQLs
-							.getNextPKValue("SAPORTFOLIO_LINES");
+							.getNextPKValue("Topic_Lines");
 					line.setId(linePK);
 				}
 			}

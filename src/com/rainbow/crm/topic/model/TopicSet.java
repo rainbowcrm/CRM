@@ -18,6 +18,8 @@ public class TopicSet  extends CRMBusinessModelObject{
 	Topic newTopic;
 	
 	String completeDiscussion;
+	
+	String postedReply;
 
 	public List<Topic> getOpenTopics() {
 		return openTopics;
@@ -77,6 +79,15 @@ public class TopicSet  extends CRMBusinessModelObject{
 	public void setCompleteDiscussion(String completeDiscussion) {
 		this.completeDiscussion = completeDiscussion;
 	}
+
+	public String getPostedReply() {
+		return postedReply;
+	}
+
+	public void setPostedReply(String postedReply) {
+		this.postedReply = postedReply;
+	}
+	
 	
 	
 }

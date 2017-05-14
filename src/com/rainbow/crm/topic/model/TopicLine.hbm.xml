@@ -14,7 +14,7 @@
       <many-to-one name="company" column ="company_id" not-null="true" lazy="false" ></many-to-one>
       <property name="lineNumber" column="LINE_NUMBER" type="integer"/>
       <property name="reply" column="REPLY" type="string"/>
-      <property name="replyDate" column="REPLY_DATE" type="string"/>
+      <property name="replyDate" column="REPLY_DATE" type="timestamp"/>
       <many-to-one name="repliedBy" column="REPLIED_BY" not-null="true" lazy="false" ></many-to-one>
       <property name="replyUseful" column="REPLY_USEFUL" type="boolean"/>
       <property name="comments" column="comments" type="string"/>
