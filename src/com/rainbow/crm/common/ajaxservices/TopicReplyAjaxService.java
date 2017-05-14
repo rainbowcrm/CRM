@@ -34,12 +34,13 @@ public class TopicReplyAjaxService implements IAjaxUpdateService {
 	Integer topicId = root.optInt("selectedTopic");
 	Integer repliesRead =  root.optInt("repliesRead");
 	String replyPosted = root.optString("reply");
-	ITopicService service = (ITopicService) SpringObjectFactory.INSTANCE.getInstance("ITopicService");
-	if(!Utils.isNullString(replyPosted) ) {
-		
-	}
 	Topic topic = new Topic();
 	topic.setId(topicId);
+	ITopicService service = (ITopicService) SpringObjectFactory.INSTANCE.getInstance("ITopicService");
+	if(!Utils.isNullString(replyPosted) ) {
+		service.addNewReply(topic, replyPosted, (CRMContext)ctx);
+	}
+	
 	StringBuffer replies = new StringBuffer (  " {\n \"updatedReplies\": [  ");
 	List<TopicLine> lines =  service.getUpdatedReplies(topic, repliesRead, (CRMContext)ctx);
 	if (lines != null) {
@@ -51,7 +52,9 @@ public class TopicReplyAjaxService implements IAjaxUpdateService {
 			replies.append("\n");
 		}
 		
-	 replies.append("]\n}");	
+	 replies.append("],\n");
+	 replies.append("\"totalreplies\":"+ (repliesRead + lines.size()) );
+	 replies.append("}");
 	 return replies.toString();
 	}
 	

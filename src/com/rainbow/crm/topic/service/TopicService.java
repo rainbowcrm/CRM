@@ -17,6 +17,7 @@ import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMDBException;
 import com.rainbow.crm.common.CRMValidator;
+import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.Externalize;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
@@ -281,6 +282,45 @@ public class TopicService extends AbstractService implements
 		return "-1";
 
 	}
+
+	
+	
+	@Override
+	public List<RadsError> addNewReply(Topic topic, String reply,
+			CRMContext context) {
+		topic =(Topic) getDAO().getById(topic.getPK());
+		TopicLine line= new TopicLine();
+		line.setCompany(topic.getCompany());
+		line.setRepliedBy(context.getLoggedInUser());
+		line.setReply(reply);
+		line.setLineNumber(topic.getTopicLines().size() + 1 );
+		line.setReplyDate(new java.util.Date());
+		int linePK = GeneralSQLs.getNextPKValue("Topic_Lines");
+		line.setId(linePK);
+		line.setTopic(topic);
+		topic.addTopicLine(line);
+		getDAO().update(topic);
+		return null;
+	}
+
+
+	@Override
+	public List<RadsError> closeTopic(Topic topic, CRMContext context) {
+		topic =(Topic) getDAO().getById(topic.getPK());
+		if(!context.getUser().equalsIgnoreCase(topic.getOwner().getUserId())  && !CommonUtil.isManagerRole(context.getLoggedInUser()) ){
+			List<RadsError> errors = new ArrayList<>();
+			CRMValidator validator = new TopicValidator(context);
+			RadsError error  =validator.getErrorforCode(TopicErrorCodes.CANNOT_CLOSE_TOPIC);
+			errors.add(error);
+			return errors;
+		}else {
+			topic.setClosed(true);
+			getDAO().update(topic);
+		}
+			
+		return null;
+	}
+
 
 	private String getTopicValue(FiniteValue type, String id) {
 		if (CRMConstants.SALESPFTYPE.CATEGORY.equals(type.getCode())) {

@@ -61,6 +61,20 @@ public class TopicSetController extends CRMGeneralController{
 				result.setResult(Result.FAILURE);
 				return result;
 			}
+		}else if ("closeTopic".equalsIgnoreCase(actionParam)) {
+			int topicId = topicSet.getCurrentTopic() ;
+			if (topicId > 0 ) {
+				Topic topic = new Topic();
+				topic.setId(topicId);
+				List<RadsError>  errors = service.closeTopic(topic, (CRMContext) getContext());
+				if (errors != null) {
+					PageResult result  = new PageResult();
+					result.setErrors(errors);
+					result.setResult(Result.FAILURE);
+					return result;
+				}
+				
+			}
 		}
 		return super.submit(object, actionParam);
 	}

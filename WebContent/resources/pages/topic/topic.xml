@@ -28,7 +28,7 @@ Controller = "com.rainbow.crm.topic.controller.TopicSetController">
 		</Element>
 	</Element>
 	<Element type ="UITableCol">
-		<Element label = ""  type = "UILookupText"  Id = "txtportkeyName"  size  = "25" property ="newTopic.portfolioValue" showLookupAsDialog="true" dialogId="dlgItportkey"
+		<Element label = ""  type = "UILookupText"  Id = "txtportkeyName"  size  = "20" property ="newTopic.portfolioValue" showLookupAsDialog="true" dialogId="dlgItportkey"
 	  dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 		 <lookupType>salesportfoliokey</lookupType>
 		 <height>300</height>
@@ -40,13 +40,14 @@ Controller = "com.rainbow.crm.topic.controller.TopicSetController">
 	</Element>
 	<Element type ="UITableCol">
 	  <Element label = "Question"  type = "UITextArea" Id = "txtSpecification" property ="newTopic.question"  > 
-		<rows>5</rows> <cols>40</cols>
-	</Element> 
+		<rows>5</rows> <cols>35</cols>
+	</Element>
+	 <Element caption = "Post_Topic"  type = "UIButton" Id = "btdwLoad"  style="button"  fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam =  "newTopic" /> 
 	</Element>
 	</Element>
 	<Element type= "UITableRow">
 	 <Element type = "UITableCol">
-	 <Element caption = "Post_Topic"  type = "UIButton" Id = "btdwLoad"  style="button"  fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam =  "newTopic" />
+	
 	 </Element>
 	
 	</Element>
@@ -62,7 +63,7 @@ Controller = "com.rainbow.crm.topic.controller.TopicSetController">
   
 </Element>
 <Element type ="UITableCol"  width = "80%">
-<Element label = ""  type = "UILabel" Id = "txtdiscussion" property ="completeDiscussion"  > 
+<Element label = ""  type = "UILabel" style="discussion" Id = "txtdiscussion" property ="completeDiscussion"  > 
 	</Element>
  
 </Element>
@@ -77,7 +78,7 @@ Controller = "com.rainbow.crm.topic.controller.TopicSetController">
 		<rows>5</rows> <cols>40</cols>
 	</Element>
 	<Element caption = "Reply"  type = "UIButton" Id = "Reply"  style="button"  onClickJS="postReply();" />
-	
+	<Element caption = "Close_Topic"  type = "UIButton" Id = "btdwLoad"  style="button"  fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam =  "closeTopic" />
 </Element>
 </Element>
 </Element>

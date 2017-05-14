@@ -32,10 +32,11 @@ function populateReplies(jsonVar )
 	var repliedBy= jsonResponse['RepliedBy'];
 	varRepliedByUser  = repliedBy['UserId'];
 	document.getElementById('txtdiscussion').innerHTML = document.getElementById('txtdiscussion').innerHTML + 
-	    "<B>" + varRepliedByUser + "</B>" +":" + reply + "\n";
+	    "<B>" + varRepliedByUser + "</B>" +":" + reply + "<br>";
 		ct ++ ;
 	}
-	document.topicfrm.hdnreplyRead.value=ct;
+	
+	document.topicfrm.hdnreplyRead.value=totalResponse['totalreplies'];
 
 }
 
@@ -46,7 +47,7 @@ function postReply()
 	console.log('selectedTopic = '  +selectedTopic) ;
 	var reply = document.topicfrm.txtnewReply.value;
 	var repliesRead= document.topicfrm.hdnreplyRead.value;
-
+     console.log('repliesRead = ' + repliesRead);
 	var jsonVar= {
 			"selectedTopic":selectedTopic,
 			"reply":reply,

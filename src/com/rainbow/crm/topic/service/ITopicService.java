@@ -8,6 +8,7 @@ import com.rainbow.crm.common.ITransactionService;
 import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.topic.model.Topic;
 import com.rainbow.crm.topic.model.TopicLine;
+import com.techtrade.rads.framework.model.abstracts.RadsError;
 
 public interface ITopicService extends ITransactionService{
 
@@ -18,5 +19,8 @@ public interface ITopicService extends ITransactionService{
 	
 	public List<TopicLine> getUpdatedReplies(Topic topic, int replyRead , CRMContext context);
 
+	public List<RadsError> addNewReply(Topic topic, String reply,  CRMContext context );
+	
+	public List<RadsError> closeTopic(Topic topic, CRMContext context);
   
 }

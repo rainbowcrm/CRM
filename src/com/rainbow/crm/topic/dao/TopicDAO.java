@@ -27,7 +27,7 @@ public class TopicDAO  extends SpringHibernateDAO{
 	public List<TopicLine> getUpdatedReplies (int topicId, int readReply)
 	{
 		Session session = openSession(false);
-		Query query = session.createQuery(" from TopicLine where id = :topicId and lineNumber > :readReply and     deleted = false" ) ;
+		Query query = session.createQuery(" from TopicLine where topic.id = :topicId and lineNumber > :readReply and     deleted = false" ) ;
 		query.setParameter("topicId", topicId);
 		query.setParameter("readReply", readReply);
 		List<TopicLine> lst = query.list();
