@@ -71,22 +71,25 @@ Controller = "com.rainbow.crm.topic.controller.TopicSetController">
 </Element>
 </Element>
 
-<Element type = "UITable" rows = "1" cols = "4"  style = "outlinedTable">
+
+<Element type="UIStaticText">
+  &lt;script&gt;
+   checkforupdates();
+  &lt;/script&gt;
+</Element>
+</Section>
+</CoreSection>
+<Section type= "discussionsummary">
+<Element type = "UITable" rows = "1" cols = "1"  style = "outlinedTable">
 	<Element type = "UITableRow">
 	<Element type ="UITableCol">
-	<Element label = ""  type = "UITextArea" Id = "txtnewReply" property ="postedReply"  > 
-		<rows>5</rows> <cols>40</cols>
+	<Element label = ""  type = "UIText" Id = "txtnewReply"  size ="130" property ="postedReply"  > 
 	</Element>
 	<Element caption = "Reply"  type = "UIButton" Id = "Reply"  style="button"  onClickJS="postReply();" />
 	<Element caption = "Close_Topic"  type = "UIButton" Id = "btdwLoad"  style="button"  fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam =  "closeTopic" />
 </Element>
 </Element>
 </Element>
-
-</Section>
-</CoreSection>
-<Section type= "summary">
-
 
 </Section> 
 <Section type ="copyRightSection"/>

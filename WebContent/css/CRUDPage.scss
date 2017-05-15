@@ -45,6 +45,27 @@ div.childSectionStyle {
 position:relative;
 overflow:auto;
 background-color:rgb(255,255,255); 
+height:45%;
+}
+
+div.discussionrootStyle{
+ text-align: right;
+ position:absolute;
+ top:80%;
+ width:86%;
+ left:14%;
+ #btSubmit{
+	 background: $good;
+ }
+ #btCancel,#btnFilterDelete{
+	 background: $danger;
+ }
+ #btnFetchAll{
+	 background: $primary-color;
+ }
+ #btnFilterClear{
+	 background: $warn;
+ }
 }
  
 div.summaryStyle{
@@ -98,6 +119,7 @@ span.bolded {
 
 span.discussion{
 text-align:left;
+overflow: auto;
 }
 
 span.titleStyleUnSelected:hover  {

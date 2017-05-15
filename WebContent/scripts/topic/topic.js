@@ -22,7 +22,7 @@ function populateReplies(jsonVar )
 	reqObject.open("POST", requestStr,false);
 	reqObject.setRequestHeader("Content-Type", "application/json");
 	reqObject.send(JSON.stringify(jsonVar));
-	console.log("Resp" + reqObject.responseText);
+	//console.log("Resp" + reqObject.responseText);
 	var totalResponse =  JSON.parse(reqObject.responseText) ;
 	var propArray =  totalResponse['updatedReplies'] ;
 	var ct = 0;
@@ -39,10 +39,28 @@ function populateReplies(jsonVar )
 	document.topicfrm.hdnreplyRead.value=totalResponse['totalreplies'];
 
 }
+function checkforupdates()
+{
+var selectedTopic = document.topicfrm.lstAllTopics.value ;
+console.log('selectedTopic = '  +selectedTopic) ;
+if (selectedTopic >0 ) {
+var repliesRead= document.topicfrm.hdnreplyRead.value;
+var jsonVar= {
+			"selectedTopic":selectedTopic,
+			"repliesRead":repliesRead
+	}
+	
+	populateReplies(jsonVar);
+
+}
+
+repeater = setTimeout(checkforupdates, 1000);
+
+}
 
 function postReply()
 {
-	var requestStr = appURL + "rdscontroller?ajxService=replyTopic";
+	
 	var selectedTopic = document.topicfrm.lstAllTopics.value ;
 	console.log('selectedTopic = '  +selectedTopic) ;
 	var reply = document.topicfrm.txtnewReply.value;
@@ -55,5 +73,5 @@ function postReply()
 	}
 	
 	populateReplies(jsonVar);
-
+	document.topicfrm.txtnewReply.value ='';
 }
