@@ -23,9 +23,11 @@ Controller = "com.rainbow.crm.login.controller.LoginController">
     </div>
 // -->
 <Elements>
-	<UIForm  Id ="genCC" method = "POST" style="form-signin">
+<UIForm  Id ="genCC" method = "POST" style="form-signin">
 <CoreSection style ="central">
+
 <Section type ="central">
+
 <Element type = "UIDiv" style = "container center-block">
 <Element type = "UIHeader" level ="1" style = "text-center text-primary" value = "Primus Solutions CRM" />
 <Element type = "UIBreak"/>
@@ -34,6 +36,8 @@ Controller = "com.rainbow.crm.login.controller.LoginController">
 
 <Element type = "UIDiv" style = "container center-block">
 	<Element type = "UIDiv" style = "jumbotron center-block login-div">
+	<ErrorSection>
+</ErrorSection>
 		<Element type = "UIHeader" level ="2" style = "form-signin-heading" value = "Please sign in" />
     <Element type = "UIDiv" style = "form-group">
 	  	<Element  type = "UILabel" value = "Email address" style="sr-only" />

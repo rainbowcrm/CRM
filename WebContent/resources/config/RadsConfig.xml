@@ -223,6 +223,7 @@
  <Panel key = "topBar"   showInDiv = "false">
   <Element label="" type= "UILabel" generatedValue="Controller.getCompanyName" style="topBar"></Element>
   <Element label="" type= "UILabel" style="menu"></Element>
+  <Element label="" type= "UIHyperLink" text ="Logout"  link="rdscontroller?page=login"></Element>
  </Panel>
  <Panel key = "menuPanel"   showInDiv = "false">
  <Element label = "" type = "UIMenu" Id = "menu00" style="menustyleParent" title="Setup" groupId= "menuGRP01"  >
