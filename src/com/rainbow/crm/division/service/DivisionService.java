@@ -22,6 +22,13 @@ import com.techtrade.rads.framework.utils.Utils;
 public class DivisionService extends AbstractService implements IDivisionService {
 
 	
+	
+	@Override
+	public Division getDefaultDivision(int company) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	@Override
 	protected ORMDAO getDAO() {
 		return  DivisionDAO.INSTANCE;

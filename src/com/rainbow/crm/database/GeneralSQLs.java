@@ -41,6 +41,8 @@ public class GeneralSQLs {
 		return false;
 	}
 	
+	
+	
 	public static Map<String,String> getFiniteValues(String typeCode) {
 		Connection connection = null;
 		PreparedStatement statement = null;

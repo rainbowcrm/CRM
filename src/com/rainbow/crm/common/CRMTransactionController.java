@@ -70,7 +70,9 @@ public abstract class CRMTransactionController extends TransactionController {
 
 	@Override
 	public PageResult create() {
-			return new PageResult(getService().create((CRMModelObject)object, (CRMContext)getContext()));
+		PageResult  result = new PageResult(getService().create((CRMModelObject)object, (CRMContext)getContext()));
+		result.setObject(object);
+		return result ;
 	}
 	
 	@Override

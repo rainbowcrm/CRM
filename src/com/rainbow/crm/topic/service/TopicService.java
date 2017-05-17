@@ -118,11 +118,20 @@ public class TopicService extends AbstractService implements
 				.getLoggedinCompany());
 		((Topic) object).setCompany(company);
 		((Topic) object).setOwner(context.getLoggedInUser());
-		((Topic) object).setDivision(context.getLoggedInUser().getDivision());
+		if (context.getLoggedInUser().getDivision()  == null ) {
+			
+		}else {
+			((Topic) object).setDivision(context.getLoggedInUser().getDivision());
+		}
 		((Topic) object).setClosed(false);
 		((Topic) object).setTopicDate(new java.util.Date());
+		List<RadsError> erros = adaptfromUI(context, object);
+		if (!Utils.isNullList(erros) ) {
+			return erros;
+		}
 		TopicValidator validator = new TopicValidator(context);
 		return validator.validateforCreate(object);
+		
 	}
 
 	@Override
@@ -166,7 +175,7 @@ public class TopicService extends AbstractService implements
 		object.setCompany(company);
 
 		List<RadsError> ans = new ArrayList<RadsError>();
-		if (object.getDivision() != null) {
+		/*if (object.getDivision() != null) {
 			int divisionId = object.getDivision().getId();
 			IDivisionService divisionService = (IDivisionService) SpringObjectFactory.INSTANCE
 					.getInstance("IDivisionService");
@@ -182,7 +191,7 @@ public class TopicService extends AbstractService implements
 			} else {
 				object.setDivision(division);
 			}
-		}
+		}*/
 		Externalize externalize = new Externalize();
 		;
 		if (object.getOwner() != null

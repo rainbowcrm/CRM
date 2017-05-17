@@ -48,6 +48,19 @@ public class DivisionDAO extends HibernateDAO {
 		return division;
 	}
 	
+	
+	public Division getDefaultDivision(int company) {
+		Division division = null;
+		Session session = openSession(false);
+		Query query = session.createQuery(" from Division where name = :name  and company.id =:id  and deleted=false  order by divisionType " ) ;
+		query.setParameter("id", company);
+		List lst = query.list();
+		if (!Utils.isNullList(lst))
+			division = (Division)lst.get(0);
+		closeSession(session, false);
+		return division;
+	}
+	
 	public List<Division> getAllDivisions(int company) {
 		Session session = openSession(false);
 		Query query = session.createQuery("from Division where company.id=  :id and deleted=false  "  );
