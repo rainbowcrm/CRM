@@ -244,6 +244,12 @@ body {
 form > p {
   margin: 0px; }
 
+div.pagestylefull {
+  position: relative;
+  overflow: auto;
+  width: 100%;
+  float: left; }
+
 div.pagestyle {
   position: relative;
   overflow: auto;

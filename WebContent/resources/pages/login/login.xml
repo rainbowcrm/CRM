@@ -57,9 +57,11 @@ Controller = "com.rainbow.crm.login.controller.LoginController">
           &lt;/label&gt;" />
 		  </Element>
     </Element>
-		<Element caption = "Sign In"  type = "UIButton" Id = "btSubmit"   style="btn btn-lg btn-primary btn-block" fixedAction ="FixedAction.ACTION_PLAINSUBMIT"  />
+		<Element caption = "Sign_In"  type = "UIButton" Id = "btSubmit"   style="btn btn-lg btn-primary btn-block" fixedAction ="FixedAction.ACTION_PLAINSUBMIT"  />
 		<Element type = "UIDiv" style = "checkbox">
-		<Element  type = "UILabel" value = "Forgot Password?" style="link" />
+		<Element  type = "UIHyperLink" text = "Forgot_Password" style="link" />
+		<Element type = "UIBreak"/>
+		<Element  type = "UIHyperLink" text = "Start_My_Trial" link = "./rdscontroller?page=selfcompcreate" />
 		</Element>
 	</Element>
 </Element>

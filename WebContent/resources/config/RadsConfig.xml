@@ -20,6 +20,8 @@
 </Page>
 <Page id = "compcreate" definition ="/resources/pages/company/CompanyCreate.xml" modelclass = "com.rainbow.crm.company.model.Company" >
 </Page>
+<Page id = "selfcompcreate" definition ="/resources/pages/company/SelfCompanyCreate.xml" modelclass = "com.rainbow.crm.company.model.GuestCompany"   authRequired="false">
+</Page>
 <Page id = "newuser" definition ="/resources/pages/user/UserCreate.xml" modelclass = "com.rainbow.crm.user.model.User" >
 </Page>
 <Page id = "Appnewuser" definition ="/resources/pages/user/AppUserCreate.xml" modelclass = "com.rainbow.crm.user.model.User" >
