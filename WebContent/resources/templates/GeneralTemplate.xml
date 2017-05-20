@@ -45,6 +45,12 @@
  <noCols>1</noCols> 
  
  </Section>
+ <Section Id ="discussionsummary" showinTable = "true"  style= "discussionrootStyle" >
+ <noRows>1</noRows>
+ <noCols>1</noCols> 
+ 
+ </Section>
+ 
 <Section Id ="copyRightSection"   style= "copyRight" >
   <Panel key ="copyRightPanel"  Id ="copyRightPanel" > </Panel>  
  </Section>

@@ -11,6 +11,7 @@ import com.rainbow.crm.common.CRMDBException;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
+import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.division.validator.DivisionValidator;
 import com.rainbow.crm.hibernate.ORMDAO;
 import com.rainbow.crm.user.dao.UserDAO;
@@ -70,7 +71,13 @@ public class UserService  extends AbstractService implements IUserService{
 	public User getByPhone(String phone) {
 		return ((UserDAO)getDAO()).getByPhone(phone);
 	}
+
 	
+	
+	@Override
+	public List<User> getByDivision(Division division, CRMContext context) {
+		return ((UserDAO)getDAO()).getAllUsersByDivision(division.getId(), false);
+	}
 	@Override
 	public List<RadsError> validateforCreate(CRMModelObject object,
 			CRMContext context) {

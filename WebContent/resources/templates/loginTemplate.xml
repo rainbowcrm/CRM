@@ -15,16 +15,18 @@
  <SubmitActionField>submitAction</SubmitActionField>
  <FixedActionParamField>hdnFixedActionParam</FixedActionParamField>
  <CRUDFieldMarker>:</CRUDFieldMarker>
-  <Errors showin ="central"  style ="errorStyle" showinTable = "true" tabStyle ="errorStyle">
+ <Errors showin ="central"  style ="errorStyle" showinTable = "true" tabStyle ="errorStyle">
    <OddRow>oddRowError</OddRow>
    <EvenRow>evenRowError</EvenRow>
    <TitleRow>listPageTitleError</TitleRow>
  </Errors>
   <Sections>
   <CoreSection>
-   <ErrorSection showinTable = "true"  style= "errorStyle" >
+     <ErrorSection showinTable = "true"  style= "errorStyle" >
  </ErrorSection>
   <Section Id = "central" style= "brownribbon" >
+  <ErrorSection showinTable = "true"  style= "errorStyle" >
+ </ErrorSection>
   </Section>
   </CoreSection>
   <Section Id ="copyRightSection"   style= "copyRight" >

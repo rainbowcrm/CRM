@@ -12,4 +12,6 @@ public interface IDivisionService extends IBusinessService{
 	
 	public List<Division> getAllDivisions (int company) ;
 
+	public Division getDefaultDivision(int company) ;
+	
 }

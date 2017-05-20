@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.json.JSONObject;
 
+import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.database.LoginSQLs;
 import com.rainbow.crm.filter.dao.CRMFilterDAO;
 import com.rainbow.crm.filter.model.CRMFilter;
@@ -48,7 +49,7 @@ public class FilterAjaxService implements IAjaxLookupService{
 	
 	@Override
 	public IRadsContext generateContext(HttpServletRequest request) {
-		return LoginSQLs.loggedInUser(request.getSession().getId());
+		return CommonUtil.generateContext(request.getSession().getId());
 	}
 
 	

@@ -11,4 +11,5 @@ public interface IAlertService extends IBusinessService{
 
 	public List<RadsError> acknowledgeAlert(Alert alert,CRMContext context);  
 
+	public List<RadsError> pushAlertNotifictions(Alert alert,CRMContext context);
 }

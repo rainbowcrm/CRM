@@ -20,6 +20,8 @@
 </Page>
 <Page id = "compcreate" definition ="/resources/pages/company/CompanyCreate.xml" modelclass = "com.rainbow.crm.company.model.Company" >
 </Page>
+<Page id = "selfcompcreate" definition ="/resources/pages/company/SelfCompanyCreate.xml" modelclass = "com.rainbow.crm.company.model.GuestCompany"   authRequired="false">
+</Page>
 <Page id = "newuser" definition ="/resources/pages/user/UserCreate.xml" modelclass = "com.rainbow.crm.user.model.User" >
 </Page>
 <Page id = "Appnewuser" definition ="/resources/pages/user/AppUserCreate.xml" modelclass = "com.rainbow.crm.user.model.User" >
@@ -149,6 +151,8 @@
 </Page>
 <Page id = "setup" definition ="/resources/pages/datasetup/datasetup.xml" modelclass = "com.rainbow.framework.setup.model.DataLoader" >
 </Page>
+<Page id = "topic" definition ="/resources/pages/topic/topic.xml" modelclass = "com.rainbow.crm.topic.model.TopicSet" >
+</Page>
 <Page id = "newdivision" definition ="/resources/pages/division/newDivision.xml" modelclass = "com.rainbow.crm.division.model.Division" >
 </Page>
 <Page id = "newvendor" definition ="/resources/pages/vendor/newVendor.xml" modelclass = "com.rainbow.crm.vendor.model.Vendor" >
@@ -221,6 +225,7 @@
  <Panel key = "topBar"   showInDiv = "false">
   <Element label="" type= "UILabel" generatedValue="Controller.getCompanyName" style="topBar"></Element>
   <Element label="" type= "UILabel" style="menu"></Element>
+  <Element label="" type= "UIHyperLink" text ="Logout"  link="rdscontroller?page=login"></Element>
  </Panel>
  <Panel key = "menuPanel"   showInDiv = "false">
  <Element label = "" type = "UIMenu" Id = "menu00" style="menustyleParent" title="Setup" groupId= "menuGRP01"  >
@@ -266,6 +271,7 @@
  </Element>
  <Element label = "" type = "UIMenu" Id = "menu30" style="menustyleParent" title="Salesforce_WorkBench" groupId= "menuGRP004"  >
  	<Element label = "" type = "UIMenu" Id = "menu301" style="menustyle" title="Alerts" link = "rdscontroller?page=alerts"   />
+ 	<Element label = "" type = "UIMenu" Id = "menu3011" style="menustyle" title="Discussions" link = "rdscontroller?page=topic"   />
  	<Element label = "" type = "UIMenu" Id = "menu302" style="menustyle" title="Documents" link = "rdscontroller?page=documents"   />
 	<Element label = "" type = "UIMenu" Id = "menu34" style="menustyle" title="Sales_Leads" link = "rdscontroller?page=saleslead"   />
 	<Element label = "" type = "UIMenu" Id = "menu35" style="menustyle" title="Followups" link = "rdscontroller?page=followups"   />
@@ -357,6 +363,12 @@
  <AjaxService service ="companySearch" class = "com.rainbow.crm.common.ajaxservices.CompanyDetailsAjaxService">
  <key>companyName</key>
  <key>companyCode</key>
+ </AjaxService>
+  <AjaxService service ="replyTopic" class = "com.rainbow.crm.common.ajaxservices.TopicReplyAjaxService">
+
+ </AjaxService>
+  <AjaxService service ="allReasoncodes" class = "com.rainbow.crm.common.ajaxservices.AllReasonCodes">
+
  </AjaxService>
   <AjaxService service ="customerSearch" class = "com.rainbow.crm.customer.service.CustomerAjaxService">
  <key>Phone</key>

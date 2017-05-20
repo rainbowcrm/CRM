@@ -244,6 +244,12 @@ body {
 form > p {
   margin: 0px; }
 
+div.pagestylefull {
+  position: relative;
+  overflow: auto;
+  width: 100%;
+  float: left; }
+
 div.pagestyle {
   position: relative;
   overflow: auto;
@@ -267,7 +273,23 @@ div.detailCRUDStyle {
 div.childSectionStyle {
   position: relative;
   overflow: auto;
-  background-color: white; }
+  background-color: white;
+  height: 45%; }
+
+div.discussionrootStyle {
+  text-align: right;
+  position: absolute;
+  top: 80%;
+  width: 86%;
+  left: 14%; }
+  div.discussionrootStyle #btSubmit {
+    background: #69BB7B; }
+  div.discussionrootStyle #btCancel, div.discussionrootStyle #btnFilterDelete {
+    background: #f53d3d; }
+  div.discussionrootStyle #btnFetchAll {
+    background: #00abff; }
+  div.discussionrootStyle #btnFilterClear {
+    background: #FFA500; }
 
 div.summaryStyle {
   text-align: right;
@@ -306,6 +328,10 @@ span.bolded {
   font-size: 15px;
   width: 15;
   font-weight: bold; }
+
+span.discussion {
+  text-align: left;
+  overflow: auto; }
 
 span.titleStyleUnSelected:hover {
   background: #f4f4f4;
