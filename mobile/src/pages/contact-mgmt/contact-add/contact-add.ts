@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ToastController , NavParams} from 'ionic-angular';
 
 import { Contact, ContactAddRequest, ContactAddResponse, ContactType } from '../';
-import { HTTPService, Loader } from '../../../providers/';
+import { HTTPService } from '../../../providers/';
 
 /*
 
@@ -18,8 +18,7 @@ export class ContactAddPage {
   private response: ContactAddResponse;
   private errorMessage:string;
 
-  constructor(public navCtrl: NavController,private http:HTTPService,
-    private loader:Loader, private toastCtrl: ToastController,
+  constructor(public navCtrl: NavController,private http:HTTPService, private toastCtrl: ToastController,
     private params: NavParams) {
       this.model = new Contact();
       this.model.ContactType = new ContactType();
@@ -30,7 +29,6 @@ export class ContactAddPage {
   }
 
   addContact():void{
-    this.loader.presentLoader();
     this.errorMessage = null;
     let addContactReq = new ContactAddRequest();
     addContactReq.fixedAction = "FixedAction.ACTION_CREATE";
@@ -43,7 +41,6 @@ export class ContactAddPage {
   }
 
   contactAddSuccess(response):void{
-    this.loader.dismissLoader();
     if(response.result == "failure"){
        this.errorMessage = "Failed to create contact"; 
        return ;
@@ -64,7 +61,6 @@ export class ContactAddPage {
 
   contactAddError(error){
     this.http.setAuthToken(null);
-    this.loader.dismissLoader();
     this.errorMessage = "Failed to create contact";
   }
 

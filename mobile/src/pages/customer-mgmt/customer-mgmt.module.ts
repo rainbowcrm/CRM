@@ -7,6 +7,7 @@ import { CommonPSModule }   from '../../common/common-ps.module';
 import { Contacts} from '@ionic-native/contacts';
 import { Camera} from '@ionic-native/camera';
 import { ImagePickerService } from '../../plugins/';
+import { IonicImageLoader } from 'ionic-image-loader';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ImagePickerService } from '../../plugins/';
     IonicModule,
     CommonModule,
     FormsModule,
-    CommonPSModule
+    CommonPSModule,
+    IonicImageLoader
   ],
   entryComponents: [
     CustomerHomePage,

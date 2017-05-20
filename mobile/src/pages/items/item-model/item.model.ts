@@ -3,6 +3,8 @@ export class Product{
     Name:string
 }
 
+
+
 export class Item{
     ItemClass: string;
     Description: string;
@@ -28,7 +30,12 @@ export class Item{
     Id: string;
     Deleted: string;
     MaxPrice: number;
-    Brand:ItemBrand;
+    Item:ItemBrand;
+    Image1URL: string;
+    Image2URL: string;
+    Image3URL: string;
+    Inventory: string;
+
 }
 
 export class ItemBrand{
@@ -41,6 +48,8 @@ export class ItemSearchRequest extends BaseSearchRequest{
 export class ItemSearchResponse{
     result: string;
     dataObject:Array<Item>;
+    fetchedRecords: number;   
+    availableRecords: number;
 }
 
 export class ItemSearchFilter{

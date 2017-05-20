@@ -6,17 +6,12 @@
 -->
 <ion-header>
   <ion-navbar>
-     <ion-buttons start>
+     <ion-buttons start *ngIf="!isAssociateCustomer">
       <button ion-button icon-only (click)="goHome()">
         <ion-icon name="home"></ion-icon>
       </button>
      </ion-buttons>
     <ion-title>Customer Home</ion-title>
-     <ion-buttons end>
-      <button ion-button icon-only (click)="addCustomer()">
-        <ion-icon name="person-add"></ion-icon>
-      </button>
-     </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -71,4 +66,7 @@
   <div class="button-container">
   <button ion-button [disabled]="!customerseacrhForm.form.valid" (click)="doSearch()">Search Customer</button>
 </div>
+  <ion-fab right bottom *ngIf="!isAssociateCustomer">
+    <button ion-fab (click)="addCustomer()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
 </ion-content>

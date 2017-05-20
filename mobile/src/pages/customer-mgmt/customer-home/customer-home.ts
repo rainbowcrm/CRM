@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController } from 'ionic-angular';
+import { NavController, ToastController, NavParams } from 'ionic-angular';
 
 import { Customer, CustomerSearchRequest, CustomerSearchResponse } from '../';
 import { HomePage } from '../../home/home';
 import { CustomerAddPage, CustomerListPage} from '../'
-import { HTTPService, Loader } from '../../../providers/';
+import { HTTPService } from '../../../providers/';
 
 /*
   Generated class for the CustomerHome page.
@@ -22,8 +22,11 @@ export class CustomerHomePage {
   private request: CustomerSearchRequest;
   private response: CustomerSearchResponse;
   private errorMessage:string;
-  constructor(public navCtrl: NavController,private http:HTTPService,
-    private loader:Loader,  private toastCtrl: ToastController) {}
+  private isAssociateCustomer: Boolean;
+  constructor(public navCtrl: NavController,private http:HTTPService,  private toastCtrl: ToastController
+             ,private params: NavParams) {
+       this.isAssociateCustomer = this.params.get('isAssociateCustomer');     
+  }
 
   ionViewDidLoad() {
     console.log('Hello CustomerHome Page');
@@ -43,7 +46,6 @@ export class CustomerHomePage {
   }
 
   doSearch():void{
-      this.loader.presentLoader();
       this.errorMessage = null;
       this.request = new CustomerSearchRequest();
       this.request.currentmode = 'READ';
@@ -68,7 +70,6 @@ export class CustomerHomePage {
       return filters;
   }
   customerSearchSuccess(response):void{
-    this.loader.dismissLoader();
     this.response = response;
     if(this.response.result == "failure"){
        this.errorMessage = "Failed to search customer"; 
@@ -80,13 +81,12 @@ export class CustomerHomePage {
     }
     this.navCtrl.push(CustomerListPage, {customers:this.response.dataObject, 
                                           filter:this.request.filter, fetchedResults: this.response.fetchedRecords,
-                                        numberOfResults:this.response.availableRecords});
+                                        numberOfResults:this.response.availableRecords, isAssociateCustomer: this.isAssociateCustomer});
   }
  
 
   customerSearchError(error){
     this.http.setAuthToken(null);
-    this.loader.dismissLoader();
     this.errorMessage = "Failed to search customer";
   }
   addCustomer():void{

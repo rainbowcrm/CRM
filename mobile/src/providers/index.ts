@@ -1,7 +1,9 @@
-import { HTTPService } from './http-module';
 import { Loader } from './loader';
+import { HTTPService } from './http-module';
 import { BaseSearchRequest } from './http-request-model';
+import { SharedService } from './shared-data';
 
-export * from './http-module'
 export * from './loader'
+export * from './http-module'
 export * from './http-request-model'
+export * from './shared-data'

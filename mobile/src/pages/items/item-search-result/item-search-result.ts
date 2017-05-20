@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavParams, NavController } from 'ionic-angular';
 
 import { HTTPService } from '../../../providers/';
-import { Item, ItemSearchRequest, ItemSearchResponse } from '../';
+import { Item, ItemSearchRequest, ItemSearchResponse, ItemDetails } from '../';
 
 /*
 
@@ -15,18 +15,22 @@ import { Item, ItemSearchRequest, ItemSearchResponse } from '../';
 })
 export class ItemSearchResult {
   private items:Array<Item>;
-  private hasMoreResults:boolean;
   private request: ItemSearchRequest;
   private response: ItemSearchResponse;
   private pageNumber: number;
+  private fetchedResults: number;
+  private numberOfResults: number;
+  private isAssociateItems:Boolean;
   private filter:Array<Object>;
 
   constructor(private params: NavParams,private http:HTTPService,
               private navCtrl: NavController) {
-    this.hasMoreResults = true;
     this.items = this.params.get('items');  
     this.filter = this.params.get('filter');
     this.pageNumber = 0;
+    this.fetchedResults = this.params.get('fetchedResults');
+    this.numberOfResults = this.params.get('numberOfResults');
+    this.isAssociateItems = this.params.get('isAssociateItems');
   }
 
   ionViewDidLoad() {
@@ -34,7 +38,7 @@ export class ItemSearchResult {
   }
 
   doSearchMoreItems(infiniteScroll) {
-      if(!this.hasMoreResults){
+     if(this.fetchedResults >= this.numberOfResults ){
         infiniteScroll.complete();
         return;
       }
@@ -42,9 +46,9 @@ export class ItemSearchResult {
       this.request.currentmode = 'READ';
       this.request.fixedAction = "FixedAction.NAV_NEXTPAGE";
       this.request.hdnPage = ++this.pageNumber;
-      this.request.pageID = "items";
+      this.request.pageID = "skucompletelist";
       this.request.filter = this.filter;
-      this.http.processServerRequest("post",this.request, true).subscribe(
+      this.http.processServerRequest("post",this.request, true, true).subscribe(
                      res => this.itemSearchSuccess(res, infiniteScroll),
                      error =>  this.itemSearchError(error, infiniteScroll)); 
   }
@@ -56,11 +60,11 @@ export class ItemSearchResult {
        return ;
     }
     if(this.response.dataObject.length == 0){
-      this.hasMoreResults = false;
       infiniteScroll.complete();
        return ;
     }
     this.items = this.items.concat(this.response.dataObject);
+    this.fetchedResults += this.response.fetchedRecords;
     infiniteScroll.complete();
   }
  
@@ -68,6 +72,10 @@ export class ItemSearchResult {
   itemSearchError(error,infiniteScroll){
     infiniteScroll.complete();
     this.http.setAuthToken(null);
+  }
+
+  onItemSelect(item:Item):void{
+    this.navCtrl.push(ItemDetails,{item:item, isAssociateItems:this.isAssociateItems});
   }
 
 }

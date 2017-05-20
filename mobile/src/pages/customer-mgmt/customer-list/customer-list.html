@@ -13,12 +13,11 @@
 
 
 <ion-content padding>
- <ion-card *ngFor="let customer of customers">
+ <ion-card *ngFor="let customer of customers" (click)="editCustomer(customer)">
 
   <ion-item>
     <ion-avatar item-left>
-      <img src="customer.Image" *ngIf="customer.Image && customer.Image.length>0">
-      <img src="assets/img/no_image.png" *ngIf="!customer.Image || customer.Image.length==0">
+         <img-loader src="{{customer.FileWithLink}}" fallback="assets/img/no_image.png" useImg></img-loader>
     </ion-avatar>
     <h2>{{customer.FullName}}</h2>
     <p *ngIf="customer.Deleted=='true'">Deleted</p>
@@ -33,22 +32,22 @@
   </ion-card-content>
 
   <ion-row>
-    <ion-col *ngIf="customer.Deleted!='true'" (click)="deleteCustomer(customer)">
+    <ion-col *ngIf="customer.Deleted!='true'" (click)="deleteCustomer(customer);$event.stopPropagation();">
       <button ion-button icon-left clear small>
         <ion-icon name="trash"></ion-icon>
         <div>Delete</div>
       </button>
     </ion-col>
-    <ion-col *ngIf="customer.Deleted!='true'" (click)="editCustomer(customer)">
-      <button ion-button icon-left clear small>
-        <ion-icon name="create"></ion-icon>
-        <div>Edit</div>
-      </button>
-    </ion-col>
-    <ion-col *ngIf="customer.Deleted!='true'" (click)="saveCustomer(customer)">
+    <ion-col *ngIf="customer.Deleted!='true'" (click)="saveCustomer(customer);$event.stopPropagation();">
       <button ion-button icon-left clear small>
         <ion-icon name="share-alt"></ion-icon>
         <div>Save</div>
+      </button>
+    </ion-col>
+    <ion-col *ngIf="customer.Phone" (click)="callTel(customer.Phone);$event.stopPropagation();">
+      <button ion-button icon-left clear small>
+        <ion-icon name="call"></ion-icon>
+        <div>Call</div>
       </button>
     </ion-col>
   </ion-row>

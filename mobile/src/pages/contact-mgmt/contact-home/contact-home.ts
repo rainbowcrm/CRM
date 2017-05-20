@@ -3,7 +3,7 @@ import { NavController, ToastController } from 'ionic-angular';
 
 import { HomePage } from '../../home/home';
 import { ContactAddPage} from '../'
-import { HTTPService, Loader } from '../../../providers/';
+import { HTTPService } from '../../../providers/';
 
 /*
 
