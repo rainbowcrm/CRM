@@ -1,0 +1,50 @@
+<!--
+  Generated template for the Contact List page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>Contact List</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+ <ion-card *ngFor="let contact of contacts">
+
+  <ion-item>
+    <h2>{{contact.FullName}}</h2>
+    <p *ngIf="contact.Deleted=='true'">Deleted</p>
+    <p>{{contact.ContactType.Description}}</p>
+  </ion-item>
+
+
+  <ion-card-content>
+    <div *ngIf="contact.Email"><strong>Email:</strong>{{contact.Email}}</div>
+    <div *ngIf="contact.Phone"><strong>Phone:</strong>{{contact.Phone}}</div>
+    <div><strong>Address:</strong>{{getContactAddress(contact)}}</div>
+    <div *ngIf="contact.Description"><strong>Phone:</strong>{{contact.Description}}</div>
+  </ion-card-content>
+
+  <ion-row>
+    <ion-col *ngIf="contact.Deleted!='true'" (click)="saveContact(contact);$event.stopPropagation();">
+      <button ion-button icon-left clear small>
+        <ion-icon name="share-alt"></ion-icon>
+        <div>Save</div>
+      </button>
+    </ion-col>
+    <ion-col *ngIf="contact.Phone" (click)="callTel(contact.Phone);$event.stopPropagation();">
+      <button ion-button icon-left clear small>
+        <ion-icon name="call"></ion-icon>
+        <div>Call</div>
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-card>
+ <ion-infinite-scroll (ionInfinite)="doSearchMoreContact($event)" *ngIf="fetchedResults < numberOfResults" >
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
+</ion-content>

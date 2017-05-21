@@ -9,7 +9,7 @@ import { HomePage } from '../pages/home/home';
 import { WishlistModule } from '../pages/wishlist/wishlist.module';
 import { ContactMgmtModule } from '../pages/contact-mgmt/contact-mgmt.module';
 
-import { Loader,HTTPService, SharedService } from '../providers/';
+import { Loader,HTTPService, SharedService, ReasonCodeProvider } from '../providers/';
 import { ContactService, PushService, SecureStorageService } from '../plugins/';
 import { Push} from '@ionic-native/push';
 import { SecureStorage } from '@ionic-native/secure-storage';
@@ -37,7 +37,7 @@ import { IonicStorageModule } from '@ionic/storage';
     PSApp,
     HomePage
   ],
-  providers: [Loader,HTTPService, ContactService, SecureStorage, SecureStorageService,
+  providers: [Loader,HTTPService, ReasonCodeProvider, ContactService, SecureStorage, SecureStorageService,
                 Push,PushService, SplashScreen, SharedService]
 })
 export class AppModule {}

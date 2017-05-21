@@ -46,6 +46,7 @@ export class ContactAddPage {
        return ;
     }
     this.response = response.dataObject;
+    this.navCtrl.popToRoot();
     this.showSuccessToast();
     
   }
