@@ -34,15 +34,42 @@ export class Item{
     Image1URL: string;
     Image2URL: string;
     Image3URL: string;
-    Inventory: string;
+}
 
+export class ItemWithDetails extends Item{
+    Inventory: Array<Inventory>;
+}
+
+export class Inventory{
+    CurrentQty: number;
+    DamagedQty: number;
+    Deleted: string;
+    Division: Division;
+    Id: string;
+    ObjectVersion: string;
+    OpQty: number;
+    PK: string;
+    ReservedQty: number;
+    Sku: ItemSku;
+}
+
+export class ItemSku{
+    Name: string;
 }
 
 export class ItemBrand{
     Name: string;
 }
 
+export class Division{
+    Name: string;
+    Code: string;
+}
+
 export class ItemSearchRequest extends BaseSearchRequest{
+}
+
+export class ItemDetailsRequest extends BaseSearchRequest{
 }
 
 export class ItemSearchResponse{

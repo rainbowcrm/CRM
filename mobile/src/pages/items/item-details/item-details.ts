@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavParams, Slides, ToastController, NavController } from 'ionic-angular';
-import { Item} from '../';
+import { ItemWithDetails, Inventory} from '../';
 import { Storage } from '@ionic/storage';
 
 
@@ -15,7 +15,8 @@ import { Storage } from '@ionic/storage';
   templateUrl: 'item-details.html'
 })
 export class ItemDetails {
-  private item:Item;
+  private item:ItemWithDetails;
+  private inventory: Inventory;
   private slideImg: Array<String>=[];
   private isAssociateItems:Boolean;
    @ViewChild(Slides) slides: Slides;
@@ -24,6 +25,7 @@ export class ItemDetails {
   constructor(private params: NavParams, private storage: Storage, 
   private toastCtrl: ToastController, private navCtrl: NavController) {
     this.item = this.params.get('item');
+    this.inventory = this.item.Inventory[0];
     this.isAssociateItems = this.params.get('isAssociateItems');
     this.processImageUrl();
   }
@@ -44,6 +46,10 @@ export class ItemDetails {
         toast.present();
         this.navCtrl.pop();
       })
+  }
+  
+  inventoryChanged(index){
+    this.inventory = this.item.Inventory[index];
   }
 
   processImageUrl(){

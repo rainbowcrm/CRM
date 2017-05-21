@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { NavParams, NavController } from 'ionic-angular';
+import { NavParams, NavController, ToastController } from 'ionic-angular';
 
 import { HTTPService } from '../../../providers/';
-import { Item, ItemSearchRequest, ItemSearchResponse, ItemDetails } from '../';
+import { Item, ItemSearchRequest, ItemSearchResponse, ItemDetails, ItemDetailsRequest } from '../';
 
 /*
 
@@ -16,6 +16,7 @@ import { Item, ItemSearchRequest, ItemSearchResponse, ItemDetails } from '../';
 export class ItemSearchResult {
   private items:Array<Item>;
   private request: ItemSearchRequest;
+  private itemDetailsRequest: ItemDetailsRequest;
   private response: ItemSearchResponse;
   private pageNumber: number;
   private fetchedResults: number;
@@ -24,7 +25,7 @@ export class ItemSearchResult {
   private filter:Array<Object>;
 
   constructor(private params: NavParams,private http:HTTPService,
-              private navCtrl: NavController) {
+              private navCtrl: NavController, private toastCtrl: ToastController) {
     this.items = this.params.get('items');  
     this.filter = this.params.get('filter');
     this.pageNumber = 0;
@@ -74,8 +75,36 @@ export class ItemSearchResult {
     this.http.setAuthToken(null);
   }
 
+  itemDetailsSearchSuccess(response):void{
+    this.navCtrl.push(ItemDetails,{item:response.dataObject, isAssociateItems:this.isAssociateItems});
+  }
+
+  noItemDetailsFoundToast():any{
+     let toast = this.toastCtrl.create({
+      message: 'No Details Found',
+      duration: 2000,
+      position: 'top'
+     });
+    toast.present();
+  }
+ 
+
+  itemDetailsSearchError(error){
+    this.noItemDetailsFoundToast();
+    this.http.setAuthToken(null);
+  }
+
   onItemSelect(item:Item):void{
-    this.navCtrl.push(ItemDetails,{item:item, isAssociateItems:this.isAssociateItems});
+    this.request = new ItemDetailsRequest();
+    this.request.currentmode = 'READ';
+    this.request.fixedAction = "FixedAction.ACTION_READ";
+    this.request.hdnPage = ++this.pageNumber;
+    this.request.pageID = "skucomplete";
+    this.request.dataObject = {};
+    this.request.dataObject["Name"] = item.Name;
+    this.http.processServerRequest("post",this.request, true, true).subscribe(
+                     res => this.itemDetailsSearchSuccess(res),
+                     error =>  this.itemDetailsSearchError(error));
   }
 
 }
