@@ -12,17 +12,17 @@
 </ion-header>
 
 <ion-content padding>
- <ion-card *ngFor="let item of items" >
-  <ion-card-header [class.deleted-item]="item.deleted">
-    {{item.Name}}
-  </ion-card-header>
+<div class="clearfix">
+ <ion-card *ngFor="let item of items" (click)="onItemSelect(item)">
+  <img-loader src="{{item.Image1URL}}" fallback="assets/img/no_image.png" useImg></img-loader>
   <ion-card-content>
-    <div *ngIf="item.Brand.Name"><strong>Brand:</strong>{{item.Brand.Name}}</div>
-    <div *ngIf="item.MaxPrice"><strong>Price:</strong>{{item.MaxPrice}}</div>
-    <div *ngIf="item.Description"><strong>Phone:</strong>{{item.Description}}</div>
+    <ion-card-title>
+      {{item.Item.Name}}
+    </ion-card-title>
   </ion-card-content>
  </ion-card> 
- <ion-infinite-scroll (ionInfinite)="doSearchMoreItems($event)">
+ </div>
+ <ion-infinite-scroll (ionInfinite)="doSearchMoreItems($event)" *ngIf="fetchedResults < numberOfResults">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
  </ion-infinite-scroll>
 </ion-content>

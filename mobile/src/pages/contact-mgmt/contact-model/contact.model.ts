@@ -1,3 +1,4 @@
+import { BaseSearchRequest } from '../../../providers/';
 export class Contact{
     Description:string;
     FullName:string;
@@ -15,6 +16,8 @@ export class Contact{
     Deleted:string;
     ObjectVersion:number;
     ContactType: ContactType;
+    Id: string;
+    IdentifierName: string;
 }
 
 export class ContactType{
@@ -35,4 +38,17 @@ export class ContactAddRequest{
 export class ContactAddResponse{
     result: string;
     dataObject:Contact;
+}
+
+export class ContactSearchRequest extends BaseSearchRequest{
+}
+
+export class ContactDeleteRequest extends BaseSearchRequest{
+}
+
+export class ContactSearchResponse{
+    result: string;
+    dataObject:Array<Contact>;
+    fetchedRecords: number;   
+    availableRecords: number;
 }

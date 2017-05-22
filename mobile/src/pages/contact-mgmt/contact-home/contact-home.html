@@ -11,16 +11,61 @@
       </button>
      </ion-buttons>
     <ion-title>Contact Home</ion-title>
-     <ion-buttons end>
-      <button ion-button icon-only (click)="addContact()">
-        <ion-icon name="person-add"></ion-icon>
-      </button>
-     </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+ <ps-error [message]="errorMessage" [type]="'error'"></ps-error>
+  <ion-grid>
+       <ion-row>
+         <ion-col width-70>
+           <ion-item>
+             <ion-label>Filter</ion-label>
+                <ion-select [(ngModel)]="filterName" name>
+                  <ion-option value="add-filter">Add Filter</ion-option>
+                  </ion-select>
+             </ion-item>
+        </ion-col>
+        <ion-col>
+           <ion-item>
+             <button ion-button icon-only class="filter-buttons" favorite>
+                  <ion-icon name="add"></ion-icon>
+             </button>
+             <button ion-button icon-only class="filter-buttons">
+                  <ion-icon name="create"></ion-icon>
+             </button>
+             <button ion-button icon-only danger class="filter-buttons">
+                  <ion-icon name="close-circle"></ion-icon>
+             </button>
+             </ion-item>
+        </ion-col>
+     </ion-row>
+  </ion-grid>
+  <form #contactsearchForm="ngForm">
+    <ion-grid>
+     <ion-row>
+       <ion-col>
+         <ion-item>
+           <ion-label floating>First Name</ion-label>
+           <ion-input type="text" [(ngModel)]="model.FirstName" name="first-name" #firstName="ngModel"></ion-input>
+         </ion-item>
+       </ion-col>
+       <ion-col>
+         <ion-item>
+           <ion-label floating>Last Name</ion-label>
+           <ion-input type="text" [(ngModel)]="model.LastName" name="last-name" #lastName="ngModel"></ion-input>
+         </ion-item>
+      </ion-col>
+     </ion-row>
+    </ion-grid>
+      
+  </form>
+  <div class="button-container">
+  <button ion-button [disabled]="!contactsearchForm.form.valid" (click)="doSearch()">Search Contact</button>
+</div>
+  <ion-fab right bottom>
+    <button ion-fab (click)="addContact()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
 </ion-content>

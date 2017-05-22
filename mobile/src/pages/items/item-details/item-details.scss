@@ -1,0 +1,26 @@
+ps-item-details {
+  ion-slides{
+      height: 200px;
+      .swiper-slide img{
+          max-height: 200px;
+          width: auto;
+          height: auto;
+      }
+  }
+  ion-card{
+      padding: 10px;
+      .item-description{
+          text-align: center;
+          line-height: 1.5em;
+      }
+  }
+  .variants ion-select{
+      margin: auto;
+  }
+  .good{
+          color:color($colors, secondary)
+      }
+  .bad{
+          color: color($colors, danger)
+      }
+}

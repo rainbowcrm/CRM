@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController } from 'ionic-angular';
+import { NavController, ToastController, NavParams } from 'ionic-angular';
 import { Item, Product, ItemSearchRequest, ItemSearchResponse, ItemSearchFilter } from '../';
-import { HTTPService, Loader } from '../../../providers/';
+import { HTTPService } from '../../../providers/';
 import { HomePage } from '../../home/home';
 import { ItemSearchResult } from '../';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 /*
   Generated class for the ItemSearch page.
@@ -21,11 +22,14 @@ export class ItemSearch {
   private request: ItemSearchRequest;
   private response: ItemSearchResponse;
   private errorMessage:string;
+  private isAssociateItems: Boolean;
   
 
-  constructor(public navCtrl: NavController, private http:HTTPService,
-    private loader:Loader,  private toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, private http:HTTPService
+  ,  private toastCtrl: ToastController, private barcodeScanner: BarcodeScanner,
+  private params: NavParams) {
     this.model.Product = new Product();
+    this.isAssociateItems = this.params.get("isAssociateItems");
   }
 
   ionViewDidLoad() {
@@ -34,6 +38,20 @@ export class ItemSearch {
 
   goHome():void{
       this.navCtrl.setRoot(HomePage);
+  }
+  scanItem(): void{
+    var self = this;
+    this.barcodeScanner.scan().then((barcodeData) => {
+        self.searchString = barcodeData.text;
+        self.doSearch();
+     }, (err) => {
+       let toast = self.toastCtrl.create({
+          message: 'Scan was not complete. Kindly retry',
+          duration: 2000,
+          position: 'top'
+        });
+       toast.present();
+    });
   }
 
   NoItemsFoundToast():any{
@@ -45,13 +63,18 @@ export class ItemSearch {
     toast.present();
   }
 
+  done(){
+    this.navCtrl.popToRoot();
+  }
+
   doSearch():void{
       this.errorMessage = null;
       this.request = new ItemSearchRequest();
       this.request.currentmode = 'READ';
       this.request.fixedAction = "FixedAction.NAV_FIRSTPAGE";
-      this.request.pageID = "items";
+      this.request.pageID = "skucompletelist";
       this.request.filter = [];
+      this.request.hdnPage = 0;
       let filter = new ItemSearchFilter();
       filter.field = "Product.Name";
       filter.operator = "EQUALS";
@@ -65,7 +88,6 @@ export class ItemSearch {
 
 
   itemSearchSuccess(response, filter):void{
-    this.loader.dismissLoader();
     this.response = response;
     if(this.response.result == "failure"){
        this.errorMessage = "Failed to search items"; 
@@ -75,13 +97,14 @@ export class ItemSearch {
        this.NoItemsFoundToast();
        return ;
     }
-    this.navCtrl.push(ItemSearchResult, {items:this.response.dataObject, filter:filter});
+    this.navCtrl.push(ItemSearchResult, {items:this.response.dataObject, filter:filter,
+      fetchedResults: this.response.fetchedRecords, numberOfResults:this.response.availableRecords,
+      isAssociateItems:this.isAssociateItems});
   }
  
 
   itemSearchError(error){
     this.http.setAuthToken(null);
-    this.loader.dismissLoader();
     this.errorMessage = "Failed to search items";
   }
 

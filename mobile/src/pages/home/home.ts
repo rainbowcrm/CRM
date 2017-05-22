@@ -3,8 +3,12 @@ import { NavController } from 'ionic-angular';
 import { CustomerHomePage } from '../customer-mgmt';
 import { ContactHomePage } from '../contact-mgmt';
 import { ItemSearch } from '../items';
-import { PushService,SecureStorageService } from '../../plugins/';
+import { PushService} from '../../plugins/';
+import { HTTPService} from '../../providers/';
 import { PushObject } from '@ionic-native/push';
+import { WishListPage } from '../wishlist';
+import { RegTokenRequest } from './home.model';
+import { Storage } from '@ionic/storage';
 
 
 /*
@@ -20,32 +24,17 @@ import { PushObject } from '@ionic-native/push';
 export class HomePage {
   private rootTitle = "Menu";
   private isRoot;
-  private rootMenus = ["Item Search","Customer Management","Contacts","Pricing & Promotions","Business Intelligence","Inventory"];
+  private rootMenus = ["Item Search","Customer Management","Contacts", "Wishlist"];
   private submenuList;
   private menuTitle = "Menu";
   private subMenus = {
                     "Item Search":ItemSearch,
                     "Customer Management":CustomerHomePage,
                     "Contacts":ContactHomePage,
-                    "Sales & Marketing":[
-                       {"label":"Sales Target", "page":'rdscontroller?page=salesperiodlist'},
-                       {"label":"Territories", "page":'rdscontroller?page=territories'},
-                       {"label":"Expenses", "page":'rdscontroller?page=salesexpenses'},
-                       {"label":"Sales Leads", "page":'rdscontroller?page=salesleads'},
-                       {"label":"Sales Cycle", "page":'rdscontroller?page=salescycle'},
-                       {"label":"Marketing Campaign", "page":'rdscontroller?page=campaign'},
-                    ],
-                   "Pricing & Promotions":[
-                       {"label":"Pricing Workbench", "page":'rdscontroller?page=territories'},
-                       {"label":"Promotions", "page":'rdscontroller?page=salesexpenses'}
-                    ],
-                    "Business Intelligence":[
-                       {"label":"Manager Console", "page":'rdscontroller?page=managerconsole'},
-                       {"label":"Sales Target Evaluation", "page":'rdscontroller?page=salesperiodAnalysis'},
-                       {"label":"Product Analysis", "page":'rdscontroller?page=productanalysis'},
-                       {"label":"Salesforce_Analysis", "page":'rdscontroller?page=salesforceanalysis'}
-                    ]};
-  constructor(public navCtrl: NavController, private pushService: PushService, private storageService: SecureStorageService) {
+                    "Wishlist": WishListPage
+                   };
+  constructor(public navCtrl: NavController, private pushService: PushService
+                , private http: HTTPService, private storage: Storage) {
     this.isRoot = true;
   }
 
@@ -62,7 +51,25 @@ export class HomePage {
 
   onNotificationRegistered(registration){
     console.log(registration)
+    var self = this;
+    this.storage.get('name').then((val) => {
+      self.registerDeviceToken(registration.registrationId,val);
+    });
   }
+
+  registerDeviceToken(regId: string, userName: string):void{
+     var request = new RegTokenRequest();
+     request.pageID = "login";
+     request.submitAction = "regMobileNotificationID";
+     request.dataObject.mobileNotificationId = regId;
+     request.dataObject.AuthToken = this.http.getAuthToken();
+     request.dataObject.username = userName;
+     this.http.processServerRequest("post",request, true, true).subscribe(
+                     res => console.log("Device Registered"),
+                     error =>  console.log("Error registering device"));  
+  }
+
+
 
   displaySubmenu(index, rootPage):void{
     this.submenuList = this.subMenus[rootPage];

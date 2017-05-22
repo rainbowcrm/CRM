@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavParams, NavController, ToastController, AlertController } from 'ionic-angular';
 import { Customer, CustomerAddPage, CustomerSearchRequest, CustomerSearchResponse } from '../';
-import { HTTPService, Loader } from '../../../providers/';
+import { HTTPService, SharedService } from '../../../providers/';
 import { ContactService } from '../../../plugins/';
 
 /*
@@ -21,16 +21,18 @@ export class CustomerListPage {
   private pageNumber: number;
   private fetchedResults: number;
   private numberOfResults: number;
+  private isAssociateCustomer: Boolean;
 
   constructor(private params: NavParams,private http:HTTPService,
-              private navCtrl: NavController, private loader:Loader,
+              private navCtrl: NavController,
               private toastCtrl: ToastController, private alertCtrl:AlertController,
-              private contactService: ContactService) {
+              private contactService: ContactService, private sharedData: SharedService) {
     this.customers = this.params.get('customers');
     this.filter = this.params.get('filter');
     this.pageNumber = 0;
     this.fetchedResults = this.params.get('fetchedResults');
     this.numberOfResults = this.params.get('numberOfResults');
+     this.isAssociateCustomer = this.params.get('isAssociateCustomer');  
   }
 
   ionViewDidLoad() {
@@ -53,6 +55,9 @@ export class CustomerListPage {
     }
 
   }
+  callTel(tel): void{
+            window.location.href = 'tel:'+ tel;
+  }
 
   doSearchMoreCustomer(infiniteScroll) {
       if(this.fetchedResults >= this.numberOfResults ){
@@ -65,7 +70,7 @@ export class CustomerListPage {
       this.request.hdnPage = ++this.pageNumber;
       this.request.pageID = "customers";
       this.request.filter = this.filter;
-      this.http.processServerRequest("post",this.request, true).subscribe(
+      this.http.processServerRequest("post",this.request, true, true).subscribe(
                      res => this.customerSearchSuccess(res, infiniteScroll),
                      error =>  this.customerSearchError(error, infiniteScroll)); 
   }
@@ -95,6 +100,11 @@ export class CustomerListPage {
     if(customer.Deleted == "true"){
       return;
     }
+    else if(this.isAssociateCustomer){
+      this.sharedData.saveData("customer",customer);
+      this.navCtrl.popToRoot();
+    }
+    else
      this.navCtrl.push(CustomerAddPage,{customer: customer});
   }
 
@@ -126,7 +136,6 @@ export class CustomerListPage {
   }
 
   deleteCustomerRequest(customer: Customer){
-      this.loader.dismissLoader();
       this.request = new CustomerSearchRequest();
       this.request.currentmode = 'READ';
       this.request.rds_selectedids = customer.Id;
@@ -137,7 +146,6 @@ export class CustomerListPage {
                      error =>  this.customerDeleteError(error)); 
   }
   customerDeleteSuccess(response):void{
-    this.loader.dismissLoader();
     this.response = response;
     if(this.response.result == "failure"){
       this.failedToDeleteToast();
@@ -151,7 +159,6 @@ export class CustomerListPage {
   customerDeleteError(error){
     this.http.setAuthToken(null);
     this.failedToDeleteToast();
-    this.loader.dismissLoader();
   }
 
   failedToDeleteToast():any{

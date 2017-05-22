@@ -1,0 +1,47 @@
+<!--
+  Generated template for the ItemSearch page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{item.Name}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addToCart()" *ngIf="isAssociateItems">
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+    </ion-buttons>
+ </ion-navbar>
+  
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-slides pager *ngIf="slideImg && slideImg.length>0">
+  <ion-slide *ngFor="let img of slideImg">
+    <img-loader src="{{img}}" fallback="assets/img/no_image.png" useImg></img-loader>
+  </ion-slide>
+</ion-slides>
+<div class="variants">
+    <ion-select #newSelect (change)="inventoryChanged(newSelect.value)">
+      <ion-option *ngFor="let inventory of item.Inventory; let i=index;" [value]="i" [selected]="i == 0">{{inventory.Division.Name}}</ion-option>
+    </ion-select>
+</div>
+<ion-card>
+    <div class="item-description"><strong>Class:</strong>{{item.ItemClass}}</div>
+    <div class="item-description" *ngIf="item.RetailPrice" ><strong>Price:</strong>{{item.RetailPrice}}</div>
+    <div class="item-description" *ngIf="item.Size"><strong>Size:</strong>{{item.Size}}</div>
+    <div class="item-description" *ngIf="item.Color"><strong>Color:</strong>{{item.Color}}</div>
+    <div class="item-description" *ngIf="item.Product.Name"><strong>Product:</strong>{{item.Product.Name}}</div>
+    <div class="item-description" *ngIf="item.Description"><strong>Description:</strong>{{item.Description}}</div>
+    <div class="item-description" *ngIf="inventory.CurrentQty>0">
+      <strong>Stock:</strong>
+      <span class="good">{{inventory.CurrentQty}} Quantity</span>
+    </div>
+    <div class="item-description" *ngIf="inventory.CurrentQty<=0">
+      <strong class="bad">Out of stock</strong>
+    </div>
+</ion-card>
+</ion-content>

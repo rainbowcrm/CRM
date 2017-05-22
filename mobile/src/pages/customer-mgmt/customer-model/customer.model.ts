@@ -17,6 +17,7 @@ export class Customer{
     Deleted: string;
     Base64Image: string;
     Filename: string;
+    FileWithLink: string;
 }
 
 export class CustomerSearchRequest extends BaseSearchRequest{

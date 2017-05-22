@@ -7,11 +7,19 @@
 <ion-header>
   <ion-navbar>
      <ion-buttons start>
-      <button ion-button icon-only (click)="goHome()">
+      <button ion-button icon-only (click)="goHome()" *ngIf="!isAssociateItems">
         <ion-icon name="home"></ion-icon>
       </button>
      </ion-buttons>
     <ion-title>Item Search</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="scanItem()">
+        <ion-icon name="qr-scanner"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="done()" *ngIf="isAssociateItems">
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+     </ion-buttons>
   </ion-navbar>
 
 </ion-header>

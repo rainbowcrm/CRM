@@ -3,6 +3,7 @@ import { NavController} from 'ionic-angular';
 import { Login, LoginRequest, LoginResponse } from './login.model';
 import { HTTPService, Loader } from '../../providers/';
 import { HomePage } from '../home/home';
+import { Storage } from '@ionic/storage';
 
 /*
   Generated class for the Login page.
@@ -19,7 +20,7 @@ export class LoginPage {
   private response:LoginResponse;
   private errorMessage;
   constructor(public navCtrl: NavController,private http:HTTPService,
-    private loader:Loader) {
+    private loader:Loader, private storage: Storage) {
       this.model.password="abc123";
       this.model.username="manager@atstar";
     }
@@ -46,6 +47,7 @@ export class LoginPage {
        return ;
     }
     this.response = response.dataObject;
+    this.storage.set('user', response.dataObject.Username);
     this.http.setAuthToken(response.dataObject.AuthToken);
     this.navCtrl.setRoot(HomePage);
     

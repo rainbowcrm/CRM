@@ -20,6 +20,30 @@ ps-item-search-result {
         padding-top: 13px;
     }
 
-  
+    ion-card.card {
+        height: 210px;
+        width: 42%;
+        float: left;
+        margin: 10px;
+        img{
+            max-height: 150px;
+            width: auto;
+            margin: auto;
+        }
+        ion-card-title.card-title{
+            font-size: 11px !important;
+            font-weight: bold;
+            text-align: center;
+        }
+    } 
+
+    .clearfix:after {
+      visibility: hidden;
+      display: block;
+      font-size: 0;
+      content: " ";
+      clear: both;
+      height: 0;
+   } 
   
 }

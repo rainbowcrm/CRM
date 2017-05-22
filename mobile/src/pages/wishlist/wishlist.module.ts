@@ -1,26 +1,24 @@
 import { NgModule } from '@angular/core';
+import { WishListPage } from './';
 import { IonicModule } from 'ionic-angular';
 import { CommonModule } from '@angular/common';
+import { CommonPSModule }   from '../../common/common-ps.module';
 import { IonicImageLoader } from 'ionic-image-loader';
-import {ErrorPartial} from './error-partial/error-partial'
-
 
 
 @NgModule({
   declarations: [
-    ErrorPartial
+    WishListPage
   ],
   imports: [
     IonicModule,
     CommonModule,
+    CommonPSModule,
     IonicImageLoader
   ],
-  exports:[
-    ErrorPartial
-  ],
   entryComponents: [
-    ErrorPartial
+    WishListPage
   ],
   providers: []
 })
-export class CommonPSModule {}
+export class WishlistModule {}

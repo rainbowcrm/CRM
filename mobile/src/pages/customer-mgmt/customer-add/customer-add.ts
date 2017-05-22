@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ToastController , NavParams} from 'ionic-angular';
 
 import { Customer, CustomerAddRequest, CustomerAddResponse } from '../';
-import { HTTPService, Loader } from '../../../providers/';
+import { HTTPService } from '../../../providers/';
 import { ImagePickerService } from '../../../plugins/';
 
 /*
@@ -23,8 +23,7 @@ export class CustomerAddPage {
   private pageTitle: string;
   private customerImage: string;
 
-  constructor(public navCtrl: NavController,private http:HTTPService,
-    private loader:Loader, private toastCtrl: ToastController,
+  constructor(public navCtrl: NavController,private http:HTTPService, private toastCtrl: ToastController,
     private params: NavParams, private imagePicker: ImagePickerService) {
       this.model = this.params.get('customer');
       if(this.model) {
@@ -44,7 +43,6 @@ export class CustomerAddPage {
   }
 
   addCustomer():void{
-    this.loader.presentLoader();
     this.errorMessage = null;
     let addCustomerReq = new CustomerAddRequest();
     addCustomerReq.fixedAction = this.isEdit?"FixedAction.ACTION_UPDATE":"FixedAction.ACTION_CREATE";
@@ -72,7 +70,6 @@ export class CustomerAddPage {
   }
 
   customerAddSuccess(response):void{
-    this.loader.dismissLoader();
     if(response.result == "failure"){
        this.errorMessage = "Failed to create customer"; 
        return ;
@@ -97,7 +94,6 @@ export class CustomerAddPage {
 
   customerAddError(error){
     this.http.setAuthToken(null);
-    this.loader.dismissLoader();
     this.errorMessage = "Failed to create customer";
   }
 
