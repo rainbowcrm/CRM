@@ -69,6 +69,16 @@ public class CommonUtil {
 		}
 		return "";
 	}
+
+	public static String getTokenfromSession(String sessionId)
+	{
+		return sessionId;
+	}
+	
+	public static String getSessionfromToken(String token)
+	{
+		return token;
+	}
 	
 	private static boolean changeFolder(FTPClient ftpClient, String companyCode, String subFolder) throws Exception
 	{

@@ -72,8 +72,6 @@ public class LoginSQLs {
 			ConnectionCreater.close(connection, statement, rs);	
 		}
 	}
-	
-	
 	public static void updateLogin(String user, String token, String session){
 		Connection connection = null;
 		PreparedStatement statement = null;
@@ -90,6 +88,25 @@ public class LoginSQLs {
 			statement.setString(4,user);
 			statement.executeUpdate() ;
 			Logwriter.INSTANCE.debug("Subsequent Login Reg for user" + user);
+		}catch(SQLException ex) {
+			Logwriter.INSTANCE.error(ex);
+		}finally {
+			ConnectionCreater.close(connection, statement, rs);	
+		}
+	}
+	
+	public static void updateLogout(String user){
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet rs  = null ;
+		try {
+			connection  = ConnectionCreater.getConnection() ;
+			String sql = " UPDATE LOGIN_RECORDS SET LOGGED_OFF_TIME = ?  WHERE USER_ID = ? " ; 
+			statement = connection.prepareStatement(sql) ;
+			statement.setTimestamp(1,new Timestamp(new java.util.Date().getTime()));
+			statement.setString(2,user);
+			statement.executeUpdate() ;
+			Logwriter.INSTANCE.debug("logout for user" + user);
 		}catch(SQLException ex) {
 			Logwriter.INSTANCE.error(ex);
 		}finally {

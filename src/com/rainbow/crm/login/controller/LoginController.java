@@ -30,6 +30,9 @@ public class LoginController extends  GeneralController{
 		HibernateDAO.instantiate(request.getServletContext());
 		SpringObjectFactory.INSTANCE.instantiate(request.getServletContext());
 		sessionId = request.getSession().getId();
+		CRMContext existingSession = LoginSQLs.loggedInUser(sessionId);
+		if  (existingSession != null)
+			 return existingSession;
 		return new RadsContext();
 	}
 	
@@ -54,13 +57,28 @@ public class LoginController extends  GeneralController{
 	@Override
 	public PageResult submit(ModelObject object, String actionParam) {
 		if (Utils.isNullString(actionParam))
-			return submit(object);
+			return submit(object); 
 		else if("regMobileNotificationID".equalsIgnoreCase(actionParam)) {
 			PageResult result = new PageResult();
 			Login login=(Login) object;
 			login.setMobileLogin(true);
 			LoginSQLs.updateMobileLogin(login.getUsername(), login.getMobileNotificationId(),login.getAuthToken());
 			result.setObject(login);
+			return result;
+		}else if("logout".equalsIgnoreCase(actionParam)) {
+			PageResult result = new PageResult();
+			Login login=(Login) object;
+			if (!Utils.isNullString(login.getUsername())) {
+				LoginSQLs.updateLogout(login.getUsername());
+				login.setLoggedOut(true);
+				result.setObject(login);
+			}else if (getContext() instanceof CRMContext )  {
+				String user  = ((CRMContext)getContext()).getUser();
+				LoginSQLs.updateLogout(user);
+				login.setLoggedOut(true);
+				result.setObject(login);
+			}
+			
 			return result;
 		}
 		return super.submit(object, actionParam);
