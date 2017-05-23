@@ -9,6 +9,7 @@ public class Login extends ModelObject{
 	String authToken ;
 	boolean isMobileLogin;
 	String mobileNotificationId;
+	boolean isLoggedOut;
 	
 	public String getUsername() {
 		return username;
@@ -40,6 +41,14 @@ public class Login extends ModelObject{
 	public void setMobileNotificationId(String mobileNotificationId) {
 		this.mobileNotificationId = mobileNotificationId;
 	}
+	public boolean isLoggedOut() {
+		return isLoggedOut;
+	}
+	public void setLoggedOut(boolean isLoggedOut) {
+		this.isLoggedOut = isLoggedOut;
+	}
+	
+	
 	
 	
 	
