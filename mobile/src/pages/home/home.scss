@@ -4,4 +4,8 @@ ps-home {
       background: color($colors, favorite);
       font-weight: 600;
   }
+  .home-bg {
+    background: url(/assets/img/home.jpg) no-repeat;
+    background-size: cover;
+  }
 }

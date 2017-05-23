@@ -31,20 +31,10 @@ export class ItemDetails {
   }
 
   addToCart(){
-      this.storage.get('wishList').then((val) => {
-         var items = val; 
-         if(!val){
-           items = [];
-         }
-         items.push(this.item);
-         this.storage.set("wishList",items);
-         let toast = this.toastCtrl.create({
-          message: 'Item added to cart',
-          duration: 2000,
-          position: 'top'
-         });
-        toast.present();
-        this.navCtrl.pop();
+      this.storage.get('associateItem').then((val) => {
+        this.storage.remove('associateItem');
+        this.storage.set("associateItem",this.item);
+        this.navCtrl.popToRoot();
       })
   }
   

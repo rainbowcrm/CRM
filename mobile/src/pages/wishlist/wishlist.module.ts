@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { WishListPage } from './';
+import { WishListPage, ReasonCodeItemPopOverPage } from './';
 import { IonicModule } from 'ionic-angular';
 import { CommonModule } from '@angular/common';
 import { CommonPSModule }   from '../../common/common-ps.module';
@@ -8,7 +8,8 @@ import { IonicImageLoader } from 'ionic-image-loader';
 
 @NgModule({
   declarations: [
-    WishListPage
+    WishListPage,
+    ReasonCodeItemPopOverPage
   ],
   imports: [
     IonicModule,
@@ -17,7 +18,8 @@ import { IonicImageLoader } from 'ionic-image-loader';
     IonicImageLoader
   ],
   entryComponents: [
-    WishListPage
+    WishListPage,
+    ReasonCodeItemPopOverPage
   ],
   providers: []
 })

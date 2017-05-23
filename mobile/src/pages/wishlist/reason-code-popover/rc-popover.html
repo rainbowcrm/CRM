@@ -1,0 +1,32 @@
+<!--
+  Generated template for the Home page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<form #reasonCodeForm="ngForm">
+      <ion-list>
+      <ion-item>
+        <ion-label stacked>Reason Code</ion-label>
+        <ion-input type="text" [(ngModel)]="model.reasonCode" name="reasonCode" #reasonCode="ngModel" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Desired Price</ion-label>
+        <ion-input type="text" [(ngModel)]="model.desiredPrice" name="desiredPrice" #desiredPrice="ngModel" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Desired Date</ion-label>
+        <ion-input type="date" [(ngModel)]="model.desiredDate" name="desiredDate" #desiredPrice="ngModel" placeholder="" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-textarea [(ngModel)]="model.comments" name="comments" #comments="ngModel" placeholder="Comments"></ion-textarea>
+      </ion-item>
+
+    </ion-list>
+</form>
+<div class="button-container">
+  <button ion-button [disabled]="!reasonCodeForm.form.valid" (click)="onDismiss()">Ok</button>
+</div>

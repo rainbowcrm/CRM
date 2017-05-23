@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, PopoverController } from 'ionic-angular';
 import { Customer, CustomerHomePage } from '../customer-mgmt/';
-import { Item, ItemSearch } from '../items/';
+import { Inventory, ItemSearch } from '../items/';
 import { HomePage } from '../home/home';
 import { SharedService } from '../../providers/';
 import { Storage } from '@ionic/storage';
+import { ReasonCodeItemPopOverPage, ReasonCodeItem } from './';
 
 
 /*
@@ -19,10 +20,9 @@ import { Storage } from '@ionic/storage';
 })
 export class WishListPage {
   private customer: Customer;
-  private items: Array<Item>;
+  private items: Inventory;
   constructor(public navCtrl: NavController, private sharedData: SharedService,
-              private storage: Storage) {
-     this.items = [];
+              private storage: Storage, private popoverCtrl: PopoverController) {
   }
 
   goHome():void{
@@ -31,12 +31,21 @@ export class WishListPage {
 
   ionViewDidEnter() {
     this.customer = this.sharedData.getData("customer");
+    //var self = this;
     this.storage.ready().then(() => {
        // Or to get a key/value pair
-       this.storage.get('wishList').then((val) => {
-         this.items = val;
+       this.storage.get('associateItem').then((val) => {
+         if(val){
+            let popover = this.popoverCtrl.create(ReasonCodeItemPopOverPage, {}, {cssClass:"wishlistReasonCode"});
+             popover.present({});
+             popover.onDidDismiss(this.dismissReasonCodePopover)
+         }
        })
      });
+  }
+
+  dismissReasonCodePopover(data: ReasonCodeItem){
+       debugger
   }
 
   associateCustomer():void{

@@ -33,7 +33,7 @@ export class ContactListPage {
     this.fetchedResults = this.params.get('fetchedResults');
     this.numberOfResults = this.params.get('numberOfResults');
     this.rcp.reasonCodeSource$.subscribe(res => {console.log(res)});
-   // this.rcp.getReasonCode();
+    this.rcp.getReasonCode();
   }
 
   ionViewDidLoad() {
