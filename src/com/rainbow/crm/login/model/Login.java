@@ -1,5 +1,7 @@
 package com.rainbow.crm.login.model;
 
+import com.rainbow.crm.division.model.Division;
+import com.techtrade.rads.framework.annotations.RadsPropertySet;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 
 public class Login extends ModelObject{
@@ -10,6 +12,8 @@ public class Login extends ModelObject{
 	boolean isMobileLogin;
 	String mobileNotificationId;
 	boolean isLoggedOut;
+	
+	Division loggedInDivision;
 	
 	public String getUsername() {
 		return username;
@@ -46,6 +50,16 @@ public class Login extends ModelObject{
 	}
 	public void setLoggedOut(boolean isLoggedOut) {
 		this.isLoggedOut = isLoggedOut;
+	}
+	
+	@RadsPropertySet(useBKForJSON=true, useBKForMap =true, useBKForXML =true)
+	public Division getLoggedInDivision() {
+		return loggedInDivision;
+	}
+	
+	@RadsPropertySet(useBKForJSON=true, useBKForMap =true, useBKForXML =true)
+	public void setLoggedInDivision(Division loggedInDivision) {
+		this.loggedInDivision = loggedInDivision;
 	}
 	
 	

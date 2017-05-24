@@ -105,6 +105,7 @@ public class LoginController extends  GeneralController{
 			User user =(User) obj ;
 			if (user.getPassword().equals(login.getPassword())) {
 				Logwriter.INSTANCE.debug("Login Successfull");
+				login.setLoggedInDivision(user.getDivision());
 				if (user.getCompany().getId() == 1)
 					res.setNextPageKey("sysadmin"); // newdivision
 				else
