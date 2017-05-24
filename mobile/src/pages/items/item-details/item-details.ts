@@ -33,7 +33,7 @@ export class ItemDetails {
   addToCart(){
       this.storage.get('associateItem').then((val) => {
         this.storage.remove('associateItem');
-        this.storage.set("associateItem",this.item);
+        this.storage.set("associateItem",this.inventory);
         this.navCtrl.popToRoot();
       })
   }

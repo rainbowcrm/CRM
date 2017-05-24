@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ViewController } from 'ionic-angular';
+import { ViewController, NavParams } from 'ionic-angular';
 import { ReasonCodeItem } from '../';
 
 /*
@@ -14,8 +14,10 @@ import { ReasonCodeItem } from '../';
 })
 export class ReasonCodeItemPopOverPage {
   private model: ReasonCodeItem;
-  constructor(public viewCtrl: ViewController) {
+  private item:any;
+  constructor(public viewCtrl: ViewController, private navParam: NavParams) {
     this.model = new ReasonCodeItem();
+    this.item = this.navParam.get("item");
   }
 
   onDismiss():void{

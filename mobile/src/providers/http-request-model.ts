@@ -4,7 +4,7 @@ export class BaseSearchRequest{
     currentmode:string;
     filter:Array<any>;
     hdnPage: number;
-    dataObject: Object;
+    dataObject: any;
     rds_sortfield:string;
     rds_sortdirection:string;
     rds_selectedids:string;

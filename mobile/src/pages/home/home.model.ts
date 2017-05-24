@@ -6,6 +6,11 @@ export class RegTokenRequest extends BaseSearchRequest{
     dataObject: Token;
 }
 
+export class LogoutRequest extends BaseSearchRequest{
+    submitAction: string;
+    dataObject: any;
+}
+
 export class Token{
    username:string;
    AuthToken: string;
