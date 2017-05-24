@@ -49,7 +49,7 @@ public class FilterAjaxService implements IAjaxLookupService{
 	
 	@Override
 	public IRadsContext generateContext(HttpServletRequest request) {
-		return CommonUtil.generateContext(request.getSession().getId());
+		return CommonUtil.generateContext(request);
 	}
 
 	

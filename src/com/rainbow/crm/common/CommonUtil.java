@@ -236,14 +236,26 @@ public class CommonUtil {
 	
 	public static IRadsContext generateContext(HttpServletRequest request,
 			HttpServletResponse response) {
-		
-		CRMContext context=  LoginSQLs.loggedInUser(request.getSession().getId());
+		String authToken  =  request.getParameter("authToken");
+		if(Utils.isNullString(authToken))
+			authToken = getTokenfromSession(request.getSession().getId());
+		CRMContext context=  LoginSQLs.loggedInUser(authToken);
 		User user = CommonUtil.getUser(context, context.getUser());
 		context.setLoggedInUser(user);
 		return context;
 	}
 	
 	public static IRadsContext generateContext(String authToken) {
+		CRMContext context=  LoginSQLs.loggedInUser(authToken);
+		User user = CommonUtil.getUser(context, context.getUser());
+		context.setLoggedInUser(user);
+		return context;
+	}
+	
+	public static IRadsContext generateContext(HttpServletRequest request) {
+		String authToken  =  String.valueOf(request.getAttribute("authToken"));
+		if(Utils.isNullString(authToken))
+			authToken = getTokenfromSession(request.getSession().getId());
 		CRMContext context=  LoginSQLs.loggedInUser(authToken);
 		User user = CommonUtil.getUser(context, context.getUser());
 		context.setLoggedInUser(user);

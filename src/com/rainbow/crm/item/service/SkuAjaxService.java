@@ -9,6 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.rainbow.crm.common.CRMContext;
+import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.database.LoginSQLs;
 import com.rainbow.crm.item.model.Item;
@@ -88,7 +89,7 @@ public class SkuAjaxService implements IAjaxLookupService {
 
 	@Override
 	public IRadsContext generateContext(HttpServletRequest request) {
-		return LoginSQLs.loggedInUser(request.getSession().getId());
+		return CommonUtil.generateContext(request);
 	}
 
 }

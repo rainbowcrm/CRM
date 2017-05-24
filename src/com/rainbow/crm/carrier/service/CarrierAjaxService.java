@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.rainbow.crm.common.CRMContext;
+import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.carrier.model.Carrier;
 import com.rainbow.crm.database.LoginSQLs;
@@ -36,7 +37,7 @@ public class CarrierAjaxService implements IAjaxLookupService{
 
 	@Override
 	public IRadsContext generateContext(HttpServletRequest request) {
-		return LoginSQLs.loggedInUser(request.getSession().getId());
+		return CommonUtil.generateContext(request);
 	}
 	
 	
