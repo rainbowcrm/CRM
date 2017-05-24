@@ -13,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.rainbow.crm.common.CRMAppConfig;
+import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.database.LoginSQLs;
 import com.rainbow.crm.logger.Logwriter;
 import com.techtrade.rads.framework.context.IRadsContext;
@@ -142,7 +143,7 @@ public class CountryStateAjaxService implements IAjaxLookupService{
 
 	@Override
 	public IRadsContext generateContext(HttpServletRequest request) {
-		return LoginSQLs.loggedInUser(request.getSession().getId());
+		return CommonUtil.generateContext(request);
 	}
 
 
