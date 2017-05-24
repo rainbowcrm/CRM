@@ -25,6 +25,7 @@ export class HTTPService {
     }
     if(auth){
       data.authToken = this.authToken;
+      data.AuthToken = this.authToken;
     }
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });

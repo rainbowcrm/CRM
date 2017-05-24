@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { CustomerHomePage } from '../customer-mgmt';
 import { ContactHomePage } from '../contact-mgmt';
+import { LoginPage } from '../login/login';
 import { ItemSearch } from '../items';
 import { PushService} from '../../plugins/';
 import { HTTPService} from '../../providers/';
 import { PushObject } from '@ionic-native/push';
 import { WishListPage } from '../wishlist';
-import { RegTokenRequest } from './home.model';
+import { RegTokenRequest, LogoutRequest, Token } from './home.model';
 import { Storage } from '@ionic/storage';
 
 
@@ -34,7 +35,8 @@ export class HomePage {
                     "Wishlist": WishListPage
                    };
   constructor(public navCtrl: NavController, private pushService: PushService
-                , private http: HTTPService, private storage: Storage) {
+                , private http: HTTPService, private storage: Storage,
+                private alertCtrl: AlertController) {
     this.isRoot = true;
   }
 
@@ -61,6 +63,7 @@ export class HomePage {
      var request = new RegTokenRequest();
      request.pageID = "login";
      request.submitAction = "regMobileNotificationID";
+     request.dataObject = new Token();
      request.dataObject.mobileNotificationId = regId;
      request.dataObject.AuthToken = this.http.getAuthToken();
      request.dataObject.username = userName;
@@ -85,9 +88,50 @@ export class HomePage {
     }
   }
 
+  private logoutFromBackend(): void{
+    this.storage.get('name').then((val) => {
+      var request = new LogoutRequest();
+       request.pageID = "login";
+       request.submitAction = "logout";
+       request.dataObject = {};
+       request.dataObject.AuthToken = this.http.getAuthToken();
+       request.dataObject.username = val;
+       this.http.processServerRequest("post",request, true, true).subscribe(
+                      res => {
+                         this.navCtrl.setRoot(LoginPage);
+                         this.http.setAuthToken("")
+                       },
+                      error =>  console.log("Error logging out")); 
+    });
+     
+  }
+
   displayMainmenu(index, menu):void{
     this.isRoot = true;
     this.menuTitle = "Menu";
+  }
+
+  logout(){
+    let alert = this.alertCtrl.create({
+    title: 'Logout',
+    message: 'Are you sure you want to logout?',
+    buttons: [
+      {
+        text: 'Cancel',
+        role: 'cancel',
+        handler: data => {
+          console.log('Cancel clicked');
+        }
+      },
+      {
+        text: 'Confirm',
+        handler: data => {
+          this.logoutFromBackend();
+        }
+      }
+    ]
+   });
+   alert.present();
   }
 
   navigateToPage(index, menu):void{

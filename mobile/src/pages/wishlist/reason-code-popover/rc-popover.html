@@ -6,9 +6,13 @@
 -->
 <form #reasonCodeForm="ngForm">
       <ion-list>
+      <ion-list-header>{{item.Name}}</ion-list-header>
       <ion-item>
         <ion-label stacked>Reason Code</ion-label>
-        <ion-input type="text" [(ngModel)]="model.reasonCode" name="reasonCode" #reasonCode="ngModel" required></ion-input>
+        <ion-select name="reasonCode" #reasonCode="ngModel" [(ngModel)]="model.reasonCode" required>
+                  <ion-option value="LOWPRICE">Low Price</ion-option>
+                  <ion-option value="HIGHPRICE">High Price</ion-option>
+        </ion-select>
       </ion-item>
 
       <ion-item>
@@ -19,6 +23,11 @@
       <ion-item>
         <ion-label stacked>Desired Date</ion-label>
         <ion-input type="date" [(ngModel)]="model.desiredDate" name="desiredDate" #desiredPrice="ngModel" placeholder="" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Quantity #</ion-label>
+        <ion-input type="number" [(ngModel)]="model.quantity" name="quantity" #quantity="ngModel" required></ion-input>
       </ion-item>
 
       <ion-item>

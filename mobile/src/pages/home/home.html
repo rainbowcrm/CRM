@@ -25,6 +25,9 @@
      <ion-item detail-push *ngFor="let menu of rootMenus; let i = index" (click)="displaySubmenu(i, menu)">
        {{menu}}
      </ion-item>
+     <ion-item (click)="logout()">
+       Logout
+     </ion-item>
     </ion-list>
     <ion-list *ngIf="!isRoot">
       <ion-item (click)="displayMainmenu(i, menu)" class="menu-back">

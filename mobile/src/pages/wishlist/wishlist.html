@@ -12,10 +12,16 @@
       </button>
      </ion-buttons>
     <ion-title>Wish List</ion-title>
+    <ion-buttons end>
+    <button ion-button icon-only (click)="createWishlist()" *ngIf="customer && items && items.length > 0">
+        <ion-icon name="checkmark"></ion-icon>
+    </button>
+     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
+  <ps-error [message]="errorMessage" [type]="'error'"></ps-error>
   <ion-list>
     <ion-list-header>Customer</ion-list-header>
     <ion-item *ngIf="customer">
@@ -26,18 +32,20 @@
      <p>{{customer.Phone}}</p>
     <ion-icon name="remove-circle" item-right (click)="deAssociateCustomer();"></ion-icon>
    </ion-item>
-   <button ion-fab mini *ngIf="!customer" (click)="associateCustomer();"><ion-icon name="add"></ion-icon></button>
+    <button ion-fab mini *ngIf="!customer" (click)="associateCustomer();"><ion-icon name="add"></ion-icon></button>
+  </ion-list>
+  
    <ion-list-header>Items</ion-list-header>
-    <ion-item>
-      <ion-card *ngFor="let item of items">
-      <img-loader src="{{item.Image1URL}}" fallback="assets/img/no_image.png" useImg></img-loader>
-      <ion-card-content>
-        <ion-card-title>
-         {{item.Item.Name}}
-        </ion-card-title>
-      </ion-card-content>
-     </ion-card> 
-    <button ion-fab mini (click)="addItem();"><ion-icon name="add"></ion-icon></button> 
-   </ion-item>
-</ion-list>
+     <ion-list inset>
+       <ion-item *ngFor="let item of items; let i=$index">
+          <ion-icon name="remove-circle" item-right (click)="removeItem(i);"></ion-icon>
+          <h3>{{item.Sku.Name}}</h3>
+          <h2>{{item.ReasonCode}}</h2>
+          <h2>{{item.DesiredDate}}</h2>
+          <h2>{{item.DesiredPrice}}</h2>
+          <h2>Quantity: {{item.Qty}}</h2>
+          <h2>{{item.Comments}}</h2>
+       </ion-item>
+       <button ion-fab mini (click)="addItem();"><ion-icon name="add"></ion-icon></button>
+    </ion-list>
 </ion-content>
