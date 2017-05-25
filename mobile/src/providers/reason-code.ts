@@ -25,10 +25,9 @@ export class ReasonCodeProvider {
      }else{
       this.http.processCustomUrlServerRequest("ajxService=allReasoncodes","post",this.request, true).subscribe(
                      res =>  {
-                       debugger
                        this.processReasonCodes(res);
                       },
-                     error =>  {debugger});
+                     error =>  {});
      }
   }
 

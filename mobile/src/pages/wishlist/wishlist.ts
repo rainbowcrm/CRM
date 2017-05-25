@@ -75,20 +75,23 @@ export class WishListPage {
   }
 
   createWishlist(): void{
-    let wishlistRequest = new NewWishListRequest();
-     this.errorMessage = null; 
-    wishlistRequest.fixedAction = "FixedAction.ACTION_CREATE";
-    wishlistRequest.currentmode = "CREATE";
-    wishlistRequest.dataObject = new WishList();
-    wishlistRequest.dataObject.Division = {"Name":"BANGALORE CENTRAL","Code":"DV003"};
-    var date = new Date();
-    wishlistRequest.dataObject.WishListDate = this.datePipe.transform(date,"yyyy-MM-dd");
-    wishlistRequest.dataObject.Customer = {Phone:this.customer.Phone};
-    wishlistRequest.dataObject.WishListLines = this.items;
-    wishlistRequest.pageID = 'newwishlist';
-    this.http.processServerRequest("post",wishlistRequest).subscribe(
-                     res => {this.wishlistSuccess(res)},
-                     error =>  this.wishlistError(error));  
+    this.storage.get('division').then((val) => {
+      let wishlistRequest = new NewWishListRequest();
+      this.errorMessage = null; 
+      wishlistRequest.fixedAction = "FixedAction.ACTION_CREATE";
+      wishlistRequest.currentmode = "CREATE";
+      wishlistRequest.dataObject = new WishList();
+      wishlistRequest.dataObject.Division = val;
+      var date = new Date();
+      wishlistRequest.dataObject.WishListDate = this.datePipe.transform(date,"yyyy-MM-dd");
+      wishlistRequest.dataObject.Customer = {Phone:this.customer.Phone};
+      wishlistRequest.dataObject.WishListLines = this.items;
+      wishlistRequest.pageID = 'newwishlist';
+      this.http.processServerRequest("post",wishlistRequest).subscribe(
+                       res => {this.wishlistSuccess(res)},
+                       error =>  this.wishlistError(error));  
+      });
+    
   }
 
   wishlistSuccess(res){

@@ -28,7 +28,6 @@ export class ContactAddPage {
     }
 
   updateReasonCodes(reasonCodes){
-    debugger
      this.reasonCodes =  reasonCodes.CONTTYPE;
   }
   ionViewDidLoad() {

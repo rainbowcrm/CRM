@@ -48,6 +48,7 @@ export class LoginPage {
     }
     this.response = response.dataObject;
     this.storage.set('user', response.dataObject.Username);
+     this.storage.set('division', response.dataObject.LoggedInDivision);
     this.http.setAuthToken(response.dataObject.AuthToken);
     this.navCtrl.setRoot(HomePage);
     

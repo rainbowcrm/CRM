@@ -10,8 +10,7 @@
       <ion-item>
         <ion-label stacked>Reason Code</ion-label>
         <ion-select name="reasonCode" #reasonCode="ngModel" [(ngModel)]="model.reasonCode" required>
-                  <ion-option value="LOWPRICE">Low Price</ion-option>
-                  <ion-option value="HIGHPRICE">High Price</ion-option>
+                  <ion-option *ngFor="let rc of reasonCodes" value="{{rc.Code}}">{{rc.Description}}</ion-option>
         </ion-select>
       </ion-item>
 
