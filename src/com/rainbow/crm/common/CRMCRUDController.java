@@ -114,22 +114,12 @@ public  abstract class CRMCRUDController  extends CRUDController{
 	@Override
 	public IRadsContext generateContext(HttpServletRequest request,
 			HttpServletResponse response) {
-		CRMContext context=  LoginSQLs.loggedInUser(request.getSession().getId());
-		if(context != null) {
-			User user = CommonUtil.getUser(context, context.getUser());
-			context.setLoggedInUser(user);
-		}
-		return context;
+		return CommonUtil.generateContext(request);
 	}
 	
 	@Override
 	public IRadsContext generateContext(String authToken) {
-		CRMContext context=  LoginSQLs.loggedInUser(authToken);
-		if(context != null) {
-			User user = CommonUtil.getUser(context, context.getUser());
-			context.setLoggedInUser(user);
-		}
-		return context;
+		return CommonUtil.generateContext(authToken);
 	}
 	
 	

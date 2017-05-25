@@ -76,13 +76,16 @@ Controller = "com.rainbow.crm.saleslead.controller.SalesLeadListController">
 <Column title ="Date"  sortField="releasedDate"  width ="20%" >
 <Element label = ""  type = "UINote" Id = "idDt"  property ="releasedDate" />
 </Column>
-<Column title ="Customer" sortField="customer.firstName"  width ="30%" >
+<Column title ="Customer" sortField="customer.firstName"  width ="20%" >
 <Element label = ""  type = "UINote" Id = "idCust"  property ="Customer.fullName" />
 </Column>
 <Column title ="Phone" sortField="customer.phone"  width ="10%" >
 <Element label = ""  type = "UINote" Id = "idPhone"  property ="Customer.Phone" />
 </Column> 
-<Column title ="Status"  sortField="status.description"  width ="25%" >
+<Column title ="Associate" sortField="salesAssociate"  width ="10%" >
+<Element label = ""  type = "UINote" Id = "idPhone"  property ="salesAssociate" />
+</Column>
+<Column title ="Status"  sortField="status.description"  width ="15%" >
 <Element label = ""  type = "UINote" Id = "idAmt"  property ="Status.description" />
 </Column>
 </Columns>

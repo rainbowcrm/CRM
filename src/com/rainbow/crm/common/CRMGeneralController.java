@@ -22,18 +22,12 @@ public abstract class CRMGeneralController  extends GeneralController{
 	@Override
 	public IRadsContext generateContext(HttpServletRequest request,
 			HttpServletResponse response) {
-		CRMContext context=  LoginSQLs.loggedInUser(request.getSession().getId());
-		User user = CommonUtil.getUser(context, context.getUser());
-		context.setLoggedInUser(user);
-		return context;
+		return CommonUtil.generateContext(request);
 	}
 	
 	@Override
 	public IRadsContext generateContext(String authToken) {
-		CRMContext context=  LoginSQLs.loggedInUser(authToken);
-		User user = CommonUtil.getUser(context, context.getUser());
-		context.setLoggedInUser(user);
-		return context;
+		return CommonUtil.generateContext(authToken);
 	}
 	
 	public String getCompanyName() {
