@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavParams, NavController, ToastController, AlertController } from 'ionic-angular';
 import { Contact, ContactSearchRequest, ContactSearchResponse } from '../';
-import { HTTPService, SharedService, ReasonCodeProvider } from '../../../providers/';
+import { HTTPService, SharedService } from '../../../providers/';
 import { ContactService } from '../../../plugins/';
 
 /*
@@ -25,15 +25,13 @@ export class ContactListPage {
   constructor(private params: NavParams,private http:HTTPService,
               private navCtrl: NavController,
               private toastCtrl: ToastController, private alertCtrl:AlertController,
-              private contactService: ContactService, private sharedData: SharedService,
-              private rcp: ReasonCodeProvider) {
+              private contactService: ContactService, private sharedData: SharedService
+             ) {
     this.contacts = this.params.get('contacts');
     this.filter = this.params.get('filter');
     this.pageNumber = 0;
     this.fetchedResults = this.params.get('fetchedResults');
     this.numberOfResults = this.params.get('numberOfResults');
-    this.rcp.reasonCodeSource$.subscribe(res => {console.log(res)});
-    this.rcp.getReasonCode();
   }
 
   ionViewDidLoad() {

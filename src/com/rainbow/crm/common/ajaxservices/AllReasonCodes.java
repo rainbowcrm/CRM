@@ -25,7 +25,7 @@ public class AllReasonCodes implements IAjaxUpdateService {
 				replies.append( ",");
 			replies.append("\n");
 		}
-		replies.append("],\n");
+		replies.append("]\n");
 		replies.append("}");
 		return replies.toString();
 		

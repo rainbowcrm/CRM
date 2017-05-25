@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ToastController , NavParams} from 'ionic-angular';
 
 import { Contact, ContactAddRequest, ContactAddResponse, ContactType } from '../';
-import { HTTPService } from '../../../providers/';
+import { HTTPService, ReasonCodeProvider } from '../../../providers/';
 
 /*
 
@@ -17,13 +17,19 @@ export class ContactAddPage {
   private model:Contact;
   private response: ContactAddResponse;
   private errorMessage:string;
+  private reasonCodes: Array<any>;
 
   constructor(public navCtrl: NavController,private http:HTTPService, private toastCtrl: ToastController,
-    private params: NavParams) {
+    private params: NavParams,  private rcp: ReasonCodeProvider) {
       this.model = new Contact();
       this.model.ContactType = new ContactType();
+      this.rcp.reasonCodeSource$.subscribe(res => {this.updateReasonCodes(res)});
+      this.rcp.getReasonCode();
     }
 
+  updateReasonCodes(reasonCodes){
+     this.reasonCodes =  reasonCodes.CONTTYPE;
+  }
   ionViewDidLoad() {
     console.log('Hello ContactAdd Page');
   }

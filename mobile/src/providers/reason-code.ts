@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { HTTPService, BaseSearchRequest } from './';
+import { HTTPService, BaseSearchRequest, SharedService } from './';
 import { Subject }    from 'rxjs/Subject';
 import { Observable }    from 'rxjs/Observable';
-
+import 'rxjs/add/observable/throw';
 /*
   Generated class for the Loader provider.
 
@@ -16,7 +16,7 @@ export class ReasonCodeProvider {
   private request = new BaseSearchRequest();
   reasonCodeSource$ = this.reasonCodeSource.asObservable();
 
-  constructor(private storage: Storage, private http: HTTPService) { }
+  constructor(private storage: Storage, private http: HTTPService, private sharedService: SharedService) { }
 
   getReasonCode(){
      var reasonCode = this.getReasonCodeFromStorage();
@@ -24,17 +24,34 @@ export class ReasonCodeProvider {
        this.reasonCodeSource.next(reasonCode);
      }else{
       this.http.processCustomUrlServerRequest("ajxService=allReasoncodes","post",this.request, true).subscribe(
-                     res =>  this.reasonCodeSource.next(reasonCode),
-                     error =>   this.reasonCodeSource.next());
+                     res =>  {
+                       this.processReasonCodes(res);
+                      },
+                     error =>  {});
      }
   }
 
-  private getReasonCodeFromStorage(): void{
-
+  private processReasonCodes(res): void{
+     let reasonCode = {};
+     let allReasoncodes = res.allReasonCodes;
+     if(allReasoncodes){
+       for(let i=0; i<allReasoncodes.length;i++){
+         if(!reasonCode[allReasoncodes[i]["Type"]]){
+           reasonCode[allReasoncodes[i]["Type"]] = [];
+         }
+         reasonCode[allReasoncodes[i]["Type"]].push(allReasoncodes[i]);
+       }
+     }    
+     this.saveReasonCodeIntoStorage(reasonCode);
+     this.reasonCodeSource.next(reasonCode)
   }
 
-  private saveReasonCodeIntoStorage(): void{
-    
+  private getReasonCodeFromStorage(): void{
+    return this.sharedService.getData("reasonCodes");
+  }
+
+  private saveReasonCodeIntoStorage(rc): void{
+    this.sharedService.saveData("reasonCodes",rc);
   }
 
 }

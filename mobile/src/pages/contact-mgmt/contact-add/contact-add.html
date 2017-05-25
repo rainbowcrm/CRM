@@ -82,10 +82,8 @@
        <ion-col>
          <ion-item>
            <ion-label floating>Contact Type</ion-label>
-           <ion-select [(ngModel)]="model.ContactType.Code" name="contactType" #contactType="ngModel">
-                  <ion-option value="">None</ion-option>
-                  <ion-option value="BPARTNER">Bussiness Partner</ion-option>
-                  <ion-option value="POTCUST">Customer</ion-option>
+           <ion-select [(ngModel)]="model.ContactType.Code" name="contactType" #contactType="ngModel" required>
+                  <ion-option *ngFor="let rc of reasonCodes" value="{{rc.Code}}">{{rc.Description}}</ion-option>
             </ion-select>
          </ion-item>
       </ion-col>

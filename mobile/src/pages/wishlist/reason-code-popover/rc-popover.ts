@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ViewController, NavParams } from 'ionic-angular';
 import { ReasonCodeItem } from '../';
+import { ReasonCodeProvider } from '../../../providers/';
 
 /*
   Generated class for the Reason code page.
@@ -14,10 +15,18 @@ import { ReasonCodeItem } from '../';
 })
 export class ReasonCodeItemPopOverPage {
   private model: ReasonCodeItem;
+  private reasonCodes: Array<any>;
   private item:any;
-  constructor(public viewCtrl: ViewController, private navParam: NavParams) {
+  constructor(public viewCtrl: ViewController, private navParam: NavParams,
+              private rcp: ReasonCodeProvider) {
     this.model = new ReasonCodeItem();
     this.item = this.navParam.get("item");
+    this.rcp.reasonCodeSource$.subscribe(res => {this.updateReasonCodes(res)});
+    this.rcp.getReasonCode();
+  }
+
+   updateReasonCodes(reasonCodes){
+     this.reasonCodes =  reasonCodes.WISHREASON;
   }
 
   onDismiss():void{
