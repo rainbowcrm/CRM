@@ -44,7 +44,7 @@ export class HTTPService {
     if(auth){
       data.authToken = this.authToken;
     }
-    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let headers = new Headers({ 'Content-Type': 'plain/text' });
     let options = new RequestOptions({ headers: headers });
     switch(restType){
       case "get": return this.http.get(newUrl)
