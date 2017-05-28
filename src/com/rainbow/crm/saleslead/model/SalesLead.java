@@ -136,9 +136,11 @@ public class SalesLead extends CRMBusinessModelObject{
 	public void setAlerted(boolean alerted) {
 		this.alerted = alerted;
 	}
+	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
 	public Territory getTerritory() {
 		return territory;
 	}
+	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
 	public void setTerritory(Territory territory) {
 		this.territory = territory;
 	}

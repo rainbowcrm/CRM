@@ -38,9 +38,9 @@ public abstract class CRMListController  extends ListController{
 			for (FilterNode node : filterData.getNodeList()) {
 				if (!Utils.isNullString(String.valueOf(node.getValue())) && !"FilterName".equals(node.getField())) {
 					if (whereCondition.length() < 1)
-						whereCondition.append( " where  "  + Utils.initlower(node.getField())  + getOperator(node) +  "'" +  node.getValue() + "'");
+						whereCondition.append( " where  "  + getCondition(node) );
 					else
-						whereCondition.append( " and  "  + Utils.initlower(node.getField())  +  getOperator(node) + "'" +  node.getValue() + "'");
+						whereCondition.append( " and  "  + getCondition(node));
 				}
 			}
 		}
@@ -70,6 +70,15 @@ public abstract class CRMListController  extends ListController{
 	public PageResult print(List<ModelObject> objects) {
 		return null;
 	}
+	protected static String getOperatorClose(FilterNode node) {
+		
+		 if (node.getOperater() == FilterNode.Operator.IN || node.getOperater() == FilterNode.Operator.NOT_IN) {
+				return " ) ";
+			}
+		 else
+			  return "";
+	}
+	
 	protected static String getOperator(FilterNode node) {
 		if (node.getOperater() == null || node.getOperater() == FilterNode.Operator.EQUALS) {
 			return "=";
@@ -81,10 +90,22 @@ public abstract class CRMListController  extends ListController{
 			return "<=";
 		}else if (node.getOperater() == FilterNode.Operator.LESS_THAN) {
 			return "<";
+		}else if (node.getOperater() == FilterNode.Operator.IN) {
+			return " in ( ";
+		}else if (node.getOperater() == FilterNode.Operator.NOT_IN) {
+			return "  not in ( ";
 		}
 		return "=";
 	}
 	
+	protected static String getCondition (FilterNode node) 
+	{
+		  if  (node.getOperater() != FilterNode.Operator.IN  && node.getOperater() != FilterNode.Operator.NOT_IN )
+			  return Utils.initlower(node.getField())  + getOperator(node) +  "'" +  node.getValue() + "'";
+		  else
+			  return Utils.initlower(node.getField())  + getOperator(node) +    node.getValue()  + getOperatorClose(node) ;
+		
+	}
 	@Override
 	public void saveFilter(Filter filter) {
           CRMFilter crmFilter= CRMFilter.parseRadsFilter(this, filter);
