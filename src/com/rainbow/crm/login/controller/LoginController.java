@@ -88,7 +88,7 @@ public class LoginController extends  GeneralController{
 	public PageResult submit(ModelObject object) {
 		PageResult res = new PageResult(); 
 		Login login = (Login)object;
-		if (Utils.isNull(login.getUsername())){
+		if (login == null || Utils.isNull(login.getUsername())){
 			return res;
 		}
 		

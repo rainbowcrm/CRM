@@ -3,6 +3,7 @@ package com.rainbow.crm.company.validator;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.rainbow.crm.common.CRMContext;
@@ -29,8 +30,13 @@ public class CompanyValidator extends CRMValidator{
 		if  (Utils.isNullString(company.getAdminName())) {
 			errors.add(getErrorforCode(CompanyErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Administrator"))) ;
 		}
-		if (company.getActivationDate() == null) {
-			errors.add(getErrorforCode(CompanyErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Activate_on"))) ;
+		if (company.getActivationDate() == null  ) {
+			if(!context.isGuestLogin())
+				errors.add(getErrorforCode(CompanyErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Activate_on"))) ;
+			else {
+				company.setActivationDate(new java.util.Date());
+				company.setServiceExpiryDate( new java.util.Date( new java.util.Date().getTime() + ( 45l * 24l * 3600l * 1000l )));
+			}
 		}
 		if (company.getActivationDate() != null  && company.getServiceExpiryDate() != null && 
 				company.getServiceExpiryDate().getTime() < company.getActivationDate().getTime()) {

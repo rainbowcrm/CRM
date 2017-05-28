@@ -15,9 +15,11 @@ import com.rainbow.crm.saleslead.model.SalesLeadExtended;
 import com.rainbow.crm.saleslead.service.ISalesLeadService;
 import com.rainbow.crm.saleslead.validator.SalesLeadValidator;
 import com.techtrade.rads.framework.context.IRadsContext;
+import com.techtrade.rads.framework.filter.Filter;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
+import com.techtrade.rads.framework.ui.components.SortCriteria;
 
 public class SalesLeadListController extends CRMListController{
 
@@ -42,7 +44,7 @@ public class SalesLeadListController extends CRMListController{
 				
 	}
 	
-
+	
 	
 
 	@Override

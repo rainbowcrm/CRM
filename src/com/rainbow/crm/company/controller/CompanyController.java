@@ -17,11 +17,14 @@ import com.rainbow.crm.common.IBusinessService;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.common.ajaxservices.CountryStateAjaxService;
 import com.rainbow.crm.company.model.Company;
+import com.rainbow.crm.company.model.GuestCompany;
 import com.rainbow.crm.company.service.ICompanyService;
 import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.database.LoginSQLs;
 import com.techtrade.rads.framework.context.IRadsContext;
+import com.techtrade.rads.framework.context.RadsContext;
 import com.techtrade.rads.framework.controller.abstracts.CRUDController;
+import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.model.transaction.TransactionResult.Result;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
@@ -45,6 +48,17 @@ public class CompanyController extends CRMCRUDController{
 		return ans;
 	}
 	
+	
+	
+	@Override
+	public IRadsContext generateContext(HttpServletRequest request,
+			HttpServletResponse response) {
+		CRMContext context = new CRMContext();
+		context.setGuestLogin(true);
+		return context;
+	}
+
+
 	public Map <String, String > getStates() {
 		Map<String, String> ans = new HashMap<String, String> ();
 		if(object != null  && (!Utils.isNullString(((Company)object).getCountry()))){
@@ -65,4 +79,32 @@ public class CompanyController extends CRMCRUDController{
 		}
 		return ans ;
 	}
+
+
+	@Override
+	public PageResult submit(ModelObject object, String actionParam) {
+		if("checkcode".equalsIgnoreCase(actionParam))
+		{
+			
+			
+		}  
+			return super.submit(object, actionParam);
+	}
+
+
+	@Override
+	public PageResult create() {
+		if (object instanceof GuestCompany){
+			String guestjson =  object.toJSON();
+			try {
+			 object = Company.instantiateObjectfromJSON(guestjson, Company.class.getName(), getContext());
+			}catch(Exception ex) {
+				ex.printStackTrace();
+			}
+					
+		}
+		return super.create();
+	}
+	
+	
 }

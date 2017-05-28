@@ -17,6 +17,7 @@ import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.database.LoginSQLs;
 import com.rainbow.crm.logger.Logwriter;
 import com.techtrade.rads.framework.context.IRadsContext;
+import com.techtrade.rads.framework.context.RadsContext;
 import com.techtrade.rads.framework.controller.abstracts.IAjaxLookupService;
 
 public class CountryStateAjaxService implements IAjaxLookupService{
@@ -143,7 +144,7 @@ public class CountryStateAjaxService implements IAjaxLookupService{
 
 	@Override
 	public IRadsContext generateContext(HttpServletRequest request) {
-		return CommonUtil.generateContext(request);
+		return new RadsContext();
 	}
 
 

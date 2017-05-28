@@ -21,6 +21,7 @@ public class CRMContext implements IRadsContext,Serializable{
 	
 	boolean fetchDeletedToo;
 	boolean backgroundProcess; 
+	boolean guestLogin;
 
 	
 	@Override
@@ -126,6 +127,14 @@ public class CRMContext implements IRadsContext,Serializable{
 
 	public void setBackgroundProcess(boolean backgroundProcess) {
 		this.backgroundProcess = backgroundProcess;
+	}
+
+	public boolean isGuestLogin() {
+		return guestLogin;
+	}
+
+	public void setGuestLogin(boolean guestLogin) {
+		this.guestLogin = guestLogin;
 	}
 	
 	

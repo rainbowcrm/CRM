@@ -149,7 +149,13 @@ public class SalesLeadService extends AbstractionTransactionService implements I
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
 			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
-		return super.listData("SalesLead", from, to, whereCondition, context,sortCriteria);
+		StringBuffer additionalCondition = new StringBuffer();
+		if (Utils.isNullString(whereCondition) ){
+			additionalCondition = additionalCondition.append(" where (  salesAssociate is null or  salesAssociate ='" + context.getUser() + "')") ; 
+		}else {
+			additionalCondition = additionalCondition.append(whereCondition + " and  (salesAssociate is null or  salesAssociate ='" + context.getUser() + "')") ;
+		}
+		return super.listData("SalesLead", from, to, additionalCondition.toString(), context,sortCriteria);
 	}
 
 	@Override

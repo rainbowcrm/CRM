@@ -59,15 +59,18 @@ Controller = "com.rainbow.crm.company.controller.CompanyController">
 	<Element label = "Phone"  type = "UIText" Id = "txtPhone" size="11"  property ="Phone"  isNumeric="true"  />
 	<Element label = "No_Divisions"  type = "UIText" Id = "txtDivisions" size="5"  property ="NoDivisions"  isNumeric="true"  />
 	<Element label = "No_Licenses"  type = "UIText" Id = "txtLicenses" size="5" property ="NoUsers"  isNumeric="true"  />
-	<Element label = "Activate_on"  type = "UIText" readonly="true" Id = "txtActivate"    isMandatory="true"  property ="ActivationDate" />
-	<Element label = "Expires_on"  type = "UIText" Id = "txtExpire"   readonly="true" property ="ServiceExpiryDate" />
+	<!-- <Element label = "Activate_on"  type = "UIText" readonly="true" Id = "txtActivate"    isMandatory="true"  property ="ActivationDate" />
+	<Element label = "Expires_on"  type = "UIText" Id = "txtExpire"   readonly="true" property ="ServiceExpiryDate" />  -->
 	<Element label = "Admin_UserName"  type = "UIText"  Id = "txtAdminUserName"    isMandatory="true"  property ="adminUser" />
 	<Element label = "Admin_Password"  type = "UIPassword" Id = "txtAdminPw"   readonly="true" property ="adminPassword" />
 	<Element label = "Confirm_Password"  type = "UIPassword" Id = "txtConfirmPwd"   readonly="true" property ="adminConfirmPassword" />
 	<Element label = "Email"  type = "UIText" Id = "txtemail"    property ="adminEmail" />
 </Section>
 </CoreSection>
-<Section type ="summary">
+<Section type ="optionalSummary">
+<Element caption = "Create"  type = "UIButton" Id = "btSubmit"   style="button"  rendered = "Controller.isCreateMode" fixedAction ="FixedAction.ACTION_CREATE" 
+  fixedActionvalidateFunc="validateforCreate()" fixedActionParam =  "SAVE"  />
+<Element caption = "Cancel"  type = "UIButton" Id = "btCancel"  style="button"  fixedAction ="FixedAction.ACTION_PAGEFORWARD" fixedActionParam =  "CANCEL"  />
 </Section>
 <Section type ="copyRightSection"/>
 </UIForm>
