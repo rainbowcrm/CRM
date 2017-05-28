@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavParams, NavController, ToastController, AlertController } from 'ionic-angular';
+import { NavParams, NavController, ToastController, AlertController, PopoverController } from 'ionic-angular';
 import { Contact, ContactSearchRequest, ContactSearchResponse } from '../';
 import { HTTPService, SharedService } from '../../../providers/';
 import { ContactService } from '../../../plugins/';
+import { SortPopOverPage }   from '../../../common/sort-helper/sort-popover';
 
 /*
 
@@ -21,11 +22,13 @@ export class ContactListPage {
   private pageNumber: number;
   private fetchedResults: number;
   private numberOfResults: number;
+  private sortCondition: any;
 
   constructor(private params: NavParams,private http:HTTPService,
               private navCtrl: NavController,
               private toastCtrl: ToastController, private alertCtrl:AlertController,
-              private contactService: ContactService, private sharedData: SharedService
+              private contactService: ContactService, private sharedData: SharedService,
+              private popoverCtrl: PopoverController
              ) {
     this.contacts = this.params.get('contacts');
     this.filter = this.params.get('filter');
@@ -36,6 +39,29 @@ export class ContactListPage {
 
   ionViewDidLoad() {
      
+  }
+
+  onSort(){
+    var sortType = [{key: "firstName", value: "First Name"},
+                    {key: "lastName", value: "Last Name"},
+                    {key: "email", value: "Email"},
+                    {key: "phone", value: "Phone"},
+                    {key:"contactType", value:"Type"}]
+    let popover = this.popoverCtrl.create(SortPopOverPage, {sortConditions: sortType});
+    popover.present({});
+    popover.onDidDismiss(this.dismissSortPopover.bind(this))
+  }
+
+  dismissSortPopover(data){
+    if(data){
+      this.sortCondition = {};
+      this.sortCondition.sortCondt = data.selectedValue;
+      this.sortCondition.isAscending = data.isAscending;
+      this.pageNumber = -1;
+      this.fetchedResults = 0;
+      this.contacts = [];
+      this.doSearchMoreContact({complete:function(){}});
+    }
   }
 
   getContactAddress(contact){
@@ -65,11 +91,19 @@ export class ContactListPage {
       }
       this.request = new ContactSearchRequest();
       this.request.currentmode = 'READ';
-      this.request.fixedAction = "FixedAction.NAV_NEXTPAGE";
+      if(this.pageNumber < 0){
+        this.request.fixedAction = "FixedAction.NAV_FIRSTPAGE";
+      }else{
+        this.request.fixedAction = "FixedAction.NAV_NEXTPAGE";
+      }
+      if(this.sortCondition){
+        this.request.rds_sortdirection = this.sortCondition.isAscending ? "ASCENDING":"DESCENDING";
+        this.request.rds_sortfield = this.sortCondition.sortCondt.key;
+      }
       this.request.hdnPage = ++this.pageNumber;
       this.request.pageID = "contacts";
       this.request.filter = this.filter;
-      this.http.processServerRequest("post",this.request, true, true).subscribe(
+      this.http.processServerRequest("post",this.request, true, this.pageNumber != 0).subscribe(
                      res => this.contactSearchSuccess(res, infiniteScroll),
                      error =>  this.contactSearchError(error, infiniteScroll)); 
   }

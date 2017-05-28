@@ -17,16 +17,15 @@
 </ion-header>
 
 <ion-content padding>
-<div class="clearfix">
- <ion-card *ngFor="let item of items" (click)="onItemSelect(item)">
-  <img-loader src="{{item.Image1URL}}" fallback="assets/img/no_image.png" useImg></img-loader>
-  <ion-card-content>
-    <ion-card-title>
-      {{item.Item.Name}}
-    </ion-card-title>
-  </ion-card-content>
- </ion-card> 
- </div>
+ <ion-list>
+  <ion-item *ngFor="let lead of leads" >
+    <h2>{{lead.DocNumber}}</h2>
+    <p>{{lead.ReleasedDate}}</p>
+    <p *ngIf="lead.Status.Description">{{lead.Status.Description}}</p>
+    <button ion-button clear item-right (click)="onItemSelect(lead)">View</button>
+    <button ion-button clear item-right (click)="onCustomerCall(lead)" *ngIf="lead.Customer.Phone">Call</button>
+  </ion-item>
+ </ion-list>
  <ion-infinite-scroll (ionInfinite)="doSearchMoreItems($event)" *ngIf="fetchedResults < numberOfResults">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
  </ion-infinite-scroll>

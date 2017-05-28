@@ -3,12 +3,14 @@ import { IonicModule } from 'ionic-angular';
 import { CommonModule } from '@angular/common';
 import { IonicImageLoader } from 'ionic-image-loader';
 import {ErrorPartial} from './error-partial/error-partial'
+import {SortPopOverPage} from './sort-helper/sort-popover'
 
 
 
 @NgModule({
   declarations: [
-    ErrorPartial
+    ErrorPartial,
+    SortPopOverPage
   ],
   imports: [
     IonicModule,
@@ -16,10 +18,12 @@ import {ErrorPartial} from './error-partial/error-partial'
     IonicImageLoader
   ],
   exports:[
-    ErrorPartial
+    ErrorPartial,
+    SortPopOverPage
   ],
   entryComponents: [
-    ErrorPartial
+    ErrorPartial,
+    SortPopOverPage
   ],
   providers: []
 })
