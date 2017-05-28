@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavParams, NavController, ToastController, PopoverController } from 'ionic-angular';
 
 import { HTTPService } from '../../../providers/';
-import { Item, ItemSearchRequest, ItemSearchResponse, ItemDetails, ItemDetailsRequest } from '../';
+import { SalesLeads, SalesLeadSearchRequest, SalesLeadSearchResponse, SalesLeadDetails } from '../';
 import { SortPopOverPage }   from '../../../common/sort-helper/sort-popover';
 
 /*
@@ -11,30 +11,27 @@ import { SortPopOverPage }   from '../../../common/sort-helper/sort-popover';
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'ps-item-search-result',
-  templateUrl: 'item-search-result.html'
+  selector: 'ps-sales-lead-search-result',
+  templateUrl: 'sales-lead-search-result.html'
 })
-export class ItemSearchResult {
-  private items:Array<Item>;
-  private request: ItemSearchRequest;
-  private itemDetailsRequest: ItemDetailsRequest;
-  private response: ItemSearchResponse;
+export class SalesLeadSearchResult {
+  private leads:Array<SalesLeads>;
+  private request: SalesLeadSearchRequest;
+  private response: SalesLeadSearchResponse;
   private pageNumber: number;
   private fetchedResults: number;
   private numberOfResults: number;
-  private isAssociateItems:Boolean;
   private filter:Array<Object>;
   private sortCondition: any;
 
   constructor(private params: NavParams,private http:HTTPService,
               private navCtrl: NavController, private toastCtrl: ToastController,
               private popoverCtrl: PopoverController) {
-    this.items = this.params.get('items');  
+    this.leads = this.params.get('leads');  
     this.filter = this.params.get('filter');
     this.pageNumber = 0;
     this.fetchedResults = this.params.get('fetchedResults');
     this.numberOfResults = this.params.get('numberOfResults');
-    this.isAssociateItems = this.params.get('isAssociateItems');
   }
 
   ionViewDidLoad() {
@@ -42,11 +39,10 @@ export class ItemSearchResult {
   }
 
   onSort(){
-    var sortType = [{key: "code", value: "Code"},
-                    {key: "name", value: "Item Name"},
-                    {key: "product", value: "Product"},
-                    {key: "manufacturer", value: "Manufacturer"},
-                    {key:"retailPrice", value:"Price"}]
+    var sortType = [{key: "docNumber", value: "Doc Number"},
+                    {key: "refDate", value: "Date"},
+                    {key: "customer.phone", value: "Phone"},
+                    {key:"status", value:"Status"}]
     let popover = this.popoverCtrl.create(SortPopOverPage, {sortConditions: sortType});
     popover.present({});
     popover.onDidDismiss(this.dismissSortPopover.bind(this))
@@ -59,7 +55,7 @@ export class ItemSearchResult {
       this.sortCondition.isAscending = data.isAscending;
       this.pageNumber = -1;
       this.fetchedResults = 0;
-      this.items = [];
+      this.leads = [];
       this.doSearchMoreItems({complete:function(){}});
     }
   }
@@ -69,7 +65,7 @@ export class ItemSearchResult {
         infiniteScroll.complete();
         return;
       }
-      this.request = new ItemSearchRequest();
+      this.request = new SalesLeadSearchRequest();
       this.request.currentmode = 'READ';
       if(this.pageNumber < 0){
         this.request.fixedAction = "FixedAction.NAV_FIRSTPAGE";
@@ -81,14 +77,14 @@ export class ItemSearchResult {
         this.request.rds_sortfield = this.sortCondition.sortCondt.key;
       }
       this.request.hdnPage = ++this.pageNumber;
-      this.request.pageID = "skucompletelist";
+      this.request.pageID = "saleslead";
       this.request.filter = this.filter;
       this.http.processServerRequest("post",this.request, true, this.pageNumber != 0).subscribe(
-                     res => this.itemSearchSuccess(res, infiniteScroll),
-                     error =>  this.itemSearchError(error, infiniteScroll)); 
+                     res => this.salesLeadSearchSuccess(res, infiniteScroll),
+                     error =>  this.salesLeadSearchError(error, infiniteScroll)); 
   }
 
-  itemSearchSuccess(response, infiniteScroll):void{
+  salesLeadSearchSuccess(response, infiniteScroll):void{
     this.response = response;
     if(this.response.result == "failure"){
        infiniteScroll.complete();
@@ -98,47 +94,24 @@ export class ItemSearchResult {
       infiniteScroll.complete();
        return ;
     }
-    this.items = this.items.concat(this.response.dataObject);
+    this.leads = this.leads.concat(this.response.dataObject);
     this.fetchedResults += this.response.fetchedRecords;
     infiniteScroll.complete();
   }
  
 
-  itemSearchError(error,infiniteScroll){
+  salesLeadSearchError(error,infiniteScroll){
     infiniteScroll.complete();
     this.http.setAuthToken(null);
   }
 
-  itemDetailsSearchSuccess(response):void{
-    this.navCtrl.push(ItemDetails,{item:response.dataObject, isAssociateItems:this.isAssociateItems});
+
+  onItemSelect(lead:SalesLeads):void{
+    this.navCtrl.push(SalesLeadDetails, {lead: lead});
   }
 
-  noItemDetailsFoundToast():any{
-     let toast = this.toastCtrl.create({
-      message: 'No Details Found',
-      duration: 2000,
-      position: 'top'
-     });
-    toast.present();
-  }
- 
-
-  itemDetailsSearchError(error){
-    this.noItemDetailsFoundToast();
-    this.http.setAuthToken(null);
-  }
-
-  onItemSelect(item:Item):void{
-    this.request = new ItemDetailsRequest();
-    this.request.currentmode = 'READ';
-    this.request.fixedAction = "FixedAction.ACTION_READ";
-    this.request.hdnPage = ++this.pageNumber;
-    this.request.pageID = "skucomplete";
-    this.request.dataObject = {};
-    this.request.dataObject["Name"] = item.Name;
-    this.http.processServerRequest("post",this.request, true, true).subscribe(
-                     res => this.itemDetailsSearchSuccess(res),
-                     error =>  this.itemDetailsSearchError(error));
+  onCustomerCall(lead: SalesLeads):void{
+    window.location.href = "tel:"+lead.Customer.Phone;
   }
 
 }

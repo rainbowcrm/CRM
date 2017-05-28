@@ -1,0 +1,39 @@
+<!--
+  Generated template for the ItemSearch page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{lead.DocNumber}}</ion-title>
+ </ion-navbar>
+  
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item>
+    <h2>{{lead.DocNumber}}</h2>
+    <p>{{lead.ReleasedDate}}</p>
+    <p *ngIf="lead.Status.Description"><strong>Status:</strong> {{lead.Status.Description}}</p>
+    <p *ngIf="lead.Customer.Phone"><strong>Phone:</strong><a href="tel:{{lead.Customer.Phone}}"> {{lead.Customer.Phone}}</a></p>
+  </ion-item>
+  <div class="clearfix">
+   <ion-card *ngFor="let item of lead.SalesLeadLines" >
+    <img-loader src="{{item.Image1URL}}" fallback="assets/img/no_image.png" useImg></img-loader>
+    <ion-card-content>
+      <ion-card-title>
+        {{item.Sku.Name}}
+      </ion-card-title>
+      <p *ngIf="item.Price"><strong>Actual Price:</strong> {{item.Price}}</p>
+      <p *ngIf="item.NegotiatedPrice"><strong>NegotiatedPrice Price:</strong> {{item.NegotiatedPrice}}</p>
+      <p *ngIf="item.Qty"><strong>Quantity:</strong> {{item.Qty}}</p>
+      <p *ngIf="item.ReasonCode"><strong>Reason:</strong> {{item.ReasonCode}}</p>
+      <p *ngIf="item.SalesWon == 'false'" class="bad">Sale Lost</p>
+      <p *ngIf="item.SalesWon != 'false'" class="good">Sale Won</p>
+    </ion-card-content>
+ </ion-card> 
+ </div>
+</ion-content>
