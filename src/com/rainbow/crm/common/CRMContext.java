@@ -2,6 +2,7 @@ package com.rainbow.crm.common;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
@@ -22,7 +23,9 @@ public class CRMContext implements IRadsContext,Serializable{
 	boolean fetchDeletedToo;
 	boolean backgroundProcess; 
 	boolean guestLogin;
-
+	
+	boolean mobileLogin;
+    Map<String, String> properties;
 	
 	@Override
 	public String getUser() {
@@ -36,14 +39,29 @@ public class CRMContext implements IRadsContext,Serializable{
 
 	@Override
 	public Map getProperties() {
-		return null;
+		return properties;
 	}
 
 	@Override
 	public void setProperties(Map properties) {
-		
+	 this.properties = properties;
 	}
 
+	@Override
+	public void addProperty(String key, String value) {
+	  if(properties == null)
+		  properties =  new HashMap<String,String>();
+	  properties.put(key, value);	  
+	}
+	
+	public String getProperty(String key) 
+	{
+		if (properties == null)
+			 return null;
+		else
+			 return properties.get(key);
+	}
+	
 	@Override
 	public boolean isAuthenticated() {
 		return authenticated;

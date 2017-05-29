@@ -155,6 +155,12 @@ public class SalesLeadService extends AbstractionTransactionService implements I
 		}else {
 			additionalCondition = additionalCondition.append(whereCondition + " and  (salesAssociate is null or  salesAssociate ='" + context.getUser() + "')") ;
 		}
+		
+		String workableleads = context.getProperty("workableleads");
+		if("true".equalsIgnoreCase(workableleads)) {
+			additionalCondition = additionalCondition.append(whereCondition + " and ( status is null or status.code not  in ('CLSD','FLD')) " );
+		}
+		
 		return super.listData("SalesLead", from, to, additionalCondition.toString(), context,sortCriteria);
 	}
 
