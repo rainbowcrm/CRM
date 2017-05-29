@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-05-05T08:31:44 -->
+<!-- 2017-05-29T19:38:07 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Quotation_Format1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="142599fa-d71d-4704-8481-bf352e04eec5">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="CRM"/>
@@ -202,14 +202,14 @@ WHERE
 			<staticText>
 				<reportElement x="450" y="0" width="100" height="30" uuid="5330df60-6d4b-4251-9c49-c4ab9f2a9a12"/>
 				<textElement textAlignment="Right">
-					<font fontName="DejaVu Sans" size="16" isBold="true"/>
+					<font fontName="Arial" size="16" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Quotation]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="0" y="10" width="310" height="30" uuid="d850a1cd-d890-421d-9846-813fc7d9e9e5"/>
 				<textElement>
-					<font fontName="DejaVu Sans" size="16" isBold="true"/>
+					<font fontName="Arial" size="16" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{company_name}]]></textFieldExpression>
 			</textField>

@@ -48,7 +48,7 @@ public abstract class CRMDataSheetController extends DataSheetController{
 	
 	
 	@Override
-	public long getTotalNumberofRecords() {
+	public long getTotalNumberofRecords(Filter filter) {
 		long totalRecords = getService().getTotalRecordCount((CRMContext) getContext());
 		return totalRecords;
 	}
