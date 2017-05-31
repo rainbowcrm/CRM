@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name="com.rainbow.crm.promotion.model.Promotion" table="PROMOTIONS" lazy="false">
+      <meta attribute="class-description">
+         This class contains the Promotions 
+      </meta>
+       <id name="id" type="int" column="id">
+      </id>
+      <version name="objectVersion" column="version" type="integer"></version>
+       <many-to-one name="company" column ="company_id" not-null="true" lazy="false" ></many-to-one>
+      <property name="name" column="name" type="string"/>
+      <many-to-one name="division" column ="division_id"  lazy="false" ></many-to-one>
+      <many-to-one name="promoType" column ="PROMO_TYPE" not-null="true" lazy="false" ></many-to-one>
+      <many-to-one name="custCategory" column ="CUST_CATEGORY" not-null="false" lazy="false" ></many-to-one>
+      <property name="startDt" column="START_DT" type="date"/>
+      <property name="endDt" column="END_DT" type="date"/>
+      <many-to-one name="masterPortFolioType" column ="MASTER_POSTFOLIO_TYPE" not-null="true" lazy="false" ></many-to-one>
+      <property name="masterPortFolioKey" column="MASTER_PORTFOLIO_KEY" type="string"/>
+      <many-to-one name="childPortFolioType" column ="CHILD_POSTFOLIO_TYPE" not-null="true" lazy="false" ></many-to-one>
+      <property name="childPortFolioKey" column="CHILD_PORTFOLIO_KEY" type="string"/>
+      <property name="requiredQty" column="REQ_QTY" type="double"/>
+      <property name="promotedQty" column="PROMOTED_QTY" type="double"/>
+      <property name="requiredAmount" column="REQ_AMT" type="double"/>
+      <property name="promotedDiscPercent" column="PROMOTED_DISC_PERCENT" type="double"/>
+      <property name="isActive" column="IS_ACTIVE" type="boolean"/>
+      <property name="comments" column="comments" type="string"/>
+      <property name="deleted" column="is_deleted" type="boolean"/>
+      <property name="createdDate" column="created_date" type="timestamp" update="false"/>
+      <property name="lastUpdateDate" column="last_updated_date" type="timestamp"/>
+      <property name="createdUser" column="created_by" type="string" update="false"/>
+      <property name="lastUpdateUser" column="last_updated_by" type="string"/>
+
+   </class>
+ </hibernate-mapping>
