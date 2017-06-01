@@ -24,17 +24,14 @@ public class Promotion extends CRMBusinessModelObject{
 	Date startDt;
 	Date endDt;
 	
-	FiniteValue masterPortFolioType ;
-	String masterPortFolioKey;
-	FiniteValue childPortFolioType;
-	String childPortFolioKey; 
+	Set<PromotionLine> promotionLines;
 	
-	Double requiredQty;
-	Double promotedQty;
+	Boolean isActive;
+	Boolean forAll;
+	
 	Double requiredAmount;
 	Double promotedDiscPercent;
 	
-	Boolean isActive;
 	String comments;
 	public String getName() {
 		return name;
@@ -72,41 +69,35 @@ public class Promotion extends CRMBusinessModelObject{
 	public void setEndDt(Date endDt) {
 		this.endDt = endDt;
 	}
-	public FiniteValue getMasterPortFolioType() {
-		return masterPortFolioType;
+	
+	public Boolean getIsActive() {
+		return isActive;
 	}
-	public void setMasterPortFolioType(FiniteValue masterPortFolioType) {
-		this.masterPortFolioType = masterPortFolioType;
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
 	}
-	public String getMasterPortFolioKey() {
-		return masterPortFolioKey;
+	public String getComments() {
+		return comments;
 	}
-	public void setMasterPortFolioKey(String masterPortFolioKey) {
-		this.masterPortFolioKey = masterPortFolioKey;
+	public void setComments(String comments) {
+		this.comments = comments;
 	}
-	public FiniteValue getChildPortFolioType() {
-		return childPortFolioType;
+	public Set<PromotionLine> getPromotionLines() {
+		return promotionLines;
 	}
-	public void setChildPortFolioType(FiniteValue childPortFolioType) {
-		this.childPortFolioType = childPortFolioType;
+	public void setPromotionLines(Set<PromotionLine> promotionLines) {
+		this.promotionLines = promotionLines;
 	}
-	public String getChildPortFolioKey() {
-		return childPortFolioKey;
+	public void addPromotionLine(PromotionLine promotionLine) {
+		if(promotionLines == null)
+			promotionLines = new LinkedHashSet<PromotionLine> ();
+		this.promotionLines.add(promotionLine);
 	}
-	public void setChildPortFolioKey(String childPortFolioKey) {
-		this.childPortFolioKey = childPortFolioKey;
+	public Boolean getForAll() {
+		return forAll;
 	}
-	public Double getRequiredQty() {
-		return requiredQty;
-	}
-	public void setRequiredQty(Double requiredQty) {
-		this.requiredQty = requiredQty;
-	}
-	public Double getPromotedQty() {
-		return promotedQty;
-	}
-	public void setPromotedQty(Double promotedQty) {
-		this.promotedQty = promotedQty;
+	public void setForAll(Boolean forAll) {
+		this.forAll = forAll;
 	}
 	public Double getRequiredAmount() {
 		return requiredAmount;
@@ -120,19 +111,6 @@ public class Promotion extends CRMBusinessModelObject{
 	public void setPromotedDiscPercent(Double promotedDiscPercent) {
 		this.promotedDiscPercent = promotedDiscPercent;
 	}
-	public Boolean getIsActive() {
-		return isActive;
-	}
-	public void setIsActive(Boolean isActive) {
-		this.isActive = isActive;
-	}
-	public String getComments() {
-		return comments;
-	}
-	public void setComments(String comments) {
-		this.comments = comments;
-	}
-	
 	
 	
 
