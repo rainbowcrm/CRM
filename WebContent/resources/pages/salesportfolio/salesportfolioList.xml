@@ -44,6 +44,8 @@ Controller = "com.rainbow.crm.salesportfolio.controller.SalesPortfolioListContro
 	 <height>300</height>
 	 <width>290</width>
 </Element>
+</FilterNode>
+<FilterNode>
 <Element label = ""  type = "UILookupText"  Id = "txtUser"  size  = "40" property ="User.id" showLookupAsDialog="true" dialogId="dlgIt"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>user</lookupType>

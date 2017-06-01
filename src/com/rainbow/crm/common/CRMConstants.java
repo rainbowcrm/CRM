@@ -28,6 +28,14 @@ public class CRMConstants {
 	public final static String FV_ENQUIRY_TYPE = "ENQTYPE";
 	public final static String FV_SPITCH_TYPE = "PITCHTYPE";
 	public final static String FV_DOC_TYPE = "DOCTYPE";;
+	public final static String FV_PROMO_TYPE = "PROMOTYPE";;
+	
+	public final static class PROMOTYPE {
+		public final static String CROSSSELL ="CRSSSELL";
+		public final static String BUNDLING ="BNDL";
+		public final static String UPSELLING ="UPSELL";
+		public final static String PLAINDISCOUNT ="PLNDISC";
+	}
 	
 	public final static class RELDATE {
 		public final static String TODAY ="TODAY";

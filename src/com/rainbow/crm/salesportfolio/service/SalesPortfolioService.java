@@ -17,6 +17,7 @@ import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMDBException;
 import com.rainbow.crm.common.CRMValidator;
+import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.Externalize;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
@@ -133,7 +134,7 @@ public class SalesPortfolioService extends AbstractService implements
 	public List<RadsError> adaptToUI(CRMContext context, ModelObject object) {
 		SalesPortfolio salesPortfolio = (SalesPortfolio) object;
 		for (SalesPortfolioLine line : salesPortfolio.getSalesPortfolioLines()) {
-			String value = getSalesPortfolioValue(line.getPortfolioType(),
+			String value = CommonUtil.getSalesPortfolioValue(line.getPortfolioType(),
 					line.getPortfolioKey());
 			line.setPortfolioValue(value);
 		}
@@ -203,8 +204,7 @@ public class SalesPortfolioService extends AbstractService implements
 							externalize.externalize(context, "Value")));
 				} else {
 
-					String portfolioKey = getSalesPortfolioKey(
-							line.getPortfolioType(), line.getPortfolioValue(),
+					String portfolioKey = CommonUtil.getSalesPortfolioKey(line.getPortfolioType(), line.getPortfolioValue(),
 							context);
 					if ("-1".equalsIgnoreCase(portfolioKey)) {
 						ans.add(CRMValidator.getErrorforCode(
@@ -219,107 +219,7 @@ public class SalesPortfolioService extends AbstractService implements
 		return ans;
 	}
 
-	private String getSalesPortfolioKey(FiniteValue type, String value,
-			CRMContext context) {
-		if (CRMConstants.SALESPFTYPE.CATEGORY.equals(type.getCode())) {
-			ICategoryService service = (ICategoryService) SpringObjectFactory.INSTANCE
-					.getInstance("ICategoryService");
-			Category object = new Category();
-			object.setName(value);
-			object = (Category) service.getByBusinessKey(object, context);
-			if (object != null)
-				return String.valueOf(object.getId());
-			else
-				return "-1";
-		}
-		if (CRMConstants.SALESPFTYPE.BRAND.equals(type.getCode())) {
-			IBrandService service = (IBrandService) SpringObjectFactory.INSTANCE
-					.getInstance("IBrandService");
-			Brand object = new Brand();
-			object.setName(value);
-			object = (Brand) service.getByBusinessKey(object, context);
-			if (object != null)
-				return String.valueOf(object.getId());
-			else
-				return "-1";
-		}
-		if (CRMConstants.SALESPFTYPE.PRODUCT.equals(type.getCode())) {
-			IProductService service = (IProductService) SpringObjectFactory.INSTANCE
-					.getInstance("IProductService");
-			Product object = new Product();
-			object.setName(value);
-			object = (Product) service.getByBusinessKey(object, context);
-			if (object != null)
-				return String.valueOf(object.getId());
-			else
-				return "-1";
-		}
-		if (CRMConstants.SALESPFTYPE.ITEM.equals(type.getCode())) {
-			IItemService service = (IItemService) SpringObjectFactory.INSTANCE
-					.getInstance("IItemService");
-			Item object = new Item();
-			object.setName(value);
-			object = (Item) service.getByBusinessKey(object, context);
-			if (object != null)
-				return String.valueOf(object.getId());
-			else
-				return "-1";
-
-		}
-		return "-1";
-
-	}
-
-	private String getSalesPortfolioValue(FiniteValue type, String id) {
-		if (CRMConstants.SALESPFTYPE.CATEGORY.equals(type.getCode())) {
-			ICategoryService service = (ICategoryService) SpringObjectFactory.INSTANCE
-					.getInstance("ICategoryService");
-			Category object = new Category();
-			object.setId(Integer.parseInt(id));
-			object = (Category) service.getById(object.getId());
-			if (object != null)
-				return String.valueOf(object.getName());
-			else
-				return "-1";
-		}
-		if (CRMConstants.SALESPFTYPE.BRAND.equals(type.getCode())) {
-			IBrandService service = (IBrandService) SpringObjectFactory.INSTANCE
-					.getInstance("IBrandService");
-			Brand object = new Brand();
-			object.setId(Integer.parseInt(id));
-			object = (Brand) service.getById(object.getId());
-			if (object != null)
-				return String.valueOf(object.getName());
-			else
-				return "-1";
-		}
-		if (CRMConstants.SALESPFTYPE.PRODUCT.equals(type.getCode())) {
-			IProductService service = (IProductService) SpringObjectFactory.INSTANCE
-					.getInstance("IProductService");
-			Product object = new Product();
-			object.setId(Integer.parseInt(id));
-			object = (Product) service.getById(object.getId());
-			if (object != null)
-				return String.valueOf(object.getName());
-			else
-				return "-1";
-		}
-		if (CRMConstants.SALESPFTYPE.ITEM.equals(type.getCode())) {
-			IItemService service = (IItemService) SpringObjectFactory.INSTANCE
-					.getInstance("IItemService");
-			Item object = new Item();
-			object.setId(Integer.parseInt(id));
-			object = (Item) service.getById(object.getId());
-			if (object != null)
-				return String.valueOf(object.getName());
-			else
-				return "-1";
-
-		}
-		return "-1";
-
-	}
-
+	
 	@Override
 	public TransactionResult create(CRMModelObject object, CRMContext context) {
 		SalesPortfolio salesPortfolio = (SalesPortfolio) object;

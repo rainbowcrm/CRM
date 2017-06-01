@@ -70,4 +70,15 @@ public class PromotionController extends CRMTransactionController{
 		}
 		return ans;
 	}
+	
+	public Map <String, String > getAllPromoTypes() {
+		Map<String, String> ans = GeneralSQLs.getFiniteValues(CRMConstants.FV_PROMO_TYPE);
+		return ans;
+	}
+	
+	public Map <String, String > getAllTypes() {
+		Map<String, String> ans = GeneralSQLs.getFiniteValues(CRMConstants.FV_SPFTYPE);
+		return ans;
+	}
+	
 }

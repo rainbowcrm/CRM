@@ -1,6 +1,5 @@
 package com.rainbow.crm.lookups;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,15 +10,15 @@ import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.SpringObjectFactory;
-import com.rainbow.crm.database.LoginSQLs;
+import com.rainbow.crm.custcategory.model.CustCategory;
+import com.rainbow.crm.custcategory.service.ICustCategoryService;
 import com.rainbow.crm.user.model.User;
-import com.rainbow.crm.user.service.IUserService;
 import com.techtrade.rads.framework.context.IRadsContext;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.ui.abstracts.ILookupService;
 import com.techtrade.rads.framework.utils.Utils;
 
-public class LookupUsers implements ILookupService{
+public class LookupCustCategories implements ILookupService{
 
 	@Override
 	public Map<String,String> lookupData(IRadsContext ctx, String searchString,
@@ -28,7 +27,7 @@ public class LookupUsers implements ILookupService{
 		StringBuffer condition = new StringBuffer("");
 		if (!Utils.isNull(searchString)) { 
 			searchString = searchString.replace("*", "%");
-			condition.append(" where userId like  '" + searchString + "'") ;
+			condition.append(" where name like  '" + searchString + "'") ;
 			
 		}
 		
@@ -39,10 +38,10 @@ public class LookupUsers implements ILookupService{
 				condition.append( " where ");
 			condition.append("  division.id=" + lookupParam);
 		}
-		IUserService service = (IUserService) SpringObjectFactory.INSTANCE.getInstance("IUserService");
-		List<? extends CRMModelObject> users = service.listData(from, from  + noRecords, condition.toString(),(CRMContext)ctx,null);
-		for (ModelObject obj :  users) {
-			ans.put(((User)obj).getUserId(),((User)obj).getUserId());
+		ICustCategoryService service = (ICustCategoryService) SpringObjectFactory.INSTANCE.getInstance("ICustCategoryService");
+		List<? extends CRMModelObject> custCategories = service.listData(from, from  + noRecords, condition.toString(),(CRMContext)ctx,null);
+		for (ModelObject obj :  custCategories) {
+			ans.put(((CustCategory)obj).getName(),((CustCategory)obj).getName());
 		}
 
 		return ans;

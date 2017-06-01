@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Page id = "salesportfolioList" showinFrame ="true" title ="Sales Portfolio | Rainbow CRM"  Object = "com.rainbow.crm.salesportfolio.model.SalesPortfolio" 
-Controller = "com.rainbow.crm.salesportfolio.controller.SalesPortfolioListController">
+<Page id = "promotionslist" showinFrame ="true" title ="Promotions | Rainbow CRM"  Object = "com.rainbow.crm.promotion.model.Promotion" 
+Controller = "com.rainbow.crm.promotion.controller.PromotionListController">
 <Template type= "List"  name = "ListTemplate"></Template>
 <Forwards>
-<Forward key ="NEW">rdscontroller?page=newsalesportfolio</Forward>
-<Forward key ="EDIT">rdscontroller?page=newsalesportfolio</Forward>
+<Forward key ="NEW">rdscontroller?page=newpromotions</Forward>
+<Forward key ="EDIT">rdscontroller?page=newpromotions</Forward>
 </Forwards>
 <AjaxGroups>
 <AjaxGroup service ="filterSearch">
@@ -14,9 +14,10 @@ Controller = "com.rainbow.crm.salesportfolio.controller.SalesPortfolioListContro
 <responseElements>
 <responseElement key = "FilterName" >txtFilterName</responseElement>
 <responseElement key = "Division.Name" >txtDivision</responseElement>
-<responseElement key = "User.Id" >txtUser</responseElement>
-<responseElement key = "FromDate" >txtFromDate</responseElement>
-<responseElement key = "ToDate" >txtToDate</responseElement>
+<responseElement key = "Name" >txtName</responseElement>
+<responseElement key = "CustCategory.Name" >txtCustCategory</responseElement>
+<responseElement key = "startDt" >txtFromDate</responseElement>
+<responseElement key = "endDt" >txtToDate</responseElement>
 </responseElements>
 </AjaxGroup>
 </AjaxGroups>
@@ -44,37 +45,45 @@ Controller = "com.rainbow.crm.salesportfolio.controller.SalesPortfolioListContro
 	 <height>300</height>
 	 <width>290</width>
 </Element>
-<Element label = ""  type = "UILookupText"  Id = "txtUser"  size  = "40" property ="User.id" showLookupAsDialog="true" dialogId="dlgIt"
+</FilterNode>
+<FilterNode>
+   	<Element label = "Name"  type = "UIText" Id = "txtName"  property ="Name" />
+</FilterNode>
+<FilterNode>
+<Element label = "Customer_Category"  type = "UILookupText"  Id = "txtCustCategory"  size  = "40" property ="CustCategory.Name" showLookupAsDialog="true" dialogId="dlgIt"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
-	 <lookupType>user</lookupType>
+	 <lookupType>custcategory</lookupType>
 	 <height>300</height>
 	 <width>290</width>
 </Element> 	
 </FilterNode>
 <FilterNode operator = ">=">
-   	<Element label = "From"  type = "UIDate" Id = "txtFromDate"  property ="fromDate" />
+   	<Element label = "From"  type = "UIDate" Id = "txtFromDate"  property ="startDt" />
 </FilterNode>
 <FilterNode operator = ">=">
-   	<Element label = "To"  type = "UIDate" Id = "txtToDate"  property ="toDate" />
+   	<Element label = "To"  type = "UIDate" Id = "txtToDate"  property ="endDt" />
 </FilterNode>     
 </FilterSection>
 <ListSection >
  <Columns allowrowselection ="Multiple" uniqueproperty = "Id">
 <SelectionColumn  width ="5%"  >
-<Element label = ""  type = "UICheckBox" Id = "idChkSel"  rendered="!Object.isVoided" property ="Id" />
-<Element label = ""  type = "UIImage" Id = "idChkSel"  rendered="Object.isVoided" height = "21" weight ="21" src= "./resources/images/deletedRow.jpg" />
+<Element label = ""  type = "UICheckBox" Id = "idChkSel"  rendered="!Object.isDeleted" property ="Id" />
+<Element label = ""  type = "UIImage" Id = "idChkSel"  rendered="Object.isDeleted" height = "21" weight ="21" src= "./resources/images/deletedRow.jpg" />
 </SelectionColumn>
-<Column title ="Division" sortField="division.name"  width ="30%" >
+<Column title ="Division" sortField="division.name"  width ="20%" >
 <Element label = ""  type = "UINote" Id = "idperiod"  property ="Division.Name" />
 </Column>
-<Column title ="User"  sortField="user_id" width ="30%%" >
-<Element label = ""  type = "UINote" Id = "iduse"  property ="User.userId" />
+<Column title ="Name"  sortField="Name" width ="20%" >
+<Element label = ""  type = "UINote" Id = "iduseName"  property ="Name" />
+</Column>
+<Column title ="User"  sortField="custCategory.Name" width ="20%" >
+<Element label = ""  type = "UINote" Id = "iduse"  property ="custCategory.Name" />
 </Column>
 <Column title ="From_Date"  sortField="START_DATE" width ="15%" >
-<Element label = ""  type = "UINote" Id = "idfrmDate"  property ="startDate" />
+<Element label = ""  type = "UINote" Id = "idfrmDate"  property ="startDt" />
 </Column>
 <Column title ="To_Date" sortField="END_DATE"  width ="15%" >
-<Element label = ""  type = "UINote" Id = "idDoc"  property ="EndDate" />
+<Element label = ""  type = "UINote" Id = "idDoc"  property ="endDt" />
 </Column>
 </Columns>
 </ListSection>

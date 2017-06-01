@@ -29,6 +29,8 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
+
+
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
@@ -36,6 +38,10 @@ import org.apache.velocity.app.VelocityEngine;
 
 import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
+import com.rainbow.crm.brand.model.Brand;
+import com.rainbow.crm.brand.service.IBrandService;
+import com.rainbow.crm.category.model.Category;
+import com.rainbow.crm.category.service.ICategoryService;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
@@ -43,7 +49,11 @@ import com.rainbow.crm.config.service.ConfigurationManager;
 import com.rainbow.crm.database.LoginSQLs;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.division.service.IDivisionService;
+import com.rainbow.crm.item.model.Item;
+import com.rainbow.crm.item.service.IItemService;
 import com.rainbow.crm.logger.Logwriter;
+import com.rainbow.crm.product.model.Product;
+import com.rainbow.crm.product.service.IProductService;
 import com.rainbow.crm.user.model.User;
 import com.rainbow.crm.user.service.IUserService;
 import com.rainbow.framework.setup.model.Metadata;
@@ -305,5 +315,109 @@ public class CommonUtil {
 		}
 		return retObject;
 	}
+
+	
+	public static String getSalesPortfolioKey(FiniteValue type, String value,
+			CRMContext context) {
+		if (CRMConstants.SALESPFTYPE.CATEGORY.equals(type.getCode())) {
+			ICategoryService service = (ICategoryService) SpringObjectFactory.INSTANCE
+					.getInstance("ICategoryService");
+			Category object = new Category();
+			object.setName(value);
+			object = (Category) service.getByBusinessKey(object, context);
+			if (object != null)
+				return String.valueOf(object.getId());
+			else
+				return "-1";
+		}
+		if (CRMConstants.SALESPFTYPE.BRAND.equals(type.getCode())) {
+			IBrandService service = (IBrandService) SpringObjectFactory.INSTANCE
+					.getInstance("IBrandService");
+			Brand object = new Brand();
+			object.setName(value);
+			object = (Brand) service.getByBusinessKey(object, context);
+			if (object != null)
+				return String.valueOf(object.getId());
+			else
+				return "-1";
+		}
+		if (CRMConstants.SALESPFTYPE.PRODUCT.equals(type.getCode())) {
+			IProductService service = (IProductService) SpringObjectFactory.INSTANCE
+					.getInstance("IProductService");
+			Product object = new Product();
+			object.setName(value);
+			object = (Product) service.getByBusinessKey(object, context);
+			if (object != null)
+				return String.valueOf(object.getId());
+			else
+				return "-1";
+		}
+		if (CRMConstants.SALESPFTYPE.ITEM.equals(type.getCode())) {
+			IItemService service = (IItemService) SpringObjectFactory.INSTANCE
+					.getInstance("IItemService");
+			Item object = new Item();
+			object.setName(value);
+			object = (Item) service.getByBusinessKey(object, context);
+			if (object != null)
+				return String.valueOf(object.getId());
+			else
+				return "-1";
+
+		}
+		return "-1";
+
+	}
+	
+
+	public static String getSalesPortfolioValue(FiniteValue type, String id) {
+		if (CRMConstants.SALESPFTYPE.CATEGORY.equals(type.getCode())) {
+			ICategoryService service = (ICategoryService) SpringObjectFactory.INSTANCE
+					.getInstance("ICategoryService");
+			Category object = new Category();
+			object.setId(Integer.parseInt(id));
+			object = (Category) service.getById(object.getId());
+			if (object != null)
+				return String.valueOf(object.getName());
+			else
+				return "-1";
+		}
+		if (CRMConstants.SALESPFTYPE.BRAND.equals(type.getCode())) {
+			IBrandService service = (IBrandService) SpringObjectFactory.INSTANCE
+					.getInstance("IBrandService");
+			Brand object = new Brand();
+			object.setId(Integer.parseInt(id));
+			object = (Brand) service.getById(object.getId());
+			if (object != null)
+				return String.valueOf(object.getName());
+			else
+				return "-1";
+		}
+		if (CRMConstants.SALESPFTYPE.PRODUCT.equals(type.getCode())) {
+			IProductService service = (IProductService) SpringObjectFactory.INSTANCE
+					.getInstance("IProductService");
+			Product object = new Product();
+			object.setId(Integer.parseInt(id));
+			object = (Product) service.getById(object.getId());
+			if (object != null)
+				return String.valueOf(object.getName());
+			else
+				return "-1";
+		}
+		if (CRMConstants.SALESPFTYPE.ITEM.equals(type.getCode())) {
+			IItemService service = (IItemService) SpringObjectFactory.INSTANCE
+					.getInstance("IItemService");
+			Item object = new Item();
+			object.setId(Integer.parseInt(id));
+			object = (Item) service.getById(object.getId());
+			if (object != null)
+				return String.valueOf(object.getName());
+			else
+				return "-1";
+
+		}
+		return "-1";
+
+	}
+
 
 }

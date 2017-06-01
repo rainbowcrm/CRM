@@ -75,10 +75,8 @@ public class PromotionService extends AbstractService implements
 	@Override
 	public List<RadsError> validateforUpdate(CRMModelObject object,
 			CRMContext context) {
-		ICompanyService compService = (ICompanyService) SpringObjectFactory.INSTANCE
-				.getInstance("ICompanyService");
-		Company company = (Company) compService.getById(context
-				.getLoggedinCompany());
+		ICompanyService compService = (ICompanyService) SpringObjectFactory.INSTANCE.getInstance("ICompanyService");
+		Company company = (Company) compService.getById(context.getLoggedinCompany());
 		((Promotion) object).setCompany(company);
 		PromotionValidator validator = new PromotionValidator(context);
 		return validator.validateforUpdate(object);
@@ -87,15 +85,21 @@ public class PromotionService extends AbstractService implements
 	@Override
 	public List<RadsError> adaptfromUI(CRMContext context, ModelObject object) {
 		Promotion promotion = (Promotion) object;
-		ICompanyService compService = (ICompanyService) SpringObjectFactory.INSTANCE
-				.getInstance("ICompanyService");
-		Company company = (Company) compService.getById(context
-				.getLoggedinCompany());
-		Division division = CommonUtil.getDivisionObect(context,
-				promotion.getDivision());
+		ICompanyService compService = (ICompanyService) SpringObjectFactory.INSTANCE.getInstance("ICompanyService");
+		Company company = (Company) compService.getById(context	.getLoggedinCompany());
+		Division division = CommonUtil.getDivisionObect(context,promotion.getDivision());
 		promotion.setDivision(division);
 		((Promotion) object).setCompany(company);
-
+		AtomicInteger lineNumber = new AtomicInteger(1);
+		if(promotion.getPromotionLines() != null ) {
+			promotion.getPromotionLines().forEach( promotionLine ->  { 
+				promotionLine.setCompany(promotion.getCompany());
+				promotionLine.setLineNumber(lineNumber.getAndIncrement());
+				String key =  CommonUtil.getSalesPortfolioKey(promotionLine.getMasterPortFolioType(), promotionLine.getMasterPortFolioKey(), context);
+				
+				
+			} );
+		}
 		return null;
 	}
 

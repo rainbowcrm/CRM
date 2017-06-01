@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Page id = "newsalesportfolio" showinFrame ="true" title ="New Sales Portfolio | Rainbow CRM" Object = "com.rainbow.crm.salesportfolio.model.SalesPortfolio" 
-Controller = "com.rainbow.crm.salesportfolio.controller.SalesPortfolioController">
+<Page id = "newpromotions" showinFrame ="true" title ="New Promotions | Rainbow CRM" Object = "com.rainbow.crm.promotion.model.Promotion" 
+Controller = "com.rainbow.crm.promotion.controller.PromotionController">
 <Template type= "Transaction"  name = "TransactionTemplate"></Template>
 <Forwards>
 <Forward key ="CANCEL">rdscontroller?page=salesportfoliolist</Forward>
@@ -28,49 +28,83 @@ Controller = "com.rainbow.crm.salesportfolio.controller.SalesPortfolioController
 	<options populator =  "getAllDivisions"> 
 	</options>
 	</Element>
-	<Element label = "From_Date"  type = "UIDate" Id = "txtDate" isMandatory="true"  property ="startDate" />
-	<Element label = "To_Date"  type = "UIDate" Id = "txtToDate" isMandatory="true"  property ="endDate" />
-	<Element label = "User"  type = "UILookupText"  Id = "txtUser"  property ="User.userId" showLookupAsDialog="true" dialogId="dlgIt"
+	<Element label = "From_Date"  type = "UIDate" Id = "txtDate" isMandatory="true"  property ="startDt" />
+	<Element label = "To_Date"  type = "UIDate" Id = "txtToDate" isMandatory="true"  property ="endDt" />
+	<Element label = "Name"  type = "UIText" Id = "txtName" isMandatory="true"  property ="name" />
+	<Element label = "Type"  type = "UIList" Id = "lstPromoType"  isMandatory="true" property ="promoType.code" >
+	<options populator =  "getAllPromoTypes"> 
+	</options>
+	</Element>
+	
+	<Element label = "Customer_Category"  type = "UILookupText"  Id = "txtCustCategory"  property ="custCategory.name" showLookupAsDialog="true" dialogId="dlgIt"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" additionalInputControl = "lstInvDivision">
-	 <lookupType>user</lookupType>
+	 <lookupType>custcategory</lookupType>
 	 <height>300</height>
 	 <width>290</width>
-</Element> 	
+</Element>
+    <Element label = "Al_Items"  type = "UIBooleanCheckBox" Id = "txtBoolAllitems" hiddenControlId= "hdnAll"   property ="forAll" />
+    <Element label = "Required_Amount"  type = "UIText" Id = "txtAllReqAmt"   property ="requiredAmount" />
+    <Element label = "Discount_Percent"  type = "UIText" Id = "txtAllDiscPerce"   property ="promotedDiscPercent" /> 	
 	<Element label = "Comments"  type = "UIText" Id = "txtDesc" isMandatory="true"  size  = "40"  property ="comments" />
-	<Element label = "Voided"  type = "UIBooleanCheckBox" Id = "txtBoolVoid" hiddenControlId= "txtVoidedValue"   property ="voided" />
-	<Element label = ""  type = "UILabel" Id = "txtBoolExpired" rendered ="expired" value ="Expired" />
+	<Element label = ""  type = "UILabel" Id = "txtBoolExpired" rendered ="isActive" value ="isActive" />
 </Section>
 <Section type ="brk1"/>
 <Section type ="detail">
-<Element label = ""  type = "UILabel" Id = "lblLineitTitle"  style="bigTitle" value ="Sales_Portfolio" />
-<Element type = "UITable" rows = "1" cols = "7" style = "listPageTitle" applyStyleonChildren ="true" Id  ="tblTrans" property ="salesPortfolioLines[]" >
+<Element label = ""  type = "UILabel" Id = "lblLineitTitle"  style="bigTitle" value ="Promotion_Items" />
+<Element type = "UITable" rows = "1" cols = "7" style = "listPageTitle" applyStyleonChildren ="true" Id  ="tblTrans" property ="promotionLines[]" >
 <Element type = "UITableHead">
  <Element type = "UITableRow">
 
-<Element type ="UITableCol" width = "20%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Type" /></Element>
-<Element type ="UITableCol" width = "25%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Value" /></Element>
-<Element type ="UITableCol" width = "35%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Comments" /></Element>
-<Element type ="UITableCol" width = "8%"> </Element>
+<Element type ="UITableCol" width = "10%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Master_Type" /></Element>
+<Element type ="UITableCol" width = "20%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Master_Value" /></Element>
+<Element type ="UITableCol" width = "8%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Required_Qty" /></Element>
+<Element type ="UITableCol" width = "8%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Required_Amount" /></Element>
+<Element type ="UITableCol" width = "10%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Incentive_Type" /></Element>
+<Element type ="UITableCol" width = "20%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Incentive_Value" /></Element>
+<Element type ="UITableCol" width = "8%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Promoted_Qty" /></Element>
+<Element type ="UITableCol" width = "8%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Promoted_Disc" /></Element>
+<Element type ="UITableCol" width = "10%"> </Element>
 </Element>  
  </Element>
-<Element type = "UITableRow"  dataType = "com.rainbow.crm.salesportfolio.model.SalesPortfolioLine" rendered = "!Object.getVoided">
-<Element type ="UITableCol" width = "20%"><Element label = ""  type = "UIList" Id = "txtKeyCode" onChangeJS = "selectPFKeyType(this);" property ="portfolioType.code" > 
+<Element type = "UITableRow"  dataType = "com.rainbow.crm.promotion.model.PromotionLine" rendered = "!Object.getDeleted">
+<Element type ="UITableCol" width = "10%"><Element label = ""  type = "UIList" Id = "txtKeyCode" onChangeJS = "selectPFKeyType(this);" property ="masterPortFolioType.code" > 
 	<options populator =  "getAllTypes"> 
 	</options>
 </Element>
 </Element>
-<Element type ="UITableCol" width = "25%">
 
-<Element label = ""  type = "UILookupText"  Id = "txtportkeyName"  size  = "40" property ="portfolioValue" showLookupAsDialog="true" dialogId="dlgItportkey"
+<Element type ="UITableCol" width = "20%">
+
+<Element label = ""  type = "UILookupText"  Id = "txtportkeyName"  size  = "20" property ="masterPortFolioKey" showLookupAsDialog="true" dialogId="dlgItportkey"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>salesportfoliokey</lookupType>
 	 <height>300</height>
 	 <width>290</width>
 </Element>
-
  </Element>
-<Element type ="UITableCol" width = "35%"><Element label = ""  type = "UIText" Id = "txtLineCo"  property ="Comments" size = "40" />  </Element>
-<Element type ="UITableCol" width = "8%">
+
+<Element type ="UITableCol" width = "8%"><Element label = ""  type = "UIText" Id = "txtLineReqQty"  property ="requiredQty" size = "5" />  </Element>
+<Element type ="UITableCol" width = "8%"><Element label = ""  type = "UIText" Id = "txtLinereqAmt"  property ="requiredAmount" size = "5" />  </Element>
+ 
+<Element type ="UITableCol" width = "10%"><Element label = ""  type = "UIList" Id = "txtCHKeyCode" onChangeJS = "selectPFKeyTypeChild(this);" property ="childPortFolioType.code" > 
+	<options populator =  "getAllTypes"> 
+	</options>
+</Element>
+</Element>
+
+<Element type ="UITableCol" width = "20%">
+<Element label = ""  type = "UILookupText"  Id = "txtCHportkeyName"  size  = "20" property ="childPortFolioKey" showLookupAsDialog="true" dialogId="dlgItportChildkey"
+  dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
+	 <lookupType>salesportfoliokey</lookupType>
+	 <height>300</height>
+	 <width>290</width>
+</Element>
+</Element>
+ 
+
+<Element type ="UITableCol" width = "8%"><Element label = ""  type = "UIText" Id = "txtLinepromotedQty"  property ="promotedQty" size = "5" />  </Element>
+<Element type ="UITableCol" width = "8%"><Element label = ""  type = "UIText" Id = "txtLinepromotedDisc"  property ="promotedDiscPercent" size = "5" />  </Element>
+<Element type ="UITableCol" width = "10%">
 	<Element caption = "+"  type = "UIButton" Id = "btnAddRow"    fixedAction ="FixedAction.ACTION_ADDTABLEROW"  fixedActionParam =  "this"/>
 	<Element caption = "-"  type = "UIButton" Id = "btnDelRow"    fixedAction ="FixedAction.ACTION_DELETETABLEROW"  fixedActionParam =  "this"/>
 </Element>

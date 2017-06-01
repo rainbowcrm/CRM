@@ -89,6 +89,8 @@
 </Page>
 <Page id = "salesportfoliolist" definition ="/resources/pages/salesportfolio/salesportfolioList.xml" modelclass = "com.rainbow.crm.salesportfolio.model.SalesPortfolio" >
 </Page>
+<Page id = "promotionslist" definition ="/resources/pages/promotions/promotionsList.xml" modelclass = "com.rainbow.crm.promotion.model.Promotion" >
+</Page>
 <Page id = "sales" definition ="/resources/pages/sales/salesList.xml" modelclass = "com.rainbow.crm.sales.model.Sales" >
 </Page>
 <Page id = "salesreturns" definition ="/resources/pages/sales/salesreturnList.xml" modelclass = "com.rainbow.crm.sales.model.Sales" >
@@ -166,6 +168,8 @@
 <Page id = "newsalesperiod" definition ="/resources/pages/salesperiod/newsalesperiod.xml" modelclass = "com.rainbow.crm.salesperiod.model.SalesPeriod" >
 </Page>
 <Page id = "newsalesportfolio" definition ="/resources/pages/salesportfolio/newsalesportfolio.xml" modelclass = "com.rainbow.crm.salesportfolio.model.SalesPortfolio" >
+</Page>
+<Page id = "newpromotions" definition ="/resources/pages/promotions/newpromotions.xml" modelclass = "com.rainbow.crm.promotion.model.Promotion" >
 </Page>
 <Page id = "newsales" definition ="/resources/pages/sales/newsale.xml" modelclass = "com.rainbow.crm.sales.model.Sales" >
 </Page>
@@ -284,7 +288,7 @@
  	<Element label = "" type = "UIMenu" Id = "menu0701" style="menustyle" title="Open_Expenditure" link = "rdscontroller?page=openexpenses"   />
 	<Element label = "" type = "UIMenu" Id = "menu071" style="menustyle" title="Queries" link = "rdscontroller?page=queries"   />
  	<Element label = "" type = "UIMenu" Id = "menu072" style="menustyle" title="Dashboard" link = "rdscontroller?page=divmgrdashboard"   />
-	<Element label = "" type = "UIMenu" Id = "menu073" style="menustyle" title="Promotions" link = "rdscontroller?page=salesexpenses"   />
+	<Element label = "" type = "UIMenu" Id = "menu073" style="menustyle" title="Promotions" link = "rdscontroller?page=promotionslist"   />
 	<Element label = "" type = "UIMenu" Id = "menu074" style="menustyle" title="Marketing_Campaign" link = "rdscontroller?page=campaign"   />
  </Element>
   <Element label = "" type = "UIMenu" Id = "menu30" style="menustyleParent" title="Analytics" groupId= "menuGRP006"  >
@@ -332,6 +336,9 @@
  lookuppage= "lookup">
 </Lookup>
 <Lookup type ="customer" lookupservice="com.rainbow.crm.lookups.LookupCustomers" 
+ lookuppage= "lookup">
+</Lookup>
+<Lookup type ="custcategory" lookupservice="com.rainbow.crm.lookups.LookupCustCategories" 
  lookuppage= "lookup">
 </Lookup>
 <Lookup type ="contact" lookupservice="com.rainbow.crm.lookups.LookupContacts" 
