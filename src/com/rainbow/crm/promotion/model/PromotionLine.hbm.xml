@@ -13,9 +13,9 @@
       <version name="objectVersion" column="version" type="integer"></version>
       <many-to-one name="company" column ="company_id" not-null="true" lazy="false" ></many-to-one>
       <property name="lineNumber" column="LINE_NUMBER" type="integer"/>
-      <many-to-one name="masterPortFolioType" column ="MASTER_POSTFOLIO_TYPE" not-null="true" lazy="false" ></many-to-one>
+      <many-to-one name="masterPortFolioType" column ="MASTER_POSTFOLIO_TYPE"  lazy="false" ></many-to-one>
       <property name="masterPortFolioKey" column="MASTER_PORTFOLIO_KEY" type="string"/>
-      <many-to-one name="childPortFolioType" column ="CHILD_POSTFOLIO_TYPE" not-null="true" lazy="false" ></many-to-one>
+      <many-to-one name="childPortFolioType" column ="CHILD_POSTFOLIO_TYPE"  lazy="false" ></many-to-one>
       <property name="childPortFolioKey" column="CHILD_PORTFOLIO_KEY" type="string"/>
       <property name="requiredQty" column="REQ_QTY" type="double"/>
       <property name="promotedQty" column="PROMOTED_QTY" type="double"/>

@@ -75,7 +75,7 @@ Controller = "com.rainbow.crm.promotion.controller.PromotionController">
 
 <Element type ="UITableCol" width = "20%">
 
-<Element label = ""  type = "UILookupText"  Id = "txtportkeyName"  size  = "20" property ="masterPortFolioKey" showLookupAsDialog="true" dialogId="dlgItportkey"
+<Element label = ""  type = "UILookupText"  Id = "txtportkeyName"  size  = "20" property ="masterPortFolioValue" showLookupAsDialog="true" dialogId="dlgItportkey"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>salesportfoliokey</lookupType>
 	 <height>300</height>
@@ -93,7 +93,7 @@ Controller = "com.rainbow.crm.promotion.controller.PromotionController">
 </Element>
 
 <Element type ="UITableCol" width = "20%">
-<Element label = ""  type = "UILookupText"  Id = "txtCHportkeyName"  size  = "20" property ="childPortFolioKey" showLookupAsDialog="true" dialogId="dlgItportChildkey"
+<Element label = ""  type = "UILookupText"  Id = "txtCHportkeyName"  size  = "20" property ="childPortFolioValue" showLookupAsDialog="true" dialogId="dlgItportChildkey"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>salesportfoliokey</lookupType>
 	 <height>300</height>

@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,6 +42,30 @@ public class GeneralSQLs {
 		return false;
 	}
 	
+	public static Map<String,String> getFiniteValuesWithSelect(String typeCode) {
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet rs  = null ;
+		Map<String,String> finiteValues = new LinkedHashMap<String,String>();
+		finiteValues.put("-1", "--Select One--");
+		try {
+			connection  = ConnectionCreater.getConnection() ;
+			String sql =   "Select CODE,DESCRIPTION from FINITE_VALUES where TYPE_CODE = ? " ;
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, typeCode);
+			rs = statement.executeQuery() ;
+			while (rs.next()) {
+				String code = rs.getString(1);
+				String desc = rs.getString(2);
+				finiteValues.put(code,desc);
+			}
+		}catch(SQLException ex) {
+			Logwriter.INSTANCE.error(ex);
+		}finally {
+			ConnectionCreater.close(connection, statement, rs);	
+		}
+		return finiteValues;
+	}
 	
 	
 	public static Map<String,String> getFiniteValues(String typeCode) {

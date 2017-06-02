@@ -2,13 +2,16 @@ package com.rainbow.crm.promotion.model;
 
 import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
+import com.techtrade.rads.framework.annotations.RadsPropertySet;
 
 public class PromotionLine extends CRMBusinessModelObject{
 	
 	FiniteValue masterPortFolioType ;
 	String masterPortFolioKey;
+	String masterPortFolioValue;
 	FiniteValue childPortFolioType;
 	String childPortFolioKey; 
+	String childPortFolioValue;
 	
 	Double requiredQty;
 	Double promotedQty;
@@ -75,9 +78,12 @@ public class PromotionLine extends CRMBusinessModelObject{
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
+	@RadsPropertySet(excludeFromJSON =true , excludeFromMap = true, excludeFromXML= true)
 	public Promotion getPromotion() {
 		return promotion;
 	}
+	
+	@RadsPropertySet(excludeFromJSON =true , excludeFromMap = true, excludeFromXML= true)
 	public void setPromotion(Promotion promotion) {
 		this.promotion = promotion;
 	}
@@ -86,6 +92,18 @@ public class PromotionLine extends CRMBusinessModelObject{
 	}
 	public void setLineNumber(int lineNumber) {
 		this.lineNumber = lineNumber;
+	}
+	public String getMasterPortFolioValue() {
+		return masterPortFolioValue;
+	}
+	public void setMasterPortFolioValue(String masterPortFolioValue) {
+		this.masterPortFolioValue = masterPortFolioValue;
+	}
+	public String getChildPortFolioValue() {
+		return childPortFolioValue;
+	}
+	public void setChildPortFolioValue(String childPortFolioValue) {
+		this.childPortFolioValue = childPortFolioValue;
 	}
 	
 	

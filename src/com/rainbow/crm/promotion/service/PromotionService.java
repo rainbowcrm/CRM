@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
-
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -27,8 +26,11 @@ import com.rainbow.crm.hibernate.ORMDAO;
 import com.rainbow.crm.saleslead.model.SalesLead;
 import com.rainbow.crm.saleslead.model.SalesLeadLine;
 import com.rainbow.crm.saleslead.service.ISalesLeadService;
+import com.rainbow.crm.salesportfolio.model.SalesPortfolio;
+import com.rainbow.crm.salesportfolio.model.SalesPortfolioLine;
 import com.rainbow.crm.promotion.dao.PromotionDAO;
 import com.rainbow.crm.promotion.model.Promotion;
+import com.rainbow.crm.promotion.model.PromotionLine;
 import com.rainbow.crm.promotion.sql.PromotionSQLs;
 import com.rainbow.crm.promotion.validator.PromotionValidator;
 import com.rainbow.crm.customer.model.Customer;
@@ -95,8 +97,19 @@ public class PromotionService extends AbstractService implements
 			promotion.getPromotionLines().forEach( promotionLine ->  { 
 				promotionLine.setCompany(promotion.getCompany());
 				promotionLine.setLineNumber(lineNumber.getAndIncrement());
-				String key =  CommonUtil.getSalesPortfolioKey(promotionLine.getMasterPortFolioType(), promotionLine.getMasterPortFolioKey(), context);
-				
+				if(promotionLine.getMasterPortFolioType()!= null &&  !"-1".equals(promotionLine.getMasterPortFolioType().getCode()) ) {
+					String key =  CommonUtil.getSalesPortfolioKey(promotionLine.getMasterPortFolioType(), promotionLine.getMasterPortFolioValue(), context);
+					promotionLine.setMasterPortFolioKey(key);
+				}else {
+					promotionLine.setMasterPortFolioKey(null);
+				}
+				if(promotionLine.getChildPortFolioType()!= null &&  !"-1".equals(promotionLine.getChildPortFolioType().getCode()) ) {
+					String key =  CommonUtil.getSalesPortfolioKey(promotionLine.getChildPortFolioType(), promotionLine.getChildPortFolioValue(), context);
+					promotionLine.setChildPortFolioKey(key);
+				}else {
+					promotionLine.setChildPortFolioKey(null);
+				}
+				promotionLine.setPromotion(promotion);
 				
 			} );
 		}
@@ -114,24 +127,55 @@ public class PromotionService extends AbstractService implements
 				.getInstance("PromotionDAO");
 	}
 
+	
+	
+	@Override
+	public TransactionResult create(CRMModelObject object, CRMContext context) {
+		Promotion promotion = (Promotion) object;
+		if (!Utils.isNullSet(promotion.getPromotionLines())) {
+			int pk = GeneralSQLs.getNextPKValue("Promotions");
+			promotion.setId(pk);
+			for (PromotionLine line : promotion.getPromotionLines()) {
+				int linePK = GeneralSQLs.getNextPKValue("Promotion_Lines");
+				line.setId(linePK);
+				line.setPromotion(promotion);
+			}
+		}
+		
+		return super.create(object, context);
+	}
+
 	@Transactional
 	public TransactionResult update(CRMModelObject object, CRMContext context) {
-		List<RadsError> errors = new ArrayList<RadsError>();
-		TransactionResult.Result result = TransactionResult.Result.SUCCESS;
-		try {
-			object.setLastUpdateDate(new java.sql.Timestamp(
-					new java.util.Date().getTime()));
-			object.setLastUpdateUser(context.getUser());
-			// ((PromotionDAO)getDAO()).deleteOrphanedRecords((Promotion)object);
-			getDAO().update(object);
-		} catch (DatabaseException ex) {
-			RadsError error = CRMValidator.getErrorforCode(context.getLocale(),
-					CRMDBException.ERROR_DIRTY_READ);
-			errors.add(error);
-			result = TransactionResult.Result.FAILURE;
-			throw new CRMDBException(error);
+		Promotion promotion = (Promotion) object;
+		Promotion oldObject = (Promotion) getById(promotion
+				.getPK());
+		if (!Utils.isNullSet(promotion.getPromotionLines())) {
+			int ct = 0;
+			Iterator it = oldObject.getPromotionLines().iterator();
+			for (PromotionLine line : promotion
+					.getPromotionLines()) {
+				SalesPortfolioLine oldLine = null;
+				if (it.hasNext()) {
+					oldLine = (SalesPortfolioLine) it.next();
+				}
+				line.setPromotion(promotion);
+				if (oldLine != null) {
+					line.setId(oldLine.getId());
+					line.setObjectVersion(oldLine.getObjectVersion());
+				} else {
+					int linePK = GeneralSQLs
+							.getNextPKValue("Promotion_Lines");
+					line.setId(linePK);
+				}
+			}
+			while (it.hasNext()) {
+				PromotionLine oldLine = (PromotionLine) it.next();
+				oldLine.setDeleted(true);
+				promotion.addPromotionLine(oldLine);
+			}
 		}
-		return new TransactionResult(result, errors);
+		return super.update(object, context);
 	}
 
 }

@@ -257,7 +257,7 @@ public class SalesPortfolioService extends AbstractService implements
 					line.setObjectVersion(oldLine.getObjectVersion());
 				} else {
 					int linePK = GeneralSQLs
-							.getNextPKValue("SAPORTFOLIO_LINES");
+							.getNextPKValue("SalesPortfolio_Lines");
 					line.setId(linePK);
 				}
 			}

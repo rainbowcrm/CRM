@@ -38,10 +38,7 @@ public class PromotionController extends CRMTransactionController{
 		return serv;
 	}
 
-	public Map <String, String > getEvaluationPeriods() {
-		Map<String, String> ans = GeneralSQLs.getFiniteValues(CRMConstants.FV_EVALDATE);
-		return ans;
-	}
+
 	
 
 	
@@ -77,7 +74,7 @@ public class PromotionController extends CRMTransactionController{
 	}
 	
 	public Map <String, String > getAllTypes() {
-		Map<String, String> ans = GeneralSQLs.getFiniteValues(CRMConstants.FV_SPFTYPE);
+		Map<String, String> ans = GeneralSQLs.getFiniteValuesWithSelect(CRMConstants.FV_SPFTYPE);
 		return ans;
 	}
 	
