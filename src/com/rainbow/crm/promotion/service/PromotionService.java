@@ -101,13 +101,13 @@ public class PromotionService extends AbstractService implements
 					String key =  CommonUtil.getSalesPortfolioKey(promotionLine.getMasterPortFolioType(), promotionLine.getMasterPortFolioValue(), context);
 					promotionLine.setMasterPortFolioKey(key);
 				}else {
-					promotionLine.setMasterPortFolioKey(null);
+					promotionLine.setMasterPortFolioType(null);
 				}
 				if(promotionLine.getChildPortFolioType()!= null &&  !"-1".equals(promotionLine.getChildPortFolioType().getCode()) ) {
 					String key =  CommonUtil.getSalesPortfolioKey(promotionLine.getChildPortFolioType(), promotionLine.getChildPortFolioValue(), context);
 					promotionLine.setChildPortFolioKey(key);
 				}else {
-					promotionLine.setChildPortFolioKey(null);
+					promotionLine.setChildPortFolioType(null);
 				}
 				promotionLine.setPromotion(promotion);
 				

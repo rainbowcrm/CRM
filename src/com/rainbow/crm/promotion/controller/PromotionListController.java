@@ -51,7 +51,7 @@ public class PromotionListController extends CRMListController{
 	@Override
 	public PageResult goToEdit(List<ModelObject> objects) {
 		PageResult result = new PageResult();
-		result.setNextPageKey("newpromotion");
+		result.setNextPageKey("newpromotions");
 		return result;
 	}
 	
