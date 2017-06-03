@@ -31,6 +31,20 @@ public class SalesLeadListController extends CRMListController{
 		return super.generateContext(request, response);
 	}
 	
+	
+	
+	
+	
+	@Override
+	public void init(HttpServletRequest request) {
+		realPath = request.getServletContext().getRealPath(".");
+		super.init(request);
+	}
+
+
+
+
+
 	@Override
 	public IBusinessService getService() {
 		ISalesLeadService serv = (ISalesLeadService) SpringObjectFactory.INSTANCE.getInstance("ISalesLeadService");
@@ -59,8 +73,9 @@ public class SalesLeadListController extends CRMListController{
 				SalesLeadExtended leadExtended = service.getSalesLeadWithExtension(((SalesLead)lead).getId(), (CRMContext)getContext());
 				result.setObject(leadExtended);
 				return result;
-			}else 
+			}else  if("sendemail".equalsIgnoreCase(submitAction)){
 				service.sendEmail((SalesLead)lead,(CRMContext) getContext(),realPath);
+			}
 				
 		}
 		return result;
