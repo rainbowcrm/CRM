@@ -1,6 +1,15 @@
 import { BaseSearchRequest } from '../../../providers/';
 
 export class SalesLeadSearchRequest extends BaseSearchRequest{
+    contextParameters:ContextParameters;
+}
+
+export class ContextParameters{
+    workableleads: string;
+}
+
+export class SalesLeadEmailRequest extends BaseSearchRequest{
+    submitAction: string;
 }
 
 export class SalesLeadSearchResponse extends BaseSearchRequest{
@@ -79,6 +88,7 @@ export class SalesLeadLine{
 export class ItemSku{
     Name: string;
 }
+
 
 
 

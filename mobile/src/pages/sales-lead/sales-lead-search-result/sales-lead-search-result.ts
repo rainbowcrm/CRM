@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavParams, NavController, ToastController, PopoverController } from 'ionic-angular';
 
 import { HTTPService } from '../../../providers/';
-import { SalesLeads, SalesLeadSearchRequest, SalesLeadSearchResponse, SalesLeadDetails } from '../';
+import { SalesLeads, SalesLeadSearchRequest, SalesLeadSearchResponse, SalesLeadDetails, ContextParameters } from '../';
 import { SortPopOverPage }   from '../../../common/sort-helper/sort-popover';
 
 /*
@@ -79,6 +79,9 @@ export class SalesLeadSearchResult {
       this.request.hdnPage = ++this.pageNumber;
       this.request.pageID = "saleslead";
       this.request.filter = this.filter;
+      let context = new ContextParameters();
+      context.workableleads = "true";
+      this.request.contextParameters = context;
       this.http.processServerRequest("post",this.request, true, this.pageNumber != 0).subscribe(
                      res => this.salesLeadSearchSuccess(res, infiniteScroll),
                      error =>  this.salesLeadSearchError(error, infiniteScroll)); 

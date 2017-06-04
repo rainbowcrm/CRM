@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, ToastController, NavParams } from 'ionic-angular';
-import { SalesLeadSearchRequest, SalesLeadSearchFilter, SalesLeadSearchResult } from '../';
+import { SalesLeadSearchRequest, SalesLeadSearchFilter, SalesLeadSearchResult, ContextParameters } from '../';
 import { HTTPService } from '../../../providers/';
 import { HomePage } from '../../home/home';
 
@@ -57,6 +57,9 @@ export class SalesLeadSearch {
       filter.operator = "EQUALS";
       filter.value = this.searchString;
       this.request.filter.push(filter);
+      let context = new ContextParameters();
+      context.workableleads = "true";
+      this.request.contextParameters = context;
 
       this.http.processServerRequest("post",this.request, true).subscribe(
                      res => this.salesLeadSearchSuccess(res, this.request.filter.slice(0)),
