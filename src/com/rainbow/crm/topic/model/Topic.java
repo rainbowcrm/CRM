@@ -66,10 +66,12 @@ public class Topic extends CRMBusinessModelObject {
 		topicLines.add(line);
 	}
 
+	@RadsPropertySet(useBKForJSON = true, useBKForXML = true, useBKForMap = true)
 	public User getOwner() {
 		return owner;
 	}
 
+	@RadsPropertySet(useBKForJSON = true, useBKForXML = true, useBKForMap = true)
 	public void setOwner(User owner) {
 		this.owner = owner;
 	}
@@ -90,10 +92,12 @@ public class Topic extends CRMBusinessModelObject {
 		this.topicDate = topicDate;
 	}
 
+	@RadsPropertySet(usePKForJSON = true, usePKForXML = true, usePKForMap = true)
 	public FiniteValue getPortfolioType() {
 		return portfolioType;
 	}
 
+	@RadsPropertySet(usePKForJSON = true, usePKForXML = true, usePKForMap = true)
 	public void setPortfolioType(FiniteValue portfolioType) {
 		this.portfolioType = portfolioType;
 	}

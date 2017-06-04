@@ -5,6 +5,7 @@ import com.rainbow.crm.item.service.ISkuService;
 import com.rainbow.crm.saleslead.model.SalesLead;
 import com.rainbow.crm.saleslead.service.ISalesLeadService;
 import com.rainbow.crm.user.validator.UserErrorCodes;
+import com.rainbow.crm.vendor.model.Vendor;
 import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMValidator;
@@ -23,6 +24,14 @@ public class PromotionValidator extends CRMValidator {
 	protected void checkforCreateErrors(ModelObject object) {
 		checkforErrors(object);
 		IPromotionService  service = (IPromotionService) SpringObjectFactory.INSTANCE.getInstance("IPromotionService");
+		Promotion  exist = (Promotion)service.getByBusinessKey(promotion, context);
+		if(exist != null ) {
+			errors.add(getErrorforCode(CommonErrorCodes.UNIQUE_VAL_EXISTS,externalize.externalize(context, "Name"))) ;
+		}
+		exist = (Promotion)service.getByBusinessKey(promotion, context);
+		if(exist != null ) {
+			errors.add(getErrorforCode(CommonErrorCodes.UNIQUE_VAL_EXISTS,externalize.externalize(context, "Name"))) ;
+		}
 		
 	}
 
@@ -30,13 +39,24 @@ public class PromotionValidator extends CRMValidator {
 	protected void checkforUpdateErrors(ModelObject object) {
 		checkforErrors(object);
 		IPromotionService  service = (IPromotionService) SpringObjectFactory.INSTANCE.getInstance("IPromotionService");
+		Promotion  exist = (Promotion)service.getByBusinessKey(promotion, context);
+		if(exist != null ) {
+			errors.add(getErrorforCode(CommonErrorCodes.UNIQUE_VAL_EXISTS,externalize.externalize(context, "Name"))) ;
+		}
+		exist = (Promotion)service.getByBusinessKey(promotion, context);
+		if(exist != null  && exist.getId() != promotion.getId()) {
+			errors.add(getErrorforCode(CommonErrorCodes.UNIQUE_VAL_EXISTS,externalize.externalize(context, "Name"))) ;
+		}
 		
+	}
+	
+	private void validateBundlingConditions() 
+	{
 		
 	}
 	
 	protected void checkforErrors(ModelObject object) {
 		promotion = (Promotion) object;
-		System.out.println("Cust XML=" + promotion.toXML());
 		
 	}
 	

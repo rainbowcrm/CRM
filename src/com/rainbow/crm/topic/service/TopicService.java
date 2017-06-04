@@ -405,7 +405,7 @@ public class TopicService extends AbstractService implements
 				line.setTopic(topic);
 			}
 		}
-
+		System.out.println(topic.toJSON()) ;
 		TransactionResult result = super.create(object, context);
 		return result;
 	}

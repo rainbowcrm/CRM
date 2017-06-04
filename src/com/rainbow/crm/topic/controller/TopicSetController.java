@@ -41,9 +41,11 @@ public class TopicSetController extends CRMGeneralController{
 	public PageResult submit(ModelObject object, String actionParam) {
 		TopicSet topicSet = (TopicSet) object;
 		ITopicService service  =  getService() ;
-		if  ("Refresh".equalsIgnoreCase(actionParam)) {
+		PageResult result  = new PageResult();
+		if  ("Refresh".equalsIgnoreCase(actionParam)) { 
 			List<Topic> topics = service.getOpenTopics((CRMContext)getContext());
 			topicSet.setOpenTopics(topics);
+			result.setObject(topicSet);
 		} else if ("fetchLatest".equalsIgnoreCase(actionParam)) {
 			int topicId = topicSet.getCurrentTopic() ;
 			if (topicId > 0 ) {
@@ -53,8 +55,8 @@ public class TopicSetController extends CRMGeneralController{
 				List<TopicLine> updatedReplies=  service.getUpdatedReplies(topic, readReply, (CRMContext)getContext());
 				topicSet.setNewReplies(updatedReplies);
 			}
+			result.setObject(topicSet);
 		}else if("newTopic".equalsIgnoreCase(actionParam)) {
-			PageResult result  = new PageResult();
 			List<RadsError>  errors = createNewTopic(topicSet.getNewTopic(),(CRMContext) getContext());
 			if (errors != null) {
 				result.setErrors(errors);
@@ -68,7 +70,6 @@ public class TopicSetController extends CRMGeneralController{
 				topic.setId(topicId);
 				List<RadsError>  errors = service.closeTopic(topic, (CRMContext) getContext());
 				if (errors != null) {
-					PageResult result  = new PageResult();
 					result.setErrors(errors);
 					result.setResult(Result.FAILURE);
 					return result;
@@ -76,7 +77,7 @@ public class TopicSetController extends CRMGeneralController{
 				
 			}
 		}
-		return super.submit(object, actionParam);
+		return result;
 	}
 
 	

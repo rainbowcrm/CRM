@@ -33,9 +33,13 @@ public class Promotion extends CRMBusinessModelObject{
 	Double promotedDiscPercent;
 	
 	String comments;
+	
+	@RadsPropertySet(isBK=true)
 	public String getName() {
 		return name;
 	}
+	
+	@RadsPropertySet(isBK=true)
 	public void setName(String name) {
 		this.name = name;
 	}
