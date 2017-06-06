@@ -14,7 +14,7 @@ import { HTTPService } from '../../../providers/';
   templateUrl: 'discussion-brand-modal.html'
 })
 export class DiscussionBrandModalPage {
-  private item: any;
+  private items: any;
   private type: string;
   private request: PortfolioTypeRequest;
   constructor(public viewCtrl: ViewController, private navParam: NavParams, 
@@ -36,10 +36,14 @@ export class DiscussionBrandModalPage {
   }
 
   processResponse(res){
-     debugger
+     this.items = res.dataObject;
   }
   processError(error){
+    this.showErrorToast();
+  }
 
+  onOptionSelected(i){
+    this.viewCtrl.dismiss(this.items[i]);
   }
 
   showErrorToast():any{

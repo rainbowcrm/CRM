@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, ToastController , NavParams, ModalController} from 'ionic-angular';
-
+import { DatePipe } from '@angular/common';
 import { NewDiscussion, CreateDiscussionRequest, Topic, PortFolioType, DiscussionBrandModalPage } from '../';
 import { HTTPService, ReasonCodeProvider } from '../../../providers/';
 
@@ -15,12 +15,12 @@ import { HTTPService, ReasonCodeProvider } from '../../../providers/';
 })
 export class DiscussionAddPage {
   private model:NewDiscussion;
-  private response: CreateDiscussionRequest;
   private errorMessage:string;
   private reasonCodes: Array<any>;
 
   constructor(public navCtrl: NavController,private http:HTTPService, private toastCtrl: ToastController,
-    private params: NavParams,  private rcp: ReasonCodeProvider, private modalCtrl: ModalController) {
+    private params: NavParams,  private rcp: ReasonCodeProvider, private modalCtrl: ModalController,
+    private datePipe: DatePipe) {
       this.model = new NewDiscussion();
       this.model.NewTopic = new Topic();
       this.model.NewTopic.PortfolioType = new PortFolioType();
@@ -37,26 +37,29 @@ export class DiscussionAddPage {
   
   fetchBrands(){
    let modal = this.modalCtrl.create(DiscussionBrandModalPage,{type:this.model.NewTopic.PortfolioType.Code});
+   modal.onDidDismiss(data => {
+     this.model.NewTopic.PortfolioValue = data.value;
+   });
    modal.present();
   }
-  /*addContact():void{
+  addDiscussion():void{
     this.errorMessage = null;
-    let addContactReq = new ContactAddRequest();
-    addContactReq.fixedAction = "FixedAction.ACTION_CREATE";
-    addContactReq.pageID = 'newcontact';
-    addContactReq.currentmode = "CREATE";
-    addContactReq.dataObject = this.model;
-    this.http.processServerRequest("post",addContactReq, true).subscribe(
-                     res => this.contactAddSuccess(res),
-                     error =>  this.contactAddError(error));  
+    let addTopicReq = new CreateDiscussionRequest();
+    addTopicReq.submitAction = "newTopic";
+    addTopicReq.pageID = 'topic';
+    addTopicReq.currentmode = "CREATE";
+    this.model.NewTopic.TopicDate = this.datePipe.transform(new Date(),"yyyy-MM-dd");
+    addTopicReq.dataObject = this.model;
+    this.http.processServerRequest("post",addTopicReq, true).subscribe(
+                     res => this.discussionAddSuccess(res),
+                     error =>  this.discussionAddError(error));  
   }
 
-  contactAddSuccess(response):void{
+  discussionAddSuccess(response):void{
     if(response.result == "failure"){
-       this.errorMessage = "Failed to create contact"; 
+       this.errorMessage = "Failed to create topic"; 
        return ;
     }
-    this.response = response.dataObject;
     this.navCtrl.popToRoot();
     this.showSuccessToast();
     
@@ -64,16 +67,16 @@ export class DiscussionAddPage {
 
   showSuccessToast():any{
      let toast = this.toastCtrl.create({
-      message: 'Contact was added successfully',
+      message: 'New topic was added successfully',
       duration: 2000,
       position: 'top'
      });
     toast.present();
   }
 
-  contactAddError(error){
+  discussionAddError(error){
     this.http.setAuthToken(null);
-    this.errorMessage = "Failed to create contact";
-  }*/
+    this.errorMessage = "Failed to create new topic";
+  }
 
 }

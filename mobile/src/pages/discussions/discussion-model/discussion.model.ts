@@ -82,6 +82,7 @@ export class ReadRepliesRequest extends BaseSearchRequest{
 }
 
 export class CreateDiscussionRequest extends BaseSearchRequest{
+  submitAction: string;
   dataObject: NewDiscussion;
 }
 
@@ -100,7 +101,6 @@ export class NewDiscussion{
 }
 
 export class PortfolioTypeRequest{
-  authToken: string;
   lookupType: string;
   additionalParam: string;
   searchString: string;

@@ -28,7 +28,7 @@
 </ion-list>
 <ion-item class="question-text">
     <ion-input type="text" placeholder="Reply" #replyInput></ion-input>
-    <button ion-button item-right (click)='reply(replyInput.value)'
+    <button ion-button item-right (click)='reply(replyInput.value);replyInput.value = ""'
                     *ngIf="replyInput.value && replyInput.value.length > 0" >
       <ion-icon name="send"></ion-icon>
     </button>

@@ -28,7 +28,7 @@ export class DiscussionsList {
        })
   }
 
-  ionViewDidLoad() {
+  ionViewDidEnter() {
      this.searchDiscussion();
   }
 

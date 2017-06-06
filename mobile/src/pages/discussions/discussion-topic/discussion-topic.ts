@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, Content } from 'ionic-angular';
+import { NavController, NavParams, Content, ToastController } from 'ionic-angular';
 import { Topic, ReplyRequest, ReadRepliesRequest } from '../';
 import { HTTPService } from '../../../providers/';
 
@@ -22,14 +22,14 @@ export class DiscussionTopicList {
  /* private response: ReloadTopicResponse;*/
 
   constructor(private http:HTTPService,
-              private navCtrl: NavController, private params: NavParams) {
+              private navCtrl: NavController, private params: NavParams, private toastCtrl: ToastController) {
         this.topic = this.params.get("topic");  
         this.user = this.params.get("user");   
   }
 
   ionViewDidEnter() {
     this.reloadTask = setInterval( () => {
-         // this.refreshData();
+          this.refreshData();
       }, 1000);
   }
 
@@ -62,7 +62,14 @@ export class DiscussionTopicList {
     
   }
 
-
+ showErrorToast():any{
+     let toast = this.toastCtrl.create({
+      message: 'Failed to add your reply.',
+      duration: 2000,
+      position: 'top'
+     });
+    toast.present();
+  }
 
   reply(text: string){
     this.replyRequest = new ReplyRequest();
@@ -79,11 +86,14 @@ export class DiscussionTopicList {
    }
 
    processReplyResponse(res){
-     debugger
+     this.topic.TopicLines = res.updatedReplies;
+    setTimeout( () => {
+          this.content.scrollToBottom(500);
+      }, 1000);
    }
 
    processReplyError(error){
-
+     this.showErrorToast();
    }
 }
 
