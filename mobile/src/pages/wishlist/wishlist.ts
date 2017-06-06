@@ -87,7 +87,7 @@ export class WishListPage {
       wishlistRequest.dataObject.Customer = {Phone:this.customer.Phone};
       wishlistRequest.dataObject.WishListLines = this.items;
       wishlistRequest.pageID = 'newwishlist';
-      this.http.processServerRequest("post",wishlistRequest).subscribe(
+      this.http.processServerRequest("post",wishlistRequest, true).subscribe(
                        res => {this.wishlistSuccess(res)},
                        error =>  this.wishlistError(error));  
       });
