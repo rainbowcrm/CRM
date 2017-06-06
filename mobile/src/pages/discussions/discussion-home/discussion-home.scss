@@ -1,0 +1,30 @@
+ps-discussion-home {
+  .button-container{
+    width: 100%;
+    text-align: center;
+  }
+  .label-ios,.label-md{
+    margin: 0px;
+  }
+  .scroll-content{
+    padding: 16px 5px !important;
+  }
+  .item-inner{
+    padding: 10px 0px !important;
+  }
+  ion-note{
+    position: absolute;
+    top: 15px;
+    right: 0px;
+    font-size: 12px;
+  }
+  ion-label{
+    h2{
+      width: 80%;
+      white-space: normal;
+    }
+    p{
+      width: 80%;
+    }
+  }
+}

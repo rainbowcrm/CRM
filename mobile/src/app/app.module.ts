@@ -9,6 +9,7 @@ import { HomePage } from '../pages/home/home';
 import { WishlistModule } from '../pages/wishlist/wishlist.module';
 import { ContactMgmtModule } from '../pages/contact-mgmt/contact-mgmt.module';
 import { SalesLeadModule } from '../pages/sales-lead/sales-lead.module';
+import { DiscussionModule } from '../pages/discussions/discussion.module';
 
 import { Loader,HTTPService, SharedService, ReasonCodeProvider } from '../providers/';
 import { ContactService, PushService, SecureStorageService } from '../plugins/';
@@ -31,6 +32,7 @@ import { IonicStorageModule } from '@ionic/storage';
     ItemModule,
     WishlistModule,
     SalesLeadModule,
+    DiscussionModule,
     IonicImageLoader.forRoot(),
     IonicStorageModule.forRoot()
   ],

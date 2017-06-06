@@ -1,0 +1,31 @@
+<!--
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+     <ion-buttons start>
+      <button ion-button icon-only (click)="goHome()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+     </ion-buttons>
+    <ion-title>Discussions</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="list-avatar-page">
+ <ion-list>
+     <ion-item *ngFor="let topic of topics" (click)="navigateToTopic(topic)">
+      <h2>{{topic.Title}}</h2>
+      <h3>{{topic.Owner.UserId}}</h3>
+      <p>{{getTopicSubHeader(topic)}}</p>
+      <ion-note item-end>{{topic.TopicDate}}</ion-note>
+    </ion-item>
+ </ion-list>
+</ion-content>
+<ion-fab right bottom>
+    <button ion-fab (click)="addDiscussion()"><ion-icon name="add"></ion-icon></button>
+</ion-fab>

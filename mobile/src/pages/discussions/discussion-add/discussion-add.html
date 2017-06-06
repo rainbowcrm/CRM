@@ -1,0 +1,60 @@
+<!--
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>New Discussion</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+ <ps-error [message]="errorMessage" [type]="'error'"></ps-error>
+  <form #discussionAddForm="ngForm">
+    <ion-grid>
+     <ion-row>
+       <ion-col>
+         <ion-item>
+           <ion-label floating>Brand</ion-label>
+           <ion-select [(ngModel)]="model.NewTopic.PortfolioType.Code" name="portFolioType" #portFolioType="ngModel" required>
+                  <ion-option *ngFor="let rc of reasonCodes" value="{{rc.Code}}">{{rc.Description}}</ion-option>
+            </ion-select>
+         </ion-item>
+      </ion-col>
+     </ion-row>
+     <ion-row *ngIf="model.NewTopic.PortfolioType.Code && model.NewTopic.PortfolioType.Code.length>0" >
+       <ion-col>
+         <ion-item>
+           <ion-label floating>Brand Type</ion-label>
+           <ion-input type="text" [(ngModel)]="model.NewTopic.PortfolioValue" name="portfolioValue" #portfolioValue="ngModel" disabled required (click)="fetchBrands()"></ion-input>
+         </ion-item>
+      </ion-col>
+     </ion-row>
+     <ion-row>
+       <ion-col>
+         <ion-item>
+           <ion-label floating>Title</ion-label>
+           <ion-input type="text" [(ngModel)]="model.NewTopic.Title" name="title" #title="ngModel" required></ion-input>
+         </ion-item>
+       </ion-col>
+     </ion-row>
+     <ion-row>
+       <ion-col>
+         <ion-item>
+          <ion-textarea [(ngModel)]="model.NewTopic.Question" name="question" #question="ngModel" placeholder="Description">
+           
+          </ion-textarea>
+         </ion-item>
+       </ion-col>
+     </ion-row>
+    </ion-grid>
+      
+  </form>
+  <div class="button-container">
+  <button ion-button [disabled]="!discussionAddForm.form.valid" (click)="addDiscussion()">Add Discussion</button>
+</div>
+</ion-content>

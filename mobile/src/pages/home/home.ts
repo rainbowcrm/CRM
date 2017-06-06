@@ -9,6 +9,7 @@ import { HTTPService} from '../../providers/';
 import { PushObject } from '@ionic-native/push';
 import { WishListPage } from '../wishlist';
 import { SalesLeadSearch } from '../sales-lead';
+import { DiscussionsList } from '../discussions';
 import { RegTokenRequest, LogoutRequest, Token } from './home.model';
 import { Storage } from '@ionic/storage';
 
@@ -26,7 +27,8 @@ import { Storage } from '@ionic/storage';
 export class HomePage {
   private rootTitle = "Menu";
   private isRoot;
-  private rootMenus = ["Item Search","Customer Management","Contacts", "Wishlist", "Sales Leads"];
+  private rootMenus = ["Item Search","Customer Management","Contacts", "Wishlist", "Sales Leads",
+                       "Discussions"];
   private submenuList;
   private menuTitle = "Menu";
   private subMenus = {
@@ -35,6 +37,7 @@ export class HomePage {
                     "Contacts":ContactHomePage,
                     "Wishlist": WishListPage,
                     "Sales Leads": SalesLeadSearch,
+                    "Discussions": DiscussionsList
                    };
   constructor(public navCtrl: NavController, private pushService: PushService
                 , private http: HTTPService, private storage: Storage,
