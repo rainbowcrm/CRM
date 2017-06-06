@@ -1,12 +1,5 @@
 package com.rainbow.crm.promotion.validator;
 
-import com.rainbow.crm.item.model.Sku;
-import com.rainbow.crm.item.service.ISkuService;
-import com.rainbow.crm.saleslead.model.SalesLead;
-import com.rainbow.crm.saleslead.service.ISalesLeadService;
-import com.rainbow.crm.user.validator.UserErrorCodes;
-import com.rainbow.crm.vendor.model.Vendor;
-import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMValidator;
 import com.rainbow.crm.common.CommonErrorCodes;
@@ -51,6 +44,11 @@ public class PromotionValidator extends CRMValidator {
 	}
 	
 	private void validateBundlingConditions() 
+	{
+		
+	}
+	
+	private void validateCrossSellingConditions() 
 	{
 		
 	}

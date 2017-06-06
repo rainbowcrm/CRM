@@ -66,7 +66,7 @@ public class TopicReplyAjaxService implements IAjaxUpdateService {
 
 	@Override
 	public IRadsContext generateContext(HttpServletRequest request) {
-		return CommonUtil.generateContext(request.getSession().getId());
+		return CommonUtil.generateContext(request);
 	}
 
 	
