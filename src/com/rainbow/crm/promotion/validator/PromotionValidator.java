@@ -1,5 +1,6 @@
 package com.rainbow.crm.promotion.validator;
 
+import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMValidator;
 import com.rainbow.crm.common.CommonErrorCodes;
@@ -7,7 +8,6 @@ import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.promotion.model.Promotion;
 import com.rainbow.crm.promotion.service.IPromotionService;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
-import com.techtrade.rads.framework.utils.Utils;
 
 public class PromotionValidator extends CRMValidator {
 
@@ -43,6 +43,20 @@ public class PromotionValidator extends CRMValidator {
 		
 	}
 	
+	private void validate()
+	{
+		if(promotion.getForAll())  {
+			forAllValidations();
+			
+		}
+		
+	}
+	
+	private void forAllValidations() {
+		if(!promotion.getPromoType().equals(CRMConstants.PROMOTYPE.PLAINDISCOUNT) && !promotion.getPromoType().equals(CRMConstants.PROMOTYPE.BUNDLING) ) {
+			errors.add( getErrorforCode(PromotionErrorCodes.INVALID_PROMO_FOR_ALLITEMS));
+		}
+	}
 	private void validateBundlingConditions() 
 	{
 		
