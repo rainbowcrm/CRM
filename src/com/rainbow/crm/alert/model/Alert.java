@@ -24,15 +24,20 @@ public class Alert extends CRMBusinessModelObject{
 	String raisedBy;
 	String data;
 	String url;
+	
+	@RadsPropertySet(useBKForJSON=true,useBKForXML=true,usePKForMap=true)
 	public Division getDivision() {
 		return division;
 	}
+	@RadsPropertySet(useBKForJSON=true,useBKForXML=true,usePKForMap=true)
 	public void setDivision(Division division) {
 		this.division = division;
 	}
+	
 	public FiniteValue getType() {
 		return type;
 	}
+	
 	public void setType(FiniteValue type) {
 		this.type = type;
 	}

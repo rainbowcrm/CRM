@@ -94,7 +94,10 @@ public class AlertListController extends CRMListController{
 				}
 			}
 		}else {
-			whereCondition.append( " where  status='" + CRMConstants.ALERT_STATUS.OPEN + "' and  (owner is null or owner ='" + getContext().getUser() + "')");
+			CRMContext ctx = (CRMContext)getContext();
+			int division = (ctx.getLoggedInUser().getDivision()!= null)?ctx.getLoggedInUser().getDivision().getId():-1;
+			whereCondition.append( " where  status='" + CRMConstants.ALERT_STATUS.OPEN + "' and  (owner is null or owner ='" + getContext().getUser() + "') and "+
+		   " ( division is null or division.id = "+ division +") ");
 		}
 		return whereCondition.toString();
 	}
