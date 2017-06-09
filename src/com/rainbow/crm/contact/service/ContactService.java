@@ -18,11 +18,13 @@ import com.techtrade.rads.framework.utils.Utils;
 
 public class ContactService extends AbstractService implements IContactService{
 
+	
 	@Override
-	public long getTotalRecordCount(CRMContext context) {
-		return getDAO().getTotalRecordCount("Contact",context);
+	protected String getTableName() {
+		return "Contact";
 	}
-
+	
+	
 	@Override
 	public Object getById(Object PK) {
 		return getDAO().getById(PK);

@@ -58,11 +58,13 @@ public class UserService  extends AbstractService implements IUserService{
 	public TransactionResult batchUpdate(List<CRMModelObject> users, CRMContext context) throws CRMDBException {
 		return super.batchUpdate(users,context);
 	}
+	
 	@Override
-	public long getTotalRecordCount(CRMContext context) {
-		return getDAO().getTotalRecordCount("User",context);
-		
+	protected String getTableName() {
+		return "User";
 	}
+	
+	
 	@Override
 	public User getByEmail(String email) {
 		return((UserDAO)getDAO()).getByEmail(email);

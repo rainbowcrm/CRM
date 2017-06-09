@@ -26,10 +26,12 @@ import com.techtrade.rads.framework.utils.Utils;
 
 public class SkuService extends AbstractService implements ISkuService {
 
+	
 	@Override
-	public long getTotalRecordCount(CRMContext context) {
-		return getDAO().getTotalRecordCount("Sku",context);
+	protected String getTableName() {
+		return "Sku";
 	}
+	
 
 	@Override
 	public Object getById(Object PK) {

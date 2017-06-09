@@ -85,9 +85,11 @@ public class SalesService extends AbstractionTransactionService implements ISale
 	}
 
 	@Override
-	public long getTotalRecordCount(CRMContext context) {
-		return getDAO().getTotalRecordCount("Sales",context);
+	protected String getTableName() {
+		return "Sales";
 	}
+	
+	
 
 	@Override
 	public Object getById(Object PK) {

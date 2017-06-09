@@ -14,7 +14,7 @@ import com.techtrade.rads.framework.ui.components.SortCriteria;
 public interface IBusinessService {
 
 	
-	public long getTotalRecordCount(CRMContext context);
+	public long getTotalRecordCount(CRMContext context,String whereCondition);
 	
 	public Object getById(Object PK) ;
 	

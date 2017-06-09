@@ -30,9 +30,11 @@ public class ProductService extends AbstractService implements  IProductService{
 	}
 		
 	@Override
-	public long getTotalRecordCount(CRMContext context) {
-		return getDAO().getTotalRecordCount("Product",context);
+	protected String getTableName() {
+		return "Product";
 	}
+	
+	
 
 	@Override
 	public Object getById(Object PK) {

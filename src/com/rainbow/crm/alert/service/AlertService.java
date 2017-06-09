@@ -14,6 +14,7 @@ import java.util.List;
 
 
 
+
 import com.google.android.gcm.server.Message;
 import com.google.android.gcm.server.Result;
 import com.google.android.gcm.server.Sender;
@@ -43,10 +44,13 @@ import com.techtrade.rads.framework.utils.Utils;
 
 public class AlertService extends AbstractService implements IAlertService{
 
+	
+	
 	@Override
-	public long getTotalRecordCount(CRMContext context) {
-		return getDAO().getTotalRecordCount("Alert",context);
+	protected String getTableName() {
+		return "Alert";
 	}
+	
 
 	@Override
 	public Object getById(Object PK) {

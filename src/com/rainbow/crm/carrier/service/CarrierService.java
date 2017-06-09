@@ -19,9 +19,11 @@ import com.techtrade.rads.framework.utils.Utils;
 public class CarrierService extends AbstractService implements ICarrierService{
 
 	@Override
-	public long getTotalRecordCount(CRMContext context) {
-		return getDAO().getTotalRecordCount("Carrier",context);
+	protected String getTableName() {
+		return "Carrier";
 	}
+	
+	
 
 	@Override
 	public Object getById(Object PK) {

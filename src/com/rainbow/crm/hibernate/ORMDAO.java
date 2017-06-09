@@ -41,10 +41,10 @@ public abstract class ORMDAO {
     	}
     }
     
-	public long getTotalRecordCount( String tableName, CRMContext context ) {
+	public long getTotalRecordCount( String tableName, CRMContext context, String whereCondition ) {
 		Session session = openSession(false) ;
     	try  {
-    	String queryString = " Select count(*) from " + tableName  +  " where company_id=" + context.getLoggedinCompany();
+    	String queryString = " Select count(*) from " + tableName  + " " +  whereCondition; 
     	Query  query = session.createQuery(queryString);
     	List lst = query.list();
     	if(!Utils.isNull(lst)) {

@@ -18,10 +18,13 @@ import com.techtrade.rads.framework.utils.Utils;
 
 public class VendorService extends AbstractService implements IVendorService{
 
+	
 	@Override
-	public long getTotalRecordCount(CRMContext context) {
-		return getDAO().getTotalRecordCount("Vendor",context);
+	protected String getTableName() {
+		return "Vendor";
 	}
+	
+	
 
 	@Override
 	public Object getById(Object PK) {

@@ -33,12 +33,12 @@ public class CompanyService  extends AbstractService implements ICompanyService{
 		 return  getDAO().listData("Company" ,from, to, whereCondition);
 	}
 
-	
 	@Override
-	public long getTotalRecordCount(CRMContext context) {
-		return getDAO().getTotalRecordCount("Company",context);
-		
+	protected String getTableName() {
+		return "Company";
 	}
+	
+	
 	@Override
 	public Company findByCode(String code) {
 		return ((CompanyDAO)getDAO()).findByCode(code);

@@ -72,10 +72,7 @@ public class CompanyListController extends CRMListController{
 		return ans;
 	}
 
-	@Override
-	public int getTotalNumberofPages() {
-		return super.getTotalNumberofPages();
-	}
+	
 
 	@Override
 	public PageResult submit(List<ModelObject> objects, String submitAction) {

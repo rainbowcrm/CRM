@@ -28,11 +28,13 @@ public class ExpenseHeadService extends AbstractService implements IExpenseHeadS
 	protected ORMDAO getDAO() {
 		return (ExpenseHeadDAO) SpringObjectFactory.INSTANCE.getInstance("ExpenseHeadDAO");
 	}
-		
+	
 	@Override
-	public long getTotalRecordCount(CRMContext context) {
-		return getDAO().getTotalRecordCount("ExpenseHead",context);
+	protected String getTableName() {
+		return "ExpenseHead";
 	}
+		
+	
 
 	@Override
 	public Object getById(Object PK) {

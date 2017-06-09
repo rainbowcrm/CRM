@@ -137,8 +137,9 @@ public class SalesLeadService extends AbstractionTransactionService implements I
 	}
 
 	@Override
-	public long getTotalRecordCount(CRMContext context) {
-		return getDAO().getTotalRecordCount("SalesLead",context);
+	public long getTotalRecordCount(CRMContext context,String whereCondition) {
+		String additionalCondition = getAdditionalCondition(whereCondition, context);
+		return getDAO().getTotalRecordCount("SalesLead",context,additionalCondition);
 	}
 
 	@Override
@@ -147,8 +148,12 @@ public class SalesLeadService extends AbstractionTransactionService implements I
 	}
 
 	@Override
-	public List<CRMModelObject> listData(int from, int to,
-			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
+	protected String getTableName() {
+		return "SalesLead";
+	}
+	
+	private String getAdditionalCondition(String whereCondition, CRMContext context)
+	{
 		StringBuffer additionalCondition = new StringBuffer();
 		if (Utils.isNullString(whereCondition) ){
 			additionalCondition = additionalCondition.append(" where (  salesAssociate is null or  salesAssociate ='" + context.getUser() + "')") ; 
@@ -160,8 +165,15 @@ public class SalesLeadService extends AbstractionTransactionService implements I
 		if("true".equalsIgnoreCase(workableleads)) {
 			additionalCondition = additionalCondition.append(whereCondition + " and ( status is null or status.code not  in ('CLSD','FLD')) " );
 		}
+		return additionalCondition.toString();
+	}
+	
+	@Override
+	public List<CRMModelObject> listData(int from, int to,
+			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
+		 String additionalCondition = getAdditionalCondition(whereCondition, context);
 		
-		return super.listData("SalesLead", from, to, additionalCondition.toString(), context,sortCriteria);
+		return super.listData("SalesLead", from, to, additionalCondition, context,sortCriteria);
 	}
 
 	@Override

@@ -20,7 +20,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 
 
+
 import org.springframework.transaction.annotation.Transactional;
+
 
 
 
@@ -61,11 +63,13 @@ import com.techtrade.rads.framework.utils.Utils;
 
 public class CustCategoryService extends AbstractService implements ICustCategoryService{
 
+	
 	@Override
-	public long getTotalRecordCount(CRMContext context) {
-		return getDAO().getTotalRecordCount("CustCategory",context);
+	protected String getTableName() {
+		return "CustCategory";
 	}
-
+	
+	
 	@Override
 	public Object getById(Object PK) {
 		CustCategory category =(CustCategory) getDAO().getById(PK);

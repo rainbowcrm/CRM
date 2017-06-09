@@ -80,9 +80,11 @@ import com.techtrade.rads.framework.utils.Utils;
 public class TerritoryService extends AbstractionTransactionService implements ITerritoryService{
 
 	@Override
-	public long getTotalRecordCount(CRMContext context) {
-		return getDAO().getTotalRecordCount("Territory",context);
+	protected String getTableName() {
+		return "Territory";
 	}
+	
+	
 
 	@Override
 	public Object getById(Object PK) {

@@ -50,16 +50,19 @@ public class PromotionService extends AbstractService implements
 		IPromotionService {
 
 	@Override
-	public long getTotalRecordCount(CRMContext context) {
-		return getDAO().getTotalRecordCount("Promotion", context);
+	protected String getTableName() {
+		return "Promotion";
 	}
-
+	
+	
 	@Override
 	public Object getById(Object PK) {
 		Promotion category = (Promotion) getDAO().getById(PK);
 		return category;
 	}
 
+	
+	
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
 			String whereCondition, CRMContext context, SortCriteria sortCriteria) {

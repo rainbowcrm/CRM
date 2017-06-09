@@ -46,10 +46,11 @@ import com.techtrade.rads.framework.utils.Utils;
 public class PurchaseService extends AbstractionTransactionService implements IPurchaseService{
 
 	@Override
-	public long getTotalRecordCount(CRMContext context) {
-		return getDAO().getTotalRecordCount("Purchase",context);
+	protected String getTableName() {
+		return "Purchase";
 	}
-
+	
+	
 	@Override
 	public Object getById(Object PK) {
 		return getDAO().getById(PK);

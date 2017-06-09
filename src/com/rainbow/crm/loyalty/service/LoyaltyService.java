@@ -16,6 +16,7 @@ import java.util.List;
 
 
 
+
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.AbstractService;
 import com.rainbow.crm.common.CRMConstants;
@@ -45,10 +46,14 @@ import com.techtrade.rads.framework.utils.Utils;
 
 public class LoyaltyService extends AbstractService implements ILoyaltyService{
 
+	
 	@Override
-	public long getTotalRecordCount(CRMContext context) {
-		return getDAO().getTotalRecordCount("Loyalty",context);
+	protected String getTableName() {
+		return "Loyalty";
 	}
+	
+	
+	
 
 	@Override
 	public Object getById(Object PK) {

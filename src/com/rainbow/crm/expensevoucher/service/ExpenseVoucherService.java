@@ -40,10 +40,13 @@ import com.techtrade.rads.framework.utils.Utils;
 @Transactional
 public class ExpenseVoucherService extends AbstractionTransactionService implements IExpenseVoucherService{
 
+	
 	@Override
-	public long getTotalRecordCount(CRMContext context) {
-		return getDAO().getTotalRecordCount("ExpenseVoucher",context);
+	protected String getTableName() {
+		return "ExpenseVoucher";
 	}
+	
+	
 
 	@Override
 	public Object getById(Object PK) {
