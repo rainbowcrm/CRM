@@ -65,6 +65,14 @@ public class PromotionValidator extends CRMValidator {
 		{
 			validateBundlingConditions() ;
 		}
+		if(promotion.getPromoType().equals(CRMConstants.PROMOTYPE.UPSELLING))
+		{
+			validateUpSellingConditions();
+		}
+		if(promotion.getPromoType().equals(CRMConstants.PROMOTYPE.CROSSSELL))
+		{
+			validateCrossSellingConditions();
+		}
 	}
 	private void validateBundlingConditions() 
 	{
@@ -86,16 +94,64 @@ public class PromotionValidator extends CRMValidator {
 				 errors.add( getErrorforCode(PromotionErrorCodes.CANNOT_BE_BLANK_FOR,"Incentive_Value","Bundling"));
 			 }
 			 if (promotionLine.getRequiredQty() == 0 &&  promotionLine.getRequiredAmount() == 0 ) {
-				 errors.add( getErrorforCode(PromotionErrorCodes.CANNOT_BE_BLANK_FOR,"Incentive_Value","Bundling"));
+				 errors.add( getErrorforCode(PromotionErrorCodes.CANNOT_BE_BLANK_FOR,"Required_Amount","Bundling"));
 			 }
-			 
 		 } );
-		 
 	}
 	
 	private void validateCrossSellingConditions() 
 	{
+		if(Utils.isNullSet(promotion.getPromotionLines())) {
+			 errors.add( getErrorforCode(CommonErrorCodes.FIELD_EMPTY,"Promotion_Lines"));
+			 return ; 
+		 }
+		promotion.getPromotionLines().forEach(promotionLine ->  {
+			 if (promotionLine.getMasterPortFolioType() == null ) {
+				 errors.add( getErrorforCode(PromotionErrorCodes.CANNOT_BE_BLANK_FOR,"Master_Type","Cross_Selling"));
+			 }
+			 if (promotionLine.getMasterPortFolioKey() == null ) {
+				 errors.add( getErrorforCode(PromotionErrorCodes.CANNOT_BE_BLANK_FOR,"Master_Value","Cross_Selling"));
+			 }
+			 if (promotionLine.getChildPortFolioType() == null ) {
+				 errors.add( getErrorforCode(PromotionErrorCodes.CANNOT_BE_BLANK_FOR,"Incentive_Type","Cross_Selling"));
+			 }
+			 if (promotionLine.getChildPortFolioKey() == null ) {
+				 errors.add( getErrorforCode(PromotionErrorCodes.CANNOT_BE_BLANK_FOR,"Incentive_Value","Cross_Selling"));
+			 }
+			 if (promotionLine.getRequiredQty() == 0 &&  promotionLine.getRequiredAmount() == 0 ) {
+				 errors.add( getErrorforCode(PromotionErrorCodes.CANNOT_BE_BLANK_FOR,"Required_Amount","Cross_Selling"));
+			 }
+		 } );
 		
+	}
+
+	private void validateUpSellingConditions() 
+	{
+	
+		 if(Utils.isNullSet(promotion.getPromotionLines())) {
+			 errors.add( getErrorforCode(CommonErrorCodes.FIELD_EMPTY,"Promotion_Lines"));
+			 return ; 
+		 }
+		 promotion.getPromotionLines().forEach(promotionLine ->  {
+			 if (promotionLine.getMasterPortFolioType() == null ) {
+				 errors.add( getErrorforCode(PromotionErrorCodes.CANNOT_BE_BLANK_FOR,"Master_Type","Up_Selling"));
+			 }
+			 if (promotionLine.getMasterPortFolioKey() == null ) {
+				 errors.add( getErrorforCode(PromotionErrorCodes.CANNOT_BE_BLANK_FOR,"Master_Value","Up_Selling"));
+			 }
+			 if (promotionLine.getChildPortFolioType() != null ) {
+				 errors.add( getErrorforCode(PromotionErrorCodes.SHOULD_NOT_BEENTERED,"Incentive_Type","Up_Selling"));
+			 }
+			 if (promotionLine.getChildPortFolioKey() != null ) {
+				 errors.add( getErrorforCode(PromotionErrorCodes.SHOULD_NOT_BEENTERED,"Incentive_Value","Up_Selling"));
+			 }
+			 if (promotionLine.getRequiredQty() == 0 &&  promotionLine.getRequiredAmount() == 0 ) {
+				 errors.add( getErrorforCode(PromotionErrorCodes.CANNOT_BE_BLANK_FOR,"Required_Amount","Required_Amount"));
+			 }
+			 if(promotionLine.getPromotedDiscPercent() == 0) {
+				 errors.add( getErrorforCode(PromotionErrorCodes.CANNOT_BE_BLANK_FOR,"Discount_Percent","Up_Selling"));
+			 }
+		 } );
 	}
 	
 	protected void checkforErrors(ModelObject object) {
