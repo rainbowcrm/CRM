@@ -139,7 +139,7 @@ public class SalesLeadService extends AbstractionTransactionService implements I
 	@Override
 	public long getTotalRecordCount(CRMContext context,String whereCondition) {
 		String additionalCondition = getAdditionalCondition(whereCondition, context);
-		return getDAO().getTotalRecordCount("SalesLead",context,additionalCondition);
+		return super.getTotalRecordCount(context, additionalCondition);
 	}
 
 	@Override
