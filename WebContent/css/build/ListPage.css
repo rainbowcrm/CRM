@@ -291,7 +291,7 @@ div.detailStyle {
     font-weight: bold;
     font-size: 18px; }
   div.detailStyle th {
-    text-align: right; }
+    text-align: left; }
 
 div.summaryStyle {
   text-align: right;
@@ -317,6 +317,12 @@ span.errorStyle {
 
 table, tr {
   width: 100%;
+  text-align: left; }
+
+table.summaryStyle {
+  text-align: right; }
+
+tr.summaryStyle {
   text-align: right; }
 
 table.errorStyle {

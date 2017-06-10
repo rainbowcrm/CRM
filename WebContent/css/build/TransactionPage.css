@@ -301,7 +301,9 @@ input {
 
 span {
   color: #373a3c;
-  font-size: 12px; }
+  font-size: 13px;
+  min-width: 100px;
+  display: inline-block; }
 
 span.bigTitle {
   color: #f4f4f4;
@@ -347,14 +349,17 @@ th.uitabstyle {
 
 table, tr {
   width: 100%;
-  text-align: right; }
+  text-align: left; }
+
+th.listPageTitle {
+  text-align: left; }
 
 td.grid {
   border: 1px solid #cccccc; }
 
 table.grid {
   border-style: solid;
-  text-align: right;
+  text-align: left;
   border-collapse: collapse;
   position: relative; }
 
