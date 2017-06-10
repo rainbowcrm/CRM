@@ -74,7 +74,7 @@ export class AlertsHomePage {
 	         });
         }
         else if(this.model[data] && Object.keys(this.model[data]).length > 0){
-           var subFilters = this.getSubFilters(this.model[data]);
+           var subFilters = this.getSubFilters(data, this.model[data]);
            if(subFilters.length > 0)
              filters = filters.concat(subFilters);
         }
@@ -82,12 +82,12 @@ export class AlertsHomePage {
       return filters;
   }
 
-  getSubFilters(model):Array<any>{
+  getSubFilters(key,model):Array<any>{
      let filters = [];
      for(let data in model){
         if(model[data] && model[data].length > 0){
           filters.push({
-	      	  "field" :data ,
+	      	  "field" :key+"."+data ,
 	   	      "operator" :"EQUALS",
 	   	      "value":model[data]
 	         });
