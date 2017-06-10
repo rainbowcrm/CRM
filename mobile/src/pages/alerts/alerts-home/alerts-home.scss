@@ -1,0 +1,18 @@
+ps-alerts-home {
+  .button-container{
+    width: 100%;
+    text-align: center;
+  }
+  .label-ios,.label-md{
+    margin: 0px;
+  }
+  button.filter-buttons{
+    padding: 5px !important;  
+  }
+  button.filter-buttons[danger]{
+    background: color($colors, danger)
+  }
+  button.filter-buttons[favorite]{
+    background: color($colors, favorite)
+  }
+}

@@ -78,7 +78,9 @@ export class SalesLeadSearchResult {
       }
       this.request.hdnPage = ++this.pageNumber;
       this.request.pageID = "saleslead";
-      this.request.filter = this.filter;
+      if(this.filter){
+         this.request.filter = this.filter;
+      }
       let context = new ContextParameters();
       context.workableleads = "true";
       this.request.contextParameters = context;

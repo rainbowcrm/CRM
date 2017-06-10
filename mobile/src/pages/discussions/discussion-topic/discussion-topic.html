@@ -6,6 +6,12 @@
 <ion-header>
   <ion-navbar>
     <ion-title>{{topic.Title}}</ion-title>
+    <ion-buttons end>
+      <button *ngIf="user == topic.Owner.UserId"  ion-button outline icon-left (click)="closeTopic()">
+        <ion-icon name="close"></ion-icon>
+         Topic
+      </button>
+     </ion-buttons>
   </ion-navbar>
 
 </ion-header>

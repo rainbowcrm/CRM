@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, Content, ToastController } from 'ionic-angular';
-import { Topic, ReplyRequest, ReadRepliesRequest } from '../';
+import { NavController, NavParams, Content, ToastController, AlertController } from 'ionic-angular';
+import { Topic, ReplyRequest, ReadRepliesRequest, CloseTopicRequest } from '../';
 import { HTTPService } from '../../../providers/';
 
 /*
@@ -22,7 +22,8 @@ export class DiscussionTopicList {
  /* private response: ReloadTopicResponse;*/
 
   constructor(private http:HTTPService,
-              private navCtrl: NavController, private params: NavParams, private toastCtrl: ToastController) {
+              private navCtrl: NavController, private params: NavParams, 
+              private toastCtrl: ToastController, private alertCtrl: AlertController) {
         this.topic = this.params.get("topic");  
         this.user = this.params.get("user");   
   }
@@ -62,9 +63,9 @@ export class DiscussionTopicList {
     
   }
 
- showErrorToast():any{
+ showToast(msg: string):any{
      let toast = this.toastCtrl.create({
-      message: 'Failed to add your reply.',
+      message: msg,
       duration: 2000,
       position: 'top'
      });
@@ -93,7 +94,43 @@ export class DiscussionTopicList {
    }
 
    processReplyError(error){
-     this.showErrorToast();
+     this.showToast("Failed to add your reply.");
+   }
+
+   closeTopic(){
+     let alert = this.alertCtrl.create({
+       title: 'Close Topic',
+       message: 'Are you sure you want to close the topic?',
+       buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Confirm',
+          handler: data => {
+            this.closeTopicFromBackend();
+         }
+       }
+      ]
+     });
+     alert.present();
+   }
+
+   closeTopicFromBackend(){
+     let clRequest = new CloseTopicRequest();
+     clRequest.submitAction = "closeTopic";
+     clRequest.pageID = "topic";
+     clRequest.currentmode = "CREATE";
+     clRequest.dataObject = {
+       CurrentTopic:  this.topic.Id
+     }
+     this.http.processServerRequest("post",clRequest, true).subscribe(
+                     res => {this.navCtrl.popToRoot()},
+                     error => this.showToast("Failed to close the topic")); 
    }
 }
 

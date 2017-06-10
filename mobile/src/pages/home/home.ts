@@ -3,6 +3,7 @@ import { NavController, AlertController } from 'ionic-angular';
 import { CustomerHomePage } from '../customer-mgmt';
 import { ContactHomePage } from '../contact-mgmt';
 import { LoginPage } from '../login/login';
+import { AlertsHomePage } from '../alerts';
 import { ItemSearch } from '../items';
 import { PushService} from '../../plugins/';
 import { HTTPService} from '../../providers/';
@@ -27,7 +28,7 @@ import { Storage } from '@ionic/storage';
 export class HomePage {
   private rootTitle = "Menu";
   private isRoot;
-  private rootMenus = ["Item Search","Customer Management","Contacts", "Wishlist", "Sales Leads",
+  private rootMenus = ["Item Search","Customer Management","Contacts","Alerts", "Wishlist", "Sales Leads",
                        "Discussions"];
   private submenuList;
   private menuTitle = "Menu";
@@ -37,7 +38,8 @@ export class HomePage {
                     "Contacts":ContactHomePage,
                     "Wishlist": WishListPage,
                     "Sales Leads": SalesLeadSearch,
-                    "Discussions": DiscussionsList
+                    "Discussions": DiscussionsList,
+                    "Alerts": AlertsHomePage
                    };
   constructor(public navCtrl: NavController, private pushService: PushService
                 , private http: HTTPService, private storage: Storage,

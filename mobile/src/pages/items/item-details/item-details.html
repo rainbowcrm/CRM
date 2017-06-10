@@ -24,7 +24,7 @@
     <img-loader src="{{img}}" fallback="assets/img/no_image.png" useImg></img-loader>
   </ion-slide>
 </ion-slides>
-<div class="variants">
+<div class="variants" *ngIf="item.Inventory && item.Inventory.length>0">
     <ion-select #newSelect (change)="inventoryChanged(newSelect.value)">
       <ion-option *ngFor="let inventory of item.Inventory; let i=index;" [value]="i" [selected]="i == 0">{{inventory.Division.Name}}</ion-option>
     </ion-select>
@@ -36,11 +36,11 @@
     <div class="item-description" *ngIf="item.Color"><strong>Color:</strong>{{item.Color}}</div>
     <div class="item-description" *ngIf="item.Product.Name"><strong>Product:</strong>{{item.Product.Name}}</div>
     <div class="item-description" *ngIf="item.Description"><strong>Description:</strong>{{item.Description}}</div>
-    <div class="item-description" *ngIf="inventory.CurrentQty>0">
+    <div class="item-description" *ngIf="inventory && inventory.CurrentQty>0">
       <strong>Stock:</strong>
       <span class="good">{{inventory.CurrentQty}} Quantity</span>
     </div>
-    <div class="item-description" *ngIf="inventory.CurrentQty<=0">
+    <div class="item-description" *ngIf="inventory && inventory.CurrentQty<=0">
       <strong class="bad">Out of stock</strong>
     </div>
 </ion-card>

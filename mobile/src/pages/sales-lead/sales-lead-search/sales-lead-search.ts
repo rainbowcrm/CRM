@@ -52,15 +52,16 @@ export class SalesLeadSearch {
       this.request.pageID = "saleslead";
       this.request.filter = [];
       this.request.hdnPage = 0;
-      let filter = new SalesLeadSearchFilter();
-      filter.field = "status.description";
-      filter.operator = "EQUALS";
-      filter.value = this.searchString;
-      this.request.filter.push(filter);
+      if(this.searchString){
+          let filter = new SalesLeadSearchFilter();
+          filter.field = "status.description";
+          filter.operator = "EQUALS";
+          filter.value = this.searchString;
+          this.request.filter.push(filter);
+      }
       let context = new ContextParameters();
       context.workableleads = "true";
       this.request.contextParameters = context;
-
       this.http.processServerRequest("post",this.request, true).subscribe(
                      res => this.salesLeadSearchSuccess(res, this.request.filter.slice(0)),
                      error =>  this.salesLeadSearchError(error));  

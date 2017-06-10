@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { NavController, PopoverController, ToastController } from 'ionic-angular';
 import { Customer, CustomerHomePage } from '../customer-mgmt/';
-import { Inventory, ItemSearch } from '../items/';
+import { Inventory, ItemSearch, Item } from '../items/';
 import { HomePage } from '../home/home';
 import { SharedService, HTTPService } from '../../providers/';
 import { Storage } from '@ionic/storage';
@@ -43,7 +43,7 @@ export class WishListPage {
        this.storage.get('associateItem').then((val) => {
          this.associatedItem = val;
          if(val){
-            let popover = this.popoverCtrl.create(ReasonCodeItemPopOverPage, {item:val.Sku}, {cssClass:"wishlistReasonCode"});
+            let popover = this.popoverCtrl.create(ReasonCodeItemPopOverPage, {item:val.item.Item}, {cssClass:"wishlistReasonCode"});
              popover.present({});
              popover.onDidDismiss(this.dismissReasonCodePopover.bind(this))
          }
@@ -115,7 +115,7 @@ export class WishListPage {
      this.storage.set("wishlist",this.items);
   }
 
-  private createWishlistItem(reason: ReasonCodeItem, item: Inventory){
+  private createWishlistItem(reason: ReasonCodeItem, item: any){
     var wishlist = new WishlistLineItem();
     wishlist.LineNumber = this.items.length+1+"";
     wishlist.Comments = reason.comments;
@@ -125,7 +125,7 @@ export class WishListPage {
     wishlist.SalesLeadGenerated = "false";
     wishlist.Qty = reason.quantity;
     wishlist.Sku = new Sku();
-    wishlist.Sku.Name = item.Sku.Name;
+    wishlist.Sku.Name = item.item.Item.Name;
     this.items.push(wishlist);
     //save to DB
     this.storage.set("wishlist",this.items);

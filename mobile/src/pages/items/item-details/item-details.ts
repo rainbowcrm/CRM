@@ -25,7 +25,8 @@ export class ItemDetails {
   constructor(private params: NavParams, private storage: Storage, 
   private toastCtrl: ToastController, private navCtrl: NavController) {
     this.item = this.params.get('item');
-    this.inventory = this.item.Inventory[0];
+    if(this.item.Inventory)
+      this.inventory = this.item.Inventory[0];
     this.isAssociateItems = this.params.get('isAssociateItems');
     this.processImageUrl();
   }
@@ -33,7 +34,11 @@ export class ItemDetails {
   addToCart(){
       this.storage.get('associateItem').then((val) => {
         this.storage.remove('associateItem');
-        this.storage.set("associateItem",this.inventory);
+        let selectedInventory={
+          item: this.item,
+          inventory: this.inventory
+        }
+        this.storage.set("associateItem",selectedInventory);
         this.navCtrl.popToRoot();
       })
   }

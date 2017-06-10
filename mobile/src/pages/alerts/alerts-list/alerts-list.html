@@ -1,0 +1,50 @@
+<!--
+  Generated template for the Contact List page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>Alert List</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="onSort()">
+        <ion-icon name="shuffle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+ <ion-card *ngFor="let alert of alerts">
+
+  <ion-item>
+    <h2>{{alert.Type.Description}}</h2>
+  </ion-item>
+
+
+  <ion-card-content>
+    <div *ngIf="alert.Status.Description"><strong>Status:</strong>{{alert.Status.Description}}</div>
+    <div *ngIf="alert.Owner.UserId"><strong>Owner:</strong>{{alert.Owner.UserId}}</div>
+    <div *ngIf="alert.RaisedBy"><strong>Raised By:</strong>{{alert.RaisedBy}}</div>
+  </ion-card-content>
+
+  <ion-row>
+    <ion-col (click)="viewDetails(alert.Url)">
+      <button ion-button icon-left clear small>
+        <div>View</div>
+      </button>
+    </ion-col>
+    <ion-col *ngIf="alert.Status.Code == 'ALTOPN'">
+      <button ion-button icon-left clear small>
+        <div>Acknowledge</div>
+      </button>
+    </ion-col>
+  </ion-row>
+ </ion-card>
+ <ion-infinite-scroll (ionInfinite)="doSearchMoreAlerts($event)" *ngIf="fetchedResults < numberOfResults" >
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+ </ion-infinite-scroll> 
+</ion-content>

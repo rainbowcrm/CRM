@@ -81,6 +81,10 @@ export class ReadRepliesRequest extends BaseSearchRequest{
   submitAction: String;
 }
 
+export class CloseTopicRequest extends BaseSearchRequest{
+  submitAction: String;
+}
+
 export class CreateDiscussionRequest extends BaseSearchRequest{
   submitAction: string;
   dataObject: NewDiscussion;
