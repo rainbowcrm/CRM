@@ -1,9 +1,11 @@
 package com.rainbow.crm.common.ajaxservices;
 
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.rainbow.crm.common.CommonUtil;
@@ -21,6 +23,7 @@ public class FilterAjaxService implements IAjaxLookupService{
 	@Override
 	public String lookupValues(Map<String, String> searchFields,IRadsContext ctx) {
 		JSONObject json = new JSONObject();
+		JSONArray array = new JSONArray();
 		CRMFilter filter =null ;
 		try { 
 		String filterId=searchFields.get("filterId");
@@ -31,14 +34,17 @@ public class FilterAjaxService implements IAjaxLookupService{
 		} else if (!Utils.isNullString(filterName) &&  !Utils.isNullString(page)) {
 			filter =(CRMFilter) CRMFilterDAO.INSTANCE.findByKey(ctx.getUser(), page, filterName);
 		}
+		AtomicInteger index = new AtomicInteger(0);
 		if (filter != null ) {
-			json.put("FilterName", filter.getName());
+
 			for (CRMFilterDetails det : filter.getDetails()) {
-				json.put(det.getField(), det.getValue());
+				JSONObject filtJSON = new JSONObject();
+				filtJSON.put("field", det.getField());
+				filtJSON.put("value", det.getValue());
+				array.put(index.getAndIncrement(),filtJSON);
 			}
 		}
-		
-		
+		json.put("filter", array);
 		}catch(Exception ex) {
 			Logwriter.INSTANCE.error(ex);
 		}

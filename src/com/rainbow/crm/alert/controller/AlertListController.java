@@ -93,12 +93,16 @@ public class AlertListController extends CRMListController{
 						whereCondition.append( " and  "  + Utils.initlower(node.getField())  +  getOperator(node) + "'" +  node.getValue() + "'");
 				}
 			}
-		}else {
+		}
 			CRMContext ctx = (CRMContext)getContext();
 			int division = (ctx.getLoggedInUser().getDivision()!= null)?ctx.getLoggedInUser().getDivision().getId():-1;
-			whereCondition.append( " where  status='" + CRMConstants.ALERT_STATUS.OPEN + "' and  (owner is null or owner ='" + getContext().getUser() + "') and "+
+			StringBuffer mandateCondition =  new StringBuffer(" (owner is null or owner ='" + getContext().getUser() + "') and "+
 		   " ( division is null or division.id = "+ division +") ");
-		}
+			if (whereCondition.toString().trim().equals("") )
+				whereCondition.append( " where status='" + CRMConstants.ALERT_STATUS.OPEN + "' and  " +  mandateCondition) ;
+			else
+				whereCondition.append( " and  " +  mandateCondition) ;
+		
 		return whereCondition.toString();
 	}
 	
