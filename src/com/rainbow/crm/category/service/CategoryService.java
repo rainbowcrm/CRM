@@ -30,9 +30,11 @@ public class CategoryService extends AbstractService implements ICategoryService
 	}
 		
 	@Override
-	public long getTotalRecordCount(CRMContext context) {
-		return getDAO().getTotalRecordCount("Category",context);
+	protected String getTableName() {
+		return "Category";
 	}
+	
+	
 
 	@Override
 	public Object getById(Object PK) {

@@ -26,9 +26,11 @@ import com.techtrade.rads.framework.ui.components.SortCriteria;
 public class AddressService extends AbstractService implements IAddressService{
 
 	@Override
-	public long getTotalRecordCount(CRMContext context) {
-		return getDAO().getTotalRecordCount("Address",context);
+	protected String getTableName() {
+		return "Address";
 	}
+	
+	
 
 	@Override
 	public Object getById(Object PK) {

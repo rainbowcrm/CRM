@@ -8,6 +8,7 @@ import java.util.List;
 
 
 
+
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.AbstractService;
 import com.rainbow.crm.common.CRMConstants;
@@ -30,11 +31,11 @@ import com.techtrade.rads.framework.utils.Utils;
 
 public class SalespitchService extends AbstractService implements ISalespitchService{
 
+	
 	@Override
-	public long getTotalRecordCount(CRMContext context) {
-		return getDAO().getTotalRecordCount("Salespitch",context);
+	protected String getTableName() {
+		return "Salespitch";
 	}
-
 	@Override
 	public Object getById(Object PK) {
 		return getDAO().getById(PK);

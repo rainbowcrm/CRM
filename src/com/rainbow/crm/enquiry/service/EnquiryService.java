@@ -8,6 +8,7 @@ import java.util.List;
 
 
 
+
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.AbstractService;
 import com.rainbow.crm.common.CRMConstants;
@@ -30,10 +31,12 @@ import com.techtrade.rads.framework.utils.Utils;
 
 public class EnquiryService extends AbstractService implements IEnquiryService{
 
+	
 	@Override
-	public long getTotalRecordCount(CRMContext context) {
-		return getDAO().getTotalRecordCount("Enquiry",context);
+	protected String getTableName() {
+		return "Enquiry";
 	}
+	
 
 	@Override
 	public Object getById(Object PK) {

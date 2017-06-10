@@ -412,7 +412,10 @@ th.uitabstyle {
 
 table, tr {
   width: 100%;
-  text-align: right; }
+  text-align: left; }
+
+th.listPageTitle {
+  text-align: left; }
 
 .button {
   border: none;

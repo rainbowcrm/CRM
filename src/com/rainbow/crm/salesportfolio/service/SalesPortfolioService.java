@@ -79,11 +79,13 @@ public class SalesPortfolioService extends AbstractService implements
 	public List<SalesPortfolio> getPortfoliosforExpiry(Date date) {
 		return ((SalesPortfolioDAO) getDAO()).getPortfoliosforExpiry(date);
 	}
-
+	
 	@Override
-	public long getTotalRecordCount(CRMContext context) {
-		return getDAO().getTotalRecordCount("SalesPortfolio", context);
+	protected String getTableName() {
+		return "SalesPortfolio";
 	}
+
+	
 
 	@Override
 	public Object getById(Object PK) {

@@ -62,7 +62,7 @@
   </Colstyle> 
  </ListSection>
  </CoreSection>  
- <Section Id ="summary" showinTable = "true"  style= "summaryStyle" >
+ <Section Id ="summary" showinTable = "true"  style= "summaryStyle"  tabStyle ="summaryStyle">
  <noRows>1</noRows>
  <noCols>1</noCols> 
  </Section>

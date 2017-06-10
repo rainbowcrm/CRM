@@ -18,6 +18,7 @@ import java.util.List;
 
 
 
+
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.AbstractService;
 import com.rainbow.crm.common.CRMAppConfig;
@@ -51,9 +52,11 @@ import com.techtrade.rads.framework.utils.Utils;
 public class DocumentService extends AbstractService implements IDocumentService{
 
 	@Override
-	public long getTotalRecordCount(CRMContext context) {
-		return getDAO().getTotalRecordCount("Document",context);
+	protected String getTableName() {
+		return "Document";
 	}
+	
+	
 
 	@Override
 	public Object getById(Object PK) {

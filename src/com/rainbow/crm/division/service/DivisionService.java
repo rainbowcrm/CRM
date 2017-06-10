@@ -33,11 +33,13 @@ public class DivisionService extends AbstractService implements IDivisionService
 	protected ORMDAO getDAO() {
 		return  DivisionDAO.INSTANCE;
 	}
-
+	
 	@Override
-	public long getTotalRecordCount(CRMContext context) {
-		return getDAO().getTotalRecordCount("Division",context);
+	protected String getTableName() {
+		return "Division";
 	}
+
+	
 
 	@Override
 	public Object getById(Object PK) {

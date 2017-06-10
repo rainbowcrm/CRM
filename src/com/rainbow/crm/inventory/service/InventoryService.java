@@ -33,9 +33,11 @@ public class InventoryService extends AbstractService implements  IInventoryServ
 	}
 		
 	@Override
-	public long getTotalRecordCount(CRMContext context) {
-		return getDAO().getTotalRecordCount("Inventory",context);
+	protected String getTableName() {
+		return "Inventory";
 	}
+	
+	
 
 	@Override
 	public Object getById(Object PK) {

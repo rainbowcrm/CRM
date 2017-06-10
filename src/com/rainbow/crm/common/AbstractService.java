@@ -19,8 +19,23 @@ import com.techtrade.rads.framework.utils.Utils;
 @Transactional(rollbackFor = Exception.class)
 public abstract class AbstractService implements IBusinessService{
 	
+	protected abstract String getTableName() ;
 	
-	
+	@Override
+	public long getTotalRecordCount(CRMContext context, String whereCondition) {
+		StringBuffer additionalCondition = new StringBuffer();
+		 boolean allowAllDiv = CommonUtil.allowAllDivisionAccess(context);
+		 Metadata metadata = CommonUtil.getMetaDataforClass(getTableName());
+		 if (Utils.isNullString(whereCondition) ){
+			 additionalCondition = additionalCondition.append(" where company.id = " +  context.getLoggedinCompany()) ;
+		 }else { 
+			 additionalCondition = additionalCondition.append(whereCondition +  " and company.id= " +  context.getLoggedinCompany()) ;
+		 }
+		 if (!allowAllDiv && metadata != null && metadata.isDivisionSpecific()) {
+			 additionalCondition = additionalCondition.append(" and division.id = "  +  context.getLoggedInUser().getDivision().getId());
+		 }
+		return getDAO().getTotalRecordCount(getTableName(),context,additionalCondition.toString());
+	}
 	
 	@Override
 	public CRMModelObject getByBusinessKey(CRMModelObject object, CRMContext context) {

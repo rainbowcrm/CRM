@@ -20,6 +20,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 
 
+
 import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
@@ -37,6 +38,7 @@ import javax.mail.internet.MimeMessage;
 
 
 
+
 import org.apache.commons.io.IOUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
@@ -45,6 +47,7 @@ import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 
 
 
@@ -108,11 +111,13 @@ import com.techtrade.rads.framework.utils.Utils;
 
 @Transactional
 public class DistributionOrderService extends AbstractionTransactionService implements IDistributionOrderService{
-
+	
 	@Override
-	public long getTotalRecordCount(CRMContext context) {
-		return getDAO().getTotalRecordCount("DistributionOrder",context);
+	protected String getTableName() {
+		return "DistributionOrder";
 	}
+
+	
 
 	@Override
 	public Object getById(Object PK) {

@@ -74,7 +74,7 @@ max-height: 60%;
     font-size:18px;
   }
   th{
-    text-align: right;
+    text-align: left;
   }
 }
 
@@ -108,6 +108,14 @@ span.errorStyle {
 
 table, tr {
 width : 100%;
+text-align: left;
+}
+
+table.summaryStyle {
+text-align: right;
+}
+
+tr.summaryStyle {
 text-align: right;
 }
 

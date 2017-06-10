@@ -30,9 +30,11 @@ public class BrandService extends AbstractService implements IBrandService{
 	}
 		
 	@Override
-	public long getTotalRecordCount(CRMContext context) {
-		return getDAO().getTotalRecordCount("Brand",context);
+	protected String getTableName() {
+		return "Brand";
 	}
+	
+	
 
 	@Override
 	public Object getById(Object PK) {

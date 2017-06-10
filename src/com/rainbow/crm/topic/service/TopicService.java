@@ -90,10 +90,12 @@ public class TopicService extends AbstractService implements
 	}
 
 
+	
 	@Override
-	public long getTotalRecordCount(CRMContext context) {
-		return getDAO().getTotalRecordCount("Topic", context);
+	protected String getTableName() {
+		return "Topic";
 	}
+	
 
 	@Override
 	public Object getById(Object PK) {

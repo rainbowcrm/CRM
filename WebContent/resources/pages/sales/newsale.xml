@@ -74,8 +74,8 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 	</Element>
 	
 	<Element label = ""  type = "UILabel" Id = "lblFree4"  style="bigTitle" value ="" />
-	<Element label = ""  type = "UILabel" Id = "lblCustTitle"   value ="Customer" />
-	<Element label = "Phone"  type = "UIText" Id = "txtPhone"   showInPrevCol ="true"  property ="Customer.Phone" />
+	<!-- <Element label = ""  type = "UILabel" Id = "lblCustTitle"   value ="" />  --> 
+	<Element label = "Customer_Phone"  type = "UIText" Id = "txtPhone"     property ="Customer.Phone" />
 	<Element label = "Email"  type = "UIText" Id = "txtEmail"   property ="Customer.Email" />
 	 <Element label = "Name"  type = "UILookupText"  Id = "txtCustomerName"  isMandatory="true" property ="Customer.FullName" showLookupAsDialog="true" dialogId="dlgComp"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >

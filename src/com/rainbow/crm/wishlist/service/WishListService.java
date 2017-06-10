@@ -54,9 +54,11 @@ import com.techtrade.rads.framework.utils.Utils;
 public class WishListService extends AbstractionTransactionService implements IWishListService{
 
 	@Override
-	public long getTotalRecordCount(CRMContext context) {
-		return getDAO().getTotalRecordCount("WishList",context);
+	protected String getTableName() {
+		return "WishList";
 	}
+	
+	
 
 	@Override
 	public Object getById(Object PK) {

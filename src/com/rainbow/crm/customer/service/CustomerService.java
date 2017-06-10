@@ -30,10 +30,13 @@ import com.techtrade.rads.framework.utils.Utils;
 
 public class CustomerService extends AbstractService implements ICustomerService{
 
+	
 	@Override
-	public long getTotalRecordCount(CRMContext context) {
-		return getDAO().getTotalRecordCount("Customer",context);
+	protected String getTableName() {
+		return "Customer";
 	}
+	
+	
 
 	@Override
 	public Object getById(Object PK) {

@@ -82,10 +82,13 @@ input {
 	font-size: 12px;
 }
 
-span {
-	color: $span-default;
-	font-size: 12px;
-}
+span{
+     color: $span-default;
+    font-size: 13px;
+    min-width: 100px;
+    display: inline-block;
+   }
+   
 span.bigTitle {
 	color: $light;
 	font-size: 18px;
@@ -135,7 +138,11 @@ th.uitabstyle{
 }
 table, tr {
 width : 100%;
-text-align: right;
+text-align: left;
+}
+
+th.listPageTitle{
+text-align: left;
 }
 
 td.grid {
@@ -145,7 +152,7 @@ border: 1px solid #cccccc;
 
 table.grid {
 	border-style: solid;
-	text-align: right;
+	text-align: left;
 	border-collapse: collapse;
 	position:relative;	
 }

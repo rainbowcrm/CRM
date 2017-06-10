@@ -48,10 +48,12 @@ import com.techtrade.rads.framework.utils.Utils;
 @Transactional
 public class SalesPeriodService extends AbstractionTransactionService implements ISalesPeriodService{
 
+	
 	@Override
-	public long getTotalRecordCount(CRMContext context) {
-		return getDAO().getTotalRecordCount("SalesPeriod",context);
+	protected String getTableName() {
+		return "SalesPeriod";
 	}
+	
 
 	@Override
 	public Object getById(Object PK) {

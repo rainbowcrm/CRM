@@ -21,10 +21,11 @@ import com.techtrade.rads.framework.ui.components.SortCriteria;
 public class ItemService extends AbstractService implements IItemService{
 
 	@Override
-	public long getTotalRecordCount(CRMContext context) {
-		return getDAO().getTotalRecordCount("Item",context);
+	protected String getTableName() {
+		return "Item";
 	}
-
+	
+	
 	@Override
 	public Object getById(Object PK) {
 		return getDAO().getById(PK);
