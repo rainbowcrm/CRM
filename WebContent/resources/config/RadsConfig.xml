@@ -227,9 +227,13 @@
 <Element caption = "Last"  type = "UIButton" Id = "btnLast"    style="button" fixedAction ="FixedAction.NAV_LASTPAGE"/>
  </Panel>
  <Panel key = "topBar"   showInDiv = "false">
-  <Element label="" type= "UILabel" generatedValue="Controller.getCompanyName" style="topBar"></Element>
-  <Element label="" type= "UILabel" style="menu"></Element>
-  <Element label="" type= "UIHyperLink" text ="Logout"  link="rdscontroller?page=login&amp;submitAction=logout"></Element>
+  <Element type = "UITable" rows = "1" cols = "3">
+  <Element type = "UITableRow">
+  <Element type = "UITableCol" width ="25%"> <Element label="" type= "UILabel"   style="menu"/> </Element>
+  <Element type = "UITableCol" width ="50%" align ="center"><Element label="" type= "UILabel"  width ="33%" generatedValue="Controller.getCompanyName" style="topBar"/></Element>
+  <Element type = "UITableCol" width ="25%" align="right"> <Element label="" type= "UIHyperLink" text ="Logout"   width ="33%" link="rdscontroller?page=login&amp;submitAction=logout"/> </Element>
+  </Element>
+  </Element>
  </Panel>
  <Panel key = "menuPanel"   showInDiv = "false">
  <Element label = "" type = "UIMenu" Id = "menu00" style="menustyleParent" title="Setup" groupId= "menuGRP01"  >

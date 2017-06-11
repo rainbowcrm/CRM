@@ -3,6 +3,7 @@ package com.rainbow.crm.sales.model;
 import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
 import com.rainbow.crm.abstratcs.model.CRMItemLine;
 import com.rainbow.crm.item.model.Sku;
+import com.rainbow.crm.promotion.model.Promotion;
 import com.rainbow.crm.user.model.User;
 import com.techtrade.rads.framework.annotations.RadsPropertySet;
 
@@ -27,6 +28,12 @@ public class SalesLine extends CRMItemLine {
 	Double returnPrice;
 	Integer originalQty;
 	Double originalPrice;
+	
+	Promotion promotion;
+	boolean isMasterLine;
+	boolean isChildLine;
+	int masterlineId;
+	
 
 	public SalesLine() {
 	}
@@ -99,6 +106,40 @@ public class SalesLine extends CRMItemLine {
 
 	public double getTaxAmount() {
 		return taxAmount;
+	}
+	
+	
+
+	public Promotion getPromotion() {
+		return promotion;
+	}
+
+	public void setPromotion(Promotion promotion) {
+		this.promotion = promotion;
+	}
+
+	public boolean isMasterLine() {
+		return isMasterLine;
+	}
+
+	public void setMasterLine(boolean isMasterLine) {
+		this.isMasterLine = isMasterLine;
+	}
+
+	public boolean isChildLine() {
+		return isChildLine;
+	}
+
+	public void setChildLine(boolean isChildLine) {
+		this.isChildLine = isChildLine;
+	}
+
+	public int getMasterlineId() {
+		return masterlineId;
+	}
+
+	public void setMasterlineId(int masterlineId) {
+		this.masterlineId = masterlineId;
 	}
 
 	public void setTaxAmount(double taxAmount) {

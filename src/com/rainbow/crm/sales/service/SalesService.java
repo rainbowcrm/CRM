@@ -3,11 +3,16 @@ package com.rainbow.crm.sales.service;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+
+
+
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.velocity.Template;
@@ -15,6 +20,10 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+
+
+
 
 import com.rainbow.crm.abstratcs.model.CRMItemLine;
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
@@ -51,6 +60,9 @@ import com.rainbow.crm.item.service.ISkuService;
 import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.product.model.Product;
 import com.rainbow.crm.product.validator.ProductValidator;
+import com.rainbow.crm.promotion.model.Promotion;
+import com.rainbow.crm.promotion.model.PromotionLine;
+import com.rainbow.crm.promotion.service.IPromotionService;
 import com.rainbow.crm.sales.dao.SalesDAO;
 import com.rainbow.crm.sales.model.Sales;
 import com.rainbow.crm.sales.model.SalesLine;
@@ -156,6 +168,39 @@ public class SalesService extends AbstractionTransactionService implements ISale
 	}
 
 	
+
+	private void populatePromotion(Sales sales)
+	{
+		IPromotionService promotionService = (IPromotionService) SpringObjectFactory.INSTANCE.getInstance("IPromotionService");
+		Map<PromotionLine,Integer> unusedPromotions =  new HashMap<PromotionLine,Integer> ();
+		Map<PromotionLine,Integer> unconsumedPromotions =  new HashMap<PromotionLine,Integer> ();
+		for (SalesLine salesLine : sales.getSalesLines() ) {
+			 PromotionLine promotionLine   =  promotionService.getPromotionforSKU(salesLine.getSku(),sales.getSalesDate());
+			 if (promotionLine  != null) {
+				 
+				 continue ;
+			 }
+			 Promotion promotion = promotionService.getAllItemPromotion(sales.getSalesDate(), sales.getDivision());
+			 if (promotion  != null) {
+				 
+				 continue ;
+			 }
+			 
+			 PromotionLine promotedLine   =  promotionService.isPromotedSku(salesLine.getSku(),sales.getSalesDate());
+			 if (promotedLine  != null) {
+				 if (unconsumedPromotions.containsKey(promotedLine)) {
+					 int qty = unconsumedPromotions.get(promotedLine);
+					 qty += salesLine.getQty();
+					 unconsumedPromotions.put(promotedLine, qty);
+				 }else {
+					 unconsumedPromotions.put(promotedLine, salesLine.getQty());
+				 }
+				 continue ;
+			 }
+			
+		}
+		
+	}
 	
 	@Override
 	public List<RadsError> adaptfromUI(CRMContext context, ModelObject object) {

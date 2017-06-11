@@ -23,6 +23,7 @@ import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
 import com.rainbow.crm.hibernate.ORMDAO;
+import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.saleslead.model.SalesLead;
 import com.rainbow.crm.saleslead.model.SalesLeadLine;
 import com.rainbow.crm.saleslead.service.ISalesLeadService;
@@ -61,8 +62,31 @@ public class PromotionService extends AbstractService implements
 		return category;
 	}
 
+
 	
 	
+	
+	@Override
+	public PromotionLine getPromotionforSKU(Sku sku, Date date) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Promotion getAllItemPromotion(Date date, Division division) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public PromotionLine isPromotedSku(Sku sku, Date date) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
 			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
