@@ -38,5 +38,17 @@
      	 <key column="SALES_PERIOD_ID"></key>
       <one-to-many class="com.rainbow.crm.salesperiod.model.SalesPeriodTerritory"/>
       </set>
+      <set   name="salesPeriodBrands" cascade="all" inverse="true" lazy="false"  order-by="lineNumber" >
+     	 <key column="SALES_PERIOD_ID"></key>
+      <one-to-many class="com.rainbow.crm.salesperiod.model.SalesPeriodBrand"/>
+      </set>
+       <set   name="salesPeriodCategories" cascade="all" inverse="true" lazy="false"  order-by="lineNumber" >
+     	 <key column="SALES_PERIOD_ID"></key>
+      <one-to-many class="com.rainbow.crm.salesperiod.model.SalesPeriodCategory"/>
+      </set>
+      <set   name="salesPeriodProducts" cascade="all" inverse="true" lazy="false"  order-by="lineNumber" >
+     	 <key column="SALES_PERIOD_ID"></key>
+      <one-to-many class="com.rainbow.crm.salesperiod.model.SalesPeriodProduct"/>
+      </set>
  </class>
 </hibernate-mapping>

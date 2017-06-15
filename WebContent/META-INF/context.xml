@@ -6,7 +6,7 @@
       type="javax.sql.DataSource"
       driverClassName="com.mysql.jdbc.Driver"
       url="jdbc:mysql://localhost:3306/CRMSAAS"
-      username="crmadmin"
+      username="root"
       password="dbadmin888"
       maxActive="20"
       maxIdle="30"

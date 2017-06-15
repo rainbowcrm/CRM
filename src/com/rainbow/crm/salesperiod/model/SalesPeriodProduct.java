@@ -2,6 +2,7 @@ package com.rainbow.crm.salesperiod.model;
 
 import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
 import com.rainbow.crm.product.model.Product;
+import com.techtrade.rads.framework.annotations.RadsPropertySet;
 
 public class SalesPeriodProduct extends CRMBusinessModelObject {
 
@@ -64,10 +65,12 @@ public class SalesPeriodProduct extends CRMBusinessModelObject {
 		this.voided = voided;
 	}
 
+	@RadsPropertySet(excludeFromJSON=true,excludeFromMap=true,excludeFromXML=true)
 	public SalesPeriod getSalesPeriodDoc() {
 		return salesPeriodDoc;
 	}
 
+	@RadsPropertySet(excludeFromJSON=true,excludeFromMap=true,excludeFromXML=true)
 	public void setSalesPeriodDoc(SalesPeriod salesPeriodDoc) {
 		this.salesPeriodDoc = salesPeriodDoc;
 	}

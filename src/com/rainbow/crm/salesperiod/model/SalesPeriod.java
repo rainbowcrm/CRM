@@ -28,6 +28,59 @@ public class SalesPeriod extends CRMBusinessModelObject{
 	Set<SalesPeriodLine> salesPeriodLines;
 	Set<SalesPeriodAssociate> salesPeriodAssociates ;
 	Set<SalesPeriodTerritory> salesPeriodTerritories ;
+
+	Set<SalesPeriodBrand> salesPeriodBrands;
+	Set<SalesPeriodCategory> salesPeriodCategories;
+	Set<SalesPeriodProduct> salesPeriodProducts;
+	
+	
+	
+	
+	public Set<SalesPeriodBrand> getSalesPeriodBrands() {
+		return salesPeriodBrands;
+	}
+	public void setSalesPeriodBrands(Set<SalesPeriodBrand> salesPeriodBrands) {
+		this.salesPeriodBrands = salesPeriodBrands;
+	}
+	
+	
+	public void addSalePeriodCategory(SalesPeriodCategory salesPeriodCategory)
+	{
+		if (salesPeriodCategories == null )
+			salesPeriodCategories = new LinkedHashSet <SalesPeriodCategory> ();
+		this.salesPeriodCategories.add(salesPeriodCategory);
+		
+	}
+	
+	public void addSalePeriodBrand(SalesPeriodBrand salesPeriodBrand)
+	{
+		if (salesPeriodBrands == null )
+			salesPeriodBrands = new LinkedHashSet <SalesPeriodBrand> ();
+		this.salesPeriodBrands.add(salesPeriodBrand);
+		
+	}
+	
+	public void addSalePeriodProduct(SalesPeriodProduct salesPeriodProduct)
+	{
+		if (salesPeriodProducts == null )
+			salesPeriodProducts = new LinkedHashSet <SalesPeriodProduct> ();
+		this.salesPeriodProducts.add(salesPeriodProduct);
+		
+	}
+	
+	public Set<SalesPeriodCategory> getSalesPeriodCategories() {
+		return salesPeriodCategories;
+	}
+	public void setSalesPeriodCategories(
+			Set<SalesPeriodCategory> salesPeriodCategories) {
+		this.salesPeriodCategories = salesPeriodCategories;
+	}
+	public Set<SalesPeriodProduct> getSalesPeriodProducts() {
+		return salesPeriodProducts;
+	}
+	public void setSalesPeriodProducts(Set<SalesPeriodProduct> salesPeriodProducts) {
+		this.salesPeriodProducts = salesPeriodProducts;
+	}
 	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
 	public Division getDivision() {
 		return division;
