@@ -32,7 +32,7 @@ public class SalesLine extends CRMItemLine {
 	Promotion promotion;
 	boolean isMasterLine;
 	boolean isChildLine;
-	int masterlineId;
+	Integer masterlineId;
 	
 
 	public SalesLine() {
@@ -118,27 +118,27 @@ public class SalesLine extends CRMItemLine {
 		this.promotion = promotion;
 	}
 
-	public boolean isMasterLine() {
+	public boolean getIsMasterLine() {
 		return isMasterLine;
 	}
 
-	public void setMasterLine(boolean isMasterLine) {
+	public void setIsMasterLine(boolean isMasterLine) {
 		this.isMasterLine = isMasterLine;
 	}
 
-	public boolean isChildLine() {
+	public boolean getIsChildLine() {
 		return isChildLine;
 	}
 
-	public void setChildLine(boolean isChildLine) {
+	public void setIsChildLine(boolean isChildLine) {
 		this.isChildLine = isChildLine;
 	}
 
-	public int getMasterlineId() {
+	public Integer getMasterlineId() {
 		return masterlineId;
 	}
 
-	public void setMasterlineId(int masterlineId) {
+	public void setMasterlineId(Integer masterlineId) {
 		this.masterlineId = masterlineId;
 	}
 

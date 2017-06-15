@@ -169,38 +169,7 @@ public class SalesService extends AbstractionTransactionService implements ISale
 
 	
 
-	private void populatePromotion(Sales sales)
-	{
-		IPromotionService promotionService = (IPromotionService) SpringObjectFactory.INSTANCE.getInstance("IPromotionService");
-		Map<PromotionLine,Integer> unusedPromotions =  new HashMap<PromotionLine,Integer> ();
-		Map<PromotionLine,Integer> unconsumedPromotions =  new HashMap<PromotionLine,Integer> ();
-		for (SalesLine salesLine : sales.getSalesLines() ) {
-			 PromotionLine promotionLine   =  promotionService.getPromotionforSKU(salesLine.getSku(),sales.getSalesDate());
-			 if (promotionLine  != null) {
-				 
-				 continue ;
-			 }
-			 Promotion promotion = promotionService.getAllItemPromotion(sales.getSalesDate(), sales.getDivision());
-			 if (promotion  != null) {
-				 
-				 continue ;
-			 }
-			 
-			 PromotionLine promotedLine   =  promotionService.isPromotedSku(salesLine.getSku(),sales.getSalesDate());
-			 if (promotedLine  != null) {
-				 if (unconsumedPromotions.containsKey(promotedLine)) {
-					 int qty = unconsumedPromotions.get(promotedLine);
-					 qty += salesLine.getQty();
-					 unconsumedPromotions.put(promotedLine, qty);
-				 }else {
-					 unconsumedPromotions.put(promotedLine, salesLine.getQty());
-				 }
-				 continue ;
-			 }
-			
-		}
-		
-	}
+	
 	
 	@Override
 	public List<RadsError> adaptfromUI(CRMContext context, ModelObject object) {

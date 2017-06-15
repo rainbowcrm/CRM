@@ -1,8 +1,10 @@
 package com.rainbow.crm.promotion.service;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
+import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.promotion.model.Promotion;
 import com.rainbow.crm.promotion.model.PromotionLine;
@@ -19,12 +21,16 @@ public class PromotionEngine {
 	public void populatePromotion(Sales sales)
 	{
 		IPromotionService promotionService = (IPromotionService) SpringObjectFactory.INSTANCE.getInstance("IPromotionService");
-		
-		
 		for (SalesLine salesLine : sales.getSalesLines() ) {
 			 PromotionLine promotionLine   =  promotionService.getPromotionforSKU(salesLine.getSku(),sales.getSalesDate());
 			 if (promotionLine  != null) {
-				 
+				 if (unusedPromotions.containsKey(promotionLine)) {
+					 int qty = unusedPromotions.get(promotionLine);
+					 qty += salesLine.getQty();
+					 unusedPromotions.put(promotionLine, qty);
+				 }else {
+					 unusedPromotions.put(promotionLine, salesLine.getQty());
+				 }
 				 continue ;
 			 }
 			 Promotion promotion = promotionService.getAllItemPromotion(sales.getSalesDate(), sales.getDivision());
@@ -44,8 +50,31 @@ public class PromotionEngine {
 				 }
 				 continue ;
 			 }
+		}
+		
+		Iterator it = unusedPromotions.keySet().iterator();
+		
+		while( it.hasNext()) {
+			PromotionLine promotedLine = (PromotionLine)it.next() ;
+			if(promotedLine.getPromotion().getPromoType().equals(CRMConstants.PROMOTYPE.BUNDLING))
+			{
+				
+			}
+			if(promotedLine.getPromotion().getPromoType().equals(CRMConstants.PROMOTYPE.CROSSSELL))
+			{
+				
+			}
+			if(promotedLine.getPromotion().getPromoType().equals(CRMConstants.PROMOTYPE.UPSELLING))
+			{
+				
+			}
+			
 			
 		}
 		
+		
 	}
+	
+	
+	
 }
