@@ -336,6 +336,9 @@
 <Lookup type ="product" lookupservice="com.rainbow.crm.lookups.LookupProducts" 
  lookuppage= "lookup">
 </Lookup>
+<Lookup type ="category" lookupservice="com.rainbow.crm.lookups.LookupCategories" 
+ lookuppage= "lookup">
+</Lookup>
 <Lookup type ="vendor" lookupservice="com.rainbow.crm.lookups.LookupVendors" 
  lookuppage= "lookup">
 </Lookup>
