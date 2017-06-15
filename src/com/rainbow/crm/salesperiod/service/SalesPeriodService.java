@@ -8,6 +8,10 @@ import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
+import com.rainbow.crm.brand.model.Brand;
+import com.rainbow.crm.brand.service.IBrandService;
+import com.rainbow.crm.category.model.Category;
+import com.rainbow.crm.category.service.ICategoryService;
 import com.rainbow.crm.common.AbstractService;
 import com.rainbow.crm.common.AbstractionTransactionService;
 import com.rainbow.crm.common.CRMContext;
@@ -27,10 +31,15 @@ import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.item.service.IItemService;
 import com.rainbow.crm.item.service.ISkuService;
+import com.rainbow.crm.product.model.Product;
+import com.rainbow.crm.product.service.IProductService;
 import com.rainbow.crm.salesperiod.dao.SalesPeriodDAO;
 import com.rainbow.crm.salesperiod.model.SalesPeriod;
 import com.rainbow.crm.salesperiod.model.SalesPeriodAssociate;
+import com.rainbow.crm.salesperiod.model.SalesPeriodBrand;
+import com.rainbow.crm.salesperiod.model.SalesPeriodCategory;
 import com.rainbow.crm.salesperiod.model.SalesPeriodLine;
+import com.rainbow.crm.salesperiod.model.SalesPeriodProduct;
 import com.rainbow.crm.salesperiod.model.SalesPeriodTerritory;
 import com.rainbow.crm.salesperiod.validator.SalesPeriodErrorCodes;
 import com.rainbow.crm.salesperiod.validator.SalesPeriodValidator;
@@ -169,13 +178,61 @@ public class SalesPeriodService extends AbstractionTransactionService implements
 				}
 			}
 		}
+		
+		if(!Utils.isNullSet(object.getSalesPeriodCategories())){
+			int lineNo=1;
+			for (SalesPeriodCategory line: object.getSalesPeriodCategories()) {
+				line.setCompany(company);
+				line.setPeriod(object.getPeriod());
+				line.setLineNumber(lineNo ++);
+				if(line.getCategory() == null ) {
+					ans.add(CRMValidator.getErrorforCode(context.getLocale(), SalesPeriodErrorCodes.FIELD_NOT_VALID , externalize.externalize(context, "Category")));
+				}else {
+					ICategoryService clientService = (ICategoryService)SpringObjectFactory.INSTANCE.getInstance("ICategoryService");
+					Category client  = (Category)clientService.getByName(context.getLoggedinCompany(), line.getCategory().getName());
+					line.setCategory(client);
+				}
+			}
+		}
+		
+		if(!Utils.isNullSet(object.getSalesPeriodBrands())){
+			int lineNo=1;
+			for (SalesPeriodBrand line: object.getSalesPeriodBrands()) {
+				line.setCompany(company);
+				line.setPeriod(object.getPeriod());
+				line.setLineNumber(lineNo ++);
+				if(line.getBrand() == null ) {
+					ans.add(CRMValidator.getErrorforCode(context.getLocale(), SalesPeriodErrorCodes.FIELD_NOT_VALID , externalize.externalize(context, "Brand")));
+				}else {
+					IBrandService clientService = (IBrandService)SpringObjectFactory.INSTANCE.getInstance("IBrandService");
+					Brand client  = (Brand)clientService.getByName(context.getLoggedinCompany(), line.getBrand().getName());
+					line.setBrand(client);
+				}
+			}
+		}
+		
+		if(!Utils.isNullSet(object.getSalesPeriodProducts())){
+			int lineNo=1;
+			for (SalesPeriodProduct line: object.getSalesPeriodProducts()) {
+				line.setCompany(company);
+				line.setPeriod(object.getPeriod());
+				line.setLineNumber(lineNo ++);
+				if(line.getProduct() == null ) {
+					ans.add(CRMValidator.getErrorforCode(context.getLocale(), SalesPeriodErrorCodes.FIELD_NOT_VALID , externalize.externalize(context, "Product")));
+				}else {
+					IProductService clientService = (IProductService)SpringObjectFactory.INSTANCE.getInstance("IProductService");
+					Product client  = (Product)clientService.getByName(context.getLoggedinCompany(), line.getProduct().getName());
+					line.setProduct(client);
+				}
+			}
+		}
+		
 		return ans;
 	}
 
 	@Override
 	public TransactionResult create(CRMModelObject object, CRMContext context) {
 		SalesPeriod salesPeriod = (SalesPeriod)object ;
-		if (!Utils.isNullSet(salesPeriod.getSalesPeriodLines())) {
 			int pk = GeneralSQLs.getNextPKValue("SalesPeriods") ;
 			salesPeriod.setId(pk);
 			for (SalesPeriodLine  line : salesPeriod.getSalesPeriodLines()) {
@@ -193,7 +250,21 @@ public class SalesPeriodService extends AbstractionTransactionService implements
 				line.setId(linePK);
 				line.setSalesPeriodDoc(salesPeriod);
 			}
-		}
+			for (SalesPeriodBrand  line : salesPeriod.getSalesPeriodBrands()) {
+				int linePK = GeneralSQLs.getNextPKValue( "SALESPERIOD_BRANDS") ;
+				line.setId(linePK);
+				line.setSalesPeriodDoc(salesPeriod);
+			}
+			for (SalesPeriodCategory  line : salesPeriod.getSalesPeriodCategories()) {
+				int linePK = GeneralSQLs.getNextPKValue( "SALESPERIOD_CATEGORIES") ;
+				line.setId(linePK);
+				line.setSalesPeriodDoc(salesPeriod);
+			}
+			for (SalesPeriodProduct  line : salesPeriod.getSalesPeriodProducts()) {
+				int linePK = GeneralSQLs.getNextPKValue( "SALESPERIOD_PRODUCTS") ;
+				line.setId(linePK);
+				line.setSalesPeriodDoc(salesPeriod);
+			}
 		TransactionResult result= super.create(object, context);
 		return result; 
 	}
@@ -280,6 +351,91 @@ public class SalesPeriodService extends AbstractionTransactionService implements
 				}
 			}
 		}
+		
+		if (!Utils.isNullSet(salesPeriod.getSalesPeriodCategories())) {
+			int  ct = 0;
+			Iterator it = null;
+			if (!Utils.isNullSet(oldObject.getSalesPeriodCategories()))
+					it = oldObject.getSalesPeriodCategories().iterator() ;
+			for (SalesPeriodCategory  line : salesPeriod.getSalesPeriodCategories()) {
+				SalesPeriodCategory oldLine = null ;
+				if ( it != null && it.hasNext()) {
+					oldLine= (SalesPeriodCategory) it.next() ;
+				}
+				line.setSalesPeriodDoc(salesPeriod);
+				if (oldLine != null) {
+					line.setId(oldLine.getId());
+					line.setObjectVersion(oldLine.getObjectVersion());
+				}else {
+					int linePK = GeneralSQLs.getNextPKValue( "SALESPERIOD_CATEGORIES") ;
+					line.setId(linePK);
+				}
+			}
+			if (it != null ) {
+				while (it.hasNext()) {
+					SalesPeriodCategory oldLine= (SalesPeriodCategory) it.next() ;
+					oldLine.setVoided(true);
+					salesPeriod.addSalePeriodCategory(oldLine);
+				}
+			}
+		}
+		
+		if (!Utils.isNullSet(salesPeriod.getSalesPeriodBrands())) {
+			int  ct = 0;
+			Iterator it = null;
+			if (!Utils.isNullSet(oldObject.getSalesPeriodBrands()))
+					it = oldObject.getSalesPeriodBrands().iterator() ;
+			for (SalesPeriodBrand  line : salesPeriod.getSalesPeriodBrands()) {
+				SalesPeriodBrand oldLine = null ;
+				if ( it != null && it.hasNext()) {
+					oldLine= (SalesPeriodBrand) it.next() ;
+				}
+				line.setSalesPeriodDoc(salesPeriod);
+				if (oldLine != null) {
+					line.setId(oldLine.getId());
+					line.setObjectVersion(oldLine.getObjectVersion());
+				}else {
+					int linePK = GeneralSQLs.getNextPKValue( "SALESPERIOD_BRANDS") ;
+					line.setId(linePK);
+				}
+			}
+			if (it != null ) {
+				while (it.hasNext()) {
+					SalesPeriodBrand oldLine= (SalesPeriodBrand) it.next() ;
+					oldLine.setVoided(true);
+					salesPeriod.addSalePeriodBrand(oldLine);
+				}
+			}
+		}
+		
+		if (!Utils.isNullSet(salesPeriod.getSalesPeriodProducts())) {
+			int  ct = 0;
+			Iterator it = null;
+			if (!Utils.isNullSet(oldObject.getSalesPeriodProducts()))
+					it = oldObject.getSalesPeriodBrands().iterator() ;
+			for (SalesPeriodProduct  line : salesPeriod.getSalesPeriodProducts()) {
+				SalesPeriodProduct oldLine = null ;
+				if ( it != null && it.hasNext()) {
+					oldLine= (SalesPeriodProduct) it.next() ;
+				}
+				line.setSalesPeriodDoc(salesPeriod);
+				if (oldLine != null) {
+					line.setId(oldLine.getId());
+					line.setObjectVersion(oldLine.getObjectVersion());
+				}else {
+					int linePK = GeneralSQLs.getNextPKValue( "SALESPERIOD_PRODUCTS") ;
+					line.setId(linePK);
+				}
+			}
+			if (it != null ) {
+				while (it.hasNext()) {
+					SalesPeriodProduct oldLine= (SalesPeriodProduct) it.next() ;
+					oldLine.setVoided(true);
+					salesPeriod.addSalePeriodProduct(oldLine);
+				}
+			}
+		}
+		
 		return super.update(object, context);
 	}
 

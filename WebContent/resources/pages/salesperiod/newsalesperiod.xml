@@ -170,10 +170,10 @@ Controller = "com.rainbow.crm.salesperiod.controller.SalesPeriodController">
 <Element type ="UITableCol" width = "5%"> </Element>
 </Element>  
  </Element>
-<Element type = "UITableRow"  dataType = "com.rainbow.crm.salesperiod.model.SalesPeriodBrand" rendered = "!Object.getVoided">
+<Element type = "UITableRow"  dataType = "com.rainbow.crm.salesperiod.model.SalesPeriodBrand" rendered = "!Object.isVoided">
 
 <Element type ="UITableCol" width = "25%">
-<Element label = ""  type = "UILookupText"  Id = "txtBrandName"  size  = "35" property ="Brand.Id" showLookupAsDialog="true" dialogId="dlgBrandIt"
+<Element label = ""  type = "UILookupText"  Id = "txtBrandName"  size  = "35" property ="Brand.Name" showLookupAsDialog="true" dialogId="dlgBrandIt"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>brand</lookupType>
 	 <height>300</height>
@@ -209,10 +209,10 @@ Controller = "com.rainbow.crm.salesperiod.controller.SalesPeriodController">
 <Element type ="UITableCol" width = "5%"> </Element>
 </Element>  
  </Element>
-<Element type = "UITableRow"  dataType = "com.rainbow.crm.salesperiod.model.SalesPeriodCategory" rendered = "!Object.getVoided">
+<Element type = "UITableRow"  dataType = "com.rainbow.crm.salesperiod.model.SalesPeriodCategory" rendered = "!Object.isVoided">
 
 <Element type ="UITableCol" width = "25%">
-<Element label = ""  type = "UILookupText"  Id = "txtCategoryName"  size  = "35" property ="Category.Id" showLookupAsDialog="true" dialogId="dlgCategIt"
+<Element label = ""  type = "UILookupText"  Id = "txtCategoryName"  size  = "35" property ="Category.Name" showLookupAsDialog="true" dialogId="dlgCategIt"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>category</lookupType>
 	 <height>300</height>
@@ -246,10 +246,10 @@ Controller = "com.rainbow.crm.salesperiod.controller.SalesPeriodController">
 <Element type ="UITableCol" width = "5%"> </Element>
 </Element>  
  </Element>
-<Element type = "UITableRow"  dataType = "com.rainbow.crm.salesperiod.model.SalesPeriodProduct" rendered = "!Object.getVoided">
+<Element type = "UITableRow"  dataType = "com.rainbow.crm.salesperiod.model.SalesPeriodProduct" rendered = "!Object.isVoided">
 
 <Element type ="UITableCol" width = "25%">
-<Element label = ""  type = "UILookupText"  Id = "txtProdName"  size  = "35" property ="Product.Id" showLookupAsDialog="true" dialogId="dlgProdIt"
+<Element label = ""  type = "UILookupText"  Id = "txtProdName"  size  = "35" property ="Product.Name" showLookupAsDialog="true" dialogId="dlgProdIt"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>product</lookupType>
 	 <height>300</height>
