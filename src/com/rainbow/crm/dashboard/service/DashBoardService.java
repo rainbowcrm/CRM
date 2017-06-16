@@ -224,6 +224,26 @@ public class DashBoardService  implements IDashBoardService{
 	}
 
 	
+	@Override
+	public PieChartData getBrandwiseSales(User manager, Date date,
+			CRMContext context) {
+		PieChartData pieChartData  = new PieChartData();
+		SalesPeriod currentPeriod = getActiveSalesPeriodforManager(manager,date,context);
+		if(currentPeriod == null) return null;
+		Map <String , Double > results = DashBoardSQLs.getBrandWiseSale(currentPeriod.getDivision().getId(),  new java.sql.Date( currentPeriod.getFromDate().getTime()),
+				new java.sql.Date( currentPeriod.getToDate().getTime())) ;
+		AtomicInteger index = new AtomicInteger(0);
+		results.forEach(  (item, qty) -> {  
+			PieSliceData pieSliceData  = new PieSliceData();
+			pieSliceData.setVolume(qty);
+			pieSliceData.setText(item);
+			pieSliceData.setColor(CommonUtil.getGraphColors()[index.getAndIncrement()]);
+			pieChartData.addPieSlice(pieSliceData);
+		} );
+		pieChartData.setFooterNote("Sale by Brand");
+		pieChartData.setTitle("Sale by Brand");
+		return pieChartData;
+	}
 	
 	@Override
 	public PieChartData getCategorywiseSales(User manager, Date date,

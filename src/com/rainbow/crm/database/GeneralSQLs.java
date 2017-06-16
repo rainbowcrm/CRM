@@ -336,6 +336,87 @@ public class GeneralSQLs {
 		return 0;
 		
    }
+
+   public static int getCategorySoldQty(int categoryId, Date fromDate , Date toDate , int divisionId) {
+	   Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet rs  = null ;
+		Map<String,String> ans = new HashMap<String,String>();
+		try {
+			connection  = ConnectionCreater.getConnection() ;
+			String sql = "Select sum(sllines.LINE_TOTAL) from SALES sales,SALES_LINES sllines,SKUS skus,items,products  where sales.id = sllines.sales_id and sales.division_id = ?  " +
+			" and skus.item_id = items.id and items.product_id = products.id and sllines.sku_id = skus.id and sales.SALES_DATE >= ? and sales.SALES_DATE<= ?  and products.category_id = ?  " ;
+			statement = connection.prepareStatement(sql);
+			statement.setInt(1, divisionId);
+			statement.setTimestamp(2, new java.sql.Timestamp(fromDate.getTime()));
+			statement.setTimestamp(3, new java.sql.Timestamp(toDate.getTime()));
+			statement.setInt(4, categoryId);
+			rs = statement.executeQuery() ;
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
+		}catch(SQLException ex) {
+			Logwriter.INSTANCE.error(ex);
+		}finally {
+			ConnectionCreater.close(connection, statement, rs);	
+		}
+		return 0;
+		
+   }
+   
+   public static int getProductSoldQty(int productId, Date fromDate , Date toDate , int divisionId) {
+	   Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet rs  = null ;
+		Map<String,String> ans = new HashMap<String,String>();
+		try {
+			connection  = ConnectionCreater.getConnection() ;
+			String sql = "Select sum(sllines.LINE_TOTAL) from SALES sales,SALES_LINES sllines,SKUS skus,items  where sales.id = sllines.sales_id and sales.division_id = ?  " +
+			" and skus.item_id = items.id and sllines.sku_id = skus.id and sales.SALES_DATE >= ? and sales.SALES_DATE<= ?  and items.product_id = ?  " ;
+			statement = connection.prepareStatement(sql);
+			statement.setInt(1, divisionId);
+			statement.setTimestamp(2, new java.sql.Timestamp(fromDate.getTime()));
+			statement.setTimestamp(3, new java.sql.Timestamp(toDate.getTime()));
+			statement.setInt(4, productId);
+			rs = statement.executeQuery() ;
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
+		}catch(SQLException ex) {
+			Logwriter.INSTANCE.error(ex);
+		}finally {
+			ConnectionCreater.close(connection, statement, rs);	
+		}
+		return 0;
+		
+   }
+   
+   public static int getBrandSoldQty(int brandId, Date fromDate , Date toDate , int divisionId) {
+	   Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet rs  = null ;
+		Map<String,String> ans = new HashMap<String,String>();
+		try {
+			connection  = ConnectionCreater.getConnection() ;
+			String sql = "Select sum(sllines.LINE_TOTAL) from SALES sales,SALES_LINES sllines,SKUS skus,items  where sales.id = sllines.sales_id and sales.division_id = ?  " +
+			" and skus.item_id = items.id and sllines.sku_id = skus.id and sales.SALES_DATE >= ? and sales.SALES_DATE<= ?  and items.brand_id = ?  " ;
+			statement = connection.prepareStatement(sql);
+			statement.setInt(1, divisionId);
+			statement.setTimestamp(2, new java.sql.Timestamp(fromDate.getTime()));
+			statement.setTimestamp(3, new java.sql.Timestamp(toDate.getTime()));
+			statement.setInt(4, brandId);
+			rs = statement.executeQuery() ;
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
+		}catch(SQLException ex) {
+			Logwriter.INSTANCE.error(ex);
+		}finally {
+			ConnectionCreater.close(connection, statement, rs);	
+		}
+		return 0;
+		
+   }   
    
    public static int getTerritorySoldQty(int territoryId, Date fromDate , Date toDate , int divisionId) {
 	   Connection connection = null;

@@ -381,6 +381,29 @@ public class SalesService extends AbstractionTransactionService implements ISale
 		return GeneralSQLs.getTerritorySoldQty(territory, from, to, division.getId());
 	}
 
+	
+	
+	@Override
+	public int getBrandSaleQuantity(int brandId, Date from, Date to,
+			Division division) {
+		// TODO Auto-generated method stub
+		return GeneralSQLs.getBrandSoldQty(brandId, from, to, division.getId());
+	}
+
+	@Override
+	public int getProductSaleQuantity(int productId, Date from, Date to,
+			Division division) {
+		// TODO Auto-generated method stub
+		return GeneralSQLs.getProductSoldQty(productId, from, to, division.getId());
+	}
+
+	@Override
+	public int getCategorySaleQuantity(int categoryId, Date from, Date to,
+			Division division) {
+		// TODO Auto-generated method stub
+		return GeneralSQLs.getCategorySoldQty(categoryId, from, to, division.getId());
+	}
+
 	@Override
 	public String generateInvoice(Sales sales,CRMContext context) {
 		Externalize externalize = new Externalize();

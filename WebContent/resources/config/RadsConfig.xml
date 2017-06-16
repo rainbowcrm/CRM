@@ -231,7 +231,7 @@
   <Element type = "UITableRow">
   <Element type = "UITableCol" width ="25%"> <Element label="" type= "UILabel"   style="menu"/> </Element>
   <Element type = "UITableCol" width ="50%" align ="center"><Element label="" type= "UILabel"  width ="33%" generatedValue="Controller.getCompanyName" style="topBar"/></Element>
-  <Element type = "UITableCol" width ="25%" align="right"> <Element label="" type= "UIHyperLink" text ="Logout"   width ="33%" link="rdscontroller?page=login&amp;submitAction=logout"/> </Element>
+  <Element type = "UITableCol" width ="25%" align="right"> <Element label="" type= "UIButton" caption ="Logout"   width ="33%" onClickJS="logout();"/> </Element>
   </Element>
   </Element>
  </Panel>

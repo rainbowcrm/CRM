@@ -71,6 +71,9 @@ public class SalesDashBoardController extends CRMGeneralController{
 			} else if("CATEGORY".equals(type)) {
 				PieChartData pieChartData  = service.getCategorywiseSales(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext());
 				dashBoard.setDivManagerSaleProductsSplits(pieChartData);
+			}else if("BRAND".equals(type)) {
+				PieChartData pieChartData  = service.getBrandwiseSales(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext());
+				dashBoard.setDivManagerSaleProductsSplits(pieChartData);
 			}
 		}
 		

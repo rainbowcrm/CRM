@@ -23,6 +23,8 @@ public interface IDashBoardService {
 	
 	public PieChartData getCategorywiseSales(User manager,Date date, CRMContext context  );
 	
+	public PieChartData getBrandwiseSales(User manager,Date date, CRMContext context  );
+	
 	public PieChartData getAssociateSplits(User manager,Date date, CRMContext context  );
 	
 	public PieChartData getTerritorySplits(User manager,Date date, CRMContext context  );

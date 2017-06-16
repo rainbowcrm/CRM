@@ -31,6 +31,12 @@ public interface ISalesService extends ITransactionService{
 	
 	public int getTerritorySaleQuantity(int territory, Date from, Date to,Division division ) ;
 	
+	public int getBrandSaleQuantity(int brandId, Date from, Date to,Division division ) ;
+	
+	public int getProductSaleQuantity(int productId, Date from, Date to,Division division ) ;
+	
+	public int getCategorySaleQuantity(int categoryId, Date from, Date to,Division division ) ;
+	
 	public Sales getByBillNumberforReturn(Division division , String billNumber) ;
 
 }

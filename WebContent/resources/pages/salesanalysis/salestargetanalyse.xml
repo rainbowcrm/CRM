@@ -24,6 +24,9 @@ Controller = "com.rainbow.crm.salesperiod.controller.SalesPeriodAnalyzerControll
 	  <option key ="IT"> Item </option>
 	  <option key ="US"> User </option>
 	  <option key ="TR"> Territory </option>
+	  <option key ="BR"> Brand </option>
+	  <option key ="CTG"> Category </option>
+	  <option key ="PRD"> Product </option>
 	  </options>
 	</Element>
 	</Element>

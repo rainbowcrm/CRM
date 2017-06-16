@@ -21,7 +21,10 @@ import com.rainbow.crm.sales.service.ISalesService;
 import com.rainbow.crm.salesperiod.model.SalesPeriod;
 import com.rainbow.crm.salesperiod.model.SalesPeriodAnalyzer;
 import com.rainbow.crm.salesperiod.model.SalesPeriodAssociate;
+import com.rainbow.crm.salesperiod.model.SalesPeriodBrand;
+import com.rainbow.crm.salesperiod.model.SalesPeriodCategory;
 import com.rainbow.crm.salesperiod.model.SalesPeriodLine;
+import com.rainbow.crm.salesperiod.model.SalesPeriodProduct;
 import com.rainbow.crm.salesperiod.model.SalesPeriodTerritory;
 import com.rainbow.crm.salesperiod.service.ISalesPeriodService;
 import com.techtrade.rads.framework.context.IRadsContext;
@@ -153,6 +156,120 @@ public class SalesPeriodAnalyzerController  extends CRMGeneralController{
 					//actualSales.setText(periodLine.getTerritory().getTerritory());
 					int soldQty = salesService.getTerritorySaleQuantity(
 							periodLine.getTerritory().getId(), salesPeriod.getFromDate(),
+							salesPeriod.getToDate(), salesPeriod.getDivision());
+					actualSales.setValue(soldQty);
+					if (soldQty > maxY) {
+						maxY = soldQty;
+					}
+					actualSales.setColor("red");
+					actualSales.setLegend("Actual");
+					divis.addBarData(actualSales);
+
+					barChartData.addDivision(divis);
+				}
+				BarChartData.Range range = barChartData.new Range();
+				range.setyMax(maxY);
+				range.setyMin(0);
+				barChartData.setRange(range);
+				analyzer.setSalesData(barChartData);
+			}else  if ("BR".equalsIgnoreCase(analyzer.getBasedOn())) {
+				Set<SalesPeriodBrand> brands = salesPeriod.getSalesPeriodBrands();
+				barChartData.setSubTitle("Brand Wise");
+				int minY = 0, maxY = 0;
+				for (SalesPeriodBrand periodLine : brands) {
+					BarData barData = new BarData();
+					barData.setText(periodLine.getBrand().getName());
+					if (periodLine.getLineTotal() > maxY) {
+						maxY = (int)periodLine.getLineTotal();
+					}
+					barData.setValue(periodLine.getLineTotal());
+					barData.setColor("green");
+					barData.setTextColor("blue");
+					barData.setLegend("Target");
+					BarChartData.Division divis = barChartData.new Division();
+					divis.addBarData(barData);
+					divis.setDivisionTitle(periodLine.getBrand().getName());
+
+					BarData actualSales = new BarData();
+					//actualSales.setText(periodLine.getTerritory().getTerritory());
+					int soldQty = salesService.getBrandSaleQuantity(
+							periodLine.getBrand().getId(), salesPeriod.getFromDate(),
+							salesPeriod.getToDate(), salesPeriod.getDivision());
+					actualSales.setValue(soldQty);
+					if (soldQty > maxY) {
+						maxY = soldQty;
+					}
+					actualSales.setColor("red");
+					actualSales.setLegend("Actual");
+					divis.addBarData(actualSales);
+
+					barChartData.addDivision(divis);
+				}
+				BarChartData.Range range = barChartData.new Range();
+				range.setyMax(maxY);
+				range.setyMin(0);
+				barChartData.setRange(range);
+				analyzer.setSalesData(barChartData);
+			}else  if ("CTG".equalsIgnoreCase(analyzer.getBasedOn())) {
+				Set<SalesPeriodCategory> categories = salesPeriod.getSalesPeriodCategories();
+				barChartData.setSubTitle("Category Wise");
+				int minY = 0, maxY = 0;
+				for (SalesPeriodCategory periodLine : categories) {
+					BarData barData = new BarData();
+					barData.setText(periodLine.getCategory().getName());
+					if (periodLine.getLineTotal() > maxY) {
+						maxY = (int)periodLine.getLineTotal();
+					}
+					barData.setValue(periodLine.getLineTotal());
+					barData.setColor("green");
+					barData.setTextColor("blue");
+					barData.setLegend("Target");
+					BarChartData.Division divis = barChartData.new Division();
+					divis.addBarData(barData);
+					divis.setDivisionTitle(periodLine.getCategory().getName());
+
+					BarData actualSales = new BarData();
+					//actualSales.setText(periodLine.getTerritory().getTerritory());
+					int soldQty = salesService.getCategorySaleQuantity(
+							periodLine.getCategory().getId(), salesPeriod.getFromDate(),
+							salesPeriod.getToDate(), salesPeriod.getDivision());
+					actualSales.setValue(soldQty);
+					if (soldQty > maxY) {
+						maxY = soldQty;
+					}
+					actualSales.setColor("red");
+					actualSales.setLegend("Actual");
+					divis.addBarData(actualSales);
+
+					barChartData.addDivision(divis);
+				}
+				BarChartData.Range range = barChartData.new Range();
+				range.setyMax(maxY);
+				range.setyMin(0);
+				barChartData.setRange(range);
+				analyzer.setSalesData(barChartData);
+			}else  if ("PRD".equalsIgnoreCase(analyzer.getBasedOn())) {
+				Set<SalesPeriodProduct> products = salesPeriod.getSalesPeriodProducts();
+				barChartData.setSubTitle("Product Wise");
+				int minY = 0, maxY = 0;
+				for (SalesPeriodProduct periodLine : products) {
+					BarData barData = new BarData();
+					barData.setText(periodLine.getProduct().getName());
+					if (periodLine.getLineTotal() > maxY) {
+						maxY = (int)periodLine.getLineTotal();
+					}
+					barData.setValue(periodLine.getLineTotal());
+					barData.setColor("green");
+					barData.setTextColor("blue");
+					barData.setLegend("Target");
+					BarChartData.Division divis = barChartData.new Division();
+					divis.addBarData(barData);
+					divis.setDivisionTitle(periodLine.getProduct().getName());
+
+					BarData actualSales = new BarData();
+					//actualSales.setText(periodLine.getTerritory().getTerritory());
+					int soldQty = salesService.getProductSaleQuantity(
+							periodLine.getProduct().getId(), salesPeriod.getFromDate(),
 							salesPeriod.getToDate(), salesPeriod.getDivision());
 					actualSales.setValue(soldQty);
 					if (soldQty > maxY) {
