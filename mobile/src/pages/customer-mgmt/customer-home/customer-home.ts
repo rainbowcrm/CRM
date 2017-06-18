@@ -4,7 +4,7 @@ import { NavController, ToastController, NavParams } from 'ionic-angular';
 import { Customer, CustomerSearchRequest, CustomerSearchResponse } from '../';
 import { HomePage } from '../../home/home';
 import { CustomerAddPage, CustomerListPage} from '../'
-import { HTTPService } from '../../../providers/';
+import { HTTPService, FilterProvider } from '../../../providers/';
 
 /*
   Generated class for the CustomerHome page.
@@ -24,8 +24,9 @@ export class CustomerHomePage {
   private errorMessage:string;
   private isAssociateCustomer: Boolean;
   constructor(public navCtrl: NavController,private http:HTTPService,  private toastCtrl: ToastController
-             ,private params: NavParams) {
-       this.isAssociateCustomer = this.params.get('isAssociateCustomer');     
+             ,private params: NavParams, private filter: FilterProvider) {
+       this.isAssociateCustomer = this.params.get('isAssociateCustomer'); 
+       this.filter.getAllFiltersForPage("com.rainbow.crm.customer.controller.CustomerListController");    
   }
 
   ionViewDidLoad() {
