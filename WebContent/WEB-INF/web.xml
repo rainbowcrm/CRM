@@ -91,7 +91,12 @@ id="WebApp_ID" version="3.0">
      
   <error-page>
     <!-- Uncaught exception -->
-    <error-code>500</error-code>
-    <location>/rdscontroller?page=login</location>
+    <error-code>401</error-code>
+    <location>/rdscontroller?currentpage=login</location>
 </error-page>   
+<error-page>
+    <!-- Uncaught exception -->
+    <error-code>500</error-code>
+    <location>/rdscontroller?currentpage=alerts</location>
+</error-page> 
 </web-app>

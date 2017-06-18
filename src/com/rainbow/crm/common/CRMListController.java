@@ -153,7 +153,7 @@ public abstract class CRMListController  extends ListController{
 	
 	@Override
 	public IRadsContext generateContext(HttpServletRequest request,HttpServletResponse response) {
-		return CommonUtil.generateContext(request.getSession().getId());
+		return CommonUtil.generateContext(request);
 	}
 	
 	
