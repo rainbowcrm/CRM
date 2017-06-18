@@ -11,7 +11,7 @@ Controller = "com.rainbow.crm.dashboard.controller.SalesDashBoardController">
 <Element type = "UIBarChart" Id = "brChrt2"  dataProvider = "divManagersalesTargetData"  useGoogleGraph="true">
 	  <xStart>0</xStart>
 	  <yStart>20</yStart>
-	  <rangeHeight>270</rangeHeight>
+	  <rangeHeight>300</rangeHeight>
 	  <rangeWidth>400</rangeWidth>
 	  <marginWidth>30</marginWidth>
 	  <barWidth>30</barWidth>

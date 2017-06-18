@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Page id = "salesdashboardsaleshistory" showinFrame ="true"  title ="Sales Dashboard| Rainbow CRM" Object = "com.rainbow.crm.dashboard.model.SalesDashbBard" 
+<Page id = "divsaleshistorypage" showinFrame ="true"  title ="Sales Dashboard| Rainbow CRM" Object = "com.rainbow.crm.dashboard.model.SalesDashbBard" 
 Controller = "com.rainbow.crm.dashboard.controller.SalesDashBoardController">
 <Template type= "General"  name = "GraphTemplate"></Template>
 
 <Elements>
 <UIForm Id ="cust" method = "POST" enctype="multipart/form-data" >
 <Section type= "fullSection">
-<Element type = "UIHidden" Id = "hdngraphId"  property = "graphId"  constantValue="saleshistory"/>
-<Element type = "UILineChart" Id = "line3"  dataProvider = "salesHistory" useGoogleGraph="true"  >
+<Element type = "UIHidden" Id = "hdngraphId"  property = "graphId"  constantValue="divsaleshistory"/>
+<Element type = "UILineChart" Id = "line3"  dataProvider = "divSalesHistory" useGoogleGraph="true"  >
 	  <xStart>0</xStart>
 	  <yStart>0</yStart>
 	  <canvasHeight>300</canvasHeight>

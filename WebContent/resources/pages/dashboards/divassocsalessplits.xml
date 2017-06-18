@@ -19,6 +19,10 @@ Controller = "com.rainbow.crm.dashboard.controller.SalesDashBoardController">
 	  <options> 
 	  <option key ="ASSOCIATE"> Associate</option>
 	  <option key ="TERRITORY"> Territory</option>
+	  <option key ="PRODUCT"> Product</option>
+	  <option key ="ITEM"> Item</option>
+	  <option key ="CATEGORY"> Category</option>
+	  <option key ="BRAND"> Brand</option>
 	  </options>
 	</Element>
 	

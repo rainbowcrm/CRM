@@ -67,6 +67,8 @@
 </Page>
 <Page id = "divtargetanalysis" definition ="/resources/pages/dashboards/divtargetanalysis.xml" modelclass = "com.rainbow.crm.dashboard.model.SalesDashBoard" >
 </Page>
+<Page id = "divsalehistory" definition ="/resources/pages/dashboards/divsaleshistory.xml" modelclass = "com.rainbow.crm.dashboard.model.SalesDashBoard" >
+</Page>
 <Page id = "divsalesleadsplits" definition ="/resources/pages/dashboards/divsalesleadsplits.xml" modelclass = "com.rainbow.crm.dashboard.model.SalesDashBoard" >
 </Page>
 <Page id = "salesdashboardsaleshistory" definition ="/resources/pages/dashboards/salesdashboardsaleshistory.xml" modelclass = "com.rainbow.crm.dashboard.model.SalesDashBoard" >

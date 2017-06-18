@@ -34,10 +34,12 @@ Controller = "com.rainbow.crm.dashboard.controller.SalesDashBoardController">
 	  <marginWidth>30</marginWidth>
 	  <barWidth>30</barWidth>
 	  <noYAxisDivisions>6</noYAxisDivisions>
-	</Element>  -->
+	</Element> 
  	<Element type = "UIIFrame" src ="./rdscontroller?page=divproductsalesplits&amp;graphId=divprodsalessplits"  style="graphWindow">
-	</Element>
+	</Element> -->
 	
+	<Element type = "UIIFrame" src ="./rdscontroller?page=divsalesleadsplits&amp;graphId=divmgrsalesleadsplits"  style = "graphWindow">
+	</Element>
 </Element>	
  	
 
@@ -71,8 +73,10 @@ Controller = "com.rainbow.crm.dashboard.controller.SalesDashBoardController">
 	  <radius>50</radius>
 	  <rangeHeight>300</rangeHeight>
 	  <rangeWidth>500</rangeWidth>
- 	</Element>  -->  
+ 	</Element>   
  	<Element type = "UIIFrame" src ="./rdscontroller?page=divsalesleadsplits&amp;graphId=divmgrsalesleadsplits"  style = "graphWindow">
+	</Element>  -->
+	<Element type = "UIIFrame" src ="./rdscontroller?page=divsalehistory&amp;graphId=divsaleshistory"  style = "graphWindow">
 	</Element>
 </Element>
 

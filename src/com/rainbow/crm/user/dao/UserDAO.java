@@ -61,7 +61,7 @@ public class UserDAO extends SpringHibernateDAO {
 	public List<User> getAllUsersByDivision(int  division,boolean includeDeleted) {
 		User user = null;
 		Session session = openSession(false);
-		Query query = session.createQuery(" from User where division = :division and deleted in (false,:deleted)    " ) ;
+		Query query = session.createQuery(" from User where division.id = :division and deleted in (false,:deleted)    " ) ;
 		query.setParameter("division", division);
 		query.setParameter("deleted", includeDeleted);
 		List lst = query.list();

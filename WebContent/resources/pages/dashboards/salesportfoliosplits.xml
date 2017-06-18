@@ -11,7 +11,7 @@ Controller = "com.rainbow.crm.dashboard.controller.SalesDashBoardController">
 	  <centerX>150</centerX>
 	  <centerY>150</centerY>
 	  <radius>50</radius>
-	  <rangeHeight>270</rangeHeight>
+	  <rangeHeight>300</rangeHeight>
 	  <rangeWidth>500</rangeWidth>
  	</Element>  
 </Section>
