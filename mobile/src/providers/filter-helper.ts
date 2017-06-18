@@ -3,6 +3,7 @@ import { Storage } from '@ionic/storage';
 import { HTTPService, BaseSearchRequest } from './';
 import { Subject }    from 'rxjs/Subject';
 import { Observable }    from 'rxjs/Observable';
+import { ToastController} from 'ionic-angular';
 import 'rxjs/add/observable/throw';
 /*
   Generated class for the Loader provider.
@@ -14,10 +15,12 @@ import 'rxjs/add/observable/throw';
 export class FilterProvider {
   private filtersForPage= new Subject<any>();
   private filtersDetails= new Subject<any>();
+  private filtersSave= new Subject<any>();
   filtersForPage$ = this.filtersForPage.asObservable();
   filtersDetails$ = this.filtersDetails.asObservable();
+  filtersSave$ = this.filtersSave.asObservable();
 
-  constructor(private http: HTTPService) { }
+  constructor(private http: HTTPService, private toastCtrl: ToastController) { }
   getAllFiltersForPage(page: string){
       let request = new BaseSearchRequest();
       var query = ["page="+page,"ajxService=allFilters"];
@@ -27,4 +30,34 @@ export class FilterProvider {
                       },
                      error =>  {});
   }
+  saveFilter(page: string, data: any, pageId: string){
+    let request = new BaseSearchRequest();
+    request.fixedAction = "FixedAction.ACTION_FILTERSAVE";
+    request.hdnPage = 0;
+    request.pageID = pageId;
+    request.currentmode = "READ";
+    request.filter = data;
+    this.http.processServerRequest("post",request, true).subscribe(
+                     res => this.filterSaveSuccess(res),
+                     error =>  this.filterSaveError(error)); 
+  }
+
+  filterSaveSuccess(response):void{
+    this.showToast("Filter saved");
+  }
+ 
+
+  filterSaveError(error){
+    this.showToast("Error saving filter, Kindly try again later");
+  }
+
+  showToast(msg: string):any{
+     let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 2000,
+      position: 'top'
+     });
+    toast.present();
+  }
 }
+
