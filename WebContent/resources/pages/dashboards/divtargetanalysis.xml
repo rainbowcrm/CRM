@@ -16,7 +16,23 @@ Controller = "com.rainbow.crm.dashboard.controller.SalesDashBoardController">
 	  <marginWidth>30</marginWidth>
 	  <barWidth>30</barWidth>
 	  <noYAxisDivisions>6</noYAxisDivisions>
+</Element>
+<!-- 
+<Element label = "Based_on"  type = "UIList" Id = "lstAggrType"   property ="classification" >
+	  <options> 
+	  <option key ="TOTAL"> Total</option>
+	  <option key ="ASSCT"> Associate</option>
+	  <option key ="PRODUCT"> Product</option>
+	  <option key ="ITEM"> Item</option>
+	  <option key ="CATEGORY"> Category</option>
+	  <option key ="BRAND"> Brand</option>
+	  <option key ="TRRTRY"> Territory</option>
+	  </options>
 	</Element>
+	
+
+<Element caption = "Refresh"  type = "UIButton" Id = "btfilterSave"  style="button" fixedAction ="FixedAction.ACTION_PLAINSUBMIT"   />
+ -->
 </Section>
 </UIForm>
 </Elements>

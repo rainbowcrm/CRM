@@ -45,6 +45,7 @@ Controller = "com.rainbow.crm.dashboard.controller.SalesDashBoardController">
 </Element>	
 
 <Element type = "UITableRow" >
+
 <Element type = "UITableCol" width ="50%" >
  	<!-- <Element type = "UILineChart" Id = "line3"  dataProvider = "salesHistory" useGoogleGraph="true"  >
 	  <xStart>0</xStart>
@@ -63,6 +64,28 @@ Controller = "com.rainbow.crm.dashboard.controller.SalesDashBoardController">
 	</Element>
 	
 </Element>
+
+<Element type = "UITableCol" width ="50%" >
+ 	<!-- <Element type = "UILineChart" Id = "line3"  dataProvider = "salesHistory" useGoogleGraph="true"  >
+	  <xStart>0</xStart>
+	  <yStart>0</yStart>
+	  <canvasHeight>300</canvasHeight>
+	  <canvasWidth>500</canvasWidth>
+	  <rangeHeight>300</rangeHeight>
+	  <rangeWidth>500</rangeWidth>
+	  <marginWidth>30</marginWidth>
+	  <marginHeight>30</marginHeight>
+	  <noYAxisDivisions>6</noYAxisDivisions>
+	  <noXAxisDivisions>6</noXAxisDivisions>
+	</Element> -->
+	
+	<Element type = "UIIFrame" src ="./rdscontroller?page=salesleadssplits&amp;graphId=leadsplits"  style="graphWindow">
+	</Element>
+	
+</Element>
+
+
+
 </Element>
  	<!-- <Element type = "UIBarChart" Id = "brChrt4"  dataProvider = "salesTargetData" >
 	  <xStart>0</xStart>

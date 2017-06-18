@@ -114,7 +114,7 @@ public class SalesController extends CRMTransactionController{
 			Sales sales = (Sales) getObject();
 			IUserService userService  = (IUserService) SpringObjectFactory.INSTANCE.getInstance("IUserService") ;
 			if (sales.getDivision() != null && sales.getDivision().getId() > 0 ){
-				userList = (List<User>)userService.findAll("User"," division.id= "  + sales.getDivision().getId() ,"userId",(CRMContext)getContext());
+				userList = (List<User>)userService.findAll("User"," where division.id= "  + sales.getDivision().getId() ,"userId",(CRMContext)getContext());
 			}else
 				userList = (List<User>)userService.findAll("User",null,"userId",(CRMContext)getContext());
 				

@@ -142,7 +142,7 @@ public class SalesService extends AbstractionTransactionService implements ISale
 		if(!sale.isReturn()) 
 		{
 			SalesValidator validator = new SalesValidator(context);
-			return validator.validateforCreate(object);
+			return validator.validateforUpdate(object);
 		}else {
 			SalesReturnValidator validator = new SalesReturnValidator(context);
 			return validator.validateforCreate(object);

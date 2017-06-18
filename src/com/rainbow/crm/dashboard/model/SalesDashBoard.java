@@ -12,6 +12,7 @@ public class SalesDashBoard extends CRMModelObject{
 	BarChartData salesTargetData  ;
 	LineChartData salesHistory;
 	PieChartData portfolioSplits;
+	PieChartData leadSplits;
 	
 	BarChartData divManagersalesTargetData  ;
 	PieChartData  divManagerSalesAssociateSplits;
@@ -21,8 +22,17 @@ public class SalesDashBoard extends CRMModelObject{
 	
 	String salespiecriteria;
 	
+	String classification;
 	
 	
+	
+	
+	public String getClassification() {
+		return classification;
+	}
+	public void setClassification(String classification) {
+		this.classification = classification;
+	}
 	public String getSalespiecriteria() {
 		return salespiecriteria;
 	}
@@ -72,6 +82,12 @@ public class SalesDashBoard extends CRMModelObject{
 	public void setDivManagerSaleProductsSplits(
 			PieChartData divManagerSaleProductsSplits) {
 		this.divManagerSaleProductsSplits = divManagerSaleProductsSplits;
+	}
+	public PieChartData getLeadSplits() {
+		return leadSplits;
+	}
+	public void setLeadSplits(PieChartData leadSplits) {
+		this.leadSplits = leadSplits;
 	}
 	
 

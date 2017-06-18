@@ -71,6 +71,8 @@
 </Page>
 <Page id = "salesportfoliosplits" definition ="/resources/pages/dashboards/salesportfoliosplits.xml" modelclass = "com.rainbow.crm.dashboard.model.SalesDashBoard" >
 </Page> 
+<Page id = "salesleadssplits" definition ="/resources/pages/dashboards/salesleadssplits.xml" modelclass = "com.rainbow.crm.dashboard.model.SalesDashBoard" >
+</Page> 
 <Page id = "divassocsalessplits" definition ="/resources/pages/dashboards/divassocsalessplits.xml" modelclass = "com.rainbow.crm.dashboard.model.SalesDashBoard" >
 </Page> 
 <Page id = "divproductsalesplits" definition ="/resources/pages/dashboards/divproductsalesplits.xml" modelclass = "com.rainbow.crm.dashboard.model.SalesDashBoard" >
