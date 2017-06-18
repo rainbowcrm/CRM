@@ -63,6 +63,19 @@ Controller = "com.rainbow.crm.dashboard.controller.SalesDashBoardController">
 	</Element>
 	
 </Element>
+
+<Element type = "UITableCol" width ="50%" >
+	<!-- <Element type = "UIPieChart" Id = "pieChart1"  dataProvider = "portfolioSplits" useGoogleGraph="true" >
+	  <centerX>150</centerX>
+	  <centerY>150</centerY>
+	  <radius>50</radius>
+	  <rangeHeight>300</rangeHeight>
+	  <rangeWidth>500</rangeWidth>
+ 	</Element>  -->  
+ 	<Element type = "UIIFrame" src ="./rdscontroller?page=divsalesleadsplits&amp;graphId=divmgrsalesleadsplits"  style = "graphWindow">
+	</Element>
+</Element>
+
 </Element>
  	<!-- <Element type = "UIBarChart" Id = "brChrt4"  dataProvider = "salesTargetData" >
 	  <xStart>0</xStart>

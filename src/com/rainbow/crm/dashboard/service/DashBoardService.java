@@ -282,6 +282,28 @@ public class DashBoardService  implements IDashBoardService{
 
 	
 	
+	
+	@Override
+	public PieChartData getDivisionLeadSplits(User manager, Date date,
+			CRMContext context) {
+		PieChartData pieChartData  = new PieChartData();
+		SalesPeriod currentPeriod = getSalesPeriodforUser(manager, date, context);
+		if(currentPeriod == null) return null;
+		Map <String , Double > results = DashBoardSQLs.getStatusWiseSaleLeadsforDivision(currentPeriod.getDivision().getId(), new java.sql.Date( currentPeriod.getFromDate().getTime()),
+				new java.sql.Date( currentPeriod.getToDate().getTime())) ;
+		AtomicInteger index = new AtomicInteger(0);
+		results.forEach(  (status, count) -> {  
+			PieSliceData pieSliceData  = new PieSliceData();
+			pieSliceData.setVolume(count);
+			pieSliceData.setText(status);
+			pieSliceData.setColor(CommonUtil.getGraphColors()[index.getAndIncrement()]);
+			pieChartData.addPieSlice(pieSliceData);
+		} );
+		pieChartData.setFooterNote("Sales Lead by Status");
+		pieChartData.setTitle("Sales Lead by Status");
+		return pieChartData;
+	}
+
 	@Override
 	public PieChartData getLeadSplits(User associate, Date date,
 			CRMContext context) {

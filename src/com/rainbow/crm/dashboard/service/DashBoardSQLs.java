@@ -129,6 +129,43 @@ public class DashBoardSQLs {
 		}
 		return ans;
 	}
+	
+	public static Map<String, Double> getStatusWiseSaleLeadsforDivision(int division,   Date startDate, Date endDate )
+	{
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		Map<String, Double> ans = new HashMap<String, Double> ();
+		try {
+			connection = ConnectionCreater.getConnection();
+			String sql =  " SELECT COUNT(SALES_LEADS.ID),SALES_LEADS.STATUS FROM SALES_LEADS  WHERE   " + 
+			"  SALES_LEADS.RELEASED_DATE >= ? AND  SALES_LEADS.RELEASED_DATE <= ? AND SALES_LEADS.DIVISION_ID = ? AND " + 
+			"   SALES_LEADS.IS_VOIDED = FALSE  GROUP BY SALES_LEADS.STATUS ";
+			statement = connection.prepareStatement(sql);
+			statement.setDate(1, startDate);
+			statement.setDate(2, endDate);
+			statement.setInt(3, division);
+			rs = statement.executeQuery();
+			while (rs.next()) {
+				String statusCode  = rs.getString(2);
+				String status = "Open" ;
+				if(!Utils.isNullString(statusCode)) {
+					FiniteValue fValue=	GeneralSQLs.getFiniteValue(statusCode);
+					status =fValue.getDescription();		
+				}
+				Double count = rs.getDouble(1);
+				ans.put(status, count);
+			}
+			
+		}catch (SQLException ex) {
+			Logwriter.INSTANCE.error(ex);
+		} finally {
+			ConnectionCreater.close(connection, statement, rs);
+		}
+		
+		return ans ;
+	}
+	
 	public static Map<String, Double> getStatusWiseSaleLeads(int division, String associate,  Date startDate, Date endDate )
 	{
 		Connection connection = null;

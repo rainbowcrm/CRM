@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Page id = "salesportfoliosplits" showinFrame ="true"  title ="Sales Dashboard| Rainbow CRM" Object = "com.rainbow.crm.dashboard.model.SalesDashbBard" 
+<Page id = "salesleadsplits" showinFrame ="true"  title ="Sales Dashboard| Rainbow CRM" Object = "com.rainbow.crm.dashboard.model.SalesDashbBard" 
 Controller = "com.rainbow.crm.dashboard.controller.SalesDashBoardController">
 <Template type= "General"  name = "GraphTemplate"></Template>
 
