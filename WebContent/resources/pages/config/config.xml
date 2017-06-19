@@ -104,6 +104,30 @@ Controller = "com.rainbow.crm.config.controller.ConfigController">
 </Element>
 </Element>
 
+<Element type ="UITab" Id= "idauth" title = "Authorizations"   >
+<Element type = "UITable" rows = "1" cols = "3" style = "grid" applyStyleonChildren ="true" Id  ="tblAuth" property ="AuthorizationConfigLines[]" >
+<Element type = "UITableRow"  dataType = "com.rainbow.crm.config.model.ConfigLine" >
+<Element type ="UITableCol" width = "70%" align = "left">
+<Element label = ""  type = "UIHidden" Id = "txtAuthCode" size  = "10" property ="configCode" /> 
+<Element label = ""  type = "UILabel" Id = "txtAuthDesc" size  = "50" property ="description" /> 
+</Element>
+<Element type ="UITableCol" width = "30%">
+<Element label = ""  type = "UIText" Id = "txtAuthValue" size  = "40" property ="value" rendered = "Object.isTextField"/> 
+<Element label = ""  type = "UIList" Id = "txtAuthValue"  property ="value" rendered = "Object.isFVField"> 
+<options populator = "Object.getOptions" >
+</options>
+</Element>
+<Element label = ""  type = "UIHidden" Id = "hdnAuthCHKBX"    rendered = "!Object.isBooleanField"/>
+<Element label = ""  type = "UIText" Id = "txtAuthValue"   size  = "10" isNumeric  ="true" property ="value" rendered = "Object.isNumericField"/>
+<Element label = ""  type = "UIBooleanCheckBox" Id = "hdnAuthCHKBX"  property ="value"  hiddenControlId= "txtPYValue" rendered = "Object.isBooleanField">
+</Element> 
+</Element>
+</Element>
+</Element>
+</Element>
+
+
+
 <!-- commenting  Payment Tab  
 <Element type ="UITab" Id= "idpay" title = "Payment"   >
 <Element type = "UITable" rows = "1" cols = "3" style = "grid" applyStyleonChildren ="true" Id  ="tblPay" property ="PaymentConfigLines[]" >

@@ -15,9 +15,18 @@ public class ConfigSet extends ModelObject{
 	public final static String INVENTORY = "Inventory" ;
 	public final static String ORDER_MANAGEMENT = "Order Management" ;
 	public final static String WORKFORCE_MANAGEMENT = "Workforce Management" ;
+	public final static String AUTHORIZATIONS = "Authorizations" ;
 	
 	int company ;
 
+	public List<ConfigLine> getAuthorizationConfigLines() {
+		return configMap.get(AUTHORIZATIONS) ;
+	}
+	public void setAuthorizationConfigLines(List<ConfigLine>  configLines) {
+		configMap.put(AUTHORIZATIONS, configLines);
+	}
+	
+	
 	public List<ConfigLine> getOrderConfigLines() {
 		return configMap.get(ORDER_MANAGEMENT) ;
 	}
