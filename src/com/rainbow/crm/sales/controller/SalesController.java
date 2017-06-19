@@ -147,15 +147,7 @@ public class SalesController extends CRMTransactionController{
 	}
 	
 	public Map <String, String > getAllDivisions() {
-		Map<String, String> ans = new LinkedHashMap<String, String> ();
-		IDivisionService service =(IDivisionService) SpringObjectFactory.INSTANCE.getInstance("IDivisionService");
-		List<Division> divisions = service.getAllDivisions(((CRMContext)getContext()).getLoggedinCompany());
-		if (!Utils.isNullList(divisions)) {
-			for (Division division : divisions) {
-				ans.put(String.valueOf(division.getId()), division.getName());
-			}
-		}
-		return ans;
+		return CommonUtil.getAllDivisions((CRMContext)getContext());
 	}
 
 }

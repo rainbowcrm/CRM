@@ -104,6 +104,7 @@ Controller = "com.rainbow.crm.config.controller.ConfigController">
 </Element>
 </Element>
 
+<!-- commenting  Payment Tab  
 <Element type ="UITab" Id= "idpay" title = "Payment"   >
 <Element type = "UITable" rows = "1" cols = "3" style = "grid" applyStyleonChildren ="true" Id  ="tblPay" property ="PaymentConfigLines[]" >
 <Element type = "UITableRow"  dataType = "com.rainbow.crm.config.model.ConfigLine" >
@@ -126,7 +127,8 @@ Controller = "com.rainbow.crm.config.controller.ConfigController">
 </Element>
 </Element>
 
-<Element type ="UITab" Id= "idordermgmt" title = "Order_Management"  >
+ -->
+<Element type ="UITab" Id= "idordermgmt" title = "Delivery_Management"  >
 <Element type = "UITable" rows = "1" cols = "3" style = "grid" applyStyleonChildren ="true" Id  ="tblOrderConf" property ="OrderConfigLines[]" >
 <Element type = "UITableRow"  dataType = "com.rainbow.crm.config.model.ConfigLine" >
 <Element type ="UITableCol" width = "70%" align = "left">

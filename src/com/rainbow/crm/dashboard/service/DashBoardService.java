@@ -142,7 +142,7 @@ public class DashBoardService  implements IDashBoardService{
 		for (User associate : allAssociates) {
 			LineChartEntryData lineChartEntryData  = new LineChartEntryData();
 			lineChartEntryData.setColor(CommonUtil.getGraphColors()[ct ++] );
-			lineChartEntryData.setText(associate.getUserId() + "  Sale");
+			lineChartEntryData.setText(associate.getUserId());
 			for (long i = points;  i >0 ; i--) {
 				Date startDate = new Date(date.getTime() -  (7 * i * 24l * 3600l * 1000l  ));
 				Date endDate = new Date(date.getTime() -  (7 * (i-1) * 24l * 3600l * 1000l  ));

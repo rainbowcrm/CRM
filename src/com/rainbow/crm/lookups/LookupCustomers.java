@@ -28,7 +28,7 @@ public class LookupCustomers implements ILookupService{
 		String condition = null;
 		if (!Utils.isNull(searchString)) { 
 			searchString = searchString.replace("*", "%");
-			condition =  " where firstName like  '" + searchString + "' or  lastName like  '" + searchString + "' " ;
+			condition =  " where  (firstName like  '" + searchString + "' or  lastName like  '" + searchString + "') " ;
 		}
 		ICustomerService service = (ICustomerService) SpringObjectFactory.INSTANCE.getInstance("ICustomerService");
 		List<? extends CRMModelObject> customers = service.listData(from, from  + noRecords, condition,(CRMContext)ctx,null);

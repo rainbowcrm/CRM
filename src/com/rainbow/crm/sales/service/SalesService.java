@@ -14,12 +14,14 @@ import java.util.Set;
 
 
 
+
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 
 
 
@@ -47,6 +49,7 @@ import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.common.messaging.CRMMessageSender;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
+import com.rainbow.crm.config.service.ConfigurationManager;
 import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.customer.service.ICustomerService;
 import com.rainbow.crm.database.GeneralSQLs;
@@ -204,6 +207,8 @@ public class SalesService extends AbstractionTransactionService implements ISale
 			Customer customer = customerService.getByPhone(context.getLoggedinCompany(), phone);
 			if (customer != null)
 				 object.setCustomer(customer);
+			else 
+				ans.add(CRMValidator.getErrorforCode(context.getLocale(), SalesErrorCodes.FIELD_NOT_VALID , "Customer"));
 		}
 		Externalize externalize = new Externalize(); ;
 		
@@ -291,19 +296,22 @@ public class SalesService extends AbstractionTransactionService implements ISale
 			}
 		}
 		TransactionResult result= super.create(object, context);
-		InventoryUpdateObject invObject = new InventoryUpdateObject();
-		invObject.setCompany(sales.getCompany());
-		invObject.setContext(context);
-		invObject.setDivision(sales.getDivision());
-		invObject.setAddition(false);
-		invObject.setItemLines(sales.getSalesLines());
-		invObject.setAction(BusinessAction.CREATE);
-		if(sales.getCustomer() != null) {
-			invObject.setAddLoyalty(true);
-			invObject.setSalesDoc(sales.getBillNumber());
+		String trackString = ConfigurationManager.getConfig(ConfigurationManager.TRACK_INVENTORY, context);
+		Boolean track = Utils.getBooleanValue(trackString) ;
+		if (track != false ) {
+			InventoryUpdateObject invObject = new InventoryUpdateObject();
+			invObject.setCompany(sales.getCompany());
+			invObject.setContext(context);
+			invObject.setDivision(sales.getDivision());
+			invObject.setAddition(false);
+			invObject.setItemLines(sales.getSalesLines());
+			invObject.setAction(BusinessAction.CREATE);
+			if(sales.getCustomer() != null) {
+				invObject.setAddLoyalty(true);
+				invObject.setSalesDoc(sales.getBillNumber());
+			}
+			CRMMessageSender.sendMessage(invObject);
 		}
-		CRMMessageSender.sendMessage(invObject);
-		
 		return result; 
 	}
 

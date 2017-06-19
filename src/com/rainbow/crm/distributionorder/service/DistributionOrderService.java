@@ -21,6 +21,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 
 
+
 import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
@@ -39,6 +40,7 @@ import javax.mail.internet.MimeMessage;
 
 
 
+
 import org.apache.commons.io.IOUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
@@ -47,6 +49,7 @@ import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 
 
 
@@ -78,6 +81,7 @@ import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.common.messaging.CRMMessageSender;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
+import com.rainbow.crm.config.service.ConfigurationManager;
 import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.customer.service.ICustomerService;
 import com.rainbow.crm.database.GeneralSQLs;
@@ -139,6 +143,8 @@ public class DistributionOrderService extends AbstractionTransactionService impl
 		DistributionOrderValidator validator = new DistributionOrderValidator(context);
 		return validator.validateforCreate(object);
 	}
+	
+	
 
 	@Override
 	public List<RadsError> validateforUpdate(CRMModelObject object,
@@ -390,12 +396,18 @@ public class DistributionOrderService extends AbstractionTransactionService impl
 
 	
 	private Division findDivisionForFullInventory(Sales sales,CRMContext context) {
-		int divisionId = DistributionOrderSQL.getDivisionWithInventory(sales.getId(), context.getLoggedinCompany(), sales.getSalesLines().size());
-		if (divisionId > -1) {
-			IDivisionService divisionService = (IDivisionService)SpringObjectFactory.INSTANCE.getInstance("IDivisionService") ;
-			Division division = (Division)divisionService.getById(divisionId);
-			return division;
-		}
+		String allowforOtherDivStr = ConfigurationManager.getConfig(ConfigurationManager.ALLOW_SHIPPING_FROMMULTI_DIV, context);
+		Boolean  allowforOtherDiv = Utils.getBooleanValue(allowforOtherDivStr);
+		
+		if(allowforOtherDiv) {
+			int divisionId = DistributionOrderSQL.getDivisionWithInventory(sales.getId(), context.getLoggedinCompany(), sales.getSalesLines().size());
+			if (divisionId > -1) {
+				IDivisionService divisionService = (IDivisionService)SpringObjectFactory.INSTANCE.getInstance("IDivisionService") ;
+				Division division = (Division)divisionService.getById(divisionId);
+				return division;
+			}
+		}else
+			return sales.getDivision() ;
 		return null;
 		
 	}

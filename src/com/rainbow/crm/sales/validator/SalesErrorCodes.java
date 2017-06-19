@@ -9,6 +9,8 @@ public class SalesErrorCodes extends CommonErrorCodes{
 	public static final int RETURN_PRICE_EXCEEDS_ORIGINAL = 2000303;
 	public static final int ITEM_ALREADY_RETURNED_EARLIER = 2000304;
 	public static final int REDEEM_LOYALTY_GREATER_THAN_AVLBLE = 2000305;
+	public static final int INVENTORY_NOT_AVLBLE = 2000306;
+	public static final int MGR_CAN_EDIT_LINES = 2000307;
 
 
 }

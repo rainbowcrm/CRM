@@ -4,12 +4,14 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 
 
@@ -429,5 +431,20 @@ public class CommonUtil {
 
 	}
 
+	public static Map <String, String > getAllDivisions(CRMContext ctx) {
+		boolean allowAll =CommonUtil.allowAllDivisionAccess(ctx);
+		Map<String, String> ans = new LinkedHashMap<String, String>();
+		IDivisionService service = (IDivisionService) SpringObjectFactory.INSTANCE
+				.getInstance("IDivisionService");
+		List<Division> divisions = service.getAllDivisions(ctx
+				.getLoggedinCompany());
+		if (!Utils.isNullList(divisions)) {
+			for (Division division : divisions) {
+				if (allowAll || division.getId() == ctx.getLoggedInUser().getDivision().getId())
+					ans.put(String.valueOf(division.getId()), division.getName());
+			}
+		}
+		return ans;
+	}
 
 }
