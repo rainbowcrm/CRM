@@ -120,7 +120,8 @@ public class QueryController extends CRMGeneralController {
 				.getInstance("IDivisionService");
 		List<Division> divisions = service.getAllDivisions(ctx
 				.getLoggedinCompany());
-		ans.put("-1", "All Divisions");
+		if (allowAll)
+			ans.put("-1", "All Divisions");
 		if (!Utils.isNullList(divisions)) {
 			for (Division division : divisions) {
 				if (allowAll || division.getId() == ctx.getLoggedInUser().getDivision().getId())

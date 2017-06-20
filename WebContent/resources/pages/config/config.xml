@@ -119,7 +119,7 @@ Controller = "com.rainbow.crm.config.controller.ConfigController">
 </Element>
 <Element label = ""  type = "UIHidden" Id = "hdnAuthCHKBX"    rendered = "!Object.isBooleanField"/>
 <Element label = ""  type = "UIText" Id = "txtAuthValue"   size  = "10" isNumeric  ="true" property ="value" rendered = "Object.isNumericField"/>
-<Element label = ""  type = "UIBooleanCheckBox" Id = "hdnAuthCHKBX"  property ="value"  hiddenControlId= "txtPYValue" rendered = "Object.isBooleanField">
+<Element label = ""  type = "UIBooleanCheckBox" Id = "hdnAuthCHKBX"  property ="value"  hiddenControlId= "txtAuthValue" rendered = "Object.isBooleanField">
 </Element> 
 </Element>
 </Element>
