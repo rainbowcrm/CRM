@@ -17,6 +17,7 @@ import com.rainbow.crm.division.service.IDivisionService;
 import com.techtrade.rads.framework.context.IRadsContext;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.ui.abstracts.ILookupService;
+import com.techtrade.rads.framework.ui.abstracts.UIPage;
 import com.techtrade.rads.framework.utils.Utils;
 
 public class LookupDivisions implements ILookupService{
@@ -42,7 +43,7 @@ public class LookupDivisions implements ILookupService{
 	}
 
 	@Override
-	public IRadsContext generateContext(HttpServletRequest request) {
+	public IRadsContext generateContext(HttpServletRequest request,UIPage page) {
 		return CommonUtil.generateContext(request.getSession().getId());
 	}
 	

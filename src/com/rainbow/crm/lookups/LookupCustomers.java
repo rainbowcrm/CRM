@@ -17,6 +17,7 @@ import com.rainbow.crm.database.LoginSQLs;
 import com.techtrade.rads.framework.context.IRadsContext;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.ui.abstracts.ILookupService;
+import com.techtrade.rads.framework.ui.abstracts.UIPage;
 import com.techtrade.rads.framework.utils.Utils;
 
 public class LookupCustomers implements ILookupService{
@@ -47,7 +48,7 @@ public class LookupCustomers implements ILookupService{
 	}
 
 	@Override
-	public IRadsContext generateContext(HttpServletRequest request) {
+	public IRadsContext generateContext(HttpServletRequest request,UIPage page ) {
 		return CommonUtil.generateContext(request.getSession().getId());
 	}
 
