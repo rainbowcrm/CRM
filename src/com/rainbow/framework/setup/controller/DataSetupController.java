@@ -30,6 +30,7 @@ import com.techtrade.rads.framework.context.IRadsContext;
 import com.techtrade.rads.framework.controller.abstracts.GeneralController;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
+import com.techtrade.rads.framework.ui.abstracts.UIPage;
 
 public class DataSetupController extends GeneralController{
 
@@ -111,7 +112,7 @@ public class DataSetupController extends GeneralController{
 	}
 
 	@Override
-	public IRadsContext generateContext(HttpServletRequest request,HttpServletResponse response) {
+	public IRadsContext generateContext(HttpServletRequest request,HttpServletResponse response,UIPage page) {
 		ctx =  request.getServletContext() ;
 		resp = response ;
 		return CommonUtil.generateContext(request, response);
@@ -120,7 +121,7 @@ public class DataSetupController extends GeneralController{
 	
 	
 	@Override
-	public IRadsContext generateContext(String authToken) {
+	public IRadsContext generateContext(String authToken,UIPage page) {
 		return CommonUtil.generateContext(authToken) ;
 		//return LoginSQLs.loggedInUser(authToken);
 	}

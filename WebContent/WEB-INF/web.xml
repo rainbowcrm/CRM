@@ -89,11 +89,17 @@ id="WebApp_ID" version="3.0">
     </context-param>
      -->
      
-  <error-page>
+<error-page>
     <!-- Uncaught exception -->
     <error-code>401</error-code>
     <location>/rdscontroller?currentpage=login</location>
+</error-page>
+<error-page>
+    <!-- Uncaught exception -->
+    <error-code>403</error-code>
+    <location>/rdscontroller?currentpage=login</location>
 </error-page>   
+   
 <error-page>
     <!-- Uncaught exception -->
     <error-code>500</error-code>

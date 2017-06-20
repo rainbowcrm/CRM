@@ -18,13 +18,14 @@ import com.techtrade.rads.framework.context.IRadsContext;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
+import com.techtrade.rads.framework.ui.abstracts.UIPage;
 
 public class DistributionOrderListController extends CRMListController{
 
 	String realPath ;
 	
 	@Override
-	public IRadsContext generateContext(HttpServletRequest request,HttpServletResponse response) {
+	public IRadsContext generateContext(HttpServletRequest request,HttpServletResponse response,UIPage page) {
 		realPath = request.getServletContext().getRealPath(".");
 		return CommonUtil.generateContext(request.getSession().getId());
 	}

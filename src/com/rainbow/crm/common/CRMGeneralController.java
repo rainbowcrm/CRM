@@ -15,18 +15,19 @@ import com.rainbow.crm.division.service.IDivisionService;
 import com.rainbow.crm.user.model.User;
 import com.techtrade.rads.framework.context.IRadsContext;
 import com.techtrade.rads.framework.controller.abstracts.GeneralController;
+import com.techtrade.rads.framework.ui.abstracts.UIPage;
 import com.techtrade.rads.framework.utils.Utils;
 
 public abstract class CRMGeneralController  extends GeneralController{
 	
 	@Override
 	public IRadsContext generateContext(HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response, UIPage page) {
 		return CommonUtil.generateContext(request);
 	}
 	
 	@Override
-	public IRadsContext generateContext(String authToken) {
+	public IRadsContext generateContext(String authToken, UIPage page) {
 		return CommonUtil.generateContext(authToken);
 	}
 	

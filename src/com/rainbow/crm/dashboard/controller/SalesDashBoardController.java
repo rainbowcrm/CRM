@@ -16,6 +16,7 @@ import com.techtrade.rads.framework.model.graphdata.BarChartData;
 import com.techtrade.rads.framework.model.graphdata.LineChartData;
 import com.techtrade.rads.framework.model.graphdata.PieChartData;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
+import com.techtrade.rads.framework.ui.abstracts.UIPage;
 import com.techtrade.rads.framework.utils.Utils;
 
 public class SalesDashBoardController extends CRMGeneralController{
@@ -121,9 +122,9 @@ public class SalesDashBoardController extends CRMGeneralController{
 
 	@Override
 	public IRadsContext generateContext(HttpServletRequest request,
-			HttpServletResponse response) { 
+			HttpServletResponse response,UIPage page) { 
 		graphId= request.getParameter("graphId");
-		return super.generateContext(request, response);
+		return super.generateContext(request, response,page);
 	}
 
 	

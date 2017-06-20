@@ -24,6 +24,7 @@ import com.techtrade.rads.framework.controller.abstracts.TransactionController;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
+import com.techtrade.rads.framework.ui.abstracts.UIPage;
 import com.techtrade.rads.framework.utils.Utils;
 
 public abstract class CRMTransactionController extends TransactionController {
@@ -107,13 +108,13 @@ public abstract class CRMTransactionController extends TransactionController {
 
 	@Override
 	public IRadsContext generateContext(HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response, UIPage page) {
 		
 		return CommonUtil.generateContext(request);
 	}
 	
 	@Override
-	public IRadsContext generateContext(String authToken) {
+	public IRadsContext generateContext(String authToken, UIPage page) {
 		return CommonUtil.generateContext(authToken);
 	}
 	

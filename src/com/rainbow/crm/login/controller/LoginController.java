@@ -19,13 +19,14 @@ import com.techtrade.rads.framework.controller.abstracts.GeneralController;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
+import com.techtrade.rads.framework.ui.abstracts.UIPage;
 import com.techtrade.rads.framework.utils.Utils;
 
 public class LoginController extends  GeneralController{
 
 	String sessionId ;
 	@Override
-	public IRadsContext generateContext(HttpServletRequest request,HttpServletResponse response) {
+	public IRadsContext generateContext(HttpServletRequest request,HttpServletResponse response,UIPage page) {
 		Logwriter.INSTANCE.instantiate(request.getServletContext());
 		HibernateDAO.instantiate(request.getServletContext());
 		SpringObjectFactory.INSTANCE.instantiate(request.getServletContext());
@@ -37,7 +38,7 @@ public class LoginController extends  GeneralController{
 	}
 	
 	@Override
-	public IRadsContext generateContext(String authToken) {
+	public IRadsContext generateContext(String authToken,UIPage page) {
 		return LoginSQLs.loggedInUser(authToken);
 	}
 

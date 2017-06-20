@@ -23,6 +23,7 @@ import com.techtrade.rads.framework.filter.FilterNode;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.transaction.TransactionResult.Result;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
+import com.techtrade.rads.framework.ui.abstracts.UIPage;
 import com.techtrade.rads.framework.ui.components.SortCriteria;
 import com.techtrade.rads.framework.utils.Utils;
 
@@ -152,14 +153,15 @@ public abstract class CRMListController  extends ListController{
 	}
 	
 	@Override
-	public IRadsContext generateContext(HttpServletRequest request,HttpServletResponse response) {
+	public IRadsContext generateContext(HttpServletRequest request,HttpServletResponse response, UIPage page) {
+		
 		return CommonUtil.generateContext(request);
 	}
 	
 	
 	
 	@Override
-	public IRadsContext generateContext(String authToken) {
+	public IRadsContext generateContext(String authToken, UIPage page) {
 		return CommonUtil.generateContext(authToken);
 	}
 	@Override

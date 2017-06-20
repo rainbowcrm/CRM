@@ -39,6 +39,7 @@ import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.model.transaction.TransactionResult.Result;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
+import com.techtrade.rads.framework.ui.abstracts.UIPage;
 import com.techtrade.rads.framework.utils.Utils;
 
 public class SalesController extends CRMTransactionController{
@@ -85,7 +86,7 @@ public class SalesController extends CRMTransactionController{
 	}
 
 	@Override
-	public IRadsContext generateContext(HttpServletRequest request,HttpServletResponse response) {
+	public IRadsContext generateContext(HttpServletRequest request,HttpServletResponse response,UIPage page) {
 		ctx =  request.getServletContext() ;
 		resp = response ;
 		return CommonUtil.generateContext(request.getSession().getId());

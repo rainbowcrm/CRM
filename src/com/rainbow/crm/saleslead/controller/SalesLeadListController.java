@@ -19,6 +19,7 @@ import com.techtrade.rads.framework.filter.Filter;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
+import com.techtrade.rads.framework.ui.abstracts.UIPage;
 import com.techtrade.rads.framework.ui.components.SortCriteria;
 
 public class SalesLeadListController extends CRMListController{
@@ -26,9 +27,9 @@ public class SalesLeadListController extends CRMListController{
 	String realPath ;
 	
 	@Override
-	public IRadsContext generateContext(HttpServletRequest request,HttpServletResponse response) {
+	public IRadsContext generateContext(HttpServletRequest request,HttpServletResponse response,UIPage page) {
 		realPath = request.getServletContext().getRealPath(".");
-		return super.generateContext(request, response);
+		return super.generateContext(request, response,page);
 	}
 	
 	

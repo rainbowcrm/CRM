@@ -254,6 +254,7 @@ public class CommonUtil {
 		CRMContext context=  LoginSQLs.loggedInUser(authToken);
 		User user = CommonUtil.getUser(context, context.getUser());
 		context.setLoggedInUser(user);
+		context.setAuthorized(true);
 		return context;
 	}
 	
@@ -266,6 +267,7 @@ public class CommonUtil {
 		}
 		User user = CommonUtil.getUser(context, context.getUser());
 		context.setLoggedInUser(user);
+		context.setAuthorized(true);
 		return context;
 	}
 	
@@ -281,6 +283,7 @@ public class CommonUtil {
 		}
 		User user = CommonUtil.getUser(context, context.getUser());
 		context.setLoggedInUser(user);
+		context.setAuthorized(true);
 		return context;
 	}
 	

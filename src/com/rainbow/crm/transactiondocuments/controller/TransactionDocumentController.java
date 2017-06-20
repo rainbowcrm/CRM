@@ -39,17 +39,6 @@ public class TransactionDocumentController extends CRMGeneralController{
 		result.setResult(Result.SUCCESS);
 		return result;
 	}
-
-	@Override
-	public IRadsContext generateContext(HttpServletRequest request,HttpServletResponse response) {
-		return CommonUtil.generateContext(request);
-	}
-	
-	@Override
-	public IRadsContext generateContext(String authToken) {
-		return CommonUtil.generateContext(authToken);
-	}
-
 	
 	
 }

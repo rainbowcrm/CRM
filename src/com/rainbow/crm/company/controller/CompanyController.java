@@ -28,6 +28,7 @@ import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.model.transaction.TransactionResult.Result;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
+import com.techtrade.rads.framework.ui.abstracts.UIPage;
 import com.techtrade.rads.framework.utils.Utils;
 
 public class CompanyController extends CRMCRUDController{
@@ -52,7 +53,7 @@ public class CompanyController extends CRMCRUDController{
 	
 	@Override
 	public IRadsContext generateContext(HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response,UIPage page) {
 		CRMContext context = new CRMContext();
 		context.setGuestLogin(true);
 		return context;

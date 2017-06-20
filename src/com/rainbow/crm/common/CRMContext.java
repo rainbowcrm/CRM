@@ -12,6 +12,7 @@ import com.techtrade.rads.framework.context.IRadsContext;
 public class CRMContext implements IRadsContext,Serializable{
 	String user;
 	boolean authenticated ;
+	boolean authorized =true;
 	String authenticationToken;
 	int loggedinCompany;
 	Timestamp logginTime;
@@ -154,6 +155,16 @@ public class CRMContext implements IRadsContext,Serializable{
 	public void setGuestLogin(boolean guestLogin) {
 		this.guestLogin = guestLogin;
 	}
+
+	@Override
+	public boolean isAuthorized() {
+		return authorized;
+	}
+
+	public void setAuthorized(boolean authorized) {
+		this.authorized = authorized;
+	}
+	
 	
 	
 	

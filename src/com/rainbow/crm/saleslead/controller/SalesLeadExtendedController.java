@@ -20,6 +20,7 @@ import com.rainbow.crm.saleslead.service.ISalesLeadService;
 import com.techtrade.rads.framework.context.IRadsContext;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
+import com.techtrade.rads.framework.ui.abstracts.UIPage;
 
 
 public class SalesLeadExtendedController extends CRMTransactionController{
@@ -61,7 +62,7 @@ public class SalesLeadExtendedController extends CRMTransactionController{
 	}
 	
 	@Override
-	public IRadsContext generateContext(HttpServletRequest request,HttpServletResponse response) {
+	public IRadsContext generateContext(HttpServletRequest request,HttpServletResponse response,UIPage page) {
 		ctx =  request.getServletContext() ;
 		resp = response ;
 		return CommonUtil.generateContext(request);
