@@ -46,7 +46,7 @@ public class AllFiltersAjaxService implements IAjaxLookupService{
 	@Override
 	public IRadsContext generateContext(HttpServletRequest request) {
 		// TODO Auto-generated method stub
-		 return CommonUtil.generateContext(request);
+		 return CommonUtil.generateContext(request,null);
 	}
 	
 	

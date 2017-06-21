@@ -89,7 +89,7 @@ public class SalesController extends CRMTransactionController{
 	public IRadsContext generateContext(HttpServletRequest request,HttpServletResponse response,UIPage page) {
 		ctx =  request.getServletContext() ;
 		resp = response ;
-		return CommonUtil.generateContext(request.getSession().getId());
+		return CommonUtil.generateContext(request,page);
 	}
 	
 	public ISalesService getService() {

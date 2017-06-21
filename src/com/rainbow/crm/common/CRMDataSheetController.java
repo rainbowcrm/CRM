@@ -109,14 +109,14 @@ public abstract class CRMDataSheetController extends DataSheetController{
 	
 	@Override
 	public IRadsContext generateContext(HttpServletRequest request,HttpServletResponse response,UIPage page) {
-		return CommonUtil.generateContext(request.getSession().getId());
+		return CommonUtil.generateContext(request,page);
 	}
 	
 	
 	
 	@Override
 	public IRadsContext generateContext(String authToken,UIPage page) {
-		return CommonUtil.generateContext(authToken);
+		return CommonUtil.generateContext(authToken,page);
 	}
 	
 	@Override

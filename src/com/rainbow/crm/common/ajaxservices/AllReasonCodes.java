@@ -35,7 +35,7 @@ public class AllReasonCodes implements IAjaxUpdateService {
 	@Override
 	public IRadsContext generateContext(HttpServletRequest request) {
 		// TODO Auto-generated method stub
-		return CommonUtil.generateContext(request);
+		return CommonUtil.generateContext(request,null);
 	}
 	
 	

@@ -54,7 +54,7 @@ public class DistributionOrderController extends CRMTransactionController{
 	public IRadsContext generateContext(HttpServletRequest request,HttpServletResponse response,UIPage page) {
 		ctx =  request.getServletContext() ;
 		resp = response ;
-		return CommonUtil.generateContext(request, response);
+		return CommonUtil.generateContext(request, response,page);
 	}
 	
 	public boolean isReleased() {

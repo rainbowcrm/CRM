@@ -44,7 +44,7 @@ public class LookupCategories implements ILookupService{
 	@Override
 	public IRadsContext generateContext(HttpServletRequest request,UIPage page) {
 		// TODO Auto-generated method stub
-		return CommonUtil.generateContext(request.getSession().getId());
+		return CommonUtil.generateContext(request.getSession().getId(),page);
 	}
 	
 	

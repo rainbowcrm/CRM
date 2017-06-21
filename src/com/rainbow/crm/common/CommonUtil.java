@@ -33,6 +33,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
+
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
@@ -61,6 +62,7 @@ import com.rainbow.crm.user.service.IUserService;
 import com.rainbow.framework.setup.model.Metadata;
 import com.rainbow.framework.setup.sql.MetadataSQL;
 import com.techtrade.rads.framework.context.IRadsContext;
+import com.techtrade.rads.framework.ui.abstracts.UIPage;
 import com.techtrade.rads.framework.utils.Utils;
 
 public class CommonUtil {
@@ -227,7 +229,7 @@ public class CommonUtil {
 			return false;
 	}
 	
-	private static boolean isCorporateUser(User user) {
+	public static boolean isCorporateUser(User user) {
 		
 		if (CRMConstants.ROLETYPE.CORPADMIN.equals(user.getRoleType())  ||  CRMConstants.ROLETYPE.SYSADMIN.equals(user.getRoleType()))
 				return true;
@@ -247,18 +249,19 @@ public class CommonUtil {
 	}
 	
 	public static IRadsContext generateContext(HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response,UIPage page ) {
 		String authToken  =  request.getParameter("authToken");
 		if(Utils.isNullString(authToken))
 			authToken = getTokenfromSession(request.getSession().getId());
 		CRMContext context=  LoginSQLs.loggedInUser(authToken);
 		User user = CommonUtil.getUser(context, context.getUser());
 		context.setLoggedInUser(user);
+		//AuthorizationUtil.isAccessAllowed(accessCode, user)
 		context.setAuthorized(true);
 		return context;
 	}
 	
-	public static IRadsContext generateContext(String authToken) {
+	public static IRadsContext generateContext(String authToken,UIPage page) {
 		CRMContext context=  LoginSQLs.loggedInUser(authToken);
 		if (context == null ) {
 			CRMContext contextUnAuth = new CRMContext();
@@ -271,7 +274,7 @@ public class CommonUtil {
 		return context;
 	}
 	
-	public static IRadsContext generateContext(HttpServletRequest request) {
+	public static IRadsContext generateContext(HttpServletRequest request,UIPage page) {
 		String authToken  =  String.valueOf(request.getAttribute("authToken"));
 		if(Utils.isNullString(authToken))
 			authToken = getTokenfromSession(request.getSession().getId());

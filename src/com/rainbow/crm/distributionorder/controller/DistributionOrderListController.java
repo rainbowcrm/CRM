@@ -27,7 +27,7 @@ public class DistributionOrderListController extends CRMListController{
 	@Override
 	public IRadsContext generateContext(HttpServletRequest request,HttpServletResponse response,UIPage page) {
 		realPath = request.getServletContext().getRealPath(".");
-		return CommonUtil.generateContext(request.getSession().getId());
+		return CommonUtil.generateContext(request,page);
 	}
 	
 	@Override

@@ -251,11 +251,14 @@
  </Element>
  </Panel>
  <Panel key = "appMenuPanel"   showInDiv = "false">
- <Element label = "" type = "UIMenu" Id = "menu00" style="menustyleParent" title="Setup" groupId= "menuGRP001"  >
- 	<Element label = "" type = "UIMenu" Id = "menu01" style="menustyle" title="Configuration" link = "rdscontroller?page=config"   />
+ <Element label = "" type = "UIMenu" Id = "menu80" style="menustyleParent" title="Administration" groupId= "menuGRP080"  >
+ <Element label = "" type = "UIMenu" Id = "menu01" style="menustyle" title="Configuration" link = "rdscontroller?page=config"   />
  	<Element label = "" type = "UIMenu" Id = "menu01" style="menustyle" title="Data_Setup" link = "rdscontroller?page=setup"   />
  	<Element label = "" type = "UIMenu" Id = "menu02" style="menustyle" title="Divisions" link = "rdscontroller?page=divisions"   />
  	<Element label = "" type = "UIMenu" Id = "menu03" style="menustyle" title="Users" link = "rdscontroller?page=appUsers"   />
+ </Element>
+ 
+ <Element label = "" type = "UIMenu" Id = "menu00" style="menustyleParent" title="Setup" groupId= "menuGRP001"  >
  	<Element label = "" type = "UIMenu" Id = "menu04" style="menustyle" title="Vendors" link = "rdscontroller?page=vendors"   />
  	<Element label = "" type = "UIMenu" Id = "menu04" style="menustyle" title="Contacts" link = "rdscontroller?page=contacts"   />
  	<Element label = "" type = "UIMenu" Id = "menu04" style="menustyle" title="Carriers" link = "rdscontroller?page=carriers"   />
@@ -273,12 +276,12 @@
  </Element>
  <Element label = "" type = "UIMenu" Id = "menu20" style="menustyleParent" title="Customer_Management" groupId= "menuGRP003"  >
  	<Element label = "" type = "UIMenu" Id = "menu05" style="menustyle" title="Customers" link = "rdscontroller?page=customers"   />
-	<Element label = "" type = "UIMenu" Id = "menu05" style="menustyle" title="Categories" link = "rdscontroller?page=custcategories"   />
 	<Element label = "" type = "UIMenu" Id = "menu05" style="menustyle" title="Loyalty" link = "rdscontroller?page=loyatylist"   />
 	<Element label = "" type = "UIMenu" Id = "menu05" style="menustyle" title="Wish_List" link = "rdscontroller?page=wishlist"   />
  </Element>
  <Element label = "" type = "UIMenu" Id = "menu300" style="menustyleParent" title="Sales_Planning" groupId= "menuGRP0040"  >
  <Element label = "" type = "UIMenu" Id = "menu3001" style="menustyle" title="Territories" link = "rdscontroller?page=territories"   />
+ 	 <Element label = "" type = "UIMenu" Id = "menu05" style="menustyle" title="Categories" link = "rdscontroller?page=custcategories"   />
 	 <Element label = "" type = "UIMenu" Id = "menu301" style="menustyle" title="Sales_Associate_PortFolio" link = "rdscontroller?page=salesportfoliolist"   />
 	 <Element label = "" type = "UIMenu" Id = "menu302" style="menustyle" title="Sales_Period" link = "rdscontroller?page=salesperiodlist"   />
 	<Element label = "" type = "UIMenu" Id = "menu303" style="menustyle" title="Expense_Heads" link = "rdscontroller?page=expenseheads"   />

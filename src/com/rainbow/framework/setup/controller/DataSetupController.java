@@ -115,14 +115,14 @@ public class DataSetupController extends GeneralController{
 	public IRadsContext generateContext(HttpServletRequest request,HttpServletResponse response,UIPage page) {
 		ctx =  request.getServletContext() ;
 		resp = response ;
-		return CommonUtil.generateContext(request, response);
+		return CommonUtil.generateContext(request, response,page);
 	}
 	
 	
 	
 	@Override
 	public IRadsContext generateContext(String authToken,UIPage page) {
-		return CommonUtil.generateContext(authToken) ;
+		return CommonUtil.generateContext(authToken,page) ;
 		//return LoginSQLs.loggedInUser(authToken);
 	}
 

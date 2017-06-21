@@ -58,6 +58,12 @@ public class CRMConstants {
 		public final static String FLOORWORK = "FLOORWRK";
 	}
 		
+	public final static class USERTYPE {
+		public final static String ALLUSERS = "ALLUSR";
+		public final static String MANAGERUSERS = "MGRUSR";
+		public final static String ADMINUSERS = "ADMUSR";
+		
+	}
 	public final static class SALESPFTYPE{
 		public final static String CATEGORY = "SPFCATG";
 		public final static String PRODUCT = "SPFPROD";

@@ -65,7 +65,7 @@ public class SalesLeadExtendedController extends CRMTransactionController{
 	public IRadsContext generateContext(HttpServletRequest request,HttpServletResponse response,UIPage page) {
 		ctx =  request.getServletContext() ;
 		resp = response ;
-		return CommonUtil.generateContext(request);
+		return CommonUtil.generateContext(request,page);
 	}
 	
 	

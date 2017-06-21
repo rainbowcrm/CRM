@@ -49,7 +49,7 @@ public class LookupCustomers implements ILookupService{
 
 	@Override
 	public IRadsContext generateContext(HttpServletRequest request,UIPage page ) {
-		return CommonUtil.generateContext(request.getSession().getId());
+		return CommonUtil.generateContext(request,page);
 	}
 
 }

@@ -55,7 +55,7 @@ public class FilterAjaxService implements IAjaxLookupService{
 	
 	@Override
 	public IRadsContext generateContext(HttpServletRequest request) {
-		return CommonUtil.generateContext(request);
+		return CommonUtil.generateContext(request,null);
 	}
 
 	

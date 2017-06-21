@@ -51,7 +51,7 @@ public class LookupUsers implements ILookupService{
 
 	@Override
 	public IRadsContext generateContext(HttpServletRequest request,UIPage page) {
-		return CommonUtil.generateContext(request);
+		return CommonUtil.generateContext(request,page);
 	}
 
 }
