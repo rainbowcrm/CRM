@@ -52,6 +52,9 @@ public  abstract class CRMValidator {
 	}
 	
 	public static  RadsError getErrorforCode(int errorCode,String ... params) {
+		if (resourceBundle == null) {
+			resourceBundle = ResourceBundle.getBundle("com.rainbow.crm.common.ErrorMessages",Locale.US);
+		}
 		String property = (String)resourceBundle.getObject(String.valueOf(errorCode));
 		String converted = MessageFormat.format(property, params);
 		RadsError error = new RadsError(String.valueOf(errorCode),converted);

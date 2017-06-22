@@ -14,6 +14,8 @@
 <Pages>
 <Page id = "login" definition ="/resources/pages/login/login.xml" modelclass = "com.rainbow.crm.login.model.Login" >
 </Page>
+<Page id = "noaccesspage" definition ="/resources/pages/login/noaccesspage.xml" modelclass = "com.rainbow.crm.login.model.DummyObject" >
+</Page>
 <Page id = "testTags" definition ="/resources/pages/login/testTags.xml" modelclass = "com.rainbow.crm.login.model.Login" >
 </Page>
 <Page id = "sysadmin" definition ="/resources/pages/company/CompanyList.xml" modelclass = "com.rainbow.crm.company.model.Company" >
@@ -22,16 +24,16 @@
 </Page>
 <Page id = "selfcompcreate" definition ="/resources/pages/company/SelfCompanyCreate.xml" modelclass = "com.rainbow.crm.company.model.GuestCompany"   authRequired="false">
 </Page>
-<Page id = "newuser" definition ="/resources/pages/user/UserCreate.xml" modelclass = "com.rainbow.crm.user.model.User" >
+<Page id = "newuser" definition ="/resources/pages/user/UserCreate.xml" accessCode ="ADMIN:USER" modelclass = "com.rainbow.crm.user.model.User" >
 </Page>
-<Page id = "Appnewuser" definition ="/resources/pages/user/AppUserCreate.xml" modelclass = "com.rainbow.crm.user.model.User" >
+<Page id = "Appnewuser" definition ="/resources/pages/user/AppUserCreate.xml" accessCode ="ADMIN:USER" modelclass = "com.rainbow.crm.user.model.User" >
 </Page>
-<Page id = "users" definition ="/resources/pages/user/UserList.xml" modelclass = "com.rainbow.crm.user.model.User" >
+<Page id = "users" definition ="/resources/pages/user/UserList.xml"  accessCode ="ADMIN:USER" modelclass = "com.rainbow.crm.user.model.User" >
 </Page>
-<Page id = "appUsers" definition ="/resources/pages/user/AppUserList.xml" modelclass = "com.rainbow.crm.user.model.User" >
+<Page id = "appUsers" definition ="/resources/pages/user/AppUserList.xml" accessCode ="ADMIN:USER" modelclass = "com.rainbow.crm.user.model.User" >
 </Page>
 <Page id = "lookup" definition ="/resources/pages/lookup/lookup.xml"  modelclass = "com.techtrade.rads.framework.model.simple.LookupObject" > </Page>
-<Page id = "divisions" definition ="/resources/pages/division/divisionList.xml" modelclass = "com.rainbow.crm.division.model.Division" >
+<Page id = "divisions" definition ="/resources/pages/division/divisionList.xml" accessCode ="ADMIN:DIVISION" modelclass = "com.rainbow.crm.division.model.Division" >
 </Page>
 <Page id = "categories" definition ="/resources/pages/category/categories.xml" modelclass = "com.rainbow.crm.category.model.Category" >
 </Page>
@@ -121,9 +123,9 @@
 <Page id = "uoms" definition ="/resources/pages/uoms/uoms.xml" modelclass = "com.rainbow.crm.uom.model.UOM" >
 </Page>
 -->
-<Page id = "queries" definition ="/resources/pages/query/query.xml" modelclass = "com.rainbow.framework.query.model.Query" >
+<Page id = "queries" definition ="/resources/pages/query/query.xml" accessCode ="MANAGER:QUERY" modelclass = "com.rainbow.framework.query.model.Query" >
 </Page>
-<Page id = "config" definition ="/resources/pages/config/config.xml" modelclass = "com.rainbow.crm.config.model.ConfigSet" >
+<Page id = "config" definition ="/resources/pages/config/config.xml" accessCode ="ADMIN:CONFIG" modelclass = "com.rainbow.crm.config.model.ConfigSet" >
 </Page>
 <Page id = "newcustomer" definition ="/resources/pages/customer/newcustomer.xml" modelclass = "com.rainbow.crm.customer.model.Customer" >
 </Page>
@@ -157,11 +159,11 @@
 </Page>
 <Page id = "skucomplete" definition ="/resources/pages/item/skucomplete.xml" modelclass = "com.rainbow.crm.item.model.SkuComplete" >
 </Page>
-<Page id = "setup" definition ="/resources/pages/datasetup/datasetup.xml" modelclass = "com.rainbow.framework.setup.model.DataLoader" >
+<Page id = "setup" definition ="/resources/pages/datasetup/datasetup.xml" accessCode ="ADMIN:DATASETUP" modelclass = "com.rainbow.framework.setup.model.DataLoader" >
 </Page>
 <Page id = "topic" definition ="/resources/pages/topic/topic.xml" modelclass = "com.rainbow.crm.topic.model.TopicSet" >
 </Page>
-<Page id = "newdivision" definition ="/resources/pages/division/newDivision.xml" modelclass = "com.rainbow.crm.division.model.Division" >
+<Page id = "newdivision" definition ="/resources/pages/division/newDivision.xml"  accessCode ="ADMIN:DIVISION" modelclass = "com.rainbow.crm.division.model.Division" >
 </Page>
 <Page id = "newvendor" definition ="/resources/pages/vendor/newVendor.xml" modelclass = "com.rainbow.crm.vendor.model.Vendor" >
 </Page>
@@ -181,11 +183,11 @@
 </Page>
 <Page id = "newsalereturn" definition ="/resources/pages/sales/newsalereturn.xml" modelclass = "com.rainbow.crm.sales.model.Sales" >
 </Page>
-<Page id = "salesperiodAnalysis" definition ="/resources/pages/salesanalysis/salestargetanalyse.xml" modelclass = "com.rainbow.crm.salesperiod.model.SalesPeriodAnalyzer" >
+<Page id = "salesperiodAnalysis" definition ="/resources/pages/salesanalysis/salestargetanalyse.xml" accessCode ="ANALY:STARGET" modelclass = "com.rainbow.crm.salesperiod.model.SalesPeriodAnalyzer" >
 </Page>
-<Page id = "productanalysis" definition ="/resources/pages/products/productanalyse.xml" modelclass = "com.rainbow.crm.product.model.ProductAnalyzer" >
+<Page id = "productanalysis" definition ="/resources/pages/products/productanalyse.xml" accessCode ="ANALY:PRODANALYSE" modelclass = "com.rainbow.crm.product.model.ProductAnalyzer" >
 </Page>
-<Page id = "salestrend" definition ="/resources/pages/products/productstrend.xml" modelclass = "com.rainbow.crm.sales.model.SalesTrend" >
+<Page id = "salestrend" definition ="/resources/pages/products/productstrend.xml"  accessCode ="ANALY:PRODTREND" modelclass = "com.rainbow.crm.sales.model.SalesTrend" >
 </Page>
 <Page id = "newwishlist" definition ="/resources/pages/wishlist/newwishlist.xml" modelclass = "com.rainbow.crm.wishlist.model.WishList" >
 </Page>

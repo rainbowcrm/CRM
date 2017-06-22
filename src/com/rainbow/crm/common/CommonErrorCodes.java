@@ -11,5 +11,6 @@ public class CommonErrorCodes {
 	public static int OBJECT_DELETED = 900108 ;
 	public static int INVALID_STATUS = 900109 ;
 	public static int COULDNOT_SENDEMAIL = 900110 ;
+	public static int UNAUTHORIZED_ACCESS = 900111 ;
 
 }

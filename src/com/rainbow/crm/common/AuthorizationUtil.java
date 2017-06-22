@@ -13,7 +13,6 @@ public class AuthorizationUtil {
 		//ConfigSQL.getConfigforCode(context.getLoggedinCompany(), key);
 		int companyId = user.getCompany().getId();
 		
-		user.getRoleType() ;
 		if(accessCode == null )
 			return true;
 		String permission =null ;
@@ -35,8 +34,9 @@ public class AuthorizationUtil {
 				return true;
 			else if (CRMConstants.USERTYPE.ADMINUSERS.equals(accessRight) &&  CommonUtil.isCorporateUser(user))
 				return true ;
+			else
+				return false;
 		
-		return true;	
 	}
 
 }

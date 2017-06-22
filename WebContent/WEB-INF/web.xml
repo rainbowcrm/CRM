@@ -97,7 +97,7 @@ id="WebApp_ID" version="3.0">
 <error-page>
     <!-- Uncaught exception -->
     <error-code>403</error-code>
-    <location>/rdscontroller?currentpage=login</location>
+    <location>/rdscontroller?currentpage=noaccesspage</location>
 </error-page>   
    
 <error-page>
