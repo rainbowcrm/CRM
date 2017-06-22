@@ -73,8 +73,12 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 		</options>
 	</Element>
 	
-	<Element label = ""  type = "UILabel" Id = "lblFree4"  style="bigTitle" value ="" />
-	<!-- <Element label = ""  type = "UILabel" Id = "lblCustTitle"   value ="" />  --> 
+	<Element label = "Associate"  type = "UIList" Id = "lstHeaderAssociate"   property ="salesMan.userId"  rendered = "Controller.isAssociateHeaderLevel"   externalise= "true">
+		<options populator =  "getAssociates"> 
+		</options>
+	</Element>
+	<Element label = ""  type = "UILabel" Id = "lblFree4"  rendered = "!Controller.isAssociateHeaderLevel"  showInPrevCol="true" style="bigTitle" value ="" />
+	<!--  <Element label = ""  type = "UILabel" Id = "lblCustTitle"   value ="" />  --> 
 	<Element label = "Customer_Phone"  type = "UIText" Id = "txtPhone"     property ="Customer.Phone" />
 	<Element label = "Email"  type = "UIText" Id = "txtEmail"   property ="Customer.Email" />
 	 <Element label = "Name"  type = "UILookupText"  Id = "txtCustomerName"  isMandatory="true" property ="Customer.FullName" showLookupAsDialog="true" dialogId="dlgComp"
@@ -102,6 +106,9 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 	<Element type = "UIIFrame" src ="./rdscontroller?page=quickcustomeradd" style ="lookupFrameStyle">
 	</Element>
 	</Element>
+	
+
+	
 </Section>
 
 <Section type ="detail">

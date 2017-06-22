@@ -20,7 +20,7 @@
       <many-to-one name="orderType" column ="ORDER_TYPE" not-null="false" lazy="false" ></many-to-one>
       <property name="salesDate" column="SALES_DATE" type="date"/>
       <property name="salesRef" column="SALES_REF" type="string"/>
-      <property name="salesMan" column="SALES_MAN" type="string"/>
+      <many-to-one name="salesMan" column ="SALES_MAN"  lazy="false" ></many-to-one>
       <property name="discAmount" column="HD_DISC_AMOUNT" type="double"/>
       <property name="discPercent" column="HD_DISC_PERCENT" type="double"/>
       <property name="totalDisc" column="TOTAL_DISCOUNT" type="double"/>

@@ -47,8 +47,25 @@ public class SalesController extends CRMTransactionController{
 	ServletContext ctx;
 	HttpServletResponse resp;
 	
+	public boolean isAssociateHeaderLevel()
+	{
+		CRMContext ctx= (CRMContext)getContext() ;
+		String slsAssociation = ConfigurationManager.getConfig(ConfigurationManager.SALESPERSONAL_ASSOCIATION, ctx);
+		if(CRMConstants.SALESORDER_ASSOCIATION.ORDER_HEADER.equals(slsAssociation) || CRMConstants.SALESORDER_ASSOCIATION.ORDER_HEAD_LINE.equals(slsAssociation) )
+			return true;
+		else
+			return false;
+	}
 	
-	
+	public boolean isAssociateLineLevel()
+	{
+		CRMContext ctx= (CRMContext)getContext() ;
+		String slsAssociation = ConfigurationManager.getConfig(ConfigurationManager.SALESPERSONAL_ASSOCIATION, ctx);
+		if(CRMConstants.SALESORDER_ASSOCIATION.ORDER_LINE.equals(slsAssociation) || CRMConstants.SALESORDER_ASSOCIATION.ORDER_HEAD_LINE.equals(slsAssociation) )
+			return true;
+		else
+			return false;
+	}
 	
 	@Override
 	public PageResult submit(ModelObject object) {

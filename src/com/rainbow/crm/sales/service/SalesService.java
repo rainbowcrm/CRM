@@ -185,8 +185,15 @@ public class SalesService extends AbstractionTransactionService implements ISale
 		object.setCompany(company);
 				
 		List<RadsError> ans = new ArrayList<RadsError>();
-		
-		
+		Externalize externalize = new Externalize(); ;
+		if(object.getSalesMan() != null ){
+			IUserService userService = (IUserService) SpringObjectFactory.INSTANCE.getInstance("IUserService");
+			User user = (User)userService.getById(object.getSalesMan().getUserId());
+			if (user == null ) {
+				ans.add(CRMValidator.getErrorforCode(context.getLocale(), SalesErrorCodes.FIELD_NOT_VALID , externalize.externalize(context, "User")));
+			}
+			object.setSalesMan(user);
+		}
 		if (object.getDivision() != null) {
 			int divisionId  = object.getDivision().getId() ;
 			IDivisionService divisionService =(IDivisionService) SpringObjectFactory.INSTANCE.getInstance("IDivisionService");
@@ -210,7 +217,7 @@ public class SalesService extends AbstractionTransactionService implements ISale
 			else 
 				ans.add(CRMValidator.getErrorforCode(context.getLocale(), SalesErrorCodes.FIELD_NOT_VALID , "Customer"));
 		}
-		Externalize externalize = new Externalize(); ;
+		
 		
 		if(object.getTerritory() != null) {
 			ITerritoryService territoryService = (ITerritoryService)SpringObjectFactory.INSTANCE.getInstance("ITerritoryService");

@@ -29,6 +29,13 @@ public class CRMConstants {
 	public final static String FV_SPITCH_TYPE = "PITCHTYPE";
 	public final static String FV_DOC_TYPE = "DOCTYPE";;
 	public final static String FV_PROMO_TYPE = "PROMOTYPE";;
+	public final static String FV_SALES_ORDER_ASSOCIATION="SLSORDASS";
+	
+	public final static class SALESORDER_ASSOCIATION {
+		public final static String ORDER_HEADER ="ORDHDR";
+		public final static String ORDER_LINE ="ORDLINE";
+		public final static String ORDER_HEAD_LINE ="ORDHDLN";
+	}
 	
 	public final static class PROMOTYPE {
 		public final static String CROSSSELL ="CRSSSELL";

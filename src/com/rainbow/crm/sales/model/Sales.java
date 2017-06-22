@@ -13,6 +13,7 @@ import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.territory.model.Territory;
+import com.rainbow.crm.user.model.User;
 import com.rainbow.crm.vendor.model.Vendor;
 import com.techtrade.rads.framework.annotations.RadsPropertySet;
 
@@ -26,7 +27,7 @@ public class Sales extends CRMBusinessModelObject{
 	FiniteValue orderType;
 	Date salesDate ;
 	String salesRef;
-	String salesMan;
+	User salesMan;
 	double discAmount;
 	double discPercent;
 	double totalDisc;
@@ -185,10 +186,10 @@ public class Sales extends CRMBusinessModelObject{
 	public void setSalesRef(String salesRef) {
 		this.salesRef = salesRef;
 	}
-	public String getSalesMan() {
+	public User getSalesMan() {
 		return salesMan;
 	}
-	public void setSalesMan(String salesMan) {
+	public void setSalesMan(User salesMan) {
 		this.salesMan = salesMan;
 	}
 	public boolean isFutureDelivery() {

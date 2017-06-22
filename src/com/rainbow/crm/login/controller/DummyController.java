@@ -7,6 +7,9 @@ import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMValidator;
 import com.rainbow.crm.common.CommonErrorCodes;
 import com.rainbow.crm.common.CommonUtil;
+import com.rainbow.crm.common.SpringObjectFactory;
+import com.rainbow.crm.company.model.Company;
+import com.rainbow.crm.company.service.ICompanyService;
 import com.techtrade.rads.framework.context.IRadsContext;
 import com.techtrade.rads.framework.controller.abstracts.GeneralController;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
@@ -33,5 +36,9 @@ public class DummyController extends  GeneralController{
 		return CommonUtil.generateContext(authToken, page);
 	}
 	
-	
+	public String getCompanyName() {
+		ICompanyService service = (ICompanyService)SpringObjectFactory.INSTANCE.getInstance("ICompanyService");
+		Company company =(Company) service.getById(((CRMContext)getContext()).getLoggedinCompany());
+		return company.getName();
+	}
 }

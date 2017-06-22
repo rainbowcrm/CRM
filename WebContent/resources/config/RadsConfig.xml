@@ -37,7 +37,7 @@
 </Page>
 <Page id = "categories" definition ="/resources/pages/category/categories.xml" modelclass = "com.rainbow.crm.category.model.Category" >
 </Page>
-<Page id = "expenseheads" definition ="/resources/pages/expensehead/expenseheads.xml" modelclass = "com.rainbow.crm.expensehead.model.ExpenseHead" >
+<Page id = "expenseheads" definition ="/resources/pages/expensehead/expenseheads.xml" accessCode ="SPLAN:EXPHEADS" modelclass = "com.rainbow.crm.expensehead.model.ExpenseHead" >
 </Page>
 <Page id = "brands" definition ="/resources/pages/brand/brands.xml" modelclass = "com.rainbow.crm.brand.model.Brand" >
 </Page>
@@ -63,7 +63,7 @@
 </Page>
 <Page id = "dashboard" definition ="/resources/pages/dashboards/salesdashboard.xml" modelclass = "com.rainbow.crm.dashboard.model.SalesDashBoard" >
 </Page>
-<Page id = "divmgrdashboard" definition ="/resources/pages/dashboards/divmgrdashboard.xml" modelclass = "com.rainbow.crm.dashboard.model.SalesDashBoard" >
+<Page id = "divmgrdashboard" definition ="/resources/pages/dashboards/divmgrdashboard.xml"  accessCode ="MANAGER:DASHBOARD" modelclass = "com.rainbow.crm.dashboard.model.SalesDashBoard" >
 </Page>
 <Page id = "salesdashboardtargetdata" definition ="/resources/pages/dashboards/salesdashboardtargetdata.xml" modelclass = "com.rainbow.crm.dashboard.model.SalesDashBoard" >
 </Page>
@@ -83,9 +83,9 @@
 </Page> 
 <Page id = "divproductsalesplits" definition ="/resources/pages/dashboards/divproductsalesplits.xml" modelclass = "com.rainbow.crm.dashboard.model.SalesDashBoard" >
 </Page> 
-<Page id = "custcategories" definition ="/resources/pages/custcategory/custcategoryList.xml" modelclass = "com.rainbow.crm.custcategory.model.CustCategory" >
+<Page id = "custcategories" definition ="/resources/pages/custcategory/custcategoryList.xml" accessCode ="SPLAN:CUSTCATEGORY" modelclass = "com.rainbow.crm.custcategory.model.CustCategory" >
 </Page>
-<Page id = "newcustcategory" definition ="/resources/pages/custcategory/newcustcategory.xml" modelclass = "com.rainbow.crm.custcategory.model.CustCategory" >
+<Page id = "newcustcategory" definition ="/resources/pages/custcategory/newcustcategory.xml" accessCode ="SPLAN:CUSTCATEGORY" modelclass = "com.rainbow.crm.custcategory.model.CustCategory" >
 </Page>
 <Page id = "alerts" definition ="/resources/pages/alert/alertList.xml" modelclass = "com.rainbow.crm.alert.model.Alert" >
 </Page>
@@ -93,11 +93,11 @@
 </Page>
 <Page id = "purchases" definition ="/resources/pages/purchase/purchaseList.xml" modelclass = "com.rainbow.crm.purchase.model.Purchase" >
 </Page>
-<Page id = "salesperiodlist" definition ="/resources/pages/salesperiod/salesPeriodList.xml" modelclass = "com.rainbow.crm.salesperiod.model.SalesPeriod" >
+<Page id = "salesperiodlist" definition ="/resources/pages/salesperiod/salesPeriodList.xml"  accessCode ="SPLAN:SPERIOD" modelclass = "com.rainbow.crm.salesperiod.model.SalesPeriod" >
 </Page>
-<Page id = "salesportfoliolist" definition ="/resources/pages/salesportfolio/salesportfolioList.xml" modelclass = "com.rainbow.crm.salesportfolio.model.SalesPortfolio" >
+<Page id = "salesportfoliolist" definition ="/resources/pages/salesportfolio/salesportfolioList.xml" accessCode ="SPLAN:SAPFOLIO" modelclass = "com.rainbow.crm.salesportfolio.model.SalesPortfolio" >
 </Page>
-<Page id = "promotionslist" definition ="/resources/pages/promotions/promotionsList.xml" modelclass = "com.rainbow.crm.promotion.model.Promotion" >
+<Page id = "promotionslist" definition ="/resources/pages/promotions/promotionsList.xml"  accessCode ="MANAGER:PROMOTIONS" modelclass = "com.rainbow.crm.promotion.model.Promotion" >
 </Page>
 <Page id = "sales" definition ="/resources/pages/sales/salesList.xml" modelclass = "com.rainbow.crm.sales.model.Sales" >
 </Page>
@@ -111,10 +111,10 @@
 </Page>
 <Page id = "expensevouchers" definition ="/resources/pages/expensevoucher/expensevoucherList.xml" modelclass = "com.rainbow.crm.expensevoucher.model.ExpenseVoucher" >
 </Page>
-<Page id = "openexpenses" definition ="/resources/pages/expensevoucher/mgrexpensevoucherList.xml" modelclass = "com.rainbow.crm.expensevoucher.model.ExpenseVoucher" >
+<Page id = "openexpenses" definition ="/resources/pages/expensevoucher/mgrexpensevoucherList.xml" accessCode ="MANAGER:OPENEXPENSES" modelclass = "com.rainbow.crm.expensevoucher.model.ExpenseVoucher" >
 </Page>
 
-<Page id = "territories" definition ="/resources/pages/territory/territoryList.xml" modelclass = "com.rainbow.crm.territory.model.Territory" >
+<Page id = "territories" definition ="/resources/pages/territory/territoryList.xml"  accessCode ="SPLAN:TERRIT" modelclass = "com.rainbow.crm.territory.model.Territory" >
 </Page>
 <Page id = "distributionorders" definition ="/resources/pages/distributionorder/distributionorderList.xml" modelclass = "com.rainbow.crm.distributionorder.model.DistributionOrder" >
 </Page>
@@ -171,13 +171,13 @@
 </Page>
 <Page id = "newexpensevoucher" definition ="/resources/pages/expensevoucher/newexpensevoucher.xml" modelclass = "com.rainbow.crm.expensevoucher.model.ExpenseVoucher" >
 </Page>
-<Page id = "mgrexpensevoucher" definition ="/resources/pages/expensevoucher/mgrproexpensevoucher.xml" modelclass = "com.rainbow.crm.expensevoucher.model.ExpenseVoucher" >
+<Page id = "mgrexpensevoucher" definition ="/resources/pages/expensevoucher/mgrproexpensevoucher.xml"   accessCode ="MANAGER:OPENEXPENSES" modelclass = "com.rainbow.crm.expensevoucher.model.ExpenseVoucher" >
 </Page>
-<Page id = "newsalesperiod" definition ="/resources/pages/salesperiod/newsalesperiod.xml" modelclass = "com.rainbow.crm.salesperiod.model.SalesPeriod" >
+<Page id = "newsalesperiod" definition ="/resources/pages/salesperiod/newsalesperiod.xml"   accessCode ="SPLAN:SPERIOD" modelclass = "com.rainbow.crm.salesperiod.model.SalesPeriod" >
 </Page>
-<Page id = "newsalesportfolio" definition ="/resources/pages/salesportfolio/newsalesportfolio.xml" modelclass = "com.rainbow.crm.salesportfolio.model.SalesPortfolio" >
+<Page id = "newsalesportfolio" definition ="/resources/pages/salesportfolio/newsalesportfolio.xml" accessCode ="SPLAN:SAPFOLIO" modelclass = "com.rainbow.crm.salesportfolio.model.SalesPortfolio" >
 </Page>
-<Page id = "newpromotions" definition ="/resources/pages/promotions/newpromotions.xml" modelclass = "com.rainbow.crm.promotion.model.Promotion" >
+<Page id = "newpromotions" definition ="/resources/pages/promotions/newpromotions.xml" accessCode ="MANAGER:PROMOTIONS" modelclass = "com.rainbow.crm.promotion.model.Promotion" >
 </Page>
 <Page id = "newsales" definition ="/resources/pages/sales/newsale.xml" modelclass = "com.rainbow.crm.sales.model.Sales" >
 </Page>
@@ -195,7 +195,7 @@
 </Page>
 <Page id = "salesleadconsole" definition ="/resources/pages/saleslead/salesleadconsole.xml" modelclass = "com.rainbow.crm.saleslead.model.SalesLeadExtended" >
 </Page>
-<Page id = "newterritory" definition ="/resources/pages/territory/newterritory.xml" modelclass = "com.rainbow.crm.territory.model.Territory" >
+<Page id = "newterritory" definition ="/resources/pages/territory/newterritory.xml" accessCode ="SPLAN:TERRIT" modelclass = "com.rainbow.crm.territory.model.Territory" >
 </Page>
 <Page id = "newdistributionorder" definition ="/resources/pages/distributionorder/newdistributionorder.xml" modelclass = "com.rainbow.crm.distributionorder.model.DistributionOrder" >
 </Page>

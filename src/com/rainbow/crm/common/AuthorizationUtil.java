@@ -27,6 +27,10 @@ public class AuthorizationUtil {
 			permission =  ConfigurationManager.TARGET_SETTING_PRIVILEGE;
 			
 		}
+		if(accessCode.contains("MANAGER:")){
+			 return  CommonUtil.isManagerRole(user);
+			
+		} 
 			String accessRight = ConfigSQL.getConfigforCode(companyId,permission);
 			if (CRMConstants.USERTYPE.ALLUSERS.equals(accessRight))
 				return true;
