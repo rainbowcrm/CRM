@@ -82,7 +82,7 @@ Controller = "com.rainbow.crm.sales.controller.SalesListController">
 <Element label = ""  type = "UINote" Id = "idPhone"  property ="Customer.Phone" />
 </Column>
 <Column title ="Associate" sortField="salesAssociate"  width ="20%" >
-<Element label = ""  type = "UINote" Id = "idPhone"  property ="salesMan" />
+<Element label = ""  type = "UINote" Id = "idPhone"  property ="salesMan.userId" />
 </Column>
 <Column title ="Amount" sortField="netAmount" width ="31%" >
 <Element label = ""  type = "UINote" Id = "idAmt"  property ="netAmount" />
