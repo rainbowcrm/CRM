@@ -4,10 +4,12 @@ import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMValidator;
 import com.rainbow.crm.common.CommonErrorCodes;
 import com.rainbow.crm.common.SpringObjectFactory;
+import com.rainbow.crm.config.service.ConfigurationManager;
 import com.rainbow.crm.sales.model.Sales;
 import com.rainbow.crm.sales.model.SalesLine;
 import com.rainbow.crm.sales.service.ISalesService;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
+import com.techtrade.rads.framework.ui.abstracts.PageResult;
 import com.techtrade.rads.framework.utils.Utils;
 
 public class SalesReturnValidator extends CRMValidator {
@@ -44,6 +46,13 @@ public class SalesReturnValidator extends CRMValidator {
 		
 	}
 	protected void checkforErrors(ModelObject object) {
+		
+		String allowReturnStr= ConfigurationManager.getConfig(ConfigurationManager.ALLOW_RETURNS, context);
+		boolean allowReturns  = Utils.getBooleanValue(allowReturnStr);
+		if(! allowReturns) {
+			errors.add(CRMValidator.getErrorforCode(SalesErrorCodes.NOT_ALLOWED_TODO_RETURNS));
+			return;
+		}
 		sales = (Sales) object ;
 		if (sales.getCompany() == null){
 			errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Company"))) ;

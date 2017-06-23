@@ -4,16 +4,21 @@ import java.util.List;
 
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMListController;
+import com.rainbow.crm.common.CRMValidator;
+import com.rainbow.crm.common.CommonErrorCodes;
 import com.rainbow.crm.common.IBusinessService;
 import com.rainbow.crm.common.SpringObjectFactory;
+import com.rainbow.crm.config.service.ConfigurationManager;
 import com.rainbow.crm.sales.model.Sales;
 import com.rainbow.crm.sales.service.ISalesService;
+import com.rainbow.crm.sales.validator.SalesErrorCodes;
 import com.rainbow.crm.sales.validator.SalesValidator;
 import com.techtrade.rads.framework.filter.Filter;
 import com.techtrade.rads.framework.filter.FilterNode;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
+import com.techtrade.rads.framework.utils.Utils;
 
 public class SalesReturnListController  extends CRMListController{
 
@@ -41,9 +46,21 @@ public class SalesReturnListController  extends CRMListController{
 		return sales.getId();
 				
 	}
+	
+	
+	
 
 	@Override
 	public PageResult submit(List<ModelObject> objects, String submitAction) {
+		CRMContext ctx = (CRMContext)getContext();
+		String allowReturnStr= ConfigurationManager.getConfig(ConfigurationManager.ALLOW_RETURNS, ctx);
+		boolean allowReturns  = Utils.getBooleanValue(allowReturnStr);
+		if(! allowReturns) {
+			PageResult pageResult = new PageResult();
+			pageResult.addError(CRMValidator.getErrorforCode(SalesErrorCodes.NOT_ALLOWED_TODO_RETURNS));
+			return pageResult;
+			
+		}
 		PageResult result = new PageResult();
 		result.setNextPageKey("salesreturnsearch");
 		return result;

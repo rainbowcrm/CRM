@@ -11,7 +11,7 @@ Controller = "com.rainbow.crm.sales.controller.SalesReturnSearchController">
 <ErrorSection>
 </ErrorSection>
 <Section type= "mainSection">
-<Element type = "UITable" rows = "1" cols = "3"  style = "outlinedTable">
+<Element type = "UITable" rows = "1" cols = "3" rendered = "Controller.isReturnAllowed"  style = "outlinedTable">
 <Element type = "UITableRow">
 <Element type ="UITableCol">	
 <Element label = "Division"  type = "UIList" Id = "lstInvDivision"  isMandatory="true" property ="Division.Id" >

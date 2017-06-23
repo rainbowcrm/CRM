@@ -2,9 +2,11 @@ package com.rainbow.crm.sales.controller;
 
 import org.apache.activemq.transport.LogWriter;
 
+import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMGeneralController;
 import com.rainbow.crm.common.CRMValidator;
 import com.rainbow.crm.common.SpringObjectFactory;
+import com.rainbow.crm.config.service.ConfigurationManager;
 import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.sales.model.Sales;
 import com.rainbow.crm.sales.model.SalesReturnSearch;
@@ -32,8 +34,23 @@ public class SalesReturnSearchController  extends CRMGeneralController{
 		});
 	}
 	
+	public  boolean isReturnAllowed()
+	{
+		CRMContext ctx = (CRMContext)getContext();
+		String allowReturnStr= ConfigurationManager.getConfig(ConfigurationManager.ALLOW_RETURNS, ctx);
+		boolean allowReturns  = Utils.getBooleanValue(allowReturnStr);
+		return allowReturns;
+	}
+	
 	@Override
 	public PageResult submit(ModelObject object) {
+		boolean allowReturns  = isReturnAllowed();
+		if(! allowReturns) {
+			PageResult pageResult = new PageResult();
+			pageResult.addError(CRMValidator.getErrorforCode(SalesErrorCodes.NOT_ALLOWED_TODO_RETURNS));
+			return pageResult;
+			
+		}
 		try {
 		SalesReturnSearch search = (SalesReturnSearch) object; 
 		if(search != null && !Utils.isNull(search.getOriginalBilllNumber())) {
