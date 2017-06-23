@@ -101,6 +101,34 @@ public class DashBoardSQLs {
 		return ans;
 	}
 	
+	public static Map<String, Double> getSaleMadeByAssociateWithoutDivision(  Date startDate, Date endDate )
+	{
+		Map<String, Double> ans = new HashMap<String, Double>();
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		try {
+			connection = ConnectionCreater.getConnection();
+			String sql =  " SELECT SUM(SALES_LINES.LINE_TOTAL),USER_ID FROM SALES , SALES_LINES WHERE SALES.ID= SALES_LINES.SALES_ID AND  " + 
+			 " SALES.SALES_DATE > ? AND  SALES.SALES_DATE <= ?    " + 
+			"  AND  SALES_LINES.IS_VOIDED = FALSE AND SALES.IS_VOIDED= FALSE  GROUP BY USER_ID";
+			statement = connection.prepareStatement(sql);
+			statement.setDate(1, startDate);
+			statement.setDate(2, endDate);
+			rs = statement.executeQuery();
+			while (rs.next()) {
+				Double amount = rs.getDouble(1);
+				String user = rs.getString(2);
+				ans.put(user, amount);
+			}
+		}catch (SQLException ex) {
+			Logwriter.INSTANCE.error(ex);
+		} finally {
+			ConnectionCreater.close(connection, statement, rs);
+		}
+		return ans;
+	}
+	
 	public static Map<String, Double> getSaleMadeByTerritory(int divison,  Date startDate, Date endDate )
 	{
 		Map<String, Double> ans = new HashMap<String, Double>();

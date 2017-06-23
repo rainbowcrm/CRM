@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Page id = "itemimages" showinFrame ="true"  title ="Sales Target Analysis| Rainbow CRM" Object = "com.rainbow.crm.salesperiod.model.SalesPeriodAnalyzer" 
+<Page id = "salestargetanalyse" showinFrame ="true"  title ="Sales Target Analysis| Rainbow CRM" Object = "com.rainbow.crm.salesperiod.model.SalesPeriodAnalyzer" 
 Controller = "com.rainbow.crm.salesperiod.controller.SalesPeriodAnalyzerController">
 <Template type= "General"  name = "GraphTemplate"></Template>
 

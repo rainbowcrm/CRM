@@ -423,6 +423,34 @@ public class DashBoardService  implements IDashBoardService{
 
 	}
 
+	
+	
+	@Override
+	public PieChartData getAssociateSaleSplits(
+			com.rainbow.crm.division.model.Division division, Date fromDate,
+			Date toDate, CRMContext context) {
+		Map<String , Double> splits;
+		if(division != null && division.getId() > -1)
+		splits = DashBoardSQLs.getSaleMadeByAssociate(division.getId(), 
+				new java.sql.Date(fromDate.getTime()), new java.sql.Date(toDate.getTime()));
+		else
+			splits = DashBoardSQLs.getSaleMadeByAssociateWithoutDivision( 
+					new java.sql.Date(fromDate.getTime()), new java.sql.Date(toDate.getTime()));
+		PieChartData pieChartData = new PieChartData();
+		AtomicInteger index = new AtomicInteger(0);
+		splits.forEach(  (item, qty) -> {  
+			PieSliceData pieSliceData  = new PieSliceData();
+			pieSliceData.setVolume(qty);
+			pieSliceData.setText(item);
+			pieSliceData.setColor(CommonUtil.getGraphColors()[index.getAndIncrement()]);
+			pieChartData.addPieSlice(pieSliceData);
+		} );
+		pieChartData.setFooterNote("Sale by Associate");
+		pieChartData.setTitle("Sale by Associate");
+		return pieChartData;
+
+	}
+
 	@Override
 	public PieChartData getAssociateSplits(User manager, Date date,
 			CRMContext context) {

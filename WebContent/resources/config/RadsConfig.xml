@@ -189,6 +189,9 @@
 </Page>
 <Page id = "salestrend" definition ="/resources/pages/products/productstrend.xml"  accessCode ="ANALY:PRODTREND" modelclass = "com.rainbow.crm.sales.model.SalesTrend" >
 </Page>
+<Page id = "salesforceanalysis" definition ="/resources/pages/salesanalysis/salesforceanalyse.xml"  accessCode ="ANALY:SALESFORCEANALYSE" modelclass = "com.rainbow.crm.salesforceanalyzer.model.SalesForceAnalyzer" >
+</Page>
+
 <Page id = "newwishlist" definition ="/resources/pages/wishlist/newwishlist.xml" modelclass = "com.rainbow.crm.wishlist.model.WishList" >
 </Page>
 <Page id = "newsaleslead" definition ="/resources/pages/saleslead/newsaleslead.xml" modelclass = "com.rainbow.crm.saleslead.model.SalesLead" >
