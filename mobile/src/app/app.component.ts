@@ -16,6 +16,7 @@ export class PSApp {
 
   constructor(platform: Platform, private statusBar: StatusBar, private splashScreen: SplashScreen) {
     platform.ready().then(() => {
+            debugger
             this.statusBar.styleDefault();
     });
   }

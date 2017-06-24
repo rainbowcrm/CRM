@@ -17,7 +17,7 @@ export class HTTPService {
   private authToken;
   constructor(public http: Http, private loader: Loader) {
     //this.url = 'http://ec2-35-154-225-199.ap-south-1.compute.amazonaws.com:8080/primuscrm/rdscontroller';//TO BE REMOVED.. may be config
-    this.url = 'http://localhost:8080/rdscontroller';
+    this.url = 'http://119.18.52.32:8080/primuscrm/rdscontroller';
   }
   processServerRequest (restType:string,data:any,auth?:boolean, isSilent?:boolean): Observable<any[]> {
     if(!isSilent){

@@ -23,8 +23,7 @@ import {SortPopOverPage} from './sort-helper/sort-popover'
   ],
   entryComponents: [
     ErrorPartial,
-    SortPopOverPage
-  ],
+    SortPopOverPage  ],
   providers: []
 })
 export class CommonPSModule {}

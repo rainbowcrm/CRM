@@ -12,7 +12,7 @@ import { ContactMgmtModule } from '../pages/contact-mgmt/contact-mgmt.module';
 import { SalesLeadModule } from '../pages/sales-lead/sales-lead.module';
 import { DiscussionModule } from '../pages/discussions/discussion.module';
 
-import { Loader,HTTPService, SharedService, ReasonCodeProvider, FilterProvider } from '../providers/';
+import { Loader,HTTPService, SharedService, ReasonCodeProvider, FilterProvider, PromptService } from '../providers/';
 import { ContactService, PushService, SecureStorageService } from '../plugins/';
 import { Push} from '@ionic-native/push';
 import { SecureStorage } from '@ionic-native/secure-storage';
@@ -44,6 +44,6 @@ import { IonicStorageModule } from '@ionic/storage';
     HomePage
   ],
   providers: [Loader,HTTPService, ReasonCodeProvider, FilterProvider, ContactService, SecureStorage, SecureStorageService,
-                Push,PushService, SplashScreen, SharedService]
+                Push,PushService, SplashScreen, SharedService, PromptService]
 })
 export class AppModule {}

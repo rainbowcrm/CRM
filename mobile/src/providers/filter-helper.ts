@@ -11,6 +11,16 @@ import 'rxjs/add/observable/throw';
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html
   for more info on providers and Angular 2 DI.
 */
+export class AllFilter{
+  filterId: string;
+  filterValue: string;
+}
+
+export class FilterDetails{
+  field: string;
+  value: string;
+}
+
 @Injectable()
 export class FilterProvider {
   private filtersForPage= new Subject<any>();
@@ -26,10 +36,45 @@ export class FilterProvider {
       var query = ["page="+page,"ajxService=allFilters"];
       this.http.processCustomUrlServerRequest(query.join('&'),"post",request, true).subscribe(
                      res =>  {
-                       debugger;
+                       this.processAllFilter(res);
                       },
-                     error =>  {});
+                     error =>  {
+                       this.showToast("Failed to fetch filters");
+                     });
   }
+
+  private processAllFilter(res): void{
+    let availableFilters = [];
+    let allFiltersKeys = Object.keys(res);
+     if(res){
+       for(let i=0; i<allFiltersKeys.length;i++){
+         let filter = new AllFilter();
+         filter.filterId = allFiltersKeys[i];
+         filter.filterValue = res[allFiltersKeys[i]];
+         availableFilters.push(filter)
+       }
+     }    
+     this.filtersForPage.next(availableFilters);
+  }
+
+  getFilterDetails(page: string, filterName: string){
+      let request = new BaseSearchRequest();
+      var query = ["page="+page,"ajxService=filterSearch","filterName="+filterName];
+      this.http.processCustomUrlServerRequest(query.join('&'),"post",request, true).subscribe(
+                     res =>  {
+                       this.processFilterDetails(res);
+                      },
+                     error =>  {
+                       this.showToast("Failed to fetch filter values");
+                     });
+  }
+
+  processFilterDetails(res){
+    this.filtersDetails.next(res);
+  }
+
+  
+
   saveFilter(page: string, data: any, pageId: string){
     let request = new BaseSearchRequest();
     request.fixedAction = "FixedAction.ACTION_FILTERSAVE";
