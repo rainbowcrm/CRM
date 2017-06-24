@@ -41,11 +41,11 @@ Controller = "com.rainbow.crm.salesforceanalyzer.controller.SalesForceAnalyzerCo
 </Section>
 <Section type= "displaySection">
 	<Element type = "UIPieChart" Id = "brChrt2"  dataProvider = "salesData" >
-	  <centerX>150</centerX>
-	  <centerY>150</centerY>
-	  <radius>50</radius>
-	  <rangeHeight>300</rangeHeight>
-	  <rangeWidth>500</rangeWidth>
+	  <centerX>500</centerX>
+	  <centerY>350</centerY>
+	  <radius>250</radius>
+	  <rangeHeight>800</rangeHeight>
+	  <rangeWidth>1000</rangeWidth>
  	</Element>
  <!-- 	<Element type = "UIPieChart" Id = "brChrt3"  dataProvider = "expenseData" >
 	  <centerX>150</centerX>

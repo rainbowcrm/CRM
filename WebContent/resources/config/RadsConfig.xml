@@ -395,7 +395,7 @@
   <AjaxService service ="replyTopic" class = "com.rainbow.crm.common.ajaxservices.TopicReplyAjaxService">
 
  </AjaxService>
-  <AjaxService service ="allReasoncodes" class = "com.rainbow.crm.common.ajaxservices.AllReasonCodes">
+  <AjaxService service ="allFiniteValues" class = "com.rainbow.crm.common.ajaxservices.AllFiniteValues">
 
  </AjaxService>
   <AjaxService service ="customerSearch" class = "com.rainbow.crm.customer.service.CustomerAjaxService">

@@ -12,12 +12,12 @@ import com.rainbow.crm.database.GeneralSQLs;
 import com.techtrade.rads.framework.context.IRadsContext;
 import com.techtrade.rads.framework.controller.abstracts.IAjaxUpdateService;
 
-public class AllReasonCodes implements IAjaxUpdateService {
+public class AllFiniteValues implements IAjaxUpdateService {
 
 	@Override
 	public String update(String jsonString, IRadsContext ctx) {
 		List<FiniteValue> values = GeneralSQLs.getAllFiniteValues();
-		StringBuffer replies = new StringBuffer (  " {\n \"allReasonCodes\": [  ");
+		StringBuffer replies = new StringBuffer (  " {\n \"allFiniteValues\": [  ");
 		for (int i = 0 ;   i < values.size() ; i ++ ) {
 			String replyJSON = values.get(i).toJSON() ;
 			replies.append( replyJSON  ) ;
