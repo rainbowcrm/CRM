@@ -29,23 +29,21 @@
   <ps-error [message]="errorMessage" [type]="'error'"></ps-error>
   <ion-grid>
        <ion-row>
-         <ion-col width-70>
+         <ion-col>
            <ion-item>
-             <ion-label>Filter</ion-label>
-                <ion-select [(ngModel)]="filterName" name>
-                  <ion-option value="add-filter">Add Filter</ion-option>
+               <ion-label *ngIf="!filterName" >Filter</ion-label>
+                <ion-select [(ngModel)]="filterName" (ionChange)="fetchFilterValues()">
+                  <ion-option value="0" >Add Filter</ion-option>
+                  <ion-option *ngFor="let filter of availableFilters" value="{{filter.filterValue}}">{{filter.filterValue}}</ion-option>
                   </ion-select>
              </ion-item>
         </ion-col>
         <ion-col>
            <ion-item>
-             <button ion-button icon-only class="filter-buttons" favorite>
+             <button ion-button icon-only class="filter-buttons" favorite (click)="onAdd()">
                   <ion-icon name="add"></ion-icon>
              </button>
-             <button ion-button icon-only class="filter-buttons">
-                  <ion-icon name="create"></ion-icon>
-             </button>
-             <button ion-button icon-only danger class="filter-buttons">
+             <button ion-button icon-only danger class="filter-buttons" (click)="onReset()">
                   <ion-icon name="close-circle"></ion-icon>
              </button>
              </ion-item>
@@ -58,7 +56,7 @@
        <ion-col>
          <ion-item>
            <ion-label floating>Product Name</ion-label>
-           <ion-input type="text" [(ngModel)]="searchString" name="product-name" #productName="ngModel"></ion-input>
+           <ion-input type="text" [(ngModel)]="model.Product.Name" name="product-name" #productName="ngModel"></ion-input>
          </ion-item>
        </ion-col>
      </ion-row>

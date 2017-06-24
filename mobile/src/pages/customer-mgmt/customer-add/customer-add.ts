@@ -93,7 +93,6 @@ export class CustomerAddPage {
   }
 
   customerAddError(error){
-    this.http.setAuthToken(null);
     this.errorMessage = "Failed to create customer";
   }
 

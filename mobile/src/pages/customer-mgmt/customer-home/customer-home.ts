@@ -29,7 +29,9 @@ export class CustomerHomePage {
        this.isAssociateCustomer = this.params.get('isAssociateCustomer'); 
        this.filter.filtersForPage$.subscribe(res => {this.updateFilters(res)});
        this.filter.filtersDetails$.subscribe(res => {this.updateFilterValues(res)});
+       this.filter.filtersSave$.subscribe(res => {this.updateFilterAfterSave()});
        this.promptCtrl.prompt$.subscribe(res => {this.saveFilterValue(res)});
+       this.filterName = "0";
        this.filter.getAllFiltersForPage("com.rainbow.crm.customer.controller.CustomerListController");  
   }
 
@@ -48,8 +50,30 @@ export class CustomerHomePage {
       return;
     }else{
       this.filterName = filterName;
-      debugger
+      this.model.FilterName = this.filterName;
+      this.filter.saveFilter( this.getFilters(),"customers");
     }
+  }
+
+  updateFilterAfterSave(){
+    let newFilter = new AllFilter();
+    if(this.isFilterExist(this.filterName)){
+      return;
+    }
+    newFilter.filterId = this.filterName;
+    newFilter.filterValue = this.filterName;
+    this.availableFilters.push(newFilter);
+  }
+
+  isFilterExist(filterName: string): boolean{
+    let filterExists = false;
+    for(let i=0; i<this.availableFilters.length ; i++){
+      if(this.availableFilters[i].filterValue == filterName){
+        filterExists = true;
+        break;
+      }
+    }
+    return filterExists;
   }
 
   fetchFilterValues(){
@@ -61,6 +85,7 @@ export class CustomerHomePage {
 
   onReset(){
     this.model = new Customer();
+    this.filterName = "0";
   }
 
   onAdd(){
@@ -69,6 +94,9 @@ export class CustomerHomePage {
     }else if( this.filterName == "0"){
       let prompt = this.promptCtrl.displayPrompt("Filter Name","Choose a filter name","OK");
       prompt.present();
+    }else{
+      this.model.FilterName = this.filterName;
+      this.filter.saveFilter( this.getFilters(),"customers");
     }
   }
 
@@ -130,7 +158,6 @@ export class CustomerHomePage {
  
 
   customerSearchError(error){
-    this.http.setAuthToken(null);
     this.errorMessage = "Failed to search customer";
   }
   addCustomer():void{

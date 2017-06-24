@@ -107,7 +107,6 @@ export class SalesLeadSearchResult {
 
   salesLeadSearchError(error,infiniteScroll){
     infiniteScroll.complete();
-    this.http.setAuthToken(null);
   }
 
 

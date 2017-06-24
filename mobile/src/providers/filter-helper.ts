@@ -75,7 +75,7 @@ export class FilterProvider {
 
   
 
-  saveFilter(page: string, data: any, pageId: string){
+  saveFilter(data: any, pageId: string){
     let request = new BaseSearchRequest();
     request.fixedAction = "FixedAction.ACTION_FILTERSAVE";
     request.hdnPage = 0;
@@ -89,6 +89,7 @@ export class FilterProvider {
 
   filterSaveSuccess(response):void{
     this.showToast("Filter saved");
+    this.filtersSave.next();
   }
  
 

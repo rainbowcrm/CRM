@@ -18,6 +18,7 @@ export class Customer{
     Base64Image: string;
     Filename: string;
     FileWithLink: string;
+    FilterName: string;
 }
 
 export class CustomerSearchRequest extends BaseSearchRequest{

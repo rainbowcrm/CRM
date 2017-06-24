@@ -46,6 +46,7 @@ export class SalesLeads{
    Territory: string;
    Status: Status;
    Voided: string;
+   FilterName: string;
 }
 
 export class Status{
@@ -56,7 +57,7 @@ export class Status{
 }
 
 export class Customer{
-    Phone: String;
+    Phone: string;
 }
 
 export class Division{

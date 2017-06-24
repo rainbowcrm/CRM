@@ -57,7 +57,7 @@ export class DiscussionsList {
  
 
   discussionSearchError(error){
-    this.http.setAuthToken(null);
+    
   }
 
   getTopicSubHeader(topic: Topic){
