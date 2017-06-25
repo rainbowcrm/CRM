@@ -32,7 +32,7 @@ public class SalesForceAnalyzerController extends CRMGeneralController {
 	public PageResult read(ModelObject object) {
 		SalesForceAnalyzer analyzer = (SalesForceAnalyzer)object;
 		if(analyzer.getFromDate() != null && analyzer.getToDate() != null) {
-			PieChartData data = loadSalesData(analyzer.getFromDate(),analyzer.getToDate(),analyzer.getDivision(),(CRMContext)getContext());
+			PieChartData data = loadSalesData(analyzer.getFromDate(),analyzer.getToDate(),analyzer.getDivision(),(CRMContext)getContext(),analyzer.getBasedOn());
 			analyzer.setSalesData(data);
 			PageResult result = new PageResult();
 			result.setObject(analyzer);
@@ -43,11 +43,20 @@ public class SalesForceAnalyzerController extends CRMGeneralController {
 
 
 
-	private PieChartData loadSalesData (Date fromDate, Date toDate, Division division, CRMContext context)
+	private PieChartData loadSalesData (Date fromDate, Date toDate, Division division, CRMContext context, String basedOn)
 	{
 		IDashBoardService dashBoardService = (IDashBoardService)SpringObjectFactory.INSTANCE.getInstance("IDashBoardService");
-		PieChartData salesData = dashBoardService.getAssociateSaleSplits(division, fromDate, toDate, context);
-		return salesData ;
+		if("Sales".equalsIgnoreCase(basedOn))  {
+			PieChartData salesData = dashBoardService.getAssociateSaleSplits(division, fromDate, toDate, context);
+			return salesData ;
+		}else if("Expense".equalsIgnoreCase(basedOn))  {
+			PieChartData salesData = dashBoardService.getAssociateExpenseSplits(division, fromDate, toDate, context);
+			return salesData ;
+		}else if("Leads".equalsIgnoreCase(basedOn))  {
+			PieChartData salesData = dashBoardService.getAssociateSalesLeadSplits(division, fromDate, toDate, context);
+			return salesData ;
+		}
+		return null;
 	}
 	
 	public Map <String, String > getAllDivisions() {

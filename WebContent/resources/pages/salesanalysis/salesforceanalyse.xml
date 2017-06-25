@@ -19,11 +19,11 @@ Controller = "com.rainbow.crm.salesforceanalyzer.controller.SalesForceAnalyzerCo
 	 </Element>
 	 </Element>
 	 <Element type ="UITableCol">
-	 	<Element label = "Based on"  type = "UIRadioBox" Id = "rdoType"    >
+	 	<Element label = "Based on"  type = "UIRadioBox" Id = "rdoType"   property ="basedOn" >
 	  <options> 
-	  <option key ="IT"> Sales </option>
-	  <option key ="US"> Expense </option>
-	  <option key ="TR"> Leads </option>
+	  <option key ="Sales"> Sales </option>
+	  <option key ="Expense"> Expense </option>
+	  <option key ="Leads"> Leads </option>
 	  </options>
 	</Element>
 	</Element>
