@@ -18,6 +18,7 @@
  <IncludeJS>./resources/js/RadsLib.js</IncludeJS>
  <IncludeJS>./resources/js/dialog-polyfill.js</IncludeJS>
  <IncludeJS>./resources/js/date-polyfill.js</IncludeJS>
+  <IncludeJS>./scripts/CRMGeneral.js</IncludeJS>
   <Errors showin ="detail"  style ="errorStyle" showinTable = "true" tabStyle ="errorStyle">
    <OddRow>oddRowError</OddRow>
    <EvenRow>evenRowError</EvenRow>
