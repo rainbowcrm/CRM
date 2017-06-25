@@ -126,7 +126,6 @@ export class ContactListPage {
 
   contactSearchError(error,infiniteScroll){
     infiniteScroll.complete();
-    this.http.setAuthToken(null);
   }
 
   saveContact(contact: Contact){

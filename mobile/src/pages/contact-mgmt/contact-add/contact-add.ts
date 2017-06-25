@@ -67,7 +67,6 @@ export class ContactAddPage {
   }
 
   contactAddError(error){
-    this.http.setAuthToken(null);
     this.errorMessage = "Failed to create contact";
   }
 

@@ -3,7 +3,8 @@ import { NavController, ToastController } from 'ionic-angular';
 
 import { HomePage } from '../../home/home';
 import { Alert, AlertSearchRequest, Owner, AlertListPage } from '../'
-import { HTTPService, ReasonCodeProvider } from '../../../providers/';
+import * as _ from 'lodash';
+import { HTTPService, ReasonCodeProvider,  FilterProvider, AllFilter, FilterDetails, PromptService } from '../../../providers/';
 
 /*
 
@@ -21,13 +22,21 @@ export class AlertsHomePage {
   private request: AlertSearchRequest;
   private typeReasonCodes: Array<any>;
   private statusReasonCodes: Array<any>;
+  private availableFilters: Array<AllFilter>;
 
   constructor(public navCtrl: NavController, private toastCtrl: ToastController
-  , private http: HTTPService, private rcp: ReasonCodeProvider) {
+  , private http: HTTPService, private rcp: ReasonCodeProvider,
+  private filter: FilterProvider, private promptCtrl: PromptService) {
      this.model = new Alert();
      this.model.Owner = new Owner();
      this.rcp.reasonCodeSource$.subscribe(res => {this.updateReasonCodes(res)});
      this.rcp.getReasonCode();
+     this.filter.filtersForPage$.subscribe(res => {this.updateFilters(res)});
+     this.filter.filtersDetails$.subscribe(res => {this.updateFilterValues(res)});
+     this.filter.filtersSave$.subscribe(res => {this.updateFilterAfterSave()});
+     this.promptCtrl.prompt$.subscribe(res => {this.saveFilterValue(res)});       
+     this.filterName = "0";
+     this.filter.getAllFiltersForPage("com.rainbow.crm.alert.controller.AlertListController");
   }
 
   updateReasonCodes(reasonCodes){
@@ -97,7 +106,7 @@ export class AlertsHomePage {
   }
   alertSearchSuccess(response):void{
     if(response.result == "failure"){
-       this.errorMessage = "Failed to search contacts"; 
+       this.errorMessage = "Failed to search Alerts"; 
        return ;
     }
     if(response.dataObject.length == 0){
@@ -111,8 +120,74 @@ export class AlertsHomePage {
  
 
   alertSearchError(error){
-    this.http.setAuthToken(null);
-    this.errorMessage = "Failed to search contacts";
+    this.errorMessage = "Failed to search Alerts";
+  }
+
+  updateFilters(res: Array<AllFilter>){
+    this.availableFilters = res;
+  }
+
+  updateFilterValues(res: Array<FilterDetails>){
+     for(let i=0; i< res.filter.length; i++){
+       _.set(this.model,res.filter[i].field, res.filter[i].value);
+     }
+  }
+
+  saveFilterValue(filterName: string){
+    if(filterName.length == 0){
+      return;
+    }else{
+      this.filterName = filterName;
+      this.model.FilterName = this.filterName;
+      this.filter.saveFilter( this.getFilters(),"alerts");
+    }
+  }
+
+  updateFilterAfterSave(){
+    let newFilter = new AllFilter();
+    if(this.isFilterExist(this.filterName)){
+      return;
+    }
+    newFilter.filterId = this.filterName;
+    newFilter.filterValue = this.filterName;
+    this.availableFilters.push(newFilter);
+  }
+
+  isFilterExist(filterName: string): boolean{
+    let filterExists = false;
+    for(let i=0; i<this.availableFilters.length ; i++){
+      if(this.availableFilters[i].filterValue == filterName){
+        filterExists = true;
+        break;
+      }
+    }
+    return filterExists;
+  }
+
+  fetchFilterValues(){
+    this.model = new Alert();
+    this.model.Owner = new Owner();
+    if(this.filterName && this.filterName != "0"){
+      this.filter.getFilterDetails("com.rainbow.crm.alert.controller.AlertListController", this.filterName);
+    }
+  }
+
+  onReset(){
+    this.model = new Alert();
+    this.model.Owner = new Owner();
+    this.filterName = "0";
+  }
+
+  onAdd(){
+    if(!this.filterName){
+       this.showToast("Please choose proper filter from drop down");
+    }else if( this.filterName == "0"){
+      let prompt = this.promptCtrl.displayPrompt("Filter Name","Choose a filter name","OK");
+      prompt.present();
+    }else{
+      this.model.FilterName = this.filterName;
+      this.filter.saveFilter( this.getFilters(),"alerts");
+    }
   }
 
 }

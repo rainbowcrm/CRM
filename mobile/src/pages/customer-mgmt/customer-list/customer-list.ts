@@ -104,7 +104,6 @@ export class CustomerListPage {
 
   customerSearchError(error,infiniteScroll){
     infiniteScroll.complete();
-    this.http.setAuthToken(null);
   }
 
   onSort(){
@@ -192,7 +191,6 @@ export class CustomerListPage {
   }
 
   customerDeleteError(error){
-    this.http.setAuthToken(null);
     this.failedToDeleteToast();
   }
 

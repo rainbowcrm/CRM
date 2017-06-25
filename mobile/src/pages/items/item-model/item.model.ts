@@ -34,6 +34,7 @@ export class Item{
     Image1URL: string;
     Image2URL: string;
     Image3URL: string;
+    FilterName: string;
 }
 
 export class ItemWithDetails extends Item{
@@ -79,8 +80,3 @@ export class ItemSearchResponse{
     availableRecords: number;
 }
 
-export class ItemSearchFilter{
-    field: string;
-    operator: string;
-    value: string;
-}

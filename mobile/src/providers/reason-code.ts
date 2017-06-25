@@ -23,7 +23,7 @@ export class ReasonCodeProvider {
      if(reasonCode){
        this.reasonCodeSource.next(reasonCode);
      }else{
-      this.http.processCustomUrlServerRequest("ajxService=allReasoncodes","post",this.request, true).subscribe(
+      this.http.processCustomUrlServerRequest("ajxService=allFiniteValues","post",this.request, true).subscribe(
                      res =>  {
                        this.processReasonCodes(res);
                       },
@@ -33,13 +33,13 @@ export class ReasonCodeProvider {
 
   private processReasonCodes(res): void{
      let reasonCode = {};
-     let allReasoncodes = res.allReasonCodes;
-     if(allReasoncodes){
-       for(let i=0; i<allReasoncodes.length;i++){
-         if(!reasonCode[allReasoncodes[i]["Type"]]){
-           reasonCode[allReasoncodes[i]["Type"]] = [];
+     let allFiniteValues = res.allFiniteValues;
+     if(allFiniteValues){
+       for(let i=0; i<allFiniteValues.length;i++){
+         if(!reasonCode[allFiniteValues[i]["Type"]]){
+           reasonCode[allFiniteValues[i]["Type"]] = [];
          }
-         reasonCode[allReasoncodes[i]["Type"]].push(allReasoncodes[i]);
+         reasonCode[allFiniteValues[i]["Type"]].push(allFiniteValues[i]);
        }
      }    
      this.saveReasonCodeIntoStorage(reasonCode);

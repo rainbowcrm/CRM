@@ -115,7 +115,6 @@ export class AlertListPage {
 
   alertSearchError(error,infiniteScroll){
     infiniteScroll.complete();
-    this.http.setAuthToken(null);
   }
 
 }

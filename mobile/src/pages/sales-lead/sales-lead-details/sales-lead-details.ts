@@ -66,7 +66,6 @@ export class SalesLeadDetails {
  
 
   salesLeadEmailError(error){
-    this.http.setAuthToken(null);
     this.emailFailed();
   }
 

@@ -15,4 +15,7 @@ ps-search-lead-search {
   button.filter-buttons[favorite]{
     background: color($colors, favorite)
   }
+  ion-select{
+    max-width: none;
+  }
 }

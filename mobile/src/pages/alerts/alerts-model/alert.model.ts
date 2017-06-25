@@ -14,6 +14,7 @@ export class Alert{
   Data: String;
   Url: String;
   Owner: Owner;
+  FilterName: string;
 }
 
 export class Owner{

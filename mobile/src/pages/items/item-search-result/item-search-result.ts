@@ -106,7 +106,6 @@ export class ItemSearchResult {
 
   itemSearchError(error,infiniteScroll){
     infiniteScroll.complete();
-    this.http.setAuthToken(null);
   }
 
   itemDetailsSearchSuccess(response):void{
@@ -125,7 +124,6 @@ export class ItemSearchResult {
 
   itemDetailsSearchError(error){
     this.noItemDetailsFoundToast();
-    this.http.setAuthToken(null);
   }
 
   onItemSelect(item:Item):void{

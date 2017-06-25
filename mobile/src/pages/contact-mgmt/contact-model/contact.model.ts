@@ -18,6 +18,7 @@ export class Contact{
     ContactType: ContactType;
     Id: string;
     IdentifierName: string;
+    FilterName: string;
 }
 
 export class ContactType{

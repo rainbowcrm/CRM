@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController, NavParams } from 'ionic-angular';
+import { NavController, ToastController, NavParams, AlertController } from 'ionic-angular';
 
 import { Customer, CustomerSearchRequest, CustomerSearchResponse } from '../';
 import { HomePage } from '../../home/home';
 import { CustomerAddPage, CustomerListPage} from '../'
-import { HTTPService } from '../../../providers/';
+import { HTTPService, FilterProvider, AllFilter, FilterDetails, PromptService } from '../../../providers/';
 
 /*
   Generated class for the CustomerHome page.
@@ -23,9 +23,81 @@ export class CustomerHomePage {
   private response: CustomerSearchResponse;
   private errorMessage:string;
   private isAssociateCustomer: Boolean;
+  private availableFilters: Array<AllFilter>;
   constructor(public navCtrl: NavController,private http:HTTPService,  private toastCtrl: ToastController
-             ,private params: NavParams) {
-       this.isAssociateCustomer = this.params.get('isAssociateCustomer');     
+             ,private params: NavParams, private filter: FilterProvider, private promptCtrl: PromptService) {
+       this.isAssociateCustomer = this.params.get('isAssociateCustomer'); 
+       this.filter.filtersForPage$.subscribe(res => {this.updateFilters(res)});
+       this.filter.filtersDetails$.subscribe(res => {this.updateFilterValues(res)});
+       this.filter.filtersSave$.subscribe(res => {this.updateFilterAfterSave()});
+       this.promptCtrl.prompt$.subscribe(res => {this.saveFilterValue(res)});
+       this.filterName = "0";
+       this.filter.getAllFiltersForPage("com.rainbow.crm.customer.controller.CustomerListController");  
+  }
+
+  updateFilters(res: Array<AllFilter>){
+    this.availableFilters = res;
+  }
+
+  updateFilterValues(res: Array<FilterDetails>){
+     for(let i=0; i< res.filter.length; i++){
+       this.model[res.filter[i].field] = res.filter[i].value;
+     }
+  }
+
+  saveFilterValue(filterName: string){
+    if(filterName.length == 0){
+      return;
+    }else{
+      this.filterName = filterName;
+      this.model.FilterName = this.filterName;
+      this.filter.saveFilter( this.getFilters(),"customers");
+    }
+  }
+
+  updateFilterAfterSave(){
+    let newFilter = new AllFilter();
+    if(this.isFilterExist(this.filterName)){
+      return;
+    }
+    newFilter.filterId = this.filterName;
+    newFilter.filterValue = this.filterName;
+    this.availableFilters.push(newFilter);
+  }
+
+  isFilterExist(filterName: string): boolean{
+    let filterExists = false;
+    for(let i=0; i<this.availableFilters.length ; i++){
+      if(this.availableFilters[i].filterValue == filterName){
+        filterExists = true;
+        break;
+      }
+    }
+    return filterExists;
+  }
+
+  fetchFilterValues(){
+    this.model = new Customer();
+    if(this.filterName && this.filterName != "0"){
+      this.filter.getFilterDetails("com.rainbow.crm.customer.controller.CustomerListController", this.filterName);
+    }
+  }
+
+  onReset(){
+    this.model = new Customer();
+    this.filterName = "0";
+  }
+
+  onAdd(){
+    if(!this.filterName){
+       this.showToast("Please choose proper filter from drop down");
+    }else if( this.filterName == "0"){
+      let prompt = this.promptCtrl.displayPrompt("Filter Name","Choose a filter name","OK");
+      prompt.present();
+    }else{
+      this.model.FilterName = this.filterName;
+      this.filter.saveFilter( this.getFilters(),"customers");
+    }
   }
 
   ionViewDidLoad() {
@@ -36,9 +108,9 @@ export class CustomerHomePage {
       this.navCtrl.setRoot(HomePage);
   }
 
-  NoCustomersFoundToast():any{
+  showToast(msg: string):any{
      let toast = this.toastCtrl.create({
-      message: 'No customers found',
+      message: msg,
       duration: 2000,
       position: 'top'
      });
@@ -76,7 +148,7 @@ export class CustomerHomePage {
        return ;
     }
     if(this.response.dataObject.length == 0){
-       this.NoCustomersFoundToast();
+       this.showToast("No customers found");
        return ;
     }
     this.navCtrl.push(CustomerListPage, {customers:this.response.dataObject, 
@@ -86,7 +158,6 @@ export class CustomerHomePage {
  
 
   customerSearchError(error){
-    this.http.setAuthToken(null);
     this.errorMessage = "Failed to search customer";
   }
   addCustomer():void{
