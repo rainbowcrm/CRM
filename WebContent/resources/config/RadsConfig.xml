@@ -330,6 +330,9 @@
  <Element label = "" type = "UIMenu" Id = "menu50" style="menustyleParent" title="Reports" groupId= "menuGRP008"  >
  <Element label = "" type = "UIMenu" Id = "menu51" style="menustyle" title="Daily_Sales_Report" link = "rdscontroller?page=salesreport"   />
  <Element label = "" type = "UIMenu" Id = "menu52" style="menustyle" title="Sales_Item_Report" link = "rdscontroller?page=salesreport&amp;reportType=DailyItemSales"   />
+ <Element label = "" type = "UIMenu" Id = "menu53" style="menustyle" title="Sales_Product_Report" link = "rdscontroller?page=salesreport&amp;reportType=DailyProductSales"   />
+ <Element label = "" type = "UIMenu" Id = "menu54" style="menustyle" title="Sales_Brand_Report" link = "rdscontroller?page=salesreport&amp;reportType=DailyBrandSales"   />
+ <Element label = "" type = "UIMenu" Id = "menu55" style="menustyle" title="Sales_Associate_Report" link = "rdscontroller?page=salesreport&amp;reportType=DailyAssociateSales"   />
  <!-- <Element label = "" type = "UIMenu" Id = "menu52" style="menustyle" title="Sales_Category_Report" link = "rdscontroller?page=report"   />
  <Element label = "" type = "UIMenu" Id = "menu52" style="menustyle" title="Sales_Brand_Report" link = "rdscontroller?page=report"   />
  <Element label = "" type = "UIMenu" Id = "menu52" style="menustyle" title="Sales_Product_Report" link = "rdscontroller?page=report"   />
