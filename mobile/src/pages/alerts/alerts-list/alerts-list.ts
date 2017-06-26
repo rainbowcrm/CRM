@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavParams, NavController, ToastController, AlertController, PopoverController } from 'ionic-angular';
-import { Alert, AlertSearchRequest } from '../';
+import { Alert, AlertSearchRequest, AcknowledgeAlertRequest } from '../';
 import { HTTPService, SharedService } from '../../../providers/';
 import { ContactService } from '../../../plugins/';
 import { SortPopOverPage }   from '../../../common/sort-helper/sort-popover';
@@ -115,6 +115,19 @@ export class AlertListPage {
 
   alertSearchError(error,infiniteScroll){
     infiniteScroll.complete();
+  }
+
+  acknowledge(alert:Alert){
+      let request = new AcknowledgeAlertRequest();
+      request.submitAction = "acknowledge";
+      request.currentmode = 'READ';
+      request.hdnPage = 0;
+      request.pageID = "alerts";
+      request.rds_selectedids = alert.Id;
+
+      this.http.processServerRequest("post",request, true).subscribe(
+                     res => this.showToast("Alert acknowledge"),
+                     error =>  this.showToast("Failed to acknowledge. Kindly retry again")); 
   }
 
 }
