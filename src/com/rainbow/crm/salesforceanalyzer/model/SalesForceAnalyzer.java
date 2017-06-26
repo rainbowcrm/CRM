@@ -13,6 +13,16 @@ public class SalesForceAnalyzer  extends CRMModelObject{
 	
 	Date fromDate;
 	Date toDate;
+	
+	String basedOn;
+	
+	
+	public String getBasedOn() {
+		return basedOn;
+	}
+	public void setBasedOn(String basedOn) {
+		this.basedOn = basedOn;
+	}
 	public Division getDivision() {
 		return division;
 	}

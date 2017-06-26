@@ -72,6 +72,65 @@ public class DashBoardSQLs {
 		return 0d ;
 	}
 	
+	public static Map<String, Double> getExpenseMadeByAssociate(int divison,  Date startDate, Date endDate )
+	{
+		Map<String, Double> ans = new HashMap<String, Double>();
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		try {
+			connection = ConnectionCreater.getConnection();
+			String sql =  " SELECT SUM(REQ_TOTAL),USER_ID FROM EXPENSE_VOUCHERS WHERE   " + 
+			 " EXPENSE_DATE > ? AND  EXPENSE_DATE <= ?  AND DIVISION_ID= ?  " + 
+			"  AND IS_DELETED = FALSE   GROUP BY USER_ID";
+			statement = connection.prepareStatement(sql);
+			statement.setDate(1, startDate);
+			statement.setDate(2, endDate);
+			statement.setInt(3,divison);
+			rs = statement.executeQuery();
+			while (rs.next()) {
+				Double amount = rs.getDouble(1);
+				String user = rs.getString(2);
+				ans.put(user, amount);
+			}
+		}catch (SQLException ex) {
+			Logwriter.INSTANCE.error(ex);
+		} finally {
+			ConnectionCreater.close(connection, statement, rs);
+		}
+		return ans;
+	}
+	
+	
+	public static Map<String, Double> getExpenseMadeByAssociateWithoutDivision(  Date startDate, Date endDate, int company )
+	{
+		Map<String, Double> ans = new HashMap<String, Double>();
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		try {
+			connection = ConnectionCreater.getConnection();
+			String sql =  " SELECT SUM(REQ_TOTAL),USER_ID FROM EXPENSE_VOUCHERS WHERE   " + 
+			 " EXPENSE_DATE > ? AND  EXPENSE_DATE <= ?  AND COMPANY_ID =?   " + 
+			"  AND IS_DELETED = FALSE   GROUP BY USER_ID";
+			statement = connection.prepareStatement(sql);
+			statement.setDate(1, startDate);
+			statement.setDate(2, endDate);
+			statement.setInt(3, company);
+			rs = statement.executeQuery();
+			while (rs.next()) {
+				Double amount = rs.getDouble(1);
+				String user = rs.getString(2);
+				ans.put(user, amount);
+			}
+		}catch (SQLException ex) {
+			Logwriter.INSTANCE.error(ex);
+		} finally {
+			ConnectionCreater.close(connection, statement, rs);
+		}
+		return ans;
+	}
+	
 	public static Map<String, Double> getSaleMadeByAssociate(int divison,  Date startDate, Date endDate )
 	{
 		Map<String, Double> ans = new HashMap<String, Double>();
@@ -101,7 +160,7 @@ public class DashBoardSQLs {
 		return ans;
 	}
 	
-	public static Map<String, Double> getSaleMadeByAssociateWithoutDivision(  Date startDate, Date endDate )
+	public static Map<String, Double> getSaleMadeByAssociateWithoutDivision(  Date startDate, Date endDate, int company )
 	{
 		Map<String, Double> ans = new HashMap<String, Double>();
 		Connection connection = null;
@@ -110,11 +169,12 @@ public class DashBoardSQLs {
 		try {
 			connection = ConnectionCreater.getConnection();
 			String sql =  " SELECT SUM(SALES_LINES.LINE_TOTAL),USER_ID FROM SALES , SALES_LINES WHERE SALES.ID= SALES_LINES.SALES_ID AND  " + 
-			 " SALES.SALES_DATE > ? AND  SALES.SALES_DATE <= ?    " + 
+			 " SALES.SALES_DATE > ? AND  SALES.SALES_DATE <= ?  AND SALES.COMPANY_ID = ?  " + 
 			"  AND  SALES_LINES.IS_VOIDED = FALSE AND SALES.IS_VOIDED= FALSE  GROUP BY USER_ID";
 			statement = connection.prepareStatement(sql);
 			statement.setDate(1, startDate);
 			statement.setDate(2, endDate);
+			statement.setInt(3, company);
 			rs = statement.executeQuery();
 			while (rs.next()) {
 				Double amount = rs.getDouble(1);
@@ -183,6 +243,68 @@ public class DashBoardSQLs {
 				}
 				Double count = rs.getDouble(1);
 				ans.put(status, count);
+			}
+			
+		}catch (SQLException ex) {
+			Logwriter.INSTANCE.error(ex);
+		} finally {
+			ConnectionCreater.close(connection, statement, rs);
+		}
+		
+		return ans ;
+	}
+	
+	public static Map<String, Double> getAssociateWiseSaleLeadsWithoutDivision( int company,  Date startDate, Date endDate )
+	{
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		Map<String, Double> ans = new HashMap<String, Double> ();
+		try {
+			connection = ConnectionCreater.getConnection();
+			String sql =  " SELECT COUNT(SALES_LEADS.ID),SALES_LEADS.SALES_ASSOCIATE FROM SALES_LEADS  WHERE   " + 
+			"  SALES_LEADS.RELEASED_DATE >= ? AND  SALES_LEADS.RELEASED_DATE <= ? AND " + 
+			" (SALES_LEADS.COMPANY_ID =  ?  ) AND  SALES_LEADS.IS_VOIDED = FALSE  GROUP BY SALES_LEADS.SALES_ASSOCIATE ";
+			statement = connection.prepareStatement(sql);
+			statement.setDate(1, startDate);
+			statement.setDate(2, endDate);
+			statement.setInt(3, company);
+			rs = statement.executeQuery();
+			while (rs.next()) {
+				String user  = rs.getString(2);
+				Double count = rs.getDouble(1);
+				ans.put(user, count);
+			}
+			
+		}catch (SQLException ex) {
+			Logwriter.INSTANCE.error(ex);
+		} finally {
+			ConnectionCreater.close(connection, statement, rs);
+		}
+		
+		return ans ;
+	}
+	
+	public static Map<String, Double> getAssociateWiseSaleLeads(int division,   Date startDate, Date endDate )
+	{
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		Map<String, Double> ans = new HashMap<String, Double> ();
+		try {
+			connection = ConnectionCreater.getConnection();
+			String sql =  " SELECT COUNT(SALES_LEADS.ID),SALES_LEADS.SALES_ASSOCIATE FROM SALES_LEADS  WHERE   " + 
+			"  SALES_LEADS.RELEASED_DATE >= ? AND  SALES_LEADS.RELEASED_DATE <= ? AND SALES_LEADS.DIVISION_ID = ? AND " + 
+			"   SALES_LEADS.IS_VOIDED = FALSE  GROUP BY SALES_LEADS.SALES_ASSOCIATE ";
+			statement = connection.prepareStatement(sql);
+			statement.setDate(1, startDate);
+			statement.setDate(2, endDate);
+			statement.setInt(3, division);
+			rs = statement.executeQuery();
+			while (rs.next()) {
+				String user  = rs.getString(2);
+				Double count = rs.getDouble(1);
+				ans.put(user, count);
 			}
 			
 		}catch (SQLException ex) {

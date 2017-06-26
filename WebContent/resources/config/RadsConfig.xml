@@ -198,6 +198,8 @@
 </Page>
 <Page id = "salesleadconsole" definition ="/resources/pages/saleslead/salesleadconsole.xml" modelclass = "com.rainbow.crm.saleslead.model.SalesLeadExtended" >
 </Page>
+<Page id = "salesreport" definition ="/resources/pages/reports/salesreports.xml" modelclass = "com.rainbow.crm.reports.model.SalesReport" >
+</Page>
 <Page id = "newterritory" definition ="/resources/pages/territory/newterritory.xml" accessCode ="SPLAN:TERRIT" modelclass = "com.rainbow.crm.territory.model.Territory" >
 </Page>
 <Page id = "newdistributionorder" definition ="/resources/pages/distributionorder/newdistributionorder.xml" modelclass = "com.rainbow.crm.distributionorder.model.DistributionOrder" >
@@ -324,7 +326,15 @@
  		<Element label = "" type = "UIMenu" Id = "menu401" style="menustyle" title="Sales_Returns" link = "rdscontroller?page=salesreturns"   />
  		<!-- <Element label = "" type = "UIMenu" Id = "menu402" style="menustyle" title="Purchase Returns" link = "rdscontroller?page=purchasereturns"   />  -->
  	</Element>
- 	
+  </Element>	
+ <Element label = "" type = "UIMenu" Id = "menu50" style="menustyleParent" title="Reports" groupId= "menuGRP008"  >
+ <Element label = "" type = "UIMenu" Id = "menu51" style="menustyle" title="Daily_Sales_Report" link = "rdscontroller?page=salesreport"   />
+ <!-- <Element label = "" type = "UIMenu" Id = "menu52" style="menustyle" title="Sales_Category_Report" link = "rdscontroller?page=report"   />
+ <Element label = "" type = "UIMenu" Id = "menu52" style="menustyle" title="Sales_Brand_Report" link = "rdscontroller?page=report"   />
+ <Element label = "" type = "UIMenu" Id = "menu52" style="menustyle" title="Sales_Product_Report" link = "rdscontroller?page=report"   />
+ <Element label = "" type = "UIMenu" Id = "menu52" style="menustyle" title="Sales_Item_Report" link = "rdscontroller?page=report"   />
+ <Element label = "" type = "UIMenu" Id = "menu52" style="menustyle" title="Customer_Summary" link = "rdscontroller?page=report"   />  -->
+
  </Element>
  </Panel>
 </Panels>
