@@ -3,6 +3,10 @@ import { BaseSearchRequest } from '../../../providers/';
 export class AlertSearchRequest extends BaseSearchRequest{
 }
 
+export class AcknowledgeAlertRequest extends BaseSearchRequest{
+    submitAction: string;
+}
+
 export class Alert{
   Division: Division;
   Type: Type;
@@ -15,6 +19,7 @@ export class Alert{
   Url: String;
   Owner: Owner;
   FilterName: string;
+  Id: string;
 }
 
 export class Owner{

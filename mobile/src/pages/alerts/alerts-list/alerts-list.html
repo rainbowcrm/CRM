@@ -38,7 +38,7 @@
       </button>
     </ion-col>
     <ion-col *ngIf="alert.Status.Code == 'ALTOPN'">
-      <button ion-button icon-left clear small>
+      <button ion-button icon-left clear small (click)="acknowledge(alert)">
         <div>Acknowledge</div>
       </button>
     </ion-col>
