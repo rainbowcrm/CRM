@@ -26,16 +26,22 @@ import com.techtrade.rads.framework.utils.Utils;
 public class SalesReportController  extends CRMGeneralController{
 
 	HttpServletResponse resp;
-	
+	HttpServletRequest request;
 	@Override
 	public PageResult submit(ModelObject object) {
+		String repType = request.getParameter("reportType") ;
+		((SalesReport) object).setReportType(repType);
 		return new PageResult();
 	}
 	@Override
 	public IRadsContext generateContext(HttpServletRequest request,HttpServletResponse response,UIPage page) {
 		resp = response ;
+		this.request= request;
 		return CommonUtil.generateContext(request,page);
 	}
+	
+	
+	
 
 	@Override
 	public PageResult submit(ModelObject object, String actionParam) {

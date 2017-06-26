@@ -43,7 +43,7 @@ public class SalesPortfolioDAO  extends SpringHibernateDAO{
 			"  ( line.portfolioType.code = 'SPFCATG' and line.portfolioKey = :categoryId )  " +
 				" )" );
 		try {
-		//query.setCacheable(true);
+		query.setCacheable(true);
 		query.setParameter("divisionId", divisionId);
 		query.setParameter("itemId", String.valueOf(itemId));
 		query.setParameter("productId", String.valueOf(productId));
