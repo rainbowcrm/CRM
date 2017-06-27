@@ -170,8 +170,29 @@ public class DocumentService extends AbstractService implements IDocumentService
 	@Override
 	public List<Document> findAllBySalesLead(SalesLead lead) {
 		DocumentDAO dao = (DocumentDAO) getDAO();
-		return dao.getDocumentsforSalesLead(lead.getId());
+		List<Document> docs = dao.getDocumentsforSalesLead(lead.getId());
+		if(!Utils.isNullList(docs)) {
+			docs.forEach(doc ->  {   
+				loadSupplymentoryURL(doc);
+			} );
+		}
+		return docs;
 	}
+
+
+
+	@Override
+	public List<Document> findAllByItem(Item item) {
+		DocumentDAO dao = (DocumentDAO) getDAO();
+		List<Document> docs =  dao.getDocumentsforItem(item.getId());
+		if(!Utils.isNullList(docs)) {
+			docs.forEach(doc ->  {   
+				loadSupplymentoryURL(doc);
+			} );
+		}
+		return docs;
+	}
+
 
 	
    

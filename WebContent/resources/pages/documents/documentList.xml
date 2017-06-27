@@ -42,7 +42,7 @@ Controller = "com.rainbow.crm.document.controller.DocumentListController">
    	<Element label = "Owner"  type = "UIText" Id = "txtSalesAss"  property ="owner" />
 </FilterNode>
  <FilterNode>
-   <Element label = "Type"  type = "UIList" Id = "lstType"  property ="enquiryType.code" >
+   <Element label = "Type"  type = "UIList" Id = "lstType"  property ="docType.code" >
 	<options populator =  "getDocumentTypes"> 
 	</options>
 	</Element>

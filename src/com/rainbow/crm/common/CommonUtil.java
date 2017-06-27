@@ -208,6 +208,13 @@ public class CommonUtil {
 				return null;
 	}
 	
+
+	public static Division getDefaultDivision(CRMContext context)
+	{
+		int company  = context.getLoggedinCompany() ;
+		IDivisionService service =(IDivisionService)SpringObjectFactory.INSTANCE.getInstance("IDivisionService");
+		return service.getDefaultDivision(company);
+	}
 	
 	public static User getUser(CRMContext context, String userId){
 		IUserService service = (IUserService) SpringObjectFactory.INSTANCE.getInstance("IUserService");

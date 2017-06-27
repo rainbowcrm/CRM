@@ -87,6 +87,7 @@ public class AlertService extends AbstractService implements IAlertService{
 	@Override
 	public TransactionResult create(CRMModelObject object, CRMContext context) {
 		TransactionResult result=  super.create(object, context);
+		pushAlertNotifictions((Alert) object,context);
 		return result; 
 	}
 

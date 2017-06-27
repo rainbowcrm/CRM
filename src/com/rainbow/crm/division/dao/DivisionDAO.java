@@ -34,6 +34,8 @@ public class DivisionDAO extends HibernateDAO {
 		closeSession(session, false);
 		return division;
 	}
+
+
 	
 	public Division getByName(String name,int company) {
 		Division division = null;
@@ -52,7 +54,7 @@ public class DivisionDAO extends HibernateDAO {
 	public Division getDefaultDivision(int company) {
 		Division division = null;
 		Session session = openSession(false);
-		Query query = session.createQuery(" from Division where name = :name  and company.id =:id  and deleted=false  order by divisionType " ) ;
+		Query query = session.createQuery(" from Division where company.id =:id  and deleted=false  order by divisionType " ) ;
 		query.setParameter("id", company);
 		List lst = query.list();
 		if (!Utils.isNullList(lst))

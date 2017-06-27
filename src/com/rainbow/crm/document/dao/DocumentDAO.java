@@ -36,5 +36,14 @@ public class DocumentDAO extends SpringHibernateDAO {
 		return lst;
 	}
 	
+	public List<Document> getDocumentsforItem(int item) {
+		Session session = openSession(false);
+		Query query = session.createQuery(" from Document where item.id = :item    and deleted = false  " ) ;
+		query.setParameter("item", item);
+		List<Document> lst = query.list();
+		closeSession(session, false);
+		return lst;
+	}
+	
 
 }

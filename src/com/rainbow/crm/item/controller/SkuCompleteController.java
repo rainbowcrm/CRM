@@ -11,6 +11,8 @@ import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.config.service.ConfigurationManager;
+import com.rainbow.crm.document.model.Document;
+import com.rainbow.crm.document.service.IDocumentService;
 import com.rainbow.crm.inventory.model.Inventory;
 import com.rainbow.crm.inventory.service.IInventoryService;
 import com.rainbow.crm.item.dao.ItemImageSQL;
@@ -51,7 +53,11 @@ public class SkuCompleteController  extends SkuController{
 		}
 		itemComplete.setInventory(inventoryList);
 		
+		IDocumentService docService = (IDocumentService)SpringObjectFactory.INSTANCE.getInstance("IDocumentService");
+		List<Document> documents = docService.findAllByItem(((Sku) thisObject).getItem());
+		itemComplete.setDocuments(documents);
 		setObject(itemComplete);
+		
 		}catch(Exception ex) {
 			Logwriter.INSTANCE.error(ex);
 		}

@@ -37,8 +37,10 @@ public class DashBoardService  implements IDashBoardService{
 	private SalesPeriod getActiveSalesPeriodforManager(User associate, Date date,CRMContext context)
 	{
 		ISalesPeriodService salesPeriodService = (ISalesPeriodService)SpringObjectFactory.INSTANCE.getInstance("ISalesPeriodService");
-		return salesPeriodService.getActiveSalesPeriodforDivision(associate.getDivision().getId(), date);
-
+		if(associate.getDivision() != null)
+			return salesPeriodService.getActiveSalesPeriodforDivision(associate.getDivision().getId(), date);
+		else
+			return salesPeriodService.getActiveSalesPeriodforDivision(CommonUtil.getDefaultDivision(context).getId(), date);
 	}
 	
 	
@@ -565,7 +567,8 @@ public class DashBoardService  implements IDashBoardService{
 	public BarChartData setDivisionSalesTargetData(User manager, Date date,
 			CRMContext context, String classification) {
 		SalesPeriod currentPeriod = getActiveSalesPeriodforManager(manager,date,context);
-		ISalesPeriodService service = (ISalesPeriodService)SpringObjectFactory.INSTANCE.getInstance("ISalesPeriodService");
+		if (currentPeriod == null)
+			return null;
 		ISalesService salesService =  (ISalesService)SpringObjectFactory.INSTANCE.getInstance("ISalesService");
 		if (Utils.isNullString(classification) || "TOTAL".equalsIgnoreCase(classification) ) {
 		int totalSoldQty = salesService.getTotalSaleQuantity(currentPeriod.getFromDate(),

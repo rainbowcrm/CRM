@@ -121,7 +121,7 @@ public class TopicService extends AbstractService implements
 		((Topic) object).setCompany(company);
 		((Topic) object).setOwner(context.getLoggedInUser());
 		if (context.getLoggedInUser().getDivision()  == null ) {
-			
+			((Topic) object).setDivision(CommonUtil.getDefaultDivision(context));
 		}else {
 			((Topic) object).setDivision(context.getLoggedInUser().getDivision());
 		}

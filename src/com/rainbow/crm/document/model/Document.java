@@ -58,21 +58,27 @@ public class Document extends CRMBusinessModelObject{
 	public void setDocPath(String docPath) {
 		this.docPath = docPath;
 	}
+	@RadsPropertySet(useBKForJSON=true,useBKForMap=true,useBKForXML=true)
 	public Item getItem() {
 		return item;
 	}
+	@RadsPropertySet(useBKForJSON=true,useBKForMap=true,useBKForXML=true)
 	public void setItem(Item item) {
 		this.item = item;
 	}
+	@RadsPropertySet(useBKForJSON=true,useBKForMap=true,useBKForXML=true)
 	public Customer getCustomer() {
 		return customer;
 	}
+	@RadsPropertySet(useBKForJSON=true,useBKForMap=true,useBKForXML=true)
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
+	@RadsPropertySet(useBKForJSON=true,useBKForMap=true,useBKForXML=true)
 	public User getOwner() {
 		return owner;
 	}
+	@RadsPropertySet(useBKForJSON=true,useBKForMap=true,useBKForXML=true)
 	public void setOwner(User owner) {
 		this.owner = owner;
 	}
@@ -82,9 +88,11 @@ public class Document extends CRMBusinessModelObject{
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
+	@RadsPropertySet(useBKForJSON=true,useBKForMap=true,useBKForXML=true)
 	public SalesLead getLead() {
 		return lead;
 	}
+	@RadsPropertySet(useBKForJSON=true,useBKForMap=true,useBKForXML=true)
 	public void setLead(SalesLead lead) {
 		this.lead = lead;
 	}
