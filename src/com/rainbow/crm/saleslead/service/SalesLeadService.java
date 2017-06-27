@@ -155,6 +155,7 @@ public class SalesLeadService extends AbstractionTransactionService implements I
 	private String getAdditionalCondition(String whereCondition, CRMContext context)
 	{
 		StringBuffer additionalCondition = new StringBuffer();
+		if(CommonUtil.isManagerRole(context.getLoggedInUser() )) return whereCondition;
 		if (Utils.isNullString(whereCondition) ){
 			additionalCondition = additionalCondition.append(" where (  salesAssociate is null or  salesAssociate ='" + context.getUser() + "')") ; 
 		}else {

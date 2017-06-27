@@ -93,7 +93,7 @@
 </Page>
 <Page id = "purchases" definition ="/resources/pages/purchase/purchaseList.xml" modelclass = "com.rainbow.crm.purchase.model.Purchase" >
 </Page>
-<Page id = "salesperiodlist" definition ="/resources/pages/salesperiod/salesPeriodList.xml"  accessCode ="SPLAN:SPERIOD" modelclass = "com.rainbow.crm.salesperiod.model.SalesPeriod" >
+<Page id = "salesperiodlist" definition ="/resources/pages/salesperiod/salesperiodList.xml"  accessCode ="SPLAN:SPERIOD" modelclass = "com.rainbow.crm.salesperiod.model.SalesPeriod" >
 </Page>
 <Page id = "salesportfoliolist" definition ="/resources/pages/salesportfolio/salesportfolioList.xml" accessCode ="SPLAN:SAPFOLIO" modelclass = "com.rainbow.crm.salesportfolio.model.SalesPortfolio" >
 </Page>
