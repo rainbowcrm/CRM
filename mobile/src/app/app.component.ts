@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, Nav, AlertController } from 'ionic-angular';
+import { Platform, Nav, AlertController, ViewController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
@@ -23,8 +23,12 @@ export class PSApp {
 
         platform.registerBackButtonAction(() => {
             // get current active page
+            let view: ViewController = this.nav.getActive();
             if(this.nav.canGoBack()){
               this.nav.pop();
+            }
+            else if(view.component.name != "HomePage"){
+              this.nav.setRoot(HomePage);
             }else{
               if(this.alert){ 
                 this.alert.dismiss();
