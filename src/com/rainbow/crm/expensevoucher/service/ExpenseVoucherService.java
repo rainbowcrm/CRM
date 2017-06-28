@@ -12,6 +12,7 @@ import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMDBException;
 import com.rainbow.crm.common.CRMValidator;
+import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.Externalize;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
@@ -20,6 +21,7 @@ import com.rainbow.crm.company.service.ICompanyService;
 import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.division.service.IDivisionService;
+import com.rainbow.crm.document.model.Document;
 import com.rainbow.crm.hibernate.ORMDAO;
 import com.rainbow.crm.user.model.User;
 import com.rainbow.crm.user.service.IUserService;
@@ -142,6 +144,17 @@ public class ExpenseVoucherService extends AbstractionTransactionService impleme
 		return ans;
 	}
 
+	private boolean uploadFile(ExpenseVoucherLine line, String docNo, CRMContext context)
+	{
+		String fileExtn = CommonUtil.getFileExtn(line.getFile1());
+		String fileName =  new String(docNo + line.getLineNumber());
+		fileName.replace(" ", "_")    ; 
+	//	doc.setDocName(fileName +  "."  + fileExtn);
+		line.setFilePath( "//" +  context.getLoggedinCompanyCode() +  "//exps//" + fileName +  "."  + fileExtn );
+		CommonUtil.uploadFile(line.getFile1Data(), fileName +  "."  + fileExtn  , context, "exps");
+		return true;
+	}
+	
 	@Override
 	public TransactionResult create(CRMModelObject object, CRMContext context) {
 		ExpenseVoucher expenseVoucher = (ExpenseVoucher)object ;
@@ -156,6 +169,9 @@ public class ExpenseVoucherService extends AbstractionTransactionService impleme
 				int linePK = GeneralSQLs.getNextPKValue( "ExpenseVoucher_Lines") ;
 				line.setId(linePK);
 				line.setExpenseVoucherDoc(expenseVoucher);
+				if (line.getFile1Data() != null ) {
+					uploadFile(line,expenseVoucher.getDocNumber() ,context);
+				}
 			}
 		}
 		TransactionResult result= super.create(object, context);
@@ -184,6 +200,9 @@ public class ExpenseVoucherService extends AbstractionTransactionService impleme
 				}else {
 					int linePK = GeneralSQLs.getNextPKValue( "ExpenseVoucher_Lines") ;
 					line.setId(linePK);
+				}
+				if (line.getFile1Data() != null ) {
+					uploadFile(line,expenseVoucher.getDocNumber() ,context);
 				}
 			}
 			while (it.hasNext()) {
