@@ -61,7 +61,7 @@ export class HomePage {
   onNotificationRegistered(registration){
     console.log(registration)
     var self = this;
-    this.storage.get('name').then((val) => {
+    this.storage.get('user').then((val) => {
       self.registerDeviceToken(registration.registrationId,val);
     });
   }
