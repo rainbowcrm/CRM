@@ -7,23 +7,23 @@ import com.rainbow.crm.division.model.Division;
 
 public class SalesReport  extends CRMModelObject {
 
-	public enum ReportType {
-		DAILY_SALES, DAILY_DIVISION_SALES ;
-		
-	};
+	private String reportType;
 	
 	Date from;
 	Date to;
 	
 	Division division;
 	
-	ReportType reportType;
+	
+	
 
-	public ReportType getReportType() {
+
+
+	public String getReportType() {
 		return reportType;
 	}
 
-	public void setReportType(ReportType reportType) {
+	public void setReportType(String reportType) {
 		this.reportType = reportType;
 	}
 

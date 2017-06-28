@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-06-25T23:03:51 -->
+<!-- 2017-06-26T20:03:57 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Daily_Sales" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7b58219a-74b2-49b3-b65c-353bc00168b4">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="CRM"/>
@@ -68,6 +68,12 @@ ORDER BY
 	<variable name="net_amount2" class="java.lang.Float" resetType="Column" calculation="Sum">
 		<variableExpression><![CDATA[$F{net_amount}]]></variableExpression>
 	</variable>
+	<variable name="line_total1" class="java.lang.Float" resetType="Group" resetGroup="Group1" calculation="Sum">
+		<variableExpression><![CDATA[$F{line_total}]]></variableExpression>
+	</variable>
+	<variable name="line_total2" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{line_total}]]></variableExpression>
+	</variable>
 	<group name="Group1">
 		<groupExpression><![CDATA[$F{sales_date}]]></groupExpression>
 		<groupHeader>
@@ -88,14 +94,7 @@ ORDER BY
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band height="18">
-				<textField>
-					<reportElement x="440" y="0" width="110" height="18" uuid="67e38864-b08e-4ff2-9ef7-8eedaa3fc902"/>
-					<textElement textAlignment="Right">
-						<font size="12" isBold="true" isUnderline="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$V{net_amount1}]]></textFieldExpression>
-				</textField>
+			<band height="23">
 				<staticText>
 					<reportElement x="360" y="0" width="70" height="18" uuid="968394cf-3585-4ede-882d-b151dcfced6c"/>
 					<textElement textAlignment="Left">
@@ -103,6 +102,13 @@ ORDER BY
 					</textElement>
 					<text><![CDATA[Daily Total:]]></text>
 				</staticText>
+				<textField>
+					<reportElement x="450" y="0" width="100" height="18" uuid="6d06b9c5-14db-46f1-a5cf-ccdbd4b92a88"/>
+					<textElement textAlignment="Right">
+						<font isBold="true" isUnderline="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{line_total1}]]></textFieldExpression>
+				</textField>
 			</band>
 		</groupFooter>
 	</group>
@@ -230,27 +236,27 @@ ORDER BY
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch">
-			<textField>
-				<reportElement x="440" y="0" width="110" height="30" uuid="22644268-0a61-42ec-828e-75aa05737104"/>
-				<textElement textAlignment="Right">
-					<font size="14" isBold="true" isUnderline="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{net_amount2}]]></textFieldExpression>
-			</textField>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="24" splitType="Stretch">
 			<staticText>
-				<reportElement x="360" y="0" width="70" height="18" uuid="2df4e0ac-17f3-4bfa-9aa6-e0cdb87d1f83"/>
+				<reportElement x="360" y="1" width="70" height="18" uuid="2df4e0ac-17f3-4bfa-9aa6-e0cdb87d1f83"/>
 				<textElement textAlignment="Left">
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[Grand Total:]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="450" y="1" width="100" height="18" uuid="9631390d-94b5-44dd-9242-6032aca4c7f5"/>
+				<textElement textAlignment="Right">
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{line_total2}]]></textFieldExpression>
+			</textField>
 		</band>
-	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
 	</summary>
 </jasperReport>

@@ -25,8 +25,7 @@ public class DivisionService extends AbstractService implements IDivisionService
 	
 	@Override
 	public Division getDefaultDivision(int company) {
-		// TODO Auto-generated method stub
-		return null;
+		return ((DivisionDAO)getDAO()).getDefaultDivision(company);
 	}
 
 	@Override

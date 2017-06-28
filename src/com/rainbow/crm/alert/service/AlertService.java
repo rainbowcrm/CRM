@@ -15,11 +15,13 @@ import java.util.List;
 
 
 
+
 import com.google.android.gcm.server.Message;
 import com.google.android.gcm.server.Result;
 import com.google.android.gcm.server.Sender;
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.AbstractService;
+import com.rainbow.crm.common.CRMAppConfig;
 import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.SpringObjectFactory;
@@ -87,6 +89,7 @@ public class AlertService extends AbstractService implements IAlertService{
 	@Override
 	public TransactionResult create(CRMModelObject object, CRMContext context) {
 		TransactionResult result=  super.create(object, context);
+		pushAlertNotifictions((Alert) object,context);
 		return result; 
 	}
 
@@ -134,12 +137,13 @@ public class AlertService extends AbstractService implements IAlertService{
 	public void pushNotification(Alert alert, String notificationID )
 	{
 		try {
-		Sender sender = new  Sender(notificationID);
+		String mobileAppId= 	CRMAppConfig.INSTANCE.getProperty("mobile_app_id");
+		Sender sender = new  Sender(mobileAppId);
 		Message message = new Message.Builder()
           .collapseKey("message")
           .timeToLive(3)
           .delayWhileIdle(true)
-          .addData("message",alert.getUrl()) 
+          .addData("message",alert.getData()) 
           .build();  
 		Result result = sender.send(message,notificationID, 1);
 		}catch(Exception ex)

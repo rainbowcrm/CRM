@@ -93,7 +93,7 @@
 </Page>
 <Page id = "purchases" definition ="/resources/pages/purchase/purchaseList.xml" modelclass = "com.rainbow.crm.purchase.model.Purchase" >
 </Page>
-<Page id = "salesperiodlist" definition ="/resources/pages/salesperiod/salesPeriodList.xml"  accessCode ="SPLAN:SPERIOD" modelclass = "com.rainbow.crm.salesperiod.model.SalesPeriod" >
+<Page id = "salesperiodlist" definition ="/resources/pages/salesperiod/salesperiodList.xml"  accessCode ="SPLAN:SPERIOD" modelclass = "com.rainbow.crm.salesperiod.model.SalesPeriod" >
 </Page>
 <Page id = "salesportfoliolist" definition ="/resources/pages/salesportfolio/salesportfolioList.xml" accessCode ="SPLAN:SAPFOLIO" modelclass = "com.rainbow.crm.salesportfolio.model.SalesPortfolio" >
 </Page>
@@ -198,7 +198,7 @@
 </Page>
 <Page id = "salesleadconsole" definition ="/resources/pages/saleslead/salesleadconsole.xml" modelclass = "com.rainbow.crm.saleslead.model.SalesLeadExtended" >
 </Page>
-<Page id = "salesreport" definition ="/resources/pages/reports/salesreports.xml" modelclass = "com.rainbow.crm.reports.model.SalesReport" >
+<Page id = "salesreport" definition ="/resources/pages/reports/salesreports.xml" accessCode ="REPORTS:DAILYSALES" modelclass = "com.rainbow.crm.reports.model.SalesReport" >
 </Page>
 <Page id = "newterritory" definition ="/resources/pages/territory/newterritory.xml" accessCode ="SPLAN:TERRIT" modelclass = "com.rainbow.crm.territory.model.Territory" >
 </Page>
@@ -329,10 +329,14 @@
   </Element>	
  <Element label = "" type = "UIMenu" Id = "menu50" style="menustyleParent" title="Reports" groupId= "menuGRP008"  >
  <Element label = "" type = "UIMenu" Id = "menu51" style="menustyle" title="Daily_Sales_Report" link = "rdscontroller?page=salesreport"   />
+ <Element label = "" type = "UIMenu" Id = "menu52" style="menustyle" title="Sales_Item_Report" link = "rdscontroller?page=salesreport&amp;reportType=DailyItemSales"   />
+ <Element label = "" type = "UIMenu" Id = "menu53" style="menustyle" title="Sales_Product_Report" link = "rdscontroller?page=salesreport&amp;reportType=DailyProductSales"   />
+ <Element label = "" type = "UIMenu" Id = "menu54" style="menustyle" title="Sales_Brand_Report" link = "rdscontroller?page=salesreport&amp;reportType=DailyBrandSales"   />
+ <Element label = "" type = "UIMenu" Id = "menu55" style="menustyle" title="Sales_Associate_Report" link = "rdscontroller?page=salesreport&amp;reportType=DailyAssociateSales"   />
  <!-- <Element label = "" type = "UIMenu" Id = "menu52" style="menustyle" title="Sales_Category_Report" link = "rdscontroller?page=report"   />
  <Element label = "" type = "UIMenu" Id = "menu52" style="menustyle" title="Sales_Brand_Report" link = "rdscontroller?page=report"   />
  <Element label = "" type = "UIMenu" Id = "menu52" style="menustyle" title="Sales_Product_Report" link = "rdscontroller?page=report"   />
- <Element label = "" type = "UIMenu" Id = "menu52" style="menustyle" title="Sales_Item_Report" link = "rdscontroller?page=report"   />
+ 
  <Element label = "" type = "UIMenu" Id = "menu52" style="menustyle" title="Customer_Summary" link = "rdscontroller?page=report"   />  -->
 
  </Element>

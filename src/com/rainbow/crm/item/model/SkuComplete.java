@@ -3,6 +3,7 @@ package com.rainbow.crm.item.model;
 import java.util.List;
 
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
+import com.rainbow.crm.document.model.Document;
 import com.rainbow.crm.inventory.model.Inventory;
 
 public class SkuComplete  extends Sku{
@@ -12,6 +13,7 @@ public class SkuComplete  extends Sku{
 	private String image3URL;
 	
 	List<Inventory> inventory;
+	List<Document> documents;
 	
 	public String getImage1URL() {
 		return image1URL;
@@ -64,6 +66,13 @@ public class SkuComplete  extends Sku{
 	public void setInventory(List<Inventory> inventory) {
 		this.inventory = inventory;
 	}
+	public List<Document> getDocuments() {
+		return documents;
+	}
+	public void setDocuments(List<Document> documents) {
+		this.documents = documents;
+	}
+	
 	
 	
 	

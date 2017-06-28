@@ -27,6 +27,10 @@ public class AuthorizationUtil {
 			permission =  ConfigurationManager.TARGET_SETTING_PRIVILEGE;
 			
 		}
+		if(accessCode.contains("REPORTS:")){
+			permission =  ConfigurationManager.REPORT_VIEW_PRIVILEGE;
+			
+		}
 		if(accessCode.contains("MANAGER:")){
 			 return  CommonUtil.isManagerRole(user);
 			
