@@ -352,6 +352,7 @@ public class SalesService extends AbstractionTransactionService implements ISale
 				delta.addLine(deltaLine);
 			}
 		}
+		delta.setContext(context);
 		CRMMessageSender.sendMessage(delta);
 	
 	}

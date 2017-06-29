@@ -50,7 +50,7 @@ public class CRMMessageReceiver implements MessageListener {
 			}else if(objMsg.getObject() instanceof InventoryDelta) {
 				InventoryDelta inventoryObject = (InventoryDelta)objMsg.getObject() ;
 				IInventoryService service = (IInventoryService)SpringObjectFactory.INSTANCE.getInstance("IInventoryService");
-			
+				service.updateInventory(inventoryObject);
 				
 			}
 		}catch(Exception ex) {
