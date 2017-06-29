@@ -10,6 +10,7 @@ import com.rainbow.crm.common.CRMDBException;
 import com.rainbow.crm.common.IBusinessService;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.inventory.model.Inventory;
+import com.rainbow.crm.inventory.model.InventoryDelta;
 import com.rainbow.crm.inventory.model.InventoryUpdateObject;
 import com.rainbow.crm.item.model.Sku;
 import com.techtrade.rads.framework.model.transaction.TransactionResult;
@@ -26,6 +27,8 @@ public interface IInventoryService extends IBusinessService{
 	
 	public List<Inventory> getByItem(Sku item);
 	
+	@Transactional
+	public void updateInventory(InventoryDelta inventoryDelta) ;
 	
 
 }

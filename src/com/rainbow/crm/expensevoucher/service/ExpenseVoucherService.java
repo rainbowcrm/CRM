@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.AbstractionTransactionService;
+import com.rainbow.crm.common.CRMAppConfig;
 import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMDBException;
@@ -23,6 +24,7 @@ import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.division.service.IDivisionService;
 import com.rainbow.crm.document.model.Document;
 import com.rainbow.crm.hibernate.ORMDAO;
+import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.user.model.User;
 import com.rainbow.crm.user.service.IUserService;
 import com.rainbow.crm.expensehead.model.ExpenseHead;
@@ -49,10 +51,30 @@ public class ExpenseVoucherService extends AbstractionTransactionService impleme
 	}
 	
 	
+	private void loadSupplymentoryURL(ExpenseVoucherLine line)
+	{
+		try { 
+			String serverURL = CRMAppConfig.INSTANCE.getProperty("doc_server");
+			line.setFileWithLink(serverURL + line.getFilePath());
+		
+		}catch(Exception ex) 
+		{
+		  Logwriter.INSTANCE.error(ex);	
+		}
+	}
+	
 
 	@Override
 	public Object getById(Object PK) {
-		return getDAO().getById(PK);
+		ExpenseVoucher voucher = (ExpenseVoucher) getDAO().getById(PK);
+		if(!Utils.isNullSet(voucher.getExpenseVoucherLines()))  {
+			for (ExpenseVoucherLine line : voucher.getExpenseVoucherLines()) {
+				if(!Utils.isNull(line.getFilePath())) 
+					loadSupplymentoryURL(line);
+					
+			}
+		}
+		return voucher;
 	}
 
 	@Override

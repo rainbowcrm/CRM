@@ -15,12 +15,16 @@ import java.util.Set;
 
 
 
+
+
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+
 
 
 
@@ -56,6 +60,8 @@ import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.division.service.IDivisionService;
 import com.rainbow.crm.hibernate.ORMDAO;
+import com.rainbow.crm.inventory.model.InventoryDelta;
+import com.rainbow.crm.inventory.model.InventoryDeltaLine;
 import com.rainbow.crm.inventory.model.InventoryUpdateObject;
 import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.item.model.Sku;
@@ -321,6 +327,35 @@ public class SalesService extends AbstractionTransactionService implements ISale
 		}
 		return result; 
 	}
+	
+	private void updateInventoryDelta(Sales oldState, Sales newState , CRMContext context)
+	{
+		InventoryDelta delta = new InventoryDelta();
+		Set<SalesLine> oldLines = oldState.getSalesLines();
+		Set<SalesLine> newLines = newState.getSalesLines() ;
+		if(!Utils.isNullSet(oldLines))
+		{
+			for (SalesLine line : oldLines) {
+				InventoryDeltaLine deltaLine = new InventoryDeltaLine();
+				deltaLine.setDivision(oldState.getDivision());
+				deltaLine.setSku(line.getSku());
+				deltaLine.setQty(line.getQty());
+				delta.addLine(deltaLine);
+			}
+		}
+		if(!Utils.isNullSet(newLines)) {
+			for (SalesLine line : newLines) {
+				InventoryDeltaLine deltaLine = new InventoryDeltaLine();
+				deltaLine.setDivision(newState.getDivision());
+				deltaLine.setSku(line.getSku());
+				deltaLine.setQty(line.getQty() * -1 );
+				delta.addLine(deltaLine);
+			}
+		}
+		CRMMessageSender.sendMessage(delta);
+	
+	}
+	
 
 	@Override
 	public TransactionResult update(CRMModelObject object, CRMContext context) {
@@ -350,7 +385,9 @@ public class SalesService extends AbstractionTransactionService implements ISale
 				sales.addSalesLine(oldLine);
 			}
 		}
-		return super.update(object, context);
+		TransactionResult result = super.update(object, context);
+		updateInventoryDelta(oldObject,sales, context) ;
+		return result;
 	}
 
 	@Override

@@ -46,10 +46,11 @@ Controller = "com.rainbow.crm.expensevoucher.controller.ExpenseVoucherController
 <Element type = "UITableHead">
  <Element type = "UITableRow">
 
-<Element type ="UITableCol" width = "15%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Expense" /></Element>
-<Element type ="UITableCol" width = "10%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="BillNo" /></Element>
-<Element type ="UITableCol" width = "20%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Comments" /></Element>
-<Element type ="UITableCol" width = "20%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Manager_Comments" /></Element>
+<Element type ="UITableCol" width = "13%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Expense" /></Element>
+<Element type ="UITableCol" width = "5%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="BillNo" /></Element>
+<Element type ="UITableCol" width = "18%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Comments" /></Element>
+<Element type ="UITableCol" width = "18%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Manager_Comments" /></Element>
+<Element type ="UITableCol" width = "12%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="File" /></Element>
 <Element type ="UITableCol" width = "12%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Attachment" /></Element>
 <Element type ="UITableCol" width = "6%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Requested_Amount" /></Element>
 <Element type ="UITableCol" width = "6%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Countered_Amount" /></Element>
@@ -63,9 +64,16 @@ Controller = "com.rainbow.crm.expensevoucher.controller.ExpenseVoucherController
 	</options>
 </Element>
 </Element>
-<Element type ="UITableCol" width = "10%"><Element label = ""  type = "UIText" Id = "txtLineCo"  property ="billNumber" size = "10" />  </Element>
-<Element type ="UITableCol" width = "20%"><Element label = ""  type = "UIText" Id = "txtLineMgrComm"  property ="associateComments"  size = "18" />  </Element>
-<Element type ="UITableCol" width = "20%"><Element label = ""  type = "UIText" Id = "txtLineAssComm"  property ="managerComments" readonly="true"  size = "18" />  </Element>
+<Element type ="UITableCol" width = "5%"><Element label = ""  type = "UIText" Id = "txtLineCo"  property ="billNumber" size = "10" />  </Element>
+<Element type ="UITableCol" width = "18%"><Element label = ""  type = "UIText" Id = "txtLineMgrComm"  property ="associateComments"  size = "18" />  </Element>
+<Element type ="UITableCol" width = "18%">
+<Element label = ""  type = "UIText" Id = "txtLineAssComm"  property ="managerComments" readonly="true"  size = "18" />  
+</Element>
+<Element type ="UITableCol" width = "12%">
+<If check  = "Controller.isUpdateMode" >
+	<Element label = ""  type = "UIHyperLink" Id = "txtlink"    size="10" property ="fileWithLink" externalise ="false" />
+</If>
+</Element>
 <Element type ="UITableCol" width = "12%">
 <Element label = "" type = "UIFileUpload" Id = "txtPhoto3" property ="file1Data" maxSize="30720"
    multiple ="false"  fileNameProperty="file1"    />

@@ -18,6 +18,8 @@ import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.hibernate.ORMDAO;
 import com.rainbow.crm.inventory.dao.InventoryDAO;
 import com.rainbow.crm.inventory.model.Inventory;
+import com.rainbow.crm.inventory.model.InventoryDelta;
+import com.rainbow.crm.inventory.model.InventoryDeltaLine;
 import com.rainbow.crm.inventory.model.InventoryUpdateObject;
 import com.rainbow.crm.inventory.validator.InventoryValidator;
 import com.rainbow.crm.item.model.Sku;
@@ -93,6 +95,29 @@ public class InventoryService extends AbstractService implements  IInventoryServ
 	@Override
 	public List<Inventory> getByItem(Sku item) {
 		return ((InventoryDAO)getDAO()).getByItem(item.getId());
+	}
+
+	
+	
+	
+	@Override
+	public void updateInventory(InventoryDelta inventoryDelta) {
+		if (inventoryDelta != null && !Utils.isNullList(inventoryDelta.getLines())) {
+			for(InventoryDeltaLine line : inventoryDelta.getLines() ) {
+				Inventory inv = getByItemandDivision( line.getSku(),line.getDivision());
+				if (line.isReserve()) {
+					inv.setReservedQty(inv.getReservedQty() + line.getQty());
+				} else if (line.isFulFill()) {
+					inv.setCurrentQty(inv.getCurrentQty() - line.getQty());
+					inv.setReservedQty(inv.getReservedQty() - line.getQty());
+				}else 
+					inv.setCurrentQty(inv.getCurrentQty() + line.getQty());
+				
+				update(inv, inventoryDelta.getContext());
+			}
+				
+			}
+		
 	}
 
 	@Override

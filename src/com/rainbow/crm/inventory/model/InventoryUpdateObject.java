@@ -10,6 +10,7 @@ import com.rainbow.crm.common.BusinessAction;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.division.model.Division;
 
+@Deprecated
 public class InventoryUpdateObject extends CRMBusinessModelObject implements Serializable{
 
 	Division division ;

@@ -11,6 +11,7 @@ import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
+import com.rainbow.crm.inventory.model.InventoryDelta;
 import com.rainbow.crm.inventory.model.InventoryUpdateObject;
 import com.rainbow.crm.inventory.service.IInventoryService;
 import com.rainbow.crm.logger.Logwriter;
@@ -45,6 +46,11 @@ public class CRMMessageReceiver implements MessageListener {
 					ILoyaltyService loyaltyService = (ILoyaltyService)SpringObjectFactory.INSTANCE.getInstance("ILoyaltyService");
 					loyaltyService.addToLoyalty(inventoryObject.getSalesDoc(), makeContext(inventoryObject));
 				}
+				
+			}else if(objMsg.getObject() instanceof InventoryDelta) {
+				InventoryDelta inventoryObject = (InventoryDelta)objMsg.getObject() ;
+				IInventoryService service = (IInventoryService)SpringObjectFactory.INSTANCE.getInstance("IInventoryService");
+			
 				
 			}
 		}catch(Exception ex) {

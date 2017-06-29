@@ -29,6 +29,8 @@ public class ExpenseVoucherLine extends CRMBusinessModelObject{
 	byte[] file1Data ;
 	byte[] file2Data ;
 	
+	String fileWithLink; 
+	
 	public ExpenseVoucherLine() {
 	
 	}
@@ -126,6 +128,12 @@ public class ExpenseVoucherLine extends CRMBusinessModelObject{
 	}
 	public void setFilePath(String filePath) {
 		this.filePath = filePath;
+	}
+	public String getFileWithLink() {
+		return fileWithLink;
+	}
+	public void setFileWithLink(String fileWithLink) {
+		this.fileWithLink = fileWithLink;
 	}
 	
 	
