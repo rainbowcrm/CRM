@@ -30,6 +30,19 @@ public class CRMConstants {
 	public final static String FV_DOC_TYPE = "DOCTYPE";;
 	public final static String FV_PROMO_TYPE = "PROMOTYPE";;
 	public final static String FV_SALES_ORDER_ASSOCIATION="SLSORDASS";
+	public final static String FV_REASON_TYPE="REASTYPE";
+	public final static String FV_USRPRIV_TYPE= "USRPRIVTYP";
+	
+	public final static class REASON_TYPE {
+		public final static String FAVORABLE_SALESLEAD_REASON ="FVSLREAS";
+		public final static String UNFAVORABLE_SALESLEAD_REASON ="UNFVSLREAS";
+		public final static String POSTIVE_FEEDBACK_REASON ="PSFBREAS";
+		public final static String NEGATIVE_FEEDBACK_REASON ="NGFBREAS";
+		public final static String SERVICE_REQUEST_REASON ="SRVRQREAS";
+		public final static String EXCESS_DISC_REASON ="DISCREAS";
+		public final static String EXPENSE_REJECTION_REASON ="EXPRJREAS";
+		public final static String EXPENSE_APPROVAL_REASON ="EXPAPREAS";
+	}
 	
 	public final static class SALESORDER_ASSOCIATION {
 		public final static String ORDER_HEADER ="ORDHDR";

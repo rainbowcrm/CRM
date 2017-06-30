@@ -127,6 +127,8 @@
 </Page>
 <Page id = "config" definition ="/resources/pages/config/config.xml" accessCode ="ADMIN:CONFIG" modelclass = "com.rainbow.crm.config.model.ConfigSet" >
 </Page>
+<Page id = "reasoncodes" definition ="/resources/pages/reasoncode/reasoncodes.xml" accessCode ="ADMIN:REASON" modelclass = "com.rainbow.crm.reasoncode.model.ReasonCode" >
+</Page>
 <Page id = "newcustomer" definition ="/resources/pages/customer/newcustomer.xml" modelclass = "com.rainbow.crm.customer.model.Customer" >
 </Page>
 <Page id = "newcarrier" definition ="/resources/pages/carrier/newcarrier.xml" modelclass = "com.rainbow.crm.carrier.model.Carrier" >
@@ -263,6 +265,7 @@
  	<Element label = "" type = "UIMenu" Id = "menu01" style="menustyle" title="Data_Setup" link = "rdscontroller?page=setup"   />
  	<Element label = "" type = "UIMenu" Id = "menu02" style="menustyle" title="Divisions" link = "rdscontroller?page=divisions"   />
  	<Element label = "" type = "UIMenu" Id = "menu03" style="menustyle" title="Users" link = "rdscontroller?page=appUsers"   />
+ 	<Element label = "" type = "UIMenu" Id = "menu04" style="menustyle" title="Reason_Codes" link = "rdscontroller?page=reasoncodes"   />
  </Element>
  
  <Element label = "" type = "UIMenu" Id = "menu00" style="menustyleParent" title="Setup" groupId= "menuGRP001"  >
