@@ -19,5 +19,5 @@ public interface IPromotionService extends ITransactionService{
 	
 	public Promotion getAllItemPromotion(Date date, Division division);
 	
-	public PromotionLine isPromotedSku(Sku sku, Date date);
+	public PromotionLine isIncentivizedSku(Sku sku, Date date);
 }

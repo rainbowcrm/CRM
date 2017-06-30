@@ -81,7 +81,7 @@ public class PromotionService extends AbstractService implements
 
 
 	@Override
-	public PromotionLine isPromotedSku(Sku sku, Date date) {
+	public PromotionLine isIncentivizedSku(Sku sku, Date date) {
 		// TODO Auto-generated method stub
 		return null;
 	}

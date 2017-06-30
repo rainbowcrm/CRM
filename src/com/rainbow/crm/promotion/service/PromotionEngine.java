@@ -15,7 +15,7 @@ public class PromotionEngine {
 
 	Map<PromotionLine,Integer> unusedPromotions =  new HashMap<PromotionLine,Integer> ();
 	
-	Map<PromotionLine,Integer> unconsumedPromotions =  new HashMap<PromotionLine,Integer> ();
+	Map<PromotionLine,Integer> unconsumedIncentives =  new HashMap<PromotionLine,Integer> ();
 	
 	
 	public void populatePromotion(Sales sales)
@@ -39,14 +39,14 @@ public class PromotionEngine {
 				 continue ;
 			 }
 			 
-			 PromotionLine promotedLine   =  promotionService.isPromotedSku(salesLine.getSku(),sales.getSalesDate());
+			 PromotionLine promotedLine   =  promotionService.isIncentivizedSku(salesLine.getSku(),sales.getSalesDate());
 			 if (promotedLine  != null) {
-				 if (unconsumedPromotions.containsKey(promotedLine)) {
-					 int qty = unconsumedPromotions.get(promotedLine);
+				 if (unconsumedIncentives.containsKey(promotedLine)) {
+					 int qty = unconsumedIncentives.get(promotedLine);
 					 qty += salesLine.getQty();
-					 unconsumedPromotions.put(promotedLine, qty);
+					 unconsumedIncentives.put(promotedLine, qty);
 				 }else {
-					 unconsumedPromotions.put(promotedLine, salesLine.getQty());
+					 unconsumedIncentives.put(promotedLine, salesLine.getQty());
 				 }
 				 continue ;
 			 }
@@ -62,10 +62,16 @@ public class PromotionEngine {
 			}
 			if(promotedLine.getPromotion().getPromoType().equals(CRMConstants.PROMOTYPE.CROSSSELL))
 			{
+				if (unconsumedIncentives.containsKey(promotedLine)) {
+					
+				}
 				
 			}
 			if(promotedLine.getPromotion().getPromoType().equals(CRMConstants.PROMOTYPE.UPSELLING))
 			{
+				if (unconsumedIncentives.containsKey(promotedLine)) {
+					
+				}
 				
 			}
 			
@@ -76,5 +82,25 @@ public class PromotionEngine {
 	}
 	
 	
+	private void applyBundling(PromotionLine promotedLine ) 
+	{
+		if (unconsumedIncentives.containsKey(promotedLine)) 
+		{
+			Integer qty = unconsumedIncentives.get(promotedLine);
+			//Integer deducedQty = qty - Integer.valueOf(promotedLine.getRequiredQty()) ;
+			
+			
+		}
+	}
+	
+	private void applyCrossSelling() 
+	{
+		
+	}
+	
+	private void applyUpSelling() 
+	{
+		
+	}
 	
 }

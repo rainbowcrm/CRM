@@ -35,15 +35,15 @@
 <Page id = "lookup" definition ="/resources/pages/lookup/lookup.xml"  modelclass = "com.techtrade.rads.framework.model.simple.LookupObject" > </Page>
 <Page id = "divisions" definition ="/resources/pages/division/divisionList.xml" accessCode ="ADMIN:DIVISION" modelclass = "com.rainbow.crm.division.model.Division" >
 </Page>
-<Page id = "categories" definition ="/resources/pages/category/categories.xml" modelclass = "com.rainbow.crm.category.model.Category" >
+<Page id = "categories" definition ="/resources/pages/category/categories.xml" accessCode ="MERCH:CATEGORIES" modelclass = "com.rainbow.crm.category.model.Category" >
 </Page>
 <Page id = "expenseheads" definition ="/resources/pages/expensehead/expenseheads.xml" accessCode ="SPLAN:EXPHEADS" modelclass = "com.rainbow.crm.expensehead.model.ExpenseHead" >
 </Page>
-<Page id = "brands" definition ="/resources/pages/brand/brands.xml" modelclass = "com.rainbow.crm.brand.model.Brand" >
+<Page id = "brands" definition ="/resources/pages/brand/brands.xml" accessCode ="MERCH:BRANDS"  modelclass = "com.rainbow.crm.brand.model.Brand" >
 </Page>
 <Page id = "inventory" definition ="/resources/pages/inventory/inventory.xml" modelclass = "com.rainbow.crm.inventory.model.Inventory" >
 </Page>
-<Page id = "products" definition ="/resources/pages/products/products.xml" modelclass = "com.rainbow.crm.product.model.Product" >
+<Page id = "products" definition ="/resources/pages/products/products.xml"  accessCode ="MERCH:PRODUCTS" modelclass = "com.rainbow.crm.product.model.Product" >
 </Page>
 <Page id = "vendors" definition ="/resources/pages/vendor/vendorList.xml" modelclass = "com.rainbow.crm.vendor.model.Vendor" >
 </Page>
@@ -145,17 +145,17 @@
 </Page>
 <Page id = "newsalespitch" definition ="/resources/pages/salespitch/newsalespitch.xml" modelclass = "com.rainbow.crm.salespitch.model.Salespitch" >
 </Page>
-<Page id = "newsku" definition ="/resources/pages/item/newsku.xml" modelclass = "com.rainbow.crm.item.model.Sku" >
+<Page id = "newsku" definition ="/resources/pages/item/newsku.xml"  accessCode ="MERCH:SKUS" modelclass = "com.rainbow.crm.item.model.Sku" >
 </Page>
-<Page id = "skus" definition ="/resources/pages/item/skuList.xml" modelclass = "com.rainbow.crm.item.model.Sku" >
+<Page id = "skus" definition ="/resources/pages/item/skuList.xml" accessCode ="MERCH:SKUS" modelclass = "com.rainbow.crm.item.model.Sku" >
 </Page>
-<Page id = "newitem" definition ="/resources/pages/item/newitem.xml" modelclass = "com.rainbow.crm.item.model.Item" >
+<Page id = "newitem" definition ="/resources/pages/item/newitem.xml" accessCode ="MERCH:ITEMS" modelclass = "com.rainbow.crm.item.model.Item" >
 </Page>
-<Page id = "items" definition ="/resources/pages/item/itemList.xml" modelclass = "com.rainbow.crm.item.model.Item" >
+<Page id = "items" definition ="/resources/pages/item/itemList.xml" accessCode ="MERCH:ITEMS" modelclass = "com.rainbow.crm.item.model.Item" >
 </Page>
 <Page id = "skucompletelist" definition ="/resources/pages/item/skucompletelist.xml" modelclass = "com.rainbow.crm.item.model.SkuComplete" >
 </Page>
-<Page id = "itemimages" definition ="/resources/pages/item/itemimages.xml" modelclass = "com.rainbow.crm.item.model.ItemImageSet" >
+<Page id = "itemimages" definition ="/resources/pages/item/itemimages.xml"  accessCode ="MERCH:ITEMIMAGES" modelclass = "com.rainbow.crm.item.model.ItemImageSet" >
 </Page>
 <Page id = "skucomplete" definition ="/resources/pages/item/skucomplete.xml" modelclass = "com.rainbow.crm.item.model.SkuComplete" >
 </Page>

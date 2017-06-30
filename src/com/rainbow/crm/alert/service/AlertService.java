@@ -125,8 +125,10 @@ public class AlertService extends AbstractService implements IAlertService{
 			List<User> users = userService.getByDivision(alert.getDivision(), context);
 			if(!Utils.isNullList(users)) {
 				users.forEach( user ->  {  
+					if(alert.getOwner() != null ) {
 					String notificationID= LoginSQLs.getNotificationIDforUser(alert.getOwner().getUserId());
 					pushNotification(alert, notificationID);
+					}
 				});
 			}
 		}

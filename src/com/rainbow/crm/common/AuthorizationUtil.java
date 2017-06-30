@@ -31,6 +31,11 @@ public class AuthorizationUtil {
 			permission =  ConfigurationManager.REPORT_VIEW_PRIVILEGE;
 			
 		}
+		if(accessCode.contains("MERCH:")){
+			permission =  ConfigurationManager.MERCH_ACCESS_PRIVILEGE;
+			
+		}
+		
 		if(accessCode.contains("MANAGER:")){
 			 return  CommonUtil.isManagerRole(user);
 			

@@ -10,6 +10,7 @@ public class ConfigurationManager {
 	public static final String ANALYTICAL_REPORTS_PRIVILEGE = "ANLREPPRIVIL";
 	public static final String TARGET_SETTING_PRIVILEGE = "TRGSETPRIV";
 	public static final String REPORT_VIEW_PRIVILEGE = "REPVIEWPRIV";
+	public static final String MERCH_ACCESS_PRIVILEGE = "MERCHPRIVIL";
 	
 	public static final String ALLOW_RETURNS = "ALLOWRETURNS";
 	public static final String IMAGE_SERVER_HOST = "IMGSRVHST";

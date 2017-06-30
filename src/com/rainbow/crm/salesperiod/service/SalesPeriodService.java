@@ -412,7 +412,7 @@ public class SalesPeriodService extends AbstractionTransactionService implements
 			int  ct = 0;
 			Iterator it = null;
 			if (!Utils.isNullSet(oldObject.getSalesPeriodProducts()))
-					it = oldObject.getSalesPeriodBrands().iterator() ;
+					it = oldObject.getSalesPeriodProducts().iterator() ;
 			for (SalesPeriodProduct  line : salesPeriod.getSalesPeriodProducts()) {
 				SalesPeriodProduct oldLine = null ;
 				if ( it != null && it.hasNext()) {
