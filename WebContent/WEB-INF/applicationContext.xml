@@ -70,6 +70,8 @@
     </bean>
     <bean id="IFollowupService" class="com.rainbow.crm.followup.service.FollowupService">
     </bean>
+    <bean id="IFeedBackService" class="com.rainbow.crm.feedback.service.FeedBackService">
+    </bean>
     <bean id="IEnquiryService" class="com.rainbow.crm.enquiry.service.EnquiryService">
     </bean>
     <bean id="IDocumentService" class="com.rainbow.crm.document.service.DocumentService">
@@ -162,6 +164,9 @@
     <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
     <bean id="FollowupDAO" class="com.rainbow.crm.followup.dao.FollowupDAO">
+    <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean id="FeedBackDAO" class="com.rainbow.crm.feedback.dao.FeedBackDAO">
     <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
     <bean id="EnquiryDAO" class="com.rainbow.crm.enquiry.dao.EnquiryDAO">
