@@ -53,9 +53,11 @@ public class ExpenseVoucher extends CRMBusinessModelObject{
 		this.docNumber = docNumber;
 	}
 	
+	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
 	public FiniteValue getStatus() {
 		return status;
 	}
+	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
 	public void setStatus(FiniteValue status) {
 		this.status = status;
 	}
@@ -67,20 +69,25 @@ public class ExpenseVoucher extends CRMBusinessModelObject{
 	public void setExpenseVoucherLines(Set<ExpenseVoucherLine> expenseVoucherLines) {
 		this.expenseVoucherLines = expenseVoucherLines;
 	}
+	
 	public void addExpenseVoucherLine(ExpenseVoucherLine expenseVoucherLine) {
 		if (expenseVoucherLines == null )
 			expenseVoucherLines = new LinkedHashSet <ExpenseVoucherLine> ();
 		this.expenseVoucherLines.add(expenseVoucherLine);
 	}
+	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
 	public User getSalesAssoicate() {
 		return salesAssoicate;
 	}
+	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
 	public void setSalesAssoicate(User salesAssoicate) {
 		this.salesAssoicate = salesAssoicate;
 	}
+	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
 	public User getManager() {
 		return manager;
 	}
+	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
 	public void setManager(User manager) {
 		this.manager = manager;
 	}

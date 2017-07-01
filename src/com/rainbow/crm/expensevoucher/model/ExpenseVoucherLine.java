@@ -51,9 +51,11 @@ public class ExpenseVoucherLine extends CRMBusinessModelObject{
 	public void setExpenseVoucherDoc(ExpenseVoucher expenseVoucherDoc) {
 		this.expenseVoucherDoc = expenseVoucherDoc;
 	}
+	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
 	public ExpenseHead getExpenseHead() {
 		return expenseHead;
 	}
+	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
 	public void setExpenseHead(ExpenseHead expenseHead) {
 		this.expenseHead = expenseHead;
 	}

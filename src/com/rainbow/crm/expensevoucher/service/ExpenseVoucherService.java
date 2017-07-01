@@ -140,10 +140,14 @@ public class ExpenseVoucherService extends AbstractionTransactionService impleme
 				line.setLineNumber(lineNo ++);
 				if(line.getExpenseHead() == null ) {
 					ans.add(CRMValidator.getErrorforCode(context.getLocale(), ExpenseVoucherErrorCodes.FIELD_NOT_VALID , externalize.externalize(context, "Item")));
-				}else {
+				}else if  (line.getExpenseHead().getId() > 0 ) {
 					int id = line.getExpenseHead().getId();
 					IExpenseHeadService service = (IExpenseHeadService)SpringObjectFactory.INSTANCE.getInstance("IExpenseHeadService");
 					ExpenseHead head = (ExpenseHead)service.getById(id);
+					line.setExpenseHead(head);
+				}else if  (!Utils.isNullString(line.getExpenseHead().getName())) {
+					IExpenseHeadService service = (IExpenseHeadService)SpringObjectFactory.INSTANCE.getInstance("IExpenseHeadService");
+					ExpenseHead head = (ExpenseHead) service.getByName(company.getId(), line.getExpenseHead().getName());
 					line.setExpenseHead(head);
 				}
 			}
