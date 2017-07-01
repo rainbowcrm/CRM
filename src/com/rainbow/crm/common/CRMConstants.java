@@ -32,6 +32,7 @@ public class CRMConstants {
 	public final static String FV_SALES_ORDER_ASSOCIATION="SLSORDASS";
 	public final static String FV_REASON_TYPE="REASTYPE";
 	public final static String FV_USRPRIV_TYPE= "USRPRIVTYP";
+	public final static String FV_FACTOR_TYPE= "FACTTYPE";
 	
 	public final static class REASON_TYPE {
 		public final static String FAVORABLE_SALESLEAD_REASON ="FVSLREAS";
@@ -42,6 +43,12 @@ public class CRMConstants {
 		public final static String EXCESS_DISC_REASON ="DISCREAS";
 		public final static String EXPENSE_REJECTION_REASON ="EXPRJREAS";
 		public final static String EXPENSE_APPROVAL_REASON ="EXPAPREAS";
+	}
+	
+	public final static class FACTOR_TYPE {
+		public final static String INTERNAL ="INTFACT";
+		public final static String EXTERNAL ="EXTFACT";
+		public final static String NOT_APPLICABLE ="NAFACT";
 	}
 	
 	public final static class SALESORDER_ASSOCIATION {

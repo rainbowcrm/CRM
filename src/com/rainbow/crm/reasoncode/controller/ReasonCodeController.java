@@ -71,11 +71,7 @@ public class ReasonCodeController extends CRMDataSheetController{
 	}
 
 	public Map <String, String > getAllFactors() {
-		 Map<String,String> ans = new HashMap<String,String>();
-		 ans.put("I", "Internal");
-		 ans.put("E", "External");
-		 ans.put("N", "Not_Applicable");
-		 return ans;
+		return  GeneralSQLs.getFiniteValues(CRMConstants.FV_FACTOR_TYPE);
 	}
 	
 	public Map <String, String > getAllAccessibleRoles() {

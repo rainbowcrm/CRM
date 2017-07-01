@@ -35,18 +35,18 @@ Controller = "com.rainbow.crm.reasoncode.controller.ReasonCodeController">
 <Element label = ""  type = "UIImage" Id = "idChkSel"  rendered="Object.isDeleted" height = "21" weight ="21" src= "./resources/images/deletedRow.jpg" />
 </SelectionColumn>
 <Column title ="Type" sortField="reasonType.Description" width ="25%" >
-<Element label = ""  type = "UINote" Id = "idNameNote"  property ="reasonType.Code" />
+<Element label = ""  type = "UINote" Id = "idNameNote"  property ="reasonType.Description" />
 </Column>
 <Column title ="Reason" sortField="reason" width ="25%" >
 <Element label = ""  type = "UINote" Id = "idDescNote"  property ="Reason" />
 </Column>
- <Column title ="Factor_Type" sortField="factorType"  width ="15%" >
-  <Element label = ""  type = "UINote" Id = "idIndusNote"  property ="factorType" />
+ <Column title ="Factor" sortField="factorType.Description"  width ="15%" >
+  <Element label = ""  type = "UINote" Id = "idIndusNote"  property ="factorType.Description" />
  </Column>
- <Column title ="Accessible_By" sortField="accessibleBy.Description"  width ="25%" >
-  <Element label = ""  type = "UINote" Id = "idIndusNote"  property ="accessibleBy" />
+ <Column title ="Accessible_By" sortField="accessibleBy.Description"  width ="20%" >
+  <Element label = ""  type = "UINote" Id = "idIndusNote"  property ="accessibleBy.Description" />
  </Column>
-  <Column title =""  width ="5%" >
+  <Column title =""  width ="10%" >
   <Element label = ""  type = "UINote" Id = "idAdEd"   />
  </Column>
 </Columns>
@@ -65,13 +65,13 @@ Controller = "com.rainbow.crm.reasoncode.controller.ReasonCodeController">
 <Element label = ""  type = "UIText" Id = "idDesc" size  = "30" property ="Reason" />
 </Column>
 <Column width ="15%" >
-<Element label = ""  type = "UIList" Id = "lstPrUOM"   property ="factorType"  externalise= "true">
+<Element label = ""  type = "UIList" Id = "lstfactorType"   property ="factorType.Code"  externalise= "true">
 	<options populator =  "getAllFactors"> 
 	</options>
 </Element>
 </Column>
-<Column width ="25%" >
-<Element label = ""  type = "UIList" Id = "lstPrUOM"   property ="factorType"  externalise= "true">
+<Column width ="20%" >
+<Element label = ""  type = "UIList" Id = "lstAccessType"   property ="accessibleBy.Code"  externalise= "true">
 	<options populator =  "getAllAccessibleRoles"> 
 	</options>
 </Element>

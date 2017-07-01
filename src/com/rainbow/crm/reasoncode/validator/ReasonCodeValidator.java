@@ -18,7 +18,7 @@ public class ReasonCodeValidator extends CRMValidator {
 		IReasonCodeService service =(IReasonCodeService)SpringObjectFactory.INSTANCE.getInstance("IReasonCodeService");
 		ReasonCode exist = (ReasonCode)service.getByName(reasonCode.getCompany().getId(), reasonCode.getReason());
 		if(exist != null) {
-				errors.add(getErrorforCode(CommonErrorCodes.UNIQUE_VAL_EXISTS,externalize.externalize(context, "ReasonCode_Name"))) ;
+				errors.add(getErrorforCode(CommonErrorCodes.UNIQUE_VAL_EXISTS,externalize.externalize(context, "Reason"))) ;
 		}
 	}
 
@@ -28,7 +28,7 @@ public class ReasonCodeValidator extends CRMValidator {
 		IReasonCodeService service =(IReasonCodeService)SpringObjectFactory.INSTANCE.getInstance("IReasonCodeService");
 		ReasonCode exist = (ReasonCode)service.getByName(reasonCode.getCompany().getId(), reasonCode.getReason());
 		if(exist != null && exist.getId() != reasonCode.getId()) {
-				errors.add(getErrorforCode(CommonErrorCodes.UNIQUE_VAL_EXISTS,externalize.externalize(context, "ReasonCode_Name"))) ;
+				errors.add(getErrorforCode(CommonErrorCodes.UNIQUE_VAL_EXISTS,externalize.externalize(context, "Reason"))) ;
 		}
 	}
 	
@@ -38,7 +38,7 @@ public class ReasonCodeValidator extends CRMValidator {
 			errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Company"))) ;
 		}
 		if (reasonCode.getReason() == null){
-			errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "ReasonCode_Name"))) ;
+			errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Reason"))) ;
 		}
 		if (reasonCode.getReasonType() == null){
 			errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Reason_Type"))) ;

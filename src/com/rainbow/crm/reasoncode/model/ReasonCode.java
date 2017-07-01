@@ -12,7 +12,7 @@ public class ReasonCode extends CRMBusinessModelObject {
 	String reason;
 	String description;
 	FiniteValue reasonType;
-	String factorType;
+	FiniteValue factorType;
 	FiniteValue accessibleBy;
 	
 	@RadsPropertySet(isBK=true)
@@ -37,10 +37,12 @@ public class ReasonCode extends CRMBusinessModelObject {
 	public void setReasonType(FiniteValue reasonType) {
 		this.reasonType = reasonType;
 	}
-	public String getFactorType() {
+	@RadsPropertySet(useBKForJSON=true, useBKForMap =true, useBKForXML=true)
+	public FiniteValue getFactorType() {
 		return factorType;
 	}
-	public void setFactorType(String factorType) {
+	@RadsPropertySet(useBKForJSON=true, useBKForMap =true, useBKForXML=true)
+	public void setFactorType(FiniteValue factorType) {
 		this.factorType = factorType;
 	}
 	@RadsPropertySet(useBKForJSON=true, useBKForMap =true, useBKForXML=true)
