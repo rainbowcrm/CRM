@@ -33,7 +33,7 @@ public class AllExpenseHeadsAjaxService implements IAjaxLookupService{
 			for (int i = 0 ; i < expenseHeads.size() ; i ++ ) {
 				replies.append("{"); 
 				replies.append("\"Id\":" + expenseHeads.get(i).getId() + ",\n");
-				replies.append("\"Name\":" + expenseHeads.get(i).getName() + ",\n }" );
+				replies.append("\"Name\":\"" + expenseHeads.get(i).getName() + "\"\n }" );
 				if (i < expenseHeads.size() -1 ) 
 					replies.append( ",");
 				replies.append("\n");

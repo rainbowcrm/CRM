@@ -415,6 +415,9 @@
   <AjaxService service ="allFiniteValues" class = "com.rainbow.crm.common.ajaxservices.AllFiniteValues">
 
  </AjaxService>
+  <AjaxService service ="allExpenseHeads" class = "com.rainbow.crm.common.ajaxservices.AllExpenseHeadsAjaxService">
+
+ </AjaxService>
   <AjaxService service ="customerSearch" class = "com.rainbow.crm.customer.service.CustomerAjaxService">
  <key>Phone</key>
  <key>Email</key>
