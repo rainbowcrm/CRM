@@ -34,6 +34,8 @@
       <property name="voided" column="IS_CANCELLED" type="boolean"/>
       <property name="returned" column="IS_RETURNED" type="boolean"/>
       <property name="return" column="IS_RETURN" type="boolean"/>
+      <property name="feedBackAlerted" column="FEEDBACK_ALERTED" type="boolean"/>
+      <property name="feedBackCaptured" column="FEEDBACK_CAPTURED" type="boolean"/>
       <property name="originalBillNo" column="ORIGINAL_BILL_NUMBER" type="string"/>
       <property name="originalSalesId" column="ORIGINAL_SALES_ID" not-null="false" type="integer"/>      
       <property name="commments" column="commments" type="string"/>

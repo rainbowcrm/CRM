@@ -11,6 +11,8 @@ public interface ICompanyService  extends IBusinessService{
 	 public Company findByCode(String code) ;
 	 
 	 public Company findByName(String name) ;
+	 
+	 public List<Company> findAllActiveCompanies() ;
 	
 	
 }

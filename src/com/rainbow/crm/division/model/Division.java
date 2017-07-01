@@ -102,6 +102,15 @@ public class Division extends CRMBusinessModelObject{
 	public void setNoEmployees(int noEmployees) {
 		this.noEmployees = noEmployees;
 	}
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Division ) {
+			Division other = (Division) obj;
+			int otherId  = other.getId() ;
+			return (otherId == this.getId());
+		}
+		return super.equals(obj);
+	}
 	
 	
 }

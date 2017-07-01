@@ -24,6 +24,18 @@ public class SalesDAO  extends SpringHibernateDAO{
 		return obj;
 	}
 
+	public List<Sales> getNonAlertedSalesFeedBack(int company , Date startDate)
+	{
+		Session session = openSession(false);
+		Query query = session.createQuery(" from Sales where company.id = :company    and salesDate <= :startDate and  " +
+		 " feedBackAlerted =false and feedBackCaptured =false and voided= false " ) ;
+		query.setParameter("company", company);
+		query.setParameter("startDate", startDate);
+		List<Sales> lst = query.list();
+		closeSession(session, false);
+		return lst;
+	}
+	
 	public Sales getByBillNumberandDivision(Division division, String billNumber)
 	{
 		Session session = openSession(false);

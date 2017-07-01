@@ -26,6 +26,7 @@ public class CompanyDAO extends SpringHibernateDAO{
 	}
 	
 	
+	
 	public long getTotalRecordCount( String tableName, CRMContext context ) {
 		Session session = openSession(false) ;
     	try  {
@@ -58,6 +59,16 @@ public class CompanyDAO extends SpringHibernateDAO{
 		return company;
 	}
 	
+	public List<Company> getAllActiveCompanies() {
+		Company company = null;
+		Session session = openSession(false);
+		Query query = session.createQuery(" from Company where active = true  " ) ;
+		List lst = query.list();
+		closeSession(session, false);
+		return lst;
+
+		
+	}
 	public Company findByName(String name) {
 		Company company = null;
 		Session session = openSession(false);

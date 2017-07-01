@@ -57,6 +57,9 @@ public class Sales extends CRMBusinessModelObject{
 	Integer originalSalesId;
 	String originalDate;
 	
+	boolean feedBackAlerted;
+	boolean feedBackCaptured;
+	
 	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
 	public Division getDivision() {
 		return division;
@@ -281,6 +284,18 @@ public class Sales extends CRMBusinessModelObject{
 	}
 	public void setAvailableLoyalty(Double availableLoyalty) {
 		this.availableLoyalty = availableLoyalty;
+	}
+	public boolean isFeedBackAlerted() {
+		return feedBackAlerted;
+	}
+	public void setFeedBackAlerted(boolean feedBackAlerted) {
+		this.feedBackAlerted = feedBackAlerted;
+	}
+	public boolean isFeedBackCaptured() {
+		return feedBackCaptured;
+	}
+	public void setFeedBackCaptured(boolean feedBackCaptured) {
+		this.feedBackCaptured = feedBackCaptured;
 	}
 	
 	

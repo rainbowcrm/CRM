@@ -216,6 +216,16 @@ public class CommonUtil {
 		return service.getDefaultDivision(company);
 	}
 	
+	public static User getDivisionManager(Division division,CRMContext context) 
+	{
+		IUserService userService= (IUserService) SpringObjectFactory.INSTANCE.getInstance("IUserService");
+		List<User> users =  userService.getByDivision(division, context);
+		for (User user : users) {
+			if ( isManagerRole(user) ) return user;
+		}
+		return null;		
+	}
+	
 	public static User getUser(CRMContext context, String userId){
 		IUserService service = (IUserService) SpringObjectFactory.INSTANCE.getInstance("IUserService");
 		User user  = (User) service.getById(userId);

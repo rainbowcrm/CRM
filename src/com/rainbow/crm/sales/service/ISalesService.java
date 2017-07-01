@@ -38,5 +38,7 @@ public interface ISalesService extends ITransactionService{
 	public int getCategorySaleQuantity(int categoryId, Date from, Date to,Division division ) ;
 	
 	public Sales getByBillNumberforReturn(Division division , String billNumber) ;
+	
+	public List<Sales> getNonAlertedSalesFeedBack(int company, int interval);
 
 }

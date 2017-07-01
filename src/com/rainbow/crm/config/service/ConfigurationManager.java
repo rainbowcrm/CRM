@@ -38,8 +38,14 @@ public class ConfigurationManager {
 	public static final String SALESPERSONAL_ASSOCIATION = "ASSSLSPERHDLIN";
 	public static final String ASSOCIATE_ACC_ALLDIV = "ALLDIVACCASS";
 	public static final String MANAGER_ACC_ALLDIV = "ALLDIVACCGMR";
+	public static final String FEEDBACK_INTERVAL ="FDBKDAY";
+	public static final String FEEDBACK_OWNER ="FDBKOWNR";
 	
 	public static String  getConfig(String key , CRMContext context) {
 		return ConfigSQL.getConfigforCode(context.getLoggedinCompany(), key);
+	}
+	
+	public static String  getConfig(String key , int company) {
+		return ConfigSQL.getConfigforCode(company, key);
 	}
 }

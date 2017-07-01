@@ -95,9 +95,15 @@ import com.techtrade.rads.framework.utils.Utils;
 public class SalesService extends AbstractionTransactionService implements ISalesService{
 
 	
-	
-	
-	
+	@Override
+	public List<Sales> getNonAlertedSalesFeedBack(int company, int  interval) {
+		SalesDAO salesDao = (SalesDAO) getDAO();
+		long currentTime =  (new java.util.Date()).getTime() ;
+		long intervalTime = ((long)interval) * 24l * 60l * 60l * 1000l; 
+		Date startDate = new java.util.Date( currentTime  -  intervalTime  )  ;
+		return salesDao.getNonAlertedSalesFeedBack(company, startDate);
+	}
+
 	@Override
 	public Sales getByBillNumberforReturn(Division division, String billNumber) {
 		SalesDAO salesDao = (SalesDAO) getDAO();
@@ -352,8 +358,10 @@ public class SalesService extends AbstractionTransactionService implements ISale
 				delta.addLine(deltaLine);
 			}
 		}
-		delta.setContext(context);
-		CRMMessageSender.sendMessage(delta);
+		if(delta.hasChanged() ) {
+			delta.setContext(context);
+			CRMMessageSender.sendMessage(delta);
+		}
 	
 	}
 	

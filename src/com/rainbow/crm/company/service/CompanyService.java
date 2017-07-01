@@ -27,7 +27,14 @@ public class CompanyService  extends AbstractService implements ICompanyService{
 	public Object getById(Object PK) {
 		return (Company)getDAO().getById(PK);
 	}
+	
+	
 
+	@Override
+	public List<Company> findAllActiveCompanies() {
+		// TODO Auto-generated method stub
+		return ((CompanyDAO)getDAO()).getAllActiveCompanies();
+	}
 	@Override
 	public List<CRMModelObject> listData(int from, int to, String whereCondition,CRMContext context, SortCriteria sortCriteria) {
 		 return  getDAO().listData("Company" ,from, to, whereCondition);
