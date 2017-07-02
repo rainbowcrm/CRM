@@ -40,6 +40,9 @@ public class FeedBackValidator extends CRMValidator {
 		if (feedBack.getCompany() == null){
 			errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Company"))) ;
 		}
+		if (feedBack.getCapturedBy() == null){
+			errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Captured_By"))) ;
+		}
 		if(Utils.isNull(feedBack.getFeedBackDate())) {
 			errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Date"))) ;
 		}
@@ -51,6 +54,9 @@ public class FeedBackValidator extends CRMValidator {
 					errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Type"))) ;
 				}else if (line.getFeedBackObject() == null ) {
 					errors.add(getErrorforCode(CommonErrorCodes.OBJECT_DELETED,externalize.externalize(context, "Object") )) ;
+				}
+				if(line.getRating() <0  || line.getRating() > 10 ) {
+					errors.add(getErrorforCode(FeedBackErrorCodes.RATING_RANGE_ERROR)) ;
 				}
 			}
 		}

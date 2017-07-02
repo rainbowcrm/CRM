@@ -9,6 +9,7 @@ import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.reasoncode.model.ReasonCode;
 import com.rainbow.crm.sales.model.Sales;
+import com.rainbow.crm.user.model.User;
 import com.techtrade.rads.framework.annotations.RadsPropertySet;
 
 public class FeedBackLine extends CRMBusinessModelObject{
@@ -16,10 +17,12 @@ public class FeedBackLine extends CRMBusinessModelObject{
 	int lineNumber;
 	FiniteValue feedBackObjectType;
 	String feedBackObject ;
+	Sku sku;
+	User associate;
 	int rating ;
 	ReasonCode reasonCode;
 	String comments;
-	Boolean deleted;
+	boolean deleted;
 	
 	FeedBack feedBackDoc;
 
@@ -58,6 +61,23 @@ public class FeedBackLine extends CRMBusinessModelObject{
 	public void setFeedBackObjectType(FiniteValue feedBackObjectType) {
 		this.feedBackObjectType = feedBackObjectType;
 	}
+	
+	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
+	public Sku getSku() {
+		return sku;
+	}
+	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
+	public void setSku(Sku sku) {
+		this.sku = sku;
+	}
+	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
+	public User getAssociate() {
+		return associate;
+	}
+	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
+	public void setAssociate(User associate) {
+		this.associate = associate;
+	}
 	public String getFeedBackObject() {
 		return feedBackObject;
 	}
@@ -78,12 +98,13 @@ public class FeedBackLine extends CRMBusinessModelObject{
 	public void setReasonCode(ReasonCode reasonCode) {
 		this.reasonCode = reasonCode;
 	}
-	public Boolean getDeleted() {
+	public boolean isDeleted() {
 		return deleted;
 	}
-	public void setDeleted(Boolean deleted) {
+	public void setDeleted(boolean deleted) {
 		this.deleted = deleted;
 	}
+	
 	
 	
 

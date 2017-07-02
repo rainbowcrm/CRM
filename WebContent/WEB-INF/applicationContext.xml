@@ -266,6 +266,8 @@
         <value>com/rainbow/framework/query/model/QueryCondition.hbm.xml</value>
         <value>com/rainbow/crm/territory/model/Territory.hbm.xml</value>
         <value>com/rainbow/crm/territory/model/TerritoryLine.hbm.xml</value>
+        <value>com/rainbow/crm/feedback/model/FeedBack.hbm.xml</value>
+        <value>com/rainbow/crm/feedback/model/FeedBackLine.hbm.xml</value>
         <value>com/rainbow/crm/salesperiod/model/SalesPeriod.hbm.xml</value>
         <value>com/rainbow/crm/salesperiod/model/SalesPeriodLine.hbm.xml</value>
         <value>com/rainbow/crm/salesperiod/model/SalesPeriodAssociate.hbm.xml</value>

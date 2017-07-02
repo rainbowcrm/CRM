@@ -302,7 +302,7 @@ input {
 span {
   color: #373a3c;
   font-size: 13px;
-  min-width: 100px;
+  min-width: 150px;
   display: inline-block; }
 
 span.bigTitle {

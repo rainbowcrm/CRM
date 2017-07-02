@@ -33,6 +33,13 @@ public class CRMConstants {
 	public final static String FV_REASON_TYPE="REASTYPE";
 	public final static String FV_USRPRIV_TYPE= "USRPRIVTYP";
 	public final static String FV_FACTOR_TYPE= "FACTTYPE";
+	public final static String FV_FEEDBACK_ON =  "FDBACKON";
+	
+	public final static class FEEDBACK_ON {
+		public final static String SALES_LINE ="FDBKSLSLN";
+		public final static String SALES_ASSOCIATE ="FDBKSLASS";
+		public final static String OVERALL ="FDBKOVRLL";
+	}
 	
 	public final static class REASON_TYPE {
 		public final static String FAVORABLE_SALESLEAD_REASON ="FVSLREAS";
