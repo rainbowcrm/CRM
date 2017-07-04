@@ -6,6 +6,8 @@ import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.company.model.Company;
+import com.rainbow.crm.division.model.Division;
+import com.rainbow.crm.reasoncode.model.ReasonCode;
 import com.rainbow.crm.saleslead.model.SalesLead;
 import com.techtrade.rads.framework.annotations.RadsPropertySet;
 import com.techtrade.rads.framework.utils.Utils;
@@ -13,7 +15,9 @@ import com.techtrade.rads.framework.utils.Utils;
 @RadsPropertySet(jsonTag="Followup",xmlTag="Followup")
 public class Followup extends CRMBusinessModelObject{
    
+
 	SalesLead lead;
+	Division division;
 	String conversation;
 	Date followupDate ;
 	FiniteValue confidenceLevel;
@@ -24,10 +28,19 @@ public class Followup extends CRMBusinessModelObject{
 	Date nextFollwup;
 	boolean finalFollowup;
 	FiniteValue result;
-	FiniteValue resultReason ;
+	ReasonCode resultReason ;
 	String comments;
 	boolean alerted; 
 	
+	
+	@RadsPropertySet(excludeFromJSON =true, excludeFromMap = true, excludeFromXML = true)
+	public Division getDivision() {
+		return division;
+	}
+	@RadsPropertySet(excludeFromJSON =true, excludeFromMap = true, excludeFromXML = true)
+	public void setDivision(Division division) {
+		this.division = division;
+	}
 	@RadsPropertySet(useBKForJSON=true,useBKForXML=true,useBKForMap=true)
 	public SalesLead getLead() {
 		return lead;
@@ -90,16 +103,16 @@ public class Followup extends CRMBusinessModelObject{
 	public void setResult(FiniteValue result) {
 		this.result = result;
 	}
+	public String getComments() {
+		return comments;
+	}
 	@RadsPropertySet(usePKForJSON=true,usePKForMap=true,usePKForXML=true)
-	public FiniteValue getResultReason() {
+	public ReasonCode getResultReason() {
 		return resultReason;
 	}
 	@RadsPropertySet(usePKForJSON=true,usePKForMap=true,usePKForXML=true)
-	public void setResultReason(FiniteValue resultReason) {
+	public void setResultReason(ReasonCode resultReason) {
 		this.resultReason = resultReason;
-	}
-	public String getComments() {
-		return comments;
 	}
 	public void setComments(String comments) {
 		this.comments = comments;

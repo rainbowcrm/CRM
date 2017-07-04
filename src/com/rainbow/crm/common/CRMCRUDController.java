@@ -95,20 +95,7 @@ public  abstract class CRMCRUDController  extends CRUDController{
 	}
 
 	public Map <String, String > getAllDivisions() {
-		CRMContext ctx = ((CRMContext) getContext());
-		boolean allowAll =CommonUtil.allowAllDivisionAccess(ctx);
-		Map<String, String> ans = new LinkedHashMap<String, String>();
-		IDivisionService service = (IDivisionService) SpringObjectFactory.INSTANCE
-				.getInstance("IDivisionService");
-		List<Division> divisions = service.getAllDivisions(ctx
-				.getLoggedinCompany());
-		if (!Utils.isNullList(divisions)) {
-			for (Division division : divisions) {
-				if (allowAll || division.getId() == ctx.getLoggedInUser().getDivision().getId())
-					ans.put(String.valueOf(division.getId()), division.getName());
-			}
-		}
-		return ans;
+		return CommonUtil.getAllDivisions((CRMContext)getContext());
 	}
 
 	

@@ -36,7 +36,6 @@ public class FollowupValidator extends CRMValidator {
 	
 	protected void checkforErrors(ModelObject object) {
 		followup = (Followup) object;
-		System.out.println("Cust XML=" + followup.toXML());
 		if(followup.getLead()==null) {
 			errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Sales_Lead"))) ;
 		}else {

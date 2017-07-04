@@ -14,15 +14,25 @@ Controller = "com.rainbow.crm.followup.controller.FollowupController">
 <Section type ="leftsideBarApp"></Section>
 <CoreSection>
 <ErrorSection>
-</ErrorSection>
+</ErrorSection>r
 <Section type ="detail">
 	<Element label = "" type = "UIHidden" Id = "hdnVersion" property ="ObjectVersion" />
 	<Element label = ""  type = "UIHidden" Id = "hdnUserID"  property ="Id" />
+	<Element label = "Division"  type = "UIList" Id = "lstInvDivision"  isMandatory="true" property ="Division.Id" >
+	<options populator =  "getAllDivisions"> 
+	</options>
+	</Element>
 	<Element label = "Sales_Lead"  type = "UILookupText" Id = "txtName"  isMandatory="true" size="30" property ="Lead.docNumber" showLookupAsDialog="true" dialogId="dlgComp"
- 	dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
+ 	dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" additionalInputControl = "lstInvDivision" >
   	<lookupType>saleslead</lookupType>
 	 <height>300</height>
 	 <width>290</width>
+	 <SupplementaryFields>
+	 	<Field>
+	        <property>salesAssociate</property>
+	        <control>txtLName</control>
+	     </Field>
+	 </SupplementaryFields>
   	</Element>
 	<Element label = "Sales_Associate"  type = "UILookupText" Id = "txtLName"  isMandatory="true" size="30" property ="salesAssociate"  showLookupAsDialog="true" dialogId="dlgUser"
  	dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
@@ -50,7 +60,7 @@ Controller = "com.rainbow.crm.followup.controller.FollowupController">
 		<options populator =  "getFollowupResults"> 
 		</options>
 	</Element>
-	<Element label = "Result_Reson"  type = "UIList" Id = "lstResultReason"   property ="resultReason.code"  externalise= "true">
+	<Element label = "Result_Reason"  type = "UIList" Id = "lstResultReason"   property ="resultReason.code"  externalise= "true">
 		<options populator =  "getAllReasons"> 
 		</options>
 	</Element>
