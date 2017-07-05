@@ -89,7 +89,7 @@ public class FollowupService extends AbstractService implements IFollowupService
 				}
 			}
 		}
-	//	lead.setSalesAssReasonCode(followup.getResultReason().getCode());
+		lead.setSalesAssReason(followup.getResultReason());
 		ISalesLeadService leadService = (ISalesLeadService)SpringObjectFactory.INSTANCE.getInstance("ISalesLeadService");
 		leadService.update(lead, context);
 	}

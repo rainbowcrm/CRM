@@ -60,7 +60,7 @@ Controller = "com.rainbow.crm.followup.controller.FollowupController">
 		<options populator =  "getFollowupResults"> 
 		</options>
 	</Element>
-	<Element label = "Result_Reason"  type = "UIList" Id = "lstResultReason"   property ="resultReason.code"  externalise= "true">
+	<Element label = "Result_Reason"  type = "UIList" Id = "lstResultReason"   property ="resultReason.id"  externalise= "true">
 		<options populator =  "getAllReasons"> 
 		</options>
 	</Element>

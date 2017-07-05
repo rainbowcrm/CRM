@@ -24,8 +24,8 @@
       <many-to-one name="sales" column ="SALES_ID" not-null="false" lazy="false" ></many-to-one>
       <many-to-one name="status" column ="STATUS" not-null="false" lazy="false" ></many-to-one>
       <property name="salesAssociate" column="SALES_ASSOCIATE" type="string"/>
-      <property name="salesAssReasonCode" column="SALESASS_REASON_CODE" type="string"/>
-      <property name="mgrReasonCode" column="MGR_REASON_CODE" type="string"/>
+      <many-to-one name="salesAssReason" column ="SALESASS_REASON_ID" not-null="false" lazy="false" ></many-to-one>
+      <many-to-one name="mgrReason" column ="MGR_REASON_ID" not-null="false" lazy="false" ></many-to-one>
       <property name="voided" column="IS_VOIDED" type="boolean"/>
       <property name="alerted" column="IS_ALERTED" type="boolean"/>
       <property name="comments" column="comments" type="string"/>
