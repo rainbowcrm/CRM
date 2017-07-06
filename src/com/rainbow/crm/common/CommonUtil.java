@@ -34,6 +34,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
+
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
@@ -57,6 +58,8 @@ import com.rainbow.crm.item.service.IItemService;
 import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.product.model.Product;
 import com.rainbow.crm.product.service.IProductService;
+import com.rainbow.crm.reasoncode.model.ReasonCode;
+import com.rainbow.crm.reasoncode.service.IReasonCodeService;
 import com.rainbow.crm.user.model.User;
 import com.rainbow.crm.user.service.IUserService;
 import com.rainbow.framework.setup.model.Metadata;
@@ -479,6 +482,20 @@ public class CommonUtil {
 			}
 		}
 		return ans;
+	}
+	
+	public static ReasonCode getReasonCode(ReasonCode selectedReason,CRMContext context)
+	{
+		IReasonCodeService reasonCodeService = (IReasonCodeService)SpringObjectFactory.INSTANCE.getInstance("IReasonCodeService");
+		if(selectedReason != null && selectedReason.getId() > 0 ) {
+			ReasonCode reason =  (ReasonCode)reasonCodeService.getById(selectedReason.getId());
+			return reason; 
+		} else if (selectedReason != null && !Utils.isNullString(selectedReason.getReason())) {
+			ReasonCode reason =  (ReasonCode)reasonCodeService.getByBusinessKey(selectedReason, context);
+			return reason;
+		}
+		
+		return null ;
 	}
 
 }

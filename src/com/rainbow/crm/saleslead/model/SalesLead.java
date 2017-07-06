@@ -41,6 +41,7 @@ public class SalesLead extends CRMBusinessModelObject{
 	ReasonCode mgrReason;
 	
 	boolean alerted; 
+	Date closureDate ;
 	
 	
 	
@@ -91,7 +92,12 @@ public class SalesLead extends CRMBusinessModelObject{
 	public void setSalesAssociate(String salesAssociate) {
 		this.salesAssociate = salesAssociate;
 	}
-	
+	public Date getClosureDate() {
+		return closureDate;
+	}
+	public void setClosureDate(Date closureDate) {
+		this.closureDate = closureDate;
+	}
 	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
 	public ReasonCode getSalesAssReason() {
 		return salesAssReason;

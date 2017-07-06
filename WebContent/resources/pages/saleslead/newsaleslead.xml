@@ -83,11 +83,20 @@ Controller = "com.rainbow.crm.saleslead.controller.SalesLeadController">
 	<Element label = "Sales_Bill"  type = "UIText" Id = "txtSale"   property ="Sale.BillNumber" />
 	<Element label = "Status"  type = "UIHidden" Id = "hdnStatsCode"  readonly="true"  property ="Status.code" />
 	<Element label = "Status"  type = "UIText" Id = "txtStatus"  readonly="true"  property ="Status.description" />
-	<Element label = ""  type = "UILabel" Id = "lblCustTitle"   value ="Customer" />
-	<Element label = ""  type = "UILabel" Id = "lblFree1"  style="bigTitle" value ="" />
-	<Element label = "Phone"  type = "UIText" Id = "txtPhone"   property ="Customer.Phone" />
-	<Element label = "Email"  type = "UIText" Id = "txtEmail"   property ="Customer.Email" />
-	 <Element label = "Name"  type = "UILookupText"  Id = "txtCustomerName"  isMandatory="true" property ="Customer.FullName" showLookupAsDialog="true" dialogId="dlgComp"
+	<If check  = "Controller.completedForAssociate" >
+		<Element label = "Associate_Reason"  type = "UIText" Id = "lblAssStatus"   readonly="true"  property ="salesAssReason.reason" />
+		<Element label = "Manager_Reason"  type = "UILabel" Id = "lbtMgrStatus"    property ="mgrReason.reason" />
+	</If>
+	<If check  = "Controller.completedForManager" >
+		<Element label = "Associate_Reason"  type = "UIText" Id = "lblmgrAssStatus" readonly="true"  property ="salesAssReason.reason" />
+		<Element label = "Manager_Reason"  type = "UIList" Id = "lstmgrMgrStatus"    property ="mgrReason.id" >
+			<options populator =  "getAllReasons"> 
+			</options>
+		</Element>
+	</If>
+	<Element label = "Customer_Phone"  type = "UIText" Id = "txtPhone"   property ="Customer.Phone" />
+	<Element label = "Customer_Email"  type = "UIText" Id = "txtEmail"   property ="Customer.Email" />
+	 <Element label = "Customer_Name"  type = "UILookupText"  Id = "txtCustomerName"  isMandatory="true" property ="Customer.FullName" showLookupAsDialog="true" dialogId="dlgComp"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>customer</lookupType>
 	 <height>300</height>

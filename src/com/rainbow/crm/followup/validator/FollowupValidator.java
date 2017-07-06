@@ -49,7 +49,8 @@ public class FollowupValidator extends CRMValidator {
 				return ;
 			}else 
 				followup.setLead(lead);
-			if (lead.getStatus().equals(CRMConstants.SALESCYCLE_STATUS.CLOSED) || lead.getStatus().equals(CRMConstants.SALESCYCLE_STATUS.FAILED)){
+			if (lead.getStatus() != null && ( lead.getStatus().equals(CRMConstants.SALESCYCLE_STATUS.CLOSED) || 
+					lead.getStatus().equals(CRMConstants.SALESCYCLE_STATUS.FAILED))){
 				errors.add(getErrorforCode(CommonErrorCodes.INVALID_STATUS,externalize.externalize(context, "Sales_Lead"))) ;
 				return ;
 			}

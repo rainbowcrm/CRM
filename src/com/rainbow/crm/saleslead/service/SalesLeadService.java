@@ -85,6 +85,8 @@ import com.rainbow.crm.item.model.ItemImage;
 import com.rainbow.crm.item.service.ISkuService;
 import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.product.validator.ProductValidator;
+import com.rainbow.crm.reasoncode.model.ReasonCode;
+import com.rainbow.crm.reasoncode.service.IReasonCodeService;
 import com.rainbow.crm.saleslead.dao.SalesLeadDAO;
 import com.rainbow.crm.saleslead.model.SalesLead;
 import com.rainbow.crm.saleslead.model.SalesLeadExtended;
@@ -204,6 +206,7 @@ public class SalesLeadService extends AbstractionTransactionService implements I
 	}
 
 	
+	
 	@Override
 	public List<RadsError> adaptfromUI(CRMContext context,ModelObject obj) {
 		SalesLead object = (SalesLead) obj;
@@ -236,6 +239,15 @@ public class SalesLeadService extends AbstractionTransactionService implements I
 				 object.setCustomer(customer);
 		}
 		
+		if(object.getSalesAssReason() != null) {
+			ReasonCode reason = CommonUtil.getReasonCode(object.getSalesAssReason(), context) ;
+			object.setSalesAssReason(reason);
+		}
+		
+		if (object.getMgrReason() != null ) {
+			ReasonCode reason = CommonUtil.getReasonCode(object.getMgrReason(), context) ;
+			object.setMgrReason(reason);
+		}
 		if(object.getReferall() != null && !Utils.isNullString(object.getReferall().getIdentifierName()))
 		{
 			IContactService contactService = (IContactService) SpringObjectFactory.INSTANCE.getInstance("IContactService");

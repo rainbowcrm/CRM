@@ -76,6 +76,8 @@ public class FollowupService extends AbstractService implements IFollowupService
 				lead.setSalesWon(true);
 			}else 
 				lead.setStatus(new FiniteValue(CRMConstants.SALESCYCLE_STATUS.FAILED));
+			lead.setClosureDate(followup.getFollowupDate());
+			lead.setSalesAssReason(followup.getResultReason());
 		} else {
 			lead.setStatus(new FiniteValue(CRMConstants.SALESCYCLE_STATUS.IN_PROGRESS));
 			if (followup.getOfferedPrice() != null && followup.getOfferedPrice() >0 ) {
@@ -89,7 +91,6 @@ public class FollowupService extends AbstractService implements IFollowupService
 				}
 			}
 		}
-		lead.setSalesAssReason(followup.getResultReason());
 		ISalesLeadService leadService = (ISalesLeadService)SpringObjectFactory.INSTANCE.getInstance("ISalesLeadService");
 		leadService.update(lead, context);
 	}
