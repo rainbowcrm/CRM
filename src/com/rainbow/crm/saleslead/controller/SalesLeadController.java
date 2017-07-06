@@ -65,15 +65,10 @@ public class SalesLeadController extends CRMTransactionController{
 		
 		IReasonCodeService reasonCodeService = (IReasonCodeService)SpringObjectFactory.INSTANCE.getInstance("IReasonCodeService");
 		Map<String,String > ans = new HashMap<String,String> ();
-		List<ReasonCode> positiveReasons = reasonCodeService.getAllReasonsforType(new FiniteValue(CRMConstants.REASON_TYPE.FAVORABLE_SALESLEAD_REASON), (CRMContext) getContext());
-		List<ReasonCode> negativeReasons = reasonCodeService.getAllReasonsforType(new FiniteValue(CRMConstants.REASON_TYPE.UNFAVORABLE_SALESLEAD_REASON), (CRMContext) getContext());
-		positiveReasons.forEach( reasonCode ->  {
+		List<ReasonCode> reasons = reasonCodeService.getAllReasonsforType(new FiniteValue(CRMConstants.REASON_TYPE.SALESLEAD_REASON), (CRMContext) getContext());
+		reasons.forEach( reasonCode ->  {
 			ans.put(String.valueOf(reasonCode. getId()),reasonCode.getReason());
 		});
-		negativeReasons.forEach( reasonCode ->  {
-			ans.put(String.valueOf(reasonCode. getId()),reasonCode.getReason());
-		});
-
 		
 		return ans;
 		

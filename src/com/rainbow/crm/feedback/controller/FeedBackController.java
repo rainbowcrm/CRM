@@ -79,12 +79,8 @@ public class FeedBackController extends CRMTransactionController{
 	public Map <String, String > getReasonCodes() {
 		IReasonCodeService reasonCodeService = (IReasonCodeService)SpringObjectFactory.INSTANCE.getInstance("IReasonCodeService");
 		Map<String,String > ans = new HashMap<String,String> ();
-		List<ReasonCode> positiveReasons = reasonCodeService.getAllReasonsforType(new FiniteValue(CRMConstants.REASON_TYPE.POSTIVE_FEEDBACK_REASON), (CRMContext) getContext());
-		List<ReasonCode> negativeReasons = reasonCodeService.getAllReasonsforType(new FiniteValue(CRMConstants.REASON_TYPE.NEGATIVE_FEEDBACK_REASON), (CRMContext) getContext());
-		positiveReasons.forEach( reasonCode ->  {
-			ans.put(String.valueOf(reasonCode. getId()),reasonCode.getReason());
-		});
-		negativeReasons.forEach( reasonCode ->  {
+		List<ReasonCode> reasons = reasonCodeService.getAllReasonsforType(new FiniteValue(CRMConstants.REASON_TYPE.FEEDBACK_REASON), (CRMContext) getContext());
+		reasons.forEach( reasonCode ->  {
 			ans.put(String.valueOf(reasonCode. getId()),reasonCode.getReason());
 		});
 

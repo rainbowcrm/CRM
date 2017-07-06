@@ -14,6 +14,7 @@ public class ReasonCode extends CRMBusinessModelObject {
 	FiniteValue reasonType;
 	FiniteValue factorType;
 	FiniteValue accessibleBy;
+	FiniteValue orientation;
 	
 	@RadsPropertySet(isBK=true)
 	public String getReason() {
@@ -28,6 +29,15 @@ public class ReasonCode extends CRMBusinessModelObject {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	@RadsPropertySet(useBKForJSON=true, useBKForMap =true, useBKForXML=true)
+	public FiniteValue getOrientation() {
+		return orientation;
+	}
+	@RadsPropertySet(useBKForJSON=true, useBKForMap =true, useBKForXML=true)
+	public void setOrientation(FiniteValue orientation) {
+		this.orientation = orientation;
 	}
 	@RadsPropertySet(useBKForJSON=true, useBKForMap =true, useBKForXML=true)
 	public FiniteValue getReasonType() {

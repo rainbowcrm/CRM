@@ -74,6 +74,9 @@ public class ReasonCodeController extends CRMDataSheetController{
 		return  GeneralSQLs.getFiniteValues(CRMConstants.FV_FACTOR_TYPE);
 	}
 	
+	public Map <String, String > getAllOrientation() {
+		return  GeneralSQLs.getFiniteValues(CRMConstants.FV_ORIENTATION);
+	}
 	public Map <String, String > getAllAccessibleRoles() {
 		 return  GeneralSQLs.getFiniteValues(CRMConstants.FV_USRPRIV_TYPE);
 	}

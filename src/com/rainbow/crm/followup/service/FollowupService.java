@@ -9,15 +9,19 @@ import java.util.List;
 
 
 
+
+
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.AbstractService;
 import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
+import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
 import com.rainbow.crm.hibernate.ORMDAO;
+import com.rainbow.crm.reasoncode.model.ReasonCode;
 import com.rainbow.crm.saleslead.model.SalesLead;
 import com.rainbow.crm.saleslead.model.SalesLeadLine;
 import com.rainbow.crm.saleslead.service.ISalesLeadService;
@@ -53,6 +57,7 @@ public class FollowupService extends AbstractService implements IFollowupService
 		ICompanyService compService = (ICompanyService)SpringObjectFactory.INSTANCE.getInstance("ICompanyService");
 		Company company = (Company)compService.getById(context.getLoggedinCompany());
 		((Followup)object).setCompany(company);
+		massageData((Followup)object,context);
 		FollowupValidator validator = new FollowupValidator(context);
 		return validator.validateforCreate(object);
 	}
@@ -63,6 +68,7 @@ public class FollowupService extends AbstractService implements IFollowupService
 		ICompanyService compService = (ICompanyService)SpringObjectFactory.INSTANCE.getInstance("ICompanyService");
 		Company company = (Company)compService.getById(context.getLoggedinCompany());
 		((Followup)object).setCompany(company);
+		massageData((Followup)object,context);
 		FollowupValidator validator = new FollowupValidator(context);
 		return validator.validateforUpdate(object);
 	}
@@ -95,12 +101,20 @@ public class FollowupService extends AbstractService implements IFollowupService
 		leadService.update(lead, context);
 	}
 	
+	public void massageData(Followup followup,CRMContext context)
+	{
+		if(followup.getResultReason() != null) {
+			ReasonCode reasonCode= CommonUtil.getReasonCode(followup.getResultReason(), context) ;
+			followup.setResultReason(reasonCode);
+		}
+	}
 	
 
 	@Override
 	public TransactionResult create(CRMModelObject object, CRMContext context) {
 		Followup followup = (Followup) object ;
 		TransactionResult result=  super.create(object, context);
+		
 		updateSalesLead(followup,context);
 		return result; 
 	}

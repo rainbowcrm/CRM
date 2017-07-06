@@ -34,6 +34,13 @@ public class CRMConstants {
 	public final static String FV_USRPRIV_TYPE= "USRPRIVTYP";
 	public final static String FV_FACTOR_TYPE= "FACTTYPE";
 	public final static String FV_FEEDBACK_ON =  "FDBACKON";
+	public final static String FV_ORIENTATION= "BUSORIEN";
+	
+	public final static class BUSINESS_ORIENTATION {
+		public final static String POSITIVE ="POSIT";
+		public final static String NEGATIVE ="NEGAT";
+		public final static String NOT_APPLICABLE ="NOTAPP";
+	}
 	
 	public final static class FEEDBACK_ON {
 		public final static String SALES_LINE ="FDBKSLSLN";
@@ -42,10 +49,8 @@ public class CRMConstants {
 	}
 	
 	public final static class REASON_TYPE {
-		public final static String FAVORABLE_SALESLEAD_REASON ="FVSLREAS";
-		public final static String UNFAVORABLE_SALESLEAD_REASON ="UNFVSLREAS";
-		public final static String POSTIVE_FEEDBACK_REASON ="PSFBREAS";
-		public final static String NEGATIVE_FEEDBACK_REASON ="NGFBREAS";
+		public final static String SALESLEAD_REASON ="SLSLDREAS";
+		public final static String FEEDBACK_REASON ="FDBREAS";
 		public final static String SERVICE_REQUEST_REASON ="SRVRQREAS";
 		public final static String EXCESS_DISC_REASON ="DISCREAS";
 		public final static String EXPENSE_REJECTION_REASON ="EXPRJREAS";
