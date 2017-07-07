@@ -7,11 +7,15 @@ import java.util.List;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.IBusinessService;
 import com.rainbow.crm.common.ITransactionService;
+import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.saleslead.model.SalesLead;
 import com.rainbow.crm.saleslead.model.SalesLeadExtended;
+import com.rainbow.crm.user.model.User;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
+import com.techtrade.rads.framework.model.graphdata.BarChartData;
+import com.techtrade.rads.framework.model.graphdata.PieChartData;
 
 public interface ISalesLeadService extends ITransactionService{
 
@@ -25,5 +29,6 @@ public interface ISalesLeadService extends ITransactionService{
 	
 	
 	public byte[] printQuotation(SalesLead lead) ;
-
+	
+	
 }

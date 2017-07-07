@@ -3,6 +3,7 @@ package com.rainbow.crm.dashboard.service;
 import java.util.Date;
 
 import com.rainbow.crm.common.CRMContext;
+import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.user.model.User;
 import com.techtrade.rads.framework.model.graphdata.BarChartData;
@@ -42,5 +43,10 @@ public interface IDashBoardService {
 	public PieChartData getTerritorySplits(User manager,Date date, CRMContext context  );
 	
 	public BarChartData setDivisionSalesTargetData(User manager,Date date, CRMContext context, String classification  );
+	
+	public PieChartData getSaleLeadSplitsByReason(Division division,Date fromDate, Date toDate, CRMContext context, FiniteValue  orientation  );
+	
+	public BarChartData getSalesLeadPotentials(Division division,Date fromDate, Date toDate, CRMContext context);
+
 	
 }

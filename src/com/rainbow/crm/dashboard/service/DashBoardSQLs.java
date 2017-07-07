@@ -44,6 +44,89 @@ public class DashBoardSQLs {
 		return 0d ;
 	}
 	
+	private static String getLeadStatusQuery (String [] statuses, boolean isIncludeNull)
+	{
+		if (statuses == null || statuses.length == 0) return  " ";
+		StringBuffer status = new StringBuffer(" AND (") ;
+		if (isIncludeNull )
+			 status.append(" SALES_LEADS.STATUS IS NULL OR  ");
+		status.append(" SALES_LEADS.STATUS IN (  ") ;
+		for (int i = 0 ; i < statuses.length ; i ++ ) {
+			status.append("'" + statuses[i] + "'" );
+			if(i < statuses.length-1 )
+				status.append(",");
+		}
+		status.append( " ))");
+		return status.toString() ;
+	}
+	
+	
+	public static Double getTotalforAllLeadsByStatus(int division,Date startDate, Date endDate , String [] statuses , boolean includeNullStatus, int company )
+	{
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		try {
+			connection = ConnectionCreater.getConnection();
+			String divisionClause = (division>0)?" AND SALES_LEADS.DIVISION_ID = ? ":"" ; 
+			String statusQuery = getLeadStatusQuery(statuses, includeNullStatus);
+			String sql =  " SELECT SUM(SALESLEAD_LINES.PRICE) FROM SALES_LEADS , SALESLEAD_LINES WHERE SALES_LEADS.ID= SALESLEAD_LINES.SALESLEAD_ID AND  " + 
+			 " SALES_LEADS.RELEASED_DATE > ? AND  SALES_LEADS.RELEASED_DATE <= ? AND SALES_LEADS.COMPANY_ID = ?    " +  divisionClause + 
+			"  AND  SALESLEAD_LINES.IS_VOIDED = FALSE AND SALES_LEADS.IS_VOIDED= FALSE  " + statusQuery; 
+			
+			statement = connection.prepareStatement(sql);
+			statement.setDate(1, startDate);
+			statement.setDate(2, endDate);
+			statement.setInt(3, company);
+			if (division > 0)
+				statement.setInt(4, division);
+		
+			rs = statement.executeQuery();
+			while (rs.next()) {
+				Double amount = rs.getDouble(1);
+				return amount; 
+			}
+			
+		}catch (SQLException ex) {
+			Logwriter.INSTANCE.error(ex);
+		} finally {
+			ConnectionCreater.close(connection, statement, rs);
+		}
+		return 0d ;
+	}
+	
+	public static Double getTotalforAllLeads(int division,Date startDate, Date endDate , int company )
+	{
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		try {
+			connection = ConnectionCreater.getConnection();
+			String divisionClause = (division>0)?" AND SALES_LEADS.DIVISION_ID = ? ":"" ; 
+			String sql =  " SELECT SUM(SALESLEAD_LINES.PRICE) FROM SALES_LEADS , SALESLEAD_LINES WHERE SALES_LEADS.ID= SALESLEAD_LINES.SALESLEAD_ID AND  " + 
+			 " SALES_LEADS.RELEASED_DATE > ? AND  SALES_LEADS.RELEASED_DATE <= ?   AND SALES_LEADS.COMPANY_ID = ?  " +  divisionClause + 
+			"  AND  SALESLEAD_LINES.IS_VOIDED = FALSE AND SALES_LEADS.IS_VOIDED= FALSE  ";
+			statement = connection.prepareStatement(sql);
+			statement.setDate(1, startDate);
+			statement.setDate(2, endDate);
+			statement.setInt(3, company);
+			if (division > 0)
+				statement.setInt(4, division);
+		
+			rs = statement.executeQuery();
+			while (rs.next()) {
+				Double amount = rs.getDouble(1);
+				return amount; 
+			}
+			
+		}catch (SQLException ex) {
+			Logwriter.INSTANCE.error(ex);
+		} finally {
+			ConnectionCreater.close(connection, statement, rs);
+		}
+		return 0d ;
+	}
+
 	public static Double getSaleAllMade(int divison,  Date startDate, Date endDate )
 	{
 		Connection connection = null;

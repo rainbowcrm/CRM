@@ -102,6 +102,8 @@ import com.rainbow.crm.vendor.service.IVendorService;
 import com.rainbow.framework.nextup.NextUpGenerator;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
+import com.techtrade.rads.framework.model.graphdata.BarChartData;
+import com.techtrade.rads.framework.model.graphdata.PieChartData;
 import com.techtrade.rads.framework.model.transaction.TransactionResult;
 import com.techtrade.rads.framework.ui.components.SortCriteria;
 import com.techtrade.rads.framework.utils.Utils;
@@ -110,8 +112,7 @@ import com.techtrade.rads.framework.utils.Utils;
 public class SalesLeadService extends AbstractionTransactionService implements ISalesLeadService{
 
 	
-	
-	
+
 	@Override
 	public byte[] printQuotation(SalesLead lead) {
 		try { 

@@ -8,6 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.SpringObjectFactory;
+import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.sales.service.ISalesService;
 import com.rainbow.crm.salesperiod.model.SalesPeriod;
@@ -57,6 +58,82 @@ public class DashBoardService  implements IDashBoardService{
 	}
 	
 	
+	
+	
+	@Override
+	public PieChartData getSaleLeadSplitsByReason(
+			com.rainbow.crm.division.model.Division division, Date fromDate,
+			Date toDate, CRMContext context, FiniteValue orientation) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public BarChartData getSalesLeadPotentials(
+			com.rainbow.crm.division.model.Division division, Date fromDate,
+			Date toDate, CRMContext context) {
+		int divisionId = (division==null)?-1:division.getId();
+		BarChartData barChartData = new BarChartData();
+		barChartData.setTitle("Total vs Won vs Lost  vs Open");
+		barChartData.setSubTitle(" ");
+
+		Double totalPotential  = DashBoardSQLs.getTotalforAllLeads(division.getId(),new java.sql.Date(fromDate.getTime()),new java.sql.Date(toDate.getTime()) , context.getLoggedinCompany());
+		BarData tagetBarData = new BarData();
+		BarChartData.Division targetDivis = barChartData.new Division();
+		tagetBarData.setText("Total");
+		tagetBarData.setLegend("Total");
+		tagetBarData.setValue(totalPotential);
+		tagetBarData.setColor(CommonUtil.getGraphColors()[0]);
+		targetDivis.addBarData(tagetBarData);
+		barChartData.addDivision(targetDivis);
+		
+		BarChartData.Division winDivision = barChartData.new Division();
+		String [] winStatuses = { "CLSD"};
+		Double soldAmount  = DashBoardSQLs.getTotalforAllLeadsByStatus(division.getId(),new java.sql.Date(fromDate.getTime()),new java.sql.Date(toDate.getTime()) ,
+				winStatuses, false, context.getLoggedinCompany());
+		BarData actualBarData = new BarData();
+		actualBarData.setText("Won");
+		actualBarData.setLegend("Won");
+		actualBarData.setValue(soldAmount);
+		actualBarData.setColor(CommonUtil.getGraphColors()[1]);
+		winDivision.addBarData(actualBarData);
+		barChartData.addDivision(winDivision);
+
+		BarChartData.Division failedDivision = barChartData.new Division();
+		String [] failStatuses = { "FLD"};
+		Double failedAmountt  = DashBoardSQLs.getTotalforAllLeadsByStatus(division.getId(),new java.sql.Date(fromDate.getTime()),new java.sql.Date(toDate.getTime()) ,
+				failStatuses, false, context.getLoggedinCompany());
+		BarData failBarData = new BarData();
+		failBarData.setText("Failed");
+		failBarData.setLegend("Failed");
+		failBarData.setValue(failedAmountt);
+		failBarData.setColor(CommonUtil.getGraphColors()[2]);
+		failedDivision.addBarData(failBarData);
+		barChartData.addDivision(failedDivision);
+		
+		BarChartData.Division openedDivision = barChartData.new Division();
+		String [] openStatuses = { "INIT","ASSGND","INPRG","NGTD"};
+		Double openAmt  = DashBoardSQLs.getTotalforAllLeadsByStatus(division.getId(),new java.sql.Date(fromDate.getTime()),new java.sql.Date(toDate.getTime()) ,
+				openStatuses, true, context.getLoggedinCompany());
+		BarData openBarData = new BarData();
+		openBarData.setText("Open");
+		openBarData.setLegend("Open");
+		openBarData.setValue(openAmt);
+		openBarData.setColor(CommonUtil.getGraphColors()[1]);
+		openedDivision.addBarData(openBarData);
+		barChartData.addDivision(openedDivision);
+				
+		BarChartData.Range range =  barChartData.new  Range();
+		range.setyMax(totalPotential.intValue());
+		range.setyMin(0);
+		range.setxMin(0);
+		range.setxMax(100);
+		barChartData.setRange(range);
+		return barChartData;
+		
+		
+	}
+
 	@Override
 	public BarChartData setSalesTargetData(User associate, Date date,
 			CRMContext context) {
