@@ -1,0 +1,76 @@
+<!--
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>New Expense Line</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="getImageFromLibrary()">
+        <ion-icon name="photos"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="getImageFromCamera()">
+        <ion-icon name="camera"></ion-icon>
+      </button>
+     </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+ <ps-error [message]="errorMessage" [type]="'error'"></ps-error>
+  <form #expenseLineAddForm="ngForm">
+    <ion-grid>
+     <ion-row>
+       <ion-col>
+         <ion-item>
+           <ion-label floating>Expense</ion-label>
+           <ion-select [(ngModel)]="model.ExpenseHead.Name" name="expense" #expense="ngModel" required>
+                  <ion-option *ngFor="let expenseHead of expenseHeads" value="{{expenseHead.Name}}">{{expenseHead.Name}}</ion-option>
+            </ion-select>
+         </ion-item>
+       </ion-col>
+       <ion-col>
+         <ion-item>
+           <ion-label floating>Bill Number</ion-label>
+           <ion-input type="text" [(ngModel)]="model.BillNumber" name="billNumber" #billNumber="ngModel" required></ion-input>
+         </ion-item>
+      </ion-col>   
+     </ion-row>
+     <ion-row>
+       <ion-col>
+         <ion-item>
+           <ion-label floating>Countered Amount</ion-label>
+           <ion-input type="text" [(ngModel)]="model.CorrectedAmount" name="correctedAmount" #correctedAmount="ngModel" required></ion-input>
+         </ion-item>
+       </ion-col>
+       <ion-col>
+         <ion-item>
+           <ion-label floating>Requested Amount</ion-label>
+           <ion-input type="text" [(ngModel)]="model.RequestedAmount" name="requestedAmount" #requestedAmount="ngModel" required></ion-input>
+         </ion-item>
+      </ion-col>   
+     </ion-row>
+     <ion-row>
+       <ion-col>
+         <ion-item>
+           <ion-textarea [(ngModel)]="model.AssociateComments" name="comments" #comments="ngModel" placeholder="Comments" required>
+           
+          </ion-textarea>
+         </ion-item>
+       </ion-col>  
+     </ion-row>
+    </ion-grid>
+      
+  </form>
+  <div class="img-container">
+     <img src="{{expenseImage}}" *ngIf="expenseImage && expenseImage.length>0"/>
+  </div>
+  
+  <div class="button-container">
+  <button ion-button [disabled]="!expenseLineAddForm.form.valid || expenseImage.length==0" (click)="addExpenseLine()">Add Expense</button>
+</div>
+</ion-content>

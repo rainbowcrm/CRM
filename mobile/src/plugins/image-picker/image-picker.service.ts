@@ -15,4 +15,16 @@ export class ImagePickerService {
       };
       return this.imagePicker.getPicture(options);
   }
+
+  getPictureFromGallery(width, height):Promise<any>{
+      const options: CameraOptions = {
+        sourceType:0,
+        allowEdit:true,
+        targetWidth:width,
+        targetHeight: height,
+        destinationType: 0,
+        quality: 100
+      };
+      return this.imagePicker.getPicture(options);
+  }
 }

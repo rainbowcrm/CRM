@@ -36,10 +36,6 @@ export class AlertListPage {
     this.numberOfResults = this.params.get('numberOfResults');
   }
 
-  ionViewDidLoad() {
-     
-  }
-
   onSort(){
     var sortType = [{key: "type", value: "Type"},
                     {key: "owner", value: "Owner"},
@@ -117,7 +113,7 @@ export class AlertListPage {
     infiniteScroll.complete();
   }
 
-  acknowledge(alert:Alert){
+  acknowledge(alert:Alert, index: number){
       let request = new AcknowledgeAlertRequest();
       request.submitAction = "acknowledge";
       request.currentmode = 'READ';
@@ -126,7 +122,9 @@ export class AlertListPage {
       request.rds_selectedids = alert.Id;
 
       this.http.processServerRequest("post",request, true).subscribe(
-                     res => this.showToast("Alert acknowledge"),
+                     res => {this.showToast("Alert acknowledge");
+                             this.alerts.splice(index, 1);                           
+                            },
                      error =>  this.showToast("Failed to acknowledge. Kindly retry again")); 
   }
 
