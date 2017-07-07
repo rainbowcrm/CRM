@@ -18,7 +18,7 @@
 
 
 <ion-content padding>
- <ion-card *ngFor="let alert of alerts">
+ <ion-card *ngFor="let alert of alerts; let i = index">
 
   <ion-item>
     <h2>{{alert.Type.Description}}</h2>
@@ -38,7 +38,7 @@
       </button>
     </ion-col>
     <ion-col *ngIf="alert.Status.Code == 'ALTOPN'">
-      <button ion-button icon-left clear small (click)="acknowledge(alert)">
+      <button ion-button icon-left clear small (click)="acknowledge(alert, i)">
         <div>Acknowledge</div>
       </button>
     </ion-col>

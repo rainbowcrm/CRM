@@ -1,0 +1,17 @@
+ps-expenses-add {
+  .button-container{
+    width: 100%;
+    text-align: center;
+  }
+  ion-slides{
+    height: 200px;
+  }
+  ion-card.card{
+    width: calc(100% - 100px);
+    margin: auto;
+    ion-icon{
+      float: right;
+    }
+  }
+
+}

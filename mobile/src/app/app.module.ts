@@ -11,6 +11,7 @@ import { WishlistModule } from '../pages/wishlist/wishlist.module';
 import { ContactMgmtModule } from '../pages/contact-mgmt/contact-mgmt.module';
 import { SalesLeadModule } from '../pages/sales-lead/sales-lead.module';
 import { DiscussionModule } from '../pages/discussions/discussion.module';
+import { ExpenseModule } from '../pages/expenses/expenses.module';
 
 import { Loader,HTTPService, SharedService, ReasonCodeProvider, FilterProvider, PromptService } from '../providers/';
 import { ContactService, PushService, SecureStorageService } from '../plugins/';
@@ -35,6 +36,7 @@ import { IonicStorageModule } from '@ionic/storage';
     SalesLeadModule,
     DiscussionModule,
     AlertsModule,
+    ExpenseModule,
     IonicImageLoader.forRoot(),
     IonicStorageModule.forRoot()
   ],
@@ -44,6 +46,6 @@ import { IonicStorageModule } from '@ionic/storage';
     HomePage
   ],
   providers: [Loader,HTTPService, ReasonCodeProvider, FilterProvider, ContactService, SecureStorage, SecureStorageService,
-                Push,PushService, SplashScreen, SharedService, PromptService]
+                Push,PushService, SplashScreen, SharedService, PromptService, ExpenseModule]
 })
 export class AppModule {}
