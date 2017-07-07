@@ -49,7 +49,7 @@ Controller = "com.rainbow.crm.followup.controller.FollowupListController">
    	<Element label = "Result"  type = "UIText" Id = "txtResult"  property ="Result.code" />
  </FilterNode>
  <FilterNode>
-   	<Element label = "Reson"  type = "UIText" Id = "ResultReason"  property ="ResultReason.code" />
+   	<Element label = "Reson"  type = "UIText" Id = "ResultReason"  property ="ResultReason.Reason" />
  </FilterNode>
 </FilterSection>
 <ListSection >
@@ -70,8 +70,8 @@ Controller = "com.rainbow.crm.followup.controller.FollowupListController">
 <Column title ="Result"   sortField="result.description"  width ="18%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="Result.description" />
 </Column>
-<Column title ="Result_Reson"  sortField="resultReason.description"  width ="18%">
-<Element label = ""  type = "UINote" Id = "idIdNote"  property ="ResultReason.description" />
+<Column title ="Result_Reason"  sortField="resultReason.reason"  width ="18%">
+<Element label = ""  type = "UINote" Id = "idIdNote"  property ="ResultReason.Reason" />
 </Column>   
 <Column title ="Followup_Date"  sortField="followupDate" width ="18%">
 <Element label = ""  type = "UINote" Id = "idIdNote"  property ="followupDate" />

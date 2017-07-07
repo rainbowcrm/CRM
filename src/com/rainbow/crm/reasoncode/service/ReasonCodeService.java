@@ -123,8 +123,8 @@ public class ReasonCodeService extends AbstractService implements IReasonCodeSer
 	@Override
 	public List<ReasonCode> getAllReasonsforType(FiniteValue value,
 			CRMContext context) {
-		// TODO Auto-generated method stub
-		return null;
+		ReasonCodeDAO dao = ((ReasonCodeDAO)getDAO()) ;
+		return dao.getAllReasonsByType(context.getLoggedinCompany(), value.getCode()) ;
 	}
 
 		

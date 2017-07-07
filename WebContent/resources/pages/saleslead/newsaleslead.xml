@@ -83,11 +83,20 @@ Controller = "com.rainbow.crm.saleslead.controller.SalesLeadController">
 	<Element label = "Sales_Bill"  type = "UIText" Id = "txtSale"   property ="Sale.BillNumber" />
 	<Element label = "Status"  type = "UIHidden" Id = "hdnStatsCode"  readonly="true"  property ="Status.code" />
 	<Element label = "Status"  type = "UIText" Id = "txtStatus"  readonly="true"  property ="Status.description" />
-	<Element label = ""  type = "UILabel" Id = "lblCustTitle"   value ="Customer" />
-	<Element label = ""  type = "UILabel" Id = "lblFree1"  style="bigTitle" value ="" />
-	<Element label = "Phone"  type = "UIText" Id = "txtPhone"   property ="Customer.Phone" />
-	<Element label = "Email"  type = "UIText" Id = "txtEmail"   property ="Customer.Email" />
-	 <Element label = "Name"  type = "UILookupText"  Id = "txtCustomerName"  isMandatory="true" property ="Customer.FullName" showLookupAsDialog="true" dialogId="dlgComp"
+	<If check  = "Controller.completedForAssociate" >
+		<Element label = "Associate_Reason"  type = "UIText" Id = "lblAssStatus"   readonly="true"  property ="salesAssReason.reason" />
+		<Element label = "Manager_Reason"  type = "UILabel" Id = "lbtMgrStatus"    property ="mgrReason.reason" />
+	</If>
+	<If check  = "Controller.completedForManager" >
+		<Element label = "Associate_Reason"  type = "UIText" Id = "lblmgrAssStatus" readonly="true"  property ="salesAssReason.reason" />
+		<Element label = "Manager_Reason"  type = "UIList" Id = "lstmgrMgrStatus"    property ="mgrReason.id" >
+			<options populator =  "getAllReasons"> 
+			</options>
+		</Element>
+	</If>
+	<Element label = "Customer_Phone"  type = "UIText" Id = "txtPhone"   property ="Customer.Phone" />
+	<Element label = "Customer_Email"  type = "UIText" Id = "txtEmail"   property ="Customer.Email" />
+	 <Element label = "Customer_Name"  type = "UILookupText"  Id = "txtCustomerName"  isMandatory="true" property ="Customer.FullName" showLookupAsDialog="true" dialogId="dlgComp"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>customer</lookupType>
 	 <height>300</height>
@@ -117,8 +126,8 @@ Controller = "com.rainbow.crm.saleslead.controller.SalesLeadController">
  <Element type = "UITableRow">
 
 <Element type ="UITableCol" width = "10%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Code" /></Element>
-<Element type ="UITableCol" width = "25%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Item" /></Element>
-<Element type ="UITableCol" width = "18%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Comments" /></Element>
+<Element type ="UITableCol" width = "28%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Item" /></Element>
+<Element type ="UITableCol" width = "15%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Comments" /></Element>
 <Element type ="UITableCol" width = "8%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Retail_Price" /></Element>
 <Element type ="UITableCol" width = "8%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Qty" /></Element>
 <Element type ="UITableCol" width = "8%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Negotiated_Price" /></Element>
@@ -128,7 +137,7 @@ Controller = "com.rainbow.crm.saleslead.controller.SalesLeadController">
 <Element type = "UITableRow"  dataType = "com.rainbow.crm.saleslead.model.SalesLeadLine" rendered = "!Object.getVoided">
 
 <Element type ="UITableCol" width = "10%"><Element label = ""  type = "UIText" Id = "txtCode" size  = "10" property ="Sku.Code" /> </Element>
-<Element type ="UITableCol" width = "25%"><Element label = ""  type = "UILookupText"  Id = "txtItName"  size  = "30" property ="Sku.Name" showLookupAsDialog="true" dialogId="dlgItSKU"
+<Element type ="UITableCol" width = "28%"><Element label = ""  type = "UILookupText"  Id = "txtItName"  size  = "30" property ="Sku.Name" showLookupAsDialog="true" dialogId="dlgItSKU"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>sku</lookupType>
 	 <height>300</height>
@@ -142,7 +151,7 @@ Controller = "com.rainbow.crm.saleslead.controller.SalesLeadController">
 	 
 </Element>
  </Element>
-<Element type ="UITableCol" width = "18%"><Element label = ""  type = "UIText" Id = "txtLineCo"  property ="Comments" size = "30" />  </Element>
+<Element type ="UITableCol" width = "15%"><Element label = ""  type = "UIText" Id = "txtLineCo"  property ="Comments" size = "15" />  </Element>
 <Element type ="UITableCol" width = "8%"><Element label = ""  type = "UIText" Id = "txtPrice"  property ="price"  isNumeric= "true" size = "10" />  </Element>
 <Element type ="UITableCol" width = "8%"><Element label = ""  type = "UIText" Id = "txtQty"  property ="Qty"   isNumeric= "true"  size = "10"/>  </Element>
 <Element type ="UITableCol" width = "8%"><Element label = ""  type = "UIText" Id = "txtlineDisc"  property ="negotiatedPrice"  isNumeric= "true" size = "10" />  </Element>

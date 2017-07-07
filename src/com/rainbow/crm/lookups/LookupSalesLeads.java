@@ -26,15 +26,33 @@ public class LookupSalesLeads implements ILookupService{
 	public Map<String,String> lookupData(IRadsContext ctx, String searchString,
 			int from, int noRecords, String lookupParam,List<String > additionalFields) {
 		Map<String,String> ans = new LinkedHashMap<String,String> ();
-		String condition = null;
+		StringBuffer condition = new StringBuffer ( "") ; ;
 		if (!Utils.isNull(searchString)) { 
 			searchString = searchString.replace("*", "%");
-			condition =  " where docNumber like  '" + searchString + "'" ;
+			condition.append(" where docNumber like  '" + searchString + "'") ;
+		}
+		if (!Utils.isNullString(lookupParam)) {
+			if (condition.length() > 2)
+				condition.append( " and ");
+			else
+				condition.append( " where ");
+			condition.append("  division.id=" + lookupParam);
 		}
 		ISalesLeadService service = (ISalesLeadService) SpringObjectFactory.INSTANCE.getInstance("ISalesLeadService");
-		List<? extends CRMModelObject> slsLeads = service.listData(from, from  + noRecords, condition,(CRMContext)ctx,null);
+		List<? extends CRMModelObject> slsLeads = service.listData(from, from  + noRecords, condition.toString(),(CRMContext)ctx,null);
 		for (ModelObject obj :  slsLeads) {
-			ans.put(((SalesLead)obj).getDocNumber(),((SalesLead)obj).getDocNumber());
+			StringBuffer key = new StringBuffer(((SalesLead)obj).getDocNumber());
+			SalesLead lead =(SalesLead) obj;
+			if(additionalFields != null && additionalFields.contains("salesAssociate")  ){
+				if(lead.getSalesAssociate() != null) {
+					key.append("|" + lead.getSalesAssociate());
+				}else
+				{
+					key.append("|" + "" );
+				}
+					
+			}
+			ans.put(key.toString(),((SalesLead)obj).getDocNumber());
 		}
 
 		return ans;

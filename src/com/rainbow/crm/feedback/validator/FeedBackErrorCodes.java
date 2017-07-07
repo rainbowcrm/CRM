@@ -4,6 +4,6 @@ import com.rainbow.crm.common.CommonErrorCodes;
 
 public class FeedBackErrorCodes extends CommonErrorCodes{
 	
-	
+	public static int RATING_RANGE_ERROR= 20000801;
 
 }

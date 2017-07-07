@@ -4,7 +4,7 @@
  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
 
 <hibernate-mapping>
-<class name="com.rainbow.crm.feedback.model.FeedBackLine" table="SALESLEAD_LINES" lazy="false">
+<class name="com.rainbow.crm.feedback.model.FeedBackLine" table="FEEDBACK_LINES" lazy="false">
 	<meta attribute="class-description">
          This class contains the FeedBack Line
       </meta>
@@ -15,7 +15,9 @@
       <property name="lineNumber" column="LINE_NUMBER" type="integer"/>
       <many-to-one name="feedBackObjectType" column ="FEEDBACK_ON" not-null="true" lazy="false" ></many-to-one>
       <property name="feedBackObject" column="OBJECT_ID" type="string"/>
-      <property name="rating" column="RATING" type="double"/>
+      <property name="rating" column="RATING" type="integer"/>
+      <many-to-one name="sku" column ="SKU_ID" not-null="false" lazy="false" ></many-to-one>
+      <many-to-one name="associate" column ="ASSOCIATE_ID" not-null="false" lazy="false" ></many-to-one>
       <many-to-one name="reasonCode" column ="REASON_CODE_ID" not-null="false" lazy="false" ></many-to-one>
       <property name="deleted" column="IS_DELETED" type="boolean"/>
       <property name="comments" column="comments" type="string"/>

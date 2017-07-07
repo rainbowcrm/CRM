@@ -28,7 +28,7 @@ public class ReasonCodeDAO extends SpringHibernateDAO{
 	public ReasonCode findByReason(int company, String reason) {
 		ReasonCode reasonCode = null;
 		Session session = openSession(false);
-		Query query = session.createQuery(" from ReasonCode where reason = :reason and company.id =:company  " ) ;
+		Query query = session.createQuery(" from ReasonCode where reason = :reason and company.id =:company  and deleted = false " ) ;
 		query.setParameter("reason", reason);
 		query.setParameter("company", company);
 		List lst = query.list();
@@ -50,10 +50,20 @@ public class ReasonCodeDAO extends SpringHibernateDAO{
 		}
 	}
 	
-	public List<ReasonCode> getAllCategories(int company)  {
+	public List<ReasonCode> getAllReasons(int company)  {
 		Session session = openSession(false);
-		Query query = session.createQuery(" from ReasonCode where  company.id =:company  " ) ;
+		Query query = session.createQuery(" from ReasonCode where  company.id =:company and deleted=false " ) ;
 		query.setParameter("company", company);
+		List lst = query.list();
+		closeSession(session, false);
+		return lst;
+	}
+	
+	public List<ReasonCode> getAllReasonsByType(int company, String type )  {
+		Session session = openSession(false);
+		Query query = session.createQuery(" from ReasonCode where  company.id =:company  and  deleted= false and reasonType.code =:type" ) ;
+		query.setParameter("company", company);
+		query.setParameter("type", type);
 		List lst = query.list();
 		closeSession(session, false);
 		return lst;

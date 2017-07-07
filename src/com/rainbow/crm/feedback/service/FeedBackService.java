@@ -90,6 +90,10 @@ import com.rainbow.crm.feedback.model.FeedBack;
 import com.rainbow.crm.feedback.model.FeedBackLine;
 import com.rainbow.crm.feedback.validator.FeedBackErrorCodes;
 import com.rainbow.crm.feedback.validator.FeedBackValidator;
+import com.rainbow.crm.reasoncode.model.ReasonCode;
+import com.rainbow.crm.reasoncode.service.IReasonCodeService;
+import com.rainbow.crm.sales.model.Sales;
+import com.rainbow.crm.sales.service.ISalesService;
 import com.rainbow.crm.territory.model.Territory;
 import com.rainbow.crm.territory.service.ITerritoryService;
 import com.rainbow.crm.user.model.User;
@@ -184,6 +188,15 @@ public class FeedBackService extends AbstractionTransactionService implements IF
 				object.setDivision(division);
 			}
 		}
+		if (object.getCapturedBy() != null) {
+			IUserService userService = (IUserService)SpringObjectFactory.INSTANCE.getInstance("IUserService");
+			User user = (User) userService.getById(object.getCapturedBy().getUserId());
+			if(user != null)
+				object.setCapturedBy(user);
+			else
+				ans.add(CRMValidator.getErrorforCode(context.getLocale(), FeedBackErrorCodes.FIELD_NOT_VALID , "Captured_By"));
+			
+		}
 		if (object.getCustomer() != null) {
 			String phone = object.getCustomer().getPhone();
 			ICustomerService customerService = (ICustomerService) SpringObjectFactory.INSTANCE.getInstance("ICustomerService");
@@ -191,7 +204,15 @@ public class FeedBackService extends AbstractionTransactionService implements IF
 			if (customer != null)
 				 object.setCustomer(customer);
 		}
-		
+		if(object.getSales() != null && !Utils.isNullString(object.getSales().getBillNumber())) {
+			ISalesService salesService = (ISalesService) SpringObjectFactory.INSTANCE.getInstance("ISalesService");
+			Sales sales = (Sales )salesService.getByBusinessKey( object.getSales(),context );
+			if(sales != null)
+				object.setSales(sales);
+			else
+				ans.add(CRMValidator.getErrorforCode(context.getLocale(), FeedBackErrorCodes.FIELD_NOT_VALID , "Sales_Bill"));
+			
+		}
 				
 		if(!Utils.isNullSet(object.getFeedBackLines())){
 			int lineNo=1;
@@ -200,7 +221,30 @@ public class FeedBackService extends AbstractionTransactionService implements IF
 				line.setLineNumber(lineNo ++);
 				if(line.getFeedBackObjectType() == null ) {
 					ans.add(CRMValidator.getErrorforCode(context.getLocale(), FeedBackErrorCodes.FIELD_NOT_VALID , externalize.externalize(context, "Type")));
+				}else if (line.getFeedBackObjectType().equals(CRMConstants.FEEDBACK_ON.SALES_ASSOCIATE)) {
+					IUserService userService = (IUserService)SpringObjectFactory.INSTANCE.getInstance("IUserService");
+					 User user = (User) userService.getById(line.getFeedBackObject());
+					 if(user != null)
+						 line.setAssociate(user);
+					 else
+						ans.add(CRMValidator.getErrorforCode(context.getLocale(), FeedBackErrorCodes.FIELD_NOT_VALID , "Associate"));
+				}else if (line.getFeedBackObjectType().equals(CRMConstants.FEEDBACK_ON.SALES_LINE)) {
+					ISkuService skuService = (ISkuService)SpringObjectFactory.INSTANCE.getInstance("ISkuService");
+					Sku sku = (Sku)skuService.getById(line.getFeedBackObject());
+					if(sku != null)
+						line.setSku(sku);
+					else
+						ans.add(CRMValidator.getErrorforCode(context.getLocale(), FeedBackErrorCodes.FIELD_NOT_VALID , "Sku"));
 				}
+				if(line.getReasonCode() != null ) {
+					IReasonCodeService reasonCodeService = (IReasonCodeService)SpringObjectFactory.INSTANCE.getInstance("IReasonCodeService");
+					ReasonCode reasonCode = (ReasonCode) reasonCodeService.getById(line.getReasonCode().getId());
+					if(reasonCode != null)
+						line.setReasonCode(reasonCode);
+					else
+						ans.add(CRMValidator.getErrorforCode(context.getLocale(), FeedBackErrorCodes.FIELD_NOT_VALID , "ReasonCode"));
+				}
+				
 			}
 		}
 		return ans;

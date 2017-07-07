@@ -12,6 +12,7 @@ import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.contact.model.Contact;
 import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.division.model.Division;
+import com.rainbow.crm.reasoncode.model.ReasonCode;
 import com.rainbow.crm.sales.model.Sales;
 import com.rainbow.crm.territory.model.Territory;
 import com.rainbow.crm.vendor.model.Vendor;
@@ -34,9 +35,13 @@ public class SalesLead extends CRMBusinessModelObject{
 	Set<SalesLeadLine> salesLeadLines;
 	FiniteValue status;
 	String salesAssociate ;
-	String salesAssReasonCode;
-	String mgrReasonCode;
+	
+	
+	ReasonCode salesAssReason;
+	ReasonCode mgrReason;
+	
 	boolean alerted; 
+	Date closureDate ;
 	
 	
 	
@@ -87,17 +92,27 @@ public class SalesLead extends CRMBusinessModelObject{
 	public void setSalesAssociate(String salesAssociate) {
 		this.salesAssociate = salesAssociate;
 	}
-	public String getSalesAssReasonCode() {
-		return salesAssReasonCode;
+	public Date getClosureDate() {
+		return closureDate;
 	}
-	public void setSalesAssReasonCode(String salesAssReasonCode) {
-		this.salesAssReasonCode = salesAssReasonCode;
+	public void setClosureDate(Date closureDate) {
+		this.closureDate = closureDate;
 	}
-	public String getMgrReasonCode() {
-		return mgrReasonCode;
+	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
+	public ReasonCode getSalesAssReason() {
+		return salesAssReason;
 	}
-	public void setMgrReasonCode(String mgrReasonCode) {
-		this.mgrReasonCode = mgrReasonCode;
+	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
+	public void setSalesAssReason(ReasonCode salesAssReason) {
+		this.salesAssReason = salesAssReason;
+	}
+	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
+	public ReasonCode getMgrReason() {
+		return mgrReason;
+	}
+	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
+	public void setMgrReason(ReasonCode mgrReason) {
+		this.mgrReason = mgrReason;
 	}
 	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
 	public Customer getCustomer() {

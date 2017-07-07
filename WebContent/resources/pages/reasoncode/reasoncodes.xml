@@ -34,17 +34,20 @@ Controller = "com.rainbow.crm.reasoncode.controller.ReasonCodeController">
 <Element label = ""  type = "UICheckBox" Id = "idChkSel"  rendered="!Object.isDeleted" property ="Id" />
 <Element label = ""  type = "UIImage" Id = "idChkSel"  rendered="Object.isDeleted" height = "21" weight ="21" src= "./resources/images/deletedRow.jpg" />
 </SelectionColumn>
-<Column title ="Type" sortField="reasonType.Description" width ="25%" >
-<Element label = ""  type = "UINote" Id = "idNameNote"  property ="reasonType.Description" />
+<Column title ="Type" sortField="reasonType.description" width ="20%" >
+<Element label = ""  type = "UINote" Id = "idNameNote"  property ="reasonType.description" />
 </Column>
-<Column title ="Reason" sortField="reason" width ="25%" >
+<Column title ="Reason" sortField="reason" width ="20%" >
 <Element label = ""  type = "UINote" Id = "idDescNote"  property ="Reason" />
 </Column>
- <Column title ="Factor" sortField="factorType.Description"  width ="15%" >
-  <Element label = ""  type = "UINote" Id = "idIndusNote"  property ="factorType.Description" />
+ <Column title ="Factor" sortField="factorType.description"  width ="15%" >
+  <Element label = ""  type = "UINote" Id = "idIndusNote"  property ="factorType.description" />
  </Column>
- <Column title ="Accessible_By" sortField="accessibleBy.Description"  width ="20%" >
-  <Element label = ""  type = "UINote" Id = "idIndusNote"  property ="accessibleBy.Description" />
+ <Column title ="Business_Orientation" sortField="orientation.description"  width ="15%" >
+  <Element label = ""  type = "UINote" Id = "idIndusNote"  property ="orientation.description" />
+ </Column>
+ <Column title ="Accessible_By" sortField="accessibleBy.description"  width ="20%" >
+  <Element label = ""  type = "UINote" Id = "idIndusNote"  property ="accessibleBy.description" />
  </Column>
   <Column title =""  width ="10%" >
   <Element label = ""  type = "UINote" Id = "idAdEd"   />
@@ -54,19 +57,25 @@ Controller = "com.rainbow.crm.reasoncode.controller.ReasonCodeController">
 <Column width ="5%">
 <Element label = ""  type = "UIHidden" Id = "idReasonCodeID"  size  = "40" property ="Id" />
 </Column>
-<Column width ="25%">
+<Column width ="20%">
 <Element label = ""  type = "UIList" Id = "idCatName"  property ="reasonType.Code" >
 	<options populator =  "getAllReasonCodeTypes"> 
 	</options>
 </Element>
 <Element label = "" type = "UIHidden" Id = "hdnVersion" property ="ObjectVersion" />
 </Column>
-<Column width ="25%">
+<Column width ="20%">
 <Element label = ""  type = "UIText" Id = "idDesc" size  = "30" property ="Reason" />
 </Column>
 <Column width ="15%" >
 <Element label = ""  type = "UIList" Id = "lstfactorType"   property ="factorType.Code"  externalise= "true">
 	<options populator =  "getAllFactors"> 
+	</options>
+</Element>
+</Column>
+<Column width ="15%" >
+<Element label = ""  type = "UIList" Id = "lstOrientationType"   property ="orientation.Code"  externalise= "true">
+	<options populator =  "getAllOrientation"> 
 	</options>
 </Element>
 </Column>
