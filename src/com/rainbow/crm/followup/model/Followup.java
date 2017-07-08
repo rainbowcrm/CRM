@@ -95,22 +95,22 @@ public class Followup extends CRMBusinessModelObject{
 	public void setFinalFollowup(boolean finalFollowup) {
 		this.finalFollowup = finalFollowup;
 	}
-	@RadsPropertySet(usePKForJSON=true,usePKForMap=true,usePKForXML=true)
+	@RadsPropertySet(useBKForJSON=true,useBKForMap=true,useBKForXML=true)
 	public FiniteValue getResult() {
 		return result;
 	}
-	@RadsPropertySet(usePKForJSON=true,usePKForMap=true,usePKForXML=true)
+	@RadsPropertySet(useBKForJSON=true,useBKForMap=true,useBKForXML=true)
 	public void setResult(FiniteValue result) {
 		this.result = result;
 	}
 	public String getComments() {
 		return comments;
 	}
-	@RadsPropertySet(usePKForJSON=true,usePKForMap=true,usePKForXML=true)
+	@RadsPropertySet(useBKForJSON=true,useBKForMap=true,useBKForXML=true)
 	public ReasonCode getResultReason() {
 		return resultReason;
 	}
-	@RadsPropertySet(usePKForJSON=true,usePKForMap=true,usePKForXML=true)
+	@RadsPropertySet(useBKForJSON=true,useBKForMap=true,useBKForXML=true)
 	public void setResultReason(ReasonCode resultReason) {
 		this.resultReason = resultReason;
 	}

@@ -11,6 +11,7 @@ import java.util.List;
 
 
 
+
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.AbstractService;
 import com.rainbow.crm.common.CRMConstants;
@@ -20,6 +21,7 @@ import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
+import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.hibernate.ORMDAO;
 import com.rainbow.crm.reasoncode.model.ReasonCode;
 import com.rainbow.crm.saleslead.model.SalesLead;
@@ -108,14 +110,18 @@ public class FollowupService extends AbstractService implements IFollowupService
 			ReasonCode reasonCode= CommonUtil.getReasonCode(followup.getResultReason(), context) ;
 			followup.setResultReason(reasonCode);
 		}
+		if (followup.getDivision() != null) {
+			Division division  = CommonUtil.getDivisionObect(context, followup.getDivision());
+			followup.setDivision(division);
+		}
 	}
 	
 
 	@Override
 	public TransactionResult create(CRMModelObject object, CRMContext context) {
 		Followup followup = (Followup) object ;
+		System.out.println("followup json =" + followup.toJSON());
 		TransactionResult result=  super.create(object, context);
-		
 		updateSalesLead(followup,context);
 		return result; 
 	}

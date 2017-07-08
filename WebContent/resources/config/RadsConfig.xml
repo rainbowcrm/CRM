@@ -422,7 +422,10 @@
 
  </AjaxService>
   <AjaxService service ="allFiniteValues" class = "com.rainbow.crm.common.ajaxservices.AllFiniteValues">
-
+  
+  </AjaxService>
+  <AjaxService service ="searchReasonCode" class = "com.rainbow.crm.common.ajaxservices.ReasonCodesAjaxService">
+ <key>type</key>
  </AjaxService>
   <AjaxService service ="allExpenseHeads" class = "com.rainbow.crm.common.ajaxservices.AllExpenseHeadsAjaxService">
 

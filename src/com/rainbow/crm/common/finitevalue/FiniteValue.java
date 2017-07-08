@@ -17,11 +17,11 @@ public class FiniteValue extends ModelObject implements Serializable,Cloneable{
 	public void setType(String type) {
 		this.type = type;
 	}
-	@RadsPropertySet(isPK=true)
+	@RadsPropertySet(isPK=true, isBK =true)
 	public String getCode() {
 		return code;
 	}
-	@RadsPropertySet(isPK=true)
+	@RadsPropertySet(isPK=true, isBK =true)
 	public void setCode(String code) {
 		this.code = code;
 	}

@@ -56,7 +56,7 @@ public class FollowupValidator extends CRMValidator {
 			}
 		}
 		if(followup.getDivision() == null) {
-			errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Sales_Associate"))) ;
+			errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Division"))) ;
 		} else if (followup.getDivision().getId() !=  followup.getLead().getDivision().getId()) {
 			errors.add(getErrorforCode(FollowupErrorCodes.SALESLEAD_DIVISON_MISMATCH));
 		}
@@ -70,7 +70,7 @@ public class FollowupValidator extends CRMValidator {
 			user = (User)userService.getByBusinessKey(user, context);
 			if (user == null) {
 				errors.add(getErrorforCode(CommonErrorCodes.FIELD_NOT_VALID,externalize.externalize(context, "Sales_Associate"))) ;
-			}else if (user.getDivision().getId() != followup.getDivision().getId())  {
+			}else if (followup.getDivision() != null && user.getDivision().getId() != followup.getDivision().getId())  {
 				errors.add(getErrorforCode(FollowupErrorCodes.ASSOCIATE_DIVISON_MISMATCH));
 			}
 			
