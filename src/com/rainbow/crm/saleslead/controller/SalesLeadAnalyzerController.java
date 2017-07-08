@@ -27,9 +27,15 @@ public class SalesLeadAnalyzerController extends CRMGeneralController {
 			IDashBoardService dashBoardService = (IDashBoardService)SpringObjectFactory.INSTANCE.getInstance("IDashBoardService");
 			BarChartData barChartData = dashBoardService.getSalesLeadPotentials(analyzer.getDivision(), analyzer.getFromDate(),analyzer.getToDate(),(CRMContext) getContext());
 			analyzer.setLeadsBarData(barChartData);
+			
 			PieChartData pieChartData = dashBoardService.getLeadSplitsByStatus(analyzer.getDivision(), analyzer.getFromDate(),analyzer.getToDate(),(CRMContext) getContext());
 			analyzer.setSalesleadSplits(pieChartData);
+			
+			PieChartData pieChartReasnData = dashBoardService.getLeadSplitsByReason(analyzer.getDivision(), analyzer.getFromDate(),analyzer.getToDate(),(CRMContext) getContext());
+			analyzer.setSalesReasonSplits(pieChartReasnData);
+			
 			PageResult result = new PageResult();
+			
 			result.setObject(analyzer);
 			return result;
 		}

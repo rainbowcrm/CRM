@@ -432,6 +432,28 @@ public class DashBoardService  implements IDashBoardService{
 	}
 	
 	
+	
+	
+	@Override
+	public PieChartData getLeadSplitsByReason(
+			com.rainbow.crm.division.model.Division division, Date fromDate,
+			Date toDate, CRMContext context) {
+		PieChartData pieChartData  = new PieChartData();
+		Map <String , Double > results = DashBoardSQLs.getReasonWiseSaleLeadsforDivision(division.getId(),  new java.sql.Date( fromDate.getTime()),
+				new java.sql.Date( toDate.getTime()), context.getLoggedinCompany()) ;
+		AtomicInteger index = new AtomicInteger(0);
+		results.forEach(  (status, count) -> {  
+			PieSliceData pieSliceData  = new PieSliceData();
+			pieSliceData.setVolume(count);
+			pieSliceData.setText(status);
+			pieSliceData.setColor(CommonUtil.getGraphColors()[index.getAndIncrement()]);
+			pieChartData.addPieSlice(pieSliceData);
+		} );
+		pieChartData.setFooterNote("Sales Lead by Reason");
+		pieChartData.setTitle("Sales Lead by Reason");
+		return pieChartData;
+	}
+
 	@Override
 	public PieChartData getDivisionLeadSplits(User manager, Date date,
 			CRMContext context) {

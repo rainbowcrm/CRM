@@ -53,14 +53,14 @@ Controller = "com.rainbow.crm.saleslead.controller.SalesLeadAnalyzerController">
 	  <rangeWidth>500</rangeWidth>
  	</Element>  
  	
-	<!-- <Element type = "UIPieChart" Id = "brChrt"  dataProvider = "topSalesData" >
+	 <Element type = "UIPieChart" Id = "brChrt"  dataProvider = "salesReasonSplits" useGoogleGraph="true">
 	  <centerX>150</centerX>
 	  <centerY>150</centerY>
 	  <radius>50</radius>
 	  <rangeHeight>300</rangeHeight>
 	  <rangeWidth>500</rangeWidth>
  	</Element>
- 	<Element type = "UIPieChart" Id = "brChrt3"  dataProvider = "LowMedSalesData" >
+ 	<!-- <Element type = "UIPieChart" Id = "brChrt3"  dataProvider = "LowMedSalesData" >
 	  <centerX>150</centerX>
 	  <centerY>150</centerY>
 	  <radius>50</radius>

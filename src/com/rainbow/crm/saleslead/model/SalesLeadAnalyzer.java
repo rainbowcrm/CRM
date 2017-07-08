@@ -16,6 +16,7 @@ public class SalesLeadAnalyzer  extends CRMModelObject{
 	
 	BarChartData leadsBarData;
 	PieChartData salesleadSplits;
+	PieChartData salesReasonSplits;
 
 	public Division getDivision() {
 		return division;
@@ -55,6 +56,14 @@ public class SalesLeadAnalyzer  extends CRMModelObject{
 
 	public void setSalesleadSplits(PieChartData salesleadSplits) {
 		this.salesleadSplits = salesleadSplits;
+	}
+
+	public PieChartData getSalesReasonSplits() {
+		return salesReasonSplits;
+	}
+
+	public void setSalesReasonSplits(PieChartData salesReasonSplits) {
+		this.salesReasonSplits = salesReasonSplits;
 	}
 	
 	

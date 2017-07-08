@@ -84,6 +84,7 @@ public class FollowupService extends AbstractService implements IFollowupService
 				lead.setStatus(new FiniteValue(CRMConstants.SALESCYCLE_STATUS.FAILED));
 			lead.setClosureDate(followup.getFollowupDate());
 			lead.setSalesAssReason(followup.getResultReason());
+			lead.setMgrReason(followup.getResultReason());
 		} else {
 			lead.setStatus(new FiniteValue(CRMConstants.SALESCYCLE_STATUS.IN_PROGRESS));
 			if (followup.getOfferedPrice() != null && followup.getOfferedPrice() >0 ) {
