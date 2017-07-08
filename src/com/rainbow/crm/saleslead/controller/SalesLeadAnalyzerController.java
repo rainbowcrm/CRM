@@ -14,6 +14,7 @@ import com.rainbow.crm.division.service.IDivisionService;
 import com.rainbow.crm.saleslead.model.SalesLeadAnalyzer;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.graphdata.BarChartData;
+import com.techtrade.rads.framework.model.graphdata.PieChartData;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
 import com.techtrade.rads.framework.utils.Utils;
 
@@ -26,6 +27,8 @@ public class SalesLeadAnalyzerController extends CRMGeneralController {
 			IDashBoardService dashBoardService = (IDashBoardService)SpringObjectFactory.INSTANCE.getInstance("IDashBoardService");
 			BarChartData barChartData = dashBoardService.getSalesLeadPotentials(analyzer.getDivision(), analyzer.getFromDate(),analyzer.getToDate(),(CRMContext) getContext());
 			analyzer.setLeadsBarData(barChartData);
+			PieChartData pieChartData = dashBoardService.getLeadSplitsByStatus(analyzer.getDivision(), analyzer.getFromDate(),analyzer.getToDate(),(CRMContext) getContext());
+			analyzer.setSalesleadSplits(pieChartData);
 			PageResult result = new PageResult();
 			result.setObject(analyzer);
 			return result;

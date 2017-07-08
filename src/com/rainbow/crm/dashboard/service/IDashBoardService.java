@@ -47,6 +47,8 @@ public interface IDashBoardService {
 	public PieChartData getSaleLeadSplitsByReason(Division division,Date fromDate, Date toDate, CRMContext context, FiniteValue  orientation  );
 	
 	public BarChartData getSalesLeadPotentials(Division division,Date fromDate, Date toDate, CRMContext context);
+	
+	public PieChartData getLeadSplitsByStatus(Division division,Date fromDate, Date toDate, CRMContext context);
 
 	
 }

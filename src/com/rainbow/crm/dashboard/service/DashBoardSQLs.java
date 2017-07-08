@@ -301,7 +301,7 @@ public class DashBoardSQLs {
 		return ans;
 	}
 	
-	public static Map<String, Double> getStatusWiseSaleLeadsforDivision(int division,   Date startDate, Date endDate )
+	public static Map<String, Double> getStatusWiseSaleLeadsforDivision(int division,   Date startDate, Date endDate , int company)
 	{
 		Connection connection = null;
 		PreparedStatement statement = null;
@@ -309,17 +309,21 @@ public class DashBoardSQLs {
 		Map<String, Double> ans = new HashMap<String, Double> ();
 		try {
 			connection = ConnectionCreater.getConnection();
+			String divisionPart = (division==-1)?"":" AND SALES_LEADS.DIVISION_ID = ? ";
 			String sql =  " SELECT COUNT(SALES_LEADS.ID),SALES_LEADS.STATUS FROM SALES_LEADS  WHERE   " + 
-			"  SALES_LEADS.RELEASED_DATE >= ? AND  SALES_LEADS.RELEASED_DATE <= ? AND SALES_LEADS.DIVISION_ID = ? AND " + 
-			"   SALES_LEADS.IS_VOIDED = FALSE  GROUP BY SALES_LEADS.STATUS ";
+			"  SALES_LEADS.RELEASED_DATE >= ? AND  SALES_LEADS.RELEASED_DATE <= ?  AND SALES_LEADS.COMPANY_ID = ? AND "   + 
+			"   SALES_LEADS.IS_VOIDED = FALSE  " + divisionPart +   "    GROUP BY SALES_LEADS.STATUS ";
 			statement = connection.prepareStatement(sql);
 			statement.setDate(1, startDate);
 			statement.setDate(2, endDate);
-			statement.setInt(3, division);
+			statement.setInt(3, company);
+			if(division != -1)
+				statement.setInt(4, division);
+			
 			rs = statement.executeQuery();
 			while (rs.next()) {
 				String statusCode  = rs.getString(2);
-				String status = "Open" ;
+				String status = "Unassigned" ;
 				if(!Utils.isNullString(statusCode)) {
 					FiniteValue fValue=	GeneralSQLs.getFiniteValue(statusCode);
 					status =fValue.getDescription();		

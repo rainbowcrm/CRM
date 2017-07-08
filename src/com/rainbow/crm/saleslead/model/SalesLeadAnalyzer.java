@@ -5,6 +5,7 @@ import java.util.Date;
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.division.model.Division;
 import com.techtrade.rads.framework.model.graphdata.BarChartData;
+import com.techtrade.rads.framework.model.graphdata.PieChartData;
 
 public class SalesLeadAnalyzer  extends CRMModelObject{ 
 	
@@ -14,6 +15,7 @@ public class SalesLeadAnalyzer  extends CRMModelObject{
 	Date toDate;
 	
 	BarChartData leadsBarData;
+	PieChartData salesleadSplits;
 
 	public Division getDivision() {
 		return division;
@@ -45,6 +47,14 @@ public class SalesLeadAnalyzer  extends CRMModelObject{
 
 	public void setLeadsBarData(BarChartData leadsBarData) {
 		this.leadsBarData = leadsBarData;
+	}
+
+	public PieChartData getSalesleadSplits() {
+		return salesleadSplits;
+	}
+
+	public void setSalesleadSplits(PieChartData salesleadSplits) {
+		this.salesleadSplits = salesleadSplits;
 	}
 	
 	

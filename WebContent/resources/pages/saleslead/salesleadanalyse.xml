@@ -45,6 +45,14 @@ Controller = "com.rainbow.crm.saleslead.controller.SalesLeadAnalyzerController">
 	  <barWidth>30</barWidth>
 	  <noYAxisDivisions>6</noYAxisDivisions>
  	</Element>  
+ 	<Element type = "UIPieChart" Id = "pieChart5"   useDonutChart="true"  dataProvider = "salesleadSplits" useGoogleGraph="true" >
+	  <centerX>150</centerX>
+	  <centerY>150</centerY>
+	  <radius>50</radius>
+	  <rangeHeight>300</rangeHeight>
+	  <rangeWidth>500</rangeWidth>
+ 	</Element>  
+ 	
 	<!-- <Element type = "UIPieChart" Id = "brChrt"  dataProvider = "topSalesData" >
 	  <centerX>150</centerX>
 	  <centerY>150</centerY>
