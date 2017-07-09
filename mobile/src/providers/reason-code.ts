@@ -12,26 +12,28 @@ import 'rxjs/add/observable/throw';
 */
 @Injectable()
 export class ReasonCodeProvider {
+  private finiteValueSource= new Subject<any>();
   private reasonCodeSource= new Subject<any>();
   private request = new BaseSearchRequest();
+  finiteValueSource$ = this.finiteValueSource.asObservable();
   reasonCodeSource$ = this.reasonCodeSource.asObservable();
 
   constructor(private storage: Storage, private http: HTTPService, private sharedService: SharedService) { }
 
-  getReasonCode(){
-     var reasonCode = this.getReasonCodeFromStorage();
+  getFiniteValues(){
+     var reasonCode = this.getFiniteValuesFromStorage();
      if(reasonCode){
-       this.reasonCodeSource.next(reasonCode);
+       this.finiteValueSource.next(reasonCode);
      }else{
       this.http.processCustomUrlServerRequest("ajxService=allFiniteValues","post",this.request, true).subscribe(
                      res =>  {
-                       this.processReasonCodes(res);
+                       this.processFiniteValues(res);
                       },
                      error =>  {});
      }
   }
 
-  private processReasonCodes(res): void{
+  private processFiniteValues(res): void{
      let reasonCode = {};
      let allFiniteValues = res.allFiniteValues;
      if(allFiniteValues){
@@ -42,16 +44,31 @@ export class ReasonCodeProvider {
          reasonCode[allFiniteValues[i]["Type"]].push(allFiniteValues[i]);
        }
      }    
-     this.saveReasonCodeIntoStorage(reasonCode);
-     this.reasonCodeSource.next(reasonCode)
+     this.saveFiniteValuesIntoStorage(reasonCode);
+     this.finiteValueSource.next(reasonCode)
   }
 
-  private getReasonCodeFromStorage(): void{
-    return this.sharedService.getData("reasonCodes");
+  private getFiniteValuesFromStorage(): void{
+    return this.sharedService.getData("finiteValues");
   }
 
-  private saveReasonCodeIntoStorage(rc): void{
-    this.sharedService.saveData("reasonCodes",rc);
+  private saveFiniteValuesIntoStorage(rc): void{
+    this.sharedService.saveData("finiteValues",rc);
+  }
+
+  getReasonCodes(type){
+      this.http.processCustomUrlServerRequest("ajxService=searchReasonCode&type="+type,"post",this.request, true).subscribe(
+                     res =>  {
+                       this.processReasonCodeValues(res);
+                      },
+                     error =>  {});
+  }
+
+  private processReasonCodeValues(res): void{
+     let allReasonCodes = res.reasonCodes;
+     if(allReasonCodes){
+       this.reasonCodeSource.next(allReasonCodes)
+     }    
   }
 
 }
