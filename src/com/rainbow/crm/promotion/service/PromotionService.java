@@ -59,11 +59,37 @@ public class PromotionService extends AbstractService implements
 	@Override
 	public Object getById(Object PK) {
 		Promotion category = (Promotion) getDAO().getById(PK);
+		fetchDetails(category,null);
 		return category;
 	}
 
 
-	
+	private void fetchDetails(Promotion promotion,CRMContext context)
+ {
+		if (promotion == null || Utils.isNullSet(promotion.getPromotionLines()))
+			return;
+
+		promotion.getPromotionLines().forEach(
+				promotionLine -> {
+					if (promotionLine.getMasterPortFolioType() != null
+							&& !Utils.isNullString(promotionLine
+									.getMasterPortFolioKey())) {
+						String masterValue = CommonUtil.getSalesPortfolioValue(
+								promotionLine.getMasterPortFolioType(),
+								promotionLine.getMasterPortFolioKey());
+						promotionLine.setMasterPortFolioValue(masterValue);
+					}
+					if (promotionLine.getChildPortFolioType() != null
+							&& !Utils.isNullString(promotionLine
+									.getChildPortFolioKey())) {
+						String childValue = CommonUtil.getSalesPortfolioValue(
+								promotionLine.getChildPortFolioType(),
+								promotionLine.getChildPortFolioKey());
+						promotionLine.setChildPortFolioValue(childValue);
+					}
+
+				});
+	}
 	
 	
 	@Override

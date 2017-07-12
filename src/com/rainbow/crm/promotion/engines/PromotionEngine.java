@@ -1,4 +1,4 @@
-package com.rainbow.crm.promotion.service;
+package com.rainbow.crm.promotion.engines;
 
 import java.util.ArrayList;
 import java.util.HashMap;

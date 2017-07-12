@@ -23,6 +23,7 @@
       <property name="promotedDiscPercent" column="PROMOTED_DISC_PERCENT" type="double"/>
       <property name="isActive" column="IS_ACTIVE" type="boolean"/>
       <property name="comments" column="comments" type="string"/>
+      <many-to-one name="itemClass" column ="ITEM_CLASS" not-null="true" lazy="false" ></many-to-one>
       <property name="deleted" column="is_deleted" type="boolean"/>
       <property name="createdDate" column="created_date" type="timestamp" update="false"/>
       <property name="lastUpdateDate" column="last_updated_date" type="timestamp"/>

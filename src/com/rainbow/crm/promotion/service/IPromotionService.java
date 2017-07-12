@@ -6,6 +6,7 @@ import java.util.List;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.IBusinessService;
 import com.rainbow.crm.common.ITransactionService;
+import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.promotion.model.Promotion;
 import com.rainbow.crm.promotion.model.PromotionLine;
 import com.rainbow.crm.customer.model.Customer;
@@ -20,4 +21,6 @@ public interface IPromotionService extends ITransactionService{
 	public Promotion getAllItemPromotion(Date date, Division division);
 	
 	public PromotionLine isIncentivizedSku(Sku sku, Date date);
+	
+	public List<Promotion> getAllPromotionsforType(FiniteValue promoType,Date date, CRMContext context);
 }

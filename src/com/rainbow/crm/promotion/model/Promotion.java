@@ -23,6 +23,7 @@ public class Promotion extends CRMBusinessModelObject{
 	CustCategory custCategory ;
 	Date startDt;
 	Date endDt;
+	FiniteValue itemClass;
 	
 	Set<PromotionLine> promotionLines;
 	
@@ -115,9 +116,14 @@ public class Promotion extends CRMBusinessModelObject{
 	public void setPromotedDiscPercent(Double promotedDiscPercent) {
 		this.promotedDiscPercent = promotedDiscPercent;
 	}
-	
-	
 
-	
+	public FiniteValue getItemClass() {
+		return itemClass;
+	}
+
+	public void setItemClass(FiniteValue itemClass) {
+		this.itemClass = itemClass;
+	}
+		
 
 }

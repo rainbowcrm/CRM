@@ -3,8 +3,8 @@
 Controller = "com.rainbow.crm.promotion.controller.PromotionController">
 <Template type= "Transaction"  name = "TransactionTemplate"></Template>
 <Forwards>
-<Forward key ="CANCEL">rdscontroller?page=promotions</Forward>
-<Forward key ="SAVE">promotions</Forward>
+<Forward key ="CANCEL">rdscontroller?page=promotionslist</Forward>
+<Forward key ="SAVE">promotionslist</Forward>
 </Forwards>
 <IncludeJS>./resources/js/RadsLib.js</IncludeJS>
 <IncludeJS>./scripts/CRMGeneral.js</IncludeJS>
@@ -35,6 +35,10 @@ Controller = "com.rainbow.crm.promotion.controller.PromotionController">
 	<options populator =  "getAllPromoTypes"> 
 	</options>
 	</Element>
+	<Element label = "Item_Class"  type = "UIList" Id = "lstItemClass"   property ="itemClass.code" >
+	<options populator =  "getAllItemClasses"> 
+	</options>
+	</Element>
 	
 	<Element label = "Customer_Category"  type = "UILookupText"  Id = "txtCustCategory"  property ="custCategory.name" showLookupAsDialog="true" dialogId="dlgIt"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" additionalInputControl = "lstInvDivision">
@@ -56,24 +60,24 @@ Controller = "com.rainbow.crm.promotion.controller.PromotionController">
  <Element type = "UITableRow">
 
 <Element type ="UITableCol" width = "10%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Master_Type" /></Element>
-<Element type ="UITableCol" width = "20%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Master_Value" /></Element>
+<Element type ="UITableCol" width = "25%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Master_Value" /></Element>
 <Element type ="UITableCol" width = "8%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Required_Qty" /></Element>
 <Element type ="UITableCol" width = "8%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Required_Amount" /></Element>
 <Element type ="UITableCol" width = "10%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Incentive_Type" /></Element>
-<Element type ="UITableCol" width = "20%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Incentive_Value" /></Element>
+<Element type ="UITableCol" width = "25%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Incentive_Value" /></Element>
 <Element type ="UITableCol" width = "8%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Promoted_Qty" /></Element>
 <Element type ="UITableCol" width = "8%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Promoted_Disc" /></Element>
 <Element type ="UITableCol" width = "10%"> </Element>
 </Element>  
  </Element>
-<Element type = "UITableRow"  dataType = "com.rainbow.crm.promotion.model.PromotionLine" rendered = "!Object.getDeleted">
+<Element type = "UITableRow"  dataType = "com.rainbow.crm.promotion.model.PromotionLine" rendered = "!Object.isDeleted">
 <Element type ="UITableCol" width = "10%"><Element label = ""  type = "UIList" Id = "txtKeyCode" onChangeJS = "selectPFKeyType(this);" property ="masterPortFolioType.code" > 
 	<options populator =  "getAllTypes"> 
 	</options>
 </Element>
 </Element>
 
-<Element type ="UITableCol" width = "20%">
+<Element type ="UITableCol" width = "25%">
 
 <Element label = ""  type = "UILookupText"  Id = "txtportkeyName"  size  = "20" property ="masterPortFolioValue" showLookupAsDialog="true" dialogId="dlgItportkey"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
@@ -92,7 +96,7 @@ Controller = "com.rainbow.crm.promotion.controller.PromotionController">
 </Element>
 </Element>
 
-<Element type ="UITableCol" width = "20%">
+<Element type ="UITableCol" width = "25%">
 <Element label = ""  type = "UILookupText"  Id = "txtCHportkeyName"  size  = "20" property ="childPortFolioValue" showLookupAsDialog="true" dialogId="dlgItportChildkey"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>salesportfoliokey</lookupType>
