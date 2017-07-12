@@ -21,8 +21,8 @@ export class ReasonCodeItemPopOverPage {
               private rcp: ReasonCodeProvider) {
     this.model = new ReasonCodeItem();
     this.item = this.navParam.get("item");
-    this.rcp.reasonCodeSource$.subscribe(res => {this.updateReasonCodes(res)});
-    this.rcp.getReasonCode();
+    this.rcp.finiteValueSource$.subscribe(res => {this.updateReasonCodes(res)});
+    this.rcp.getFiniteValues();
   }
 
    updateReasonCodes(reasonCodes){

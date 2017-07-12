@@ -23,8 +23,8 @@ export class ContactAddPage {
     private params: NavParams,  private rcp: ReasonCodeProvider) {
       this.model = new Contact();
       this.model.ContactType = new ContactType();
-      this.rcp.reasonCodeSource$.subscribe(res => {this.updateReasonCodes(res)});
-      this.rcp.getReasonCode();
+      this.rcp.finiteValueSource$.subscribe(res => {this.updateReasonCodes(res)});
+      this.rcp.getFiniteValues();
     }
 
   updateReasonCodes(reasonCodes){

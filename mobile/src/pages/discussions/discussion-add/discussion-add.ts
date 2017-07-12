@@ -24,8 +24,8 @@ export class DiscussionAddPage {
       this.model = new NewDiscussion();
       this.model.NewTopic = new Topic();
       this.model.NewTopic.PortfolioType = new PortFolioType();
-      this.rcp.reasonCodeSource$.subscribe(res => {this.updateReasonCodes(res)});
-      this.rcp.getReasonCode();
+      this.rcp.finiteValueSource$.subscribe(res => {this.updateReasonCodes(res)});
+      this.rcp.getFiniteValues();
     }
 
   updateReasonCodes(reasonCodes){
@@ -38,7 +38,8 @@ export class DiscussionAddPage {
   fetchBrands(){
    let modal = this.modalCtrl.create(DiscussionBrandModalPage,{type:this.model.NewTopic.PortfolioType.Code});
    modal.onDidDismiss(data => {
-     this.model.NewTopic.PortfolioValue = data.value;
+     if(data && data.value)
+       this.model.NewTopic.PortfolioValue = data.value;
    });
    modal.present();
   }

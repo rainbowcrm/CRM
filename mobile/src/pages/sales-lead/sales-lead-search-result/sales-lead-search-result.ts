@@ -21,6 +21,7 @@ export class SalesLeadSearchResult {
   private pageNumber: number;
   private fetchedResults: number;
   private numberOfResults: number;
+  private isAssociateLead: Boolean;
   private filter:Array<Object>;
   private sortCondition: any;
 
@@ -32,10 +33,17 @@ export class SalesLeadSearchResult {
     this.pageNumber = 0;
     this.fetchedResults = this.params.get('fetchedResults');
     this.numberOfResults = this.params.get('numberOfResults');
+    this.isAssociateLead = this.params.get("isAssociate");
+
   }
 
   ionViewDidLoad() {
-     
+     if(this.isAssociateLead){
+      this.pageNumber = -1;
+      this.fetchedResults = 0;
+      this.leads = [];
+      this.doSearchMoreItems({complete:function(){}});
+     }
   }
 
   onSort(){
@@ -100,6 +108,7 @@ export class SalesLeadSearchResult {
        return ;
     }
     this.leads = this.leads.concat(this.response.dataObject);
+    this.numberOfResults = this.response.availableRecords;
     this.fetchedResults += this.response.fetchedRecords;
     infiniteScroll.complete();
   }
@@ -111,7 +120,7 @@ export class SalesLeadSearchResult {
 
 
   onItemSelect(lead:SalesLeads):void{
-    this.navCtrl.push(SalesLeadDetails, {lead: lead});
+    this.navCtrl.push(SalesLeadDetails, {lead: lead, isAssociate: this.isAssociateLead});
   }
 
   onCustomerCall(lead: SalesLeads):void{

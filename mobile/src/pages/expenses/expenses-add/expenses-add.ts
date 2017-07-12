@@ -4,6 +4,7 @@ import { DatePipe } from '@angular/common';
 import { ExpenseVoucher,ExpenseVoucherLine, Division, SalesAssoicate, FetchExpenseHead, AddExpenseVoucherRequest, ExpensesLineAddPage } from '../';
 import { HTTPService, ReasonCodeProvider, SharedService } from '../../../providers/';
 import { Storage } from '@ionic/storage';
+import { HomePage } from '../../home/home';
 
 /*
 
@@ -49,6 +50,10 @@ export class ExpensesAddPage {
       this.storage.get('user').then(val => this.model.SalesAssoicate.UserId = val);
       this.storage.get('division').then(val => this.model.Division = val);
      });
+  }
+
+  goHome():void{
+      this.navCtrl.setRoot(HomePage);
   }
 
   

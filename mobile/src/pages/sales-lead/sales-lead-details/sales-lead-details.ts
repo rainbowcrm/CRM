@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { NavParams, Slides, ToastController, NavController } from 'ionic-angular';
 import { SalesLeads, SalesLeadEmailRequest} from '../';
 import { Storage } from '@ionic/storage';
-import { HTTPService } from '../../../providers/';
+import { HTTPService, SharedService } from '../../../providers/';
 
 
 /*
@@ -18,10 +18,12 @@ import { HTTPService } from '../../../providers/';
 export class SalesLeadDetails {
   private lead:SalesLeads;
   private request: SalesLeadEmailRequest;
+  private isAssociateLead: boolean;
 
   constructor(private params: NavParams,private navCtrl: NavController, private http: HTTPService,
-              private toastCtrl: ToastController) {
+              private toastCtrl: ToastController, private sharedData: SharedService) {
     this.lead = this.params.get('lead');
+    this.isAssociateLead = this.params.get("isAssociate");
   }
 
   sendMail(){
@@ -68,7 +70,11 @@ export class SalesLeadDetails {
   salesLeadEmailError(error){
     this.emailFailed();
   }
-
+  
+  associateLead(){
+     this.sharedData.saveData("lead",this.lead);
+     this.navCtrl.popToRoot();
+  }
   
  
 

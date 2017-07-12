@@ -11,7 +11,8 @@ import { PushObject } from '@ionic-native/push';
 import { WishListPage } from '../wishlist';
 import { SalesLeadSearch } from '../sales-lead';
 import { DiscussionsList } from '../discussions';
-import { ExpenseHomePage } from '../expenses';
+import { ExpensesAddPage } from '../expenses';
+import { FollowUpAddPage } from '../follow-up';
 import { RegTokenRequest, LogoutRequest, Token } from './home.model';
 import { Storage } from '@ionic/storage';
 
@@ -30,7 +31,7 @@ export class HomePage {
   private rootTitle = "Menu";
   private isRoot;
   private rootMenus = ["Item Search","Customer Management","Contacts","Alerts", "Wishlist", "Sales Leads",
-                       "Discussions", "Expense Vouchers"];
+                       "Discussions", "Expense Vouchers", "Follow Up"];
   private submenuList;
   private menuTitle = "Menu";
   private subMenus = {
@@ -41,7 +42,8 @@ export class HomePage {
                     "Sales Leads": SalesLeadSearch,
                     "Discussions": DiscussionsList,
                     "Alerts": AlertsHomePage,
-                    "Expense Vouchers": ExpenseHomePage
+                    "Expense Vouchers": ExpensesAddPage,
+                    "Follow Up": FollowUpAddPage 
                    };
   constructor(public navCtrl: NavController, private pushService: PushService
                 , private http: HTTPService, private storage: Storage,
@@ -57,7 +59,6 @@ export class HomePage {
 
   onNotification(notification){
     //TO DO may be page navigation
-    alert("onNotification");
   }
 
   onNotificationRegistered(registration){

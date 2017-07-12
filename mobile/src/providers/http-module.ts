@@ -16,8 +16,8 @@ export class HTTPService {
   private url; 
   private authToken;
   constructor(public http: Http, private loader: Loader) {
-    this.url = 'http://119.18.52.32:8080/primuscrm/rdscontroller';
-    //this.url = 'http://localhost:8080/rdscontroller';
+    //this.url = 'http://119.18.52.32:8080/primuscrm/rdscontroller';
+    this.url = 'http://localhost:8080/rdscontroller';
   }
   processServerRequest (restType:string,data:any,auth?:boolean, isSilent?:boolean): Observable<any[]> {
     if(!isSilent){

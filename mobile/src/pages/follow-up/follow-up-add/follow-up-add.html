@@ -1,0 +1,113 @@
+<!--
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+   <ion-navbar>
+     <ion-buttons start>
+      <button ion-button icon-only (click)="goHome()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+     </ion-buttons>
+    <ion-title>New Follow Up</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+ <ps-error [message]="errorMessage" [type]="'error'"></ps-error>
+  <form #followUpAddForm="ngForm">
+    <ion-grid>
+     <ion-row>
+        <ion-col>
+         <ion-item>
+           <ion-label floating>Sales Lead</ion-label>
+           <ion-input type="text" [(ngModel)]="model.Lead.DocNumber" name="salesLead" #salesLead="ngModel" disabled required (click)="associateSalesLead()"></ion-input>
+         </ion-item>
+       </ion-col>
+       <ion-col>
+         <ion-item>
+           <ion-label floating>Confidence Level</ion-label>
+           <ion-select [(ngModel)]="model.ConfidenceLevel.Code" name="confidenceLevel" #confidenceLevel="ngModel" required>
+                  <ion-option *ngFor="let cLevel of confidenceLevels" value="{{cLevel.Code}}">{{cLevel.Description}}</ion-option>
+            </ion-select>
+         </ion-item>
+      </ion-col>
+     </ion-row>
+     <ion-row>
+      <ion-col>
+         <ion-item>
+           <ion-label floating>Communication Mode</ion-label>
+           <ion-select [(ngModel)]="model.CommunicationMode.Code" name="communicationMode" #communicationMode="ngModel" required>
+                  <ion-option *ngFor="let cMode of communicationModes" value="{{cMode.Code}}">{{cMode.Description}}</ion-option>
+            </ion-select>
+         </ion-item>
+      </ion-col>
+       <ion-col>
+         <ion-item>
+           <ion-label floating>Result</ion-label>
+           <ion-select [(ngModel)]="model.Result.Code" name="result" #result="ngModel" required>
+                  <ion-option *ngFor="let res of results" value="{{res.Code}}">{{res.Description}}</ion-option>
+            </ion-select>
+         </ion-item>
+      </ion-col>
+     </ion-row>
+     <ion-row>
+        <ion-col>
+         <ion-item>
+           <ion-label floating>Offered Price</ion-label>
+           <ion-input type="text" [(ngModel)]="model.OfferedPrice" name="offeredPrice" #offeredPrice="ngModel" required></ion-input>
+         </ion-item>
+       </ion-col>
+       <ion-col>
+         <ion-item>
+           <ion-label floating>Result Reason</ion-label>
+           <ion-select [(ngModel)]="model.ResultReason.Reason" name="resultReason" #resultReason="ngModel" required>
+                  <ion-option *ngFor="let resReason of resultReasons" value="{{resReason.Reason}}">{{resReason.Reason}}</ion-option>
+            </ion-select>
+         </ion-item>
+      </ion-col>
+     </ion-row>
+     <ion-row>
+        <ion-col>
+         <ion-item>
+           <ion-label>Finalized</ion-label>
+          <ion-checkbox [(ngModel)]="model.FinalFollowup" name="finalFollowup" #finalFollowup="ngModel"></ion-checkbox>
+         </ion-item>
+       </ion-col>
+     </ion-row>
+     <ion-row>
+       <ion-col>
+         <ion-item>
+           <ion-label>Next Followup Date</ion-label>
+           <ion-input type="date" [(ngModel)]="model.NextFollwup" name="nextFollwup" #nextFollwup="ngModel" placeholder="" required></ion-input>
+         </ion-item>
+      </ion-col>
+     </ion-row>
+     <ion-row>
+       <ion-col>
+         <ion-item>
+          <ion-textarea [(ngModel)]="model.Comments" name="comments" #comments="ngModel" placeholder="Comments">
+           
+          </ion-textarea>
+         </ion-item>
+       </ion-col>
+     </ion-row>
+      <ion-row>
+       <ion-col>
+         <ion-item>
+          <ion-textarea [(ngModel)]="model.Conversation" name="conversation" #conversation="ngModel" placeholder="Conversation">
+           
+          </ion-textarea>
+         </ion-item>
+       </ion-col>
+     </ion-row>
+   </ion-grid>      
+  </form>
+   <div class="button-container">
+    <button ion-button [disabled]="!followUpAddForm.form.valid" (click)="createFollowUp()">Create</button>
+  </div>
+</ion-content>

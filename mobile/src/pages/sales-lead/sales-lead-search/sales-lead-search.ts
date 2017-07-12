@@ -20,7 +20,6 @@ export class SalesLeadSearch {
   private request: SalesLeadSearchRequest;
   private response: any;
   private errorMessage:string;
-  private isAssociateItems: Boolean;
   private availableFilters: Array<AllFilter>;
   private filterName: string;
   private model: SalesLeads;
@@ -33,8 +32,8 @@ export class SalesLeadSearch {
      this.model = new SalesLeads();
      this.model.Status = new Status();
      this.model.Customer = new Customer();
-     this.rcp.reasonCodeSource$.subscribe(res => {this.updateReasonCodes(res)});
-     this.rcp.getReasonCode();
+     this.rcp.finiteValueSource$.subscribe(res => {this.updateReasonCodes(res)});
+     this.rcp.getFiniteValues();
      this.filter.filtersForPage$.subscribe(res => {this.updateFilters(res)});
      this.filter.filtersDetails$.subscribe(res => {this.updateFilterValues(res)});
      this.filter.filtersSave$.subscribe(res => {this.updateFilterAfterSave()});
