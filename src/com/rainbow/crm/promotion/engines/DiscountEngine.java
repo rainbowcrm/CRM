@@ -14,7 +14,7 @@ import com.rainbow.crm.sales.model.SalesLine;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.utils.Utils;
 
-public class UPSellingEngine implements IPromotionEngine{
+public class DiscountEngine implements IPromotionEngine{
 
 	@Override
 	public RadsError searchForUnConsumedPromotions(Sales sales,
@@ -28,25 +28,21 @@ public class UPSellingEngine implements IPromotionEngine{
 			return true;
 		for (PromotionLine promoLine :  promotion.getPromotionLines()) {
 			if(promoLine.getMasterPortFolioType().equals(CRMConstants.SALESPFTYPE.BRAND) && 
-					line.getSku().getItem().getItemClass().equals(promotion.getItemClass()) &&
 					line.getSku().getItem().getBrand().getId() ==  Integer.parseInt(promoLine.getMasterPortFolioKey())) {
 				line.setPromotion(promotion);
 				return true;
 			}
 			if(promoLine.getMasterPortFolioType().equals(CRMConstants.SALESPFTYPE.PRODUCT) &&
-					line.getSku().getItem().getItemClass().equals(promotion.getItemClass().getCode()) &&
 					line.getSku().getItem().getProduct().getId() ==  Integer.parseInt(promoLine.getMasterPortFolioKey())) {
 				line.setPromotion(promotion);
 				return true;
 			}
 			if(promoLine.getMasterPortFolioType().equals(CRMConstants.SALESPFTYPE.CATEGORY) &&
-					line.getSku().getItem().getItemClass().equals(promotion.getItemClass()) &&
 					line.getSku().getItem().getProduct().getCategory().getId() ==  Integer.parseInt(promoLine.getMasterPortFolioKey())) {
 				line.setPromotion(promotion);
 				return true;
 			}
 			if(promoLine.getMasterPortFolioType().equals(CRMConstants.SALESPFTYPE.ITEM) &&
-					line.getSku().getItem().getItemClass().equals(promotion.getItemClass()) &&
 					line.getSku().getItem().getId() ==  Integer.parseInt(promoLine.getMasterPortFolioKey())) {
 				line.setPromotion(promotion);
 				return true;
@@ -57,7 +53,7 @@ public class UPSellingEngine implements IPromotionEngine{
 	@Override
 	public void applyPromotions(Sales sales, CRMContext context) {
 		IPromotionService promotionService = (IPromotionService)SpringObjectFactory.INSTANCE.getInstance("IPromotionService");
-		List<Promotion> promotions = promotionService.getAllPromotionsforType(new FiniteValue(CRMConstants.PROMOTYPE.UPSELLING), sales.getSalesDate(), context);
+		List<Promotion> promotions = promotionService.getAllPromotionsforType(new FiniteValue(CRMConstants.PROMOTYPE.PLAINDISCOUNT), sales.getSalesDate(), context);
 		if(Utils.isNullList(promotions)) return ;
 		promotions.forEach(promotion ->    {
 			for (SalesLine line : sales.getSalesLines()) {

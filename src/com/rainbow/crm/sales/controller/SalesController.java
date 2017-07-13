@@ -28,6 +28,7 @@ import com.rainbow.crm.distributionorder.service.IDistributionOrderService;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.division.service.IDivisionService;
 import com.rainbow.crm.logger.Logwriter;
+import com.rainbow.crm.promotion.engines.PromotionEngine;
 import com.rainbow.crm.sales.model.Sales;
 import com.rainbow.crm.sales.service.ISalesService;
 import com.rainbow.crm.sales.validator.SalesErrorCodes;
@@ -79,6 +80,17 @@ public class SalesController extends CRMTransactionController{
 			Sales sales =(Sales)getService().getById(object.getPK());
 			distributionservice.createDOfromSalesOrder(sales, (CRMContext)getContext()) ;
 			return new PageResult();
+		}else if ( "applyPromotion".equals(actionParam)  ) {
+			Sales sales = (Sales) object ;
+			super.adaptfromUI(sales);
+			PageResult result = new PageResult();
+			List<RadsError > errors = super.validateforCreate() ;
+			if (Utils.isNullList(errors))
+				PromotionEngine.applyPromotions(sales, (CRMContext) getContext());
+			else
+				result.setErrors(errors);
+			result.setObject(sales);
+			return result;
 		}else if ( "getLoayltyDiscount".equals(actionParam)  ) {
 			 Sales sales = (Sales) object ;
 			 if(sales.getLoyaltyRedeemed() != null && sales.getLoyaltyRedeemed().doubleValue() > 0 ) {

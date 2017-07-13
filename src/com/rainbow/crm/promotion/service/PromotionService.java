@@ -64,6 +64,15 @@ public class PromotionService extends AbstractService implements
 	}
 
 
+	
+	@Override
+	public List<Promotion> getAllPromotionsforType(FiniteValue promoType,
+			Date date, CRMContext context) {
+		PromotionDAO dao =(PromotionDAO) getDAO();
+		return dao.getPromotionsforType(context.getLoggedinCompany(), date, promoType.getCode()) ;
+	}
+
+
 	private void fetchDetails(Promotion promotion,CRMContext context)
  {
 		if (promotion == null || Utils.isNullSet(promotion.getPromotionLines()))

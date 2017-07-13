@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.rainbow.crm.common.CRMConstants;
+import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.promotion.model.Promotion;
 import com.rainbow.crm.promotion.model.PromotionLine;
@@ -15,14 +16,22 @@ import com.rainbow.crm.sales.model.SalesLine;
 
 public class PromotionEngine {
 
-	Map<PromotionLine,List<SalesLine>> unusedPromotions =  new HashMap<PromotionLine,List<SalesLine>> ();
-	
-	Map<PromotionLine,List<SalesLine>> unconsumedIncentives =  new HashMap<PromotionLine,List<SalesLine>> ();
-	
-	
-	public void populatePromotion(Sales sales)
-	{
 		
+	private static List<IPromotionEngine> availablePromoEngines()
+	{
+		List<IPromotionEngine> engines = new ArrayList<IPromotionEngine>();
+		engines.add( new UPSellingEngine());
+		engines.add( new DiscountEngine());
+		return engines;
+		
+	}
+	
+	public static void applyPromotions(Sales sales,CRMContext context)
+	{
+		List<IPromotionEngine> engines = availablePromoEngines();
+		engines.forEach( engine ->  { 
+			engine.applyPromotions(sales, context);
+		} );
 		
 		
 	}

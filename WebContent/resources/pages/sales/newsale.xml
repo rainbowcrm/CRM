@@ -227,6 +227,7 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 </CoreSection>
 <Section type ="summary">
 <Element caption = "Get_Loyalty_Discount"  type = "UIButton"    Id = "btnInvoice"  style="button"  fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="getLoayltyDiscount"   />
+<Element caption = "Apply_Promotions"  type = "UIButton"    Id = "btnApplyPromotion"  style="button"  fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="applyPromotion"   />
 <Element caption = "Print_Invoice"  type = "UIButton"    Id = "btnInvoice"  style="button" onClickJS = "showPrintDialog('newprintpop','SalesInvoice');"  rendered = "Controller.isUpdateMode" />
 <Element caption = "Create_DO"  type = "UIButton"    Id = "btnInvoice"  style="button" rendered = "Controller.isUpdateMode" fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="createDO"   />
 </Section>
