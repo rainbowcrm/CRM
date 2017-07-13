@@ -40,5 +40,7 @@ public interface ISalesService extends ITransactionService{
 	public Sales getByBillNumberforReturn(Division division , String billNumber) ;
 	
 	public List<Sales> getNonAlertedSalesFeedBack(int company, int interval);
+	
+	public void reCalculateTotal (Sales sales, CRMContext contex) ;
 
 }

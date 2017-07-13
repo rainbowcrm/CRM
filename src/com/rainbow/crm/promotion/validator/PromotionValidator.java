@@ -34,7 +34,7 @@ public class PromotionValidator extends CRMValidator {
 		checkforErrors(object);
 		IPromotionService  service = (IPromotionService) SpringObjectFactory.INSTANCE.getInstance("IPromotionService");
 		Promotion  exist = (Promotion)service.getByBusinessKey(promotion, context);
-		if(exist != null ) {
+		if(exist != null && exist.getId() !=  promotion.getId()) {
 			errors.add(getErrorforCode(CommonErrorCodes.UNIQUE_VAL_EXISTS,externalize.externalize(context, "Name"))) ;
 		}
 		exist = (Promotion)service.getByBusinessKey(promotion, context);

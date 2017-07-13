@@ -133,11 +133,12 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
  <Element type = "UITableRow">
 
 <Element type ="UITableCol" width = "10%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Code" /></Element>
-<Element type ="UITableCol" width = "22%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Item" /></Element>
+<Element type ="UITableCol" width = "25%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Item" /></Element>
 <Element type ="UITableCol"   rendered = "Controller.isAssociateLineLevel" width = "16%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Sales_Associate" /> </Element>
 <Element type ="UITableCol" width = "5%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Price" /></Element>
 <Element type ="UITableCol" width = "5%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Qty" /></Element>
-<Element type ="UITableCol" width = "8%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Discount" /></Element>
+<Element type ="UITableCol" width = "5%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Discount_Percent" /></Element>
+<Element type ="UITableCol" width = "8%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Discount_Amount" /></Element>
 <Element type ="UITableCol" width = "8%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Total" /></Element>
 <Element type ="UITableCol" width = "5%"> </Element>
 </Element>  
@@ -145,7 +146,7 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 <Element type = "UITableRow"  dataType = "com.rainbow.crm.sales.model.SalesLine" rendered = "!Object.getVoided">
 
 <Element type ="UITableCol" width = "10%"><Element label = ""  type = "UIText" Id = "txtCode" size  = "10" property ="Sku.Code" /> </Element>
-<Element type ="UITableCol" width = "22%"><Element label = ""  type = "UILookupText"  Id = "txtItName"  size  = "30" property ="Sku.Name" showLookupAsDialog="true" dialogId="dlgIt"
+<Element type ="UITableCol" width = "25%"><Element label = ""  type = "UILookupText"  Id = "txtItName"  size  = "30" property ="Sku.Name" showLookupAsDialog="true" dialogId="dlgIt"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>sku</lookupType>
 	 <height>300</height>
@@ -165,10 +166,12 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 	</Element>
 </Element>
 
-<Element type ="UITableCol" width = "5%"><Element label = ""  type = "UIText" Id = "txtPrice"  property ="unitPrice"  isNumeric= "true" size = "10" />  </Element>
+<Element type ="UITableCol" width = "5%"><Element label = ""  type = "UIText" Id = "txtPrice"  property ="unitPrice"  isNumeric= "true" size = "8" />  </Element>
 <Element type ="UITableCol" width = "5%"><Element label = ""  type = "UIText" Id = "txtQty"  property ="Qty"   isNumeric= "true" 
- focusoutJS = "calculateAll()" size = "10"/>  </Element>
-<Element type ="UITableCol" width = "8%"><Element label = ""  type = "UIText" Id = "txtlineDisc"  property ="lineTotalDisc"  isNumeric= "true" size = "10" />  </Element>
+ focusoutJS = "calculateAll()" size = "3"/>  </Element>
+ <Element type ="UITableCol" width = "5%"><Element label = ""  type = "UIText" Id = "txtlineDiscPerc"  property ="discPercent"  isNumeric= "true" 
+ focusoutJS = "calculateAll()"  size = "2" />  </Element>
+<Element type ="UITableCol" width = "8%"><Element label = ""  type = "UIText" Id = "txtlineDisc"  property ="lineTotalDisc"  isNumeric= "true" size = "7" />  </Element>
 <Element type ="UITableCol" width = "8%"><Element label = ""  type = "UIText" Id = "txtlineTotal"  property ="lineTotal" size = "10"  readonly="true" />  </Element>
 
 <Element type ="UITableCol" width = "5%">

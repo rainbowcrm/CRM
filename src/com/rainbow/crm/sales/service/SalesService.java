@@ -129,6 +129,45 @@ public class SalesService extends AbstractionTransactionService implements ISale
 		return super.listData("Sales", from, to, whereCondition, context,sortCriteria);
 	}
 
+	
+	
+	@Override
+	public void reCalculateTotal(Sales sales, CRMContext contex) {
+		double grossTotal = 0  ,netTotal = 0 ;
+		if(sales != null &&  !Utils.isNullSet(sales.getSalesLines())) {
+			for (SalesLine  line : sales.getSalesLines()) {
+				if(!line.isDeleted())  {
+					
+					if(line.getDiscPercent() > 0 ) {
+						double lineDiscount =  line.getUnitPrice() * line.getQty() * line.getDiscPercent()  /100;
+						line.setLineTotalDisc(lineDiscount);
+					}
+					if (line.getLineTotalDisc() > 0 ){
+						double lineTotal = line.getUnitPrice() * line.getQty()- line.getLineTotalDisc();
+						line.setLineTotal(lineTotal);
+					}else {
+						line.setLineTotal(line.getUnitPrice() * line.getQty());
+					}
+				grossTotal += line.getLineTotal();
+					
+				}
+			}
+			sales.setGrossAmount(grossTotal);
+			if(sales.getDiscPercent() > 0 ) {
+				double transactionDisc = sales.getGrossAmount() * sales.getDiscPercent() /100;
+				sales.setDiscAmount(transactionDisc);
+			}
+			if(sales.getTaxPerc() > 0 ) {
+				double taxAmount = sales.getGrossAmount() * sales.getTaxPerc() /100;
+				sales.setTaxAmount(taxAmount);
+			}
+			
+			
+			sales.setNetAmount(sales.getGrossAmount()  + sales.getDiscAmount() + sales.getTaxAmount()  - 
+					((sales.getLoyaltyDiscount()==null)?0:sales.getLoyaltyDiscount().doubleValue()));
+		}
+	}
+
 	@Override
 	public List<RadsError> validateforCreate(CRMModelObject object,
 			CRMContext context) {

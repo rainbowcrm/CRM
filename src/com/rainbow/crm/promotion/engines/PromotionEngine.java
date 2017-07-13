@@ -13,13 +13,14 @@ import com.rainbow.crm.promotion.model.Promotion;
 import com.rainbow.crm.promotion.model.PromotionLine;
 import com.rainbow.crm.sales.model.Sales;
 import com.rainbow.crm.sales.model.SalesLine;
+import com.rainbow.crm.sales.service.ISalesService;
 
 public class PromotionEngine {
 
 		
-	private static List<IPromotionEngine> availablePromoEngines()
+	private static List<AbstractPromotionEngine> availablePromoEngines()
 	{
-		List<IPromotionEngine> engines = new ArrayList<IPromotionEngine>();
+		List<AbstractPromotionEngine> engines = new ArrayList<AbstractPromotionEngine>();
 		engines.add( new UPSellingEngine());
 		engines.add( new DiscountEngine());
 		return engines;
@@ -28,12 +29,13 @@ public class PromotionEngine {
 	
 	public static void applyPromotions(Sales sales,CRMContext context)
 	{
-		List<IPromotionEngine> engines = availablePromoEngines();
+		List<AbstractPromotionEngine> engines = availablePromoEngines();
 		engines.forEach( engine ->  { 
 			engine.applyPromotions(sales, context);
 		} );
 		
-		
+		ISalesService service = (ISalesService) SpringObjectFactory.INSTANCE.getInstance("ISalesService");
+		service.reCalculateTotal(sales, context);
 	}
 	
 	

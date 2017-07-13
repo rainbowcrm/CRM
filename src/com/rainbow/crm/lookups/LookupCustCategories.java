@@ -37,7 +37,7 @@ public class LookupCustCategories implements ILookupService{
 				condition.append( " and ");
 			else
 				condition.append( " where ");
-			condition.append("  division.id=" + lookupParam);
+			condition.append("  (  division.id=" + lookupParam +   " or division is null ) ");
 		}
 		ICustCategoryService service = (ICustCategoryService) SpringObjectFactory.INSTANCE.getInstance("ICustCategoryService");
 		List<? extends CRMModelObject> custCategories = service.listData(from, from  + noRecords, condition.toString(),(CRMContext)ctx,null);

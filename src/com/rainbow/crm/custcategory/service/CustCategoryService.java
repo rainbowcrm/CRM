@@ -70,6 +70,18 @@ public class CustCategoryService extends AbstractService implements ICustCategor
 	}
 	
 	
+	
+	
+	@Override
+	public boolean isCustomerInCategory(CustCategory custCategory,
+			Customer customer) {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+
+
+
 	@Override
 	public Object getById(Object PK) {
 		CustCategory category =(CustCategory) getDAO().getById(PK);

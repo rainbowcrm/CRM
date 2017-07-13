@@ -14,7 +14,7 @@ import com.rainbow.crm.sales.model.SalesLine;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.utils.Utils;
 
-public class DiscountEngine implements IPromotionEngine{
+public class DiscountEngine extends AbstractPromotionEngine{
 
 	@Override
 	public RadsError searchForUnConsumedPromotions(Sales sales,
@@ -50,18 +50,22 @@ public class DiscountEngine implements IPromotionEngine{
 		}
 		return false; 
 	}
+	
 	@Override
 	public void applyPromotions(Sales sales, CRMContext context) {
 		IPromotionService promotionService = (IPromotionService)SpringObjectFactory.INSTANCE.getInstance("IPromotionService");
 		List<Promotion> promotions = promotionService.getAllPromotionsforType(new FiniteValue(CRMConstants.PROMOTYPE.PLAINDISCOUNT), sales.getSalesDate(), context);
 		if(Utils.isNullList(promotions)) return ;
 		promotions.forEach(promotion ->    {
-			for (SalesLine line : sales.getSalesLines()) {
-				if (matches(line, promotion)){
-					if (line.getDiscPercent() < promotion.getPromotedDiscPercent())
-						line.setDiscPercent(promotion.getPromotedDiscPercent());
+			if(isApplicable(promotion,sales))  {
+				for (SalesLine line : sales.getSalesLines()) {
+					if (matches(line, promotion)){
+						if (line.getDiscPercent() < promotion.getPromotedDiscPercent())
+							line.setDiscPercent(promotion.getPromotedDiscPercent());
+					}
 				}
 			}
+
 		 });
 		
 	}

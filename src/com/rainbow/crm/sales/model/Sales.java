@@ -34,6 +34,7 @@ public class Sales extends CRMBusinessModelObject{
 	double taxPerc;
 	double taxAmount;
 	double netAmount;
+	double grossAmount;
 	boolean creditSales ;
 	boolean settled =true;
 	boolean voided;
@@ -296,6 +297,12 @@ public class Sales extends CRMBusinessModelObject{
 	}
 	public void setFeedBackCaptured(boolean feedBackCaptured) {
 		this.feedBackCaptured = feedBackCaptured;
+	}
+	public double getGrossAmount() {
+		return grossAmount;
+	}
+	public void setGrossAmount(double grossAmount) {
+		this.grossAmount = grossAmount;
 	}
 	
 	

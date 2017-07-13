@@ -26,6 +26,10 @@ function calculateLineTotal(index) {
 	if (index < ct ) {
 		var priceElem = document.getElementsByName('txtPrice')[index];
 		var qtyElem = document.getElementsByName('txtQty')[index];
+		var discPerc = document.getElementsByName('txtlineDiscPerc')[index];
+		if( discPerc != '' ){
+			document.getElementsByName('txtlineDisc')[index].value = ( priceElem.value * qtyElem.value ) *  discPerc.value /100;
+		}
 		var discElem = document.getElementsByName('txtlineDisc')[index];
 		var totalPrice =( priceElem.value * qtyElem.value ) - discElem.value ;
 		netPrice += totalPrice;

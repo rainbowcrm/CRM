@@ -278,7 +278,8 @@ div.childSectionStyle {
   overflow: auto; }
 
 div.uitabstyle {
-  background-color: #eceeef; }
+  background-color: #eceeef;
+  overflow: scroll; }
 
 div.summaryStyle {
   text-align: right;
