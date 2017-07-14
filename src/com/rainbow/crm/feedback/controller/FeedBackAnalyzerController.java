@@ -16,6 +16,7 @@ import com.rainbow.crm.division.service.IDivisionService;
 import com.rainbow.crm.feedback.model.FeedBackAnalyzer;
 import com.rainbow.crm.feedback.service.IFeedBackService;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
+import com.techtrade.rads.framework.model.graphdata.GaugeChartData;
 import com.techtrade.rads.framework.model.graphdata.PieChartData;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
 import com.techtrade.rads.framework.utils.Utils;
@@ -34,8 +35,13 @@ public class FeedBackAnalyzerController extends CRMGeneralController {
 			PieChartData negativeSplits =service.getNegativeFeedBacksByReason(analyzer.getDivision(), analyzer.getFromDate(), analyzer.getToDate(),(CRMContext) getContext(), 
 					analyzer.getFeedBackOn());
 			analyzer.setNegativeSplits(negativeSplits);
-			PageResult result = new PageResult();
 			
+			GaugeChartData custSatisfactionData  = service.getCustomerSatisfactionIndex(analyzer.getDivision(), analyzer.getFromDate(), analyzer.getToDate(),(CRMContext) getContext(), 
+					analyzer.getFeedBackOn());
+			analyzer.setCustSatisfactionIndex(custSatisfactionData);
+			
+			PageResult result = new PageResult();
+		
 			result.setObject(analyzer);
 			return result;
 		}

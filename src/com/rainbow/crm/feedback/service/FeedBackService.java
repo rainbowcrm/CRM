@@ -106,6 +106,8 @@ import com.rainbow.crm.vendor.service.IVendorService;
 import com.rainbow.framework.nextup.NextUpGenerator;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
+import com.techtrade.rads.framework.model.graphdata.GaugeChartData;
+import com.techtrade.rads.framework.model.graphdata.GaugeChartData.ColorRange;
 import com.techtrade.rads.framework.model.graphdata.PieChartData;
 import com.techtrade.rads.framework.model.graphdata.PieSliceData;
 import com.techtrade.rads.framework.model.transaction.TransactionResult;
@@ -122,6 +124,49 @@ public class FeedBackService extends AbstractionTransactionService implements IF
 		FeedBackDAO dao =(FeedBackDAO) getDAO();
 		return dao.getBySalesBill(docNo, context.getLoggedinCompany());
 	}
+
+	
+	
+
+	@Override
+	public GaugeChartData getCustomerSatisfactionIndex(Division division,
+			Date fromDate, Date toDate, CRMContext context,
+			FiniteValue feedBackOn) {
+		GaugeChartData chartData = new GaugeChartData();
+		String benchMark =ConfigurationManager.getConfig(ConfigurationManager.FEEDBACK_RATING_BENCHMARK, context);
+		int avgRating = FeedbackSQLs.getAverageRatingIndex(Utils.getSQLDate(fromDate), Utils.getSQLDate(toDate), context.getLoggedinCompany(), division.getId(),
+				feedBackOn.getCode());
+		chartData.setLabel("");
+		chartData.setMaxValue(100);
+		chartData.setGraphValue(avgRating * 10);
+		chartData.setMinorTicks(10);
+		
+		int dangerZone = Integer.parseInt(benchMark)/2 * 10 ;
+		int yellowZone = Integer.parseInt(benchMark) * 10 ;
+		int greenZone = 100;
+		ColorRange redRange =  chartData.new ColorRange () ;
+		redRange.setColor("red");
+		redRange.setFrom(0);
+		redRange.setTo(dangerZone);
+		chartData.addColorRange(redRange);
+		
+		ColorRange yellowRange =  chartData.new ColorRange () ;
+		yellowRange.setColor("yellow");
+		yellowRange.setFrom(dangerZone);
+		yellowRange.setTo(yellowZone);
+		chartData.addColorRange(yellowRange);
+
+		ColorRange greenRange =  chartData.new ColorRange () ;
+		greenRange.setColor("green");
+		greenRange.setFrom(yellowZone);
+		greenRange.setTo(greenZone);
+		chartData.addColorRange(greenRange);
+		
+		
+		return chartData;
+	}
+
+
 
 
 	@Override

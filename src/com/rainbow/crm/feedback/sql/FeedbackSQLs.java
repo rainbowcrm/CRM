@@ -13,6 +13,41 @@ import com.rainbow.crm.logger.Logwriter;
 
 public class FeedbackSQLs {
 
+	public static int getAverageRatingIndex ( Date startDate, Date endDate, int company, int division, 
+	String FeedBackOn )
+	{
+		int ans =0;
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		try {
+			String divisionPart = (division==-1)?"":" AND FEEDBACKS.DIVISION_ID = ? "; 
+			connection = ConnectionCreater.getConnection();
+			String sql =  " SELECT AVG(FEEDBACK_LINES.RATING) FROM FEEDBACKS,FEEDBACK_LINES,REASON_CODES WHERE   " +
+			" FEEDBACKS.ID= FEEDBACK_LINES.FEEDBACK_ID AND FEEDBACK_LINES.REASON_CODE_ID = REASON_CODES.ID AND   " +
+			 " FEEDBACKS.FDBACK_DATE >= ? AND  FEEDBACKS.FDBACK_DATE <= ?  AND FEEDBACKS.COMPANY_ID =?   " +
+			 "   AND FEEDBACK_LINES.FEEDBACK_ON= ?  "  +
+			 divisionPart + 
+			"  AND FEEDBACKS.IS_DELETED = FALSE AND FEEDBACK_LINES.IS_DELETED=FALSE  ";
+			statement = connection.prepareStatement(sql);
+			statement.setDate(1, startDate);
+			statement.setDate(2, endDate);
+			statement.setInt(3, company);
+			statement.setString(4, FeedBackOn);
+			if(division != -1 ) 
+				statement.setInt(5, division);
+			rs = statement.executeQuery();
+			while (rs.next()) {
+				ans = rs.getInt(1);
+			}
+		}catch (SQLException ex) {
+			Logwriter.INSTANCE.error(ex);
+		} finally {
+			ConnectionCreater.close(connection, statement, rs);
+		}
+		return ans  ;
+		
+	}
 	
 	public static Map<String, Integer> getFeedBackReason(  Date startDate, Date endDate, int company, int division, 
 			int minRating, int MaxRating, String FeedBackOn )

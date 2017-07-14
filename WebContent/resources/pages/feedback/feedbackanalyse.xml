@@ -49,7 +49,14 @@ Controller = "com.rainbow.crm.feedback.controller.FeedBackAnalyzerController">
 	  <marginWidth>30</marginWidth>
 	  <barWidth>30</barWidth>
 	  <noYAxisDivisions>6</noYAxisDivisions>
- 	</Element>  --> 
+ 	</Element>  -->
+ 	
+ 	<Element type = "UIGaugeChart" Id = "guageChart1"     dataProvider = "custSatisfactionIndex" useGoogleGraph="true" >
+	  <ticks>10</ticks>
+	  <rangeHeight>250</rangeHeight>
+	  <rangeWidth>350</rangeWidth>
+ 	</Element>
+ 	 
  	<Element type = "UIPieChart" Id = "pieChart5"     dataProvider = "positiveSplits" useGoogleGraph="true" >
 	  <centerX>150</centerX>
 	  <centerY>150</centerY>
