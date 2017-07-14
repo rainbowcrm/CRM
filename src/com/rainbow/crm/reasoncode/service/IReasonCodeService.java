@@ -18,4 +18,6 @@ public interface IReasonCodeService extends IBusinessService{
 	public TransactionResult batchCreate(List<CRMModelObject> objects, CRMContext context) throws CRMDBException;
 
 	public List<ReasonCode>  getAllReasonsforType(FiniteValue value, CRMContext context);
+	
+	public List<ReasonCode>  getAllReasonsforTypeAndOrientation(FiniteValue value, CRMContext context, FiniteValue orientation);
 }

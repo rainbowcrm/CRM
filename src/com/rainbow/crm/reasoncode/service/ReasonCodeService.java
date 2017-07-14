@@ -127,6 +127,15 @@ public class ReasonCodeService extends AbstractService implements IReasonCodeSer
 		return dao.getAllReasonsByType(context.getLoggedinCompany(), value.getCode()) ;
 	}
 
+	@Override
+	public List<ReasonCode> getAllReasonsforTypeAndOrientation(
+			FiniteValue value, CRMContext context, FiniteValue orientation) {
+		ReasonCodeDAO dao = ((ReasonCodeDAO)getDAO()) ;
+		return dao.getAllReasonsByTypeAndOrientation(context.getLoggedinCompany(), value.getCode(),orientation.getCode()) ;
+	}
+	
+	
+
 		
 	
 }

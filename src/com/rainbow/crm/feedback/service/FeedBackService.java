@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.mail.BodyPart;
 import javax.mail.Message;
@@ -65,6 +66,7 @@ import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.common.messaging.CRMMessageSender;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
+import com.rainbow.crm.config.service.ConfigurationManager;
 import com.rainbow.crm.contact.model.Contact;
 import com.rainbow.crm.contact.service.IContactService;
 import com.rainbow.crm.customer.model.Customer;
@@ -88,6 +90,7 @@ import com.rainbow.crm.product.validator.ProductValidator;
 import com.rainbow.crm.feedback.dao.FeedBackDAO;
 import com.rainbow.crm.feedback.model.FeedBack;
 import com.rainbow.crm.feedback.model.FeedBackLine;
+import com.rainbow.crm.feedback.sql.FeedbackSQLs;
 import com.rainbow.crm.feedback.validator.FeedBackErrorCodes;
 import com.rainbow.crm.feedback.validator.FeedBackValidator;
 import com.rainbow.crm.reasoncode.model.ReasonCode;
@@ -103,6 +106,8 @@ import com.rainbow.crm.vendor.service.IVendorService;
 import com.rainbow.framework.nextup.NextUpGenerator;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
+import com.techtrade.rads.framework.model.graphdata.PieChartData;
+import com.techtrade.rads.framework.model.graphdata.PieSliceData;
 import com.techtrade.rads.framework.model.transaction.TransactionResult;
 import com.techtrade.rads.framework.ui.components.SortCriteria;
 import com.techtrade.rads.framework.utils.Utils;
@@ -111,11 +116,61 @@ import com.techtrade.rads.framework.utils.Utils;
 public class FeedBackService extends AbstractionTransactionService implements IFeedBackService{
 
 	
-	
+
+	@Override
+	public FeedBack getBySale(String docNo, CRMContext context) {
+		FeedBackDAO dao =(FeedBackDAO) getDAO();
+		return dao.getBySalesBill(docNo, context.getLoggedinCompany());
+	}
+
+
+	@Override
+	public PieChartData getPositiveFeedBacksByReason(Division division,
+			Date fromDate, Date toDate, CRMContext context,FiniteValue feedBackOn) {
+		PieChartData pieChartData  = new PieChartData();
+		String benchMark =ConfigurationManager.getConfig(ConfigurationManager.FEEDBACK_RATING_BENCHMARK, context);
+		Map<String,Integer> reasonsMap = FeedbackSQLs.getFeedBackReason(Utils.getSQLDate(fromDate), Utils.getSQLDate(toDate), context.getLoggedinCompany(), division.getId(), Integer.parseInt(benchMark), 
+				10, feedBackOn.getCode());
+		AtomicInteger index = new AtomicInteger(0);
+		reasonsMap.forEach(  (reason, qty) -> {  
+			PieSliceData pieSliceData  = new PieSliceData();
+			pieSliceData.setVolume((Integer)qty);
+			pieSliceData.setText(reason);
+			pieSliceData.setColor(CommonUtil.getGraphColors()[index.getAndIncrement()]);
+			pieChartData.addPieSlice(pieSliceData);
+		} );
+		pieChartData.setFooterNote("Positive feebacks");
+		pieChartData.setTitle("Positive Feedback Reasons");
+		return pieChartData;
+
+	}
+
+
+	@Override
+	public PieChartData getNegativeFeedBacksByReason(Division division,
+			Date fromDate, Date toDate, CRMContext context,FiniteValue feedBackOn) {
+		PieChartData pieChartData  = new PieChartData();
+		String benchMark =ConfigurationManager.getConfig(ConfigurationManager.FEEDBACK_RATING_BENCHMARK, context);
+		Map<String,Integer> reasonsMap = FeedbackSQLs.getFeedBackReason(Utils.getSQLDate(fromDate), Utils.getSQLDate(toDate), context.getLoggedinCompany(), division.getId(), 0, 
+				Integer.parseInt(benchMark)-1, feedBackOn.getCode());
+		AtomicInteger index = new AtomicInteger(0);
+		reasonsMap.forEach(  (reason, qty) -> {  
+			PieSliceData pieSliceData  = new PieSliceData();
+			pieSliceData.setVolume((Integer)qty);
+			pieSliceData.setText(reason);
+			pieSliceData.setColor(CommonUtil.getGraphColors()[index.getAndIncrement()]);
+			pieChartData.addPieSlice(pieSliceData);
+		} );
+		pieChartData.setFooterNote("Negative feebacks");
+		pieChartData.setTitle("Negative Feedback Reasons");
+		return pieChartData;
+
+	}
+
+
 	@Override
 	public List<CRMModelObject> listData(int from, int to,
 			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
-		
 		return super.listData("FeedBack", from, to, whereCondition, context,sortCriteria);
 	}
 
@@ -315,8 +370,6 @@ public class FeedBackService extends AbstractionTransactionService implements IF
 	}
 
 		
-	
-	
 	
 	
 }
