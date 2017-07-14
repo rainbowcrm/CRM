@@ -19,7 +19,14 @@ Controller = "com.rainbow.crm.feedback.controller.FeedBackController">
 <responseElement key = "objects">txtObject</responseElement>
 </responseElements>
 </AjaxGroup>
-
+<AjaxGroup service ="feedbackReasons">
+<requestElements event = "">
+<requestElement key = "rating">txtRating</requestElement>
+</requestElements>
+<responseElements>
+<responseElement key = "reasonCodes">lstReasonCode</responseElement>
+</responseElements>
+</AjaxGroup>
 </AjaxGroups>
 
 <Elements>

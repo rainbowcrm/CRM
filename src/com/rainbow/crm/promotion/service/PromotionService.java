@@ -34,6 +34,8 @@ import com.rainbow.crm.promotion.model.Promotion;
 import com.rainbow.crm.promotion.model.PromotionLine;
 import com.rainbow.crm.promotion.sql.PromotionSQLs;
 import com.rainbow.crm.promotion.validator.PromotionValidator;
+import com.rainbow.crm.custcategory.model.CustCategory;
+import com.rainbow.crm.custcategory.service.ICustCategoryService;
 import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.division.model.Division;
@@ -59,11 +61,46 @@ public class PromotionService extends AbstractService implements
 	@Override
 	public Object getById(Object PK) {
 		Promotion category = (Promotion) getDAO().getById(PK);
+		fetchDetails(category,null);
 		return category;
 	}
 
 
 	
+	@Override
+	public List<Promotion> getAllPromotionsforType(FiniteValue promoType,
+			Date date, CRMContext context) {
+		PromotionDAO dao =(PromotionDAO) getDAO();
+		return dao.getPromotionsforType(context.getLoggedinCompany(), date, promoType.getCode()) ;
+	}
+
+
+	private void fetchDetails(Promotion promotion,CRMContext context)
+ {
+		if (promotion == null || Utils.isNullSet(promotion.getPromotionLines()))
+			return;
+
+		promotion.getPromotionLines().forEach(
+				promotionLine -> {
+					if (promotionLine.getMasterPortFolioType() != null
+							&& !Utils.isNullString(promotionLine
+									.getMasterPortFolioKey())) {
+						String masterValue = CommonUtil.getSalesPortfolioValue(
+								promotionLine.getMasterPortFolioType(),
+								promotionLine.getMasterPortFolioKey());
+						promotionLine.setMasterPortFolioValue(masterValue);
+					}
+					if (promotionLine.getChildPortFolioType() != null
+							&& !Utils.isNullString(promotionLine
+									.getChildPortFolioKey())) {
+						String childValue = CommonUtil.getSalesPortfolioValue(
+								promotionLine.getChildPortFolioType(),
+								promotionLine.getChildPortFolioKey());
+						promotionLine.setChildPortFolioValue(childValue);
+					}
+
+				});
+	}
 	
 	
 	@Override
@@ -119,6 +156,17 @@ public class PromotionService extends AbstractService implements
 		Division division = CommonUtil.getDivisionObect(context,promotion.getDivision());
 		promotion.setDivision(division);
 		((Promotion) object).setCompany(company);
+		if(promotion.getCustCategory() != null ) {
+			ICustCategoryService custCategService = (ICustCategoryService)SpringObjectFactory.INSTANCE.getInstance("ICustCategoryService");
+			CustCategory custCategory =(CustCategory) custCategService.getByBusinessKey(promotion.getCustCategory(),context);
+			promotion.setCustCategory(custCategory);
+		}
+		if (promotion.getItemClass() != null) {
+			if("-1".equals(promotion.getItemClass().getCode())) {
+				promotion.setItemClass(null);
+			}
+		}
+		
 		AtomicInteger lineNumber = new AtomicInteger(1);
 		if(promotion.getPromotionLines() != null ) {
 			promotion.getPromotionLines().forEach( promotionLine ->  { 
@@ -182,9 +230,9 @@ public class PromotionService extends AbstractService implements
 			Iterator it = oldObject.getPromotionLines().iterator();
 			for (PromotionLine line : promotion
 					.getPromotionLines()) {
-				SalesPortfolioLine oldLine = null;
+				PromotionLine oldLine = null;
 				if (it.hasNext()) {
-					oldLine = (SalesPortfolioLine) it.next();
+					oldLine = (PromotionLine) it.next();
 				}
 				line.setPromotion(promotion);
 				if (oldLine != null) {

@@ -68,5 +68,17 @@ public class ReasonCodeDAO extends SpringHibernateDAO{
 		closeSession(session, false);
 		return lst;
 	}
+	
+	public List<ReasonCode> getAllReasonsByTypeAndOrientation(int company, String type,String orientation )  {
+		Session session = openSession(false);
+		Query query = session.createQuery(" from ReasonCode where  company.id =:company  and  deleted= false and  " +
+		"reasonType.code =:type and orientation.code = :orientation" ) ;
+		query.setParameter("company", company);
+		query.setParameter("type", type);
+		query.setParameter("orientation", orientation);
+		List lst = query.list();
+		closeSession(session, false);
+		return lst;
+	}
 
 }

@@ -72,6 +72,12 @@ public class PromotionController extends CRMTransactionController{
 		Map<String, String> ans = GeneralSQLs.getFiniteValues(CRMConstants.FV_PROMO_TYPE);
 		return ans;
 	}
+
+	
+	public Map <String, String > getAllItemClasses() {
+		Map<String, String> ans = GeneralSQLs.getFiniteValuesWithSelect(CRMConstants.FV_ITEMCLASS_TYPE);
+		return ans;
+	}
 	
 	public Map <String, String > getAllTypes() {
 		Map<String, String> ans = GeneralSQLs.getFiniteValuesWithSelect(CRMConstants.FV_SPFTYPE);

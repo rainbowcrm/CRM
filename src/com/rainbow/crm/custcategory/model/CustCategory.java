@@ -30,10 +30,13 @@ public class CustCategory extends CRMBusinessModelObject{
 	Set<CustCategoryCondition> aggregateConditions;
 	
 	Set<CustCategoryCondition> whereConditions;
-	
+
+	@RadsPropertySet(isBK=true)
 	public String getName() {
 		return name;
 	}
+	
+	@RadsPropertySet(isBK=true)
 	public void setName(String name) {
 		this.name = name;
 	}

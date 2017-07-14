@@ -23,6 +23,10 @@ public class FeedBackValidator extends CRMValidator {
 				errors.add(getErrorforCode(CommonErrorCodes.UNIQUE_VAL_EXISTS,externalize.externalize(context, "Doc_Number"))) ;
 		}
 		
+		FeedBack existForSale = (FeedBack)service.getBySale(feedBack.getSales().getBillNumber(), context);
+		if(existForSale != null ) {
+			errors.add(getErrorforCode(FeedBackErrorCodes.FEEDBACK_ALREADY_CAPTURED,feedBack.getSales().getBillNumber())) ;
+		}
 	}
 
 	@Override
@@ -33,7 +37,10 @@ public class FeedBackValidator extends CRMValidator {
 		if(exist != null && exist.getId() != feedBack.getId()) {
 				errors.add(getErrorforCode(CommonErrorCodes.UNIQUE_VAL_EXISTS,externalize.externalize(context, "Doc_Number"))) ;
 		}
-		
+		FeedBack existForSale = (FeedBack)service.getBySale(feedBack.getSales().getBillNumber(), context);
+		if(existForSale != null && existForSale.getId() != feedBack.getId() ) {
+			errors.add(getErrorforCode(FeedBackErrorCodes.FEEDBACK_ALREADY_CAPTURED,feedBack.getSales().getBillNumber())) ;
+		}
 	}
 	protected void checkforErrors(ModelObject object) {
 		feedBack = (FeedBack) object ;
@@ -52,8 +59,6 @@ public class FeedBackValidator extends CRMValidator {
 			for (FeedBackLine line : feedBack.getFeedBackLines()) {
 				if (line.getFeedBackObjectType() == null ) {
 					errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Type"))) ;
-				}else if (line.getFeedBackObject() == null ) {
-					errors.add(getErrorforCode(CommonErrorCodes.OBJECT_DELETED,externalize.externalize(context, "Object") )) ;
 				}
 				if(line.getRating() <0  || line.getRating() > 10 ) {
 					errors.add(getErrorforCode(FeedBackErrorCodes.RATING_RANGE_ERROR)) ;

@@ -13,5 +13,7 @@ import com.rainbow.framework.query.model.QueryReport;
 public interface ICustCategoryService extends ITransactionService{
 	
   public QueryReport checCustomers(CustCategory custCategory, CRMContext context);
+  
+  public boolean isCustomerInCategory (CustCategory custCategory, Customer customer);
 	
 }

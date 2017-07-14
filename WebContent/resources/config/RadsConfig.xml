@@ -195,6 +195,9 @@
 </Page>
 <Page id = "salesleadanalysis" definition ="/resources/pages/saleslead/salesleadanalyse.xml" accessCode ="ANALY:LEADANALYSE" modelclass = "com.rainbow.crm.saleslead.model.SalesLeadAnalyzer" >
 </Page>
+<Page id = "feedbackanalysis" definition ="/resources/pages/feedback/feedbackanalyse.xml" accessCode ="ANALY:FDBACKANALYSE" modelclass = "com.rainbow.crm.feedback.model.FeedBackAnalyzer" >
+</Page>
+
 
 <Page id = "salestrend" definition ="/resources/pages/products/productstrend.xml"  accessCode ="ANALY:PRODTREND" modelclass = "com.rainbow.crm.sales.model.SalesTrend" >
 </Page>
@@ -328,6 +331,7 @@
 	<Element label = "" type = "UIMenu" Id = "menu034" style="menustyle" title="Sales_Trend" link = "rdscontroller?page=salestrend"   />
 	<Element label = "" type = "UIMenu" Id = "menu035" style="menustyle" title="Salesforce_Analysis" link = "rdscontroller?page=salesforceanalysis"   />
 	<Element label = "" type = "UIMenu" Id = "menu036" style="menustyle" title="Saleslead_Analysis" link = "rdscontroller?page=salesleadanalysis"   />
+	<Element label = "" type = "UIMenu" Id = "menu036" style="menustyle" title="FeedBack_Analysis" link = "rdscontroller?page=feedbackanalysis"   />
  </Element>
  <Element label = "" type = "UIMenu" Id = "menu40" style="menustyleParent" title="Operations" groupId= "menuGRP007"  >
  	<Element label = "" type = "UIMenu" Id = "menu41" style="menustyle" title="Stock" link = "rdscontroller?page=inventory"   />
@@ -439,6 +443,9 @@
  <key>Division</key>
  <key>Barcode</key>
  <key>Name</key>
+ </AjaxService>
+ <AjaxService service ="feedbackReasons" class = "com.rainbow.crm.common.ajaxservices.FeedBackReasonsAjaxService">
+ <key>rating</key>
  </AjaxService>
  <AjaxService service ="feedbackObjectSearch" class = "com.rainbow.crm.feedback.service.FeedbackAjaxObjectsService">
  <key>BillNo</key>

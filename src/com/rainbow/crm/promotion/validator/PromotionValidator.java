@@ -34,7 +34,7 @@ public class PromotionValidator extends CRMValidator {
 		checkforErrors(object);
 		IPromotionService  service = (IPromotionService) SpringObjectFactory.INSTANCE.getInstance("IPromotionService");
 		Promotion  exist = (Promotion)service.getByBusinessKey(promotion, context);
-		if(exist != null ) {
+		if(exist != null && exist.getId() !=  promotion.getId()) {
 			errors.add(getErrorforCode(CommonErrorCodes.UNIQUE_VAL_EXISTS,externalize.externalize(context, "Name"))) ;
 		}
 		exist = (Promotion)service.getByBusinessKey(promotion, context);
@@ -80,6 +80,10 @@ public class PromotionValidator extends CRMValidator {
 			 errors.add( getErrorforCode(CommonErrorCodes.FIELD_EMPTY,"Promotion_Lines"));
 			 return ; 
 		 }
+		 if(promotion.getItemClass() != null ) {
+			 errors.add( getErrorforCode(PromotionErrorCodes.ITEMCLASS_NOTFOR_UPSELLING));
+			 return ;
+		 }
 		 promotion.getPromotionLines().forEach(promotionLine ->  {
 			 if (promotionLine.getMasterPortFolioType() == null ) {
 				 errors.add( getErrorforCode(PromotionErrorCodes.CANNOT_BE_BLANK_FOR,"Master_Type","Bundling"));
@@ -104,6 +108,10 @@ public class PromotionValidator extends CRMValidator {
 		if(Utils.isNullSet(promotion.getPromotionLines())) {
 			 errors.add( getErrorforCode(CommonErrorCodes.FIELD_EMPTY,"Promotion_Lines"));
 			 return ; 
+		 }
+		if(promotion.getItemClass() != null ) {
+			 errors.add( getErrorforCode(PromotionErrorCodes.ITEMCLASS_NOTFOR_UPSELLING));
+			 return ;
 		 }
 		promotion.getPromotionLines().forEach(promotionLine ->  {
 			 if (promotionLine.getMasterPortFolioType() == null ) {
@@ -132,6 +140,10 @@ public class PromotionValidator extends CRMValidator {
 			 errors.add( getErrorforCode(CommonErrorCodes.FIELD_EMPTY,"Promotion_Lines"));
 			 return ; 
 		 }
+		 if(promotion.getItemClass() == null ) {
+			 errors.add( getErrorforCode(PromotionErrorCodes.ITEMCLASS_FOR_UPSELLING));
+			 return ;
+		 }
 		 promotion.getPromotionLines().forEach(promotionLine ->  {
 			 if (promotionLine.getMasterPortFolioType() == null ) {
 				 errors.add( getErrorforCode(PromotionErrorCodes.CANNOT_BE_BLANK_FOR,"Master_Type","Up_Selling"));
@@ -139,15 +151,9 @@ public class PromotionValidator extends CRMValidator {
 			 if (promotionLine.getMasterPortFolioKey() == null ) {
 				 errors.add( getErrorforCode(PromotionErrorCodes.CANNOT_BE_BLANK_FOR,"Master_Value","Up_Selling"));
 			 }
-			 if (promotionLine.getChildPortFolioType() != null ) {
-				 errors.add( getErrorforCode(PromotionErrorCodes.SHOULD_NOT_BEENTERED,"Incentive_Type","Up_Selling"));
-			 }
-			 if (promotionLine.getChildPortFolioKey() != null ) {
-				 errors.add( getErrorforCode(PromotionErrorCodes.SHOULD_NOT_BEENTERED,"Incentive_Value","Up_Selling"));
-			 }
-			 if (promotionLine.getRequiredQty() == 0 &&  promotionLine.getRequiredAmount() == 0 ) {
+			/* if (promotionLine.getRequiredQty() == 0 &&  promotionLine.getRequiredAmount() == 0 ) {
 				 errors.add( getErrorforCode(PromotionErrorCodes.CANNOT_BE_BLANK_FOR,"Required_Amount","Required_Amount"));
-			 }
+			 }*/
 			 if(promotionLine.getPromotedDiscPercent() == 0) {
 				 errors.add( getErrorforCode(PromotionErrorCodes.CANNOT_BE_BLANK_FOR,"Discount_Percent","Up_Selling"));
 			 }

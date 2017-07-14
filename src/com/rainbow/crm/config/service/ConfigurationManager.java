@@ -6,6 +6,7 @@ import com.rainbow.crm.config.sql.ConfigSQL;
 public class ConfigurationManager {
 
 	public static final String CURRENCY = "CURRENCY";
+	public static final String FEEDBACK_RATING_BENCHMARK ="FDBKRTNGMRK";
 	public static final String CONFIGURATION_PRIVILEGE = "CONFPRIVIL";
 	public static final String ANALYTICAL_REPORTS_PRIVILEGE = "ANLREPPRIVIL";
 	public static final String TARGET_SETTING_PRIVILEGE = "TRGSETPRIV";
@@ -40,6 +41,7 @@ public class ConfigurationManager {
 	public static final String MANAGER_ACC_ALLDIV = "ALLDIVACCGMR";
 	public static final String FEEDBACK_INTERVAL ="FDBKDAY";
 	public static final String FEEDBACK_OWNER ="FDBKOWNR";
+	
 	
 	public static String  getConfig(String key , CRMContext context) {
 		return ConfigSQL.getConfigforCode(context.getLoggedinCompany(), key);

@@ -1,4 +1,4 @@
-package com.rainbow.crm.promotion.service;
+package com.rainbow.crm.promotion.engines;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,6 +10,7 @@ import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.promotion.model.Promotion;
 import com.rainbow.crm.promotion.model.PromotionLine;
+import com.rainbow.crm.promotion.service.IPromotionService;
 import com.rainbow.crm.sales.model.Sales;
 import com.rainbow.crm.sales.model.SalesLine;
 

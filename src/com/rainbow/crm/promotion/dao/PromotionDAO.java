@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.salesperiod.model.SalesPeriod;
+import com.rainbow.crm.salesportfolio.model.SalesPortfolio;
 import com.rainbow.crm.common.DatabaseException;
 import com.rainbow.crm.promotion.model.Promotion;
 import com.rainbow.crm.customer.model.Customer;
@@ -28,5 +29,17 @@ public class PromotionDAO extends SpringHibernateDAO {
 	}
 	
 	
+	public List<Promotion> getPromotionsforType(int company , Date date, String code)
+	{
+		Session session = openSession(false);
+		Query query = session.createQuery(" from Promotion where startDt <= :salesDate  and endDt >= :salesDate and company.id =:company  " +
+		"    and deleted = false  and promoType.code = :code" ) ;
+		query.setParameter("salesDate", new Timestamp(date.getTime() ));
+		query.setParameter("company", company);
+		query.setParameter("code", code);
+		List<Promotion> lst = query.list();
+		closeSession(session, false);
+		return lst;
+	}
 
 }
