@@ -6,6 +6,8 @@ import { FormsModule }   from '@angular/forms';
 import { CommonPSModule }   from '../../common/common-ps.module';
 import { IonicImageLoader } from 'ionic-image-loader';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { FileOpener } from '@ionic-native/file-opener';
+import { FileTransfer } from '@ionic-native/file-transfer';
 
 
 @NgModule({
@@ -26,6 +28,6 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
     ItemSearchResult,
     ItemDetails
   ],
-  providers: [BarcodeScanner]
+  providers: [BarcodeScanner, FileOpener, FileTransfer]
 })
 export class ItemModule {}

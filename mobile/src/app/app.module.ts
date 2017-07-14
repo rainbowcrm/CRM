@@ -14,7 +14,7 @@ import { DiscussionModule } from '../pages/discussions/discussion.module';
 import { ExpenseModule } from '../pages/expenses/expenses.module';
 import { FollowUpModule } from '../pages/follow-up/follow-up.module';
 
-import { Loader,HTTPService, SharedService, ReasonCodeProvider, FilterProvider, PromptService } from '../providers/';
+import { Loader,HTTPService, SharedService, ReasonCodeProvider, FilterProvider, PromptService, CommonHelper } from '../providers/';
 import { ContactService, PushService, SecureStorageService } from '../plugins/';
 import { Push} from '@ionic-native/push';
 import { SecureStorage } from '@ionic-native/secure-storage';
@@ -48,6 +48,6 @@ import { IonicStorageModule } from '@ionic/storage';
     HomePage
   ],
   providers: [Loader,HTTPService, ReasonCodeProvider, FilterProvider, ContactService, SecureStorage, SecureStorageService,
-                Push,PushService, SplashScreen, SharedService, PromptService, ExpenseModule]
+                Push,PushService, SplashScreen, SharedService, PromptService, ExpenseModule, CommonHelper]
 })
 export class AppModule {}

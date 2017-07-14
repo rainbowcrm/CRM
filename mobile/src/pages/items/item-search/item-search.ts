@@ -86,7 +86,7 @@ export class ItemSearch {
       this.request.filter = [];
       this.request.hdnPage = 0;
       let filter = this.getFilters();
-      this.request.filter.push(filter);
+      this.request.filter = filter;
 
       this.http.processServerRequest("post",this.request, true).subscribe(
                      res => this.itemSearchSuccess(res, this.request.filter.slice(0)),

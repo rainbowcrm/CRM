@@ -44,4 +44,5 @@
       <strong class="bad">Out of stock</strong>
     </div>
 </ion-card>
+<ion-badge *ngFor="let document of item.Documents" (click)="download(document.FileWithLink, document.DocName)">{{document.DocName}}</ion-badge>
 </ion-content>
