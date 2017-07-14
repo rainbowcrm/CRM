@@ -71,6 +71,7 @@ import com.rainbow.crm.contact.model.Contact;
 import com.rainbow.crm.contact.service.IContactService;
 import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.customer.service.ICustomerService;
+import com.rainbow.crm.dashboard.service.DashBoardSQLs;
 import com.rainbow.crm.database.ConnectionCreater;
 import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.division.model.Division;
@@ -106,7 +107,10 @@ import com.rainbow.crm.vendor.service.IVendorService;
 import com.rainbow.framework.nextup.NextUpGenerator;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
+import com.techtrade.rads.framework.model.graphdata.BarChartData;
+import com.techtrade.rads.framework.model.graphdata.BarData;
 import com.techtrade.rads.framework.model.graphdata.GaugeChartData;
+import com.techtrade.rads.framework.model.graphdata.BarChartData.Range;
 import com.techtrade.rads.framework.model.graphdata.GaugeChartData.ColorRange;
 import com.techtrade.rads.framework.model.graphdata.PieChartData;
 import com.techtrade.rads.framework.model.graphdata.PieSliceData;
@@ -125,8 +129,56 @@ public class FeedBackService extends AbstractionTransactionService implements IF
 		return dao.getBySalesBill(docNo, context.getLoggedinCompany());
 	}
 
+
 	
 	
+	
+
+	@Override
+	public BarChartData getFeedBackValue(Division division, Date fromDate,
+			Date toDate, CRMContext context) {
+
+		BarChartData barChartData = new BarChartData();
+		barChartData.setTitle("Total  Sale - Feedback given");
+		barChartData.setSubTitle(" ");
+		String feedBackInterval = ConfigurationManager.getConfig(ConfigurationManager.FEEDBACK_INTERVAL, context);
+		long interval = Long.parseLong(feedBackInterval) * 24 * 60 * 60 * 1000;
+		Date saleStartDate =  new java.util.Date(fromDate.getTime() -interval );
+		Date saleEndDate =   new java.util.Date(toDate.getTime() -interval );
+		Double totalSale = FeedbackSQLs.getTotalSale(Utils.getSQLDate(saleStartDate), Utils.getSQLDate(saleEndDate), context.getLoggedinCompany(), division.getId());
+		Double feedBackTaken =FeedbackSQLs.getFeedBackGivenSale(Utils.getSQLDate(fromDate), Utils.getSQLDate(toDate), context.getLoggedinCompany(), division.getId());
+		
+		BarData tagetBarData = new BarData();
+		BarChartData.Division targetDivis = barChartData.new Division();
+		tagetBarData.setText("Total");
+		tagetBarData.setLegend("Total");
+		tagetBarData.setValue(totalSale);
+		tagetBarData.setColor(CommonUtil.getGraphColors()[0]);
+		targetDivis.addBarData(tagetBarData);
+		barChartData.addDivision(targetDivis);
+		
+		BarChartData.Division winDivision = barChartData.new Division();
+		BarData actualBarData = new BarData();
+		actualBarData.setText("FeedBack Taken");
+		actualBarData.setLegend("FeedBack Taken");
+		actualBarData.setValue(feedBackTaken);
+		actualBarData.setColor(CommonUtil.getGraphColors()[1]);
+		winDivision.addBarData(actualBarData);
+		barChartData.addDivision(winDivision);
+		
+		BarChartData.Range range =  barChartData.new  Range();
+		range.setyMax(totalSale.intValue());
+		range.setyMin(0);
+		range.setxMin(0);
+		range.setxMax(100);
+		barChartData.setRange(range);
+		return barChartData;
+	}
+
+
+
+
+
 
 	@Override
 	public GaugeChartData getCustomerSatisfactionIndex(Division division,
@@ -134,11 +186,12 @@ public class FeedBackService extends AbstractionTransactionService implements IF
 			FiniteValue feedBackOn) {
 		GaugeChartData chartData = new GaugeChartData();
 		String benchMark =ConfigurationManager.getConfig(ConfigurationManager.FEEDBACK_RATING_BENCHMARK, context);
-		int avgRating = FeedbackSQLs.getAverageRatingIndex(Utils.getSQLDate(fromDate), Utils.getSQLDate(toDate), context.getLoggedinCompany(), division.getId(),
+		double avgRating = FeedbackSQLs.getAverageRatingIndex(Utils.getSQLDate(fromDate), Utils.getSQLDate(toDate), context.getLoggedinCompany(), division.getId(),
 				feedBackOn.getCode());
-		chartData.setLabel("");
+		chartData.setTitle("Customer Satisfaction Index");
+		chartData.setLabel("CSI");
 		chartData.setMaxValue(100);
-		chartData.setGraphValue(avgRating * 10);
+		chartData.setGraphValue((int)(avgRating * 10));
 		chartData.setMinorTicks(10);
 		
 		int dangerZone = Integer.parseInt(benchMark)/2 * 10 ;

@@ -12,6 +12,7 @@ import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.feedback.model.FeedBack;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
+import com.techtrade.rads.framework.model.graphdata.BarChartData;
 import com.techtrade.rads.framework.model.graphdata.GaugeChartData;
 import com.techtrade.rads.framework.model.graphdata.PieChartData;
 
@@ -27,6 +28,7 @@ public interface IFeedBackService extends ITransactionService{
 	
 	public FeedBack getBySale(String docNo, CRMContext context) ;
 	
+	public BarChartData getFeedBackValue(Division division,Date fromDate, Date toDate, CRMContext context);
 	
 
 }

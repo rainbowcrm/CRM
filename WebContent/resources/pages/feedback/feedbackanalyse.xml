@@ -41,7 +41,7 @@ Controller = "com.rainbow.crm.feedback.controller.FeedBackAnalyzerController">
 </Element>
 </Section>
 <Section type= "displaySection">
- <!-- 	<Element type = "UIBarChart" Id = "brChrt1"  dataProvider = "leadsBarData" >
+	<Element type = "UIBarChart" Id = "brChrt1"  dataProvider = "feedBackRatio" >
 	 <xStart>0</xStart>
 	  <yStart>20</yStart>
 	  <rangeHeight>300</rangeHeight>
@@ -49,13 +49,9 @@ Controller = "com.rainbow.crm.feedback.controller.FeedBackAnalyzerController">
 	  <marginWidth>30</marginWidth>
 	  <barWidth>30</barWidth>
 	  <noYAxisDivisions>6</noYAxisDivisions>
- 	</Element>  -->
+ 	</Element>  
  	
- 	<Element type = "UIGaugeChart" Id = "guageChart1"     dataProvider = "custSatisfactionIndex" useGoogleGraph="true" >
-	  <ticks>10</ticks>
-	  <rangeHeight>250</rangeHeight>
-	  <rangeWidth>350</rangeWidth>
- 	</Element>
+ 	
  	 
  	<Element type = "UIPieChart" Id = "pieChart5"     dataProvider = "positiveSplits" useGoogleGraph="true" >
 	  <centerX>150</centerX>
@@ -72,6 +68,13 @@ Controller = "com.rainbow.crm.feedback.controller.FeedBackAnalyzerController">
 	  <rangeHeight>300</rangeHeight>
 	  <rangeWidth>500</rangeWidth>
  	</Element>
+ 	
+ 	<Element type = "UIGaugeChart" Id = "guageChart1"     dataProvider = "custSatisfactionIndex" useGoogleGraph="true" >
+	  <ticks>10</ticks>
+	  <rangeHeight>230</rangeHeight>
+	  <rangeWidth>400</rangeWidth>
+ 	</Element>
+ 	
  	<!-- <Element type = "UIPieChart" Id = "brChrt3"  dataProvider = "LowMedSalesData" >
 	  <centerX>150</centerX>
 	  <centerY>150</centerY>

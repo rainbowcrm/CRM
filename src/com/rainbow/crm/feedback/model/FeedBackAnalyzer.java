@@ -5,6 +5,7 @@ import java.util.Date;
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.division.model.Division;
+import com.techtrade.rads.framework.model.graphdata.BarChartData;
 import com.techtrade.rads.framework.model.graphdata.GaugeChartData;
 import com.techtrade.rads.framework.model.graphdata.PieChartData;
 
@@ -20,6 +21,7 @@ public class FeedBackAnalyzer extends CRMModelObject{
 	PieChartData negativeSplits;
 	
 	GaugeChartData custSatisfactionIndex;
+	BarChartData feedBackRatio ;
 	
 	
 	public Division getDivision() {
@@ -63,6 +65,12 @@ public class FeedBackAnalyzer extends CRMModelObject{
 	}
 	public void setCustSatisfactionIndex(GaugeChartData custSatisfactionIndex) {
 		this.custSatisfactionIndex = custSatisfactionIndex;
+	}
+	public BarChartData getFeedBackRatio() {
+		return feedBackRatio;
+	}
+	public void setFeedBackRatio(BarChartData feedBackRatio) {
+		this.feedBackRatio = feedBackRatio;
 	}
 	
 	
