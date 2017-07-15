@@ -34,10 +34,10 @@ Controller = "com.rainbow.crm.reasoncode.controller.ReasonCodeController">
 <Element label = ""  type = "UICheckBox" Id = "idChkSel"  rendered="!Object.isDeleted" property ="Id" />
 <Element label = ""  type = "UIImage" Id = "idChkSel"  rendered="Object.isDeleted" height = "21" weight ="21" src= "./resources/images/deletedRow.jpg" />
 </SelectionColumn>
-<Column title ="Type" sortField="reasonType.description" width ="20%" >
+<Column title ="Type" sortField="reasonType.description" width ="15%" >
 <Element label = ""  type = "UINote" Id = "idNameNote"  property ="reasonType.description" />
 </Column>
-<Column title ="Reason" sortField="reason" width ="20%" >
+<Column title ="Reason" sortField="reason" width ="15%" >
 <Element label = ""  type = "UINote" Id = "idDescNote"  property ="Reason" />
 </Column>
  <Column title ="Factor" sortField="factorType.description"  width ="15%" >
@@ -46,8 +46,11 @@ Controller = "com.rainbow.crm.reasoncode.controller.ReasonCodeController">
  <Column title ="Business_Orientation" sortField="orientation.description"  width ="15%" >
   <Element label = ""  type = "UINote" Id = "idIndusNote"  property ="orientation.description" />
  </Column>
- <Column title ="Accessible_By" sortField="accessibleBy.description"  width ="20%" >
+ <Column title ="Accessible_By" sortField="accessibleBy.description"  width ="15%" >
   <Element label = ""  type = "UINote" Id = "idIndusNote"  property ="accessibleBy.description" />
+ </Column>
+ <Column title ="Use_for_SWOT" sortField="useForSWOTAnalysis"  width ="15%" >
+  <Element label = ""  type = "UINote" Id = "idIndusNote"  property ="useForSWOTAnalysis" />
  </Column>
   <Column title =""  width ="10%" >
   <Element label = ""  type = "UINote" Id = "idAdEd"   />
@@ -57,14 +60,14 @@ Controller = "com.rainbow.crm.reasoncode.controller.ReasonCodeController">
 <Column width ="5%">
 <Element label = ""  type = "UIHidden" Id = "idReasonCodeID"  size  = "40" property ="Id" />
 </Column>
-<Column width ="20%">
+<Column width ="15%">
 <Element label = ""  type = "UIList" Id = "idCatName"  property ="reasonType.Code" >
 	<options populator =  "getAllReasonCodeTypes"> 
 	</options>
 </Element>
 <Element label = "" type = "UIHidden" Id = "hdnVersion" property ="ObjectVersion" />
 </Column>
-<Column width ="20%">
+<Column width ="15%">
 <Element label = ""  type = "UIText" Id = "idDesc" size  = "30" property ="Reason" />
 </Column>
 <Column width ="15%" >
@@ -79,12 +82,16 @@ Controller = "com.rainbow.crm.reasoncode.controller.ReasonCodeController">
 	</options>
 </Element>
 </Column>
-<Column width ="20%" >
+<Column width ="15%" >
 <Element label = ""  type = "UIList" Id = "lstAccessType"   property ="accessibleBy.Code"  externalise= "true">
 	<options populator =  "getAllAccessibleRoles"> 
 	</options>
 </Element>
 </Column>
+<Column width ="15%">
+<Element label = ""  type = "UIBooleanCheckBox" Id = "idswotAnalys" hiddenControlId= "hdnswotAnalys" size  = "30" property ="useForSWOTAnalysis" />
+</Column>
+
 <Column>
 <Element caption = "+"  type = "UIButton" Id = "btnAddRow"    fixedAction ="FixedAction.ACTION_ADDTABLEROW"   rendered = "Controller.isCreateMode" fixedActionParam =  "this"/>
 <Element caption = "-"  type = "UIButton" Id = "btnDelRow"    fixedAction ="FixedAction.ACTION_DELETETABLEROW" rendered = "Controller.isCreateMode"  fixedActionParam =  "this"/>

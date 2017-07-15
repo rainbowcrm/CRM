@@ -15,6 +15,7 @@ public class ReasonCode extends CRMBusinessModelObject {
 	FiniteValue factorType;
 	FiniteValue accessibleBy;
 	FiniteValue orientation;
+	Boolean useForSWOTAnalysis ;
 	
 	@RadsPropertySet(isBK=true)
 	public String getReason() {
@@ -62,6 +63,12 @@ public class ReasonCode extends CRMBusinessModelObject {
 	@RadsPropertySet(useBKForJSON=true, useBKForMap =true, useBKForXML=true)
 	public void setAccessibleBy(FiniteValue accessibleBy) {
 		this.accessibleBy = accessibleBy;
+	}
+	public Boolean getUseForSWOTAnalysis() {
+		return useForSWOTAnalysis;
+	}
+	public void setUseForSWOTAnalysis(Boolean useForSWOTAnalysis) {
+		this.useForSWOTAnalysis = useForSWOTAnalysis;
 	}
 	
 	
