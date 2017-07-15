@@ -35,10 +35,40 @@ export class Item{
     Image2URL: string;
     Image3URL: string;
     FilterName: string;
+    Documents: Array<Document>;
 }
 
 export class ItemWithDetails extends Item{
     Inventory: Array<Inventory>;
+}
+
+export class Document{
+   Comments: string;
+   Customer: string;
+   Deleted: string;
+   DocData: string;
+   DocPath: string;
+   DocType: DocType;
+   FileName1: string;
+   FileWithLink: string;
+   Id: string;
+
+}
+
+export class DocType{
+  Type: string;
+  Description: string; 
+  Default: string;
+  Code: string;
+  Item: ItemBrand;
+  Lead: string;
+  ObjectVersion: string;
+  Owner: Owner;
+  Sales: string;
+}
+
+export class Owner{
+   UserId: string; 
 }
 
 export class Inventory{

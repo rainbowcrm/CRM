@@ -2,6 +2,10 @@ import { Component, ViewChild } from '@angular/core';
 import { NavParams, Slides, ToastController, NavController } from 'ionic-angular';
 import { ItemWithDetails, Inventory} from '../';
 import { Storage } from '@ionic/storage';
+import { CommonHelper } from '../../../providers';
+import { FileOpener } from '@ionic-native/file-opener';
+import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
 
 
 /*
@@ -22,8 +26,9 @@ export class ItemDetails {
    @ViewChild(Slides) slides: Slides;
   
 
-  constructor(private params: NavParams, private storage: Storage, 
-  private toastCtrl: ToastController, private navCtrl: NavController) {
+  constructor(private params: NavParams, private storage: Storage, private fileOpener: FileOpener,
+  private toastCtrl: ToastController, private navCtrl: NavController, private helper: CommonHelper,
+  private transfer: FileTransfer, private file: File) {
     this.item = this.params.get('item');
     if(this.item.Inventory)
       this.inventory = this.item.Inventory[0];
@@ -59,6 +64,38 @@ export class ItemDetails {
 
   ionViewDidLoad() {
     this.slides.pager = true;
+  }
+
+  download(url, name){
+    url = encodeURI(url);
+    const fileTransfer: FileTransferObject = this.transfer.create();
+    let filePath = this.file.dataDirectory + name +"."+ this.helper.getExtensionFromLink(url)
+    fileTransfer.download(url, filePath).then((entry) => {
+    console.log('download complete: ' + entry.toURL());
+     this.openFile(filePath)
+     }, (error) => {
+      // handle error
+    });
+     
+  }
+
+  openFile(file){
+     let mime = this.helper.getMimeForExtension(file);
+    if(mime == undefined || mime.length == 0){
+       this.showToast("Cannot open file");
+    }
+    this.fileOpener.open(file, mime)
+      .then(() => console.log('File is opened'))
+      .catch(e => this.showToast("Cannot open file "));
+  }
+
+  showToast(msg: string):any{
+     let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 2000,
+      position: 'top'
+     });
+    toast.present();
   }
 
 
