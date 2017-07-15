@@ -38,7 +38,7 @@ Controller = "com.rainbow.crm.salesperiod.controller.SalesPeriodAnalyzerControll
 </Element>
 </Section>
 <Section type= "displaySection">
-	<Element type = "UIBarChart" Id = "brChrt"  dataProvider = "salesData" >
+	<Element type = "UIBarChart" Id = "brChrt" useGoogleGraph="true" dataProvider = "salesData" >
 	  <xStart>0</xStart>
 	  <yStart>20</yStart>
 	  <rangeHeight>600</rangeHeight>

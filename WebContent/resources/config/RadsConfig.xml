@@ -195,6 +195,9 @@
 </Page>
 <Page id = "salesleadanalysis" definition ="/resources/pages/saleslead/salesleadanalyse.xml" accessCode ="ANALY:LEADANALYSE" modelclass = "com.rainbow.crm.saleslead.model.SalesLeadAnalyzer" >
 </Page>
+<Page id = "swotanalysis" definition ="/resources/pages/swotanalysis/swotanalyse.xml" accessCode ="MANAGER:SWOTANALYSE" modelclass = "com.rainbow.crm.swot.model.SWOTAnalysis" >
+</Page>
+
 <Page id = "feedbackanalysis" definition ="/resources/pages/feedback/feedbackanalyse.xml" accessCode ="ANALY:FDBACKANALYSE" modelclass = "com.rainbow.crm.feedback.model.FeedBackAnalyzer" >
 </Page>
 
@@ -323,6 +326,7 @@
 	<Element label = "" type = "UIMenu" Id = "menu071" style="menustyle" title="Queries" link = "rdscontroller?page=queries"   />
  	<Element label = "" type = "UIMenu" Id = "menu072" style="menustyle" title="Dashboard" link = "rdscontroller?page=divmgrdashboard"   />
 	<Element label = "" type = "UIMenu" Id = "menu073" style="menustyle" title="Promotions" link = "rdscontroller?page=promotionslist"   />
+	<Element label = "" type = "UIMenu" Id = "menu073" style="menustyle" title="SWOT_Analysis" link = "rdscontroller?page=swotanalysis"   />
 	<!--  <Element label = "" type = "UIMenu" Id = "menu074" style="menustyle" title="Marketing_Campaign" link = "rdscontroller?page=campaign"   /> -->
  </Element>
   <Element label = "" type = "UIMenu" Id = "menu30" style="menustyleParent" title="Analytics" groupId= "menuGRP006"  >

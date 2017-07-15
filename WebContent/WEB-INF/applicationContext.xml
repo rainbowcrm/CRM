@@ -104,6 +104,8 @@
     </bean>
     <bean id="IWishListService" class="com.rainbow.crm.wishlist.service.WishListService">
     </bean>
+    <bean id="ISWOTAnalysisService" class="com.rainbow.crm.swot.service.SWOTAnalysisService">
+    </bean>
     <bean id="IQueryService" class="com.rainbow.framework.query.service.QueryService">
     </bean>
     <bean id="ISalesLeadService" class="com.rainbow.crm.saleslead.service.SalesLeadService">
