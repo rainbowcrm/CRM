@@ -38,6 +38,7 @@ public class SWOTAnalysisService implements ISWOTAnalysisService {
 		strengthLeads.entrySet().forEach(entry  -> { ;
 			BarData tagetBarData = new BarData();
 			BarChartData.Division targetDivis = barChartData.new Division();
+			targetDivis.setDivisionTitle(entry.getKey());
 			tagetBarData.setText(entry.getKey());
 			tagetBarData.setLegend(entry.getKey());
 			tagetBarData.setValue(entry.getValue());
@@ -79,10 +80,11 @@ public class SWOTAnalysisService implements ISWOTAnalysisService {
 		strengthLeads.entrySet().forEach(entry  -> { ;
 			BarData tagetBarData = new BarData();
 			BarChartData.Division targetDivis = barChartData.new Division();
+			targetDivis.setDivisionTitle(entry.getKey());
 			tagetBarData.setText(entry.getKey());
 			tagetBarData.setLegend(entry.getKey());
 			tagetBarData.setValue(entry.getValue());
-			tagetBarData.setColor("Black");
+			tagetBarData.setColor("Grey");
 			targetDivis.addBarData(tagetBarData);
 			barChartData.addDivision(targetDivis);
 			if(entry.getValue() > maxValue.get()) {
@@ -120,6 +122,7 @@ public class SWOTAnalysisService implements ISWOTAnalysisService {
 		strengthLeads.entrySet().forEach(entry  -> { ;
 			BarData tagetBarData = new BarData();
 			BarChartData.Division targetDivis = barChartData.new Division();
+			targetDivis.setDivisionTitle(entry.getKey());
 			tagetBarData.setText(entry.getKey());
 			tagetBarData.setLegend(entry.getKey());
 			tagetBarData.setValue(entry.getValue());
@@ -161,6 +164,7 @@ public class SWOTAnalysisService implements ISWOTAnalysisService {
 		strengthLeads.entrySet().forEach(entry  -> { ;
 			BarData tagetBarData = new BarData();
 			BarChartData.Division targetDivis = barChartData.new Division();
+			targetDivis.setDivisionTitle(entry.getKey());
 			tagetBarData.setText(entry.getKey());
 			tagetBarData.setLegend(entry.getKey());
 			tagetBarData.setValue(entry.getValue());
@@ -183,5 +187,24 @@ public class SWOTAnalysisService implements ISWOTAnalysisService {
 	}
 	
 	
+	@Override
+	public void reArrangeRange(BarChartData data1 , BarChartData data2, BarChartData data3, BarChartData data4)
+	{
+		AtomicInteger maxRange =new AtomicInteger(0);
+		if (data1.getRange().getyMax() >  maxRange.get())
+			maxRange.set(data1.getRange().getyMax());
+		if (data2.getRange().getyMax() >  maxRange.get())
+			maxRange.set(data2.getRange().getyMax());
+		if (data3.getRange().getyMax() >  maxRange.get())
+			maxRange.set(data3.getRange().getyMax());
+		if (data4.getRange().getyMax() >  maxRange.get())
+			maxRange.set(data4.getRange().getyMax());
+		
+		data1.getRange().setyMax(maxRange.get());
+		data2.getRange().setyMax(maxRange.get());
+		data3.getRange().setyMax(maxRange.get());
+		data4.getRange().setyMax(maxRange.get());
+		
+	}
 
 }

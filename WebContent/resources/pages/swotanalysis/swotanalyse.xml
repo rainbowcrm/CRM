@@ -36,7 +36,7 @@ Controller = "com.rainbow.crm.swot.controller.SWOTAnalysisController">
 </Element>
 </Section>
 <Section type= "displaySection">
- 	<Element type = "UIBarChart" Id = "brChrt1"  dataProvider = "weaknesses" >
+ 	<Element type = "UIBarChart" Id = "brChrt1"  useCoreChart ="true"  dataProvider = "weaknesses" >
 	 <xStart>0</xStart>
 	  <yStart>20</yStart>
 	  <rangeHeight>300</rangeHeight>
@@ -46,7 +46,7 @@ Controller = "com.rainbow.crm.swot.controller.SWOTAnalysisController">
 	  <noYAxisDivisions>6</noYAxisDivisions>
  	</Element> 
  	
- 	<Element type = "UIBarChart" Id = "brChrt2"  dataProvider = "strengths" >
+ 	<Element type = "UIBarChart" Id = "brChrt2" useCoreChart ="true" dataProvider = "strengths" >
 	 <xStart>600</xStart>
 	  <yStart>20</yStart>
 	  <rangeHeight>300</rangeHeight>
@@ -56,7 +56,7 @@ Controller = "com.rainbow.crm.swot.controller.SWOTAnalysisController">
 	  <noYAxisDivisions>6</noYAxisDivisions>
  	</Element>  
  	
- 	<Element type = "UIBarChart" Id = "brChrt3"  dataProvider = "threats" >
+ 	<Element type = "UIBarChart" Id = "brChrt3" useCoreChart ="true"  dataProvider = "threats" >
 	 <xStart>0</xStart>
 	  <yStart>350</yStart>
 	  <rangeHeight>300</rangeHeight>
@@ -66,7 +66,7 @@ Controller = "com.rainbow.crm.swot.controller.SWOTAnalysisController">
 	  <noYAxisDivisions>6</noYAxisDivisions>
  	</Element> 
  	
- 	<Element type = "UIBarChart" Id = "brChrt4"  dataProvider = "opportunities" >
+ 	<Element type = "UIBarChart" Id = "brChrt4" useCoreChart ="true"  dataProvider = "opportunities" >
 	 <xStart>600</xStart>
 	  <yStart>350</yStart>
 	  <rangeHeight>300</rangeHeight>

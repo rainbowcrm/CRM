@@ -37,6 +37,8 @@ public class SWOTAnalysisController extends CRMGeneralController {
 			BarChartData threats = service.getThreats(swotAnalysis.getDivision(),swotAnalysis.getFromDate(), swotAnalysis.getToDate(),(CRMContext)getContext()) ;
 			swotAnalysis.setThreats(threats);
 			
+			service.reArrangeRange(strength, weakness, opporunties, threats);
+			
 			PageResult result = new PageResult();
 			
 			result.setObject(swotAnalysis);
