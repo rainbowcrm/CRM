@@ -97,6 +97,9 @@
 </Page>
 <Page id = "salesperiodlist" definition ="/resources/pages/salesperiod/salesperiodList.xml"  accessCode ="SPLAN:SPERIOD" modelclass = "com.rainbow.crm.salesperiod.model.SalesPeriod" >
 </Page>
+<Page id = "corpsalesperiodlist" definition ="/resources/pages/corpsalesperiod/corpsalesperiodList.xml"  accessCode ="ADMIN:SPERIOD" modelclass = "com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriod" >
+</Page>
+
 <Page id = "salesportfoliolist" definition ="/resources/pages/salesportfolio/salesportfolioList.xml" accessCode ="SPLAN:SAPFOLIO" modelclass = "com.rainbow.crm.salesportfolio.model.SalesPortfolio" >
 </Page>
 <Page id = "promotionslist" definition ="/resources/pages/promotions/promotionsList.xml"  accessCode ="MANAGER:PROMOTIONS" modelclass = "com.rainbow.crm.promotion.model.Promotion" >
@@ -303,11 +306,12 @@
 	<Element label = "" type = "UIMenu" Id = "menu05" style="menustyle" title="Wish_List" link = "rdscontroller?page=wishlist"   />
  </Element>
  <Element label = "" type = "UIMenu" Id = "menu300" style="menustyleParent" title="Sales_Planning" groupId= "menuGRP0040"  >
- <Element label = "" type = "UIMenu" Id = "menu3001" style="menustyle" title="Territories" link = "rdscontroller?page=territories"   />
+	 <Element label = "" type = "UIMenu" Id = "menu3001" style="menustyle" title="Territories" link = "rdscontroller?page=territories"   />
  	 <Element label = "" type = "UIMenu" Id = "menu05" style="menustyle" title="Categories" link = "rdscontroller?page=custcategories"   />
 	 <Element label = "" type = "UIMenu" Id = "menu301" style="menustyle" title="Sales_Associate_PortFolio" link = "rdscontroller?page=salesportfoliolist"   />
 	 <Element label = "" type = "UIMenu" Id = "menu302" style="menustyle" title="Sales_Period" link = "rdscontroller?page=salesperiodlist"   />
-	<Element label = "" type = "UIMenu" Id = "menu303" style="menustyle" title="Expense_Heads" link = "rdscontroller?page=expenseheads"   />
+	  <Element label = "" type = "UIMenu" Id = "menu304" style="menustyle" title="Corp_Sales_Period" link = "rdscontroller?page=corpsalesperiodlist"   />
+	 	<Element label = "" type = "UIMenu" Id = "menu303" style="menustyle" title="Expense_Heads" link = "rdscontroller?page=expenseheads"   />
  </Element>
  <Element label = "" type = "UIMenu" Id = "menu30" style="menustyleParent" title="Salesforce_WorkBench" groupId= "menuGRP004"  >
  	<Element label = "" type = "UIMenu" Id = "menu301" style="menustyle" title="Alerts" link = "rdscontroller?page=alerts"   />

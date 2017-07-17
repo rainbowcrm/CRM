@@ -96,6 +96,8 @@
     </bean>
     <bean id="ISalesPeriodService" class="com.rainbow.crm.salesperiod.service.SalesPeriodService">
     </bean>
+    <bean id="ICorpSalesPeriodService" class="com.rainbow.crm.corpsalesperiod.service.CorpSalesPeriodService">
+    </bean>
     <bean id="ITopicService" class="com.rainbow.crm.topic.service.TopicService">
     </bean>
     <bean id="ISalesPortfolioService" class="com.rainbow.crm.salesportfolio.service.SalesPortfolioService">
@@ -201,6 +203,9 @@
      <bean id="SalesPeriodDAO" class="com.rainbow.crm.salesperiod.dao.SalesPeriodDAO">
     <property name="sessionFactory" ref="sessionFactory"></property>  
     </bean>
+    <bean id="CorpSalesPeriodDAO" class="com.rainbow.crm.corpsalesperiod.dao.CorpSalesPeriodDAO">
+    <property name="sessionFactory" ref="sessionFactory"></property>  
+    </bean>
     <bean id="SalesPortfolioDAO" class="com.rainbow.crm.salesportfolio.dao.SalesPortfolioDAO">
     <property name="sessionFactory" ref="sessionFactory"></property>  
     </bean>
@@ -270,6 +275,11 @@
         <value>com/rainbow/crm/territory/model/TerritoryLine.hbm.xml</value>
         <value>com/rainbow/crm/feedback/model/FeedBack.hbm.xml</value>
         <value>com/rainbow/crm/feedback/model/FeedBackLine.hbm.xml</value>
+        <value>com/rainbow/crm/corpsalesperiod/model/CorpSalesPeriod.hbm.xml</value>
+        <value>com/rainbow/crm/corpsalesperiod/model/CorpSalesPeriodLine.hbm.xml</value>
+        <value>com/rainbow/crm/corpsalesperiod/model/CorpSalesPeriodBrand.hbm.xml</value>
+        <value>com/rainbow/crm/corpsalesperiod/model/CorpSalesPeriodCategory.hbm.xml</value>
+        <value>com/rainbow/crm/corpsalesperiod/model/CorpSalesPeriodProduct.hbm.xml</value>
         <value>com/rainbow/crm/salesperiod/model/SalesPeriod.hbm.xml</value>
         <value>com/rainbow/crm/salesperiod/model/SalesPeriodLine.hbm.xml</value>
         <value>com/rainbow/crm/salesperiod/model/SalesPeriodAssociate.hbm.xml</value>
