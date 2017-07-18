@@ -4,6 +4,7 @@ import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMValidator;
 import com.rainbow.crm.common.CommonErrorCodes;
 import com.rainbow.crm.common.SpringObjectFactory;
+import com.rainbow.crm.corpsalesperiod.validator.CorpSalesPeriodErrorCodes;
 import com.rainbow.crm.salesperiod.model.SalesPeriod;
 import com.rainbow.crm.salesperiod.model.SalesPeriodAssociate;
 import com.rainbow.crm.salesperiod.model.SalesPeriodBrand;
@@ -57,7 +58,7 @@ public class SalesPeriodValidator extends CRMValidator {
 		if (Utils.isNullSet(salesPeriod.getSalesPeriodLines()) &&  Utils.isNullSet(salesPeriod.getSalesPeriodAssociates())  &&
 				Utils.isNullSet(salesPeriod.getSalesPeriodTerritories()) &&  Utils.isNullSet(salesPeriod.getSalesPeriodCategories()) && 
 				Utils.isNullSet(salesPeriod.getSalesPeriodProducts()) &&  Utils.isNullSet(salesPeriod.getSalesPeriodBrands()) ) {
-			errors.add(getErrorforCode(SalesPeriodErrorCodes.FIELD_EMPTY)) ;
+			errors.add(getErrorforCode(CorpSalesPeriodErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Entries"))) ;
 		}else {
 			if (!Utils.isNullSet(salesPeriod.getSalesPeriodLines())) {
 			for (SalesPeriodLine line : salesPeriod.getSalesPeriodLines()) {

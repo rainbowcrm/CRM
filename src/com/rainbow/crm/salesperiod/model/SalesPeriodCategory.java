@@ -3,6 +3,7 @@ package com.rainbow.crm.salesperiod.model;
 import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
 import com.rainbow.crm.category.model.Category;
 import com.techtrade.rads.framework.annotations.RadsPropertySet;
+import com.techtrade.rads.framework.utils.Utils;
 
 public class SalesPeriodCategory extends CRMBusinessModelObject {
 
@@ -73,6 +74,15 @@ public class SalesPeriodCategory extends CRMBusinessModelObject {
 	@RadsPropertySet(excludeFromJSON=true,excludeFromMap=true,excludeFromXML=true)
 	public void setSalesPeriodDoc(SalesPeriod salesPeriodDoc) {
 		this.salesPeriodDoc = salesPeriodDoc;
+	}
+	
+	@Override
+	@RadsPropertySet(excludeFromJSON=true,excludeFromMap=true,excludeFromXML=true)
+	public boolean isNullContent() {
+		if ((category == null || category.isNullContent()) && lineTotal <=0  && Utils.isNullString(comments) )
+			return true;
+		else
+			return false;
 	}
 
 	

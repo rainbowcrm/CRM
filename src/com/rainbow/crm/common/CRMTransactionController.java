@@ -146,6 +146,7 @@ public abstract class CRMTransactionController extends TransactionController {
 		Map<String, String> ans = new LinkedHashMap<String, String> ();
 		ITerritoryService service =(ITerritoryService) SpringObjectFactory.INSTANCE.getInstance("ITerritoryService");
 		List<Territory> territorries = (List<Territory>)service.findAll("Territory", "", "territory", (CRMContext)getContext());
+		ans.put("-1", "--Select one--");
 		if (!Utils.isNullList(territorries)) {
 			for (Territory territory : territorries) {
 				ans.put(String.valueOf(territory.getId()), territory.getTerritory());

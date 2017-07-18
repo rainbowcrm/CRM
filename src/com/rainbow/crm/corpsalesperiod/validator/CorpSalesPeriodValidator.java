@@ -54,8 +54,9 @@ public class CorpSalesPeriodValidator extends CRMValidator {
 			errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "To_Date"))) ;
 		}
 		if (Utils.isNullSet(corpSalesPeriod.getCorpSalesPeriodLines()) &&   Utils.isNullSet(corpSalesPeriod.getCorpSalesPeriodCategories()) && 
-				Utils.isNullSet(corpSalesPeriod.getCorpSalesPeriodProducts()) &&  Utils.isNullSet(corpSalesPeriod.getCorpSalesPeriodBrands()) ) {
-			errors.add(getErrorforCode(CorpSalesPeriodErrorCodes.FIELD_EMPTY)) ;
+				Utils.isNullSet(corpSalesPeriod.getCorpSalesPeriodProducts()) && Utils.isNullSet(corpSalesPeriod.getCorpSalesPeriodDivisions()) &&
+				Utils.isNullSet(corpSalesPeriod.getCorpSalesPeriodBrands()) ) {
+			errors.add(getErrorforCode(CorpSalesPeriodErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Entries"))) ;
 		}else {
 			if (!Utils.isNullSet(corpSalesPeriod.getCorpSalesPeriodLines())) {
 			for (CorpSalesPeriodLine line : corpSalesPeriod.getCorpSalesPeriodLines()) {

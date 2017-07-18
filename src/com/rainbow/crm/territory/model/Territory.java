@@ -14,6 +14,7 @@ import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.sales.model.Sales;
 import com.rainbow.crm.vendor.model.Vendor;
 import com.techtrade.rads.framework.annotations.RadsPropertySet;
+import com.techtrade.rads.framework.utils.Utils;
 
 public class Territory extends CRMBusinessModelObject{
 
@@ -60,6 +61,16 @@ public class Territory extends CRMBusinessModelObject{
 			territoryLines = new LinkedHashSet<TerritoryLine> ();
 		this.territoryLines.add(territoryLine);
 	}
+	
+	@Override
+	@RadsPropertySet(excludeFromJSON=true,excludeFromMap=true,excludeFromXML=true)
+	public boolean isNullContent() {
+		if( id <= 0 && Utils.isNullString(territory))
+			return true ;
+		else
+			return false;
+	}
+	
 
 	
 	

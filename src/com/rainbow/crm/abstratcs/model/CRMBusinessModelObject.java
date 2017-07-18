@@ -55,8 +55,11 @@ public abstract class CRMBusinessModelObject  extends CRMModelObject{
 		Iterator it = keys.keySet().iterator() ;
 		while(it.hasNext()) {
 			Object ob = keys.get(it.next());
-			if (ob != null)
-				return false; 
+			if (ob != null) {
+				if (ob instanceof CRMBusinessModelObject)
+					return ((CRMBusinessModelObject)ob).isNullContent();
+				return false;
+			}
 		}
 		return true;
 	}

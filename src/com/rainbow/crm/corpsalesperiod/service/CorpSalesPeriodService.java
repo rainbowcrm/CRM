@@ -82,7 +82,10 @@ public class CorpSalesPeriodService extends AbstractionTransactionService implem
 		Company company = (Company)compService.getById(context.getLoggedinCompany());
 		((CorpSalesPeriod)object).setCompany(company);
 		CorpSalesPeriodValidator validator = new CorpSalesPeriodValidator(context);
-		return validator.validateforCreate(object);
+		List<RadsError> errors = validator.validateforCreate(object);
+		if(Utils.isNullList(errors) &&  errors.size() >1 )
+			addBlankRowBack((CorpSalesPeriod) object);
+		return errors;
 	}
 
 	@Override
@@ -92,7 +95,10 @@ public class CorpSalesPeriodService extends AbstractionTransactionService implem
 		Company company = (Company)compService.getById(context.getLoggedinCompany());
 		((CorpSalesPeriod)object).setCompany(company);
 		CorpSalesPeriodValidator validator = new CorpSalesPeriodValidator(context);
-		return validator.validateforUpdate(object);
+		List<RadsError> errors = validator.validateforUpdate(object);
+		if(Utils.isNullList(errors) &&  errors.size() >1 )
+			addBlankRowBack((CorpSalesPeriod) object);
+		return errors;
 	}
 
 	@Override
@@ -116,6 +122,7 @@ public class CorpSalesPeriodService extends AbstractionTransactionService implem
 		List<RadsError> ans = new ArrayList<RadsError>();
 		
 		Externalize externalize = new Externalize(); ;
+		exlcudeBlankRows(object);
 		
 		if(!Utils.isNullSet(object.getCorpSalesPeriodLines())){
 			int lineNo=1;
@@ -212,10 +219,93 @@ public class CorpSalesPeriodService extends AbstractionTransactionService implem
 				}
 			}
 		}
-		
+		if(ans.size() > 0 )
+			addBlankRowBack(object);
 		return ans;
 	}
 
+	private void addBlankRowBack(CorpSalesPeriod corpSalesPeriod)
+	{
+		if(Utils.isNullSet(corpSalesPeriod.getCorpSalesPeriodLines())){
+			corpSalesPeriod.addCorpSalesPeriodLine(new CorpSalesPeriodLine());
+		}
+		if(Utils.isNullSet(corpSalesPeriod.getCorpSalesPeriodDivisions())){
+			corpSalesPeriod.addCorpSalesPeriodDivision(new CorpSalesPeriodDivision());
+		}
+		if(Utils.isNullSet(corpSalesPeriod.getCorpSalesPeriodCategories())){
+			corpSalesPeriod.addCorpSalesPeriodCategory(new CorpSalesPeriodCategory()); 
+		}
+		if(Utils.isNullSet(corpSalesPeriod.getCorpSalesPeriodProducts())){
+			corpSalesPeriod.addCorpSalesPeriodProduct(new CorpSalesPeriodProduct());
+		}
+		if(Utils.isNullSet(corpSalesPeriod.getCorpSalesPeriodBrands())){
+			corpSalesPeriod.addCorpSalesPeriodBrand(new CorpSalesPeriodBrand());
+		}
+	}
+	
+	private void exlcudeBlankRows(CorpSalesPeriod corpSalesPeriod)
+	{
+		Double maxSum = 0d;
+		if(!Utils.isNullSet(corpSalesPeriod.getCorpSalesPeriodLines())){
+			Double currentSum = 0d ;
+			for (CorpSalesPeriodLine line: corpSalesPeriod.getCorpSalesPeriodLines()) {
+				if(line.isNullContent()) {
+					corpSalesPeriod.getCorpSalesPeriodLines().remove(line);
+				}
+			}
+			if(currentSum > maxSum)
+				maxSum = currentSum;
+		}
+		
+		if(!Utils.isNullSet(corpSalesPeriod.getCorpSalesPeriodDivisions())){
+			Double currentSum = 0d ;
+			for (CorpSalesPeriodDivision line: corpSalesPeriod.getCorpSalesPeriodDivisions()) {
+				if(line.isNullContent()) {
+					corpSalesPeriod.getCorpSalesPeriodDivisions().remove(line);
+				}else
+					currentSum += line.getLineTotal();
+			}
+			if(currentSum > maxSum)
+				maxSum = currentSum;
+		}
+		
+		if(!Utils.isNullSet(corpSalesPeriod.getCorpSalesPeriodBrands())){
+			Double currentSum = 0d ;
+			for (CorpSalesPeriodBrand line: corpSalesPeriod.getCorpSalesPeriodBrands()) {
+				if(line.isNullContent()) {
+					corpSalesPeriod.getCorpSalesPeriodBrands().remove(line);
+				}else
+					currentSum += line.getLineTotal();
+			}
+			if(currentSum > maxSum)
+				maxSum = currentSum;
+		}
+		if(!Utils.isNullSet(corpSalesPeriod.getCorpSalesPeriodCategories())){
+			Double currentSum = 0d ;
+			for (CorpSalesPeriodCategory line: corpSalesPeriod.getCorpSalesPeriodCategories()) {
+				if(line.isNullContent()) {
+					corpSalesPeriod.getCorpSalesPeriodCategories().remove(line);
+				}else
+					currentSum += line.getLineTotal();
+			}
+			if(currentSum > maxSum)
+				maxSum = currentSum;
+		}
+		if(!Utils.isNullSet(corpSalesPeriod.getCorpSalesPeriodProducts())){
+			Double currentSum = 0d ;
+			for (CorpSalesPeriodProduct line: corpSalesPeriod.getCorpSalesPeriodProducts()) {
+				if(line.isNullContent()) {
+					corpSalesPeriod.getCorpSalesPeriodProducts().remove(line);
+				}else
+					currentSum += line.getLineTotal();
+			}
+			if(currentSum > maxSum)
+				maxSum = currentSum;
+		}
+		corpSalesPeriod.setTotalTarget(maxSum + corpSalesPeriod.getAdditionalTarget());
+
+	}
+	
 	@Override
 	public TransactionResult create(CRMModelObject object, CRMContext context) {
 		CorpSalesPeriod corpSalesPeriod = (CorpSalesPeriod)object ;
@@ -226,19 +316,23 @@ public class CorpSalesPeriodService extends AbstractionTransactionService implem
 				line.setId(linePK);
 				line.setCorpSalesPeriodDoc(corpSalesPeriod);
 			}
-			
+			for (CorpSalesPeriodDivision  line : corpSalesPeriod.getCorpSalesPeriodDivisions()) {
+				int linePK = GeneralSQLs.getNextPKValue( "CorpSalesPeriod_Divisions") ;
+				line.setId(linePK);
+				line.setCorpSalesPeriodDoc(corpSalesPeriod);
+			}
 			for (CorpSalesPeriodBrand  line : corpSalesPeriod.getCorpSalesPeriodBrands()) {
-				int linePK = GeneralSQLs.getNextPKValue( "SALESPERIOD_BRANDS") ;
+				int linePK = GeneralSQLs.getNextPKValue( "CorpSalesPeriod_Brands") ;
 				line.setId(linePK);
 				line.setCorpSalesPeriodDoc(corpSalesPeriod);
 			}
 			for (CorpSalesPeriodCategory  line : corpSalesPeriod.getCorpSalesPeriodCategories()) {
-				int linePK = GeneralSQLs.getNextPKValue( "SALESPERIOD_CATEGORIES") ;
+				int linePK = GeneralSQLs.getNextPKValue( "CorpSalesPeriod_Categories") ;
 				line.setId(linePK);
 				line.setCorpSalesPeriodDoc(corpSalesPeriod);
 			}
 			for (CorpSalesPeriodProduct  line : corpSalesPeriod.getCorpSalesPeriodProducts()) {
-				int linePK = GeneralSQLs.getNextPKValue( "SALESPERIOD_PRODUCTS") ;
+				int linePK = GeneralSQLs.getNextPKValue( "CorpSalesPeriod_Products") ;
 				line.setId(linePK);
 				line.setCorpSalesPeriodDoc(corpSalesPeriod);
 			}
@@ -299,7 +393,35 @@ public class CorpSalesPeriodService extends AbstractionTransactionService implem
 				while (it.hasNext()) {
 					CorpSalesPeriodCategory oldLine= (CorpSalesPeriodCategory) it.next() ;
 					oldLine.setVoided(true);
-					corpSalesPeriod.addSalePeriodCategory(oldLine);
+					corpSalesPeriod.addCorpSalesPeriodCategory(oldLine);
+				}
+			}
+		}
+		
+		if (!Utils.isNullSet(corpSalesPeriod.getCorpSalesPeriodDivisions())) {
+			int  ct = 0;
+			Iterator it = null;
+			if (!Utils.isNullSet(oldObject.getCorpSalesPeriodDivisions()))
+					it = oldObject.getCorpSalesPeriodDivisions().iterator() ;
+			for (CorpSalesPeriodDivision  line : corpSalesPeriod.getCorpSalesPeriodDivisions()) {
+				CorpSalesPeriodDivision oldLine = null ;
+				if ( it != null && it.hasNext()) {
+					oldLine= (CorpSalesPeriodDivision) it.next() ;
+				}
+				line.setCorpSalesPeriodDoc(corpSalesPeriod);
+				if (oldLine != null) {
+					line.setId(oldLine.getId());
+					line.setObjectVersion(oldLine.getObjectVersion());
+				}else {
+					int linePK = GeneralSQLs.getNextPKValue( "CorpSalesPeriod_Divisions") ;
+					line.setId(linePK);
+				}
+			}
+			if (it != null ) {
+				while (it.hasNext()) {
+					CorpSalesPeriodDivision oldLine= (CorpSalesPeriodDivision) it.next() ;
+					oldLine.setVoided(true);
+					corpSalesPeriod.addCorpSalesPeriodDivision(oldLine);
 				}
 			}
 		}
@@ -327,7 +449,7 @@ public class CorpSalesPeriodService extends AbstractionTransactionService implem
 				while (it.hasNext()) {
 					CorpSalesPeriodBrand oldLine= (CorpSalesPeriodBrand) it.next() ;
 					oldLine.setVoided(true);
-					corpSalesPeriod.addSalePeriodBrand(oldLine);
+					corpSalesPeriod.addCorpSalesPeriodBrand(oldLine);
 				}
 			}
 		}
@@ -355,7 +477,7 @@ public class CorpSalesPeriodService extends AbstractionTransactionService implem
 				while (it.hasNext()) {
 					CorpSalesPeriodProduct oldLine= (CorpSalesPeriodProduct) it.next() ;
 					oldLine.setVoided(true);
-					corpSalesPeriod.addSalePeriodProduct(oldLine);
+					corpSalesPeriod.addCorpSalesPeriodProduct(oldLine);
 				}
 			}
 		}

@@ -9,6 +9,7 @@ import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.division.model.Division;
 import com.techtrade.rads.framework.annotations.RadsPropertySet;
+import com.techtrade.rads.framework.utils.Utils;
 
 public class User extends CRMBusinessModelObject {
 	
@@ -131,6 +132,15 @@ public class User extends CRMBusinessModelObject {
 	@Override
 	public Object getPK() {
 		return null;
+	}
+	
+	@Override
+	@RadsPropertySet(excludeFromJSON=true,excludeFromMap=true,excludeFromXML=true)
+	public boolean isNullContent() {
+		if (Utils.isNullString(userId))
+			 return true;
+		else
+			return false;
 	}
 	
 	

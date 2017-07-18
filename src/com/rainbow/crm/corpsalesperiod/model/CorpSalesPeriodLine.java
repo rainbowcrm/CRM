@@ -5,6 +5,7 @@ import com.rainbow.crm.abstratcs.model.CRMItemLine;
 import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.item.model.Sku;
 import com.techtrade.rads.framework.annotations.RadsPropertySet;
+import com.techtrade.rads.framework.utils.Utils;
 
 public class CorpSalesPeriodLine extends CRMBusinessModelObject {
 	String period;
@@ -90,5 +91,13 @@ public class CorpSalesPeriodLine extends CRMBusinessModelObject {
 	}
 	
 	
+	@Override
+	@RadsPropertySet(excludeFromJSON=true,excludeFromMap=true,excludeFromXML=true)
+	public boolean isNullContent() {
+		if ((item == null || item.isNullContent()) && lineTotal <=0  && Utils.isNullString(comments) )
+			return true;
+		else
+			return false;
+	}
 
 }

@@ -78,7 +78,7 @@ public class CorpSalesPeriodAnalyzerController  extends CRMGeneralController{
 					//actualSales.setText(periodLine.getItem().getName());
 					int soldQty = salesService.getItemSaleQuantity(
 							periodLine.getItem(), corpSalesPeriod.getFromDate(),
-							corpSalesPeriod.getToDate(), corpSalesPeriod.getDivision());
+							corpSalesPeriod.getToDate(), null);
 					actualSales.setValue(soldQty);
 					if (soldQty > maxY) {
 						maxY = soldQty;
@@ -116,7 +116,7 @@ public class CorpSalesPeriodAnalyzerController  extends CRMGeneralController{
 					//actualSales.setText(periodLine.getTerritory().getTerritory());
 					int soldQty = salesService.getBrandSaleQuantity(
 							periodLine.getBrand().getId(), corpSalesPeriod.getFromDate(),
-							corpSalesPeriod.getToDate(), corpSalesPeriod.getDivision());
+							corpSalesPeriod.getToDate(), null);
 					actualSales.setValue(soldQty);
 					if (soldQty > maxY) {
 						maxY = soldQty;
@@ -154,7 +154,7 @@ public class CorpSalesPeriodAnalyzerController  extends CRMGeneralController{
 					//actualSales.setText(periodLine.getTerritory().getTerritory());
 					int soldQty = salesService.getCategorySaleQuantity(
 							periodLine.getCategory().getId(), corpSalesPeriod.getFromDate(),
-							corpSalesPeriod.getToDate(), corpSalesPeriod.getDivision());
+							corpSalesPeriod.getToDate(), null);
 					actualSales.setValue(soldQty);
 					if (soldQty > maxY) {
 						maxY = soldQty;
@@ -192,7 +192,7 @@ public class CorpSalesPeriodAnalyzerController  extends CRMGeneralController{
 					//actualSales.setText(periodLine.getTerritory().getTerritory());
 					int soldQty = salesService.getProductSaleQuantity(
 							periodLine.getProduct().getId(), corpSalesPeriod.getFromDate(),
-							corpSalesPeriod.getToDate(), corpSalesPeriod.getDivision());
+							corpSalesPeriod.getToDate(), null);
 					actualSales.setValue(soldQty);
 					if (soldQty > maxY) {
 						maxY = soldQty;

@@ -5,6 +5,7 @@ import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.finitevalue.FiniteValueManager;
 import com.rainbow.crm.company.model.Company;
 import com.techtrade.rads.framework.annotations.RadsPropertySet;
+import com.techtrade.rads.framework.utils.Utils;
 
 public class Brand extends CRMBusinessModelObject {
 
@@ -34,8 +35,14 @@ public class Brand extends CRMBusinessModelObject {
 		this.description = description;
 	}
 	
-	
-	
+	@Override
+	@RadsPropertySet(excludeFromJSON=true,excludeFromMap=true,excludeFromXML=true)
+	public boolean isNullContent() {
+		if( id <= 0 && Utils.isNullString(name))
+			return true ;
+		else
+			return false;
+	}
 	
 	
 }

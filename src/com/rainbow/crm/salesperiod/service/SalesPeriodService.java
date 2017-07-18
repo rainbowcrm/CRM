@@ -22,6 +22,12 @@ import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.common.messaging.CRMMessageSender;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
+import com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriod;
+import com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriodBrand;
+import com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriodCategory;
+import com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriodDivision;
+import com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriodLine;
+import com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriodProduct;
 import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.division.service.IDivisionService;
@@ -82,7 +88,10 @@ public class SalesPeriodService extends AbstractionTransactionService implements
 		Company company = (Company)compService.getById(context.getLoggedinCompany());
 		((SalesPeriod)object).setCompany(company);
 		SalesPeriodValidator validator = new SalesPeriodValidator(context);
-		return validator.validateforCreate(object);
+		List<RadsError> errors = validator.validateforCreate(object);
+		if(Utils.isNullList(errors) &&  errors.size() >1 )
+			addBlankRowBack((SalesPeriod) object);
+		return errors;
 	}
 
 	@Override
@@ -92,7 +101,10 @@ public class SalesPeriodService extends AbstractionTransactionService implements
 		Company company = (Company)compService.getById(context.getLoggedinCompany());
 		((SalesPeriod)object).setCompany(company);
 		SalesPeriodValidator validator = new SalesPeriodValidator(context);
-		return validator.validateforUpdate(object);
+		List<RadsError> errors = validator.validateforUpdate(object);
+		if(Utils.isNullList(errors) &&  errors.size() >1 )
+			addBlankRowBack((SalesPeriod) object);
+		return errors;
 	}
 
 	@Override
@@ -112,7 +124,7 @@ public class SalesPeriodService extends AbstractionTransactionService implements
 		ICompanyService compService = (ICompanyService) SpringObjectFactory.INSTANCE.getInstance("ICompanyService");
 		Company company = (Company)compService.getById(context.getLoggedinCompany());
 		object.setCompany(company);
-				
+		exlcudeBlankRows(object);
 		List<RadsError> ans = new ArrayList<RadsError>();
 		if (object.getDivision() != null) {
 			int divisionId  = object.getDivision().getId() ;
@@ -227,9 +239,108 @@ public class SalesPeriodService extends AbstractionTransactionService implements
 			}
 		}
 		
+		if(ans.size() > 0 )
+			addBlankRowBack(object);
 		return ans;
 	}
 
+	private void addBlankRowBack(SalesPeriod salesPeriod)
+	{
+		if(Utils.isNullSet(salesPeriod.getSalesPeriodLines())){
+			salesPeriod.addSalesPeriodLine(new SalesPeriodLine());
+		}
+		if(Utils.isNullSet(salesPeriod.getSalesPeriodCategories())){
+			salesPeriod.addSalePeriodCategory(new SalesPeriodCategory()); 
+		}
+		if(Utils.isNullSet(salesPeriod.getSalesPeriodAssociates())){
+			salesPeriod.addSalesPeriodAssociate(new SalesPeriodAssociate());
+		}
+		if(Utils.isNullSet(salesPeriod.getSalesPeriodTerritories())){
+			salesPeriod.addSalesPeriodTerritory(new SalesPeriodTerritory());
+		}
+		if(Utils.isNullSet(salesPeriod.getSalesPeriodProducts())){
+			salesPeriod.addSalePeriodProduct(new SalesPeriodProduct());
+		}
+		if(Utils.isNullSet(salesPeriod.getSalesPeriodBrands())){
+			salesPeriod.addSalePeriodBrand(new SalesPeriodBrand());
+		}
+	}
+	
+	private void exlcudeBlankRows(SalesPeriod salesPeriod)
+	{
+		Double maxSum = 0d;
+		if(!Utils.isNullSet(salesPeriod.getSalesPeriodLines())){
+			Double currentSum = 0d ;
+			for (SalesPeriodLine line: salesPeriod.getSalesPeriodLines()) {
+				if(line.isNullContent()) {
+					salesPeriod.getSalesPeriodLines().remove(line);
+				}else
+					currentSum += line.getLineTotal();
+			}
+			if(currentSum > maxSum)
+				maxSum = currentSum;
+		}
+		if(!Utils.isNullSet(salesPeriod.getSalesPeriodAssociates())){
+			Double currentSum = 0d ;
+			for (SalesPeriodAssociate line: salesPeriod.getSalesPeriodAssociates()) {
+				if(line.isNullContent()) {
+					salesPeriod.getSalesPeriodAssociates().remove(line);
+				}else
+					currentSum += line.getLineTotal();
+			}
+			if(currentSum > maxSum)
+				maxSum = currentSum;
+		}
+		if(!Utils.isNullSet(salesPeriod.getSalesPeriodTerritories())){
+			Double currentSum = 0d ;
+			for (SalesPeriodTerritory line: salesPeriod.getSalesPeriodTerritories()) {
+				if(line.isNullContent()) {
+					salesPeriod.getSalesPeriodTerritories().remove(line);
+				}else
+					currentSum += line.getLineTotal();
+			}
+			if(currentSum > maxSum)
+				maxSum = currentSum;
+		}
+		if(!Utils.isNullSet(salesPeriod.getSalesPeriodBrands())){
+			Double currentSum = 0d ;
+			for (SalesPeriodBrand line: salesPeriod.getSalesPeriodBrands()) {
+				if(line.isNullContent()) {
+					salesPeriod.getSalesPeriodBrands().remove(line);
+				}else
+					currentSum += line.getLineTotal();
+			}
+			if(currentSum > maxSum)
+				maxSum = currentSum;
+		}
+		if(!Utils.isNullSet(salesPeriod.getSalesPeriodCategories())){
+			Double currentSum = 0d ;
+			for (SalesPeriodCategory line: salesPeriod.getSalesPeriodCategories()) {
+				if(line.isNullContent()) {
+					salesPeriod.getSalesPeriodCategories().remove(line);
+				}else
+					currentSum += line.getLineTotal();
+			}
+			if(currentSum > maxSum)
+				maxSum = currentSum;
+		}
+		if(!Utils.isNullSet(salesPeriod.getSalesPeriodProducts())){
+			Double currentSum = 0d ;
+			for (SalesPeriodProduct line: salesPeriod.getSalesPeriodProducts()) {
+				if(line.isNullContent()) {
+					salesPeriod.getSalesPeriodProducts().remove(line);
+				}else
+					currentSum += line.getLineTotal();
+			}
+			if(currentSum > maxSum)
+				maxSum = currentSum;
+		}
+		salesPeriod.setTotalTarget(maxSum + salesPeriod.getAdditionalTarget());
+
+	}
+
+	
+	
 	@Override
 	public TransactionResult create(CRMModelObject object, CRMContext context) {
 		SalesPeriod salesPeriod = (SalesPeriod)object ;

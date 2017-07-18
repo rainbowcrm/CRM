@@ -3,6 +3,7 @@ package com.rainbow.crm.salesperiod.model;
 import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
 import com.rainbow.crm.user.model.User;
 import com.techtrade.rads.framework.annotations.RadsPropertySet;
+import com.techtrade.rads.framework.utils.Utils;
 
 public class SalesPeriodAssociate extends CRMBusinessModelObject {
 	String period;
@@ -84,6 +85,15 @@ public class SalesPeriodAssociate extends CRMBusinessModelObject {
 
 	public void setLineTotal(double lineTotal) {
 		this.lineTotal = lineTotal;
+	}
+	
+	@Override
+	@RadsPropertySet(excludeFromJSON=true,excludeFromMap=true,excludeFromXML=true)
+	public boolean isNullContent() {
+		if ((user == null || user.isNullContent()) && lineTotal <=0  && Utils.isNullString(comments) )
+			return true;
+		else
+			return false;
 	}
 
 }

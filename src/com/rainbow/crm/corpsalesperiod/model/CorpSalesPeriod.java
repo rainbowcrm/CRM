@@ -42,6 +42,13 @@ public class CorpSalesPeriod extends CRMBusinessModelObject{
 			Set<CorpSalesPeriodDivision> corpSalesPeriodDivisions) {
 		this.corpSalesPeriodDivisions = corpSalesPeriodDivisions;
 	}
+	
+	public void addCorpSalesPeriodDivision(CorpSalesPeriodDivision corpSalesPeriodDivision) {
+		if (corpSalesPeriodDivisions == null )
+			corpSalesPeriodDivisions = new LinkedHashSet <CorpSalesPeriodDivision> ();
+		this.corpSalesPeriodDivisions.add(corpSalesPeriodDivision);
+	}
+	
 	public Set<CorpSalesPeriodBrand> getCorpSalesPeriodBrands() {
 		return corpSalesPeriodBrands;
 	}
@@ -50,7 +57,7 @@ public class CorpSalesPeriod extends CRMBusinessModelObject{
 	}
 	
 	
-	public void addSalePeriodCategory(CorpSalesPeriodCategory corpSalesPeriodCategory)
+	public void addCorpSalesPeriodCategory(CorpSalesPeriodCategory corpSalesPeriodCategory)
 	{
 		if (corpSalesPeriodCategories == null )
 			corpSalesPeriodCategories = new LinkedHashSet <CorpSalesPeriodCategory> ();
@@ -58,7 +65,7 @@ public class CorpSalesPeriod extends CRMBusinessModelObject{
 		
 	}
 	
-	public void addSalePeriodBrand(CorpSalesPeriodBrand corpSalesPeriodBrand)
+	public void addCorpSalesPeriodBrand(CorpSalesPeriodBrand corpSalesPeriodBrand)
 	{
 		if (corpSalesPeriodBrands == null )
 			corpSalesPeriodBrands = new LinkedHashSet <CorpSalesPeriodBrand> ();
@@ -66,7 +73,7 @@ public class CorpSalesPeriod extends CRMBusinessModelObject{
 		
 	}
 	
-	public void addSalePeriodProduct(CorpSalesPeriodProduct corpSalesPeriodProduct)
+	public void addCorpSalesPeriodProduct(CorpSalesPeriodProduct corpSalesPeriodProduct)
 	{
 		if (corpSalesPeriodProducts == null )
 			corpSalesPeriodProducts = new LinkedHashSet <CorpSalesPeriodProduct> ();
@@ -81,6 +88,8 @@ public class CorpSalesPeriod extends CRMBusinessModelObject{
 			Set<CorpSalesPeriodCategory> corpSalesPeriodCategories) {
 		this.corpSalesPeriodCategories = corpSalesPeriodCategories;
 	}
+	
+	
 	public Set<CorpSalesPeriodProduct> getCorpSalesPeriodProducts() {
 		return corpSalesPeriodProducts;
 	}

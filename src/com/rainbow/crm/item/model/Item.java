@@ -5,6 +5,7 @@ import com.rainbow.crm.brand.model.Brand;
 import com.rainbow.crm.product.model.Product;
 import com.rainbow.crm.uom.model.UOM;
 import com.techtrade.rads.framework.annotations.RadsPropertySet;
+import com.techtrade.rads.framework.utils.Utils;
 
 public class Item extends CRMBusinessModelObject{
 	
@@ -153,6 +154,13 @@ public class Item extends CRMBusinessModelObject{
 		this.itemClassDesc = itemClassDesc;
 	} 
 
-	
+	@Override
+	@RadsPropertySet(excludeFromJSON=true,excludeFromMap=true,excludeFromXML=true)
+	public boolean isNullContent() {
+		if( id <= 0 && Utils.isNullString(name))
+			return true ;
+		else
+			return false;
+	}
 	
 }
