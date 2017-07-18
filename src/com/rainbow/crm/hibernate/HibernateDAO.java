@@ -21,6 +21,7 @@ import com.rainbow.crm.contact.model.Contact;
 import com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriod;
 import com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriodBrand;
 import com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriodCategory;
+import com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriodDivision;
 import com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriodLine;
 import com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriodProduct;
 import com.rainbow.crm.custcategory.model.CustCategory;
@@ -127,6 +128,7 @@ public  abstract class HibernateDAO  extends ORMDAO{
     		configuration.addClass(QueryCondition.class).addResource("com/rainbow/framework/query/model/QueryCondition.hbm.xml");
     		configuration.addClass(CorpSalesPeriod.class).addResource("com/rainbow/crm/corpsalesperiod/model/CorpSalesPeriod.hbm.xml");
     		configuration.addClass(CorpSalesPeriodLine.class).addResource("com/rainbow/crm/corpsalesperiod/model/CorpSalesPeriodLine.hbm.xml");
+    		configuration.addClass(CorpSalesPeriodDivision.class).addResource("com/rainbow/crm/corpsalesperiod/model/CorpSalesPeriodDivision.hbm.xml");
     		configuration.addClass(CorpSalesPeriodBrand.class).addResource("com/rainbow/crm/corpsalesperiod/model/CorpSalesPeriodBrand.hbm.xml");
     		configuration.addClass(CorpSalesPeriodCategory.class).addResource("com/rainbow/crm/corpsalesperiod/model/CorpSalesPeriodCategory.hbm.xml");
     		configuration.addClass(CorpSalesPeriodProduct.class).addResource("com/rainbow/crm/corpsalesperiod/model/CorpSalesPeriodProduct.hbm.xml");

@@ -80,7 +80,7 @@ public class LoginSQLs {
 			connection  = ConnectionCreater.getConnection() ;
 			deleteSessionforOtherUsers(session,user);
 			String sql = " UPDATE LOGIN_RECORDS SET TOKEN_ID = ? ,  SESSION_ID = ? , LOGGED_IN_TIME = ? , "  + 
-			" LOGGED_OFF_TIME = null, EXPIRED_TIME = null  WHERE USER_ID = ? " ;
+			" LOGGED_OFF_TIME = null, EXPIRED_TIME = null, IS_MOBILE_LOGIN=false  WHERE USER_ID = ? " ;
 			statement = connection.prepareStatement(sql) ;
 			statement.setString(1,session);
 			statement.setString(2,session);
@@ -144,7 +144,7 @@ public class LoginSQLs {
 		ResultSet rs  = null ;
 		try {
 			connection  = ConnectionCreater.getConnection() ;
-			String sql =   "SELECT TOKEN_ID,LOGGED_IN_TIME,USERS.USER_ID,COMPANIES.ID,COMPANIES.COMPANY_CODE FROM LOGIN_RECORDS,USERS, COMPANIES  where LOGIN_RECORDS.USER_ID = USERS.USER_ID  " +
+			String sql =   "SELECT TOKEN_ID,LOGGED_IN_TIME,USERS.USER_ID,COMPANIES.ID,COMPANIES.COMPANY_CODE,LOGIN_RECORDS.IS_MOBILE_LOGIN FROM LOGIN_RECORDS,USERS, COMPANIES  where LOGIN_RECORDS.USER_ID = USERS.USER_ID  " +
 			" AND USERS.COMPANY_ID = COMPANIES.ID  AND " +  
 			" SESSION_ID = ? AND  (EXPIRED_TIME is null && LOGGED_OFF_TIME is null) " ;
 			statement = connection.prepareStatement(sql);
@@ -158,6 +158,7 @@ public class LoginSQLs {
 				context.setUser(rs.getString("USER_ID"));
 				context.setLoggedinCompany(rs.getInt("COMPANIES.ID"));
 				context.setLoggedinCompanyCode(rs.getString("COMPANIES.COMPANY_CODE"));
+				context.setMobileLogin(rs.getBoolean("LOGIN_RECORDS.IS_MOBILE_LOGIN"));
 				return context;
 			}else
 				return null; 

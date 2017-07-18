@@ -7,6 +7,7 @@ import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriod;
 import com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriodBrand;
 import com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriodCategory;
+import com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriodDivision;
 import com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriodLine;
 import com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriodProduct;
 import com.rainbow.crm.corpsalesperiod.service.ICorpSalesPeriodService;
@@ -68,9 +69,7 @@ public class CorpSalesPeriodValidator extends CRMValidator {
 			}
 			}
 		}
-		
-		
-		
+
 		if(!Utils.isNullSet(corpSalesPeriod.getCorpSalesPeriodBrands())){
 			for (CorpSalesPeriodBrand line: corpSalesPeriod.getCorpSalesPeriodBrands()) {
 				if (line.getBrand() == null ) {
@@ -79,6 +78,18 @@ public class CorpSalesPeriodValidator extends CRMValidator {
 					errors.add(getErrorforCode(CommonErrorCodes.OBJECT_DELETED,externalize.externalize(context, "Brand") + line.getBrand().getName())) ;
 				}else if (line.getLineTotal() <=0 ) {
 					errors.add(getErrorforCode(CommonErrorCodes.SHOULD_BE_GREATER_THAN,externalize.externalize(context, "Total") + line.getBrand().getName(),"0") ) ;
+				}
+			}
+		}
+		
+		if(!Utils.isNullSet(corpSalesPeriod.getCorpSalesPeriodDivisions())){
+			for (CorpSalesPeriodDivision line: corpSalesPeriod.getCorpSalesPeriodDivisions()) {
+				if (line.getDivision() == null ) {
+					errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Division"))) ;
+				}else if (line.getDivision().isDeleted() ) {
+					errors.add(getErrorforCode(CommonErrorCodes.OBJECT_DELETED,externalize.externalize(context, "Division") + line.getDivision().getName())) ;
+				}else if (line.getLineTotal() <=0 ) {
+					errors.add(getErrorforCode(CommonErrorCodes.SHOULD_BE_GREATER_THAN,externalize.externalize(context, "Total") + line.getDivision().getName(),"0") ) ;
 				}
 			}
 		}

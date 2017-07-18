@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.database.LoginSQLs;
 import com.rainbow.crm.filter.dao.CRMFilterDAO;
@@ -35,16 +36,27 @@ public class FilterAjaxService implements IAjaxLookupService{
 			filter =(CRMFilter) CRMFilterDAO.INSTANCE.findByKey(ctx.getUser(), page, filterName);
 		}
 		AtomicInteger index = new AtomicInteger(0);
-		if (filter != null ) {
+		CRMContext context = (CRMContext) ctx;
+			if (context.isMobileLogin()) {
+				if (filter != null) {
 
-			for (CRMFilterDetails det : filter.getDetails()) {
-				JSONObject filtJSON = new JSONObject();
-				filtJSON.put("field", det.getField());
-				filtJSON.put("value", det.getValue());
-				array.put(index.getAndIncrement(),filtJSON);
+					for (CRMFilterDetails det : filter.getDetails()) {
+						JSONObject filtJSON = new JSONObject();
+						filtJSON.put("field", det.getField());
+						filtJSON.put("value", det.getValue());
+						array.put(index.getAndIncrement(), filtJSON);
+					}
+				}
+				json.put("filter", array);
+			} else {
+				if (filter != null) {
+					json.put("FilterName", filter.getName());
+					for (CRMFilterDetails det : filter.getDetails()) {
+						json.put(det.getField(), det.getValue());
+					}
+				}
 			}
-		}
-		json.put("filter", array);
+		
 		}catch(Exception ex) {
 			Logwriter.INSTANCE.error(ex);
 		}

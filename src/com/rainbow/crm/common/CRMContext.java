@@ -164,12 +164,15 @@ public class CRMContext implements IRadsContext,Serializable{
 	public void setAuthorized(boolean authorized) {
 		this.authorized = authorized;
 	}
-	
-	
-	
-	
-	
-	
+
+	public boolean isMobileLogin() {
+		return mobileLogin;
+	}
+
+	public void setMobileLogin(boolean mobileLogin) {
+		this.mobileLogin = mobileLogin;
+	}
+
 	
 	
 

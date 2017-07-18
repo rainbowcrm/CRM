@@ -15,7 +15,6 @@ import com.techtrade.rads.framework.annotations.RadsPropertySet;
 
 public class CorpSalesPeriod extends CRMBusinessModelObject{
 
-	Division division;
 	String period;
 	String description;
 	Date fromDate ;
@@ -26,7 +25,7 @@ public class CorpSalesPeriod extends CRMBusinessModelObject{
 	boolean startAlerted;
 	boolean endAlerted;
 	Set<CorpSalesPeriodLine> corpSalesPeriodLines;
-
+	Set<CorpSalesPeriodDivision> corpSalesPeriodDivisions;
 	Set<CorpSalesPeriodBrand> corpSalesPeriodBrands;
 	Set<CorpSalesPeriodCategory> corpSalesPeriodCategories;
 	Set<CorpSalesPeriodProduct> corpSalesPeriodProducts;
@@ -34,6 +33,15 @@ public class CorpSalesPeriod extends CRMBusinessModelObject{
 	
 	
 	
+	
+	
+	public Set<CorpSalesPeriodDivision> getCorpSalesPeriodDivisions() {
+		return corpSalesPeriodDivisions;
+	}
+	public void setCorpSalesPeriodDivisions(
+			Set<CorpSalesPeriodDivision> corpSalesPeriodDivisions) {
+		this.corpSalesPeriodDivisions = corpSalesPeriodDivisions;
+	}
 	public Set<CorpSalesPeriodBrand> getCorpSalesPeriodBrands() {
 		return corpSalesPeriodBrands;
 	}
@@ -79,14 +87,7 @@ public class CorpSalesPeriod extends CRMBusinessModelObject{
 	public void setCorpSalesPeriodProducts(Set<CorpSalesPeriodProduct> corpSalesPeriodProducts) {
 		this.corpSalesPeriodProducts = corpSalesPeriodProducts;
 	}
-	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
-	public Division getDivision() {
-		return division;
-	}
-	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
-	public void setDivision(Division division) {
-		this.division = division;
-	}
+	
 	
 	@RadsPropertySet(isBK=true)
 	public String getPeriod() {

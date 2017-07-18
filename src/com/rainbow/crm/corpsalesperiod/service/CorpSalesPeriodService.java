@@ -17,6 +17,7 @@ import com.rainbow.crm.common.AbstractionTransactionService;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMDBException;
 import com.rainbow.crm.common.CRMValidator;
+import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.Externalize;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.common.messaging.CRMMessageSender;
@@ -37,6 +38,7 @@ import com.rainbow.crm.corpsalesperiod.dao.CorpSalesPeriodDAO;
 import com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriod;
 import com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriodBrand;
 import com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriodCategory;
+import com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriodDivision;
 import com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriodLine;
 import com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriodProduct;
 import com.rainbow.crm.corpsalesperiod.validator.CorpSalesPeriodErrorCodes;
@@ -112,20 +114,7 @@ public class CorpSalesPeriodService extends AbstractionTransactionService implem
 		object.setCompany(company);
 				
 		List<RadsError> ans = new ArrayList<RadsError>();
-		if (object.getDivision() != null) {
-			int divisionId  = object.getDivision().getId() ;
-			IDivisionService divisionService =(IDivisionService) SpringObjectFactory.INSTANCE.getInstance("IDivisionService");
-			Division division = null;
-			if (divisionId > 0 )
-				division = (Division)divisionService.getById(divisionId);
-			else
-				division  = (Division)divisionService.getByBusinessKey(object.getDivision(), context);
-			if(division == null){
-				ans.add(CRMValidator.getErrorforCode(context.getLocale(), CorpSalesPeriodErrorCodes.FIELD_NOT_VALID , "Division"));
-			}else {
-				object.setDivision(division);
-			}
-		}
+		
 		Externalize externalize = new Externalize(); ;
 		
 		if(!Utils.isNullSet(object.getCorpSalesPeriodLines())){
@@ -178,6 +167,36 @@ public class CorpSalesPeriodService extends AbstractionTransactionService implem
 			}
 		}
 		
+		if(!Utils.isNullSet(object.getCorpSalesPeriodDivisions())){
+			int lineNo=1;
+			for (CorpSalesPeriodDivision line: object.getCorpSalesPeriodDivisions()) {
+				line.setCompany(company);
+				line.setPeriod(object.getPeriod());
+				line.setLineNumber(lineNo ++);
+				if(line.getDivision() == null ) {
+					ans.add(CRMValidator.getErrorforCode(context.getLocale(), CorpSalesPeriodErrorCodes.FIELD_NOT_VALID , externalize.externalize(context, "Division")));
+				}else {
+					Division client = CommonUtil.getDivisionObect(context, line.getDivision());
+					line.setDivision(client);
+				}
+			}
+		}
+		
+		if(!Utils.isNullSet(object.getCorpSalesPeriodBrands())){
+			int lineNo=1;
+			for (CorpSalesPeriodBrand line: object.getCorpSalesPeriodBrands()) {
+				line.setCompany(company);
+				line.setPeriod(object.getPeriod());
+				line.setLineNumber(lineNo ++);
+				if(line.getBrand() == null ) {
+					ans.add(CRMValidator.getErrorforCode(context.getLocale(), CorpSalesPeriodErrorCodes.FIELD_NOT_VALID , externalize.externalize(context, "Brand")));
+				}else {
+					IBrandService clientService = (IBrandService)SpringObjectFactory.INSTANCE.getInstance("IBrandService");
+					Brand client  = (Brand)clientService.getByName(context.getLoggedinCompany(), line.getBrand().getName());
+					line.setBrand(client);
+				}
+			}
+		}
 		if(!Utils.isNullSet(object.getCorpSalesPeriodProducts())){
 			int lineNo=1;
 			for (CorpSalesPeriodProduct line: object.getCorpSalesPeriodProducts()) {

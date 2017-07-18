@@ -34,10 +34,17 @@
      	 <key column="CORP_SALES_PERIOD_ID"></key>
       <one-to-many class="com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriodBrand"/>
       </set>
-       <set   name="corpSalesPeriodCategories" cascade="all" inverse="true" lazy="false"  order-by="lineNumber" >
+      
+      <set  name="corpSalesPeriodDivisions" cascade="all" inverse="true" lazy="false"  order-by="lineNumber" >
+     	 <key column="CORP_SALES_PERIOD_ID"></key>
+      <one-to-many class="com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriodDivision"/>
+      </set>
+      
+      <set   name="corpSalesPeriodCategories" cascade="all" inverse="true" lazy="false"  order-by="lineNumber" >
      	 <key column="CORP_SALES_PERIOD_ID"></key>
       <one-to-many class="com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriodCategory"/>
       </set>
+      
       <set   name="corpSalesPeriodProducts" cascade="all" inverse="true" lazy="false"  order-by="lineNumber" >
      	 <key column="CORP_SALES_PERIOD_ID"></key>
       <one-to-many class="com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriodProduct"/>

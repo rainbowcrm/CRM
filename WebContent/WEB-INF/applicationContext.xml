@@ -277,6 +277,7 @@
         <value>com/rainbow/crm/feedback/model/FeedBackLine.hbm.xml</value>
         <value>com/rainbow/crm/corpsalesperiod/model/CorpSalesPeriod.hbm.xml</value>
         <value>com/rainbow/crm/corpsalesperiod/model/CorpSalesPeriodLine.hbm.xml</value>
+        <value>com/rainbow/crm/corpsalesperiod/model/CorpSalesPeriodDivision.hbm.xml</value>
         <value>com/rainbow/crm/corpsalesperiod/model/CorpSalesPeriodBrand.hbm.xml</value>
         <value>com/rainbow/crm/corpsalesperiod/model/CorpSalesPeriodCategory.hbm.xml</value>
         <value>com/rainbow/crm/corpsalesperiod/model/CorpSalesPeriodProduct.hbm.xml</value>
