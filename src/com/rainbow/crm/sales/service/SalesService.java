@@ -452,7 +452,7 @@ public class SalesService extends AbstractionTransactionService implements ISale
 
 	@Override
 	public int getItemSaleQuantity(Item item, Date from, Date to,Division division) {
-		return GeneralSQLs.getItemSoldQty(item.getId(),from,to,division.getId());
+		return GeneralSQLs.getItemSoldQty(item.getId(),from,to,(division!=null)?division.getId():-1);
 	}
 	
 	
@@ -487,21 +487,29 @@ public class SalesService extends AbstractionTransactionService implements ISale
 	public int getBrandSaleQuantity(int brandId, Date from, Date to,
 			Division division) {
 		// TODO Auto-generated method stub
-		return GeneralSQLs.getBrandSoldQty(brandId, from, to, division.getId());
+		return GeneralSQLs.getBrandSoldQty(brandId, from, to, (division!=null)?division.getId():-1);
 	}
 
 	@Override
 	public int getProductSaleQuantity(int productId, Date from, Date to,
 			Division division) {
 		// TODO Auto-generated method stub
-		return GeneralSQLs.getProductSoldQty(productId, from, to, division.getId());
+		return GeneralSQLs.getProductSoldQty(productId, from, to, (division!=null)?division.getId():-1);
+	}
+
+	
+	
+	@Override
+	public int getDivisionSaleQuantity(Date from, Date to, Division division) {
+		// TODO Auto-generated method stub
+		return GeneralSQLs.getDivisionSoldQty(from, to, (division!=null)?division.getId():-1);
 	}
 
 	@Override
 	public int getCategorySaleQuantity(int categoryId, Date from, Date to,
 			Division division) {
 		// TODO Auto-generated method stub
-		return GeneralSQLs.getCategorySoldQty(categoryId, from, to, division.getId());
+		return GeneralSQLs.getCategorySoldQty(categoryId, from, to, (division!=null)?division.getId():-1);
 	}
 
 	@Override

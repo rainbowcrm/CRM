@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.rainbow.crm.common.finitevalue.FiniteValue;
+import com.rainbow.crm.division.service.DivisionService;
 import com.rainbow.crm.logger.Logwriter;
 import com.techtrade.rads.framework.utils.Utils;
 
@@ -263,13 +264,15 @@ public class GeneralSQLs {
 		Map<String,String> ans = new HashMap<String,String>();
 		try {
 			connection  = ConnectionCreater.getConnection() ;
-			String sql = "Select sum(sllines.qty) from SALES sales,SALES_LINES sllines,SKUS skus  where sales.id = sllines.sales_id and sales.division_id = ?  " +
-			" and  sllines.sku_id = skus.id and sales.SALES_DATE >= ? and sales.SALES_DATE<= ?  and skus.item_id = ?  " ;
+			String divisionSQL = (divisionId>-1)?"and sales.division_id = ?":"" ;
+			String sql = "Select sum(sllines.qty) from SALES sales,SALES_LINES sllines,SKUS skus  where sales.id = sllines.sales_id   " +
+			" and  sllines.sku_id = skus.id and sales.SALES_DATE >= ? and sales.SALES_DATE<= ?  and skus.item_id = ?  " + divisionSQL ;
 			statement = connection.prepareStatement(sql);
-			statement.setInt(1, divisionId);
-			statement.setTimestamp(2, new java.sql.Timestamp(fromDate.getTime()));
-			statement.setTimestamp(3, new java.sql.Timestamp(toDate.getTime()));
-			statement.setInt(4, itemId);
+			statement.setTimestamp(1, new java.sql.Timestamp(fromDate.getTime()));
+			statement.setTimestamp(2, new java.sql.Timestamp(toDate.getTime()));
+			statement.setInt(3, itemId);
+			if( divisionId > -1)
+				statement.setInt(4, divisionId);
 			rs = statement.executeQuery() ;
 			if (rs.next()) {
 				return rs.getInt(1);
@@ -290,12 +293,14 @@ public class GeneralSQLs {
 		Map<String,String> ans = new HashMap<String,String>();
 		try {
 			connection  = ConnectionCreater.getConnection() ;
-			String sql = "Select sum(sllines.LINE_TOTAL) from SALES sales,SALES_LINES sllines,SKUS skus  where sales.id = sllines.sales_id and sales.division_id = ?  " +
-			" and  sllines.sku_id = skus.id and sales.SALES_DATE >= ? and sales.SALES_DATE<= ?   " ;
+			String divisionSQL = (divisionId>-1)?"and sales.division_id = ?":"" ;
+			String sql = "Select sum(sllines.LINE_TOTAL) from SALES sales,SALES_LINES sllines,SKUS skus  where sales.id = sllines.sales_id  " +
+			" and  sllines.sku_id = skus.id and sales.SALES_DATE >= ? and sales.SALES_DATE<= ?  " + divisionSQL ;
 			statement = connection.prepareStatement(sql);
-			statement.setInt(1, divisionId);
-			statement.setTimestamp(2, new java.sql.Timestamp(fromDate.getTime()));
-			statement.setTimestamp(3, new java.sql.Timestamp(toDate.getTime()));
+			statement.setTimestamp(1, new java.sql.Timestamp(fromDate.getTime()));
+			statement.setTimestamp(2, new java.sql.Timestamp(toDate.getTime()));
+			if( divisionId > -1)
+				statement.setInt(4, divisionId);
 			rs = statement.executeQuery() ;
 			if (rs.next()) {
 				return rs.getInt(1);
@@ -343,14 +348,47 @@ public class GeneralSQLs {
 		ResultSet rs  = null ;
 		Map<String,String> ans = new HashMap<String,String>();
 		try {
+			String divisionSQL = (divisionId>-1)?"and sales.division_id = ?":"" ;
 			connection  = ConnectionCreater.getConnection() ;
-			String sql = "Select sum(sllines.LINE_TOTAL) from SALES sales,SALES_LINES sllines,SKUS skus,items,products  where sales.id = sllines.sales_id and sales.division_id = ?  " +
-			" and skus.item_id = items.id and items.product_id = products.id and sllines.sku_id = skus.id and sales.SALES_DATE >= ? and sales.SALES_DATE<= ?  and products.category_id = ?  " ;
+			String sql = "Select sum(sllines.LINE_TOTAL) from SALES sales,SALES_LINES sllines,SKUS skus,items,products  where sales.id = sllines.sales_id   " +
+			" and skus.item_id = items.id and items.product_id = products.id and sllines.sku_id = skus.id and sales.SALES_DATE >= ? and sales.SALES_DATE<= ?  and products.category_id = ?  " 
+					 + divisionSQL;
 			statement = connection.prepareStatement(sql);
-			statement.setInt(1, divisionId);
-			statement.setTimestamp(2, new java.sql.Timestamp(fromDate.getTime()));
-			statement.setTimestamp(3, new java.sql.Timestamp(toDate.getTime()));
-			statement.setInt(4, categoryId);
+			
+			statement.setTimestamp(1, new java.sql.Timestamp(fromDate.getTime()));
+			statement.setTimestamp(2, new java.sql.Timestamp(toDate.getTime()));
+			statement.setInt(3, categoryId);
+			if( divisionId > -1)
+				statement.setInt(4, divisionId);
+			rs = statement.executeQuery() ;
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
+		}catch(SQLException ex) {
+			Logwriter.INSTANCE.error(ex);
+		}finally {
+			ConnectionCreater.close(connection, statement, rs);	
+		}
+		return 0;
+		
+   }
+   
+   public static int getDivisionSoldQty( Date fromDate , Date toDate , int divisionId) {
+	   Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet rs  = null ;
+		Map<String,String> ans = new HashMap<String,String>();
+		try {
+			String divisionSQL =  " and sales.division_id = ?";
+			connection  = ConnectionCreater.getConnection() ;
+			String sql = "Select sum(sllines.LINE_TOTAL) from SALES sales,SALES_LINES sllines,SKUS skus,items,products  where sales.id = sllines.sales_id   " +
+			" and skus.item_id = items.id and items.product_id = products.id and sllines.sku_id = skus.id and sales.SALES_DATE >= ? and sales.SALES_DATE<= ?    " 
+					 + divisionSQL;
+			statement = connection.prepareStatement(sql);
+			
+			statement.setTimestamp(1, new java.sql.Timestamp(fromDate.getTime()));
+			statement.setTimestamp(2, new java.sql.Timestamp(toDate.getTime()));
+			statement.setInt(3, divisionId);
 			rs = statement.executeQuery() ;
 			if (rs.next()) {
 				return rs.getInt(1);
@@ -370,14 +408,17 @@ public class GeneralSQLs {
 		ResultSet rs  = null ;
 		Map<String,String> ans = new HashMap<String,String>();
 		try {
+			String divisionSQL = (divisionId>-1)?"and sales.division_id = ?":"" ;
 			connection  = ConnectionCreater.getConnection() ;
-			String sql = "Select sum(sllines.LINE_TOTAL) from SALES sales,SALES_LINES sllines,SKUS skus,items  where sales.id = sllines.sales_id and sales.division_id = ?  " +
-			" and skus.item_id = items.id and sllines.sku_id = skus.id and sales.SALES_DATE >= ? and sales.SALES_DATE<= ?  and items.product_id = ?  " ;
+			String sql = "Select sum(sllines.LINE_TOTAL) from SALES sales,SALES_LINES sllines,SKUS skus,items  where sales.id = sllines.sales_id   " +
+			" and skus.item_id = items.id and sllines.sku_id = skus.id and sales.SALES_DATE >= ? and sales.SALES_DATE<= ?  and items.product_id = ?  " + divisionSQL ;
 			statement = connection.prepareStatement(sql);
-			statement.setInt(1, divisionId);
-			statement.setTimestamp(2, new java.sql.Timestamp(fromDate.getTime()));
-			statement.setTimestamp(3, new java.sql.Timestamp(toDate.getTime()));
-			statement.setInt(4, productId);
+			
+			statement.setTimestamp(1, new java.sql.Timestamp(fromDate.getTime()));
+			statement.setTimestamp(2, new java.sql.Timestamp(toDate.getTime()));
+			statement.setInt(3, productId);
+			if( divisionId > -1)
+				statement.setInt(4, divisionId);
 			rs = statement.executeQuery() ;
 			if (rs.next()) {
 				return rs.getInt(1);
@@ -397,14 +438,18 @@ public class GeneralSQLs {
 		ResultSet rs  = null ;
 		Map<String,String> ans = new HashMap<String,String>();
 		try {
+			String divisionSQL = (divisionId>-1)?"and sales.division_id = ?":"" ;
 			connection  = ConnectionCreater.getConnection() ;
-			String sql = "Select sum(sllines.LINE_TOTAL) from SALES sales,SALES_LINES sllines,SKUS skus,items  where sales.id = sllines.sales_id and sales.division_id = ?  " +
-			" and skus.item_id = items.id and sllines.sku_id = skus.id and sales.SALES_DATE >= ? and sales.SALES_DATE<= ?  and items.brand_id = ?  " ;
+			String sql = "Select sum(sllines.LINE_TOTAL) from SALES sales,SALES_LINES sllines,SKUS skus,items  where sales.id = sllines.sales_id   " +
+			" and skus.item_id = items.id and sllines.sku_id = skus.id and sales.SALES_DATE >= ? and sales.SALES_DATE<= ?  and items.brand_id = ? "  + 
+					divisionSQL ;
 			statement = connection.prepareStatement(sql);
-			statement.setInt(1, divisionId);
-			statement.setTimestamp(2, new java.sql.Timestamp(fromDate.getTime()));
-			statement.setTimestamp(3, new java.sql.Timestamp(toDate.getTime()));
-			statement.setInt(4, brandId);
+			
+			statement.setTimestamp(1, new java.sql.Timestamp(fromDate.getTime()));
+			statement.setTimestamp(2, new java.sql.Timestamp(toDate.getTime()));
+			statement.setInt(3, brandId);
+			if( divisionId > -1)
+				statement.setInt(4, divisionId);
 			rs = statement.executeQuery() ;
 			if (rs.next()) {
 				return rs.getInt(1);

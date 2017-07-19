@@ -22,6 +22,7 @@ import com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriod;
 import com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriodAnalyzer;
 import com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriodBrand;
 import com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriodCategory;
+import com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriodDivision;
 import com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriodLine;
 import com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriodProduct;
 import com.rainbow.crm.corpsalesperiod.service.ICorpSalesPeriodService;
@@ -117,6 +118,44 @@ public class CorpSalesPeriodAnalyzerController  extends CRMGeneralController{
 					int soldQty = salesService.getBrandSaleQuantity(
 							periodLine.getBrand().getId(), corpSalesPeriod.getFromDate(),
 							corpSalesPeriod.getToDate(), null);
+					actualSales.setValue(soldQty);
+					if (soldQty > maxY) {
+						maxY = soldQty;
+					}
+					actualSales.setColor("red");
+					actualSales.setLegend("Actual");
+					divis.addBarData(actualSales);
+
+					barChartData.addDivision(divis);
+				}
+				BarChartData.Range range = barChartData.new Range();
+				range.setyMax(maxY);
+				range.setyMin(0);
+				barChartData.setRange(range);
+				analyzer.setSalesData(barChartData);
+			}else  if ("DIV".equalsIgnoreCase(analyzer.getBasedOn())) {
+				Set<CorpSalesPeriodDivision> divisions = corpSalesPeriod.getCorpSalesPeriodDivisions();
+				barChartData.setSubTitle("Division Wise");
+				int minY = 0, maxY = 0;
+				for (CorpSalesPeriodDivision periodLine : divisions) {
+					BarData barData = new BarData();
+					barData.setText(periodLine.getDivision().getName());
+					if (periodLine.getLineTotal() > maxY) {
+						maxY = (int)periodLine.getLineTotal();
+					}
+					barData.setValue(periodLine.getLineTotal());
+					barData.setColor("green");
+					barData.setTextColor("blue");
+					barData.setLegend("Target");
+					BarChartData.Division divis = barChartData.new Division();
+					divis.addBarData(barData);
+					divis.setDivisionTitle(periodLine.getDivision().getName());
+
+					BarData actualSales = new BarData();
+					//actualSales.setText(periodLine.getTerritory().getTerritory());
+					int soldQty = salesService.getDivisionSaleQuantity(
+							corpSalesPeriod.getFromDate(),
+							corpSalesPeriod.getToDate(), periodLine.getDivision());
 					actualSales.setValue(soldQty);
 					if (soldQty > maxY) {
 						maxY = soldQty;
