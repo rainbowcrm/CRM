@@ -9,6 +9,8 @@ import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
+import com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriod;
+import com.rainbow.crm.corpsalesperiod.service.ICorpSalesPeriodService;
 import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.sales.service.ISalesService;
 import com.rainbow.crm.salesperiod.model.SalesPeriod;
@@ -42,6 +44,12 @@ public class DashBoardService  implements IDashBoardService{
 			return salesPeriodService.getActiveSalesPeriodforDivision(associate.getDivision().getId(), date);
 		else
 			return salesPeriodService.getActiveSalesPeriodforDivision(CommonUtil.getDefaultDivision(context).getId(), date);
+	}
+	
+	private CorpSalesPeriod getActiveCorpSalesPeriodforManager(User associate, Date date,CRMContext context)
+	{
+		ICorpSalesPeriodService salesPeriodService = (ICorpSalesPeriodService)SpringObjectFactory.INSTANCE.getInstance("ICorpSalesPeriodService");
+		return salesPeriodService.getActiveCorpSalesPeriod(date);
 	}
 	
 	
@@ -324,12 +332,29 @@ public class DashBoardService  implements IDashBoardService{
 
 	@Override
 	public PieChartData getProductwiseSales(User manager, Date date,
-			CRMContext context) {
+			CRMContext context, boolean corproateAdmin) {
 		PieChartData pieChartData  = new PieChartData();
-		SalesPeriod currentPeriod = getActiveSalesPeriodforManager(manager,date,context);
-		if(currentPeriod == null) return null;
-		Map <String , Double > results = DashBoardSQLs.getProductWiseSale(currentPeriod.getDivision().getId(),  new java.sql.Date( currentPeriod.getFromDate().getTime()),
-				new java.sql.Date( currentPeriod.getToDate().getTime())) ;
+		int divisionId=  -1 ;
+		java.sql.Date fromDate = new java.sql.Date(new java.util.Date().getTime()) ;
+		java.sql.Date toDate = new java.sql.Date(new java.util.Date().getTime());
+		if (! corproateAdmin ) {
+			SalesPeriod currentPeriod = getActiveSalesPeriodforManager(manager,date,context);
+			if (currentPeriod == null )
+				return null;
+			
+			divisionId = currentPeriod.getDivision().getId();
+			fromDate = new java.sql.Date(currentPeriod.getFromDate().getTime());
+			toDate  = new java.sql.Date(currentPeriod.getToDate().getTime());
+		}else {
+			CorpSalesPeriod currentPeriod = getActiveCorpSalesPeriodforManager(manager, toDate, context);
+			if (currentPeriod == null )
+				return null;
+			
+			fromDate = new java.sql.Date(currentPeriod.getFromDate().getTime());
+			toDate = new java.sql.Date(currentPeriod.getToDate().getTime());
+		}
+		Map <String , Double > results = DashBoardSQLs.getProductWiseSale(divisionId, fromDate,
+				toDate) ;
 		AtomicInteger index = new AtomicInteger(0);
 		results.forEach(  (item, qty) -> {  
 			PieSliceData pieSliceData  = new PieSliceData();
@@ -348,12 +373,29 @@ public class DashBoardService  implements IDashBoardService{
 
 	@Override
 	public PieChartData getItemwiseSales(User manager, Date date,
-			CRMContext context) {
+			CRMContext context,boolean corporateAdmin) {
 		 PieChartData pieChartData  = new PieChartData();
-		SalesPeriod currentPeriod = getActiveSalesPeriodforManager(manager,date,context);
-		if(currentPeriod == null) return null;
-		Map <String , Double > results = DashBoardSQLs.getItemWiseSale(currentPeriod.getDivision().getId(),  new java.sql.Date( currentPeriod.getFromDate().getTime()),
-				new java.sql.Date( currentPeriod.getToDate().getTime())) ;
+		 int divisionId=  -1 ;
+			java.sql.Date fromDate = new java.sql.Date(new java.util.Date().getTime()) ;
+			java.sql.Date toDate = new java.sql.Date(new java.util.Date().getTime());
+			if (! corporateAdmin ) {
+				SalesPeriod currentPeriod = getActiveSalesPeriodforManager(manager,date,context);
+				if (currentPeriod == null )
+					return null;
+				
+				divisionId = currentPeriod.getDivision().getId();
+				fromDate = new java.sql.Date(currentPeriod.getFromDate().getTime());
+				toDate  = new java.sql.Date(currentPeriod.getToDate().getTime());
+			}else {
+				CorpSalesPeriod currentPeriod = getActiveCorpSalesPeriodforManager(manager, toDate, context);
+				if (currentPeriod == null )
+					return null;
+				
+				fromDate = new java.sql.Date(currentPeriod.getFromDate().getTime());
+				toDate = new java.sql.Date(currentPeriod.getToDate().getTime());
+			}
+		Map <String , Double > results = DashBoardSQLs.getItemWiseSale(divisionId, fromDate,
+				toDate) ;
 		AtomicInteger index = new AtomicInteger(0);
 		results.forEach(  (item, qty) -> {  
 			PieSliceData pieSliceData  = new PieSliceData();
@@ -370,12 +412,29 @@ public class DashBoardService  implements IDashBoardService{
 	
 	@Override
 	public PieChartData getBrandwiseSales(User manager, Date date,
-			CRMContext context) {
+			CRMContext context ,boolean corporateAdmin ) {
 		PieChartData pieChartData  = new PieChartData();
-		SalesPeriod currentPeriod = getActiveSalesPeriodforManager(manager,date,context);
-		if(currentPeriod == null) return null;
-		Map <String , Double > results = DashBoardSQLs.getBrandWiseSale(currentPeriod.getDivision().getId(),  new java.sql.Date( currentPeriod.getFromDate().getTime()),
-				new java.sql.Date( currentPeriod.getToDate().getTime())) ;
+		int divisionId=  -1 ;
+		java.sql.Date fromDate = new java.sql.Date(new java.util.Date().getTime()) ;
+		java.sql.Date toDate = new java.sql.Date(new java.util.Date().getTime());
+		if (! corporateAdmin ) {
+			SalesPeriod currentPeriod = getActiveSalesPeriodforManager(manager,date,context);
+			if (currentPeriod == null )
+				return null;
+			
+			divisionId = currentPeriod.getDivision().getId();
+			fromDate = new java.sql.Date(currentPeriod.getFromDate().getTime());
+			toDate  = new java.sql.Date(currentPeriod.getToDate().getTime());
+		}else {
+			CorpSalesPeriod currentPeriod = getActiveCorpSalesPeriodforManager(manager, toDate, context);
+			if (currentPeriod == null )
+				return null;
+			
+			fromDate = new java.sql.Date(currentPeriod.getFromDate().getTime());
+			toDate = new java.sql.Date(currentPeriod.getToDate().getTime());
+		}
+		Map <String , Double > results = DashBoardSQLs.getBrandWiseSale(divisionId,  fromDate,
+				toDate) ;
 		AtomicInteger index = new AtomicInteger(0);
 		results.forEach(  (item, qty) -> {  
 			PieSliceData pieSliceData  = new PieSliceData();
@@ -391,12 +450,29 @@ public class DashBoardService  implements IDashBoardService{
 	
 	@Override
 	public PieChartData getCategorywiseSales(User manager, Date date,
-			CRMContext context) {
+			CRMContext context,boolean corporateAdmin) {
 		PieChartData pieChartData  = new PieChartData();
-		SalesPeriod currentPeriod = getActiveSalesPeriodforManager(manager,date,context);
-		if(currentPeriod == null) return null;
-		Map <String , Double > results = DashBoardSQLs.getCategoryWiseSale(currentPeriod.getDivision().getId(),  new java.sql.Date( currentPeriod.getFromDate().getTime()),
-				new java.sql.Date( currentPeriod.getToDate().getTime())) ;
+		int divisionId=  -1 ;
+		java.sql.Date fromDate = new java.sql.Date(new java.util.Date().getTime()) ;
+		java.sql.Date toDate = new java.sql.Date(new java.util.Date().getTime());
+		if (! corporateAdmin ) {
+			SalesPeriod currentPeriod = getActiveSalesPeriodforManager(manager,date,context);
+			if (currentPeriod == null )
+				return null;
+			
+			divisionId = currentPeriod.getDivision().getId();
+			fromDate = new java.sql.Date(currentPeriod.getFromDate().getTime());
+			toDate  = new java.sql.Date(currentPeriod.getToDate().getTime());
+		}else {
+			CorpSalesPeriod currentPeriod = getActiveCorpSalesPeriodforManager(manager, toDate, context);
+			if (currentPeriod == null )
+				return null;
+			
+			fromDate = new java.sql.Date(currentPeriod.getFromDate().getTime());
+			toDate = new java.sql.Date(currentPeriod.getToDate().getTime());
+		}
+		Map <String , Double > results = DashBoardSQLs.getCategoryWiseSale(divisionId,  fromDate,
+				toDate) ;
 		AtomicInteger index = new AtomicInteger(0);
 		results.forEach(  (item, qty) -> {  
 			PieSliceData pieSliceData  = new PieSliceData();
@@ -526,12 +602,29 @@ public class DashBoardService  implements IDashBoardService{
 	
 	@Override
 	public PieChartData getTerritorySplits(User manager, Date date,
-			CRMContext context) {
-		SalesPeriod currentPeriod = getActiveSalesPeriodforManager(manager,date,context);
-		if (currentPeriod == null )
-			return null;
-		Map<String , Double> splits = DashBoardSQLs.getSaleMadeByTerritory(currentPeriod.getDivision().getId(), 
-				new java.sql.Date(currentPeriod.getFromDate().getTime()), new java.sql.Date(currentPeriod.getToDate().getTime()));
+			CRMContext context, boolean corproateAdmin) {
+		int divisionId=  -1 ;
+		java.sql.Date fromDate = new java.sql.Date(new java.util.Date().getTime()) ;
+		java.sql.Date toDate = new java.sql.Date(new java.util.Date().getTime());
+		if (! corproateAdmin ) {
+			SalesPeriod currentPeriod = getActiveSalesPeriodforManager(manager,date,context);
+			if (currentPeriod == null )
+				return null;
+			
+			divisionId = currentPeriod.getDivision().getId();
+			fromDate = new java.sql.Date(currentPeriod.getFromDate().getTime());
+			toDate  = new java.sql.Date(currentPeriod.getToDate().getTime());
+		}else {
+			CorpSalesPeriod currentPeriod = getActiveCorpSalesPeriodforManager(manager, toDate, context);
+			if (currentPeriod == null )
+				return null;
+			
+			fromDate = new java.sql.Date(currentPeriod.getFromDate().getTime());
+			toDate = new java.sql.Date(currentPeriod.getToDate().getTime());
+		}
+		
+		Map<String , Double> splits = DashBoardSQLs.getSaleMadeByTerritory(divisionId, 
+				fromDate, toDate);
 		PieChartData pieChartData = new PieChartData();
 		AtomicInteger index = new AtomicInteger(0);
 		splits.forEach(  (item, qty) -> {  
@@ -631,12 +724,29 @@ public class DashBoardService  implements IDashBoardService{
 
 	@Override
 	public PieChartData getAssociateSplits(User manager, Date date,
-			CRMContext context) {
-		SalesPeriod currentPeriod = getActiveSalesPeriodforManager(manager,date,context);
-		if (currentPeriod == null )
-			return null;
-		Map<String , Double> splits = DashBoardSQLs.getSaleMadeByAssociate(currentPeriod.getDivision().getId(), 
-				new java.sql.Date(currentPeriod.getFromDate().getTime()), new java.sql.Date(currentPeriod.getToDate().getTime()));
+			CRMContext context,boolean corporateAdmin) {
+		int divisionId=  -1 ;
+		java.sql.Date fromDate = new java.sql.Date(new java.util.Date().getTime()) ;
+		java.sql.Date toDate = new java.sql.Date(new java.util.Date().getTime());
+		if (! corporateAdmin ) {
+			SalesPeriod currentPeriod = getActiveSalesPeriodforManager(manager,date,context);
+			if (currentPeriod == null )
+				return null;
+			
+			divisionId = currentPeriod.getDivision().getId();
+			fromDate = new java.sql.Date(currentPeriod.getFromDate().getTime());
+			toDate  = new java.sql.Date(currentPeriod.getToDate().getTime());
+		}else {
+			CorpSalesPeriod currentPeriod = getActiveCorpSalesPeriodforManager(manager, toDate, context);
+			if (currentPeriod == null )
+				return null;
+			
+			fromDate = new java.sql.Date(currentPeriod.getFromDate().getTime());
+			toDate  = new java.sql.Date(currentPeriod.getToDate().getTime());
+		}
+			
+		Map<String , Double> splits = DashBoardSQLs.getSaleMadeByAssociate(divisionId, 
+				fromDate ,toDate );
 		PieChartData pieChartData = new PieChartData();
 		AtomicInteger index = new AtomicInteger(0);
 		splits.forEach(  (item, qty) -> {  

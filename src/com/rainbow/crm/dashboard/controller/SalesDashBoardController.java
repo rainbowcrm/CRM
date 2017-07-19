@@ -30,6 +30,7 @@ public class SalesDashBoardController extends CRMGeneralController{
 
 	static final String DIV_TARGET_ANALYSIS = "divtargetanalysis" ;
 	static final String DIV_ASSOC_SALES_SPLITS = "divassocsalessplits" ;
+	static final String ADMIN_ASSOC_SALES_SPLITS = "adminassocsalessplits" ;
 	static final String DIV_PROD_SALES_SPLITS = "divprodsalessplits" ;
 	static final String DIV_MGR_SALELEADSPLITS="divmgrsalesleadsplits";
 	static final String DIV_SALES_HISTORY="divsaleshistory";
@@ -69,22 +70,45 @@ public class SalesDashBoardController extends CRMGeneralController{
 		if(DIV_ASSOC_SALES_SPLITS.equalsIgnoreCase(graphId))  {
 			String type = dashBoard.getSalespiecriteria() ;
 			if(Utils.isNullString(type)  || "ASSOCIATE".equals(type)) {
-				PieChartData pieChartData  = service.getAssociateSplits(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext());
+				PieChartData pieChartData  = service.getAssociateSplits(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext(),false);
 				dashBoard.setDivManagerSalesAssociateSplits(pieChartData);
 			} else if("TERRITORY".equals(type)) {
-				PieChartData pieChartData  = service.getTerritorySplits(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext());
+				PieChartData pieChartData  = service.getTerritorySplits(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext(),false);
 				dashBoard.setDivManagerSalesAssociateSplits(pieChartData);
 			}else if( "PRODUCT".equals(type)) {
-				PieChartData pieChartData  = service.getProductwiseSales(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext());
+				PieChartData pieChartData  = service.getProductwiseSales(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext(),false);
 				dashBoard.setDivManagerSalesAssociateSplits(pieChartData);
 			} else if("ITEM".equals(type)) {
-				PieChartData pieChartData  = service.getItemwiseSales(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext());
+				PieChartData pieChartData  = service.getItemwiseSales(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext(),false);
 				dashBoard.setDivManagerSalesAssociateSplits(pieChartData);
 			} else if("CATEGORY".equals(type)) {
-				PieChartData pieChartData  = service.getCategorywiseSales(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext());
+				PieChartData pieChartData  = service.getCategorywiseSales(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext(),false);
 				dashBoard.setDivManagerSalesAssociateSplits(pieChartData);
 			}else if("BRAND".equals(type)) {
-				PieChartData pieChartData  = service.getBrandwiseSales(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext());
+				PieChartData pieChartData  = service.getBrandwiseSales(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext(),false);
+				dashBoard.setDivManagerSalesAssociateSplits(pieChartData);
+			}
+		}
+		
+		if(ADMIN_ASSOC_SALES_SPLITS.equalsIgnoreCase(graphId))  {
+			String type = dashBoard.getSalespiecriteria() ;
+			if(Utils.isNullString(type)  || "ASSOCIATE".equals(type)) {
+				PieChartData pieChartData  = service.getAssociateSplits(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext(),true);
+				dashBoard.setDivManagerSalesAssociateSplits(pieChartData);
+			} else if("TERRITORY".equals(type)) {
+				PieChartData pieChartData  = service.getTerritorySplits(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext(),true);
+				dashBoard.setDivManagerSalesAssociateSplits(pieChartData);
+			}else if( "PRODUCT".equals(type)) {
+				PieChartData pieChartData  = service.getProductwiseSales(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext(),true);
+				dashBoard.setDivManagerSalesAssociateSplits(pieChartData);
+			} else if("ITEM".equals(type)) {
+				PieChartData pieChartData  = service.getItemwiseSales(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext(),true);
+				dashBoard.setDivManagerSalesAssociateSplits(pieChartData);
+			} else if("CATEGORY".equals(type)) {
+				PieChartData pieChartData  = service.getCategorywiseSales(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext(),true);
+				dashBoard.setDivManagerSalesAssociateSplits(pieChartData);
+			}else if("BRAND".equals(type)) {
+				PieChartData pieChartData  = service.getBrandwiseSales(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext(),true);
 				dashBoard.setDivManagerSalesAssociateSplits(pieChartData);
 			}
 		}
@@ -92,16 +116,16 @@ public class SalesDashBoardController extends CRMGeneralController{
 		if(DIV_PROD_SALES_SPLITS.equalsIgnoreCase(graphId))  {
 			String type = dashBoard.getSalespiecriteria() ; 
 			if(Utils.isNullString(type)  || "PRODUCT".equals(type)) {
-				PieChartData pieChartData  = service.getProductwiseSales(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext());
+				PieChartData pieChartData  = service.getProductwiseSales(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext(),false);
 				dashBoard.setDivManagerSaleProductsSplits(pieChartData);
 			} else if("ITEM".equals(type)) {
-				PieChartData pieChartData  = service.getItemwiseSales(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext());
+				PieChartData pieChartData  = service.getItemwiseSales(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext(),false);
 				dashBoard.setDivManagerSaleProductsSplits(pieChartData);
 			} else if("CATEGORY".equals(type)) {
-				PieChartData pieChartData  = service.getCategorywiseSales(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext());
+				PieChartData pieChartData  = service.getCategorywiseSales(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext(),false);
 				dashBoard.setDivManagerSaleProductsSplits(pieChartData);
 			}else if("BRAND".equals(type)) {
-				PieChartData pieChartData  = service.getBrandwiseSales(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext());
+				PieChartData pieChartData  = service.getBrandwiseSales(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext(),false);
 				dashBoard.setDivManagerSaleProductsSplits(pieChartData);
 			}
 		}

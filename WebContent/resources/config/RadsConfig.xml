@@ -67,6 +67,8 @@
 </Page>
 <Page id = "divmgrdashboard" definition ="/resources/pages/dashboards/divmgrdashboard.xml"  accessCode ="MANAGER:DASHBOARD" modelclass = "com.rainbow.crm.dashboard.model.SalesDashBoard" >
 </Page>
+<Page id = "corpadmindashboard" definition ="/resources/pages/dashboards/corpadmindashboard.xml"  accessCode ="ADMIN:DASHBOARD" modelclass = "com.rainbow.crm.dashboard.model.SalesDashBoard" >
+</Page>
 <Page id = "salesdashboardtargetdata" definition ="/resources/pages/dashboards/salesdashboardtargetdata.xml" modelclass = "com.rainbow.crm.dashboard.model.SalesDashBoard" >
 </Page>
 <Page id = "divtargetanalysis" definition ="/resources/pages/dashboards/divtargetanalysis.xml" modelclass = "com.rainbow.crm.dashboard.model.SalesDashBoard" >
@@ -312,8 +314,7 @@
  <Element label = "" type = "UIMenu" Id = "menu600" style="menustyleParent" title="Corporate_WorkBench" groupId= "menuGRP0060"  >
     <Element label = "" type = "UIMenu" Id = "menu601" style="menustyle" title="Corp_Sales_Period" link = "rdscontroller?page=corpsalesperiodlist"   />
     <Element label = "" type = "UIMenu" Id = "menu602" style="menustyle" title="Sales_Period_Analysis" link = "rdscontroller?page=corpsalesperiodAnalysis"   />
-    
-   <!--   <Element label = "" type = "UIMenu" Id = "menu602" style="menustyle" title="Dashboard" link = "rdscontroller?page=corpdashboard"   /> -->
+   <Element label = "" type = "UIMenu" Id = "menu602" style="menustyle" title="Corp_Dashboard" link = "rdscontroller?page=corpadmindashboard"   /> 
  </Element>
  
  <Element label = "" type = "UIMenu" Id = "menu300" style="menustyleParent" title="Sales_Planning" groupId= "menuGRP0040"  >

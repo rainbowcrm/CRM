@@ -511,9 +511,9 @@ public class CorpSalesPeriodService extends AbstractionTransactionService implem
 
 	
 	@Override
-	public CorpSalesPeriod getActiveCorpSalesPeriodforDivision(int divisionId, Date date) {
+	public CorpSalesPeriod getActiveCorpSalesPeriod( Date date) {
 		CorpSalesPeriodDAO dao = (CorpSalesPeriodDAO) getDAO();
-		return dao.getActiveCorpSalesPeriodforDivision(divisionId, date);
+		return dao.getActiveCorpSalesPeriodforDivision(date);
 	}
 	
 	

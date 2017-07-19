@@ -44,16 +44,15 @@ public class CorpSalesPeriodDAO  extends SpringHibernateDAO{
 	}
 	
 	
-	public CorpSalesPeriod getActiveCorpSalesPeriodforDivision(int divisionId,  Date toDate )
+	public CorpSalesPeriod getActiveCorpSalesPeriodforDivision( Date toDate )
 	{
 		Session session = openSession(false);
 		try 
 		{
 			Query query = session.createQuery("from CorpSalesPeriod  CorpSalesPeriod  "
-			+ "   where CorpSalesPeriod.voided=false and CorpSalesPeriod.fromDate <= :fromDate and CorpSalesPeriod.toDate >= :toDate and   CorpSalesPeriod.division.id = :divisionId" ) ;
+			+ "   where CorpSalesPeriod.voided=false and CorpSalesPeriod.fromDate <= :fromDate and CorpSalesPeriod.toDate >= :toDate " ) ;
 			query.setDate("toDate", toDate);
 			query.setDate("fromDate", toDate);
-			query.setParameter("divisionId", divisionId);
 			List	lst = query.list();
 			if (!Utils.isNullList(lst)) {
 				CorpSalesPeriod period = (CorpSalesPeriod)lst.stream().findFirst().get();

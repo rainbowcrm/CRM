@@ -300,7 +300,7 @@ public class GeneralSQLs {
 			statement.setTimestamp(1, new java.sql.Timestamp(fromDate.getTime()));
 			statement.setTimestamp(2, new java.sql.Timestamp(toDate.getTime()));
 			if( divisionId > -1)
-				statement.setInt(4, divisionId);
+				statement.setInt(3, divisionId);
 			rs = statement.executeQuery() ;
 			if (rs.next()) {
 				return rs.getInt(1);

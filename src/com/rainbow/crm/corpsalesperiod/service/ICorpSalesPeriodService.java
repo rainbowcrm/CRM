@@ -15,6 +15,6 @@ public interface ICorpSalesPeriodService extends ITransactionService{
   public List<CorpSalesPeriod> getEndCorpSalesPeriodsforAlerts(Date endDt ) ;
 
   
-  public CorpSalesPeriod getActiveCorpSalesPeriodforDivision(int divisionId,  Date date) ;
+  public CorpSalesPeriod getActiveCorpSalesPeriod(Date date) ;
   
 }

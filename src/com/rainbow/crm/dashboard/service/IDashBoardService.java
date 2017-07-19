@@ -24,15 +24,15 @@ public interface IDashBoardService {
 	
 	public PieChartData getDivisionLeadSplits(User manager,Date date, CRMContext context  );
 	
-	public PieChartData getProductwiseSales(User manager,Date date, CRMContext context  );
+	public PieChartData getProductwiseSales(User manager,Date date, CRMContext context,boolean corporateAdmin  );
 	
-	public PieChartData getItemwiseSales(User manager,Date date, CRMContext context  );
+	public PieChartData getItemwiseSales(User manager,Date date, CRMContext context ,boolean corporateAdmin );
 	
-	public PieChartData getCategorywiseSales(User manager,Date date, CRMContext context  );
+	public PieChartData getCategorywiseSales(User manager,Date date, CRMContext context ,boolean corporateAdmin );
 	
-	public PieChartData getBrandwiseSales(User manager,Date date, CRMContext context  );
+	public PieChartData getBrandwiseSales(User manager,Date date, CRMContext context  ,boolean corporateAdmin );
 	
-	public PieChartData getAssociateSplits(User manager,Date date, CRMContext context  );
+	public PieChartData getAssociateSplits(User manager,Date date, CRMContext context ,boolean corporateAdmin );
 	
 	public PieChartData getAssociateSaleSplits(Division division,Date fromDate, Date toDate, CRMContext context  );
 	
@@ -40,7 +40,7 @@ public interface IDashBoardService {
 	
 	public PieChartData getAssociateSalesLeadSplits(Division division,Date fromDate, Date toDate, CRMContext context  );
 	
-	public PieChartData getTerritorySplits(User manager,Date date, CRMContext context  );
+	public PieChartData getTerritorySplits(User manager,Date date, CRMContext context, boolean  corporateAdmin );
 	
 	public BarChartData setDivisionSalesTargetData(User manager,Date date, CRMContext context, String classification  );
 	
