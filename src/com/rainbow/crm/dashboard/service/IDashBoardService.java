@@ -22,7 +22,7 @@ public interface IDashBoardService {
 	
 	public PieChartData getLeadSplits(User associate,Date date, CRMContext context  );
 	
-	public PieChartData getDivisionLeadSplits(User manager,Date date, CRMContext context  );
+	public PieChartData getDivisionLeadSplits(User manager,Date date, CRMContext context, boolean corporateAdmin  );
 	
 	public PieChartData getProductwiseSales(User manager,Date date, CRMContext context,boolean corporateAdmin  );
 	

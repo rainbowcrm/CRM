@@ -1,6 +1,7 @@
 package com.rainbow.crm.dashboard.controller;
 
 import java.util.Date;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,7 +34,20 @@ public class SalesDashBoardController extends CRMGeneralController{
 	static final String ADMIN_ASSOC_SALES_SPLITS = "adminassocsalessplits" ;
 	static final String DIV_PROD_SALES_SPLITS = "divprodsalessplits" ;
 	static final String DIV_MGR_SALELEADSPLITS="divmgrsalesleadsplits";
+	static final String ADMIN_MGR_SALELEADSPLITS="adminmgrsalesleadsplits";
 	static final String DIV_SALES_HISTORY="divsaleshistory";
+	
+	public Map<String,String> getAllSplitUpOptions()
+	{
+		SalesDashBoard dashBoard = (SalesDashBoard) object;
+		
+	/*	<option key ="ASSOCIATE"> Associate</option>
+		  <option key ="TERRITORY"> Territory</option>
+		  <option key ="PRODUCT"> Product</option>
+		  <option key ="ITEM"> Item</option>
+		  <option key ="CATEGORY"> Category</option>
+		  <option key ="BRAND"> Brand</option>*/
+	}
 	
 	@Override
 	public PageResult submit(ModelObject object) {
@@ -62,10 +76,14 @@ public class SalesDashBoardController extends CRMGeneralController{
 		}
 		
 		if(DIV_MGR_SALELEADSPLITS.equalsIgnoreCase(graphId)) {
-			PieChartData pieChartData  = service.getDivisionLeadSplits(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext());
+			PieChartData pieChartData  = service.getDivisionLeadSplits(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext(),false);
 			dashBoard.setDivManagersalesleadSplits(pieChartData);
 		}
 		
+		if(ADMIN_MGR_SALELEADSPLITS.equalsIgnoreCase(graphId)) {
+			PieChartData pieChartData  = service.getDivisionLeadSplits(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext(),true);
+			dashBoard.setDivManagersalesleadSplits(pieChartData);
+		}
 		
 		if(DIV_ASSOC_SALES_SPLITS.equalsIgnoreCase(graphId))  {
 			String type = dashBoard.getSalespiecriteria() ;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Page id = "corpashboard" showinFrame ="true"  title ="Sales Dashboard| Rainbow CRM" Object = "com.rainbow.crm.dashboard.model.SalesDashbBard" 
+<Page id = "corpashboard" showinFrame ="true"  title ="Corporate Dashboard| Rainbow CRM" Object = "com.rainbow.crm.dashboard.model.SalesDashbBard" 
 Controller = "com.rainbow.crm.dashboard.controller.SalesDashBoardController">
 <Template type= "General"  name = "GraphTemplate"></Template>
 
@@ -38,8 +38,8 @@ Controller = "com.rainbow.crm.dashboard.controller.SalesDashBoardController">
  	<Element type = "UIIFrame" src ="./rdscontroller?page=divproductsalesplits&amp;graphId=divprodsalessplits"  style="graphWindow">
 	</Element> -->
 	
-	<!-- <Element type = "UIIFrame" src ="./rdscontroller?page=divsalesleadsplits&amp;graphId=divmgrsalesleadsplits"  style = "graphWindow">
-	</Element> -->
+	<Element type = "UIIFrame" src ="./rdscontroller?page=divsalesleadsplits&amp;graphId=adminmgrsalesleadsplits"  style = "graphWindow">
+	</Element> 
 </Element>	
  	
 

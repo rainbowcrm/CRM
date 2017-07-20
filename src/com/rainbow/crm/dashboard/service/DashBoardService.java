@@ -354,7 +354,7 @@ public class DashBoardService  implements IDashBoardService{
 			toDate = new java.sql.Date(currentPeriod.getToDate().getTime());
 		}
 		Map <String , Double > results = DashBoardSQLs.getProductWiseSale(divisionId, fromDate,
-				toDate) ;
+				toDate,context.getLoggedinCompany()) ;
 		AtomicInteger index = new AtomicInteger(0);
 		results.forEach(  (item, qty) -> {  
 			PieSliceData pieSliceData  = new PieSliceData();
@@ -395,7 +395,7 @@ public class DashBoardService  implements IDashBoardService{
 				toDate = new java.sql.Date(currentPeriod.getToDate().getTime());
 			}
 		Map <String , Double > results = DashBoardSQLs.getItemWiseSale(divisionId, fromDate,
-				toDate) ;
+				toDate,context.getLoggedinCompany()) ;
 		AtomicInteger index = new AtomicInteger(0);
 		results.forEach(  (item, qty) -> {  
 			PieSliceData pieSliceData  = new PieSliceData();
@@ -434,7 +434,8 @@ public class DashBoardService  implements IDashBoardService{
 			toDate = new java.sql.Date(currentPeriod.getToDate().getTime());
 		}
 		Map <String , Double > results = DashBoardSQLs.getBrandWiseSale(divisionId,  fromDate,
-				toDate) ;
+				toDate,context.getLoggedinCompany());
+				
 		AtomicInteger index = new AtomicInteger(0);
 		results.forEach(  (item, qty) -> {  
 			PieSliceData pieSliceData  = new PieSliceData();
@@ -472,7 +473,7 @@ public class DashBoardService  implements IDashBoardService{
 			toDate = new java.sql.Date(currentPeriod.getToDate().getTime());
 		}
 		Map <String , Double > results = DashBoardSQLs.getCategoryWiseSale(divisionId,  fromDate,
-				toDate) ;
+				toDate,context.getLoggedinCompany()) ;
 		AtomicInteger index = new AtomicInteger(0);
 		results.forEach(  (item, qty) -> {  
 			PieSliceData pieSliceData  = new PieSliceData();
@@ -532,12 +533,29 @@ public class DashBoardService  implements IDashBoardService{
 
 	@Override
 	public PieChartData getDivisionLeadSplits(User manager, Date date,
-			CRMContext context) {
+			CRMContext context, boolean corporateAdmin) {
 		PieChartData pieChartData  = new PieChartData();
-		SalesPeriod currentPeriod = getSalesPeriodforUser(manager, date, context);
-		if(currentPeriod == null) return null;
-		Map <String , Double > results = DashBoardSQLs.getStatusWiseSaleLeadsforDivision(currentPeriod.getDivision().getId(), new java.sql.Date( currentPeriod.getFromDate().getTime()),
-				new java.sql.Date( currentPeriod.getToDate().getTime()), context.getLoggedinCompany()) ;
+		int divisionId=  -1 ;
+		java.sql.Date fromDate = new java.sql.Date(new java.util.Date().getTime()) ;
+		java.sql.Date toDate = new java.sql.Date(new java.util.Date().getTime());
+		if (! corporateAdmin ) {
+			SalesPeriod currentPeriod = getActiveSalesPeriodforManager(manager,date,context);
+			if (currentPeriod == null )
+				return null;
+			
+			divisionId = currentPeriod.getDivision().getId();
+			fromDate = new java.sql.Date(currentPeriod.getFromDate().getTime());
+			toDate  = new java.sql.Date(currentPeriod.getToDate().getTime());
+		}else {
+			CorpSalesPeriod currentPeriod = getActiveCorpSalesPeriodforManager(manager, toDate, context);
+			if (currentPeriod == null )
+				return null;
+			
+			fromDate = new java.sql.Date(currentPeriod.getFromDate().getTime());
+			toDate = new java.sql.Date(currentPeriod.getToDate().getTime());
+		}
+		Map <String , Double > results = DashBoardSQLs.getStatusWiseSaleLeadsforDivision(divisionId, fromDate,
+				toDate, context.getLoggedinCompany()) ;
 		AtomicInteger index = new AtomicInteger(0);
 		results.forEach(  (status, count) -> {  
 			PieSliceData pieSliceData  = new PieSliceData();
@@ -624,7 +642,7 @@ public class DashBoardService  implements IDashBoardService{
 		}
 		
 		Map<String , Double> splits = DashBoardSQLs.getSaleMadeByTerritory(divisionId, 
-				fromDate, toDate);
+				fromDate, toDate,context.getLoggedinCompany());
 		PieChartData pieChartData = new PieChartData();
 		AtomicInteger index = new AtomicInteger(0);
 		splits.forEach(  (item, qty) -> {  
@@ -703,7 +721,7 @@ public class DashBoardService  implements IDashBoardService{
 		Map<String , Double> splits;
 		if(division != null && division.getId() > -1)
 		splits = DashBoardSQLs.getSaleMadeByAssociate(division.getId(), 
-				new java.sql.Date(fromDate.getTime()), new java.sql.Date(toDate.getTime()));
+				new java.sql.Date(fromDate.getTime()), new java.sql.Date(toDate.getTime()),context.getLoggedinCompany());
 		else
 			splits = DashBoardSQLs.getSaleMadeByAssociateWithoutDivision( 
 					new java.sql.Date(fromDate.getTime()), new java.sql.Date(toDate.getTime()),context.getLoggedinCompany());
@@ -746,7 +764,7 @@ public class DashBoardService  implements IDashBoardService{
 		}
 			
 		Map<String , Double> splits = DashBoardSQLs.getSaleMadeByAssociate(divisionId, 
-				fromDate ,toDate );
+				fromDate ,toDate,context.getLoggedinCompany() );
 		PieChartData pieChartData = new PieChartData();
 		AtomicInteger index = new AtomicInteger(0);
 		splits.forEach(  (item, qty) -> {  

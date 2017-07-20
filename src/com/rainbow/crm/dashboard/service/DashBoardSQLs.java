@@ -217,7 +217,7 @@ public class DashBoardSQLs {
 		return ans;
 	}
 	
-	public static Map<String, Double> getSaleMadeByAssociate(int divison,  Date startDate, Date endDate )
+	public static Map<String, Double> getSaleMadeByAssociate(int divison,  Date startDate, Date endDate, int company )
 	{
 		Map<String, Double> ans = new HashMap<String, Double>();
 		Connection connection = null;
@@ -227,13 +227,14 @@ public class DashBoardSQLs {
 			connection = ConnectionCreater.getConnection();
 			String divisionSQL = (divison>0)?" AND SALES.DIVISION_ID = ? ": " ";
 			String sql =  " SELECT SUM(SALES_LINES.LINE_TOTAL),USER_ID FROM SALES , SALES_LINES WHERE SALES.ID= SALES_LINES.SALES_ID AND  " + 
-			 " SALES.SALES_DATE > ? AND  SALES.SALES_DATE <= ? " + divisionSQL  + 
+			 " SALES.SALES_DATE > ? AND  SALES.SALES_DATE <= ?   AND SALES.COMPANY_ID = ?  " +   divisionSQL  + 
 			"  AND  SALES_LINES.IS_VOIDED = FALSE AND SALES.IS_VOIDED= FALSE  GROUP BY USER_ID";
 			statement = connection.prepareStatement(sql);
 			statement.setDate(1, startDate);
 			statement.setDate(2, endDate);
+			statement.setInt(3, company);
 			if(divison > 0 )
-				statement.setInt(3, divison);
+				statement.setInt(4, divison);
 			rs = statement.executeQuery();
 			while (rs.next()) {
 				Double amount = rs.getDouble(1);
@@ -277,7 +278,7 @@ public class DashBoardSQLs {
 		return ans;
 	}
 	
-	public static Map<String, Double> getSaleMadeByTerritory(int divison,  Date startDate, Date endDate )
+	public static Map<String, Double> getSaleMadeByTerritory(int divison,  Date startDate, Date endDate , int company )
 	{
 		Map<String, Double> ans = new HashMap<String, Double>();
 		Connection connection = null;
@@ -287,13 +288,14 @@ public class DashBoardSQLs {
 			connection = ConnectionCreater.getConnection();
 			String divisionSQL = (divison  >0) ? "  AND SALES.DIVISION_ID = ? ":" ";
 			String sql =  " SELECT SUM(SALES.NET_AMOUNT),TERRITORIES.TERRITORY FROM SALES , TERRITORIES WHERE TERRITORIES.ID= SALES.TERRITORY_ID AND  " + 
-			 " SALES.SALES_DATE > ? AND  SALES.SALES_DATE <= ?   " +  divisionSQL + 
+			 " SALES.SALES_DATE > ? AND  SALES.SALES_DATE <= ?   AND SALES.COMPANY_ID = ?  " +   divisionSQL + 
 			"  AND  SALES.IS_VOIDED= FALSE  GROUP BY TERRITORIES.TERRITORY";
 			statement = connection.prepareStatement(sql);
 			statement.setDate(1, startDate);
 			statement.setDate(2, endDate);
+			statement.setInt(3, company);
 			if(divison > 0 )
-				statement.setInt(3, divison);
+				statement.setInt(4, divison);
 			rs = statement.executeQuery();
 			while (rs.next()) {
 				Double amount = rs.getDouble(1);
@@ -520,7 +522,7 @@ public class DashBoardSQLs {
 	}
 	
 	
-	public static Map<String, Double> getProductWiseSale(int division,  Date startDate, Date endDate )
+	public static Map<String, Double> getProductWiseSale(int division,  Date startDate, Date endDate, int companyId )
 	{
 		Connection connection = null;
 		PreparedStatement statement = null;
@@ -530,13 +532,15 @@ public class DashBoardSQLs {
 			connection = ConnectionCreater.getConnection();
 			String divisionSQL = (division> 0) ? " AND SALES.DIVISION_ID = ? " : "";
 			String sql =  " SELECT SUM(SALES_LINES.LINE_TOTAL),PRODUCTS.PRODUCT_NAME FROM SALES , SALES_LINES  ,  SKUS, ITEMS,PRODUCTS WHERE SALES.ID= SALES_LINES.SALES_ID AND  " + 
-			 " SALES_LINES.SKU_ID = SKUS.ID AND SKUS.ITEM_ID = ITEMS.ID AND ITEMS.PRODUCT_ID=PRODUCTS.ID AND SALES.SALES_DATE >= ? AND  SALES.SALES_DATE <= ? " + divisionSQL + "  AND " + 
+			 " SALES_LINES.SKU_ID = SKUS.ID AND SKUS.ITEM_ID = ITEMS.ID AND ITEMS.PRODUCT_ID=PRODUCTS.ID AND SALES.SALES_DATE >= ? AND  SALES.SALES_DATE <= ?  "  +
+			 " AND SALES.COMPANY_ID = ?  " +   divisionSQL + "  AND " + 
 			" SALES_LINES.IS_VOIDED = FALSE AND SALES.IS_VOIDED= FALSE GROUP BY PRODUCTS.PRODUCT_NAME ";
 			statement = connection.prepareStatement(sql);
 			statement.setDate(1, startDate);
 			statement.setDate(2, endDate);
+			statement.setInt(3, companyId);
 			if (division  > 0)
-				statement.setInt(3, division);
+				statement.setInt(4, division);
 			rs = statement.executeQuery();
 			while (rs.next()) {
 				String productName = rs.getString(2);
@@ -553,7 +557,7 @@ public class DashBoardSQLs {
 		
 	}
 	
-	public static Map<String, Double> getCategoryWiseSale(int division,  Date startDate, Date endDate )
+	public static Map<String, Double> getCategoryWiseSale(int division,  Date startDate, Date endDate, int company )
 	{
 		Connection connection = null;
 		PreparedStatement statement = null;
@@ -563,13 +567,15 @@ public class DashBoardSQLs {
 			connection = ConnectionCreater.getConnection();
 			String divisionSQL =  (division >0 )? " AND SALES.DIVISION_ID = ?  " : "" ;
 			String sql =  " SELECT SUM(SALES_LINES.LINE_TOTAL),CATEGORIES.CATEGORY_NAME FROM SALES , SALES_LINES  ,  SKUS, ITEMS,PRODUCTS, CATEGORIES WHERE SALES.ID= SALES_LINES.SALES_ID AND  " + 
-			 " SALES_LINES.SKU_ID = SKUS.ID AND SKUS.ITEM_ID = ITEMS.ID AND ITEMS.PRODUCT_ID=PRODUCTS.ID AND PRODUCTS.CATEGORY_ID = CATEGORIES.ID AND SALES.SALES_DATE >= ? AND  SALES.SALES_DATE <= ? " + divisionSQL +  " AND " + 
+			 " SALES_LINES.SKU_ID = SKUS.ID AND SKUS.ITEM_ID = ITEMS.ID AND ITEMS.PRODUCT_ID=PRODUCTS.ID AND PRODUCTS.CATEGORY_ID = CATEGORIES.ID AND SALES.SALES_DATE >= ? AND  SALES.SALES_DATE <= ? " +  
+			 " AND SALES.COMPANY_ID = ?  " +  divisionSQL +  " AND " + 
 			" SALES_LINES.IS_VOIDED = FALSE AND SALES.IS_VOIDED= FALSE GROUP BY CATEGORIES.CATEGORY_NAME ";
 			statement = connection.prepareStatement(sql);
 			statement.setDate(1, startDate);
 			statement.setDate(2, endDate);
+			statement.setInt(3, company);
 			if(division > 0)
-				statement.setInt(3, division);
+				statement.setInt(4, division);
 			rs = statement.executeQuery();
 			while (rs.next()) {
 				String productName = rs.getString(2);
@@ -586,7 +592,7 @@ public class DashBoardSQLs {
 		
 	}
 	
-	public static Map<String, Double> getBrandWiseSale(int division,  Date startDate, Date endDate )
+	public static Map<String, Double> getBrandWiseSale(int division,  Date startDate, Date endDate, int company )
 	{
 		Connection connection = null;
 		PreparedStatement statement = null;
@@ -596,13 +602,15 @@ public class DashBoardSQLs {
 			connection = ConnectionCreater.getConnection();
 			String divisionSQL = (division >0) ? " AND SALES.DIVISION_ID = ? " : "";
 			String sql =  " SELECT SUM(SALES_LINES.LINE_TOTAL),BRANDS.BRAND_NAME FROM SALES , SALES_LINES  ,  SKUS, ITEMS,BRANDS WHERE SALES.ID= SALES_LINES.SALES_ID AND  " + 
-			 " SALES_LINES.SKU_ID = SKUS.ID AND SKUS.ITEM_ID = ITEMS.ID AND ITEMS.BRAND_ID=BRANDS.ID AND SALES.SALES_DATE >= ? AND  SALES.SALES_DATE <= ? " + divisionSQL + "  AND " + 
+			 " SALES_LINES.SKU_ID = SKUS.ID AND SKUS.ITEM_ID = ITEMS.ID AND ITEMS.BRAND_ID=BRANDS.ID AND SALES.SALES_DATE >= ? AND  SALES.SALES_DATE <= ? " +
+			 " AND SALES.COMPANY_ID = ?  " + 	divisionSQL + "  AND " + 
 			" SALES_LINES.IS_VOIDED = FALSE AND SALES.IS_VOIDED= FALSE GROUP BY BRANDS.BRAND_NAME ";
 			statement = connection.prepareStatement(sql);
 			statement.setDate(1, startDate);
 			statement.setDate(2, endDate);
+			statement.setInt(3, company);
 			if(division > 0)
-				statement.setInt(3, division);
+				statement.setInt(4, division);
 			rs = statement.executeQuery();
 			while (rs.next()) {
 				String productName = rs.getString(2);
@@ -619,7 +627,7 @@ public class DashBoardSQLs {
 		
 	}
 	
-	public static Map<String, Double> getItemWiseSale(int division,  Date startDate, Date endDate )
+	public static Map<String, Double> getItemWiseSale(int division,  Date startDate, Date endDate, int company )
 	{
 		Connection connection = null;
 		PreparedStatement statement = null;
@@ -629,13 +637,15 @@ public class DashBoardSQLs {
 			connection = ConnectionCreater.getConnection();
 			String divisionSQL = (division > 0)?" AND SALES.DIVISION_ID = ? ": " ";
 			String sql =  " SELECT SUM(SALES_LINES.LINE_TOTAL),ITEMS.ITEM_NAME FROM SALES , SALES_LINES  ,  SKUS, ITEMS WHERE SALES.ID= SALES_LINES.SALES_ID AND  " + 
-			 " SALES_LINES.SKU_ID = SKUS.ID AND SKUS.ITEM_ID = ITEMS.ID AND  SALES.SALES_DATE >= ? AND  SALES.SALES_DATE <= ? " +divisionSQL  + " AND " + 
+			 " SALES_LINES.SKU_ID = SKUS.ID AND SKUS.ITEM_ID = ITEMS.ID AND  SALES.SALES_DATE >= ? AND  SALES.SALES_DATE <= ? " + 
+			 " AND SALES.COMPANY_ID = ?  "   +divisionSQL  + " AND " + 
 			" SALES_LINES.IS_VOIDED = FALSE AND SALES.IS_VOIDED= FALSE GROUP BY ITEMS.ITEM_NAME ";
 			statement = connection.prepareStatement(sql);
 			statement.setDate(1, startDate);
 			statement.setDate(2, endDate);
+			statement.setInt(3, company);
 			if(division > 0)
-			statement.setInt(3, division);
+			statement.setInt(4, division);
 			rs = statement.executeQuery();
 			while (rs.next()) {
 				String productName = rs.getString(2);

@@ -16,6 +16,8 @@ Controller = "com.rainbow.crm.dashboard.controller.SalesDashBoardController">
  	</Element>  
  	
 	<Element label = "Based_on"  type = "UIList" Id = "lstAggrType"   property ="salespiecriteria" >
+	<!-- <options populator =  "getAllSplitUpOptions"> 
+	</options> -->
 	  <options> 
 	  <option key ="ASSOCIATE"> Associate</option>
 	  <option key ="TERRITORY"> Territory</option>
