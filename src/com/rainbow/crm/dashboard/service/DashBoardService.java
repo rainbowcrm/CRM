@@ -410,6 +410,37 @@ public class DashBoardService  implements IDashBoardService{
 	}
 
 	
+	
+	
+	@Override
+	public PieChartData getDivisionwiseSales(User manager, Date date,
+			CRMContext context, boolean corporateAdmin) {
+		PieChartData pieChartData  = new PieChartData();
+		java.sql.Date fromDate = new java.sql.Date(new java.util.Date().getTime()) ;
+		java.sql.Date toDate = new java.sql.Date(new java.util.Date().getTime());
+		CorpSalesPeriod currentPeriod = getActiveCorpSalesPeriodforManager(manager, toDate, context);
+		if (currentPeriod == null )
+			return null;
+		
+		fromDate = new java.sql.Date(currentPeriod.getFromDate().getTime());
+		toDate = new java.sql.Date(currentPeriod.getToDate().getTime());
+		
+		Map <String , Double > results = DashBoardSQLs.getDivisionWiseSale(  fromDate,
+				toDate,context.getLoggedinCompany());
+				
+		AtomicInteger index = new AtomicInteger(0);
+		results.forEach(  (item, qty) -> {  
+			PieSliceData pieSliceData  = new PieSliceData();
+			pieSliceData.setVolume(qty);
+			pieSliceData.setText(item);
+			pieSliceData.setColor(CommonUtil.getGraphColors()[index.getAndIncrement()]);
+			pieChartData.addPieSlice(pieSliceData);
+		} );
+		pieChartData.setFooterNote("Sale by Brand");
+		pieChartData.setTitle("Sale by Brand");
+		return pieChartData;
+	}
+
 	@Override
 	public PieChartData getBrandwiseSales(User manager, Date date,
 			CRMContext context ,boolean corporateAdmin ) {

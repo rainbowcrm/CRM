@@ -6,7 +6,7 @@ Controller = "com.rainbow.crm.dashboard.controller.SalesDashBoardController">
 <Elements>
 <UIForm Id ="cust" method = "POST" enctype="multipart/form-data" >
 <Section type= "fullSection">
-<Element type = "UIHidden" Id = "hdngraphId"  property = "graphId"  constantValue="divassocsalessplits"/>
+<Element type = "UIHidden" Id = "hdngraphId"  property = "graphId"  constantValue="adminassocsalessplits"/>
 <Element type = "UIPieChart" Id = "pieChart2"  dataProvider = "divManagerSalesAssociateSplits" useGoogleGraph="true" >
 	  <centerX>150</centerX>
 	  <centerY>150</centerY>

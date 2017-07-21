@@ -8,6 +8,7 @@ import java.util.Map;
 
 import com.rainbow.crm.user.model.User;
 import com.techtrade.rads.framework.context.IRadsContext;
+import com.techtrade.rads.framework.ui.abstracts.UIPage;
 
 public class CRMContext implements IRadsContext,Serializable{
 	String user;
@@ -27,6 +28,8 @@ public class CRMContext implements IRadsContext,Serializable{
 	
 	boolean mobileLogin;
     Map<String, String> properties;
+    
+    UIPage page ;
 	
 	@Override
 	public String getUser() {
@@ -171,6 +174,14 @@ public class CRMContext implements IRadsContext,Serializable{
 
 	public void setMobileLogin(boolean mobileLogin) {
 		this.mobileLogin = mobileLogin;
+	}
+
+	public UIPage getPage() {
+		return page;
+	}
+
+	public void setPage(UIPage page) {
+		this.page = page;
 	}
 
 	

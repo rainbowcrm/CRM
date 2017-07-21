@@ -21,7 +21,7 @@ Controller = "com.rainbow.crm.dashboard.controller.SalesDashBoardController">
 	  <rangeHeight>300</rangeHeight>
 	  <rangeWidth>500</rangeWidth>
  	</Element>  -->  
- 	<Element type = "UIIFrame" src ="./rdscontroller?page=divassocsalessplits&amp;graphId=adminassocsalessplits"  style = "graphWindow">
+ 	<Element type = "UIIFrame" src ="./rdscontroller?page=adminsalessplits&amp;graphId=adminassocsalessplits"  style = "graphWindow">
 	</Element>
 </Element>
 

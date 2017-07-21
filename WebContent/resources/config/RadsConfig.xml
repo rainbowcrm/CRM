@@ -83,8 +83,10 @@
 </Page> 
 <Page id = "salesleadssplits" definition ="/resources/pages/dashboards/salesleadssplits.xml" modelclass = "com.rainbow.crm.dashboard.model.SalesDashBoard" >
 </Page> 
-<Page id = "divassocsalessplits" definition ="/resources/pages/dashboards/divassocsalessplits.xml" modelclass = "com.rainbow.crm.dashboard.model.SalesDashBoard" >
-</Page> 
+<Page id = "divassocsalessplits" definition ="/resources/pages/dashboards/divassocsalessplits.xml" accessCode ="MANAGER:SALESSPLITS" modelclass = "com.rainbow.crm.dashboard.model.SalesDashBoard" >
+</Page>
+<Page id = "adminsalessplits" definition ="/resources/pages/dashboards/adminsalessplits.xml" accessCode ="ADMIN:SALESSPLITS" modelclass = "com.rainbow.crm.dashboard.model.SalesDashBoard" >
+</Page>  
 <Page id = "divproductsalesplits" definition ="/resources/pages/dashboards/divproductsalesplits.xml" modelclass = "com.rainbow.crm.dashboard.model.SalesDashBoard" >
 </Page> 
 <Page id = "custcategories" definition ="/resources/pages/custcategory/custcategoryList.xml" accessCode ="SPLAN:CUSTCATEGORY" modelclass = "com.rainbow.crm.custcategory.model.CustCategory" >

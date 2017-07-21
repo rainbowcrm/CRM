@@ -1,6 +1,7 @@
 package com.rainbow.crm.dashboard.controller;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,7 +41,18 @@ public class SalesDashBoardController extends CRMGeneralController{
 	public Map<String,String> getAllSplitUpOptions()
 	{
 		SalesDashBoard dashBoard = (SalesDashBoard) object;
+		Map <String, String> ans = new HashMap<String,String>();
+		ans.put("ASSOCIATE", "Associate");
+		ans.put("TERRITORY", "Territory");
+		ans.put("PRODUCT", "Product");
+		ans.put("ITEM", "Item");
+		ans.put("CATEGORY", "Category");
+		ans.put("BRAND", "Brand");
+		CRMContext ctx= (CRMContext)getContext();
+		if(ctx.getPage() != null && ctx.getPage().getAccessCode() != null && ctx.getPage().getAccessCode().contains("ADMIN") )
+			ans.put("DIVISION", "Division") ;
 		
+		return ans;
 	/*	<option key ="ASSOCIATE"> Associate</option>
 		  <option key ="TERRITORY"> Territory</option>
 		  <option key ="PRODUCT"> Product</option>
@@ -127,6 +139,9 @@ public class SalesDashBoardController extends CRMGeneralController{
 				dashBoard.setDivManagerSalesAssociateSplits(pieChartData);
 			}else if("BRAND".equals(type)) {
 				PieChartData pieChartData  = service.getBrandwiseSales(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext(),true);
+				dashBoard.setDivManagerSalesAssociateSplits(pieChartData);
+			}else if("DIVISION".equals(type)) {
+				PieChartData pieChartData  = service.getDivisionwiseSales(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext(),true);
 				dashBoard.setDivManagerSalesAssociateSplits(pieChartData);
 			}
 		}

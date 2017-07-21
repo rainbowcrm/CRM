@@ -32,6 +32,8 @@ public interface IDashBoardService {
 	
 	public PieChartData getBrandwiseSales(User manager,Date date, CRMContext context  ,boolean corporateAdmin );
 	
+	public PieChartData getDivisionwiseSales(User manager,Date date, CRMContext context  ,boolean corporateAdmin );
+	
 	public PieChartData getAssociateSplits(User manager,Date date, CRMContext context ,boolean corporateAdmin );
 	
 	public PieChartData getAssociateSaleSplits(Division division,Date fromDate, Date toDate, CRMContext context  );
