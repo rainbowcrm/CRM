@@ -76,8 +76,8 @@ Controller = "com.rainbow.crm.dashboard.controller.SalesDashBoardController">
  	</Element>   
  	<Element type = "UIIFrame" src ="./rdscontroller?page=divsalesleadsplits&amp;graphId=divmgrsalesleadsplits"  style = "graphWindow">
 	</Element>  -->
-	<!-- <Element type = "UIIFrame" src ="./rdscontroller?page=divsalehistory&amp;graphId=divsaleshistory"  style = "graphWindow">
-	</Element> -->
+	<Element type = "UIIFrame" src ="./rdscontroller?page=divsalehistory&amp;graphId=adminsaleshistory"  style = "graphWindow">
+	</Element>
 </Element>
 
 </Element>

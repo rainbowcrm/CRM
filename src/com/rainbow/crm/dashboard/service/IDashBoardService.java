@@ -18,6 +18,8 @@ public interface IDashBoardService {
 	
 	public LineChartData getDivSalesHistory(User manager,Date date, CRMContext context  );
 	
+	public LineChartData getCorpSalesHistory(Date date, CRMContext context  );
+	
 	public PieChartData getPortfolioSplits(User associate,Date date, CRMContext context  );
 	
 	public PieChartData getLeadSplits(User associate,Date date, CRMContext context  );

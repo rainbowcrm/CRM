@@ -11,6 +11,7 @@ import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriod;
 import com.rainbow.crm.corpsalesperiod.service.ICorpSalesPeriodService;
+import com.rainbow.crm.division.service.IDivisionService;
 import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.sales.service.ISalesService;
 import com.rainbow.crm.salesperiod.model.SalesPeriod;
@@ -212,6 +213,54 @@ public class DashBoardService  implements IDashBoardService{
 	
 	
 	
+	
+	
+	@Override
+	public LineChartData getCorpSalesHistory(
+			 Date date,
+			CRMContext context) {
+		LineChartData lineChartData = new LineChartData();
+		long points = 3;
+		int maxValue = 0;
+	try { 
+		
+		lineChartData.setBorderColor(CommonUtil.getGraphColors()[1] );
+		lineChartData.setTitle("Sales Progression");
+		lineChartData.setSubTitle("Sales History");
+		int ct = 1;
+		IDivisionService divisionService =  (IDivisionService)SpringObjectFactory.INSTANCE.getInstance("IDivisionService");
+		List<com.rainbow.crm.division.model.Division> allDivisions = divisionService.getAllDivisions(context.getLoggedinCompany());
+		for (com.rainbow.crm.division.model.Division division : allDivisions) {
+			LineChartEntryData lineChartEntryData  = new LineChartEntryData();
+			lineChartEntryData.setColor(CommonUtil.getGraphColors()[ct ++] );
+			lineChartEntryData.setText(division.getName());
+			for (long i = points;  i >0 ; i--) {
+				Date startDate = new Date(date.getTime() -  (7 * i * 24l * 3600l * 1000l  ));
+				Date endDate = new Date(date.getTime() -  (7 * (i-1) * 24l * 3600l * 1000l  ));
+				Double saleQty = DashBoardSQLs.getDivisionTotalSale(division.getId(), new java.sql.Date(startDate.getTime()), new java.sql.Date(endDate.getTime()));
+				if (i == points){
+					lineChartData.setStartingPoint(Utils.dateToString(startDate, "dd-MM-yyyy"));
+				}
+				if(ct ==2 )
+					lineChartData.addInterval(Utils.dateToString(endDate, "dd-MM-yyyy"));
+				lineChartEntryData.addToValueMap(Utils.dateToString(endDate, "dd-MM-yyyy"), saleQty);
+				if (saleQty > maxValue )
+					maxValue = new Double(saleQty).intValue();
+						
+			}
+			lineChartData.addEntry(lineChartEntryData);
+		}
+		LineChartData.Range range = lineChartData.new Range();
+		range.setyMax(maxValue);
+		lineChartData.setRange(range);
+	}catch(Exception ex) {
+		Logwriter.INSTANCE.error(ex);
+	}
+
+	return lineChartData;
+
+	}
+
 	@Override
 	public LineChartData getDivSalesHistory(User manager, Date date,
 			CRMContext context) {

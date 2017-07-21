@@ -38,6 +38,7 @@ public class SalesDashBoardController extends CRMGeneralController{
 	static final String DIV_MGR_SALELEADSPLITS="divmgrsalesleadsplits";
 	static final String ADMIN_MGR_SALELEADSPLITS="adminmgrsalesleadsplits";
 	static final String DIV_SALES_HISTORY="divsaleshistory";
+	static final String ADMIN_SALES_HISTORY="adminsaleshistory";
 	
 	public Map<String,String> getAllSplitUpOptions()
 	{
@@ -178,7 +179,10 @@ public class SalesDashBoardController extends CRMGeneralController{
 		LineChartData lineChartData = service.getDivSalesHistory(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext());
 		dashBoard.setDivSalesHistory(lineChartData);
 		}
-		
+		if (ADMIN_SALES_HISTORY.equalsIgnoreCase(graphId))  {
+			LineChartData lineChartData = service.getCorpSalesHistory( new java.util.Date(), (CRMContext)getContext());
+			dashBoard.setDivSalesHistory(lineChartData);
+			}
 		
 		return new PageResult();
 	}

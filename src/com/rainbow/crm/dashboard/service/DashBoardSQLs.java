@@ -19,6 +19,34 @@ import com.techtrade.rads.framework.utils.Utils;
 
 public class DashBoardSQLs {
 
+	public static Double getDivisionTotalSale(int division,  Date startDate, Date endDate )
+	{
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		try {
+			connection = ConnectionCreater.getConnection();
+			String sql =  " SELECT SUM(SALES_LINES.LINE_TOTAL) FROM SALES , SALES_LINES WHERE SALES.ID= SALES_LINES.SALES_ID AND  " + 
+			 " SALES.SALES_DATE > ? AND  SALES.SALES_DATE <= ?  AND " + 
+			" SALES.DIVISION_ID= ? AND  SALES_LINES.IS_VOIDED = FALSE AND SALES.IS_VOIDED= FALSE  ";
+			statement = connection.prepareStatement(sql);
+			statement.setDate(1, startDate);
+			statement.setDate(2, endDate);
+			statement.setInt(3, division);
+			rs = statement.executeQuery();
+			while (rs.next()) {
+				Double amount = rs.getDouble(1);
+				return amount; 
+			}
+			
+		}catch (SQLException ex) {
+			Logwriter.INSTANCE.error(ex);
+		} finally {
+			ConnectionCreater.close(connection, statement, rs);
+		}
+		return 0d ;
+	}
+	
 	public static Double getPeriodTotalSale(String associate,  Date startDate, Date endDate )
 	{
 		Connection connection = null;
