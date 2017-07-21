@@ -51,8 +51,14 @@ public class SkuAjaxService implements IAjaxLookupService {
 				json.put("Color", item.getColor());
 				json.put("Size", item.getSize());
 				json.put("Specification", item.getSpecification());
-				json.put("PurchasePrice", item.getPurchasePrice());
-				json.put("RetailPrice", item.getRetailPrice());
+				if(item.getPurchasePrice()!= null &&  item.getPurchasePrice().doubleValue() > 0)
+					json.put("PurchasePrice", item.getPurchasePrice());
+				else
+					json.put("RetailPrice", item.getItem().getPurchasePrice());
+				if(item.getRetailPrice()!= null &&  item.getRetailPrice().doubleValue() > 0)
+					json.put("RetailPrice", item.getRetailPrice());
+				else
+					json.put("RetailPrice", item.getItem().getRetailPrice());
 				if (Utils.isPositiveInt(divisionId)) {
 					JSONArray ar = getSalesMenforSKU(
 							Integer.parseInt(divisionId), item, ctx);

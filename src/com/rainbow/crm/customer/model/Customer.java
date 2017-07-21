@@ -31,7 +31,9 @@ public class Customer extends CRMBusinessModelObject{
 	String fileName;
 	String fileWithLink;
 	
-	String base64Image; 
+	String base64Image;
+	
+	boolean referencible;
 	
 	public String getFullName() {
 		if (Utils.isNullString(fullName)) {
@@ -172,6 +174,14 @@ public class Customer extends CRMBusinessModelObject{
 
 	public void setBase64Image(String base64Image) {
 		this.base64Image = base64Image;
+	}
+
+	public boolean isReferencible() {
+		return referencible;
+	}
+
+	public void setReferencible(boolean referencible) {
+		this.referencible = referencible;
 	}
 	
 	

@@ -215,6 +215,7 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 </Element>
 </Section>
 <Section type ="footer">
+<Element label = "Ask_For_Feedback"  type = "UIBooleanCheckBox" Id = "txtBoolAskFeedBack" hiddenControlId= "hdnAskforFeeddBack"   property ="askForFeedBack" />
 <Element label = "Discount"  type = "UIText" Id = "txtDiscount"   focusoutJS = "calculateAll()" property ="totalDisc"  isNumeric= "true" size = "10" />  
 <Element label = "Tax_Percent"  type = "UIText" Id = "txtTaxPerc"   focusoutJS = "calculateAll()"  property ="taxPerc" isNumeric= "true" size = "10" />
 <Element label = "Tax_Amount"  type = "UIText" Id = "txtTaxAmt"   property ="taxAmount"  readonly="true" isNumeric= "true" size = "10" />

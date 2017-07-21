@@ -144,9 +144,9 @@ public class SchedulerThread extends Thread{
 					owner = CommonUtil.getDivisionManager(sales.getDivision(), context);
 					
 				}
-				createAlertforSales(sales, context, new FiniteValue( CRMConstants.ALERT_TYPE.FEEDBACK), owner);
 				sales.setFeedBackAlerted(true);
 				service.update(sales, context);
+				createAlertforSales(sales, context, new FiniteValue( CRMConstants.ALERT_TYPE.FEEDBACK), owner);
 			});
 		});
 		

@@ -58,6 +58,7 @@ public class Sales extends CRMBusinessModelObject{
 	Integer originalSalesId;
 	String originalDate;
 	
+	boolean askForFeedBack;
 	boolean feedBackAlerted;
 	boolean feedBackCaptured;
 	
@@ -303,6 +304,12 @@ public class Sales extends CRMBusinessModelObject{
 	}
 	public void setGrossAmount(double grossAmount) {
 		this.grossAmount = grossAmount;
+	}
+	public boolean isAskForFeedBack() {
+		return askForFeedBack;
+	}
+	public void setAskForFeedBack(boolean askForFeedBack) {
+		this.askForFeedBack = askForFeedBack;
 	}
 	
 	

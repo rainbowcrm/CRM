@@ -26,6 +26,7 @@
 	  <property name="alternatePhone" column="alternatephone" type="string"/>
       <many-to-one name="company" column ="company_id" not-null="true" lazy="false" ></many-to-one>
       <property name="creditLimit" column="credit_limit" type="double"/>
+      <property name="referencible" column="IS_REFERENCIBLE" type="boolean"/>
       <property name="deleted" column="is_deleted" type="boolean"/>
       <property name="createdDate" column="created_date" type="timestamp" update="false"/>
       <property name="lastUpdateDate" column="last_updated_date" type="timestamp"/>

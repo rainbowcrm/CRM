@@ -28,7 +28,7 @@ public class SalesDAO  extends SpringHibernateDAO{
 	{
 		Session session = openSession(false);
 		Query query = session.createQuery(" from Sales where company.id = :company    and salesDate <= :startDate and  " +
-		 " feedBackAlerted =false and feedBackCaptured =false and voided= false " ) ;
+		 " feedBackAlerted =false and feedBackCaptured =false  and askForFeedBack = true and voided= false " ) ;
 		query.setParameter("company", company);
 		query.setParameter("startDate", startDate);
 		List<Sales> lst = query.list();
