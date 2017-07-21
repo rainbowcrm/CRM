@@ -44,7 +44,7 @@ public interface IDashBoardService {
 	
 	public PieChartData getTerritorySplits(User manager,Date date, CRMContext context, boolean  corporateAdmin );
 	
-	public BarChartData setDivisionSalesTargetData(User manager,Date date, CRMContext context, String classification  );
+	public BarChartData setDivisionSalesTargetData(User manager,Date date, CRMContext context, String classification, boolean  corporateAdmin  );
 	
 	public PieChartData getSaleLeadSplitsByReason(Division division,Date fromDate, Date toDate, CRMContext context, FiniteValue  orientation  );
 	

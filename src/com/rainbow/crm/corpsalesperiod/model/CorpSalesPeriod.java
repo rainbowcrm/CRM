@@ -10,6 +10,7 @@ import java.util.Set;
 
 import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
 import com.rainbow.crm.division.model.Division;
+import com.rainbow.crm.salesperiod.model.SalesPeriod;
 import com.rainbow.crm.vendor.model.Vendor;
 import com.techtrade.rads.framework.annotations.RadsPropertySet;
 

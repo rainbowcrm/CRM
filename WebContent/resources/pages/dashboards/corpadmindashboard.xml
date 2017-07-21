@@ -61,8 +61,8 @@ Controller = "com.rainbow.crm.dashboard.controller.SalesDashBoardController">
 	  <noXAxisDivisions>6</noXAxisDivisions>
 	</Element> -->
 	
-	<!-- <Element type = "UIIFrame" src ="./rdscontroller?page=divtargetanalysis&amp;graphId=divtargetanalysis"  style="graphWindow">
-	</Element> -->
+	<Element type = "UIIFrame" src ="./rdscontroller?page=divtargetanalysis&amp;graphId=admintargetanalysis"  style="graphWindow">
+	</Element> 
 	
 </Element>
 

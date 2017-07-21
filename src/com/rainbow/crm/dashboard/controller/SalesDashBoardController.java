@@ -31,6 +31,7 @@ public class SalesDashBoardController extends CRMGeneralController{
 	static final String LEAD_SPLITS = "leadSplits" ;
 
 	static final String DIV_TARGET_ANALYSIS = "divtargetanalysis" ;
+	static final String ADMIN_TARGET_ANALYSIS = "admintargetanalysis" ;
 	static final String DIV_ASSOC_SALES_SPLITS = "divassocsalessplits" ;
 	static final String ADMIN_ASSOC_SALES_SPLITS = "adminassocsalessplits" ;
 	static final String DIV_PROD_SALES_SPLITS = "divprodsalessplits" ;
@@ -73,10 +74,15 @@ public class SalesDashBoardController extends CRMGeneralController{
 		if(DIV_TARGET_ANALYSIS.equalsIgnoreCase(graphId))  {
 			String classification = dashBoard.getClassification() ;
 			BarChartData barChartData = service.setDivisionSalesTargetData(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(),
-					(CRMContext)getContext(),classification);
+					(CRMContext)getContext(),classification,false);
 			dashBoard.setDivManagersalesTargetData(barChartData);
 		}
-		
+		if(ADMIN_TARGET_ANALYSIS.equalsIgnoreCase(graphId))  {
+			String classification = dashBoard.getClassification() ;
+			BarChartData barChartData = service.setDivisionSalesTargetData(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(),
+					(CRMContext)getContext(),classification,true);
+			dashBoard.setDivManagersalesTargetData(barChartData);
+		}
 		
 		if(PORTFOLIO_SPLITS.equalsIgnoreCase(graphId))  {
 		PieChartData pieChartData  = service.getPortfolioSplits(((CRMContext)getContext()).getLoggedInUser(), new java.util.Date(), (CRMContext)getContext());

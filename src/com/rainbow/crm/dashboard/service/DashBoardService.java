@@ -412,6 +412,9 @@ public class DashBoardService  implements IDashBoardService{
 	
 	
 	
+	
+	
+	
 	@Override
 	public PieChartData getDivisionwiseSales(User manager, Date date,
 			CRMContext context, boolean corporateAdmin) {
@@ -842,18 +845,75 @@ public class DashBoardService  implements IDashBoardService{
 		
 	}
 	
+	private BarChartData makeBarChartData (CorpSalesPeriod currentPeriod,int totalSoldQty,String divisionTitle, String title )
+	{
+		BarChartData barChartData = new BarChartData();
+		BarChartData.Division avgDataDivis = barChartData.new Division();
+		BarData tagetAvgBarData = new BarData();
+		tagetAvgBarData.setText("Target");
+		tagetAvgBarData.setLegend("Target");
+		tagetAvgBarData.setValue(currentPeriod.getTotalTarget());
+		tagetAvgBarData.setColor(CommonUtil.getGraphColors()[0]);
+		avgDataDivis.addBarData(tagetAvgBarData);
+		
+		BarData actualavgBarData = new BarData();
+		actualavgBarData.setText("Actual");
+		actualavgBarData.setLegend("Actual");
+		actualavgBarData.setValue(totalSoldQty);
+		actualavgBarData.setColor(CommonUtil.getGraphColors()[1]);
+		avgDataDivis.addBarData(actualavgBarData);
+		
+		avgDataDivis.setDivisionTitle(divisionTitle);
+		barChartData.addDivision(avgDataDivis);
+		barChartData.setTitle(title);
+		barChartData.setSubTitle(currentPeriod.getPeriod());
+		BarChartData.Range range =  barChartData.new  Range();
+		range.setyMax( (int)((currentPeriod.getTotalTarget()>totalSoldQty)?currentPeriod.getTotalTarget():totalSoldQty));
+		range.setyMin(0);
+		range.setxMin(0);
+		range.setxMax(100);
+		barChartData.setRange(range);
+		return barChartData;
+		
+	}
+	
+	
+	
 	@Override
 	public BarChartData setDivisionSalesTargetData(User manager, Date date,
-			CRMContext context, String classification) {
-		SalesPeriod currentPeriod = getActiveSalesPeriodforManager(manager,date,context);
-		if (currentPeriod == null)
-			return null;
+			CRMContext context, String classification, boolean  corporateAdmin) {
+		SalesPeriod currentPeriod = null;
+		CorpSalesPeriod currPeriod = null;
+		int divisionId=  -1 ;
+		java.sql.Date fromDate = new java.sql.Date(new java.util.Date().getTime()) ;
+		java.sql.Date toDate = new java.sql.Date(new java.util.Date().getTime());
+		if (! corporateAdmin ) {
+			currentPeriod = getActiveSalesPeriodforManager(manager,date,context);
+			if (currentPeriod == null )
+				return null;
+			
+			divisionId = currentPeriod.getDivision().getId();
+			fromDate = new java.sql.Date(currentPeriod.getFromDate().getTime());
+			toDate  = new java.sql.Date(currentPeriod.getToDate().getTime());
+		}else {
+			currPeriod = getActiveCorpSalesPeriodforManager(manager, toDate, context);
+			if (currPeriod == null )
+				return null;
+			
+			fromDate = new java.sql.Date(currPeriod.getFromDate().getTime());
+			toDate = new java.sql.Date(currPeriod.getToDate().getTime());
+		}
 		ISalesService salesService =  (ISalesService)SpringObjectFactory.INSTANCE.getInstance("ISalesService");
 		if (Utils.isNullString(classification) || "TOTAL".equalsIgnoreCase(classification) ) {
-		int totalSoldQty = salesService.getTotalSaleQuantity(currentPeriod.getFromDate(),
-				currentPeriod.getToDate(), currentPeriod.getDivision());
-		
-		return makeBarChartData(currentPeriod, totalSoldQty, "Total Sales Figures" ,"Sales Target state" );
+			com.rainbow.crm.division.model.Division periodDivision = new com.rainbow.crm.division.model.Division();
+			periodDivision.setId(divisionId);
+			
+		int totalSoldQty = salesService.getTotalSaleQuantity(fromDate,
+				toDate, periodDivision);
+		if (! corporateAdmin )
+			return makeBarChartData(currentPeriod, totalSoldQty, "Total Sales Figures" ,"Sales Target state" );
+		else
+			return makeBarChartData(currPeriod, totalSoldQty, "Total Sales Figures" ,"Sales Target state" );
 		//int noAssociates  =getNoAssociates(associate, date, context) ;
 		
 		}else {
@@ -862,7 +922,7 @@ public class DashBoardService  implements IDashBoardService{
 				//salesService.getCategorySaleQuantity(categoryId,currentPeriod.getFromDate(),currentPeriod.getToDate(), currentPeriod.getDivision());
 				
 			}
-			return setDivisionSalesTargetData(manager, date, context, null);
+			return setDivisionSalesTargetData(manager, date, context, null,corporateAdmin);
 		}
 			
 		
