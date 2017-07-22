@@ -30,6 +30,7 @@ public class Customer extends CRMBusinessModelObject{
 	byte[] image;
 	String fileName;
 	String fileWithLink;
+	String tempPhotoFile;
 	
 	String base64Image;
 	
@@ -183,6 +184,16 @@ public class Customer extends CRMBusinessModelObject{
 	public void setReferencible(boolean referencible) {
 		this.referencible = referencible;
 	}
+
+	public String getTempPhotoFile() {
+		return tempPhotoFile;
+	}
+
+	public void setTempPhotoFile(String tempPhotoFile) {
+		this.tempPhotoFile = tempPhotoFile;
+	}
+
+	
 	
 	
 	

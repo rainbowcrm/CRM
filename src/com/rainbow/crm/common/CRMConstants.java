@@ -35,7 +35,12 @@ public class CRMConstants {
 	public final static String FV_FACTOR_TYPE= "FACTTYPE";
 	public final static String FV_FEEDBACK_ON =  "FDBACKON";
 	public final static String FV_ORIENTATION= "BUSORIEN";
+	public final static String FV_PRICESOURCE= "PRICSRC";
 	
+	public final static class PRICE_SOURCES {
+		public final static String ITEM ="ITEMPRC";
+		public final static String SKU ="SKUPRC";
+	}
 	public final static class BUSINESS_ORIENTATION {
 		public final static String POSITIVE ="POSIT";
 		public final static String NEGATIVE ="NEGAT";

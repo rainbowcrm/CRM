@@ -8,9 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.SpringObjectFactory;
+import com.rainbow.crm.config.service.ConfigurationManager;
 import com.rainbow.crm.database.LoginSQLs;
 import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.item.model.Sku;
@@ -31,7 +33,8 @@ public class SkuAjaxService implements IAjaxLookupService {
 		String barCode = searchFields.get("Barcode");
 		String itName = searchFields.get("Name");
 		String divisionId = searchFields.get("Division");
-
+		String priceSource = ConfigurationManager.getConfig(ConfigurationManager.FETCH_PRICESFROM, ((CRMContext)ctx).getLoggedinCompany());
+		
 		ISkuService service = (ISkuService) SpringObjectFactory.INSTANCE
 				.getInstance("ISkuService");
 		Sku item = null;
@@ -55,7 +58,7 @@ public class SkuAjaxService implements IAjaxLookupService {
 					json.put("PurchasePrice", item.getPurchasePrice());
 				else
 					json.put("RetailPrice", item.getItem().getPurchasePrice());
-				if(item.getRetailPrice()!= null &&  item.getRetailPrice().doubleValue() > 0)
+				if(item.getRetailPrice()!= null &&  item.getRetailPrice().doubleValue() > 0 && CRMConstants.PRICE_SOURCES.SKU.equals(priceSource))
 					json.put("RetailPrice", item.getRetailPrice());
 				else
 					json.put("RetailPrice", item.getItem().getRetailPrice());

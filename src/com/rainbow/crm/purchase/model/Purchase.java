@@ -29,6 +29,7 @@ public class Purchase extends CRMBusinessModelObject{
 	boolean settled =true;
 	boolean voided;
 	boolean returned;
+	boolean realised; 
 	String commments;
 	Set<PurchaseLine> purchaseLines;
 	
@@ -148,5 +149,12 @@ public class Purchase extends CRMBusinessModelObject{
 			purchaseLines = new LinkedHashSet <PurchaseLine> ();
 		this.purchaseLines.add(purchaseLine);
 	}
+	public boolean isRealised() {
+		return realised;
+	}
+	public void setRealised(boolean realised) {
+		this.realised = realised;
+	}
+	
 		
 }

@@ -1,3 +1,4 @@
+
 package com.rainbow.crm.common;
 
 import java.io.ByteArrayInputStream;
@@ -281,7 +282,8 @@ public class CommonUtil {
 		}else  {
 			context.setAuthorized(true);
 		}
-		context.setPage(page);
+		if(page != null)
+			context.setPageAccessCode(page.getAccessCode());
 		return context;
 	}
 	
@@ -299,7 +301,8 @@ public class CommonUtil {
 		}else  {
 			context.setAuthorized(true);
 		}
-		context.setPage(page);
+		if(page != null)
+			context.setPageAccessCode(page.getAccessCode());
 		return context;
 	}
 	
@@ -320,7 +323,8 @@ public class CommonUtil {
 		}else  {
 			context.setAuthorized(true);
 		}
-		context.setPage(page);
+		if(page != null)
+			context.setPageAccessCode(page.getAccessCode());
 		return context;
 	}
 	
@@ -353,6 +357,12 @@ public class CommonUtil {
 			retdivision =(Division) divisionService.getByBusinessKey(division, context);
 		}
 		return retdivision;
+	}
+	
+	public static User getUser(CRMContext context , User user) {
+		IUserService userService = (IUserService) SpringObjectFactory.INSTANCE.getInstance("IUserService");
+		User retUser =(User) userService.getById(user.getUserId());
+		return retUser;
 	}
 	
 	public static CRMModelObject getCRMModelObject(CRMContext context,CRMBusinessModelObject modelObject, String interfaceName ) {

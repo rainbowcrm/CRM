@@ -28,10 +28,10 @@ public class FeedBackReasonsAjaxService implements IAjaxLookupService{
 	@Override
 	public String lookupValues(Map<String, String> searchFields,
 			IRadsContext ctx) {
-		String type=searchFields.get("rating");
+		String rating=searchFields.get("rating");
 		String benchMark =ConfigurationManager.getConfig(ConfigurationManager.FEEDBACK_RATING_BENCHMARK, (CRMContext) ctx);
 		String orientation = CRMConstants.BUSINESS_ORIENTATION.POSITIVE ;
-		if (Integer.parseInt(benchMark) >= Integer.parseInt(type))
+		if (Integer.parseInt(benchMark) > Integer.parseInt(rating))
 			orientation =  CRMConstants.BUSINESS_ORIENTATION.NEGATIVE ;
 		IReasonCodeService reasonCodeService = (IReasonCodeService)SpringObjectFactory.INSTANCE.getInstance("IReasonCodeService") ;
 		List<ReasonCode> reasons = reasonCodeService.getAllReasonsforTypeAndOrientation(new FiniteValue(CRMConstants.REASON_TYPE.FEEDBACK_REASON),

@@ -161,6 +161,14 @@ public class PurchaseService extends AbstractionTransactionService implements IP
 			}
 		}
 		TransactionResult result= super.create(object, context);
+		if(purchase.isRealised()) {
+			sendInventoryUpdate (purchase, context);
+		}
+		return result; 
+	}
+	
+	private void sendInventoryUpdate (Purchase purchase,CRMContext context)
+	{
 		InventoryUpdateObject invObject = new InventoryUpdateObject();
 		invObject.setCompany(purchase.getCompany());
 		invObject.setContext(context);
@@ -168,7 +176,6 @@ public class PurchaseService extends AbstractionTransactionService implements IP
 		invObject.setAddition(true);
 		invObject.setItemLines(purchase.getPurchaseLines());
 		CRMMessageSender.sendMessage(invObject);
-		return result; 
 	}
 
 	@Override
@@ -197,8 +204,13 @@ public class PurchaseService extends AbstractionTransactionService implements IP
 				oldLine.setVoided(true);
 				purchase.addPurchaseLine(oldLine);
 			}
+		
 		}
-		return super.update(object, context);
+		TransactionResult result= super.update(object, context);
+		if(!oldObject.isRealised() &&  purchase.isRealised()) {
+			sendInventoryUpdate (purchase, context);
+		}
+		return result ;
 	}
 
 	@Override

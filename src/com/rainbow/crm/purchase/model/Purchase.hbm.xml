@@ -27,6 +27,7 @@
       <property name="settled" column="IS_SETTLED" type="boolean"/>
       <property name="voided" column="IS_CANCELLED" type="boolean"/>
       <property name="returned" column="IS_RETURNED" type="boolean"/>
+      <property name="realised" column="IS_REALISED" type="boolean"/>
       <property name="commments" column="commments" type="string"/>
       <property name="createdDate" column="created_date" type="timestamp" update="false"/>
       <property name="lastUpdateDate" column="last_updated_date" type="timestamp"/>

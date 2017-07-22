@@ -48,7 +48,7 @@ public class CustomerService extends AbstractService implements ICustomerService
 
 	private boolean uploadFile(Customer customer, CRMContext context)
 	{
-		
+		if(Utils.isNullString(customer.getFileName())) return false;
 		String fileExtn = CommonUtil.getFileExtn(customer.getFileName());
 		String fileName =  new String("cs" + customer.getId());
 		fileName.replace(" ", "_")    ; 
@@ -77,7 +77,7 @@ public class CustomerService extends AbstractService implements ICustomerService
 		try { 
 			String serverURL = CRMAppConfig.INSTANCE.getProperty("doc_server");
 			customer.setFileWithLink(serverURL + customer.getPhotoFile());
-		
+			customer.setTempPhotoFile(customer.getPhotoFile());
 		}catch(Exception ex) 
 		{
 		  Logwriter.INSTANCE.error(ex);	
@@ -115,8 +115,13 @@ public class CustomerService extends AbstractService implements ICustomerService
 	@Override
 	@Transactional 
 	public TransactionResult update(CRMModelObject object, CRMContext context) {
-		if (((Customer)object).getImage()  != null || !Utils.isNullString(((Customer)object).getBase64Image()) )
-			  uploadFile(((Customer)object), context);
+		if (((Customer)object).getImage()  != null || !Utils.isNullString(((Customer)object).getBase64Image()) ) {
+			  boolean fileuploaded = uploadFile(((Customer)object), context);
+			  if(!fileuploaded &&  !Utils.isNullString(((Customer)object).getTempPhotoFile()) ) 
+			  {
+				  ((Customer)object).setPhotoFile(((Customer)object).getTempPhotoFile());
+			  }
+		}
 		return super.update(object, context);
 	}
 

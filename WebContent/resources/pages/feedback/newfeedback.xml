@@ -76,7 +76,7 @@ Controller = "com.rainbow.crm.feedback.controller.FeedBackController">
 	     </Field>
 	 </SupplementaryFields>
 	</Element>
-	<Element label = "Phone"  type = "UIText" Id = "txtPhone"   readonly="true" property ="Customer.Phone" />
+	<Element label = "Customer_Phone"  type = "UIText" Id = "txtPhone"   readonly="true" property ="Customer.Phone" />
 	<Element label = "Email"  type = "UIText" Id = "txtEmail"   readonly="true" property ="Customer.Email" />
 	 <Element label = "Name"  type = "UIText"  Id = "txtCustomerName"  readonly="true" property ="Customer.FullName" />
 	

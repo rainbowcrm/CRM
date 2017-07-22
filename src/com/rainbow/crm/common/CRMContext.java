@@ -29,7 +29,7 @@ public class CRMContext implements IRadsContext,Serializable{
 	boolean mobileLogin;
     Map<String, String> properties;
     
-    UIPage page ;
+    String pageAccessCode; 
 	
 	@Override
 	public String getUser() {
@@ -176,13 +176,17 @@ public class CRMContext implements IRadsContext,Serializable{
 		this.mobileLogin = mobileLogin;
 	}
 
-	public UIPage getPage() {
-		return page;
+	public String getPageAccessCode() {
+		return pageAccessCode;
 	}
 
-	public void setPage(UIPage page) {
-		this.page = page;
+	public void setPageAccessCode(String pageAccessCode) {
+		this.pageAccessCode = pageAccessCode;
 	}
+	
+	
+
+
 
 	
 	

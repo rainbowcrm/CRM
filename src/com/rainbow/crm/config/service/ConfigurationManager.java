@@ -6,6 +6,7 @@ import com.rainbow.crm.config.sql.ConfigSQL;
 public class ConfigurationManager {
 
 	public static final String CURRENCY = "CURRENCY";
+	public static final String FETCH_PRICESFROM = "USPRCSFRM";
 	public static final String FEEDBACK_RATING_BENCHMARK ="FDBKRTNGMRK";
 	public static final String CONFIGURATION_PRIVILEGE = "CONFPRIVIL";
 	public static final String ANALYTICAL_REPORTS_PRIVILEGE = "ANLREPPRIVIL";
@@ -22,6 +23,7 @@ public class ConfigurationManager {
 	
 	public static final String SLS_AMOUNT_UNIT_LOYALTY = "LOYALTY";
 	public static final String REDEEM_LOYALTY = "RDMLOYALTY";
+	public static final String TOLERANCE_WISHLIST_SALESLEAD = "TOLWSHSLSLEAD";
 	public static final String REDUCE_LOYALTY_RETURNS = "RDCLYLTRT";
 	public static final String LEAD_EMAIL_TEMPLATE = "LDEMAIL";
 	

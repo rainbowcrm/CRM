@@ -8,6 +8,7 @@ import org.hibernate.Session;
 
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
+import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.wishlist.model.WishList;
 import com.rainbow.crm.wishlist.model.WishListLine;
@@ -24,11 +25,11 @@ public class WishListDAO  extends SpringHibernateDAO{
 		return obj;
 	}
 	
-	public List<WishListLine>  getWishesPerItemByPrice(Sku item, double price, String reason ) {
+	public List<WishListLine>  getWishesPerSkuByPrice(Sku item, double price, String reason ) {
 		Session session = openSession(false) ;
     	try  {
 	    	String queryString = " from WishListLine  where item.id =  :item_id   " +   
-    	    " and reasonCode= :reasonCode and desiredPrice>=:price and salesLeadGenerated  is false "  ;
+    	    " and reasonCode= :reasonCode and desiredPrice <=:price and salesLeadGenerated  is false "  ;
 	    	Query  query = session.createQuery(queryString);
 	    	query.setInteger("item_id", item.getId()) ;
 	    	query.setDouble("price", price) ;
@@ -43,10 +44,29 @@ public class WishListDAO  extends SpringHibernateDAO{
     	return null;
 	}
 	
-	public List<WishListLine>  getWishesPerItemByInventory(Sku item, Division division, double Qty , String reason ) {
+	public List<WishListLine>  getWishesPerItemByPrice(Item item, double price, String reason ) {
 		Session session = openSession(false) ;
     	try  {
-	    	String queryString = " from WishListLine  where item.id =  :item_id and qty <= :qty  and division.id= :division_id "  + 
+	    	String queryString = " from WishListLine  where sku.item.id =  :item_id   " +   
+    	    " and reasonCode= :reasonCode and desiredPrice <=:price and salesLeadGenerated  is false "  ;
+	    	Query  query = session.createQuery(queryString);
+	    	query.setInteger("item_id", item.getId()) ;
+	    	query.setDouble("price", price) ;
+	    	query.setString("reasonCode", reason);
+	    	List<WishListLine> wishlistLines = query.list();
+	    	return wishlistLines ;
+    	}catch(Exception ex) {
+    		ex.printStackTrace();
+    	}finally{
+    		session.close();
+    	}
+    	return null;
+	}
+	
+	public List<WishListLine>  getWishesPerSkuByInventory(Sku item, Division division, double Qty , String reason ) {
+		Session session = openSession(false) ;
+    	try  {
+	    	String queryString = " from WishListLine  where sku.id =  :item_id and qty <= :qty  and division.id= :division_id "  + 
     	    " and reasonCode= :reasonCode  and salesLeadGenerated  is false "  ;
 	    	Query  query = session.createQuery(queryString);
 	    	query.setInteger("item_id", item.getId()) ;

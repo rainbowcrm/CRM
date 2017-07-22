@@ -51,7 +51,7 @@ public class SalesDashBoardController extends CRMGeneralController{
 		ans.put("CATEGORY", "Category");
 		ans.put("BRAND", "Brand");
 		CRMContext ctx= (CRMContext)getContext();
-		if(ctx.getPage() != null && ctx.getPage().getAccessCode() != null && ctx.getPage().getAccessCode().contains("ADMIN") )
+		if( ctx.getPageAccessCode() != null && ctx.getPageAccessCode().contains("ADMIN") )
 			ans.put("DIVISION", "Division") ;
 		
 		return ans;

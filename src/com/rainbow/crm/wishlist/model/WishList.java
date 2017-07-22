@@ -11,6 +11,7 @@ import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
 import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.saleslead.model.SalesLead;
+import com.rainbow.crm.user.model.User;
 import com.rainbow.crm.vendor.model.Vendor;
 import com.techtrade.rads.framework.annotations.RadsPropertySet;
 
@@ -19,6 +20,7 @@ public class WishList extends CRMBusinessModelObject{
 	Division division;
 	String docNumber;
 	Customer customer;
+	User associate;
 	Date wishListDate ;
 	boolean salesLeadGenerated;
 	boolean fulfilled;
@@ -105,4 +107,12 @@ public class WishList extends CRMBusinessModelObject{
 	public void setFulfilled(boolean fulfilled) {
 		this.fulfilled = fulfilled;
 	}
+	public User getAssociate() {
+		return associate;
+	}
+	public void setAssociate(User associate) {
+		this.associate = associate;
+	}
+	
+	
 }

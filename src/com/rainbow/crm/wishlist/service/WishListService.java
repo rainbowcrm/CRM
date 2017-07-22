@@ -18,11 +18,14 @@ import com.rainbow.crm.common.AbstractionTransactionService;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMDBException;
 import com.rainbow.crm.common.CRMValidator;
+import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.Externalize;
+import com.rainbow.crm.common.ItemUtil;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.common.messaging.CRMMessageSender;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
+import com.rainbow.crm.config.service.ConfigurationManager;
 import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.customer.service.ICustomerService;
 import com.rainbow.crm.database.GeneralSQLs;
@@ -41,6 +44,7 @@ import com.rainbow.crm.wishlist.model.WishList;
 import com.rainbow.crm.wishlist.model.WishListLine;
 import com.rainbow.crm.wishlist.validator.WishListErrorCodes;
 import com.rainbow.crm.wishlist.validator.WishListValidator;
+import com.rainbow.crm.user.model.User;
 import com.rainbow.crm.vendor.model.Vendor;
 import com.rainbow.crm.vendor.service.IVendorService;
 import com.rainbow.framework.nextup.NextUpGenerator;
@@ -112,13 +116,19 @@ public class WishListService extends AbstractionTransactionService implements IW
 	public void generateSalesLead(InventoryUpdateObject invObject, String reason) {
 		Map<Integer, SalesLead> custLeadsMap = new HashMap<Integer, SalesLead>();
 		WishListDAO dao = (WishListDAO)getDAO();
-		for (CRMItemLine item :  invObject.getItemLines()) {
+		for (CRMItemLine invLine :  invObject.getItemLines()) {
 			List<WishListLine> wishListLines = null;
 			if ("AVLBLTY".equals(reason))
-				wishListLines  = dao.getWishesPerItemByInventory(item.getSku(), invObject.getDivision(), item.getQty(),reason) ;
-			else if ("LOWPRICE".equals(reason)) 
-				wishListLines  = dao.getWishesPerItemByPrice(item.getSku(),  item.getSku().getRetailPrice() ,reason) ;
-				
+				wishListLines  = dao.getWishesPerSkuByInventory(invLine.getSku(), invObject.getDivision(), invLine.getQty(),reason) ;
+			else if ("LOWPRICE".equals(reason))   {
+				String toleranceLevel = ConfigurationManager.getConfig(ConfigurationManager.TOLERANCE_WISHLIST_SALESLEAD, invLine.getCompany().getId()) ;
+				double retailPrice = (invLine.getSku()!=null)? ItemUtil.getRetailPrice(invLine.getSku()):ItemUtil.getRetailPrice(invLine.getItem()) ;
+				double tolerantDiffe  = retailPrice * Double.parseDouble(toleranceLevel) /100;
+				if(invLine.getSku() != null)
+					wishListLines  = dao.getWishesPerSkuByPrice(invLine.getSku(),  retailPrice +  tolerantDiffe,reason) ;
+				else if ( invLine.getItem() != null)
+				wishListLines  = dao.getWishesPerItemByPrice(invLine.getItem(),  retailPrice +  tolerantDiffe,reason) ;
+			}
 			if (!Utils.isNullList(wishListLines))  {
 				for (WishListLine line : wishListLines)  {
 					WishList wishlist = (WishList)dao.getById(line.getWishListDoc().getId());
@@ -129,6 +139,9 @@ public class WishListService extends AbstractionTransactionService implements IW
 						lead = new SalesLead();
 						lead.setCompany(line.getCompany());
 						lead.setDivision(line.getDivision());
+						if(wishlist.getAssociate() != null ) {
+							lead.setSalesAssociate(wishlist.getAssociate().getUserId());
+						}
 						lead.setCustomer(wishlist.getCustomer());
 						lead.setReleasedDate(new java.util.Date());
 						custLeadsMap.put(wishlist.getCustomer().getId(),lead);
@@ -138,10 +151,12 @@ public class WishListService extends AbstractionTransactionService implements IW
 					leadLine.setDivision(lead.getDivision());
 					leadLine.setSku(line.getSku());
 					leadLine.setQty(line.getQty());
-					leadLine.setPrice(line.getSku().getRetailPrice());
+					leadLine.setPrice(ItemUtil.getRetailPrice(line.getSku()));
 					leadLine.setSalesLeadDoc(lead);
 					leadLine.getTemporaryProperties().put("wishListLine",line );
 					lead.addSalesLeadLine(leadLine);
+					wishlist.setSalesLeadGenerated(true);
+					update(wishlist,invObject.getContext());
 				}
 			}
 		}
@@ -183,6 +198,15 @@ public class WishListService extends AbstractionTransactionService implements IW
 			Customer customer = customerService.getByPhone(context.getLoggedinCompany(), phone);
 			if (customer != null)
 				 object.setCustomer(customer);
+			else
+				ans.add(CRMValidator.getErrorforCode(context.getLocale(), WishListErrorCodes.FIELD_NOT_VALID , "Customer"));
+		}
+		if(object.getAssociate() != null) {
+			User associate  = CommonUtil.getUser(context, object.getAssociate());
+			if(associate == null) {
+				ans.add(CRMValidator.getErrorforCode(context.getLocale(), WishListErrorCodes.FIELD_NOT_VALID , "Associate"));
+			}
+			object.setAssociate(associate);
 		}
 		Externalize externalize = new Externalize(); ;
 		
