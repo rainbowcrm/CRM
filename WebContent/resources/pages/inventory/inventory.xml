@@ -45,8 +45,8 @@ Controller = "com.rainbow.crm.inventory.controller.InventoryController">
 	</options>
   </Element>
 </FilterNode> 
- <Element caption = "Apply"  type = "UIButton" Id = "btfilterApply"  style="button"  fixedAction ="FixedAction.ACTION_FILTERAPPLY"   />
- <Element caption = "Clear"  type = "UIButton" Id = "btfilterClear"    style="button" showInPrevCol ="true" fixedAction ="FixedAction.ACTION_FILTERCLEAR"  />
+ <Element caption = "Apply"  type = "UIButton" Id = "btfilterApply"  style="btn btn-primary" iconStyle="glyphicon glyphicon-flash"  fixedAction ="FixedAction.ACTION_FILTERAPPLY"   />
+ <Element caption = "Clear"  type = "UIButton" Id = "btfilterClear"    style="btn btn-warning" iconStyle="glyphicon glyphicon-remove" showInPrevCol ="true" fixedAction ="FixedAction.ACTION_FILTERCLEAR"  />
 
 </FilterSection>
  
@@ -116,16 +116,16 @@ Controller = "com.rainbow.crm.inventory.controller.InventoryController">
 <Element label = ""  type = "UINote" Id = ""  property ="damagedQty" />
 </Column>
 <Column width="7%">
-<Element caption = "+"  type = "UIButton" Id = "btnAddRow"    fixedAction ="FixedAction.ACTION_ADDTABLEROW"   rendered = "Controller.isCreateMode" fixedActionParam =  "this"/>
-<Element caption = "-"  type = "UIButton" Id = "btnDelRow"    fixedAction ="FixedAction.ACTION_DELETETABLEROW" rendered = "Controller.isCreateMode"  fixedActionParam =  "this"/>
+<Element caption = "" style="btn btn-primary" iconStyle="glyphicon glyphicon-plus"  type = "UIButton" Id = "btnAddRow"    fixedAction ="FixedAction.ACTION_ADDTABLEROW"   rendered = "Controller.isCreateMode" fixedActionParam =  "this"/>
+<Element caption = "" style="btn btn-danger" iconStyle="glyphicon glyphicon-minus"  type = "UIButton" Id = "btnDelRow"    fixedAction ="FixedAction.ACTION_DELETETABLEROW" rendered = "Controller.isCreateMode"  fixedActionParam =  "this"/>
 </Column>
 </DataEntryColumns>
 </ListSection>
 </CoreSection>
 <Section type ="summary">
 <If check  = "Controller.isReadMode" >
-<Element caption = "Add"  type = "UIButton"    Id = "btnAdd"  style="button" fixedAction ="FixedAction.ACTION_GOADDMODE"  fixedActionParam =  "NEW"/>
-<Element caption = "Edit"  type = "UIButton"    Id = "btnEdit"  style="button" fixedAction ="FixedAction.ACTION_GOEDITMODE"  fixedActionParam =  "EDIT"  />
+<Element caption = "Add"  type = "UIButton"    Id = "btnAdd"  style="btn btn-primary" iconStyle="glyphicon glyphicon-plus" fixedAction ="FixedAction.ACTION_GOADDMODE"  fixedActionParam =  "NEW"/>
+<Element caption = "Edit"  type = "UIButton"    Id = "btnEdit"  style="btn btn-warning" iconStyle="glyphicon glyphicon-pencil" fixedAction ="FixedAction.ACTION_GOEDITMODE"  fixedActionParam =  "EDIT"  />
 <Element type= "Panel" key= "NavPanel"  style = "sameline" ></Element>
 </If>
 <If check  = "Controller.isCreateorEditMode" >

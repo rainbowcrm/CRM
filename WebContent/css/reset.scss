@@ -15,3 +15,24 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 div.panel-default{
     background: rgba(244,244,244,0.8);
 }
+body, div.topBar{
+    min-width: 1024px !important;
+}
+.glyphicon{
+    padding-right: 2px !important;
+}
+/*Reset bootstrap styles*/
+.form-control{
+    height: 25px !important;
+    padding: 3px !important;
+}
+input[type=checkbox], input[type=radio]{
+    &.form-control{
+        width: 25px;
+    }
+}
+thead{
+    background-color: #282828;
+    color: white;
+    font-weight: 600;
+}

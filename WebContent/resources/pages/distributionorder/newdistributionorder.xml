@@ -137,11 +137,11 @@ Controller = "com.rainbow.crm.distributionorder.controller.DistributionOrderCont
 
 </CoreSection>
 <Section type ="optionalsummary">
-<Element caption = "Pick"  type = "UIButton"    Id = "btnPick"  style="button" rendered = "Controller.isReleased" fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="pick"   />
-<Element caption = "Pack"  type = "UIButton"    Id = "btnPack"  style="button" rendered = "Controller.isPicked" fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="pack"   />
-<Element caption = "Start_Shipping"  type = "UIButton"    Id = "btnShip"  style="button" rendered = "Controller.isPacking" fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="ship"   />
-<Element caption = "Shipped"  type = "UIButton"    Id = "btnShipped"  style="button" rendered = "Controller.isShipping" fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="shipped"   />
-<Element caption = "Print_Label"  type = "UIButton"    Id = "btnPrint"  style="button"  onClickJS = "showPrintDialog('newprintpop','ShippingLabel');"    />
+<Element caption = "Pick"  type = "UIButton"    Id = "btnPick"  style="btn btn-primary" rendered = "Controller.isReleased" fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="pick"   />
+<Element caption = "Pack"  type = "UIButton"    Id = "btnPack"  style="btn btn-primary" rendered = "Controller.isPicked" fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="pack"   />
+<Element caption = "Start_Shipping"  type = "UIButton"    Id = "btnShip"  style="btn btn-primary" rendered = "Controller.isPacking" fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="ship"   />
+<Element caption = "Shipped"  type = "UIButton"    Id = "btnShipped"  style="btn btn-primary" rendered = "Controller.isShipping" fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="shipped"   />
+<Element caption = "Print_Label"  type = "UIButton"    Id = "btnPrint" style="btn btn-primary" iconStyle="glyphicon glyphicon-print"  onClickJS = "showPrintDialog('newprintpop','ShippingLabel');"    />
 </Section>
 <Section type ="copyRightSection"/>
 </UIForm>

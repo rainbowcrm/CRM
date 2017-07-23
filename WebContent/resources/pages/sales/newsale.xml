@@ -109,7 +109,7 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 	     </Field>
 	 </SupplementaryFields>
 	</Element>
-	<Element caption = "New_Customer"  type = "UIButton"    Id = "btnNewCustomer" showInPrevCol ="true" style="button" onClickJS = "createNewCustomer('newcustDL',this);"  />
+	<Element caption = "New_Customer"  type = "UIButton" style="btn btn-primary" iconStyle="glyphicon glyphicon-plus"    Id = "btnNewCustomer" showInPrevCol ="true" style="button" onClickJS = "createNewCustomer('newcustDL',this);"  />
 	<Element type ="UIDialog" Id = "newcustDL" style= "widepopup" >
 	<Element type = "UIIFrame" src ="./rdscontroller?page=quickcustomeradd" style ="lookupFrameStyle">
 	</Element>
@@ -175,8 +175,8 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 <Element type ="UITableCol" width = "8%"><Element label = ""  type = "UIText" Id = "txtlineTotal"  property ="lineTotal" size = "10"  readonly="true" />  </Element>
 
 <Element type ="UITableCol" width = "5%">
-	<Element caption = "+"  type = "UIButton" Id = "btnAddRow"    fixedAction ="FixedAction.ACTION_ADDTABLEROW"  fixedActionParam =  "this"/>
-	<Element caption = "-"  type = "UIButton" Id = "btnDelRow"    fixedAction ="FixedAction.ACTION_DELETETABLEROW"  fixedActionParam =  "this"/>
+	<Element caption = "" style="btn btn-primary" iconStyle="glyphicon glyphicon-plus"  type = "UIButton" Id = "btnAddRow"    fixedAction ="FixedAction.ACTION_ADDTABLEROW"  fixedActionParam =  "this"/>
+	<Element caption = "" style="btn btn-danger" iconStyle="glyphicon glyphicon-minus"  type = "UIButton" Id = "btnDelRow"    fixedAction ="FixedAction.ACTION_DELETETABLEROW"  fixedActionParam =  "this"/>
 </Element>
 </Element>
 </Element>
@@ -230,10 +230,10 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 
 </CoreSection>
 <Section type ="summary">
-<Element caption = "Get_Loyalty_Discount"  type = "UIButton"    Id = "btnInvoice"  style="button"  fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="getLoayltyDiscount"   />
-<Element caption = "Apply_Promotions"  type = "UIButton"    Id = "btnApplyPromotion"  style="button"  fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="applyPromotion"   />
-<Element caption = "Print_Invoice"  type = "UIButton"    Id = "btnInvoice"  style="button" onClickJS = "showPrintDialog('newprintpop','SalesInvoice');"  rendered = "Controller.isUpdateMode" />
-<Element caption = "Create_DO"  type = "UIButton"    Id = "btnInvoice"  style="button" rendered = "Controller.isUpdateMode" fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="createDO"   />
+<Element caption = "Get_Loyalty_Discount"  type = "UIButton"    Id = "btnInvoice"  style="btn btn-primary"  fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="getLoayltyDiscount"   />
+<Element caption = "Apply_Promotions"  type = "UIButton"    Id = "btnApplyPromotion"  style="btn btn-primary"  fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="applyPromotion"   />
+<Element caption = "Print_Invoice"  type = "UIButton"    Id = "btnInvoice"  style="btn btn-primary" iconStyle="glyphicon glyphicon-print" onClickJS = "showPrintDialog('newprintpop','SalesInvoice');"  rendered = "Controller.isUpdateMode" />
+<Element caption = "Create_DO"  type = "UIButton"    Id = "btnInvoice"  style="btn btn-primary" rendered = "Controller.isUpdateMode" fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="createDO"   />
 </Section>
 <Section type ="copyRightSection"/>
 </UIForm>

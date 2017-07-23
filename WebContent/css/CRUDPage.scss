@@ -27,8 +27,8 @@ div.pagestylefull {
 div.pagestyle {
      position: relative;
     overflow: auto;
-    width: 86%;
-    float: left;
+    padding-left: 225px;
+    width: 100%;
 }
 
 div.uitabstyle {
@@ -45,6 +45,15 @@ div.detailCRUDStyle {
     background-color: $primary-color;
     background: -webkit-linear-gradient(305deg,$filter-start-color,$filter-stop-color);
     background: linear-gradient(145deg,$filter-start-color,$filter-stop-color);
+	.table-striped>tbody>tr:nth-of-type(odd){
+      background: none;
+   }
+    .table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th{
+      border: none;
+   }
+   .table-bordered{
+      border: none;
+   }
 }
 
 div.childSectionStyle {
@@ -76,10 +85,9 @@ div.discussionrootStyle{
  
 div.summaryStyle{
  text-align: right;
- position:absolute;
- top:90%;
- width:86%;
- left:14%;
+ position:relative;
+ padding-left: 225px;
+ width: 100%;
  #btSubmit{
 	 background: $good;
  }
@@ -92,6 +100,15 @@ div.summaryStyle{
  #btnFilterClear{
 	 background: $warn;
  }
+ .table-striped>tbody>tr:nth-of-type(odd){
+      background: none;
+  }
+  .table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th{
+      border: none;
+  }
+  .table-bordered{
+      border: none;
+  }
 }
 
 

@@ -7,17 +7,24 @@
     background: rgba(0, 0, 0, 0.9);
     z-index:1;
 }
+body{
+    padding: 50px;
+}
 div.topBar{
-    position: relative;
+    position: absolute;
     top: 0px;
     left: 0px;
-    height: 40px;
+    height: 50px;
     width: 100%;
     background: $header-color;
     color: $light;
     text-align: center;
     box-shadow: 2px 0 3px rgba(0, 0, 0, 0.5);
 
+    button.btn{
+      background: none;
+      color: white;
+    }
     .menu:hover{
       cursor: hand;
     }
@@ -37,12 +44,21 @@ div.topBar{
       position: absolute;
       left: 25px;
   }
+  .table-striped>tbody>tr:nth-of-type(odd){
+      background: none;
+  }
+  .table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th{
+      border: none;
+  }
+  .table-bordered{
+      border: none;
+  }
 }
 
 span.topBar {
  font-size: 20px ;
  font-weight:bold;
- color:$light;
+ color: #9d9d9d;;
  line-height: 40px;
 }
 
@@ -53,21 +69,3 @@ span.topBar {
     }
 }
 
-@media screen and (max-width: $break-large) {
-    div.topBar{
-      .menu{
-        display: inline;
-      }
-    }
-    div#leftsideBarApp{
-        display: none;
-        z-index: 100;
-        width: 40%;
-    }
-    body div.pagestyle{
-        width: 100%;
-    }
-    input[type="text"], select{
-        width: 150px;
-    }
-}

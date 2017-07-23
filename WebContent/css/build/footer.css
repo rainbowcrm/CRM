@@ -6,7 +6,8 @@ div.copyRight {
   padding: 10px;
   line-height: 13px;
   background: #263238;
-  text-align: center; }
+  text-align: center;
+  display: none; }
 
 span.copyRight {
   color: #222;

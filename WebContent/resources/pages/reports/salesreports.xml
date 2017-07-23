@@ -29,7 +29,7 @@ Controller = "com.rainbow.crm.reports.controller.SalesReportController">
   	<Element type = "UITableRow">
 	<Element type ="UITableCol">
 	<Element label = ""  type = "UIHidden" Id = "hdnRepType"    property ="reportType"  />
-   <Element caption = "View"  type = "UIButton"    Id = "btnShipped"  style="button"  fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="viewReport"   />
+   <Element caption = "View"  type = "UIButton"    Id = "btnShipped"  style="btn btn-primary"  fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="viewReport"   />
    </Element>
    </Element>
   

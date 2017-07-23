@@ -17,8 +17,8 @@ form {
 div.pagestyle {
      position: relative;
     overflow: auto;
-    width: 86%;
-    float: left;
+    padding-left: 225px;
+    width: 100%;
 }
 
 div.coreStyle {
@@ -61,10 +61,9 @@ overflow:scroll;
 
 div.summaryStyle{
  text-align: right;
- position:fixed;
-top:90%;
-width:86%;
-left:14%;
+ padding-left: 225px;
+    width: 100%;
+ position: relative;
 table td{
 	border: none;
 }

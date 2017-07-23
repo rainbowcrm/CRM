@@ -178,7 +178,7 @@ Controller = "com.rainbow.crm.config.controller.ConfigController">
 </Section>
 </CoreSection>
  <Section type ="summary"  >
-<Element caption = "Update"  type = "UIButton" Id = "btdwLoad"  style="button"  
+<Element caption = "Update"  type = "UIButton" Id = "btdwLoad"  style="btn btn-primary" iconStyle="glyphicon glyphicon-flash" 
   fixedAction ="FixedAction.ACTION_PLAINSUBMIT"   />
  </Section>
 

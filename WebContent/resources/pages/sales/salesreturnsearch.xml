@@ -25,7 +25,7 @@ Controller = "com.rainbow.crm.sales.controller.SalesReturnSearchController">
 </Element>
 
 <Element type ="UITableCol">
-<Element caption = "Search"  type = "UIButton" Id = "btnFilterDelete"  style="button" fixedAction ="FixedAction.ACTION_PLAINSUBMIT"   />
+<Element caption = "Search"  type = "UIButton" Id = "btnFilterDelete"  style="btn btn-primary" iconStyle="glyphicon glyphicon-search" fixedAction ="FixedAction.ACTION_PLAINSUBMIT"   />
 </Element>
 
 </Element>

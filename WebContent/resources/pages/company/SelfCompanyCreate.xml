@@ -68,9 +68,9 @@ Controller = "com.rainbow.crm.company.controller.CompanyController">
 </Section>
 </CoreSection>
 <Section type ="optionalSummary">
-<Element caption = "Create"  type = "UIButton" Id = "btSubmit"   style="button"  rendered = "Controller.isCreateMode" fixedAction ="FixedAction.ACTION_CREATE" 
+<Element caption = "Create"  type = "UIButton" Id = "btSubmit"   style="btn btn-primary" iconStyle="glyphicon glyphicon-plus" rendered = "Controller.isCreateMode" fixedAction ="FixedAction.ACTION_CREATE" 
   fixedActionvalidateFunc="validateforCreate()" fixedActionParam =  "SAVE"  />
-<Element caption = "Cancel"  type = "UIButton" Id = "btCancel"  style="button"  fixedAction ="FixedAction.ACTION_PAGEFORWARD" fixedActionParam =  "CANCEL"  />
+<Element caption = "Cancel"  type = "UIButton" Id = "btCancel"  style="btn btn-warning" iconStyle="glyphicon glyphicon-remove"  fixedAction ="FixedAction.ACTION_PAGEFORWARD" fixedActionParam =  "CANCEL"  />
 </Section>
 <Section type ="copyRightSection"/>
 </UIForm>

@@ -79,10 +79,10 @@ Controller = "com.rainbow.crm.item.controller.ItemImageController">
 </Section>
 </CoreSection>
 <Section type= "summary">
-<Element caption = "Delete_All"  type = "UIButton" Id = "btnFilterDelete"  style="button" fixedAction ="FixedAction.ACTION_DELETE"   />
-<Element caption = "Fetch_Images"  type = "UIButton" Id = "btnFetchAll"  style="button" fixedAction ="FixedAction.ACTION_READ"   />
-<Element caption = "Submit"  type = "UIButton" Id = "btfilterSave"  style="button" fixedAction ="FixedAction.ACTION_UPDATE"   />
-<Element caption = "Clear"  type = "UIButton" Id = "btnFilterClear"  style="button" onClickJS ="clearAll();"  />
+<Element caption = "Delete_All"  type = "UIButton" Id = "btnFilterDelete"  style="btn btn-danger" iconStyle="glyphicon glyphicon-trash" fixedAction ="FixedAction.ACTION_DELETE"   />
+<Element caption = "Fetch_Images"  type = "UIButton" Id = "btnFetchAll"  style="btn btn-primary" iconStyle="glyphicon glyphicon-cloud-download" fixedAction ="FixedAction.ACTION_READ"   />
+<Element caption = "Submit"  type = "UIButton" Id = "btfilterSave"  style="btn btn-primary" iconStyle="glyphicon glyphicon-save-file" fixedAction ="FixedAction.ACTION_UPDATE"   />
+<Element caption = "Clear"  type = "UIButton" Id = "btnFilterClear"  style="btn btn-warning" iconStyle="glyphicon glyphicon-remove" onClickJS ="clearAll();"  />
 </Section> 
 <Section type ="copyRightSection"/>
 </UIForm>

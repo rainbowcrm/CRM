@@ -10,7 +10,7 @@
 <Element label = ""  type = "UIHidden" Id = "additionalFields"  property="additionalFields"   />
 <Element label = ""  type = "UIHidden" Id = "additionalControls"  property="additionalControls"   />
 <Element label = "" type = "UIText" Id = "txtSearch" />
-<Element caption = "Search"  type = "UIButton"    Id = "btnSearch" property ="X" style="button" fixedAction ="FixedAction.ACTION_PLAINSUBMIT"  />
+<Element caption = "Search"  type = "UIButton"    Id = "btnSearch" property ="X" style="btn btn-primary" iconStyle="glyphicon glyphicon-search" fixedAction ="FixedAction.ACTION_PLAINSUBMIT"  />
 
 </Section>
 <Section type ="ListSection">
@@ -20,8 +20,8 @@
 <Element label = "" type = "UINote" value="&lt;br&gt;" />
 </Section>
 <Section type ="summarySection">
- <Element caption = "Close"  type = "UIButton" Id = "btfilterApply"  style="button"  fixedAction ="FixedAction.CLOSELOOKUPDIALOG"   />
-<Element caption = "Cancel"  type = "UIButton" Id = "btfilterClear"    style="button" fixedAction ="FixedAction.CANCELDIALOG"  />
+ <Element caption = "Close"  type = "UIButton" Id = "btfilterApply"  style="btn btn-warning" iconStyle="glyphicon glyphicon-remove"  fixedAction ="FixedAction.CLOSELOOKUPDIALOG"   />
+<Element caption = "Cancel"  type = "UIButton" Id = "btfilterClear"    style="btn btn-primary" fixedAction ="FixedAction.CANCELDIALOG"  />
 </Section>
 </UIForm>
 </Elements>

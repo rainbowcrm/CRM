@@ -109,8 +109,8 @@ Controller = "com.rainbow.crm.promotion.controller.PromotionController">
 <Element type ="UITableCol" width = "8%"><Element label = ""  type = "UIText" Id = "txtLinepromotedQty"  property ="promotedQty" size = "5" />  </Element>
 <Element type ="UITableCol" width = "8%"><Element label = ""  type = "UIText" Id = "txtLinepromotedDisc"  property ="promotedDiscPercent" size = "5" />  </Element>
 <Element type ="UITableCol" width = "10%">
-	<Element caption = "+"  type = "UIButton" Id = "btnAddRow"    fixedAction ="FixedAction.ACTION_ADDTABLEROW"  fixedActionParam =  "this"/>
-	<Element caption = "-"  type = "UIButton" Id = "btnDelRow"    fixedAction ="FixedAction.ACTION_DELETETABLEROW"  fixedActionParam =  "this"/>
+	<Element caption = "" style="btn btn-primary" iconStyle="glyphicon glyphicon-plus"  type = "UIButton" Id = "btnAddRow"    fixedAction ="FixedAction.ACTION_ADDTABLEROW"  fixedActionParam =  "this"/>
+	<Element caption = "" style="btn btn-danger"   type = "UIButton" Id = "btnDelRow"    fixedAction ="FixedAction.ACTION_DELETETABLEROW"  fixedActionParam =  "this"/>
 </Element>
 </Element>
 </Element>
