@@ -91,9 +91,9 @@ Controller = "com.rainbow.crm.user.controller.UserListController">
 </ListSection>
 </CoreSection>
 <Section type ="summary">
-<Element caption = "Add"  type = "UIButton"    Id = "btnAdd"  style="button" fixedAction ="FixedAction.ACTION_PAGEFORWARD" fixedActionParam =  "NEW" />
-<Element caption = "Edit"  type = "UIButton"    Id = "btnEdit"  style="button" fixedAction ="FixedAction.ACTION_GOEDITMODE"  fixedActionParam =  "EDIT"  />
-<Element caption = "Delete"  type = "UIButton" Id = "btnDel"  style="button"  fixedAction ="FixedAction.ACTION_DELETE"  fixedActionParam =  "DELETE"
+<Element caption = "Add"  type = "UIButton"    Id = "btnAdd"  style="btn btn-primary" iconStyle="glyphicon glyphicon-plus" fixedAction ="FixedAction.ACTION_PAGEFORWARD" fixedActionParam =  "NEW" />
+<Element caption = "Edit"  type = "UIButton"    Id = "btnEdit"  style="btn btn-warning" iconStyle="glyphicon glyphicon-pencil" fixedAction ="FixedAction.ACTION_GOEDITMODE"  fixedActionParam =  "EDIT"  />
+<Element caption = "Delete"  type = "UIButton" Id = "btnDel"  style="btn btn-danger" iconStyle="glyphicon glyphicon-trash"  fixedAction ="FixedAction.ACTION_DELETE"  fixedActionParam =  "DELETE"
    fixedActionvalidateFunc ="deleteFromList()"/>
 <Element type= "Panel" key= "NavPanel"  style = "sameline" ></Element>
 </Section>

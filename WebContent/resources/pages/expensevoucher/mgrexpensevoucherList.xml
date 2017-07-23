@@ -93,7 +93,7 @@ Controller = "com.rainbow.crm.expensevoucher.controller.MgrExpenseVoucherListCon
 </ListSection>
 </CoreSection>
 <Section type ="summary">
-<Element caption = "Process"  type = "UIButton"    Id = "btnEdit"  style="button" fixedAction ="FixedAction.ACTION_GOEDITMODE"  fixedActionParam =  "EDIT"  />
+<Element caption = "Process"  type = "UIButton"    Id = "btnEdit" style="btn btn-primary" fixedAction ="FixedAction.ACTION_GOEDITMODE"  fixedActionParam =  "EDIT"  />
 <Element type= "Panel" key= "NavPanel"  style = "sameline" ></Element>
 </Section>
 <Section type ="copyRightSection"/>

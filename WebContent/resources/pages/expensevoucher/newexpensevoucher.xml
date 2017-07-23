@@ -82,8 +82,8 @@ Controller = "com.rainbow.crm.expensevoucher.controller.ExpenseVoucherController
 <Element type ="UITableCol" width = "6%"><Element label = ""  type = "UIText" Id = "txtLineCorrAmt"  property ="correctedAmount" readonly="true"  isNumeric= "true" size = "5" />  </Element>
 
 <Element type ="UITableCol" width = "8%">
-	<Element caption = "+"  type = "UIButton" Id = "btnAddRow"    fixedAction ="FixedAction.ACTION_ADDTABLEROW"  fixedActionParam =  "this"/>
-	<Element caption = "-"  type = "UIButton" Id = "btnDelRow"    fixedAction ="FixedAction.ACTION_DELETETABLEROW"  fixedActionParam =  "this"/>
+	<Element caption = "" style="btn btn-primary" iconStyle="glyphicon glyphicon-plus"  type = "UIButton" Id = "btnAddRow"    fixedAction ="FixedAction.ACTION_ADDTABLEROW"  fixedActionParam =  "this"/>
+	<Element caption = "" style="btn btn-danger" iconStyle="glyphicon glyphicon-minus" type = "UIButton" Id = "btnDelRow"    fixedAction ="FixedAction.ACTION_DELETETABLEROW"  fixedActionParam =  "this"/>
 </Element>
 </Element>
 </Element>
@@ -102,11 +102,11 @@ Controller = "com.rainbow.crm.expensevoucher.controller.ExpenseVoucherController
 </Section>
 </CoreSection>
 <Section type ="optionalsummary">
-<Element caption = "Create"  type = "UIButton" Id = "btSubmit"   style="button"  rendered = "Controller.isCreateMode" fixedAction ="FixedAction.ACTION_CREATE" 
+<Element caption = "Create"  type = "UIButton" Id = "btSubmit"   style="btn btn-primary" iconStyle="glyphicon glyphicon-plus"  rendered = "Controller.isCreateMode" fixedAction ="FixedAction.ACTION_CREATE" 
   fixedActionvalidateFunc="validateforCreate()" fixedActionParam =  "SAVE"  />
-<Element caption = "Update"  type = "UIButton" Id = "btUpdate"   style="button"  rendered = "Object.isOpen"  
+<Element caption = "Update"  type = "UIButton" Id = "btUpdate"   style="btn btn-warning" iconStyle="glyphicon glyphicon-pencil"  rendered = "Object.isOpen"  
   fixedAction ="FixedAction.ACTION_UPDATE"  fixedActionvalidateFunc="validateforCreate()" fixedActionParam =  "SAVE"  />
-<Element caption = "Cancel"  type = "UIButton" Id = "btCancel"  style="button"  fixedAction ="FixedAction.ACTION_PAGEFORWARD" fixedActionParam =  "CANCEL"  />
+<Element caption = "Cancel"  type = "UIButton" Id = "btCancel"  style="btn btn-warning" iconStyle="glyphicon glyphicon-remove"  fixedAction ="FixedAction.ACTION_PAGEFORWARD" fixedActionParam =  "CANCEL"  />
 </Section>
 <Section type ="copyRightSection"/>
 </UIForm>

@@ -1,13 +1,15 @@
 @import "./colors.scss";
 
 div.leftnav {
-    position: relative;
-    width: 14%;
-    background: $menu-bg-color;
-    color: $light;
+    position: absolute;
+    width: 225px;
+    left: 0px;
+    background: #282828;
+    color: #f4f4f4;
     overflow-y: scroll;
     float: left;
     height: 100%;
+    z-index: 2;
 }
 
 ul{
@@ -20,8 +22,7 @@ ul{
    list-style-type: none;
     text-align:left;
     display: block;
-    padding: 5px;
-    padding-left: 15px;
+    padding: 15px;
  }
 
  .menustyle:first-child{
@@ -30,18 +31,19 @@ ul{
  
 .menustyle:hover{
     cursor: hand;
-    background: $menu-hover-color;
+    background: #080808;
     color: $light;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,0.24);
  }
  
 .menustyleParent {
-    font-size: 13px;
+    font-size: 14px;
     color:$light;
     list-style-type: none;
     text-align:left;
     padding: 5px;
-    margin-bottom: 5px;
+    padding-top: 5px;
+    padding-bottom: 15px;
     &.open:before{
           content: "\f139";
     }
@@ -62,4 +64,8 @@ ul{
 
 .menustyleParent:hover{
     cursor: hand;
+ }
+
+ i.fa-fw{
+     vertical-align: middle;
  }

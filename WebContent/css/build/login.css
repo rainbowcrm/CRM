@@ -40,6 +40,25 @@ table {
 div.panel-default {
   background: rgba(244, 244, 244, 0.8); }
 
+body, div.topBar {
+  min-width: 1024px !important; }
+
+.glyphicon {
+  padding-right: 2px !important; }
+
+/*Reset bootstrap styles*/
+.form-control {
+  height: 25px !important;
+  padding: 3px !important; }
+
+input[type=checkbox].form-control, input[type=radio].form-control {
+  width: 25px; }
+
+thead {
+  background-color: #282828;
+  color: white;
+  font-weight: 600; }
+
 div.copyRight {
   position: fixed;
   bottom: 0%;
@@ -48,7 +67,8 @@ div.copyRight {
   padding: 10px;
   line-height: 13px;
   background: #263238;
-  text-align: center; }
+  text-align: center;
+  display: none; }
 
 span.copyRight {
   color: #222;
@@ -80,7 +100,7 @@ span.copyRightText {
   src: url("./fonts/Oregon LDO Medium.ttf") format("truetype"); }
 
 body {
-  background: rgba(195, 195, 195, 0.8) !important;
+  background: rgba(195, 195, 195, 0.2) !important;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif; }
 
@@ -113,12 +133,15 @@ h1.text-center {
 div.blueribbon {
   text-align: center;
   position: absolute;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.1);
   left: 35%;
   width: 33%;
   top: 20%;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.24);
   border-radius: 5px; }
+
+div.jumbotron {
+  background-color: rgba(0, 0, 0, 0.1); }
 
 input {
   line-height: initial; }
@@ -164,3 +187,7 @@ td {
 
 #btCancel {
   background: #f53d3d; }
+
+.form-control {
+  height: 34px !important;
+  padding: 6px 12px !important; }

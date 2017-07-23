@@ -19,7 +19,8 @@ form {
 div.pagestyle {
      position: relative;
     overflow: auto;
-    width: 86%;
+    padding-left: 225px;
+    width: 100%;
     float: left;
 }
 
@@ -62,17 +63,6 @@ div.detailStyle {
 position:relative;
 overflow:auto;
 max-height: 60%;
-  table{
-        margin: auto;
-        width: 95%;
-        border: 1px solid $medium-dark;
-    }
-  thead.listPageTitle {
-    background: $additional-info-color;
-    color: $light;
-    font-weight:bold;
-    font-size:18px;
-  }
   th{
     text-align: left;
   }
@@ -81,14 +71,24 @@ max-height: 60%;
 div.summaryStyle{
    text-align: right;
     position: relative;
-    width: 86%;
     height: 40px;
     margin-top: 10px;
+    padding-left: 225px;
+    width: 100%;
     float: right;
     input{
       background: $primary-color;
       color: $light;
     }
+    .table-striped>tbody>tr:nth-of-type(odd){
+      background: none;
+   }
+    .table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th{
+      border: none;
+   }
+   .table-bordered{
+      border: none;
+   }
 }
 
 
@@ -106,10 +106,6 @@ span.errorStyle {
  font-size:17px;
 }
 
-table, tr {
-width : 100%;
-text-align: left;
-}
 
 table.summaryStyle {
 text-align: right;
@@ -142,22 +138,8 @@ background-color:inherit;
 color:$dark;
 }
 
-#btnAddRow,#btnDelRow {
-   font-family: FontAwesome;
-   border: none;
-   border-radius: 15px;
-   height: 30px;
-   width: 30px;
-   color: $light;
-   background-color: $good;
-}
-
-#btnDelRow
-{
-  background-color: $danger;
-  margin-top: 2px;
-}
-
+#btnAddRow, #btnDelRow {
+    padding: 4px !important; }
 
 
 tr.evenRow{

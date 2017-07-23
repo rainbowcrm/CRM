@@ -35,7 +35,7 @@ Controller = "com.rainbow.framework.setup.controller.DataSetupController">
 	 </options>
 </Element>
 
-<Element caption = "Upload"  type = "UIButton" Id = "btfilterSave"  style="button" onClickJS ="upload();"  />
+<Element caption = "Upload"  type = "UIButton" Id = "btfilterSave"  style="btn btn-primary" iconStyle="glyphicon glyphicon-cloud-upload" onClickJS ="upload();"  />
 </Element>
 <Element type ="UITab" Id= "idExp" title = "Data_Export"  showinTable = "true" cols = "1"  >
 <Element label = "Object"  type = "UIList" Id = "lstExportObjs"     property= "exportmetadataClass" externalise= "true">
@@ -52,7 +52,7 @@ Controller = "com.rainbow.framework.setup.controller.DataSetupController">
 	 </options>
 </Element>
 
-<Element caption = "DownLoad"  type = "UIButton" Id = "btdwLoad"  style="button" onClickJS ="downLoad();"  />
+<Element caption = "DownLoad"  type = "UIButton" Id = "btdwLoad"  style="btn btn-primary" iconStyle="glyphicon glyphicon-cloud-download" onClickJS ="downLoad();"  />
 </Element>
 </Element>
 

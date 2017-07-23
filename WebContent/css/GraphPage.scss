@@ -18,8 +18,8 @@ form {
 div.pagestyle {
      position: relative;
     overflow: auto;
-    width: 86%;
-    float: left;
+    padding-left: 225px;
+    width: 100%;
 }
 
 div.detailCRUDStyle {
@@ -45,10 +45,9 @@ background-color:rgb(255,255,255);
  
 div.summaryStyle{
  text-align: right;
- position:absolute;
-top:90%;
-width:86%;
-left:14%;
+ position:relative;
+ padding-left: 225px;
+ width: 100%;
 background-color:rgb(106,53,0); 
  }
 

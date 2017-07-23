@@ -33,7 +33,7 @@ Controller = "com.rainbow.crm.salesforceanalyzer.controller.SalesForceAnalyzerCo
 	 <Element type ="UITableCol"><Element label = "To"  type = "UIDate" Id = "txtToDate"    property ="toDate"  >
 	 </Element>
 	 <Element type ="UITableCol">
-	 	<Element caption = "Analyze"  type = "UIButton" Id = "btnFilterCleas"  style="button" fixedAction ="FixedAction.ACTION_READ"   />
+	 	<Element caption = "Analyze"  type = "UIButton" Id = "btnFilterCleas"  style="btn btn-primary" iconStyle="glyphicon glyphicon-flash" fixedAction ="FixedAction.ACTION_READ"   />
 	 </Element>
 </Element>
 </Element>

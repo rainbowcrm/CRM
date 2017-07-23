@@ -5,16 +5,22 @@
   background: rgba(0, 0, 0, 0.9);
   z-index: 1; }
 
+body {
+  padding: 50px; }
+
 div.topBar {
-  position: relative;
+  position: absolute;
   top: 0px;
   left: 0px;
-  height: 40px;
+  height: 50px;
   width: 100%;
-  background: #282828;
+  background: #101010;
   color: #f4f4f4;
   text-align: center;
   box-shadow: 2px 0 3px rgba(0, 0, 0, 0.5); }
+  div.topBar button.btn {
+    background: none;
+    color: white; }
   div.topBar .menu:hover {
     cursor: hand; }
   div.topBar .menu {
@@ -30,24 +36,18 @@ div.topBar {
     padding-right: 0.5em;
     position: absolute;
     left: 25px; }
+  div.topBar .table-striped > tbody > tr:nth-of-type(odd) {
+    background: none; }
+  div.topBar .table-bordered > tbody > tr > td, div.topBar .table-bordered > tbody > tr > th, div.topBar .table-bordered > tfoot > tr > td, div.topBar .table-bordered > tfoot > tr > th, div.topBar .table-bordered > thead > tr > td, div.topBar .table-bordered > thead > tr > th {
+    border: none; }
+  div.topBar .table-bordered {
+    border: none; }
 
 span.topBar {
   font-size: 20px;
   font-weight: bold;
-  color: #f4f4f4;
+  color: #9d9d9d;
   line-height: 40px; }
 
 .headerStyle table tbody tr td, .filterStyle table tbody tr td {
   border: none; }
-
-@media screen and (max-width: 768px) {
-  div.topBar .menu {
-    display: inline; }
-  div#leftsideBarApp {
-    display: none;
-    z-index: 100;
-    width: 40%; }
-  body div.pagestyle {
-    width: 100%; }
-  input[type="text"], select {
-    width: 150px; } }
