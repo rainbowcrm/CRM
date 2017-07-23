@@ -152,6 +152,7 @@ public class WishListService extends AbstractionTransactionService implements IW
 					leadLine.setSku(line.getSku());
 					leadLine.setQty(line.getQty());
 					leadLine.setPrice(ItemUtil.getRetailPrice(line.getSku()));
+					leadLine.setNegotiatedPrice(ItemUtil.getRetailPrice(line.getSku()));
 					leadLine.setSalesLeadDoc(lead);
 					leadLine.getTemporaryProperties().put("wishListLine",line );
 					lead.addSalesLeadLine(leadLine);
