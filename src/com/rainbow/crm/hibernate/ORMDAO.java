@@ -159,7 +159,7 @@ public abstract class ORMDAO {
 		 
 	}
 	
-	public void batchUpdate(List<CRMModelObject> objects)  throws DatabaseException{
+	public void batchUpdate(List<? extends CRMModelObject> objects)  throws DatabaseException{
 		Session session = openSession(true);
 		boolean success = false; 
 		try {

@@ -3,6 +3,8 @@ package com.rainbow.crm.common;
 import com.rainbow.crm.config.service.ConfigurationManager;
 import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.item.model.Sku;
+import com.rainbow.crm.product.model.Product;
+import com.rainbow.crm.product.service.IProductService;
 
 public class ItemUtil {
 
@@ -22,5 +24,12 @@ public class ItemUtil {
 			return item.getRetailPrice();
 		else
 			return  0;
+	}
+	
+	public static Product getProduct(CRMContext context,Product product)
+	{
+		IProductService prodService = (IProductService)SpringObjectFactory.INSTANCE.getInstance("IProductService");
+	//	if (product == null)
+			
 	}
 }
