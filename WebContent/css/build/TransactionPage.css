@@ -40,6 +40,25 @@ table {
 div.panel-default {
   background: rgba(244, 244, 244, 0.8); }
 
+body, div.topBar {
+  min-width: 1024px !important; }
+
+.glyphicon {
+  padding-right: 2px !important; }
+
+/*Reset bootstrap styles*/
+.form-control {
+  height: 25px !important;
+  padding: 3px !important; }
+
+input[type=checkbox].form-control, input[type=radio].form-control {
+  width: 25px; }
+
+thead {
+  background-color: #282828;
+  color: white;
+  font-weight: 600; }
+
 .overlay {
   width: 100%;
   height: 100%;
@@ -47,16 +66,22 @@ div.panel-default {
   background: rgba(0, 0, 0, 0.9);
   z-index: 1; }
 
+body {
+  padding: 50px; }
+
 div.topBar {
-  position: relative;
+  position: absolute;
   top: 0px;
   left: 0px;
-  height: 40px;
+  height: 50px;
   width: 100%;
-  background: #282828;
+  background: #101010;
   color: #f4f4f4;
   text-align: center;
   box-shadow: 2px 0 3px rgba(0, 0, 0, 0.5); }
+  div.topBar button.btn {
+    background: none;
+    color: white; }
   div.topBar .menu:hover {
     cursor: hand; }
   div.topBar .menu {
@@ -72,27 +97,21 @@ div.topBar {
     padding-right: 0.5em;
     position: absolute;
     left: 25px; }
+  div.topBar .table-striped > tbody > tr:nth-of-type(odd) {
+    background: none; }
+  div.topBar .table-bordered > tbody > tr > td, div.topBar .table-bordered > tbody > tr > th, div.topBar .table-bordered > tfoot > tr > td, div.topBar .table-bordered > tfoot > tr > th, div.topBar .table-bordered > thead > tr > td, div.topBar .table-bordered > thead > tr > th {
+    border: none; }
+  div.topBar .table-bordered {
+    border: none; }
 
 span.topBar {
   font-size: 20px;
   font-weight: bold;
-  color: #f4f4f4;
+  color: #9d9d9d;
   line-height: 40px; }
 
 .headerStyle table tbody tr td, .filterStyle table tbody tr td {
   border: none; }
-
-@media screen and (max-width: 768px) {
-  div.topBar .menu {
-    display: inline; }
-  div#leftsideBarApp {
-    display: none;
-    z-index: 100;
-    width: 40%; }
-  body div.pagestyle {
-    width: 100%; }
-  input[type="text"], select {
-    width: 150px; } }
 
 div.copyRight {
   position: fixed;
@@ -102,7 +121,8 @@ div.copyRight {
   padding: 10px;
   line-height: 13px;
   background: #263238;
-  text-align: center; }
+  text-align: center;
+  display: none; }
 
 span.copyRight {
   color: #222;
@@ -114,13 +134,15 @@ span.copyRightText {
   font-size: 10px; }
 
 div.leftnav {
-  position: relative;
-  width: 14%;
+  position: absolute;
+  width: 225px;
+  left: 0px;
   background: #282828;
   color: #f4f4f4;
   overflow-y: scroll;
   float: left;
-  height: 100%; }
+  height: 100%;
+  z-index: 2; }
 
 ul {
   list-style-type: none; }
@@ -131,25 +153,25 @@ ul {
   list-style-type: none;
   text-align: left;
   display: block;
-  padding: 5px;
-  padding-left: 15px; }
+  padding: 15px; }
 
 .menustyle:first-child {
   margin-top: 5px; }
 
 .menustyle:hover {
   cursor: hand;
-  background: #00abff;
+  background: #080808;
   color: #f4f4f4;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.24); }
 
 .menustyleParent {
-  font-size: 13px;
+  font-size: 14px;
   color: #f4f4f4;
   list-style-type: none;
   text-align: left;
   padding: 5px;
-  margin-bottom: 5px; }
+  padding-top: 5px;
+  padding-bottom: 15px; }
   .menustyleParent.open:before {
     content: "\f139"; }
 
@@ -166,6 +188,9 @@ ul {
 
 .menustyleParent:hover {
   cursor: hand; }
+
+i.fa-fw {
+  vertical-align: middle; }
 
 dialog.dialogstyle {
   width: 100%;
@@ -237,7 +262,7 @@ dialog.fixed {
   transform: translate(0, -50%); }
 
 body {
-  background: rgba(195, 195, 195, 0.8) !important;
+  background: rgba(195, 195, 195, 0.2) !important;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif; }
 
@@ -247,8 +272,8 @@ form > p {
 div.pagestyle {
   position: relative;
   overflow: auto;
-  width: 86%;
-  float: left; }
+  padding-left: 225px;
+  width: 100%; }
 
 div.coreStyle {
   position: relative;
@@ -283,10 +308,9 @@ div.uitabstyle {
 
 div.summaryStyle {
   text-align: right;
-  position: fixed;
-  top: 90%;
-  width: 86%;
-  left: 14%;
+  padding-left: 225px;
+  width: 100%;
+  position: relative;
   /*background-color:rgb(192,192,192); 192,192,192*/
   /*background-color:rgb(106,53,0); Brown*/
   /**background-color:rgb(185,180,206);**/ }

@@ -25,8 +25,8 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 <Element type = "UITableRow">
 <Element type ="UITableCol" align="right">
 
-<Element caption = "Close"  type = "UIButton" Id = "btClose"   style="button" onClickJS = "closeDialog('newprintpop');"  />
-<Element caption = "Print"  type = "UIButton" Id = "btPrintNew"   style="button" onClickJS = "window.print();"  />
+<Element caption = "Close"  type = "UIButton" Id = "btClose"   style="btn btn-warning" iconStyle="glyphicon glyphicon-remove" onClickJS = "closeDialog('newprintpop');"  />
+<Element caption = "Print"  type = "UIButton" Id = "btPrintNew"   style="btn btn-primary" iconStyle="glyphicon glyphicon-print" onClickJS = "window.print();"  />
 </Element>
 </Element>
 </Element>
@@ -269,10 +269,10 @@ Controller = "com.rainbow.framework.query.controller.QueryController">
 </CoreSection>
  
  <Section type ="summary"  >
- <Element caption = "Fetch"  type = "UIButton" Id = "btdwFetch"  style="button"  onClickJS="submitWithParam('fetchQuery')"   />
- <Element caption = "clear"  type = "UIButton" Id = "btdwClear"  style="button"  onClickJS="submitWithParam('clear')"   />
-<Element caption = "Query"  type = "UIButton" Id = "btdwLoad"  style="button"  onClickJS="submitWithParam('runQuery')"   />
-<Element caption = "Save"  type = "UIButton" Id = "btdwSave"  style="button"  onClickJS="submitWithParam('saveQuery')"   />
+ <Element caption = "Fetch"  type = "UIButton" Id = "btdwFetch"  style="btn btn-primary"  onClickJS="submitWithParam('fetchQuery')"   />
+ <Element caption = "clear"  type = "UIButton" Id = "btdwClear"  style="btn btn-primary"  onClickJS="submitWithParam('clear')"   />
+<Element caption = "Query"  type = "UIButton" Id = "btdwLoad"  style="btn btn-primary"  onClickJS="submitWithParam('runQuery')"   />
+<Element caption = "Save"  type = "UIButton" Id = "btdwSave"  style="btn btn-primary" iconStyle="glyphicon glyphicon-save-file"  onClickJS="submitWithParam('saveQuery')"   />
  </Section>
 
 

@@ -28,12 +28,12 @@ Controller = "com.rainbow.crm.customer.controller.CustomerController">
 </CoreSection>
 <Section type ="summary">
 <If check  = "!Controller.isReadMode" >
-<Element caption = "Create"  type = "UIButton" Id = "btSubmit"   style="button"  rendered = "Controller.isCreateMode" fixedAction ="FixedAction.ACTION_CREATE" 
+<Element caption = "Create"  type = "UIButton" Id = "btSubmit"   style="btn btn-primary" iconStyle="glyphicon glyphicon-plus"  rendered = "Controller.isCreateMode" fixedAction ="FixedAction.ACTION_CREATE" 
    fixedActionParam =  "SAVE"  />
-<Element caption = "Cancel"  type = "UIButton" Id = "btClose"   style="button" fixedAction ="FixedAction.CANCELDIALOG" fixedActionParam="newcustDL"  />
+<Element caption = "Cancel"  type = "UIButton" Id = "btClose"   style="btn btn-warning" iconStyle="glyphicon glyphicon-remove" fixedAction ="FixedAction.CANCELDIALOG" fixedActionParam="newcustDL"  />
 </If>
 <If check  = "Controller.isReadMode" >
-<Element caption = "Close"  type = "UIButton" Id = "btClose"   style="button" onClickJS = "closeCustomerCreateDialog('newcustDL');"  />
+<Element caption = "Close"  type = "UIButton" Id = "btClose"   style="btn btn-warning" iconStyle="glyphicon glyphicon-remove" onClickJS = "closeCustomerCreateDialog('newcustDL');"  />
 </If>
 </Section>
 </UIForm>

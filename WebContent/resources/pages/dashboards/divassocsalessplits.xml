@@ -27,7 +27,7 @@ Controller = "com.rainbow.crm.dashboard.controller.SalesDashBoardController">
 	</Element>
 	
 
-<Element caption = "Refresh"  type = "UIButton" Id = "btfilterSave"  style="button" fixedAction ="FixedAction.ACTION_PLAINSUBMIT"   /> 	
+<Element caption = "Refresh"  type = "UIButton" Id = "btfilterSave"  style="btn btn-primary" iconStyle="glyphicon glyphicon-refresh" fixedAction ="FixedAction.ACTION_PLAINSUBMIT"   /> 	
  
 </Section>
 </UIForm>

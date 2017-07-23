@@ -80,10 +80,10 @@ Controller = "com.rainbow.crm.expensevoucher.controller.ExpenseVoucherController
 </Section>
 </CoreSection>
 <Section type ="optionalsummary">
-<Element caption = "Approve"  type = "UIButton"    Id = "btnPick"  style="button"  fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="Approve"   />
-<Element caption = "Counter"  type = "UIButton"    Id = "btnCounter"  style="button"  fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="Counter"   />
-<Element caption = "Reject"  type = "UIButton"    Id = "btnReject"  style="button"  fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="Reject"   />
-<Element caption = "Pending"  type = "UIButton"    Id = "btnPending"  style="button"  fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="Hold"   />
+<Element caption = "Approve"  type = "UIButton"    Id = "btnPick"  style="btn btn-primary" fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="Approve"   />
+<Element caption = "Counter"  type = "UIButton"    Id = "btnCounter"  style="btn btn-primary"  fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="Counter"   />
+<Element caption = "Reject"  type = "UIButton"    Id = "btnReject"  style="btn btn-danger" fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="Reject"   />
+<Element caption = "Pending"  type = "UIButton"    Id = "btnPending"  style="btn btn-warning"  fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="Hold"   />
 
 </Section>
 <Section type ="copyRightSection"/>

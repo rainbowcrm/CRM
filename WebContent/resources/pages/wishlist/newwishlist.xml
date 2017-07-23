@@ -74,7 +74,7 @@ Controller = "com.rainbow.crm.wishlist.controller.WishListController">
 	     </Field>
 	 </SupplementaryFields>
 	</Element>
-	<Element caption = "New_Customer"  type = "UIButton"    Id = "btnNewCustomer"  style="button" onclickJS = "createNewCustomer('newcustDL',this);"  />
+	<Element caption = "New_Customer"  type = "UIButton"    Id = "btnNewCustomer"  style="btn btn-primary" iconStyle="glyphicon glyphicon-plus" onclickJS = "createNewCustomer('newcustDL',this);"  />
 	
 </Section>
 <Section type ="brk1"/>
@@ -121,8 +121,8 @@ Controller = "com.rainbow.crm.wishlist.controller.WishListController">
 </Element>
 
 <Element type ="UITableCol" width = "5%">
-	<Element caption = "+"  type = "UIButton" Id = "btnAddRow"    fixedAction ="FixedAction.ACTION_ADDTABLEROW"  fixedActionParam =  "this"/>
-	<Element caption = "-"  type = "UIButton" Id = "btnDelRow"    fixedAction ="FixedAction.ACTION_DELETETABLEROW"  fixedActionParam =  "this"/>
+	<Element caption = "" style="btn btn-primary" iconStyle="glyphicon glyphicon-plus"  type = "UIButton" Id = "btnAddRow"    fixedAction ="FixedAction.ACTION_ADDTABLEROW"  fixedActionParam =  "this"/>
+	<Element caption = "" style="btn btn-danger" iconStyle="glyphicon glyphicon-minus"  type = "UIButton" Id = "btnDelRow"    fixedAction ="FixedAction.ACTION_DELETETABLEROW"  fixedActionParam =  "this"/>
 </Element>
 </Element>
 </Element>

@@ -148,7 +148,7 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 </CoreSection>
 <Section type ="summary">
 
-<Element caption = "Print_Invoice"  type = "UIButton"    Id = "btnInvoice"  style="button" onClickJS = "showPrintDialog('newprintpop','SalesInvoice');"  rendered = "Controller.isUpdateMode" />
+<Element caption = "Print_Invoice"  type = "UIButton"    Id = "btnInvoice"  style="btn btn-primary" iconStyle="glyphicon glyphicon-print" onClickJS = "showPrintDialog('newprintpop','SalesInvoice');"  rendered = "Controller.isUpdateMode" />
 </Section>
 <Section type ="copyRightSection"/>
 </UIForm>
