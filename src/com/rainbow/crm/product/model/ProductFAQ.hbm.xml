@@ -12,6 +12,7 @@
       <version name="objectVersion" column="version" type="integer"></version>
       <many-to-one name="company" column ="company_id" not-null="true" lazy="false" ></many-to-one>
       <many-to-one name="product" column ="product_id" not-null="true" lazy="false" ></many-to-one>
+      <property name="lineNumber" column="LINE_NUMBER" type="integer"/>
       <property name="question" column="QUESTION" type="string"/>
       <property name="answer" column="ANSWER" type="string"/>
       <many-to-one name="author" column ="AUTHOR" not-null="true" lazy="false" ></many-to-one>

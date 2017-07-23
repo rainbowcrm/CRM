@@ -55,7 +55,9 @@
     <bean id="ICompanyService" class="com.rainbow.crm.company.service.CompanyService">
     </bean>
     <bean id="IProductService" class="com.rainbow.crm.product.service.ProductService">
-    </bean>  
+    </bean>
+    <bean id="IProductFAQService" class="com.rainbow.crm.product.service.ProductFAQService">
+    </bean>    
     <bean id="IVendorService" class="com.rainbow.crm.vendor.service.VendorService">
     </bean>
     <bean id="IUserService" class="com.rainbow.crm.user.service.UserService">
@@ -136,7 +138,10 @@
   
    <bean id="ProductDAO" class="com.rainbow.crm.product.dao.ProductDAO">
     <property name="sessionFactory" ref="sessionFactory"></property>
-    </bean>  
+    </bean>
+    <bean id="ProductFAQDAO" class="com.rainbow.crm.product.dao.ProductFAQDAO">
+    <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>    
     
      <bean id="SkuDAO" class="com.rainbow.crm.item.dao.SkuDAO">
     <property name="sessionFactory" ref="sessionFactory"></property>
@@ -257,6 +262,7 @@
         <value>com/rainbow/crm/expensehead/model/ExpenseHead.hbm.xml</value>
         <value>com/rainbow/crm/inventory/model/Inventory.hbm.xml</value>
         <value>com/rainbow/crm/product/model/Product.hbm.xml</value>
+        <value>com/rainbow/crm/product/model/ProductFAQ.hbm.xml</value>
         <value>com/rainbow/crm/uom/model/UOM.hbm.xml</value>
         <value>com/rainbow/crm/item/model/Sku.hbm.xml</value>
         <value>com/rainbow/crm/item/model/Item.hbm.xml</value>

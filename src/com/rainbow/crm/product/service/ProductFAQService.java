@@ -8,10 +8,20 @@ import com.rainbow.crm.common.AbstractionTransactionService;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMDBException;
 import com.rainbow.crm.common.CRMValidator;
+import com.rainbow.crm.common.CommonErrorCodes;
+import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.DatabaseException;
+import com.rainbow.crm.common.Externalize;
+import com.rainbow.crm.common.ItemUtil;
+import com.rainbow.crm.common.SpringObjectFactory;
+import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.hibernate.ORMDAO;
+import com.rainbow.crm.product.dao.ProductDAO;
+import com.rainbow.crm.product.dao.ProductFAQDAO;
+import com.rainbow.crm.product.model.Product;
 import com.rainbow.crm.product.model.ProductFAQ;
 import com.rainbow.crm.product.model.ProductFAQSet;
+import com.rainbow.crm.user.model.User;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.model.transaction.TransactionResult;
@@ -28,14 +38,30 @@ public class ProductFAQService extends AbstractionTransactionService implements 
 
 	@Override
 	protected ORMDAO getDAO() {
-		return null;
+		return (ProductFAQDAO) SpringObjectFactory.INSTANCE.getInstance("ProductFAQDAO");
 	}
 
 	@Override
 	public List<RadsError> adaptfromUI(CRMContext context, ModelObject object) {
+		List<RadsError> errors= new ArrayList<RadsError> ();
+		Externalize externalize = new Externalize();
 		ProductFAQSet productFAQSet = (ProductFAQSet) object ;
-		
-		return null;
+		Product product = ItemUtil.getProduct(context, productFAQSet.getProduct());
+		productFAQSet.getProductFAQs().forEach(productFAQ ->  {
+			productFAQ.setCompany(CommonUtil.getCompany(context.getLoggedinCompany()));
+			if (product == null) {
+				errors.add(CRMValidator.getErrorforCode(CommonErrorCodes.FIELD_NOT_VALID,externalize.externalize(context, "Product"))) ;
+			}else 
+				productFAQ.setProduct(product);
+			
+			User user = CommonUtil.getUser(context, productFAQ.getAuthor());
+			if (user == null) {
+				errors.add(CRMValidator.getErrorforCode(CommonErrorCodes.FIELD_NOT_VALID,externalize.externalize(context, "Product"))) ;
+			}else
+				productFAQ.setAuthor(user);
+			
+		}  );
+		return errors;
 	}
 
 	@Override
@@ -87,8 +113,12 @@ public class ProductFAQService extends AbstractionTransactionService implements 
 			CRMContext context) {
 		List<RadsError> errors  = new ArrayList<RadsError>(); 
 		TransactionResult.Result result = TransactionResult.Result.SUCCESS;
+		int lineNo = 1 ; 
 		try {
 			for (CRMModelObject object : objects ) {
+				int id = GeneralSQLs.getNextPKValue( "Product_FAQs") ;
+				((ProductFAQ)object).setId(id);
+				((ProductFAQ)object).setLineNumber(lineNo ++ );
 				object.setLastUpdateDate(new java.sql.Timestamp(new java.util.Date().getTime()));
 				object.setLastUpdateUser(context.getUser());
 			}

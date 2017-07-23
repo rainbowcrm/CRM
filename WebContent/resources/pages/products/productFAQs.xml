@@ -17,7 +17,7 @@ Controller = "com.rainbow.crm.product.controller.ProductFAQController">
 <ErrorSection>
 </ErrorSection>
 <Section type= "header">
-	<Element label = "Product"  type = "UILookupText"  Id = "txtItem"  property ="Sku.Name" showLookupAsDialog="true" dialogId="dlgIt"
+	<Element label = "Product"  type = "UILookupText"  Id = "txtItem"  property ="product.Name" showLookupAsDialog="true" dialogId="dlgIt"
   	dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>product</lookupType>
 	 <height>300</height>

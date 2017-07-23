@@ -29,7 +29,15 @@ public class ItemUtil {
 	public static Product getProduct(CRMContext context,Product product)
 	{
 		IProductService prodService = (IProductService)SpringObjectFactory.INSTANCE.getInstance("IProductService");
-	//	if (product == null)
+		if (product == null) return null;
+		if(product.getId() > 0 )
+			product = (Product)prodService.getById(product.getId());
+		else if (product.getBK() != null )
+			product = (Product)prodService.getByBusinessKey(product, context);
+		
+		return product ;
+		
+		
 			
 	}
 }

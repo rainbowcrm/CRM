@@ -24,11 +24,6 @@ public class ProductFAQController extends CRMTransactionController {
 		IProductFAQService faqService = (IProductFAQService)SpringObjectFactory.INSTANCE.getInstance("IProductFAQService");
 		return faqService;
 	}
-
-	
-
-	
-
 	
 	
 	
