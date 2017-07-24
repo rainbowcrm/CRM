@@ -45,8 +45,8 @@ Controller = "com.rainbow.crm.salesperiod.controller.SalesPeriodController">
 	<Element label = "From_Date"  type = "UIDate" Id = "txtDate" isMandatory="true"  property ="fromDate" />
 	<Element label = "To_Date"  type = "UIDate" Id = "txtToDate" isMandatory="true"  property ="toDate" />
 	<Element label = "Additional_Target"  type = "UIText" Id = "txtAdditional"   focusoutJS = "calculateAll()" property ="additionalTarget"  isNumeric= "true" size = "10" />
-	<Element label = ""  type = "UILabel" Id = "txtbl2"  />
-	<Element label = ""  type = "UILabel" Id = "txtbl1"  />  
+	<!-- <Element label = ""  type = "UILabel" Id = "txtbl2"  />
+	<Element label = ""  type = "UILabel" Id = "txtbl1"  /> -->  
 	<Element label = "Total_Amount"  type = "UIText" Id = "txtTotalAmt"   property ="totalTarget" isNumeric= "true" readonly="true" size = "10" />
 	 	
 </Section>
