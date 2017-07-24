@@ -109,7 +109,7 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 	     </Field>
 	 </SupplementaryFields>
 	</Element>
-	<Element caption = "New_Customer"  type = "UIButton" style="btn btn-primary" iconStyle="glyphicon glyphicon-plus"    Id = "btnNewCustomer" showInPrevCol ="true" style="button" onClickJS = "createNewCustomer('newcustDL',this);"  />
+	<Element caption = "New_Customer"  type = "UIButton" style="btn btn-primary" iconStyle="glyphicon glyphicon-plus"    Id = "btnNewCustomer" showInPrevCol ="true"  onClickJS = "createNewCustomer('newcustDL',this);"  />
 	<Element type ="UIDialog" Id = "newcustDL" style= "widepopup" >
 	<Element type = "UIIFrame" src ="./rdscontroller?page=quickcustomeradd" style ="lookupFrameStyle">
 	</Element>
