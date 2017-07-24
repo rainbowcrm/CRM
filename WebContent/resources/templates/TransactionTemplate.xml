@@ -40,7 +40,7 @@
  </ErrorSection>
  <Section Id ="header" style ="headerStyle"  showinTable = "true" >
    <noRows>-1</noRows>
-  <noCols>3</noCols> 
+  <noCols>4</noCols> 
   </Section>
  <Section Id ="brk1"  showinTable = "false" >
     <Panel key ="breakPanel"  Id ="brkPnl1" > </Panel>
@@ -54,7 +54,7 @@
  </Section>
   <Section Id ="footer" style ="footerStyle"  showinTable = "true" >
    <noRows>-1</noRows>
-  <noCols>3</noCols> 
+  <noCols>4</noCols> 
   </Section>
   <Section Id ="brk3"  showinTable = "false" >
     <Panel key ="breakPanel"  Id ="smallbreakPanel" > </Panel>

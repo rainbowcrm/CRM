@@ -43,7 +43,7 @@
  </ErrorSection>
   <FilterSection showinTable = "true"  style= "filterStyle" >
  <noRows>Dynamic</noRows>
- <noCols>3</noCols>
+ <noCols>4</noCols>
  <Panel key ="FilterButtonsPanel"  Id ="filterPanel"  style="showinright"> </Panel>    
  </FilterSection>
  <ListSection Id ="list" showinTable = "true"  style= "detailStyle" >
