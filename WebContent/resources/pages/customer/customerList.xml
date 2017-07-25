@@ -26,6 +26,7 @@ Controller = "com.rainbow.crm.customer.controller.CustomerListController">
 <IncludeJS>./scripts/CRMGeneral.js</IncludeJS>
 <Elements>
 <Section type ="topBar"></Section>
+<Section type ="shortCutBar"></Section>
 <Section type ="leftsideBarApp"></Section>
 <CoreSection>
 <ErrorSection>

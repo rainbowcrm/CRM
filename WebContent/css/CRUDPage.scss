@@ -25,10 +25,12 @@ div.pagestylefull {
 
 
 div.pagestyle {
-     position: relative;
+    position: absolute;
     overflow: auto;
-    padding-left: 225px;
-    width: 100%;
+    width: 85%;
+    top: 12%;
+    left:15%;
+    height:84%;
 }
 
 div.uitabstyle {
@@ -37,11 +39,10 @@ background-color: $tab-bg;
 
 div.detailCRUDStyle {
     position:relative;
-    top:5%;
+   
     overflow:auto;
     color: $light;
-    margin: 10px;
-    padding: 10px;
+   
     background-color: $primary-color;
     background: -webkit-linear-gradient(305deg,$filter-start-color,$filter-stop-color);
     background: linear-gradient(145deg,$filter-start-color,$filter-stop-color);
@@ -84,10 +85,12 @@ div.discussionrootStyle{
 }
  
 div.summaryStyle{
- text-align: right;
- position:relative;
- padding-left: 225px;
- width: 100%;
+ 	text-align: right;
+    position: absolute;
+    height: 5%;
+    width: 85%;
+    left:15%;
+    top:94%;
  #btSubmit{
 	 background: $good;
  }

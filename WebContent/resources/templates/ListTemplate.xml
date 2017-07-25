@@ -29,7 +29,10 @@
  <Sections>
   <Section Id ="topBar"  style ="topBar"  >
   <Panel key ="topBar"  Id ="tpBR" > </Panel>  
- </Section>
+  </Section>
+  <Section Id ="shortCutBar"  style ="shortcutbar"  >
+  <Panel key ="shortcutbar"  Id ="scutBR" > </Panel>  
+  </Section>
   <Section Id ="leftsideBar"  style ="leftnav"  >
   <Panel key ="menuPanel"  Id ="leftnav" > </Panel>  
  </Section>   
