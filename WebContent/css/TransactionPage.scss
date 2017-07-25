@@ -15,10 +15,12 @@ form {
 	}
 }
 div.pagestyle {
-     position: relative;
+	position: absolute;
     overflow: auto;
-    padding-left: 225px;
-    width: 100%;
+    width: 85%;
+    top: 12%;
+    left:15%;
+    height:84%;
 }
 
 div.coreStyle {
@@ -60,10 +62,12 @@ overflow:scroll;
 } 
 
 div.summaryStyle{
- text-align: right;
- padding-left: 225px;
-    width: 100%;
- position: relative;
+text-align: right;
+    position: absolute;
+    height: 5%;
+    width: 85%;
+    left:15%;
+    top:94%;
 table td{
 	border: none;
 }

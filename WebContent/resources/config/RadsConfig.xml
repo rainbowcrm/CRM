@@ -270,13 +270,27 @@
  <Panel key = "topBar"   showInDiv = "false">
   <Element type = "UITable" rows = "1" cols = "3">
   <Element type = "UITableRow">
-  <Element type = "UITableCol" width ="13%"> <Element label="" type= "UIImage" height = "30" weight ="140" src= "./resources/images/logo1.gif" /> </Element>
+  <Element type = "UITableCol" width ="13%"> <Element label="" type= "UIImage" height = "35" width ="140" src= "./resources/images/logo1.gif" /> </Element>
   <Element type = "UITableCol" width ="25%"> <Element label="" type= "UILabel"  width ="33%" generatedValue="Controller.getCompanyName" style="topBar"/> </Element>
   <Element type = "UITableCol" width ="50%" align ="center"></Element>
   <Element type = "UITableCol" width ="25%" align="right"> <Element label="" type= "UIButton" caption ="Logout" style="btn" iconStyle="glyphicon glyphicon-off"   width ="33%" onClickJS="logout();"/> </Element>
   </Element>
   </Element>
- </Panel>
+  </Panel>
+  <Panel key ="shortcutbar" showInDiv = "false" >
+  <Element type = "UITable" rows = "1" cols = "3">
+   <Element type = "UITableRow">
+   <Element type = "UITableCol" width ="15">  </Element>
+   <Element type = "UITableCol" width ="70%"> <Element label="" type= "UILabel"  width ="33%" constantValue="PageId" /> </Element>
+  	<Element type = "UITableCol" width ="5%" align="right"> 
+  	   <Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/customer-icon.png"  onClickJS="logout();"/> </Element>
+  	   <Element type = "UITableCol" width ="5%" align="right"> 
+  	   	<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/items-512.png"  onClickJS="logout();"/></Element>
+  	   	<Element type = "UITableCol" width ="5%" align="right"> 
+  	   <Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/settings.jpg"  onClickJS="logout();"/> </Element>
+  </Element>
+  </Element>
+  </Panel>
  <Panel key = "menuPanel"   showInDiv = "false">
  <Element label = "" type = "UIMenu" Id = "menu00" style="menustyleParent" title="Setup" groupId= "menuGRP01"  >
  	<Element label = "" type = "UIMenu" Id = "menu01" style="menustyle" title="Company" link = "rdscontroller?page=sysadmin" iconStyle="fa fa-fw fa-dashboard"  />

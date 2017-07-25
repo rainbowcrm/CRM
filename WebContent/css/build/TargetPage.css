@@ -69,11 +69,22 @@ thead {
 body {
   padding: 50px; }
 
+div.shortcutbar {
+  position: absolute;
+  top: 6%;
+  left: 0px;
+  height: 5%;
+  width: 100%;
+  background: grey;
+  color: #f4f4f4;
+  text-align: center;
+  box-shadow: 2px 0 3px rgba(0, 0, 0, 0.5); }
+
 div.topBar {
   position: absolute;
   top: 0px;
   left: 0px;
-  height: 50px;
+  height: 6%;
   width: 100%;
   background: #282828;
   color: #f4f4f4;
@@ -135,8 +146,9 @@ span.copyRightText {
 
 div.leftnav {
   position: absolute;
-  width: 225px;
+  width: 14%;
   left: 0px;
+  top: 6%;
   background: #282828;
   color: #f4f4f4;
   overflow-y: scroll;
