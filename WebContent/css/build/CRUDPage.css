@@ -274,7 +274,7 @@ dialog.fixed {
   transform: translate(0, -50%); }
 
 body {
-  background: rgba(195, 195, 195, 0.2) !important;
+  background: white;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif; }
 
@@ -291,9 +291,9 @@ div.pagestyle {
   position: absolute;
   overflow: auto;
   width: 85%;
-  top: 12%;
+  top: 13%;
   left: 15%;
-  height: 84%; }
+  height: 83%; }
 
 div.uitabstyle {
   background-color: #eceeef; }
@@ -457,7 +457,7 @@ table.uitabstyle {
     color: #f4f4f4; }
 
 th.uitabstyle {
-  background-color: rgba(195, 195, 195, 0.2) !important; }
+  background-color: white; }
 
 table, tr {
   width: 100%;

@@ -100,7 +100,7 @@ span.copyRightText {
   src: url("./fonts/Oregon LDO Medium.ttf") format("truetype"); }
 
 body {
-  background: rgba(195, 195, 195, 0.2) !important;
+  background: white;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif; }
 
