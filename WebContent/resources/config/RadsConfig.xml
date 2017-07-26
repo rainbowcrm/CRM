@@ -278,16 +278,47 @@
   </Element>
   </Panel>
   <Panel key ="shortcutbar" showInDiv = "false" >
-  <Element type = "UITable" rows = "1" cols = "3">
+  <Element type = "UITable" rows = "1" cols = "18">
    <Element type = "UITableRow">
-   <Element type = "UITableCol" width ="15">  </Element>
-   <Element type = "UITableCol" width ="70%"> <Element label="" type= "UILabel"  width ="33%" constantValue="PageId" /> </Element>
+   <Element type = "UITableCol" width ="14%">  </Element>
+   
   	<Element type = "UITableCol" width ="5%" align="right"> 
   	   <Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/customer-icon.png"  onClickJS="logout();"/> </Element>
   	   <Element type = "UITableCol" width ="5%" align="right"> 
-  	   	<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/items-512.png"  onClickJS="logout();"/></Element>
+  	   			<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/sales.png"  onClickJS="logout();"/></Element>
   	   	<Element type = "UITableCol" width ="5%" align="right"> 
-  	   <Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/settings.jpg"  onClickJS="logout();"/> </Element>
+  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/settings.jpg"  onClickJS="logout();"/> </Element>
+  	   <Element type = "UITableCol" width ="5%" align="right">
+  	  	 <Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/alerts.png"  onClickJS="logout();"/> </Element>
+  	   <Element type = "UITableCol" width ="5%" align="right"> 
+  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/dashboard.png"  onClickJS="logout();"/></Element>
+  	   <Element type = "UITableCol" width ="5%" align="right"> 
+  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/opportunity.png"  onClickJS="logout();"/> </Element>
+  	   <Element type = "UITableCol" width ="5%" align="right"> 
+  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/followups.png"  onClickJS="logout();"/> </Element>
+  	   <Element type = "UITableCol" width ="5%" align="right"> 
+  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/pitchers.ico"  onClickJS="logout();"/> </Element>
+  	   <Element type = "UITableCol" width ="5%" align="right"> 
+  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/documents.jpg"  onClickJS="logout();"/> </Element>
+  	   <Element type = "UITableCol" width ="5%" align="right"> 
+  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/feedback.png"  onClickJS="logout();"/> </Element>
+  	   <Element type = "UITableCol" width ="5%" align="right"> 
+  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/items.png"  onClickJS="logout();"/> </Element>		
+  	   	<Element type = "UITableCol" width ="5%" align="right"> 
+  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/discussion.png"  onClickJS="logout();"/> </Element>
+  	   <Element type = "UITableCol" width ="5%" align="right"> 
+  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/inventory_icon.jpg"  onClickJS="logout();"/> </Element>
+  	   <Element type = "UITableCol" width ="5%" align="right"> 
+  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/delivery.jpg"  onClickJS="logout();"/> </Element>
+  	   <Element type = "UITableCol" width ="5%" align="right"> 
+  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/enquiry-icon.jpg"  onClickJS="logout();"/> </Element>
+  	   <Element type = "UITableCol" width ="5%" align="right"> 
+  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/product_faq.jpg"  onClickJS="logout();"/> </Element>
+  	   <Element type = "UITableCol" width ="5%" align="right"> 
+  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/purchase.png"  onClickJS="logout();"/> </Element>
+  	   <!-- <Element type = "UITableCol" width ="5%" align="right"> 
+  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/expenses.jpg"  onClickJS="logout();"/> </Element> -->					
+  	  
   </Element>
   </Element>
   </Panel>
