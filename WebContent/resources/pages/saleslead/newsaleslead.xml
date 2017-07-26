@@ -122,23 +122,23 @@ Controller = "com.rainbow.crm.saleslead.controller.SalesLeadController">
 </Section>
 <Section type ="detail">
 <Element label = ""  type = "UILabel" Id = "lblLineitTitle"  style="bigTitle" value ="Line_Items" />
-<Element type = "UITable" rows = "1" cols = "7" style = "listPageTitle" applyStyleonChildren ="true" Id  ="tblTrans" property ="SalesLeadLines[]" >
-<Element type = "UITableHead">
+<Element type = "UITable" rows = "1" cols = "7" style = "grid" applyStyleonChildren ="true" Id  ="tblTrans" property ="SalesLeadLines[]" >
+<Element type = "UITableHead" style ="listPageTitle">
  <Element type = "UITableRow">
 
 <Element type ="UITableCol" width = "10%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Code" /></Element>
-<Element type ="UITableCol" width = "28%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Item" /></Element>
+<Element type ="UITableCol" width = "23%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Item" /></Element>
 <Element type ="UITableCol" width = "15%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Comments" /></Element>
 <Element type ="UITableCol" width = "8%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Retail_Price" /></Element>
 <Element type ="UITableCol" width = "8%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Qty" /></Element>
 <Element type ="UITableCol" width = "8%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Negotiated_Price" /></Element>
-<Element type ="UITableCol" width = "5%"> </Element>
+<Element type ="UITableCol" width = "10%"> </Element>
 </Element>  
  </Element>
 <Element type = "UITableRow"  dataType = "com.rainbow.crm.saleslead.model.SalesLeadLine" rendered = "!Object.getVoided">
 
 <Element type ="UITableCol" width = "10%"><Element label = ""  type = "UIText" Id = "txtCode" size  = "10" property ="Sku.Code" /> </Element>
-<Element type ="UITableCol" width = "28%"><Element label = ""  type = "UILookupText"  Id = "txtItName"  size  = "30" property ="Sku.Name" showLookupAsDialog="true" dialogId="dlgItSKU"
+<Element type ="UITableCol" width = "23%"><Element label = ""  type = "UILookupText"  Id = "txtItName"  size  = "30" property ="Sku.Name" showLookupAsDialog="true" dialogId="dlgItSKU"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>sku</lookupType>
 	 <height>300</height>
@@ -157,7 +157,7 @@ Controller = "com.rainbow.crm.saleslead.controller.SalesLeadController">
 <Element type ="UITableCol" width = "8%"><Element label = ""  type = "UIText" Id = "txtQty"  property ="Qty"   isNumeric= "true"  size = "10"/>  </Element>
 <Element type ="UITableCol" width = "8%"><Element label = ""  type = "UIText" Id = "txtlineDisc"  property ="negotiatedPrice"  isNumeric= "true" size = "10" />  </Element>
 
-<Element type ="UITableCol" width = "5%">
+<Element type ="UITableCol" width = "10%">
 	<Element caption = "" style="btn btn-primary" iconStyle="glyphicon glyphicon-plus"  type = "UIButton" Id = "btnAddRow"    fixedAction ="FixedAction.ACTION_ADDTABLEROW"  fixedActionParam =  "this"/>
 	<Element caption = "" style="btn btn-danger" iconStyle="glyphicon glyphicon-minus" type = "UIButton" Id = "btnDelRow"    fixedAction ="FixedAction.ACTION_DELETETABLEROW"  fixedActionParam =  "this"/>
 </Element>

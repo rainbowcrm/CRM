@@ -16,10 +16,12 @@ form {
 	}
 }
 div.pagestyle {
-     position: relative;
+	position: absolute;
     overflow: auto;
-    padding-left: 225px;
-    width: 100%;
+    width: 85%;
+    top: 13%;
+    left:15%;
+    height:83%;
 }
 
 div.detailCRUDStyle {
@@ -44,11 +46,12 @@ background-color:rgb(255,255,255);
 }
  
 div.summaryStyle{
- text-align: right;
- position:relative;
- padding-left: 225px;
- width: 100%;
-background-color:rgb(106,53,0); 
+	text-align: right;
+    position: absolute;
+    height: 5%;
+    width: 85%;
+    left:15%;
+    top:94%;
  }
 
  svg{
