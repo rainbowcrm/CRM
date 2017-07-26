@@ -86,7 +86,7 @@ div.topBar {
   left: 0px;
   height: 6%;
   width: 100%;
-  background: #282828;
+  background: #286090;
   color: #f4f4f4;
   text-align: center;
   box-shadow: 2px 0 3px rgba(0, 0, 0, 0.5); }
@@ -177,7 +177,7 @@ ul {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.24); }
 
 .menustyleParent {
-  font-size: 14px;
+  font-size: 18px;
   color: #f4f4f4;
   list-style-type: none;
   text-align: left;
@@ -215,8 +215,8 @@ dialog.dialogstyle {
   z-index: 10; }
 
 iframe.graphWindow {
-  width: 600px;
-  height: 310px;
+  width: 100%;
+  height: 200%;
   margin: none; }
 
 iframe.lookupFrameStyle {
@@ -402,7 +402,8 @@ table.grid {
   border-style: solid;
   text-align: left;
   border-collapse: collapse;
-  position: relative; }
+  position: relative;
+  table-layout: fixed; }
 
 .button {
   background-color: black;
