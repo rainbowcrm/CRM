@@ -16,7 +16,7 @@
  <Sections>
  <Section Id="querySection" style= "lookupPagesummaryStyle">
  </Section>
- <Section Id="ListSection">
+ <Section Id="ListSection" style ="lookupPageoptionsStyle">
  </Section>
  <Section Id="summarySection"   style= "lookupPagesummaryStyle">
   <!--  <Panel key ="popupButtonPanel"  Id ="popupButtonPanel" > </Panel> -->  

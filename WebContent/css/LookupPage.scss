@@ -11,11 +11,13 @@ form {
 		margin: 0px;
 	}
 }
-
+div.lookupPageoptionsStyle{
+width:33%;
+}
 div.lookupPagesummaryStyle{
  text-align: right;
  position:relative;
- width:100%;
+ width:33%;
  padding: 3px 10px;
  background:$additional-info-color; 
    #btnSearch{
