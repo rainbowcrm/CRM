@@ -7,6 +7,7 @@ Controller = "com.rainbow.crm.sales.controller.SalesReturnSearchController">
 <UIForm Id ="lookupFrm" method = "POST" >
 <Section type ="topBar"></Section> 
 <Section type ="leftsideBarApp"></Section>
+<Section type ="shortCutBar"></Section>
 <CoreSection>
 <ErrorSection>
 </ErrorSection>

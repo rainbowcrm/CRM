@@ -26,6 +26,7 @@ Controller = "com.rainbow.crm.item.controller.ItemListController">
 <Elements>
 <Section type ="topBar"></Section>
 <Section type ="leftsideBarApp"></Section>
+<Section type ="shortCutBar"></Section>
 <CoreSection>
 <ErrorSection>
 </ErrorSection>

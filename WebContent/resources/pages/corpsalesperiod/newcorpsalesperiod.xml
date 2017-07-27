@@ -30,6 +30,7 @@ Controller = "com.rainbow.crm.corpsalesperiod.controller.CorpSalesPeriodControll
 <UIForm Id ="cust" method = "POST" > 
 <Section type ="topBar"></Section> 
 <Section type ="leftsideBarApp"></Section>
+<Section type ="shortCutBar"></Section>
 <CoreSection>
 <ErrorSection>
 </ErrorSection>

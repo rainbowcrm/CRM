@@ -27,6 +27,7 @@ Controller = "com.rainbow.crm.feedback.controller.FeedBackListController">
 <Elements>
 <Section type ="topBar"></Section>
 <Section type ="leftsideBarApp"></Section>
+<Section type ="shortCutBar"></Section>
 <CoreSection>
 <ErrorSection>
 </ErrorSection>

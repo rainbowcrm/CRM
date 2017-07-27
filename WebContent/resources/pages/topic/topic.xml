@@ -13,6 +13,7 @@ Controller = "com.rainbow.crm.topic.controller.TopicSetController">
 <UIForm Id ="topicfrm" method = "POST" enctype="POST" >
 <Section type ="topBar"></Section> 
 <Section type ="leftsideBarApp"></Section>
+<Section type ="shortCutBar"></Section>
 <CoreSection>
 <ErrorSection>
 </ErrorSection>
