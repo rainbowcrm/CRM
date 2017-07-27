@@ -52,6 +52,10 @@
   <noRows>-1</noRows>
   <noCols>1</noCols>
  </Section>
+ <Section Id ="detailForSale" showinTable = "false"  style= "detailCRUDStyleForSale"  tabStyle ="CRUDtableContainer">
+  <noRows>-1</noRows>
+  <noCols>1</noCols>
+ </Section>
  <Section Id ="brk2"  showinTable = "false" >
     <Panel key ="breakPanel"  Id ="smallbreakPanel" > </Panel>
  </Section>

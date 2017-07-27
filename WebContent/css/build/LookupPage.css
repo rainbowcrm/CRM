@@ -84,7 +84,7 @@ select.lookupMultiSelect {
   width: 100%;
   overflow-x: hidden; }
   select.lookupMultiSelect option:nth-child(2n) {
-    background: #B0BEC5; }
+    background: rgba(153, 153, 153, 0.46); }
 
 .button {
   border: none;
