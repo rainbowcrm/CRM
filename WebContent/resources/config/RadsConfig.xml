@@ -349,7 +349,7 @@
  	<Element label = "" type = "UIMenu" Id = "menu110" style="menustyle" title="Brands" link = "rdscontroller?page=brands"  iconStyle="fa fa-fw fa-dashboard" />
  	<Element label = "" type = "UIMenu" Id = "menu11" style="menustyle" title="Categories" link = "rdscontroller?page=categories"  iconStyle="fa fa-fw fa-dashboard" />
  	<Element label = "" type = "UIMenu" Id = "menu12" style="menustyle" title="Products" link = "rdscontroller?page=products"  iconStyle="fa fa-fw fa-dashboard" />
- 	<Element label = "" type = "UIMenu" Id = "menu16" style="menustyle" title="Product_FAQ" link = "rdscontroller?page=productfaqs"   />
+ 	<Element label = "" type = "UIMenu" Id = "menu16" style="menustyle" title="Product_FAQ" link = "rdscontroller?page=productfaqs" iconStyle="fa fa-fw fa-dashboard"  />
  	<!-- TBD
  	 <Element label = "" type = "UIMenu" Id = "menu13" style="menustyle" title="UOMs" link = "rdscontroller?page=uoms"   />
  	 -->
@@ -392,7 +392,7 @@
 	<Element label = "" type = "UIMenu" Id = "menu071" style="menustyle" title="Queries" link = "rdscontroller?page=queries"  iconStyle="fa fa-fw fa-dashboard" />
  	<Element label = "" type = "UIMenu" Id = "menu072" style="menustyle" title="Dashboard" link = "rdscontroller?page=divmgrdashboard"  iconStyle="fa fa-fw fa-dashboard" />
 	<Element label = "" type = "UIMenu" Id = "menu073" style="menustyle" title="Promotions" link = "rdscontroller?page=promotionslist"  iconStyle="fa fa-fw fa-dashboard" />
-	<Element label = "" type = "UIMenu" Id = "menu073" style="menustyle" title="SWOT_Analysis" link = "rdscontroller?page=swotanalysis"   />
+	<Element label = "" type = "UIMenu" Id = "menu073" style="menustyle" title="SWOT_Analysis" link = "rdscontroller?page=swotanalysis"   iconStyle="fa fa-fw fa-dashboard"/>
 	<!--  <Element label = "" type = "UIMenu" Id = "menu074" style="menustyle" title="Marketing_Campaign" link = "rdscontroller?page=campaign"   /> -->
  </Element>
   <Element label = "" type = "UIMenu" Id = "menu30" style="menustyleParent" title="Analytics" groupId= "menuGRP006"  >
