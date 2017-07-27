@@ -11,6 +11,7 @@ Controller = "com.rainbow.crm.expensehead.controller.ExpenseHeadController">
 <Elements>
 <Section type ="topBar"></Section>
 <Section type ="leftsideBarApp"></Section>
+<Section type ="shortCutBar"></Section>
 <CoreSection>
 <ErrorSection>
 </ErrorSection>

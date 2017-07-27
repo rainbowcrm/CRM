@@ -13,6 +13,7 @@ Controller = "com.rainbow.crm.custcategory.controller.CustCategoryController">
 <UIForm Id ="cust" method = "POST"  >
 <Section type ="topBar"></Section> 
 <Section type ="leftsideBarApp"></Section>
+<Section type ="shortCutBar"></Section>
 <CoreSection>
 <ErrorSection>
 </ErrorSection>

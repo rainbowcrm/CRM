@@ -26,6 +26,7 @@ Controller = "com.rainbow.crm.expensevoucher.controller.MgrExpenseVoucherListCon
 <Elements>
 <Section type ="topBar"></Section>
 <Section type ="leftsideBarApp"></Section>
+<Section type ="shortCutBar"></Section>
 <CoreSection>
 <ErrorSection>
 </ErrorSection>
