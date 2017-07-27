@@ -120,7 +120,7 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 	
 </Section>
 
-<Section type ="detail">
+<Section type ="detailForSale">
 <Element type ="UIDialog" Id = "newprintpop" style= "fullpagepopup" >
 <Element type = "UIIFrame" Id= "printFRM" src ="./rdscontroller?page=transactiondocument" style ="lookupFrameStyle">
 </Element>

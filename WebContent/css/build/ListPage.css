@@ -86,7 +86,7 @@ div.topBar {
   left: 0px;
   height: 6%;
   width: 100%;
-  background: #286090;
+  background: #31708f;
   color: #f4f4f4;
   text-align: center;
   box-shadow: 2px 0 3px rgba(0, 0, 0, 0.5); }
@@ -149,7 +149,7 @@ div.leftnav {
   width: 14%;
   left: 0px;
   top: 6%;
-  background: #282828;
+  background: #31708f;
   color: #f4f4f4;
   overflow-y: scroll;
   float: left;
@@ -160,7 +160,7 @@ ul {
   list-style-type: none; }
 
 .menustyle {
-  font-size: 13px;
+  font-size: 17px;
   color: #f4f4f4;
   list-style-type: none;
   text-align: left;
@@ -379,7 +379,7 @@ tr.oddRow {
   padding: 4px !important; }
 
 tr.evenRow {
-  background-color: #B0BEC5; }
+  background-color: rgba(153, 153, 153, 0.46); }
 
 .button {
   border: none;
