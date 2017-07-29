@@ -26,6 +26,7 @@ public class CRMConstants {
 	public final static String FV_SPFTYPE = "SPFTYPE";
 	public final static String FV_EXP_VOUCHER_STATUS = "EXPSTATUS";
 	public final static String FV_ENQUIRY_TYPE = "ENQTYPE";
+	public final static String FV_ENQUIRY_SOURCE = "ENQSRC";
 	public final static String FV_SPITCH_TYPE = "PITCHTYPE";
 	public final static String FV_DOC_TYPE = "DOCTYPE";;
 	public final static String FV_PROMO_TYPE = "PROMOTYPE";;
@@ -190,6 +191,14 @@ public class CRMConstants {
 		public final static String CLOSED = "EXPPDCLSD";
 		public final static String REJECTEDCLOSED = "EXPRJCLSD";
 
+	}
+	
+	public final static class ENQUIRY_SOURCE {
+		public final static String COMPANY_WEBSITE = "ENQWBS";
+		public final static String STORE_WALKIN = "ENQSTR";
+		public final static String TELEPHONE = "ENQTELP";
+		public final static String ASSOCIATE_CONTACT = "ENQASSCNT";
+		
 	}
 	
 	

@@ -310,6 +310,7 @@
         <value>com/rainbow/crm/distributionorder/model/DistributionOrderLine.hbm.xml</value>
         <value>com/rainbow/crm/followup/model/Followup.hbm.xml</value>  
         <value>com/rainbow/crm/enquiry/model/Enquiry.hbm.xml</value>
+        <value>com/rainbow/crm/enquiry/model/EnquiryLine.hbm.xml</value>
         <value>com/rainbow/crm/document/model/Document.hbm.xml</value>
         <value>com/rainbow/crm/salespitch/model/Salespitch.hbm.xml</value>
         <value>com/rainbow/crm/custcategory/model/CustCategory.hbm.xml</value>

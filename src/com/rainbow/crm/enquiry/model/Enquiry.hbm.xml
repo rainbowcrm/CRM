@@ -12,9 +12,11 @@
       </id>
       <version name="objectVersion" column="version" type="integer"></version>
       <many-to-one name="company" column ="company_id" not-null="true" lazy="false" ></many-to-one>
-      <many-to-one name="division" column ="division_id" not-null="true" lazy="false" ></many-to-one>
+      <property name="docNumber" column="DOC_NUMBER" type="string"/>
+      <many-to-one name="division" column ="division_id"  lazy="false" ></many-to-one>
       <many-to-one name="territory" column ="territory_id"  lazy="false" ></many-to-one>
       <many-to-one name="enquiryType" column ="ENQUIRY_TYPE" not-null="false" lazy="false" ></many-to-one>
+      <many-to-one name="enquirySource" column ="ENQUIRY_SOURCE" not-null="false" lazy="false" ></many-to-one>
       <many-to-one name="contact" column ="contact_id"  lazy="false" ></many-to-one>
       <many-to-one name="salesAssociate" column ="SALES_ASSOCIATE"  not-null="false" lazy="false" ></many-to-one>
       <property name="enquiry" column="enquiry" type="string"/>
@@ -27,6 +29,10 @@
       <property name="lastUpdateDate" column="last_updated_date" type="timestamp"/>
       <property name="createdUser" column="created_by" type="string" update="false"/>
       <property name="lastUpdateUser" column="last_updated_by" type="string"/>
+      <set   name="enquiryLines" cascade="all" inverse="true" lazy="false"  order-by="lineNumber" >
+     	 <key column="ENQUIRY_ID"></key>
+      <one-to-many class="com.rainbow.crm.enquiry.model.EnquiryLine"/>
+      </set>
       
    </class>
  </hibernate-mapping>

@@ -1,6 +1,8 @@
 package com.rainbow.crm.enquiry.model;
 
 import java.util.Date;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
@@ -19,9 +21,11 @@ import com.techtrade.rads.framework.utils.Utils;
 @RadsPropertySet(jsonTag="Enquiry",xmlTag="Enquiry")
 public class Enquiry extends CRMBusinessModelObject{
 	
+	String docNumber;
 	Division division;
 	Territory territory;
 	FiniteValue enquiryType;
+	FiniteValue enquirySource;
 	Contact contact;
 	User salesAssociate;
 	String enquiry;
@@ -29,9 +33,7 @@ public class Enquiry extends CRMBusinessModelObject{
 	Item nearestItem;
 	Sku nearestSku;
 	String comments;
-	
-	
-	
+	Set<EnquiryLine> enquiryLines;
 	
 	public String getComments() {
 		return comments;
@@ -68,6 +70,14 @@ public class Enquiry extends CRMBusinessModelObject{
 	@RadsPropertySet(useBKForJSON=true,useBKForXML=true,useBKForMap=true)
 	public void setEnquiryType(FiniteValue enquiryType) {
 		this.enquiryType = enquiryType;
+	}
+	@RadsPropertySet(useBKForJSON=true,useBKForXML=true,useBKForMap=true)
+	public FiniteValue getEnquirySource() {
+		return enquirySource;
+	}
+	@RadsPropertySet(useBKForJSON=true,useBKForXML=true,useBKForMap=true)
+	public void setEnquirySource(FiniteValue enquirySource) {
+		this.enquirySource = enquirySource;
 	}
 	@RadsPropertySet(useBKForJSON=true,useBKForXML=true,useBKForMap=true)
 	public Contact getContact() {
@@ -107,6 +117,23 @@ public class Enquiry extends CRMBusinessModelObject{
 	@RadsPropertySet(useBKForJSON=true,useBKForXML=true,useBKForMap=true)
 	public void setNearestSku(Sku nearestSku) {
 		this.nearestSku = nearestSku;
+	}
+	public Set<EnquiryLine> getEnquiryLines() {
+		return enquiryLines;
+	}
+	public void addEnquiryLine(EnquiryLine enquiryLine) {
+		if(enquiryLines == null)
+			enquiryLines = new LinkedHashSet<EnquiryLine>();
+			enquiryLines.add(enquiryLine) ;
+	}
+	public void setEnquiryLines(Set<EnquiryLine> enquiryLines) {
+		this.enquiryLines = enquiryLines;
+	}
+	public String getDocNumber() {
+		return docNumber;
+	}
+	public void setDocNumber(String docNumber) {
+		this.docNumber = docNumber;
 	}
 	
 	
