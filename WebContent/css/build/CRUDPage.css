@@ -220,8 +220,8 @@ iframe.graphWindow {
   margin: none; }
 
 iframe.lookupFrameStyle {
-  width: 350px;
-  height: 350px;
+  width: 22%;
+  height: 40%;
   margin: auto;
   border-radius: 5px; }
 
@@ -435,10 +435,10 @@ dialog.fullpagepopup {
   top: 100; }
 
 iframe.lookupFrameStyle {
-  left: 0%;
-  width: 100%;
-  top: 0%;
-  height: 100%; }
+  width: 22%;
+  height: 40%;
+  margin: auto;
+  border-radius: 5px; }
 
 table.CRUDtableContainer {
   line-height: 200%; }
@@ -478,11 +478,12 @@ th.listPageTitle {
   height: 50px; }
 
 .outlinedTable input {
-  line-height: initial; }
+  line-height: initial;
+  width: 90%; }
 
 .outlinedTable td {
   vertical-align: middle;
-  text-align: center; }
+  text-align: left; }
 
 .childSectionStyle span {
   color: #222; }

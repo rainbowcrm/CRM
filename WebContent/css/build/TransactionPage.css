@@ -220,8 +220,8 @@ iframe.graphWindow {
   margin: none; }
 
 iframe.lookupFrameStyle {
-  width: 350px;
-  height: 350px;
+  width: 22%;
+  height: 40%;
   margin: auto;
   border-radius: 5px; }
 
@@ -423,10 +423,6 @@ table.grid {
   border-radius: 8px;
   font-size: 13px; }
 
-dialog.dialogstyle {
-  width: 350px;
-  height: 300px; }
-
 dialog.widepopup {
   width: 750px;
   height: 300px;
@@ -438,10 +434,10 @@ dialog.fullpagepopup {
   top: 100; }
 
 iframe.lookupFrameStyle {
-  left: 0%;
-  width: 100%;
-  top: 0%;
-  height: 100%; }
+  width: 22%;
+  height: 40%;
+  margin: auto;
+  border-radius: 5px; }
 
 .button {
   border: none;

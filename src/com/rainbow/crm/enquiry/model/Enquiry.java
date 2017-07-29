@@ -9,9 +9,11 @@ import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.contact.model.Contact;
+import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.item.model.Sku;
+import com.rainbow.crm.reasoncode.model.ReasonCode;
 import com.rainbow.crm.saleslead.model.SalesLead;
 import com.rainbow.crm.territory.model.Territory;
 import com.rainbow.crm.user.model.User;
@@ -26,7 +28,21 @@ public class Enquiry extends CRMBusinessModelObject{
 	Territory territory;
 	FiniteValue enquiryType;
 	FiniteValue enquirySource;
+	FiniteValue enquiryStatus;
 	Contact contact;
+	Customer customer;
+	ReasonCode reason;
+	String firstName;
+	String lastName;
+	String phone;
+	String email;
+	String address1;
+	String address2;
+	String city;
+	String zipcode;
+	
+	
+	
 	User salesAssociate;
 	String enquiry;
 	Date enqDate;
@@ -62,6 +78,14 @@ public class Enquiry extends CRMBusinessModelObject{
 	@RadsPropertySet(useBKForJSON=true,useBKForXML=true,useBKForMap=true)
 	public void setTerritory(Territory territory) {
 		this.territory = territory;
+	}
+	@RadsPropertySet(useBKForJSON=true,useBKForXML=true,useBKForMap=true)
+	public FiniteValue getEnquiryStatus() {
+		return enquiryStatus;
+	}
+	@RadsPropertySet(useBKForJSON=true,useBKForXML=true,useBKForMap=true)
+	public void setEnquiryStatus(FiniteValue enquiryStatus) {
+		this.enquiryStatus = enquiryStatus;
 	}
 	@RadsPropertySet(useBKForJSON=true,useBKForXML=true,useBKForMap=true)
 	public FiniteValue getEnquiryType() {
@@ -118,6 +142,22 @@ public class Enquiry extends CRMBusinessModelObject{
 	public void setNearestSku(Sku nearestSku) {
 		this.nearestSku = nearestSku;
 	}
+	@RadsPropertySet(useBKForJSON=true,useBKForXML=true,useBKForMap=true)
+	public Customer getCustomer() {
+		return customer;
+	}
+	@RadsPropertySet(useBKForJSON=true,useBKForXML=true,useBKForMap=true)
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+	@RadsPropertySet(useBKForJSON=true,useBKForXML=true,useBKForMap=true)
+	public ReasonCode getReason() {
+		return reason;
+	}
+	@RadsPropertySet(useBKForJSON=true,useBKForXML=true,useBKForMap=true)
+	public void setReason(ReasonCode reason) {
+		this.reason = reason;
+	}
 	public Set<EnquiryLine> getEnquiryLines() {
 		return enquiryLines;
 	}
@@ -134,6 +174,54 @@ public class Enquiry extends CRMBusinessModelObject{
 	}
 	public void setDocNumber(String docNumber) {
 		this.docNumber = docNumber;
+	}
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getAddress1() {
+		return address1;
+	}
+	public void setAddress1(String address1) {
+		this.address1 = address1;
+	}
+	public String getAddress2() {
+		return address2;
+	}
+	public void setAddress2(String address2) {
+		this.address2 = address2;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public String getZipcode() {
+		return zipcode;
+	}
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
 	}
 	
 	

@@ -12,10 +12,10 @@
       </id>
       <version name="objectVersion" column="version" type="integer"></version>
       <many-to-one name="company" column ="company_id" not-null="true" lazy="false" ></many-to-one>
-      <property name="docNumber" column="DOC_NUMBER" type="string"/>
+      <property name="docNumber" column="DOC_NO" type="string"/>
       <property name="lineNumber" column="LINE_NUMBER" type="integer"/>
       <many-to-one name="sku" column ="sku_id" not-null="true" lazy="false" ></many-to-one>
-      <property name="qty" column="desired_qty" type="integer"/>
+      <property name="qty" column="qty" type="integer"/>
       <property name="deleted" column="IS_DELETED" type="boolean"/>
       <property name="comments" column="comments" type="string"/>
       <property name="createdDate" column="created_date" type="timestamp" update="false"/>

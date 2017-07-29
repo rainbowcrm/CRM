@@ -2,6 +2,7 @@ package com.rainbow.crm.enquiry.model;
 
 import com.rainbow.crm.abstratcs.model.CRMItemLine;
 import com.techtrade.rads.framework.annotations.RadsPropertySet;
+import com.techtrade.rads.framework.utils.Utils;
 
 public class EnquiryLine extends CRMItemLine{
 
@@ -42,6 +43,13 @@ public class EnquiryLine extends CRMItemLine{
 	}
 	public void setDeleted(boolean deleted) {
 		this.deleted = deleted;
+	}
+	@Override
+	public boolean isNullContent() {
+		if(getSku() == null || Utils.isNullString(getSku().getName()) )
+			return true;
+	
+		return super.isNullContent();
 	}
 	
 	

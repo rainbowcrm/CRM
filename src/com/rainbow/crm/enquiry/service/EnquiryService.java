@@ -19,18 +19,30 @@ import java.util.List;
 
 
 
+
+
+
+
+
+
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.AbstractService;
 import com.rainbow.crm.common.AbstractionTransactionService;
 import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMValidator;
+import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.Externalize;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
+import com.rainbow.crm.contact.model.Contact;
+import com.rainbow.crm.contact.service.IContactService;
+import com.rainbow.crm.customer.model.Customer;
+import com.rainbow.crm.customer.service.ICustomerService;
 import com.rainbow.crm.database.GeneralSQLs;
+import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.hibernate.ORMDAO;
 import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.item.service.ISkuService;
@@ -153,20 +165,78 @@ public class EnquiryService extends AbstractionTransactionService implements IEn
 		return (EnquiryDAO) SpringObjectFactory.INSTANCE.getInstance("EnquiryDAO");
 	}
 
+	
+	private void fetchContact(CRMContext context , Enquiry enquiry)
+	{
+		IContactService contactService = (IContactService)SpringObjectFactory.INSTANCE.getInstance("IContactService");
+		Contact contact = contactService.getByPhone(context.getLoggedinCompany(), enquiry.getPhone()) ;
+		if(contact != null) {
+			enquiry.setContact(contact);
+			return;
+		}
+		contact = contactService.getByEmail(context.getLoggedinCompany(), enquiry.getEmail()) ;
+		if(contact != null) {
+			enquiry.setContact(contact);
+			return;
+		}
+	}
+	private void fetchCustomer(CRMContext context , Enquiry enquiry)
+	{
+		ICustomerService customerService = (ICustomerService)SpringObjectFactory.INSTANCE.getInstance("ICustomerService");
+		Customer customer = customerService.getByPhone(context.getLoggedinCompany(), enquiry.getPhone()) ;
+		if(customer != null) {
+			enquiry.setCustomer(customer);
+			return;
+		}
+		customer = customerService.getByEmail(context.getLoggedinCompany(), enquiry.getEmail()) ;
+		if(customer != null) {
+			enquiry.setCustomer(customer);
+			return;
+		}
+	}
 
 	@Override
 	public List<RadsError> adaptfromUI(CRMContext context, ModelObject object) {
 		Enquiry enquiry = (Enquiry)object;
 		Externalize externalize = new Externalize(); ;
 		List<RadsError> ans = new ArrayList<RadsError>();
+		if(enquiry.getDivision() != null) {
+			Division division = CommonUtil.getDivisionObect(context, enquiry.getDivision()) ;
+			enquiry.setDivision(division);
+		}
 		if(enquiry.getTerritory() != null) {
 			ITerritoryService territoryService = (ITerritoryService)SpringObjectFactory.INSTANCE.getInstance("ITerritoryService");
 			Territory territory  = (Territory)territoryService.getById(enquiry.getTerritory().getId());
 			enquiry.setTerritory(territory);
 		}
+		if(enquiry.getContact() != null) {
+			IContactService contactService = (IContactService)SpringObjectFactory.INSTANCE.getInstance("IContactService");
+			Contact existingContact = (Contact)contactService.getByBusinessKey(enquiry.getContact(), context);
+			if(existingContact != null)
+				enquiry.setContact(existingContact);
+		}else{
+			fetchContact(context, enquiry);
+		}
+			
+		if(enquiry.getCustomer() != null) {
+			ICustomerService customerService = (ICustomerService)SpringObjectFactory.INSTANCE.getInstance("ICustomerService");
+			Customer existingCustomer = (Customer)customerService.getByBusinessKey(enquiry.getCustomer(), context);
+			enquiry.setCustomer(existingCustomer);
+		}else
+		{
+			fetchCustomer(context, enquiry);
+		}
+			
+		if(enquiry.getEnquiryStatus() == null) {
+			enquiry.setEnquiryStatus( new FiniteValue(CRMConstants.ENQUIRY_STATUS.OPEN));	
+		}
 		if(!Utils.isNullSet(enquiry.getEnquiryLines())){
 			int lineNo=1;
 			for (EnquiryLine line: enquiry.getEnquiryLines()) {
+				if( line.isNullContent()){
+					enquiry.getEnquiryLines().remove(line);
+					continue;
+				}
 				line.setCompany(enquiry.getCompany());
 				line.setDocNumber(enquiry.getDocNumber());
 				line.setLineNumber(lineNo ++);

@@ -13,6 +13,7 @@ import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.contact.model.Contact;
 import com.rainbow.crm.contact.service.IContactService;
+import com.rainbow.crm.customer.model.Customer;
 import com.techtrade.rads.framework.context.IRadsContext;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.ui.abstracts.ILookupService;
@@ -33,8 +34,12 @@ public class LookupContacts implements ILookupService{
 		IContactService service = (IContactService) SpringObjectFactory.INSTANCE.getInstance("IContactService");
 		List<? extends CRMModelObject> contacts = service.listData(from, from  + noRecords, condition,(CRMContext)ctx,null);
 		for (ModelObject obj :  contacts) {
-			Contact contact = (Contact) obj;
-			ans.put(contact.getIdentifierName(),contact.getIdentifierName());
+			StringBuffer key = new StringBuffer(((Contact)obj).getFullName());
+			if(additionalFields != null && additionalFields.contains("phone") )
+				 key.append("|" + ((Contact)obj).getPhone());
+			if(additionalFields != null && additionalFields.contains("email") )
+				 key.append("|" + ((Contact)obj).getEmail());
+			ans.put(key.toString(),((Contact)obj).getFullName()  );
 		}
 
 		return ans;

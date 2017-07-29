@@ -18,7 +18,8 @@ public class NextUpGenerator {
 		int companyCode = context.getLoggedinCompany() ;
 		StringBuffer ansString = new StringBuffer();
 		NextUpConfig config = NextUPSQL.getNextUpConfig(companyCode, program);
-		int seq =NextUPSQL.getNextPKValue(program, division.getId(), companyCode);
+		
+		int seq =NextUPSQL.getNextPKValue(program,(division == null)?-1: division.getId(), companyCode);
 		String part1 = makeCompString(config.getComponent1(), division, seq);
 		if (!Utils.isNull(part1)) {
 			ansString.append(part1);

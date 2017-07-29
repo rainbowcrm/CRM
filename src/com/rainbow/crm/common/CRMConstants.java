@@ -27,6 +27,7 @@ public class CRMConstants {
 	public final static String FV_EXP_VOUCHER_STATUS = "EXPSTATUS";
 	public final static String FV_ENQUIRY_TYPE = "ENQTYPE";
 	public final static String FV_ENQUIRY_SOURCE = "ENQSRC";
+	public final static String FV_ENQUIRY_STATUS = "ENQSTATUS";
 	public final static String FV_SPITCH_TYPE = "PITCHTYPE";
 	public final static String FV_DOC_TYPE = "DOCTYPE";;
 	public final static String FV_PROMO_TYPE = "PROMOTYPE";;
@@ -61,6 +62,7 @@ public class CRMConstants {
 		public final static String EXCESS_DISC_REASON ="DISCREAS";
 		public final static String EXPENSE_REJECTION_REASON ="EXPRJREAS";
 		public final static String EXPENSE_APPROVAL_REASON ="EXPAPREAS";
+		public final static String ENQUIRY_PROCESS_REASON ="ENQREAS";
 	}
 	
 	public final static class FACTOR_TYPE {
@@ -201,6 +203,13 @@ public class CRMConstants {
 		
 	}
 	
+	public final static class ENQUIRY_STATUS {
+		public final static String OPEN = "ENQOPEN";
+		public final static String ASSIGNED = "ENQASSND";
+		public final static String INVALID = "ENQINVLD";
+		public final static String LEAD_GENERATED = "ENQLDGNRT";
+		
+	}
 	
 }
 

@@ -211,10 +211,10 @@ dialog.fullpagepopup  {
 }
 
 iframe.lookupFrameStyle {
-	left:0%;
-	width:100%;
-	top:0%;
-	height:100%;
+    width: 22%;
+    height: 40%;
+    margin: auto;
+    border-radius: 5px;
 }
 
 table.CRUDtableContainer {
@@ -266,10 +266,11 @@ text-align: left;
   }
   input{
 	    line-height: initial;
+	    width:90%;
   }
   td{
 	  vertical-align: middle;
-	      text-align: center;
+	      text-align: left;
   }
 }
 

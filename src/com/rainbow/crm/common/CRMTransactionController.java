@@ -140,7 +140,23 @@ public abstract class CRMTransactionController extends TransactionController {
 		}
 		return ans;
 	}
-	
+	public Map <String, String > getAllDivisionsWithSelect() {
+		CRMContext ctx = ((CRMContext) getContext());
+		boolean allowAll =CommonUtil.allowAllDivisionAccess(ctx);
+		Map<String, String> ans = new LinkedHashMap<String, String>();
+		ans.put("-1", "--Select one--");
+		IDivisionService service = (IDivisionService) SpringObjectFactory.INSTANCE
+				.getInstance("IDivisionService");
+		List<Division> divisions = service.getAllDivisions(ctx
+				.getLoggedinCompany());
+		if (!Utils.isNullList(divisions)) {
+			for (Division division : divisions) {
+				if (allowAll || division.getId() == ctx.getLoggedInUser().getDivision().getId())
+					ans.put(String.valueOf(division.getId()), division.getName());
+			}
+		}
+		return ans;
+	}
 	
 	public Map <String, String > getAllTerritories() {
 		Map<String, String> ans = new LinkedHashMap<String, String> ();

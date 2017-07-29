@@ -283,39 +283,39 @@
    <Element type = "UITableCol" width ="14%">  </Element>
    
   	<Element type = "UITableCol" width ="5%" align="center"> 
-  	   <Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/customer-icon.png"  onClickJS="window.location.href ='rdscontroller?page=customers'"/> </Element>
+  	   <Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/customer-icon.png" title ="Customers" onClickJS="window.location.href ='rdscontroller?page=customers'"/> </Element>
   	   <Element type = "UITableCol" width ="5%" align="center"> 
-  	   			<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/sales.png"  onClickJS="window.location.href ='rdscontroller?page=customers'"/></Element>
+  	   			<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/sales.png" title ="Sales" onClickJS="window.location.href ='rdscontroller?page=sales'"/></Element>
   	   	<Element type = "UITableCol" width ="5%" align="center"> 
-  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/settings.jpg"  onClickJS="window.location.href ='rdscontroller?page=customers'"/> </Element>
+  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/settings.jpg" title ="Customers"  onClickJS="window.location.href ='rdscontroller?page=customers'"/> </Element>
   	   <Element type = "UITableCol" width ="5%" align="center">
-  	  	 <Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/alerts.png"  onClickJS="window.location.href ='rdscontroller?page=alerts'"/> </Element>
+  	  	 <Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/alerts.png"   title ="Alerts" onClickJS="window.location.href ='rdscontroller?page=alerts'"/> </Element>
   	   <Element type = "UITableCol" width ="5%" align="center"> 
-  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/dashboard.png"  onClickJS="window.location.href ='rdscontroller?page=topic'"/></Element>
+  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/dashboard.png" title ="Dashboard"  onClickJS="window.location.href ='rdscontroller?page=topic'"/></Element>
   	   <Element type = "UITableCol" width ="5%" align="center"> 
-  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/opportunity.png"  onClickJS="window.location.href ='rdscontroller?page=saleslead'"/> </Element>
+  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/opportunity.png" title ="Sales Leads"  onClickJS="window.location.href ='rdscontroller?page=saleslead'"/> </Element>
   	   <Element type = "UITableCol" width ="5%" align="center"> 
-  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/followups.png"  onClickJS="window.location.href ='rdscontroller?page=followups'"/> </Element>
+  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/followups.png" title ="Followups"  onClickJS="window.location.href ='rdscontroller?page=followups'"/> </Element>
   	   <Element type = "UITableCol" width ="5%" align="center"> 
-  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/pitchers.ico"  onClickJS="window.location.href ='rdscontroller?page=salespitches'"/> </Element>
+  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/pitchers.ico" title ="Sales Pitches" onClickJS="window.location.href ='rdscontroller?page=salespitches'"/> </Element>
   	   <Element type = "UITableCol" width ="5%" align="center"> 
-  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/documents.jpg"  onClickJS="window.location.href ='rdscontroller?page=documents'"/> </Element>
+  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/documents.jpg" title ="Documents" onClickJS="window.location.href ='rdscontroller?page=documents'"/> </Element>
   	   <Element type = "UITableCol" width ="5%" align="center"> 
-  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/feedback.png"  onClickJS="window.location.href ='rdscontroller?page=feedbacks'"/> </Element>
+  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/feedback.png" title ="Feedbacks"  onClickJS="window.location.href ='rdscontroller?page=feedbacks'"/> </Element>
   	   <Element type = "UITableCol" width ="5%" align="center"> 
-  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/items.png"  onClickJS="window.location.href ='rdscontroller?page=items'"/> </Element>		
+  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/items.png" title ="Items" onClickJS="window.location.href ='rdscontroller?page=items'"/> </Element>		
   	   	<Element type = "UITableCol" width ="5%" align="center"> 
-  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/discussion.png"  onClickJS="window.location.href ='rdscontroller?page=topic'"/> </Element>
+  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/discussion.png" title ="Discussions"  onClickJS="window.location.href ='rdscontroller?page=topic'"/> </Element>
   	   <Element type = "UITableCol" width ="5%" align="center"> 
-  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/inventory_icon.jpg"  onClickJS="window.location.href ='rdscontroller?page=inventory'"/> </Element>
+  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/inventory_icon.jpg" title ="Inventory" onClickJS="window.location.href ='rdscontroller?page=inventory'"/> </Element>
   	   <Element type = "UITableCol" width ="5%" align="center"> 
-  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/delivery.jpg"  onClickJS="window.location.href ='rdscontroller?page=distributionorders'"/> </Element>
+  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/delivery.jpg" title ="Delivery Orders" onClickJS="window.location.href ='rdscontroller?page=distributionorders'"/> </Element>
   	   <Element type = "UITableCol" width ="5%" align="center"> 
-  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/enquiry-icon.jpg"  onClickJS="window.location.href ='rdscontroller?page=enquiry'"/> </Element>
+  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/enquiry-icon.jpg" title ="Enquiry"  onClickJS="window.location.href ='rdscontroller?page=enquiries'"/> </Element>
   	   <Element type = "UITableCol" width ="5%" align="center"> 
-  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/product_faq.jpg"  onClickJS="window.location.href ='rdscontroller?page=productfaqs'"/> </Element>
+  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/product_faq.jpg" title ="Product FAQ" onClickJS="window.location.href ='rdscontroller?page=productfaqs'"/> </Element>
   	   <Element type = "UITableCol" width ="5%" align="center"> 
-  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/purchase.png"  onClickJS="window.location.href ='rdscontroller?page=pruchases'"/> </Element>
+  	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/purchase.png" title ="Purchases" onClickJS="window.location.href ='rdscontroller?page=pruchases'"/> </Element>
   	   <!-- <Element type = "UITableCol" width ="5%" align="right"> 
   	   		<Element label="" type= "UIImage" height = "30" width ="30"   src= "./resources/images/expenses.jpg"  onClickJS="logout();"/> </Element> -->					
   	  

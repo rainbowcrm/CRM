@@ -37,30 +37,19 @@ public class EnquiryValidator extends CRMValidator {
 	
 	protected void checkforErrors(ModelObject object) {
 		enquiry = (Enquiry) object;
-		if(enquiry.getDivision()==null) {
-			errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Division"))) ;
-		}else {
-			enquiry.setDivision(CommonUtil.getDivisionObect(context, enquiry.getDivision()));
-		}
-		if(enquiry.getSalesAssociate() == null) {
-			errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Sales_Associate"))) ;
-		}else {
-			enquiry.setSalesAssociate(CommonUtil.getUser(context, enquiry.getSalesAssociate().getUserId()));
-		}
-		if (enquiry.getContact() != null){
-			enquiry.setContact((Contact)CommonUtil.getCRMModelObject(context, enquiry.getContact(), "IContactService"));
-		}
-		if (enquiry.getTerritory() != null){
-			enquiry.setTerritory((Territory)CommonUtil.getCRMModelObject(context, enquiry.getTerritory(), "ITerritoryService"));
-		}
-		if (enquiry.getNearestItem() != null){
-			enquiry.setNearestItem((Item)CommonUtil.getCRMModelObject(context, enquiry.getNearestItem(), "IItemService"));
-		}	
-		if (enquiry.getNearestSku() != null){
-			enquiry.setNearestSku((Sku)CommonUtil.getCRMModelObject(context, enquiry.getNearestSku(), "ISkuService"));
-		}	
 		
-		
+		if(enquiry.getEnqDate() == null) {
+			errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Date"))) ;
+		}
+		if(enquiry.getPhone() == null) {
+			errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Phone"))) ;
+		}
+		if(enquiry.getFirstName() == null) {
+			errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "First_Name"))) ;
+		}
+		if(enquiry.getLastName() == null) {
+			errors.add(getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Last_Name"))) ;
+		}
 	}
 	
 	public EnquiryValidator(CRMContext context) {
