@@ -15,12 +15,16 @@ import com.rainbow.crm.common.IBusinessService;
 import com.rainbow.crm.common.ITransactionService;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
+import com.rainbow.crm.enquiry.model.Enquiry;
 import com.rainbow.crm.enquiry.service.IEnquiryService;
 import com.rainbow.crm.reasoncode.model.ReasonCode;
 import com.rainbow.crm.reasoncode.service.IReasonCodeService;
 import com.rainbow.crm.territory.model.Territory;
 import com.rainbow.crm.territory.service.ITerritoryService;
 import com.rainbow.crm.database.GeneralSQLs;
+import com.techtrade.rads.framework.model.abstracts.ModelObject;
+import com.techtrade.rads.framework.model.transaction.TransactionResult;
+import com.techtrade.rads.framework.ui.abstracts.PageResult;
 import com.techtrade.rads.framework.utils.Utils;
 
 public class EnquiryController extends CRMTransactionController{
@@ -65,4 +69,22 @@ public Map <String, String > getAllReasons() {
 		}
 		return ans;
 	}
+
+	@Override
+	public PageResult submit(ModelObject object, String actionParam) {
+		PageResult result = new PageResult();
+		if("GenerateLead".equalsIgnoreCase(actionParam)) {
+			IEnquiryService service = (IEnquiryService) SpringObjectFactory.INSTANCE.getInstance("IEnquiryService");
+			TransactionResult res = service.generateLead((Enquiry) object,(CRMContext) getContext());
+			result.setErrors(res.getErrors());
+			result.setObject(res.getObject());
+			if(res.hasErrors())
+				result.setResult(TransactionResult.Result.SUCCESS);
+			else
+				result.setResult(TransactionResult.Result.FAILURE);
+		}
+		return result;
+	}
+	
+	
 }

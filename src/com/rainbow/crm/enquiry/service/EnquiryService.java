@@ -27,6 +27,9 @@ import java.util.List;
 
 
 
+
+
+
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.AbstractService;
 import com.rainbow.crm.common.AbstractionTransactionService;
@@ -35,6 +38,7 @@ import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMValidator;
 import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.Externalize;
+import com.rainbow.crm.common.ItemUtil;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.company.model.Company;
@@ -59,11 +63,13 @@ import com.rainbow.crm.user.model.User;
 import com.rainbow.crm.enquiry.dao.EnquiryDAO;
 import com.rainbow.crm.enquiry.model.Enquiry;
 import com.rainbow.crm.enquiry.model.EnquiryLine;
+import com.rainbow.crm.enquiry.validator.EnquiryErrorCodes;
 import com.rainbow.crm.enquiry.validator.EnquiryValidator;
 import com.rainbow.framework.nextup.NextUpGenerator;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.model.transaction.TransactionResult;
+import com.techtrade.rads.framework.ui.abstracts.PageResult;
 import com.techtrade.rads.framework.ui.components.SortCriteria;
 import com.techtrade.rads.framework.utils.Utils;
 
@@ -196,6 +202,58 @@ public class EnquiryService extends AbstractionTransactionService implements IEn
 			return;
 		}
 	}
+
+	
+	
+	@Override
+	public TransactionResult generateLead(Enquiry enquiry,CRMContext context) {
+		TransactionResult result = new TransactionResult();
+		adaptfromUI(context, enquiry);
+		if( enquiry.getCustomer() == null) {
+			result.addError(CRMValidator.getErrorforCode(context.getLocale(), EnquiryErrorCodes.CUSTOMER_MANDATORY));
+			return result;
+		}
+		if( enquiry.getDivision() == null) {
+			result.addError(CRMValidator.getErrorforCode(context.getLocale(), EnquiryErrorCodes.DIVISION_MANDATORY));
+			return result;
+		}
+		if( Utils.isNullSet(enquiry.getEnquiryLines())) {
+			result.addError(CRMValidator.getErrorforCode(context.getLocale(), EnquiryErrorCodes.LINES_MANDATORY));
+			return result;
+		}
+		SalesLead lead = new SalesLead();
+		lead.setCompany(enquiry.getCompany());
+		lead.setDivision(enquiry.getDivision());
+		lead.setCustomer(enquiry.getCustomer());
+		if (enquiry.getSalesAssociate() != null)
+			lead.setSalesAssociate(enquiry.getSalesAssociate().getUserId());
+		lead.setReleasedDate(enquiry.getEnqDate());
+		lead.setRefNo(enquiry.getDocNumber());
+		for(EnquiryLine line : enquiry.getEnquiryLines()) {
+			if (line.isNullContent() ) continue ;
+			SalesLeadLine leadLine = new SalesLeadLine();
+			leadLine.setSku(line.getSku());
+			leadLine.setQty(line.getQty());
+			leadLine.setPrice(ItemUtil.getRetailPrice(line.getSku()));
+			leadLine.setNegotiatedPrice(ItemUtil.getRetailPrice(line.getSku()));
+			lead.addSalesLeadLine(leadLine);
+		}
+		if(Utils.isNullSet(lead.getSalesLeadLines())) {
+			result.addError(CRMValidator.getErrorforCode(context.getLocale(), EnquiryErrorCodes.LINES_MANDATORY));
+			return result;
+		}
+		ISalesLeadService  service = (ISalesLeadService)SpringObjectFactory.INSTANCE.getInstance("ISalesLeadService");
+		service.adaptfromUI(context, lead);
+		List<RadsError> errors = service.validateforCreate(lead, context);
+		result.setErrors(errors);
+		if (Utils.isNullList(errors)) {
+			result = service.create(lead, context);
+		}
+		enquiry.setEnquiryStatus(new FiniteValue(CRMConstants.ENQUIRY_STATUS.LEAD_GENERATED));
+		update(enquiry,context);
+		return result;
+	}
+
 
 	@Override
 	public List<RadsError> adaptfromUI(CRMContext context, ModelObject object) {
