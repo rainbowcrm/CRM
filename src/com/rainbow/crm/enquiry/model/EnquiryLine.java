@@ -48,8 +48,8 @@ public class EnquiryLine extends CRMItemLine{
 	public boolean isNullContent() {
 		if(getSku() == null || Utils.isNullString(getSku().getName()) )
 			return true;
+		return false;
 	
-		return super.isNullContent();
 	}
 	
 	

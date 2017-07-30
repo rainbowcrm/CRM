@@ -34,7 +34,10 @@
  </Section>   
   <Section Id ="leftsideBarApp"  style ="leftnav"  >
   <Panel key ="appMenuPanel"  Id ="leftnav" > </Panel>  
- </Section>   
+ </Section>
+ <Section Id ="shortCutBar"  style ="shortcutbar"  >
+  <Panel key ="shortcutbar"  Id ="scutBR" > </Panel>  
+  </Section>   
   <Section Id ="header" style ="headerStyle"  showinTable = "true" >
   </Section>
  <CoreSection style ="pagestyle">

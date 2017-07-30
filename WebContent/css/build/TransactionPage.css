@@ -433,6 +433,12 @@ dialog.fullpagepopup {
   height: 550px;
   top: 100; }
 
+iframe.quickcustaddstyle {
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  border-radius: 5px; }
+
 iframe.lookupFrameStyle {
   width: 22%;
   height: 40%;

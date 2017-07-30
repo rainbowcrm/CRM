@@ -25,6 +25,8 @@ import java.util.List;
 
 
 
+
+
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.AbstractService;
 import com.rainbow.crm.common.AbstractionTransactionService;
@@ -46,12 +48,14 @@ import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.hibernate.ORMDAO;
 import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.item.service.ISkuService;
+import com.rainbow.crm.reasoncode.model.ReasonCode;
 import com.rainbow.crm.saleslead.model.SalesLead;
 import com.rainbow.crm.saleslead.model.SalesLeadLine;
 import com.rainbow.crm.saleslead.service.ISalesLeadService;
 import com.rainbow.crm.saleslead.validator.SalesLeadErrorCodes;
 import com.rainbow.crm.territory.model.Territory;
 import com.rainbow.crm.territory.service.ITerritoryService;
+import com.rainbow.crm.user.model.User;
 import com.rainbow.crm.enquiry.dao.EnquiryDAO;
 import com.rainbow.crm.enquiry.model.Enquiry;
 import com.rainbow.crm.enquiry.model.EnquiryLine;
@@ -87,10 +91,8 @@ public class EnquiryService extends AbstractionTransactionService implements IEn
 	@Override
 	public List<RadsError> validateforCreate(CRMModelObject object,
 			CRMContext context) {
-		ICompanyService compService = (ICompanyService)SpringObjectFactory.INSTANCE.getInstance("ICompanyService");
-		Company company = (Company)compService.getById(context.getLoggedinCompany());
-		((Enquiry)object).setCompany(company);
-		adaptfromUI(context, object);
+		
+		//adaptfromUI(context, object);
 		EnquiryValidator validator = new EnquiryValidator(context);
 		return validator.validateforCreate(object);
 	}
@@ -98,10 +100,8 @@ public class EnquiryService extends AbstractionTransactionService implements IEn
 	@Override
 	public List<RadsError> validateforUpdate(CRMModelObject object,
 			CRMContext context) {
-		ICompanyService compService = (ICompanyService)SpringObjectFactory.INSTANCE.getInstance("ICompanyService");
-		Company company = (Company)compService.getById(context.getLoggedinCompany());
-		((Enquiry)object).setCompany(company);
-		adaptfromUI(context, object);
+		
+	//	adaptfromUI(context, object);
 		EnquiryValidator validator = new EnquiryValidator(context);
 		return validator.validateforUpdate(object);
 	}
@@ -124,6 +124,7 @@ public class EnquiryService extends AbstractionTransactionService implements IEn
 				line.setDocNumber(enquiry.getDocNumber());
 			}
 		}
+		updateStatus(enquiry,context);
 		TransactionResult result=  super.create(object, context);
 		return result; 
 	}
@@ -156,6 +157,7 @@ public class EnquiryService extends AbstractionTransactionService implements IEn
 				enquiry.addEnquiryLine(oldLine);
 			}
 		}
+		updateStatus(enquiry,context);
 		TransactionResult result= super.update(object, context);
 		return result; 
 	}
@@ -200,9 +202,25 @@ public class EnquiryService extends AbstractionTransactionService implements IEn
 		Enquiry enquiry = (Enquiry)object;
 		Externalize externalize = new Externalize(); ;
 		List<RadsError> ans = new ArrayList<RadsError>();
+		ICompanyService compService = (ICompanyService)SpringObjectFactory.INSTANCE.getInstance("ICompanyService");
+		Company company = (Company)compService.getById(context.getLoggedinCompany());
+		((Enquiry)object).setCompany(company);
 		if(enquiry.getDivision() != null) {
 			Division division = CommonUtil.getDivisionObect(context, enquiry.getDivision()) ;
 			enquiry.setDivision(division);
+		}
+		if(enquiry.getSalesAssociate() != null) 
+		{
+			User associate = CommonUtil.getUser(context, enquiry.getSalesAssociate() );
+			enquiry.setSalesAssociate(associate);
+			
+		}
+		if(enquiry.getReason() != null) {
+			if (enquiry.getReason().getId() > 0) {
+				ReasonCode reason = CommonUtil.getReasonCode(enquiry.getReason(), context) ;
+				enquiry.setReason(reason);
+			}else
+				enquiry.setReason(null);
 		}
 		if(enquiry.getTerritory() != null) {
 			ITerritoryService territoryService = (ITerritoryService)SpringObjectFactory.INSTANCE.getInstance("ITerritoryService");
@@ -227,9 +245,7 @@ public class EnquiryService extends AbstractionTransactionService implements IEn
 			fetchCustomer(context, enquiry);
 		}
 			
-		if(enquiry.getEnquiryStatus() == null) {
-			enquiry.setEnquiryStatus( new FiniteValue(CRMConstants.ENQUIRY_STATUS.OPEN));	
-		}
+		
 		if(!Utils.isNullSet(enquiry.getEnquiryLines())){
 			int lineNo=1;
 			for (EnquiryLine line: enquiry.getEnquiryLines()) {
@@ -250,6 +266,9 @@ public class EnquiryService extends AbstractionTransactionService implements IEn
 				}
 			}
 		}
+		if(enquiry.getEnquiryStatus() == null || Utils.isNullString(enquiry.getEnquiryStatus().getCode()) || Utils.isNullString(enquiry.getEnquiryStatus().getDescription()) ) {
+			enquiry.setEnquiryStatus( new FiniteValue(CRMConstants.ENQUIRY_STATUS.OPEN));	
+		} 
 		return super.adaptfromUI(context, object);
 	}
 
@@ -262,7 +281,14 @@ public class EnquiryService extends AbstractionTransactionService implements IEn
 	
 	
 	
+	private void updateStatus(Enquiry enquiry , CRMContext context) {
+		if (CRMConstants.ENQUIRY_STATUS.OPEN.equals(enquiry.getEnquiryStatus().getCode())) {
+			if (enquiry.getSalesAssociate() != null && !Utils.isNullSet(enquiry.getEnquiryLines())  &&  enquiry.getEnquiryLines().size() > 1 ){
+				enquiry.setEnquiryStatus( new FiniteValue(CRMConstants.ENQUIRY_STATUS.ASSIGNED));	
+			}
+		}
 
+	}
 
 	
 	

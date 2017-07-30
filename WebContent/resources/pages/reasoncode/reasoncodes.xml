@@ -16,19 +16,25 @@ Controller = "com.rainbow.crm.reasoncode.controller.ReasonCodeController">
 <ErrorSection>
 </ErrorSection>
 <FilterSection>
+
 <FilterNode>
 <Element label = "Reason"  type = "UIText" Id = "txtCode"  property ="Reason" size ="40"/>
 </FilterNode>
+
 <FilterNode>
+
 <Element label = "Reason_Type"  type = "UIList" Id = "lstType"   property ="reasonType.code"  externalise= "true">
 	<options populator =  "getAllReasonCodeTypesWithSelect"> 
 	</options>
   </Element>
 </FilterNode>
+
  <Element caption = "Apply"  type = "UIButton" Id = "btfilterApply"  style="btn btn-primary" iconStyle="glyphicon glyphicon-flash"  fixedAction ="FixedAction.ACTION_FILTERAPPLY"   />
- <Element caption = "Clear"  type = "UIButton" Id = "btfilterClear"    style="btn btn-warning" iconStyle="glyphicon glyphicon-remove"showInPrevCol ="true" fixedAction ="FixedAction.ACTION_FILTERCLEAR"  />
+ <Element caption = "Clear"  type = "UIButton" Id = "btfilterClear"    style="btn btn-warning" iconStyle="glyphicon glyphicon-remove" showInPrevCol ="true" fixedAction ="FixedAction.ACTION_FILTERCLEAR"  />
 
 </FilterSection>
+
+
 <ListSection Id="tblCols" >
  <Columns allowrowselection ="Multiple" uniqueproperty = "Id">
 <SelectionColumn  width ="5%"  >

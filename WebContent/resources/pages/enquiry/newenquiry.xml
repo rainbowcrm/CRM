@@ -99,7 +99,12 @@ Controller = "com.rainbow.crm.enquiry.controller.EnquiryController">
 	<Element label = "Enquiry"  type = "UITextArea" Id = "txtConversation"  isMandatory="true"  property ="enquiry" >
 	 <rows>5</rows> <cols>25</cols>
 	</Element>
+	<Element label = ""  type = "UIHidden" Id = "hdnenqStatus"    property ="enquiryStatus.code" />
 	<Element label = "Status"  type = "UIText" Id = "txtEnqStatus"   readonly="true" property ="enquiryStatus.description" />
+	<Element label = "Reason"  type = "UIList" Id = "lstmgrMgrStatus"    property ="reason.id" >
+			<options populator =  "getAllReasons"> 
+			</options>
+		</Element>
 </Section>
 <Section type ="detailForSale">
 <Element type = "UITable" rows = "1" cols = "4" style = "grid" applyStyleonChildren ="true" Id  ="tblTrans" property ="EnquiryLines[]" >
@@ -133,7 +138,7 @@ Controller = "com.rainbow.crm.enquiry.controller.EnquiryController">
 </Element>
  </Element>
 
-<Element type ="UITableCol" width = "10%"><Element label = ""  type = "UIText" Id = "txtPrice"   readonly= "true" size = "10" />  </Element>
+<Element type ="UITableCol" width = "10%"><Element label = ""  type = "UIText" Id = "txtPrice"  property ="Sku.item.retailPrice" readonly= "true" size = "10" />  </Element>
 <Element type ="UITableCol" width = "10%"><Element label = ""  type = "UIText" Id = "txtQty"  property ="Qty"   isNumeric= "true"  size = "10"/>  </Element>
 <Element type ="UITableCol" width = "25%"><Element label = ""  type = "UIText" Id = "txtLineCo"  property ="Comments" size = "15" />  </Element>
 <Element type ="UITableCol" width = "10%">
@@ -193,7 +198,7 @@ Controller = "com.rainbow.crm.enquiry.controller.EnquiryController">
 	</Element>
 	<Element caption = "New Customer"  type = "UIButton"   showInPrevCol ="true" Id = "btnNewCustomer"  style="btn btn-primary" iconStyle="glyphicon glyphicon-plus" onClickJS = "createNewCustomer('newcustDL',this);"  />
 	<Element type ="UIDialog" Id = "newcustDL" style= "widepopup" >
-	<Element type = "UIIFrame" src ="./rdscontroller?page=quickcustomeradd" style ="lookupFrameStyle">
+	<Element type = "UIIFrame" src ="./rdscontroller?page=quickcustomeradd" style ="quickcustaddstyle">
 	</Element>
 	</Element>
 
