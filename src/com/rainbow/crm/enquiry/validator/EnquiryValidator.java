@@ -26,8 +26,7 @@ public class EnquiryValidator extends CRMValidator {
 	@Override
 	protected void checkforCreateErrors(ModelObject object) {
 		checkforErrors(object);
-		IEnquiryService  service = (IEnquiryService) SpringObjectFactory.INSTANCE.getInstance("IEnquiryService");
-		
+		System.out.println(object.toJSON());
 	}
 
 	@Override

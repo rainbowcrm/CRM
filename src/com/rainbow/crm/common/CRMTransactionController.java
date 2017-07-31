@@ -87,9 +87,13 @@ public abstract class CRMTransactionController extends TransactionController {
 	}
 
 	@Override
-	public void read() {
+	public PageResult read() {
+		PageResult result = new PageResult();
 		ModelObject thisObject = getService().getByBusinessKey((CRMModelObject)object, (CRMContext)getContext());
 		setObject(thisObject);
+		result.setObject(thisObject);
+		return result;
+		
 	}
 	
 

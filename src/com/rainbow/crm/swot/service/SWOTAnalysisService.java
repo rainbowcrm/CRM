@@ -31,6 +31,11 @@ public class SWOTAnalysisService implements ISWOTAnalysisService {
 				CRMConstants.BUSINESS_ORIENTATION.POSITIVE);
 		strengthLeads.putAll(strengthfeedBackss);
 		
+		Map<String,Integer> strengthEnquiries =SWOTAnalysisSQLs.getEnquiryReasonSplitups(division.getId(), context.getLoggedinCompany(),
+				Utils.getSQLDate(fromDate), Utils.getSQLDate(toDate),CRMConstants.FACTOR_TYPE.INTERNAL, 
+				CRMConstants.BUSINESS_ORIENTATION.POSITIVE);
+		strengthLeads.putAll(strengthEnquiries);
+		
 		BarChartData barChartData = new BarChartData();
 		barChartData.setTitle("Strengths");
 		barChartData.setSubTitle(" ");
@@ -72,6 +77,11 @@ public class SWOTAnalysisService implements ISWOTAnalysisService {
 				Utils.getSQLDate(fromDate), Utils.getSQLDate(toDate),CRMConstants.FACTOR_TYPE.INTERNAL, 
 				CRMConstants.BUSINESS_ORIENTATION.NEGATIVE);
 		strengthLeads.putAll(strengthfeedBackss);
+		
+		Map<String,Integer> weaknesEnquiries =SWOTAnalysisSQLs.getEnquiryReasonSplitups(division.getId(), context.getLoggedinCompany(),
+				Utils.getSQLDate(fromDate), Utils.getSQLDate(toDate),CRMConstants.FACTOR_TYPE.INTERNAL, 
+				CRMConstants.BUSINESS_ORIENTATION.NEGATIVE);
+		strengthLeads.putAll(weaknesEnquiries);
 		
 		BarChartData barChartData = new BarChartData();
 		barChartData.setTitle("Weakness");
@@ -115,6 +125,11 @@ public class SWOTAnalysisService implements ISWOTAnalysisService {
 				CRMConstants.BUSINESS_ORIENTATION.POSITIVE);
 		strengthLeads.putAll(strengthfeedBackss);
 		
+		Map<String,Integer> weaknesEnquiries =SWOTAnalysisSQLs.getEnquiryReasonSplitups(division.getId(), context.getLoggedinCompany(),
+				Utils.getSQLDate(fromDate), Utils.getSQLDate(toDate),CRMConstants.FACTOR_TYPE.EXTERNAL, 
+				CRMConstants.BUSINESS_ORIENTATION.POSITIVE);
+		strengthLeads.putAll(weaknesEnquiries);
+		
 		BarChartData barChartData = new BarChartData();
 		barChartData.setTitle("Opportunities");
 		barChartData.setSubTitle(" ");
@@ -156,6 +171,12 @@ public class SWOTAnalysisService implements ISWOTAnalysisService {
 				Utils.getSQLDate(fromDate), Utils.getSQLDate(toDate),CRMConstants.FACTOR_TYPE.EXTERNAL, 
 				CRMConstants.BUSINESS_ORIENTATION.NEGATIVE);
 		strengthLeads.putAll(strengthfeedBackss);
+		
+		Map<String,Integer> weaknesEnquiries =SWOTAnalysisSQLs.getEnquiryReasonSplitups(division.getId(), context.getLoggedinCompany(),
+				Utils.getSQLDate(fromDate), Utils.getSQLDate(toDate),CRMConstants.FACTOR_TYPE.EXTERNAL, 
+				CRMConstants.BUSINESS_ORIENTATION.NEGATIVE);
+		strengthLeads.putAll(weaknesEnquiries);
+		
 		
 		BarChartData barChartData = new BarChartData();
 		barChartData.setTitle("Threats");

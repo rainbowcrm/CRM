@@ -108,7 +108,7 @@ import com.techtrade.rads.framework.model.transaction.TransactionResult;
 import com.techtrade.rads.framework.ui.components.SortCriteria;
 import com.techtrade.rads.framework.utils.Utils;
 
-@Transactional
+@Transactional(propagation=Propagation.REQUIRED, readOnly=false)
 public class SalesLeadService extends AbstractionTransactionService implements ISalesLeadService{
 
 	

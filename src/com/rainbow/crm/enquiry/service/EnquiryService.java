@@ -5,30 +5,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.AbstractService;
@@ -73,6 +51,7 @@ import com.techtrade.rads.framework.ui.abstracts.PageResult;
 import com.techtrade.rads.framework.ui.components.SortCriteria;
 import com.techtrade.rads.framework.utils.Utils;
 
+@Transactional(propagation=Propagation.REQUIRED, readOnly=false)
 public class EnquiryService extends AbstractionTransactionService implements IEnquiryService{
 
 
@@ -221,6 +200,10 @@ public class EnquiryService extends AbstractionTransactionService implements IEn
 			result.addError(CRMValidator.getErrorforCode(context.getLocale(), EnquiryErrorCodes.LINES_MANDATORY));
 			return result;
 		}
+		if(enquiry.getEnquiryStatus()!= null && enquiry.getEnquiryStatus().equals(CRMConstants.ENQUIRY_STATUS.LEAD_GENERATED) ) {
+			result.addError(CRMValidator.getErrorforCode(context.getLocale(), EnquiryErrorCodes.LEAD_GENERATED));
+			return result;
+		}
 		SalesLead lead = new SalesLead();
 		lead.setCompany(enquiry.getCompany());
 		lead.setDivision(enquiry.getDivision());
@@ -251,6 +234,8 @@ public class EnquiryService extends AbstractionTransactionService implements IEn
 		}
 		enquiry.setEnquiryStatus(new FiniteValue(CRMConstants.ENQUIRY_STATUS.LEAD_GENERATED));
 		update(enquiry,context);
+		enquiry = (Enquiry)getById(enquiry.getId());
+		result.setObject(enquiry);
 		return result;
 	}
 

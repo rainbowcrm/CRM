@@ -26,6 +26,9 @@ public interface IBusinessService {
 	public TransactionResult create(CRMModelObject object, CRMContext context) ;
 	
 	@Transactional
+	public TransactionResult createFromScratch(CRMModelObject object, CRMContext context) ;
+	
+	@Transactional
 	public TransactionResult update(CRMModelObject object, CRMContext context) ;
 	
 	@Transactional

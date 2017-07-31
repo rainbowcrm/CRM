@@ -32,6 +32,19 @@ public class ProductFAQService extends AbstractionTransactionService implements 
 	
 	
 	@Override
+	public ProductFAQSet getByProduct(Product product, CRMContext context) {
+		ProductFAQDAO  dao = (ProductFAQDAO) getDAO();
+		IProductService productService = (IProductService) SpringObjectFactory.INSTANCE.getInstance("IProductService");
+		product = (Product)productService.getByBusinessKey(product, context);
+		ProductFAQSet faqSet = new ProductFAQSet();
+		List<ProductFAQ> faqs =   dao.getByProductId(product.getId()) ;
+		faqSet.setProductFAQs(faqs);
+		faqSet.setCompany(CommonUtil.getCompany(context.getLoggedinCompany()));
+		faqSet.setProduct(product);
+		return faqSet;
+	}
+
+	@Override
 	protected String getTableName() {
 		return null;
 	}

@@ -21,6 +21,8 @@ public abstract class AbstractService implements IBusinessService{
 	
 	protected abstract String getTableName() ;
 	
+	
+	
 	@Override
 	public long getTotalRecordCount(CRMContext context, String whereCondition) {
 		StringBuffer additionalCondition = new StringBuffer();
@@ -67,6 +69,17 @@ public abstract class AbstractService implements IBusinessService{
 
 	protected abstract ORMDAO getDAO() ;
 	
+	
+	
+	
+	@Override
+	public TransactionResult createFromScratch(CRMModelObject object,
+			CRMContext context) {
+		return create(object,context);
+	}
+
+
+
 	@Transactional 
 	public TransactionResult create(CRMModelObject object,CRMContext context)  {
 		List<RadsError> errors  = new ArrayList<RadsError>(); 

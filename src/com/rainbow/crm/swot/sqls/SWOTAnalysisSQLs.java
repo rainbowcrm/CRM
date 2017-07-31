@@ -94,4 +94,45 @@ public class SWOTAnalysisSQLs {
 		}
 		return ans ;
 	}
+	
+	
+	public static Map<String,Integer> getEnquiryReasonSplitups (int division, int company , Date startDate, Date endDate ,
+			String factoryType, String orientation)
+	{
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		Map<String, Integer> ans = new HashMap<String, Integer> ();
+		try {
+			connection = ConnectionCreater.getConnection();
+			String divisionPart = (division==-1)?"":" AND ENQUIRIES.DIVISION_ID = ? ";
+			String sql =  " SELECT COUNT(ENQUIRIES.ID),REASON_CODES.REASON FROM ENQUIRIES,REASON_CODES WHERE   " +
+					" ENQUIRIES.REASON_ID = REASON_CODES.ID AND   " +
+					 " ENQUIRIES.ENQ_DATE >= ? AND  ENQUIRIES.ENQ_DATE <= ?  AND ENQUIRIES.COMPANY_ID =?  AND " +
+					 " REASON_CODES.ORIENTATION = ? AND REASON_CODES.FACTOR_TYPE = ?   "  +
+					 divisionPart + 
+					"  AND ENQUIRIES.IS_DELETED = FALSE   GROUP BY REASON_CODES.REASON ";
+			statement = connection.prepareStatement(sql);
+			statement.setDate(1, startDate);
+			statement.setDate(2, endDate);
+			statement.setInt(3, company);
+			statement.setString(4, orientation);
+			statement.setString(5, factoryType);
+			if(division != -1)
+				statement.setInt(6, division);
+			
+			rs = statement.executeQuery();
+			while (rs.next()) {
+				Integer count  = rs.getInt(1);
+				String reason = rs.getString(2)  ;
+				ans.put(reason, count);
+			}
+			
+		}catch (SQLException ex) {
+			Logwriter.INSTANCE.error(ex);
+		} finally {
+			ConnectionCreater.close(connection, statement, rs);
+		}
+		return ans ;
+	}
 }

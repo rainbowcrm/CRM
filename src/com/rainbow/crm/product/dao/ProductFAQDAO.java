@@ -2,6 +2,7 @@ package com.rainbow.crm.product.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
@@ -9,6 +10,7 @@ import com.rainbow.crm.common.DatabaseException;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.product.model.Product;
+import com.rainbow.crm.product.model.ProductFAQ;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 
 public class ProductFAQDAO extends SpringHibernateDAO{
@@ -22,6 +24,15 @@ public class ProductFAQDAO extends SpringHibernateDAO{
 		return obj;
 	}
 
+	
+	public List<ProductFAQ> getByProductId(int product) {
+		Session session = openSession(false);
+		Query query = session.createQuery(" from ProductFAQ where product.id = :product and deleted= false " ) ;
+		query.setParameter("product", product);
+		List<ProductFAQ> lst = query.list();
+		closeSession(session, false);
+		return lst;
+	}
 	
 	public void batchUpdate(List<? extends CRMModelObject> objects)  throws DatabaseException{
 		Session session = openSession(true);
