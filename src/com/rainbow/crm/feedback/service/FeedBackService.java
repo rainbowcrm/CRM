@@ -83,6 +83,7 @@ import com.rainbow.crm.followup.service.IFollowupService;
 import com.rainbow.crm.hibernate.ORMDAO;
 import com.rainbow.crm.inventory.model.InventoryUpdateObject;
 import com.rainbow.crm.item.dao.ItemImageSQL;
+import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.item.model.ItemImage;
 import com.rainbow.crm.item.service.ISkuService;
@@ -122,6 +123,17 @@ import com.techtrade.rads.framework.utils.Utils;
 public class FeedBackService extends AbstractionTransactionService implements IFeedBackService{
 
 	
+
+	@Override
+	public FeedBackLine getLinesforItem(Item item, CRMContext context,
+			Date fromDate, Date toDate) {
+		return null;
+	}
+
+
+
+
+
 
 	@Override
 	public FeedBack getBySale(String docNo, CRMContext context) {

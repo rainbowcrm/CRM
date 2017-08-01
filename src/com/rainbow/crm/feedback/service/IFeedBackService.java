@@ -9,8 +9,10 @@ import com.rainbow.crm.common.IBusinessService;
 import com.rainbow.crm.common.ITransactionService;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.division.model.Division;
+import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.feedback.model.FeedBack;
+import com.rainbow.crm.feedback.model.FeedBackLine;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.model.graphdata.BarChartData;
 import com.techtrade.rads.framework.model.graphdata.GaugeChartData;
@@ -29,6 +31,8 @@ public interface IFeedBackService extends ITransactionService{
 	public FeedBack getBySale(String docNo, CRMContext context) ;
 	
 	public BarChartData getFeedBackValue(Division division,Date fromDate, Date toDate, CRMContext context);
+	
+	public FeedBackLine getLinesforItem(Item item, CRMContext  context, Date fromDate, Date toDate);
 	
 
 }
