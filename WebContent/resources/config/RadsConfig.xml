@@ -172,6 +172,8 @@
 </Page>
 <Page id = "productfaqs" definition ="/resources/pages/products/productFAQs.xml"  accessCode ="MERCH:PRODFAQ" modelclass = "com.rainbow.crm.product.model.ProductFAQSet" >
 </Page>
+<Page id = "itemprofile" definition ="/resources/pages/item/itemprofile.xml"  accessCode ="MERCH:ITEMPROF" modelclass = "com.rainbow.crm.profile.model.ItemProfile" >
+</Page>
 <Page id = "skucomplete" definition ="/resources/pages/item/skucomplete.xml" modelclass = "com.rainbow.crm.item.model.SkuComplete" >
 </Page>
 <Page id = "setup" definition ="/resources/pages/datasetup/datasetup.xml" accessCode ="ADMIN:DATASETUP" modelclass = "com.rainbow.framework.setup.model.DataLoader" >
@@ -347,9 +349,10 @@
  </Element>
   <Element label = "" type = "UIMenu" Id = "menu10" style="menustyleParent" title="Merchandise" groupId= "menuGRP002"  >
  	<Element label = "" type = "UIMenu" Id = "menu110" style="menustyle" title="Brands" link = "rdscontroller?page=brands"  iconStyle="fa fa-fw fa-dashboard" />
- 	<Element label = "" type = "UIMenu" Id = "menu11" style="menustyle" title="Categories" link = "rdscontroller?page=categories"  iconStyle="fa fa-fw fa-dashboard" />
- 	<Element label = "" type = "UIMenu" Id = "menu12" style="menustyle" title="Products" link = "rdscontroller?page=products"  iconStyle="fa fa-fw fa-dashboard" />
- 	<Element label = "" type = "UIMenu" Id = "menu16" style="menustyle" title="Product_FAQ" link = "rdscontroller?page=productfaqs" iconStyle="fa fa-fw fa-dashboard"  />
+ 	<Element label = "" type = "UIMenu" Id = "menu111" style="menustyle" title="Categories" link = "rdscontroller?page=categories"  iconStyle="fa fa-fw fa-dashboard" />
+ 	<Element label = "" type = "UIMenu" Id = "menu112" style="menustyle" title="Products" link = "rdscontroller?page=products"  iconStyle="fa fa-fw fa-dashboard" />
+ 	<Element label = "" type = "UIMenu" Id = "menu116" style="menustyle" title="Product_FAQ" link = "rdscontroller?page=productfaqs" iconStyle="fa fa-fw fa-dashboard"  />
+ 	<Element label = "" type = "UIMenu" Id = "menu117" style="menustyle" title="Item_Profile" link = "rdscontroller?page=itemprofile" iconStyle="fa fa-fw fa-dashboard"  />
  	<!-- TBD
  	 <Element label = "" type = "UIMenu" Id = "menu13" style="menustyle" title="UOMs" link = "rdscontroller?page=uoms"   />
  	 -->

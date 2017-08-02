@@ -3,6 +3,7 @@ package com.rainbow.crm.common;
 import com.rainbow.crm.config.service.ConfigurationManager;
 import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.item.model.Sku;
+import com.rainbow.crm.item.service.IItemService;
 import com.rainbow.crm.product.model.Product;
 import com.rainbow.crm.product.service.IProductService;
 
@@ -37,7 +38,18 @@ public class ItemUtil {
 		
 		return product ;
 		
+	}
+	
+	public static Item getItem(CRMContext context , Item item)
+	{
+		IItemService service = (IItemService)SpringObjectFactory.INSTANCE.getInstance("IItemService");
+		if (item == null) return null;
+		if(item.getId() > 0 )
+			item = (Item)service.getById(item.getId());
+		else if (item.getBK() != null )
+			item = (Item)service.getByBusinessKey(item, context);
 		
-			
+		return item ;
+		
 	}
 }

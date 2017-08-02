@@ -58,6 +58,8 @@
     </bean>
     <bean id="IProductFAQService" class="com.rainbow.crm.product.service.ProductFAQService">
     </bean>    
+    <bean id="IItemProfileService" class="com.rainbow.crm.profile.service.ItemProfileService">
+    </bean>
     <bean id="IVendorService" class="com.rainbow.crm.vendor.service.VendorService">
     </bean>
     <bean id="IUserService" class="com.rainbow.crm.user.service.UserService">

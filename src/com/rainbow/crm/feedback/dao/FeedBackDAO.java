@@ -43,11 +43,27 @@ public class FeedBackDAO  extends SpringHibernateDAO{
 	}
 
 
-	public List<FeedBackLine> getByItem( String item , int company )
+	public List<FeedBackLine> getByItem( int item , int company , Date fromDate, Date toDate)
 	{
 		Session session = openSession(false);
-		Query query = session.createQuery(" from FeedBackLine where sku.item.id = :item    and sales.billNumber = :billNumber and deleted= false " ) ;
+		/*Query query = session.createQuery("  Select FeedBackLine.rating, FeedBackLine.comments,FeedBack.customer.firstName,FeedBack.customer.firstName,  " +
+		"FeedBack.customer.phone,FeedBack.feedBackDate, FeedBack.division.name,FeedBackLine.sku.name  from FeedBackLine FeedBackLine  left outer join FeedBackLine.feedBackDoc FeedBack " +
+		"  left outer join FeedBack.customer  Customer   where   FeedBackLine.feedBackObjectType.code ='FDBKSLSLN'  and   FeedBackLine.sku.item.id = :item   " +
+		"  and   FeedBack.feedBackDate >= :fromDate and  FeedBack.feedBackDate <=  :toDate  and FeedBackLine.deleted= false and FeedBackLine.deleted = false " ) ;*/
+		
+		/*Query query = session.createQuery("  Select FeedBackLine.rating, FeedBackLine.comments,FeedBackLine.feedBackDoc.customer.firstName,FeedBackLine.feedBackDoc.customer.lastName,  " +
+				"FeedBackLine.feedBackDoc.customer.phone,FeedBackLine.feedBackDoc.feedBackDate, FeedBackLine.feedBackDoc.division.name,FeedBackLine.sku.name  from FeedBackLine FeedBackLine where FeedBackLine.sku.item.id = :item   " +
+				"  and    FeedBackLine.feedBackObjectType.code ='FDBKSLSLN' and FeedBackLine.feedBackDoc.feedBackDate >= :fromDate and  FeedBackLine.feedBackDoc.feedBackDate <=  :toDate  and FeedBackLine.deleted= false and FeedBackLine.feedBackDoc.deleted = false " ) ;
+				*/
+		
+		Query query = session.createQuery("  from FeedBackLine FeedBackLine where FeedBackLine.sku.item.id = :item   " +
+				"  and    FeedBackLine.feedBackObjectType.code ='FDBKSLSLN' and FeedBackLine.feedBackDoc.feedBackDate >= :fromDate and  FeedBackLine.feedBackDoc.feedBackDate <=  :toDate  and FeedBackLine.deleted= false and FeedBackLine.feedBackDoc.deleted = false " ) ;
+			
+		
 		query.setParameter("item", item);
+		query.setParameter("fromDate", fromDate);
+		query.setParameter("toDate", toDate);
+		
 		List<FeedBackLine> lst = query.list();
 		closeSession(session, false);
 		return lst;
