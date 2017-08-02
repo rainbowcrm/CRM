@@ -124,6 +124,15 @@ public class SkuService extends AbstractService implements ISkuService {
 	public List<Sku> getAllByProduct(int company, int productId) {
 		return ((SkuDAO)getDAO()).getAllByProduct(company, productId);
 	}
+
+
+	@Override
+	public List<Sku> getAllByItem(int company, int itemId) {
+		// TODO Auto-generated method stub
+		return ((SkuDAO)getDAO()).getAllByItem(company, itemId);
+	}
+	
+	
 	
 	
 	

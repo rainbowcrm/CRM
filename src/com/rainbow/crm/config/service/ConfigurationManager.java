@@ -7,6 +7,7 @@ public class ConfigurationManager {
 
 	public static final String CURRENCY = "CURRENCY";
 	public static final String FETCH_PRICESFROM = "USPRCSFRM";
+	public static final String PROF_DATAHISTORY = "PROFDATAHIST";
 	public static final String FEEDBACK_RATING_BENCHMARK ="FDBKRTNGMRK";
 	public static final String CONFIGURATION_PRIVILEGE = "CONFPRIVIL";
 	public static final String ANALYTICAL_REPORTS_PRIVILEGE = "ANLREPPRIVIL";

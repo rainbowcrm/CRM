@@ -13,6 +13,7 @@ public interface ISkuService extends IBusinessService{
 	public Sku getByName(int company, String name) ;
 	
 	public List<Sku> getAllByProduct(int company, int productId);
+	public List<Sku> getAllByItem(int company, int itemId);
 
 	
 

@@ -125,11 +125,11 @@ public class FeedBackService extends AbstractionTransactionService implements IF
 	
 
 	@Override
-	public FeedBackLine getLinesforItem(Item item, CRMContext context,
+	public List<FeedBackLine> getLinesforItem(Item item, CRMContext context,
 			Date fromDate, Date toDate) {
 		FeedBackDAO dao =(FeedBackDAO) getDAO();
-		dao.getByItem(item.getId(), context.getLoggedinCompany(), fromDate, toDate);
-		return null;
+		List<FeedBackLine> feedBackLines= dao.getByItem(item.getId(), context.getLoggedinCompany(), fromDate, toDate);
+		return feedBackLines;
 	}
 
 

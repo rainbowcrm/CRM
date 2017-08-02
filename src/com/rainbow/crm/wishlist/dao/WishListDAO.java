@@ -82,6 +82,45 @@ public class WishListDAO  extends SpringHibernateDAO{
     	}
     	return null;
 	}
+	
+	public List<WishListLine>  getWishesPerSku(Sku item, Division division, double Qty , String reason ) {
+		Session session = openSession(false) ;
+    	try  {
+	    	String queryString = " from WishListLine  where sku.id =  :item_id and qty <= :qty  and division.id= :division_id "  + 
+    	    " and reasonCode= :reasonCode  and salesLeadGenerated  is false "  ;
+	    	Query  query = session.createQuery(queryString);
+	    	query.setInteger("item_id", item.getId()) ;
+	    	query.setDouble("qty", Qty) ;
+	    	query.setInteger("division_id", division.getId());
+	    	query.setString("reasonCode", reason);
+	    	List<WishListLine> wishlistLines = query.list();
+	    	return wishlistLines ;
+    	}catch(Exception ex) {
+    		ex.printStackTrace();
+    	}finally{
+    		session.close();
+    	}
+    	return null;
+	}
+	
+	public List<WishListLine>  getOpenWishesPerSku(Sku item,Date fromDate, Date toDate ) {
+		Session session = openSession(false) ;
+    	try  {
+	    	String queryString = " from WishListLine  where sku.id =  :item_id  and salesLeadGenerated  is false and voided=false and  "+ 
+    	  " wishListDoc.voided=false and  wishListDoc.wishListDate >= :fromDate and  wishListDoc.wishListDate <= :toDate "  ;
+	    	Query  query = session.createQuery(queryString);
+	    	query.setInteger("item_id", item.getId()) ;
+	    	query.setDate("fromDate", fromDate);
+	    	query.setDate("toDate", toDate);
+	    	List<WishListLine> wishlistLines = query.list();
+	    	return wishlistLines ;
+    	}catch(Exception ex) {
+    		ex.printStackTrace();
+    	}finally{
+    		session.close();
+    	}
+    	return null;
+	}
 
 
 	/*public int getTotalQtySold (Item item , Date from , Date To) {

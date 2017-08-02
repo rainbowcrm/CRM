@@ -65,6 +65,15 @@ public class WishListService extends AbstractionTransactionService implements IW
 	
 
 	@Override
+	public List<WishListLine> getWishesforSKU(Sku sku, CRMContext context,
+			Date fromDate, Date toDate) {
+		WishListDAO dao = (WishListDAO) getDAO();
+		return dao.getOpenWishesPerSku(sku, fromDate, toDate);
+	}
+
+
+
+	@Override
 	public Object getById(Object PK) {
 		return getDAO().getById(PK);
 	}

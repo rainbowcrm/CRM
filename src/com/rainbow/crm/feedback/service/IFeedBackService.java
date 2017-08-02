@@ -32,7 +32,7 @@ public interface IFeedBackService extends ITransactionService{
 	
 	public BarChartData getFeedBackValue(Division division,Date fromDate, Date toDate, CRMContext context);
 	
-	public FeedBackLine getLinesforItem(Item item, CRMContext  context, Date fromDate, Date toDate);
+	public List<FeedBackLine> getLinesforItem(Item item, CRMContext  context, Date fromDate, Date toDate);
 	
 
 }

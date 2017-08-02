@@ -63,8 +63,18 @@ public class SkuDAO extends SpringHibernateDAO {
 	public List<Sku> getAllByProduct(int company, int productId) {
 		Sku item = null;
 		Session session = openSession(false);
-		Query query = session.createQuery(" from Sku where company.id =:company  and product.id =:product  " ) ;
+		Query query = session.createQuery(" from Sku where company.id =:company  and product.id =:product  and deleted= false " ) ;
 		query.setParameter("product", productId);
+		query.setParameter("company", company);
+		List lst = query.list();
+		return lst;
+	}
+	
+	public List<Sku> getAllByItem(int company, int itemId) {
+		Sku item = null;
+		Session session = openSession(false);
+		Query query = session.createQuery(" from Sku where company.id =:company  and item.id =:item and deleted= false  " ) ;
+		query.setParameter("item", itemId);
 		query.setParameter("company", company);
 		List lst = query.list();
 		return lst;
