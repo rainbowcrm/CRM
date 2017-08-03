@@ -33,6 +33,7 @@ import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.division.service.IDivisionService;
 import com.rainbow.crm.hibernate.ORMDAO;
 import com.rainbow.crm.inventory.model.InventoryUpdateObject;
+import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.item.service.ISkuService;
 import com.rainbow.crm.product.validator.ProductValidator;
@@ -65,10 +66,10 @@ public class WishListService extends AbstractionTransactionService implements IW
 	
 
 	@Override
-	public List<WishListLine> getWishesforSKU(Sku sku, CRMContext context,
+	public List<WishListLine> getWishesforItem(Item item, CRMContext context,
 			Date fromDate, Date toDate) {
 		WishListDAO dao = (WishListDAO) getDAO();
-		return dao.getOpenWishesPerSku(sku, fromDate, toDate);
+		return dao.getOpenWishesPerItem(item, fromDate, toDate);
 	}
 
 

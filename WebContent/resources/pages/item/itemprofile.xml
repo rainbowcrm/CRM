@@ -27,6 +27,50 @@ Controller = "com.rainbow.crm.profile.controller.ItemProfileController">
 	
 </Element>
 </Section>
+<Section type= "displaySection">
+<Element type ="UITabset" Id = "impexp" style = "uitabstyle" selectedTabStyle= "titleStyleSelected active nav-link" unSelectedTabStyle ="titleStyleUnSelected nav-link" >
+<Element type ="UITab" Id= "idLine" title = "Details" showinTable = "false" >
+
+</Element>
+<Element type ="UITab" Id= "idSales" title = "Past Sales" showinTable = "false" >
+<Element type = "UITable" rows = "1" cols = "7" style = "grid" applyStyleonChildren ="true" Id  ="tblTrans" property ="PastSales[]" >
+<Element type = "UITableHead" style ="listPageTitle">
+ <Element type = "UITableRow">
+ <Element type ="UITableCol" width = "25%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Division" /></Element>
+ <Element type ="UITableCol" width = "15%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Doc" /></Element>
+ <Element type ="UITableCol" width = "15%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Date" /></Element>
+ <Element type ="UITableCol" width = "25%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Customer" /></Element>
+ <Element type ="UITableCol" width = "10%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Qty" /></Element>
+ <Element type ="UITableCol" width = "10%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Unit_Price" /></Element>
+ </Element>
+ 
+ <Element type = "UITableRow"  dataType = "com.rainbow.crm.sales.model.SalesLine" >
+ 
+ <Element type ="UITableCol" width = "25%" ><Element label = ""  type = "UILabel" Id = "lblCode" property ="salesDoc.division.Name" /></Element>
+ <Element type ="UITableCol" width = "15%" ><Element label = ""  type = "UILabel" Id = "lblCode" property ="salesDoc.billNumber" /></Element>
+ <Element type ="UITableCol" width = "15%" ><Element label = ""  type = "UILabel" Id = "lblCode" property ="salesDoc.salesDate" /></Element>
+ <Element type ="UITableCol" width = "25%" ><Element label = ""  type = "UILabel" Id = "lblCode" /></Element>
+ <Element type ="UITableCol" width = "10%" ><Element label = ""  type = "UILabel" Id = "lblCode" property ="qty" /></Element>
+ <Element type ="UITableCol" width = "10%" ><Element label = ""  type = "UILabel" Id = "lblCode" property ="unitPrice" /></Element>
+ 
+ </Element>
+ 
+</Element>
+</Element>
+
+</Element>
+
+<Element type ="UITab" Id= "idRevies" title = "Customer_Reviews" showinTable = "false" >
+</Element>
+
+<Element type ="UITab" Id= "idWWishes" title = "Customer_Wishes" showinTable = "false" >
+</Element>
+
+<Element type ="UITab" Id= "idDocss" title = "Documents" showinTable = "false" >
+</Element>
+
+</Element>
+</Section>
 </CoreSection>
 </UIForm>
 </Elements>

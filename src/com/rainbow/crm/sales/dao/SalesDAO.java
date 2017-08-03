@@ -10,6 +10,7 @@ import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.sales.model.Sales;
+import com.rainbow.crm.sales.model.SalesLine;
 import com.rainbow.crm.salesperiod.model.SalesPeriod;
 import com.techtrade.rads.framework.utils.Utils;
 
@@ -32,6 +33,21 @@ public class SalesDAO  extends SpringHibernateDAO{
 		query.setParameter("company", company);
 		query.setParameter("startDate", startDate);
 		List<Sales> lst = query.list();
+		closeSession(session, false);
+		return lst;
+	}
+	
+
+	public List<SalesLine> getSalesLinesforItem(int company , int item, Date fromDate, Date toDate)
+	{
+		Session session = openSession(false);
+		Query query = session.createQuery(" from SalesLine where company.id = :company  and sku.item.id = :item   and salesDoc.salesDate <= :toDate and  " +
+		 " salesDoc.salesDate >= :fromDate and voided  =false  and salesDoc.voided = true  " ) ;
+		query.setParameter("company", company);
+		query.setParameter("fromDate", fromDate);
+		query.setParameter("toDate", toDate);
+		query.setParameter("item", item);
+		List<SalesLine> lst = query.list();
 		closeSession(session, false);
 		return lst;
 	}

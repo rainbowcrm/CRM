@@ -104,6 +104,17 @@ public class SalesService extends AbstractionTransactionService implements ISale
 		return salesDao.getNonAlertedSalesFeedBack(company, startDate);
 	}
 
+	
+	
+	@Override
+	public List<SalesLine> getSalesForItem(Item item, CRMContext context,
+			boolean returns, Date from, Date to) {
+		SalesDAO salesDao = (SalesDAO) getDAO();
+		return salesDao.getSalesLinesforItem(context.getLoggedinCompany(), item.getId(), from, to);
+	}
+
+
+
 	@Override
 	public Sales getByBillNumberforReturn(Division division, String billNumber) {
 		SalesDAO salesDao = (SalesDAO) getDAO();

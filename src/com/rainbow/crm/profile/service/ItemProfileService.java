@@ -20,6 +20,7 @@ import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.item.service.ISkuService;
 import com.rainbow.crm.profile.model.ItemProfile;
 import com.rainbow.crm.sales.model.SalesLine;
+import com.rainbow.crm.sales.service.ISalesService;
 import com.rainbow.crm.wishlist.model.WishListLine;
 import com.rainbow.crm.wishlist.service.IWishListService;
 
@@ -46,20 +47,26 @@ public class ItemProfileService implements IItemProfileService{
 		List<Sku> skuList = skuService.getAllByItem(context.getLoggedinCompany(), item.getId());
 		
 		IInventoryService inventoryService = (IInventoryService) SpringObjectFactory.INSTANCE.getInstance("IInventoryService");
-		IWishListService wishListService = (IWishListService) SpringObjectFactory.INSTANCE.getInstance("IWishListService");
+		
 		List<Inventory> inventoryList = new ArrayList<Inventory> ();
-		List<WishListLine> wishesList = new ArrayList<WishListLine> ();
+		
 		if ( skuList != null ) {
 			skuList.forEach(sku ->  {   
 				List<Inventory> skuInventory = inventoryService.getByItem(sku);
 				inventoryList.addAll(skuInventory);
 				
-				List<WishListLine> skuWishes= wishListService.getWishesforSKU(sku, context, fromDate, new java.util.Date()) ;
-				wishesList.addAll(skuWishes);
+				
 			});
 		}
+		IWishListService wishListService = (IWishListService) SpringObjectFactory.INSTANCE.getInstance("IWishListService");
+		List<WishListLine> wishesList = wishListService.getWishesforItem(item, context, fromDate, new java.util.Date()) ;
+		itemProfile.setWishList(wishesList);
 		
-		return null;
+		ISalesService  salesService =(ISalesService) SpringObjectFactory.INSTANCE.getInstance("ISalesService");
+		List<SalesLine> sales = salesService.getSalesForItem(item, context, false, fromDate, new java.util.Date());
+		itemProfile.setPastSales(sales);
+				
+		return itemProfile;
 	}
 
 	public List<FeedBackLine> getCustomerFeedBacks(Item item, CRMContext context) {

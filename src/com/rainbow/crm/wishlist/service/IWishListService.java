@@ -8,6 +8,7 @@ import com.rainbow.crm.common.IBusinessService;
 import com.rainbow.crm.common.ITransactionService;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.inventory.model.InventoryUpdateObject;
+import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.wishlist.model.WishList;
 import com.rainbow.crm.wishlist.model.WishListLine;
@@ -20,6 +21,6 @@ public interface IWishListService extends ITransactionService{
 	
 	public void generateSalesLead(InventoryUpdateObject invObject,String reason);
 	
-	public List<WishListLine> getWishesforSKU(Sku sku , CRMContext  context , Date fromDate, Date toDate) ;
+	public List<WishListLine> getWishesforItem(Item item , CRMContext  context , Date fromDate, Date toDate) ;
 
 }

@@ -14,6 +14,7 @@ import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.product.model.Product;
 import com.rainbow.crm.sales.model.Sales;
+import com.rainbow.crm.sales.model.SalesLine;
 import com.rainbow.crm.user.model.User;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 
@@ -44,5 +45,7 @@ public interface ISalesService extends ITransactionService{
 	public List<Sales> getNonAlertedSalesFeedBack(int company, int interval);
 	
 	public void reCalculateTotal (Sales sales, CRMContext contex) ;
+	
+	public List<SalesLine> getSalesForItem(Item item, CRMContext context, boolean returns, Date from, Date to);
 
 }

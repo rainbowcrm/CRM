@@ -31,9 +31,9 @@ public class WishListDAO  extends SpringHibernateDAO{
 	    	String queryString = " from WishListLine  where item.id =  :item_id   " +   
     	    " and reasonCode= :reasonCode and desiredPrice <=:price and salesLeadGenerated  is false "  ;
 	    	Query  query = session.createQuery(queryString);
-	    	query.setInteger("item_id", item.getId()) ;
-	    	query.setDouble("price", price) ;
-	    	query.setString("reasonCode", reason);
+	    	query.setParameter("item_id", item.getId()) ;
+	    	query.setParameter("price", price) ;
+	    	query.setParameter("reasonCode", reason);
 	    	List<WishListLine> wishlistLines = query.list();
 	    	return wishlistLines ;
     	}catch(Exception ex) {
@@ -103,10 +103,10 @@ public class WishListDAO  extends SpringHibernateDAO{
     	return null;
 	}
 	
-	public List<WishListLine>  getOpenWishesPerSku(Sku item,Date fromDate, Date toDate ) {
+	public List<WishListLine>  getOpenWishesPerItem(Item item,Date fromDate, Date toDate ) {
 		Session session = openSession(false) ;
     	try  {
-	    	String queryString = " from WishListLine  where sku.id =  :item_id  and salesLeadGenerated  is false and voided=false and  "+ 
+	    	String queryString = " from WishListLine  where sku.item.id =  :item_id  and salesLeadGenerated  is false and voided=false and  "+ 
     	  " wishListDoc.voided=false and  wishListDoc.wishListDate >= :fromDate and  wishListDoc.wishListDate <= :toDate "  ;
 	    	Query  query = session.createQuery(queryString);
 	    	query.setInteger("item_id", item.getId()) ;
