@@ -15,6 +15,7 @@ import com.techtrade.rads.framework.annotations.RadsPropertySet;
 public class ItemProfile extends CRMModelObject{
 	Item item;
 	double avgRating;
+	String itemImage;
 	
 	List<FeedBackLine> customerFeedBacks; 
 	List <SalesLine> pastSales;
@@ -108,6 +109,12 @@ public class ItemProfile extends CRMModelObject{
 		if (wishList == null)
 			wishList = new ArrayList<WishListLine>();
 		wishList.add(document);
+	}
+	public String getItemImage() {
+		return itemImage;
+	}
+	public void setItemImage(String itemImage) {
+		this.itemImage = itemImage;
 	}
 	
 	

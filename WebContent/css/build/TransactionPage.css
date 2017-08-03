@@ -304,6 +304,11 @@ div.detailCRUDStyleForSale {
   overflow: auto;
   height: 42%; }
 
+div.detailCRUDStyleForPage {
+  position: relative;
+  overflow: auto;
+  height: 75%; }
+
 thead.listPageTitle {
   background: #263238;
   color: #f4f4f4;
@@ -348,6 +353,13 @@ input {
 span {
   color: #373a3c;
   font-size: 13px;
+  min-width: 150px;
+  display: inline-block; }
+
+span.crudlabel {
+  color: #373a3c;
+  font-size: 15px;
+  font-weight: bold;
   min-width: 150px;
   display: inline-block; }
 

@@ -4,6 +4,7 @@ import java.util.Date;
 
 import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
+import com.rainbow.crm.common.CRMAppConfig;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.contact.model.Contact;
@@ -11,6 +12,7 @@ import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.item.model.Sku;
+import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.sales.model.Sales;
 import com.rainbow.crm.saleslead.model.SalesLead;
 import com.rainbow.crm.territory.model.Territory;
@@ -109,6 +111,15 @@ public class Document extends CRMBusinessModelObject{
 		this.fileName1 = fileName1;
 	}
 	public String getFileWithLink() {
+		if(Utils.isNullString(fileWithLink)) {
+			try {
+			String serverURL = CRMAppConfig.INSTANCE.getProperty("doc_server");
+			fileWithLink= serverURL + getDocPath() ;
+			}catch(Exception ex)
+			{
+				Logwriter.INSTANCE.error(ex);
+			}
+		}
 		return fileWithLink;
 	}
 	public void setFileWithLink(String fileWithLink) {

@@ -42,7 +42,7 @@ public class SalesDAO  extends SpringHibernateDAO{
 	{
 		Session session = openSession(false);
 		Query query = session.createQuery(" from SalesLine where company.id = :company  and sku.item.id = :item   and salesDoc.salesDate <= :toDate and  " +
-		 " salesDoc.salesDate >= :fromDate and voided  =false  and salesDoc.voided = true  " ) ;
+		 " salesDoc.salesDate >= :fromDate and voided  =false  and salesDoc.voided = false  " ) ;
 		query.setParameter("company", company);
 		query.setParameter("fromDate", fromDate);
 		query.setParameter("toDate", toDate);

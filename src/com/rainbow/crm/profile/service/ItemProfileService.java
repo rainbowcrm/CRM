@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.rainbow.crm.common.CRMAppConfig;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.SpringObjectFactory;
@@ -15,9 +16,12 @@ import com.rainbow.crm.feedback.model.FeedBackLine;
 import com.rainbow.crm.feedback.service.IFeedBackService;
 import com.rainbow.crm.inventory.model.Inventory;
 import com.rainbow.crm.inventory.service.IInventoryService;
+import com.rainbow.crm.item.dao.ItemImageSQL;
 import com.rainbow.crm.item.model.Item;
+import com.rainbow.crm.item.model.ItemImage;
 import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.item.service.ISkuService;
+import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.profile.model.ItemProfile;
 import com.rainbow.crm.sales.model.SalesLine;
 import com.rainbow.crm.sales.service.ISalesService;
@@ -26,12 +30,32 @@ import com.rainbow.crm.wishlist.service.IWishListService;
 
 public class ItemProfileService implements IItemProfileService{
 
+	 private void loadImage(ItemProfile itemProfile,CRMContext context )
+	 {
+		 try {
+		 	String imgPath = "./resources/images/not-available.png";
+			String filePath = CRMAppConfig.INSTANCE.getProperty("doc_server");
+			String code = context.getLoggedinCompanyCode();
+			ItemImage dbRecord1 = ItemImageSQL.getItemImage(itemProfile.getItem().getId(), 'a');
+			if (dbRecord1 != null ) {
+				imgPath = filePath + "\\" +  code  + "\\itemimages\\" +  dbRecord1.getFileName();
+			}
+			itemProfile.setItemImage(imgPath);
+		 }catch(Exception ex)
+		 {
+			 Logwriter.INSTANCE.error(ex);
+		 }
+		 
+	 }
 	
 	
 	@Override
 	public ItemProfile getItemProfile(Item item, CRMContext context) {
 		ItemProfile itemProfile = new ItemProfile();
 		itemProfile.setItem(item);
+		
+		loadImage(itemProfile, context);
+		
 		String profDataHist = ConfigurationManager.getConfig(ConfigurationManager.PROF_DATAHISTORY, context);
 		Date fromDate = CommonUtil.getRelativeDate(new FiniteValue(profDataHist));
 		
@@ -58,6 +82,8 @@ public class ItemProfileService implements IItemProfileService{
 				
 			});
 		}
+		
+		itemProfile.setInventory(inventoryList);
 		IWishListService wishListService = (IWishListService) SpringObjectFactory.INSTANCE.getInstance("IWishListService");
 		List<WishListLine> wishesList = wishListService.getWishesforItem(item, context, fromDate, new java.util.Date()) ;
 		itemProfile.setWishList(wishesList);
