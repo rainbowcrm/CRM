@@ -10,6 +10,7 @@ import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.config.service.ConfigurationManager;
+import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.document.model.Document;
 import com.rainbow.crm.document.service.IDocumentService;
 import com.rainbow.crm.feedback.model.FeedBackLine;
@@ -22,9 +23,12 @@ import com.rainbow.crm.item.model.ItemImage;
 import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.item.service.ISkuService;
 import com.rainbow.crm.logger.Logwriter;
+import com.rainbow.crm.profile.model.CustomerProfile;
 import com.rainbow.crm.profile.model.ItemProfile;
 import com.rainbow.crm.sales.model.SalesLine;
 import com.rainbow.crm.sales.service.ISalesService;
+import com.rainbow.crm.saleslead.model.SalesLeadLine;
+import com.rainbow.crm.saleslead.service.ISalesLeadService;
 import com.rainbow.crm.wishlist.model.WishListLine;
 import com.rainbow.crm.wishlist.service.IWishListService;
 
@@ -45,10 +49,42 @@ public class ItemProfileService implements IItemProfileService{
 		 {
 			 Logwriter.INSTANCE.error(ex);
 		 }
-		 
 	 }
 	
-	
+	@Override
+	public CustomerProfile getCustomerProfile(Customer customer,
+			CRMContext context) {
+		CustomerProfile custProfile = new CustomerProfile();
+		String profDataHist = ConfigurationManager.getConfig(ConfigurationManager.PROF_DATAHISTORY, context);
+		Date fromDate = CommonUtil.getRelativeDate(new FiniteValue(profDataHist));
+		Date toDate = new java.util.Date();
+		
+		IFeedBackService  service = (IFeedBackService) SpringObjectFactory.INSTANCE.getInstance("IFeedBackService");
+		List<FeedBackLine> feedBackLines =service.getLinesforCustomer(customer, context, fromDate, toDate);
+		custProfile.setFeedBackLines(feedBackLines);
+		
+		IDocumentService docService = (IDocumentService) SpringObjectFactory.INSTANCE.getInstance("IDocumentService");
+		List<Document> docLines = docService.findAllByCustomer(customer);
+		custProfile.setDocuments(docLines);
+		
+		IWishListService wishListService = (IWishListService) SpringObjectFactory.INSTANCE.getInstance("IWishListService");
+		List<WishListLine> wishesList = wishListService.getWishesforCustomer(customer, context, fromDate, new java.util.Date()) ;
+		custProfile.setOpenWishes(wishesList);
+		
+		ISalesService  salesService =(ISalesService) SpringObjectFactory.INSTANCE.getInstance("ISalesService");
+		List<SalesLine> sales = salesService.getSalesForCustomer(customer, context, false, fromDate, new java.util.Date());
+		custProfile.setPastSales(sales);
+		
+		ISalesLeadService  salesLeadService =(ISalesLeadService) SpringObjectFactory.INSTANCE.getInstance("ISalesLeadService");
+		List<SalesLeadLine> salesLeadLines =  salesLeadService.getSalesLeadLinesforCustomer(customer, context, fromDate, toDate);
+		custProfile.setSalesLeadLines(salesLeadLines);
+		
+		return custProfile;
+		
+	}
+
+
+
 	@Override
 	public ItemProfile getItemProfile(Item item, CRMContext context) {
 		ItemProfile itemProfile = new ItemProfile();

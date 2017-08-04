@@ -8,6 +8,7 @@ import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.IBusinessService;
 import com.rainbow.crm.common.ITransactionService;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
+import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.item.model.Sku;
@@ -33,6 +34,8 @@ public interface IFeedBackService extends ITransactionService{
 	public BarChartData getFeedBackValue(Division division,Date fromDate, Date toDate, CRMContext context);
 	
 	public List<FeedBackLine> getLinesforItem(Item item, CRMContext  context, Date fromDate, Date toDate);
+	
+	public List<FeedBackLine> getLinesforCustomer(Customer customer, CRMContext  context, Date fromDate, Date toDate);
 	
 
 }

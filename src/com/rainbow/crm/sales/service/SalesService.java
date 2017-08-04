@@ -113,6 +113,13 @@ public class SalesService extends AbstractionTransactionService implements ISale
 		return salesDao.getSalesLinesforItem(context.getLoggedinCompany(), item.getId(), from, to);
 	}
 
+	@Override
+	public List<SalesLine> getSalesForCustomer(Customer customer,
+			CRMContext context, boolean returns, Date from, Date to) {
+		SalesDAO salesDao = (SalesDAO) getDAO();
+		return salesDao.getSalesLinesforCustomer(context.getLoggedinCompany(), customer.getId(), from, to);
+	}
+
 
 
 	@Override

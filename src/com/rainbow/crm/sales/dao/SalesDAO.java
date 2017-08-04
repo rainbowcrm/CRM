@@ -52,6 +52,20 @@ public class SalesDAO  extends SpringHibernateDAO{
 		return lst;
 	}
 	
+	public List<SalesLine> getSalesLinesforCustomer(int company , int customer, Date fromDate, Date toDate)
+	{
+		Session session = openSession(false);
+		Query query = session.createQuery(" from SalesLine where company.id = :company  and salesDoc.customer.id = :customer   and salesDoc.salesDate <= :toDate and  " +
+		 " salesDoc.salesDate >= :fromDate and voided  =false  and salesDoc.voided = false  " ) ;
+		query.setParameter("company", company);
+		query.setParameter("fromDate", fromDate);
+		query.setParameter("toDate", toDate);
+		query.setParameter("customer", customer);
+		List<SalesLine> lst = query.list();
+		closeSession(session, false);
+		return lst;
+	}
+	
 	public Sales getByBillNumberandDivision(Division division, String billNumber)
 	{
 		Session session = openSession(false);

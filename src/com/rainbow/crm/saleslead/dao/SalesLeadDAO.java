@@ -6,9 +6,12 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.saleslead.model.SalesLead;
+import com.rainbow.crm.saleslead.model.SalesLeadLine;
+import com.rainbow.crm.wishlist.model.WishListLine;
 import com.techtrade.rads.framework.utils.Utils;
 
 public class SalesLeadDAO  extends SpringHibernateDAO{
@@ -22,7 +25,25 @@ public class SalesLeadDAO  extends SpringHibernateDAO{
 		return obj;
 	}
 
-
+	public List<SalesLeadLine> getLeadsForCustomer(int customer,Date fromDate, Date toDate)
+	{
+		Session session = openSession(false) ;
+    	try  {
+	    	String queryString = " from SalesLeadLine  where salesLeadDoc.customer.id =  :customer_id  and  voided=false and  "+ 
+    	  "  salesLeadDoc.voided=false and  wishListDoc.releasedDate >= :fromDate and  wishListDoc.releasedDate <= :toDate "  ;
+	    	Query  query = session.createQuery(queryString);
+	    	query.setInteger("customer_id", customer) ;
+	    	query.setDate("fromDate", fromDate);
+	    	query.setDate("toDate", toDate);
+	    	List<SalesLeadLine> salesLeadLines = query.list();
+	    	return salesLeadLines ;
+    	}catch(Exception ex) {
+    		ex.printStackTrace();
+    	}finally{
+    		session.close();
+    	}
+    	return null;
+	}
 	/*public int getTotalQtySold (Item item , Date from , Date To) {
 		Session session = openSession(false) ;
     	try  {

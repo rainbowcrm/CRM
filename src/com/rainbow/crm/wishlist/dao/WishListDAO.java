@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.rainbow.crm.item.model.Item;
@@ -110,6 +111,25 @@ public class WishListDAO  extends SpringHibernateDAO{
     	  " wishListDoc.voided=false and  wishListDoc.wishListDate >= :fromDate and  wishListDoc.wishListDate <= :toDate "  ;
 	    	Query  query = session.createQuery(queryString);
 	    	query.setInteger("item_id", item.getId()) ;
+	    	query.setDate("fromDate", fromDate);
+	    	query.setDate("toDate", toDate);
+	    	List<WishListLine> wishlistLines = query.list();
+	    	return wishlistLines ;
+    	}catch(Exception ex) {
+    		ex.printStackTrace();
+    	}finally{
+    		session.close();
+    	}
+    	return null;
+	}
+	
+	public List<WishListLine>  getOpenWishesPerCustomer(Customer customer,Date fromDate, Date toDate ) {
+		Session session = openSession(false) ;
+    	try  {
+	    	String queryString = " from WishListLine  where wishListDoc.customer.id =  :customer_id  and salesLeadGenerated  is false and voided=false and  "+ 
+    	  " wishListDoc.voided=false and  wishListDoc.wishListDate >= :fromDate and  wishListDoc.wishListDate <= :toDate "  ;
+	    	Query  query = session.createQuery(queryString);
+	    	query.setInteger("customer_id", customer.getId()) ;
 	    	query.setDate("fromDate", fromDate);
 	    	query.setDate("toDate", toDate);
 	    	List<WishListLine> wishlistLines = query.list();

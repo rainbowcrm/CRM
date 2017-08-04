@@ -112,6 +112,15 @@ import com.techtrade.rads.framework.utils.Utils;
 public class SalesLeadService extends AbstractionTransactionService implements ISalesLeadService{
 
 	
+	
+
+	@Override
+	public List<SalesLeadLine> getSalesLeadLinesforCustomer(Customer customer,
+			CRMContext context, Date fromDate, Date toDate) {
+		SalesLeadDAO dao = (SalesLeadDAO)getDAO();
+		List<SalesLeadLine> leadLines = dao.getLeadsForCustomer(customer.getId(), fromDate, toDate);
+		return leadLines;
+	}
 
 	@Override
 	public byte[] printQuotation(SalesLead lead) {
