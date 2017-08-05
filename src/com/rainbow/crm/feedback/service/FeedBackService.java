@@ -203,7 +203,7 @@ public class FeedBackService extends AbstractionTransactionService implements IF
 		String benchMark =ConfigurationManager.getConfig(ConfigurationManager.FEEDBACK_RATING_BENCHMARK, context);
 		double avgRating = FeedbackSQLs.getAverageRatingIndex(Utils.getSQLDate(fromDate), Utils.getSQLDate(toDate), context.getLoggedinCompany(), division.getId(),
 				feedBackOn.getCode());
-		//chartData.setTitle("Customer Satisfaction Index");
+		chartData.setTitle("Customer Satisfaction Index");
 		chartData.setLabel("CSI");
 		chartData.setMaxValue(100);
 		chartData.setGraphValue((int)(avgRating * 10));

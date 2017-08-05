@@ -29,7 +29,7 @@ Controller = "com.rainbow.crm.profile.controller.CustomerProfileController">
 <Section type= "header">
 <Element label = "Customer_Phone"  type = "UIText" Id = "txtPhone"     property ="Customer.Phone" />
 	<Element label = "Email"  type = "UIText" Id = "txtEmail"   property ="Customer.Email" />
-	 <Element label = "Name"  type = "UILookupText"  Id = "txtCustomerName"  isMandatory="true" property ="Customer.FullName" showLookupAsDialog="true" dialogId="dlgComp"
+	<Element label = "Name"  type = "UILookupText"  Id = "txtCustomerName"  isMandatory="true" property ="Customer.FullName" showLookupAsDialog="true" dialogId="dlgComp"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>customer</lookupType>
 	 <height>300</height>
@@ -54,7 +54,13 @@ Controller = "com.rainbow.crm.profile.controller.CustomerProfileController">
 <Element type ="UITab" Id= "idLine" title = "Details" showinTable = "true"  cols="2">
  	<!-- <Element label="" type= "UIImage" height = "200" width ="200"   src= "#" property ="itemImage" ></Element>  -->
  	<Element label = ""  type = "UIImage" Id = "idIMG3"  height = "200" weight ="200" src= "#" property ="customer.fileWithLink" />
-	<Element label = ""  type = "UILabel" Id = "txtdummy" style="crudlabel"  size="10" />
+ 	<Element type = "UIGaugeChart" Id = "guageChart1"     dataProvider = "satisfactionIndex" useGoogleGraph="true" >
+	  <ticks>10</ticks>
+	  <rangeHeight>170</rangeHeight>
+	  <rangeWidth>400</rangeWidth>
+ 	</Element>
+ 	
+	<!-- <Element label = ""  type = "UILabel" Id = "txtdummy" style="crudlabel"  size="10" /> -->
 	<Element label = "First_Name"  type = "UILabel" Id = "txtCode" style="crudlabel"  size="10" property ="customer.firstName" />
 	<Element label = "Last_Name"  type = "UILabel" Id = "txtName" style="crudlabel"  size="30" property ="customer.lastName" />
 	<Element label = "Address1"  type = "UILabel" Id = "txtItem"  style="crudlabel"  size="30" property ="customer.address1" />

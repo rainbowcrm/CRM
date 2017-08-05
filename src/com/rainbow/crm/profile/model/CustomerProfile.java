@@ -9,10 +9,14 @@ import com.rainbow.crm.feedback.model.FeedBackLine;
 import com.rainbow.crm.sales.model.SalesLine;
 import com.rainbow.crm.saleslead.model.SalesLeadLine;
 import com.rainbow.crm.wishlist.model.WishListLine;
+import com.techtrade.rads.framework.model.graphdata.GaugeChartData;
 
 public class CustomerProfile extends CRMModelObject{
 
 	Customer customer;
+	
+	GaugeChartData satisfactionIndex;
+	
 	
 	List<SalesLine> pastSales;
 	List<FeedBackLine> feedBackLines;
@@ -55,6 +59,13 @@ public class CustomerProfile extends CRMModelObject{
 	public void setSalesLeadLines(List<SalesLeadLine> salesLeadLines) {
 		this.salesLeadLines = salesLeadLines;
 	}
+	public GaugeChartData getSatisfactionIndex() {
+		return satisfactionIndex;
+	}
+	public void setSatisfactionIndex(GaugeChartData satisfactionIndex) {
+		this.satisfactionIndex = satisfactionIndex;
+	}
+	
 	
 	
 	

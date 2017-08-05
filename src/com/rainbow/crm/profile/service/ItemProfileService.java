@@ -11,10 +11,12 @@ import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.config.service.ConfigurationManager;
 import com.rainbow.crm.customer.model.Customer;
+import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.document.model.Document;
 import com.rainbow.crm.document.service.IDocumentService;
 import com.rainbow.crm.feedback.model.FeedBackLine;
 import com.rainbow.crm.feedback.service.IFeedBackService;
+import com.rainbow.crm.feedback.sql.FeedbackSQLs;
 import com.rainbow.crm.inventory.model.Inventory;
 import com.rainbow.crm.inventory.service.IInventoryService;
 import com.rainbow.crm.item.dao.ItemImageSQL;
@@ -31,6 +33,9 @@ import com.rainbow.crm.saleslead.model.SalesLeadLine;
 import com.rainbow.crm.saleslead.service.ISalesLeadService;
 import com.rainbow.crm.wishlist.model.WishListLine;
 import com.rainbow.crm.wishlist.service.IWishListService;
+import com.techtrade.rads.framework.model.graphdata.GaugeChartData;
+import com.techtrade.rads.framework.model.graphdata.GaugeChartData.ColorRange;
+import com.techtrade.rads.framework.utils.Utils;
 
 public class ItemProfileService implements IItemProfileService{
 
@@ -50,7 +55,87 @@ public class ItemProfileService implements IItemProfileService{
 			 Logwriter.INSTANCE.error(ex);
 		 }
 	 }
-	
+	 
+	 public GaugeChartData getItemRatingIndex(Item item,
+				Date fromDate, Date toDate, CRMContext context) {
+			GaugeChartData chartData = new GaugeChartData();
+			String benchMark = ConfigurationManager.getConfig(
+					ConfigurationManager.FEEDBACK_RATING_BENCHMARK, context);
+			double avgRating = FeedbackSQLs.getItemRatingIndex(
+					Utils.getSQLDate(fromDate), Utils.getSQLDate(toDate),
+					context.getLoggedinCompany(), item.getId());
+			chartData.setTitle("Item Rating Index");
+			chartData.setLabel("IRI");
+			chartData.setMaxValue(100);
+			chartData.setGraphValue((int) (avgRating * 10));
+			chartData.setMinorTicks(10);
+
+			int dangerZone = Integer.parseInt(benchMark) / 2 * 10;
+			int yellowZone = Integer.parseInt(benchMark) * 10;
+			int greenZone = 100;
+			ColorRange redRange = chartData.new ColorRange();
+			redRange.setColor("red");
+			redRange.setFrom(0);
+			redRange.setTo(dangerZone);
+			chartData.addColorRange(redRange);
+
+			ColorRange yellowRange = chartData.new ColorRange();
+			yellowRange.setColor("yellow");
+			yellowRange.setFrom(dangerZone);
+			yellowRange.setTo(yellowZone);
+			chartData.addColorRange(yellowRange);
+
+			ColorRange greenRange = chartData.new ColorRange();
+			greenRange.setColor("green");
+			greenRange.setFrom(yellowZone);
+			greenRange.setTo(greenZone);
+			chartData.addColorRange(greenRange);
+
+			return chartData;
+		}
+	 
+
+	 
+	 
+	public GaugeChartData getCustomerSatisfactionIndex(Customer customer,
+			Date fromDate, Date toDate, CRMContext context) {
+		GaugeChartData chartData = new GaugeChartData();
+		String benchMark = ConfigurationManager.getConfig(
+				ConfigurationManager.FEEDBACK_RATING_BENCHMARK, context);
+		double avgRating = FeedbackSQLs.getCustSatisfactionRatingIndex(
+				Utils.getSQLDate(fromDate), Utils.getSQLDate(toDate),
+				context.getLoggedinCompany(), customer.getId());
+		chartData.setTitle("Customer Satisfaction Index");
+		chartData.setLabel("CSI");
+		chartData.setMaxValue(100);
+		chartData.setGraphValue((int) (avgRating * 10));
+		chartData.setMinorTicks(10);
+
+		int dangerZone = Integer.parseInt(benchMark) / 2 * 10;
+		int yellowZone = Integer.parseInt(benchMark) * 10;
+		int greenZone = 100;
+		ColorRange redRange = chartData.new ColorRange();
+		redRange.setColor("red");
+		redRange.setFrom(0);
+		redRange.setTo(dangerZone);
+		chartData.addColorRange(redRange);
+
+		ColorRange yellowRange = chartData.new ColorRange();
+		yellowRange.setColor("yellow");
+		yellowRange.setFrom(dangerZone);
+		yellowRange.setTo(yellowZone);
+		chartData.addColorRange(yellowRange);
+
+		ColorRange greenRange = chartData.new ColorRange();
+		greenRange.setColor("green");
+		greenRange.setFrom(yellowZone);
+		greenRange.setTo(greenZone);
+		chartData.addColorRange(greenRange);
+
+		return chartData;
+	}
+ 
+	 
 	@Override
 	public CustomerProfile getCustomerProfile(Customer customer,
 			CRMContext context) {
@@ -80,6 +165,8 @@ public class ItemProfileService implements IItemProfileService{
 		List<SalesLeadLine> salesLeadLines =  salesLeadService.getSalesLeadLinesforCustomer(customer, context, fromDate, toDate);
 		custProfile.setSalesLeadLines(salesLeadLines);
 		
+		GaugeChartData data = getCustomerSatisfactionIndex(customer, fromDate, toDate, context);
+		custProfile.setSatisfactionIndex(data);
 		return custProfile;
 		
 	}
@@ -128,6 +215,9 @@ public class ItemProfileService implements IItemProfileService{
 		ISalesService  salesService =(ISalesService) SpringObjectFactory.INSTANCE.getInstance("ISalesService");
 		List<SalesLine> sales = salesService.getSalesForItem(item, context, false, fromDate, new java.util.Date());
 		itemProfile.setPastSales(sales);
+		
+		GaugeChartData data = getItemRatingIndex(item, fromDate, new java.util.Date(), context);
+		itemProfile.setSatisfactionIndex(data);
 				
 		return itemProfile;
 	}

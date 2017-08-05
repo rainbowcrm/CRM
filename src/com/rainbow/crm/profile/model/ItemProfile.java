@@ -11,6 +11,7 @@ import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.sales.model.SalesLine;
 import com.rainbow.crm.wishlist.model.WishListLine;
 import com.techtrade.rads.framework.annotations.RadsPropertySet;
+import com.techtrade.rads.framework.model.graphdata.GaugeChartData;
 
 public class ItemProfile extends CRMModelObject{
 	Item item;
@@ -23,6 +24,8 @@ public class ItemProfile extends CRMModelObject{
 	List<Inventory> inventory;
 	List<Document> documents;
 	List<WishListLine> wishList;
+	
+	GaugeChartData satisfactionIndex;
 	
 	@RadsPropertySet(isBK =true, isPK=true)
 	public Item getItem() {
@@ -115,6 +118,12 @@ public class ItemProfile extends CRMModelObject{
 	}
 	public void setItemImage(String itemImage) {
 		this.itemImage = itemImage;
+	}
+	public GaugeChartData getSatisfactionIndex() {
+		return satisfactionIndex;
+	}
+	public void setSatisfactionIndex(GaugeChartData satisfactionIndex) {
+		this.satisfactionIndex = satisfactionIndex;
 	}
 	
 	
