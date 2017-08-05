@@ -2,6 +2,7 @@ package com.rainbow.crm.profile.model;
 
 import java.util.List;
 
+import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.document.model.Document;
 import com.rainbow.crm.feedback.model.FeedBackLine;
@@ -9,7 +10,7 @@ import com.rainbow.crm.sales.model.SalesLine;
 import com.rainbow.crm.saleslead.model.SalesLeadLine;
 import com.rainbow.crm.wishlist.model.WishListLine;
 
-public class CustomerProfile {
+public class CustomerProfile extends CRMModelObject{
 
 	Customer customer;
 	

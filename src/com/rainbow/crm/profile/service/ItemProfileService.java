@@ -55,6 +55,7 @@ public class ItemProfileService implements IItemProfileService{
 	public CustomerProfile getCustomerProfile(Customer customer,
 			CRMContext context) {
 		CustomerProfile custProfile = new CustomerProfile();
+		custProfile.setCustomer(customer);
 		String profDataHist = ConfigurationManager.getConfig(ConfigurationManager.PROF_DATAHISTORY, context);
 		Date fromDate = CommonUtil.getRelativeDate(new FiniteValue(profDataHist));
 		Date toDate = new java.util.Date();

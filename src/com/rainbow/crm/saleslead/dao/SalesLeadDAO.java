@@ -30,7 +30,7 @@ public class SalesLeadDAO  extends SpringHibernateDAO{
 		Session session = openSession(false) ;
     	try  {
 	    	String queryString = " from SalesLeadLine  where salesLeadDoc.customer.id =  :customer_id  and  voided=false and  "+ 
-    	  "  salesLeadDoc.voided=false and  wishListDoc.releasedDate >= :fromDate and  wishListDoc.releasedDate <= :toDate "  ;
+    	  "  salesLeadDoc.voided=false and  salesLeadDoc.releasedDate >= :fromDate and  salesLeadDoc.releasedDate <= :toDate "  ;
 	    	Query  query = session.createQuery(queryString);
 	    	query.setInteger("customer_id", customer) ;
 	    	query.setDate("fromDate", fromDate);

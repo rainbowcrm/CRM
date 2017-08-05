@@ -22,7 +22,7 @@ Controller = "com.rainbow.crm.profile.controller.ItemProfileController">
 	 <height>300</height>
 	 <width>290</width>
 	</Element>
-	<Element caption = "Analyze"  type = "UIButton" Id = "btnFilterCleas"  style="btn btn-primary" iconStyle="glyphicon glyphicon-flash" fixedAction ="FixedAction.ACTION_READ"   />
+	<Element caption = "View_Profile"  type = "UIButton" Id = "btnFilterCleas"  style="btn btn-primary" iconStyle="glyphicon glyphicon-flash" fixedAction ="FixedAction.ACTION_READ"   />
 	 </Element>
 	<Element type ="UITableCol">
 	</Element>

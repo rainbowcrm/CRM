@@ -36,6 +36,8 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
+
+
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
@@ -51,6 +53,8 @@ import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
 import com.rainbow.crm.config.service.ConfigurationManager;
+import com.rainbow.crm.customer.model.Customer;
+import com.rainbow.crm.customer.service.ICustomerService;
 import com.rainbow.crm.database.LoginSQLs;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.division.service.IDivisionService;
@@ -346,6 +350,18 @@ public class CommonUtil {
 			});
 			return metadataMap.get(classId) ;
 		}
+	}
+	
+	
+	public static Customer getCustomerObect(CRMContext context , Customer customer) {
+		ICustomerService customerService = (ICustomerService) SpringObjectFactory.INSTANCE.getInstance("ICustomerService");
+		Customer retdivision = null ;
+		if(customer.getId() > 0 ) {
+			retdivision =(Customer) customerService.getById(customer.getId());
+		} else if (!Utils.isNullString(customer.getPhone())) {
+			retdivision =(Customer) customerService.getByBusinessKey(customer, context);
+		}
+		return retdivision;
 	}
 	
 	public static Division getDivisionObect(CRMContext context , Division division) {

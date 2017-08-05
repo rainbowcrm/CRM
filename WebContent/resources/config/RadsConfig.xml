@@ -172,8 +172,11 @@
 </Page>
 <Page id = "productfaqs" definition ="/resources/pages/products/productFAQs.xml"  accessCode ="MERCH:PRODFAQ" modelclass = "com.rainbow.crm.product.model.ProductFAQSet" >
 </Page>
-<Page id = "itemprofile" definition ="/resources/pages/item/itemprofile.xml"  accessCode ="MERCH:ITEMPROF" modelclass = "com.rainbow.crm.profile.model.ItemProfile" >
+<Page id = "itemprofile" definition ="/resources/pages/profiles/itemprofile.xml"  accessCode ="MERCH:ITEMPROF" modelclass = "com.rainbow.crm.profile.model.ItemProfile" >
 </Page>
+<Page id = "customerprofile" definition ="/resources/pages/profiles/customerprofile.xml"  modelclass = "com.rainbow.crm.profile.model.CustomerProfile" >
+</Page>
+
 <Page id = "skucomplete" definition ="/resources/pages/item/skucomplete.xml" modelclass = "com.rainbow.crm.item.model.SkuComplete" >
 </Page>
 <Page id = "setup" definition ="/resources/pages/datasetup/datasetup.xml" accessCode ="ADMIN:DATASETUP" modelclass = "com.rainbow.framework.setup.model.DataLoader" >
@@ -365,6 +368,7 @@
  	<Element label = "" type = "UIMenu" Id = "menu05" style="menustyle" title="Customers" link = "rdscontroller?page=customers"  iconStyle="fa fa-fw fa-dashboard" />
 	<Element label = "" type = "UIMenu" Id = "menu05" style="menustyle" title="Loyalty" link = "rdscontroller?page=loyatylist"  iconStyle="fa fa-fw fa-dashboard" />
 	<Element label = "" type = "UIMenu" Id = "menu05" style="menustyle" title="Wish_List" link = "rdscontroller?page=wishlist" iconStyle="fa fa-fw fa-dashboard"  />
+	<Element label = "" type = "UIMenu" Id = "menu117" style="menustyle" title="Customer_Profile" link = "rdscontroller?page=customerprofile" iconStyle="fa fa-fw fa-dashboard"  />s
  </Element>
  <Element label = "" type = "UIMenu" Id = "menu600" style="menustyleParent" title="Corporate_WorkBench" groupId= "menuGRP0060"  >
     <Element label = "" type = "UIMenu" Id = "menu601" style="menustyle" title="Corp_Sales_Period" link = "rdscontroller?page=corpsalesperiodlist"   />
