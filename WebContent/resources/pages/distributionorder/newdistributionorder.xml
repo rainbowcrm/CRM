@@ -69,7 +69,7 @@ Controller = "com.rainbow.crm.distributionorder.controller.DistributionOrderCont
 <Section type ="detail">
 
 <Element type ="UIDialog" Id = "newprintpop" style= "fullpagepopup" >
-<Element type = "UIIFrame" Id= "printFRM" src ="./rdscontroller?page=transactiondocument" style ="lookupFrameStyle">
+<Element type = "UIIFrame" Id= "printFRM" src ="./rdscontroller?page=transactiondocument" style ="fullPageFrameStyle">
 </Element>
 </Element>
 
