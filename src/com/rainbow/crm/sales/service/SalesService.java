@@ -18,12 +18,16 @@ import java.util.Set;
 
 
 
+
+
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+
 
 
 
@@ -108,6 +112,24 @@ public class SalesService extends AbstractionTransactionService implements ISale
 
 	
 	
+	@Override
+	public Long getUnitsSoldForItem(Item item, CRMContext context,
+			boolean returns, Date from, Date to) {
+		SalesDAO salesDao = (SalesDAO) getDAO();
+		return salesDao.getUnitsSoldforItem(context.getLoggedinCompany(), item.getId(),returns, from, to);
+	}
+
+
+
+	@Override
+	public Double getTotalSalesAmountForItem(Item item, CRMContext context,
+			boolean returns, Date from, Date to) {
+		SalesDAO salesDao = (SalesDAO) getDAO();
+		return salesDao.getTotalAmountSalesLinesforItem(context.getLoggedinCompany(), item.getId(), from, to);
+	}
+
+
+
 	@Override
 	public List<SalesLine> getSalesForItem(Item item, CRMContext context,
 			boolean returns, Date from, Date to) {

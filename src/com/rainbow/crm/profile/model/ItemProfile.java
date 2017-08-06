@@ -1,9 +1,11 @@
 package com.rainbow.crm.profile.model;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
+import com.rainbow.crm.config.service.ConfigurationManager;
 import com.rainbow.crm.document.model.Document;
 import com.rainbow.crm.feedback.model.FeedBackLine;
 import com.rainbow.crm.inventory.model.Inventory;
@@ -27,6 +29,45 @@ public class ItemProfile extends CRMModelObject{
 	
 	GaugeChartData satisfactionIndex;
 	
+	double unitsSold;
+	double unitsReturned;
+	double totalAmountsSold;
+	int skuVariants;
+	
+	
+	
+	
+	public double getUnitsSold() {
+		return unitsSold;
+	}
+	public void setUnitsSold(double unitsSold) {
+		this.unitsSold = unitsSold;
+	}
+	public double getUnitsReturned() {
+		return unitsReturned;
+	}
+	public void setUnitsReturned(double unitsReturned) {
+		this.unitsReturned = unitsReturned;
+	}
+	
+	public String getTotalAmountsSoldInCurrency() {
+		DecimalFormat decFormat = new DecimalFormat("#,##0.00");
+		String currency = ConfigurationManager.getConfig(ConfigurationManager.CURRENCY, item.getCompany().getId());
+		return decFormat.format(totalAmountsSold) + " " + currency;
+	}
+	
+	public double getTotalAmountsSold() {
+		return totalAmountsSold;
+	}
+	public void setTotalAmountsSold(double totalAmountsSold) {
+		this.totalAmountsSold = totalAmountsSold;
+	}
+	public int getSkuVariants() {
+		return skuVariants;
+	}
+	public void setSkuVariants(int skuVariants) {
+		this.skuVariants = skuVariants;
+	}
 	@RadsPropertySet(isBK =true, isPK=true)
 	public Item getItem() {
 		return item;

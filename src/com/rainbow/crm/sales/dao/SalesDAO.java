@@ -37,6 +37,36 @@ public class SalesDAO  extends SpringHibernateDAO{
 		return lst;
 	}
 	
+	public Long getUnitsSoldforItem(int company , int item, boolean isReturn, Date fromDate, Date toDate)
+	{
+		Session session = openSession(false);
+		Query query = session.createQuery("select sum(qty) from SalesLine where company.id = :company  and sku.item.id = :item   and salesDoc.salesDate <= :toDate and  " +
+		 " salesDoc.salesDate >= :fromDate  and salesDoc.return =  :isReturn and voided  =false  and salesDoc.voided = false  " ) ;
+		query.setParameter("company", company);
+		query.setParameter("fromDate", fromDate);
+		query.setParameter("toDate", toDate);
+		query.setParameter("item", item);
+		query.setParameter("isReturn", isReturn);
+		List<Long> lst = query.list();
+		closeSession(session, false);
+		return lst.get(0);
+	}
+	
+	
+	public Double getTotalAmountSalesLinesforItem(int company , int item, Date fromDate, Date toDate)
+	{
+		Session session = openSession(false);
+		Query query = session.createQuery("select sum(lineTotal) from SalesLine where company.id = :company  and sku.item.id = :item   and salesDoc.salesDate <= :toDate and  " +
+		 " salesDoc.salesDate >= :fromDate and voided  =false  and salesDoc.voided = false  " ) ;
+		query.setParameter("company", company);
+		query.setParameter("fromDate", fromDate);
+		query.setParameter("toDate", toDate);
+		query.setParameter("item", item);
+		List<Double> lst = query.list();
+		closeSession(session, false);
+		return lst.get(0);
+	}
+	
 
 	public List<SalesLine> getSalesLinesforItem(int company , int item, Date fromDate, Date toDate)
 	{

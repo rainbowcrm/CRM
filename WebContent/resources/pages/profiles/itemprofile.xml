@@ -54,6 +54,12 @@ Controller = "com.rainbow.crm.profile.controller.ItemProfileController">
 	<Element label = "Item_Class"  type = "UILabel" Id = "txtItemClass" style="crudlabel"  size="30" property ="item.itemClassDesc" />
 	<Element label = "Max_Price"  type = "UILabel" Id = "txtMaxPrice" style="crudlabel"  size="10" property ="item.MaxPrice"   />
 	<Element label = "Retail_Price"  type = "UILabel" Id = "txtRetailPrice"  style="crudlabel" size="10" property ="item.RetailPrice"    />
+	<Element label = "Variants"  type = "UILabel" Id = "txtNoVariants"  style="crudlabel" size="10" property ="skuVariants"    />
+	<Element label = "Amount_Sold"  type = "UILabel" Id = "txtMaxPrice" style="crudlabel"  size="10" property ="totalAmountsSoldInCurrency"   />
+	<Element label = "Units_Sold"  type = "UILabel" Id = "txtBrand" style="crudlabel"  size="30" property ="unitsSold" />
+	<Element label = "Units_Returned"  type = "UILabel" Id = "txtItemClass" style="crudlabel"  size="30" property ="unitsReturned" />
+	
+	
 	
 	
 </Element> 

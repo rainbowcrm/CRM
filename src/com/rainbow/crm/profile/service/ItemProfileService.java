@@ -210,6 +210,8 @@ public class ItemProfileService implements IItemProfileService{
 		
 		ISkuService skuService = (ISkuService) SpringObjectFactory.INSTANCE.getInstance("ISkuService");
 		List<Sku> skuList = skuService.getAllByItem(context.getLoggedinCompany(), item.getId());
+		if (skuList != null)
+		itemProfile.setSkuVariants(skuList.size());
 		
 		IInventoryService inventoryService = (IInventoryService) SpringObjectFactory.INSTANCE.getInstance("IInventoryService");
 		
@@ -232,6 +234,15 @@ public class ItemProfileService implements IItemProfileService{
 		ISalesService  salesService =(ISalesService) SpringObjectFactory.INSTANCE.getInstance("ISalesService");
 		List<SalesLine> sales = salesService.getSalesForItem(item, context, false, fromDate, new java.util.Date());
 		itemProfile.setPastSales(sales);
+		
+		Double totSales = salesService.getTotalSalesAmountForItem(item, context, false, fromDate, new java.util.Date());
+		itemProfile.setTotalAmountsSold(totSales != null?totSales.doubleValue():0d);
+		
+		Long unitsSold = salesService.getUnitsSoldForItem(item, context, false, fromDate, new java.util.Date());
+		itemProfile.setUnitsSold(unitsSold!= null ? unitsSold.intValue():0);
+		
+		Long unitsReturned = salesService.getUnitsSoldForItem(item, context, true, fromDate, new java.util.Date());
+		itemProfile.setUnitsReturned(unitsReturned!= null ? unitsReturned.intValue():0);
 		
 		GaugeChartData data = getItemRatingIndex(item, fromDate, new java.util.Date(), context);
 		itemProfile.setSatisfactionIndex(data);

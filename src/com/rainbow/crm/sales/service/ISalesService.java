@@ -49,6 +49,10 @@ public interface ISalesService extends ITransactionService{
 	
 	public List<SalesLine> getSalesForItem(Item item, CRMContext context, boolean returns, Date from, Date to);
 	
+	public Double getTotalSalesAmountForItem(Item item, CRMContext context, boolean returns, Date from, Date to);
+	
+	public Long getUnitsSoldForItem(Item item, CRMContext context, boolean returns, Date from, Date to);
+	
 	public List<SalesLine> getSalesForCustomer(Customer customer, CRMContext context, boolean isReturn, Date from, Date to);
 	
 	public Date getLastSaleDateForCustomer(Customer customer, CRMContext context, boolean isReturn, Date from, Date to);
