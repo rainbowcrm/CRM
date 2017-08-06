@@ -57,12 +57,12 @@ Controller = "com.rainbow.crm.topic.controller.TopicSetController">
 <Element type = "UITable" rows = "1" cols = "3"  style = "outlinedTable">
 <Element type = "UITableRow">
 <Element type ="UITableCol"  width = "20%">
-  <Element type = "UIList"  size ="12" Id  ="lstAllTopics" onChangeJS = "getReplies()" property = "currentTopic"> 
+  <Element type = "UIList"  size ="12" Id  ="lstAllTopics" multiple="true" onChangeJS = "getReplies()" property = "currentTopic"> 
   	<options populator =  "getAllOpenTopics"> 
 	</options>
    </Element>
   
-</Element>
+</Element> 
 <Element type ="UITableCol"  width = "80%">
 <Element label = ""  type = "UILabel" style="discussion" Id = "txtdiscussion" property ="completeDiscussion"  > 
 	</Element>

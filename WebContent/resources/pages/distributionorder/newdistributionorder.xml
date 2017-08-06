@@ -54,24 +54,21 @@ Controller = "com.rainbow.crm.distributionorder.controller.DistributionOrderCont
 
 	<Element label = "Doc_No"  type = "UIText" Id = "txtDocNo"   readonly="true" property ="docNumber" />
 	<Element label = "Date"  type = "UIDate" Id = "txtwishListDate" readonly="true"  property ="orderDate" />
-	<Element label = ""  type = "UILabel" Id = "lblCustTitle"   value ="Customer" />
-	<Element label = ""  type = "UILabel" Id = "lblFree1"  style="bigTitle" value ="" />
-	<Element label = ""  type = "UILabel" Id = "lblFree2"  style="bigTitle" value ="" />
-	<Element label = "Phone"  type = "UIText" Id = "txtPhone"   readonly="true"  property ="Customer.Phone" />
-	<Element label = "Email"  type = "UIText" Id = "txtEmail"  readonly="true"  property ="Customer.Email" />
-	 <Element label = "Name"  type = "UIText"  Id = "txtCustomerName"   readonly="true" isMandatory="true" property ="Customer.FullName"  />
+	<Element label = "Customer_Phone"  type = "UIText" Id = "txtPhone"   readonly="true"  property ="Customer.Phone" />
+	<Element label = "Customer_Email"  type = "UIText" Id = "txtEmail"  readonly="true"  property ="Customer.Email" />
+	 <Element label = "Customer_Name"  type = "UIText"  Id = "txtCustomerName"   readonly="true" isMandatory="true" property ="Customer.FullName"  />
 	
 	<Element label = "Sales_Bill"  type = "UIText" Id = "txtSale" readonly="true"    property ="Sales.BillNumber" />
 	<Element label = "Status"  type = "UIText" Id = "txtStatus"  readonly="true"  property ="Status.description" />
 	<Element label = ""  type = "UIHidden" Id = "hdnStatusID"  readonly="true"  property ="Status.code" />
-	
+	<Element type ="UIDialog" Id = "newprintpop" style= "fullpagepopup" >
+	<Element type = "UIIFrame" Id= "printFRM" src ="./rdscontroller?page=transactiondocument" style ="fullPageFrameStyle">
+	</Element>
+	</Element>
 </Section>
-<Section type ="detail">
+<Section type ="detailCRUDStyleForPage">
 
-<Element type ="UIDialog" Id = "newprintpop" style= "fullpagepopup" >
-<Element type = "UIIFrame" Id= "printFRM" src ="./rdscontroller?page=transactiondocument" style ="fullPageFrameStyle">
-</Element>
-</Element>
+
 
 <Element type ="UITabset" Id = "impexp" style = "uitabstyle" selectedTabStyle= "titleStyleSelected active nav-link" unSelectedTabStyle ="titleStyleUnSelected nav-link" >
 <Element type ="UITab" Id= "idLine" title = "Line_Items" showinTable = "false" >

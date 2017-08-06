@@ -51,6 +51,11 @@ body, div.topBar {
   height: 25px !important;
   padding: 3px !important; }
 
+textarea.form-control {
+	 height: 40px !important;
+	
+}
+
 input[type=checkbox].form-control, input[type=radio].form-control {
   width: 25px; }
 
