@@ -68,8 +68,11 @@ Controller = "com.rainbow.crm.profile.controller.CustomerProfileController">
 	<Element label = "zipCode"  type = "UILabel" Id = "txtBrand" style="crudlabel"  size="30" property ="customer.zipCode" />
 	<Element label = "City"  type = "UILabel" Id = "txtItemClass" style="crudlabel"  size="30" property ="customer.city" />
 	<Element label = "Loyalty_Point"  type = "UILabel" Id = "txtMaxPrice" style="crudlabel"  size="10" property ="customer.loyaltyPoint"   />
-	<Element label = "Referencable"  type = "UIBooleanCheckBox" Id = "txtreferncible" hiddenControlId= "hdnAskforFeeddBack"  style="crudlabel" size="10" property ="customer.referencible"    />
-	
+	<Element label = "Referencable"  type = "UIBooleanCheckBox" Id = "txtreferncible" hiddenControlId= "hdnRefer"  style="crudlabel"  property ="customer.Referencible"    />
+	<Element label = "Total_Sales_Amount"  type = "UILabel" Id = "txtTotSalesAmount"  style="crudlabel"  size="30" property ="totalSalesInCurrency" />
+	<Element label = "No_Sales_Lines"  type = "UILabel" Id = "txtTotSalesLines"  style="crudlabel" size="30" property ="noSalesLines" />
+	<Element label = "No_Return_Lines"  type = "UILabel" Id = "txtNoReturnLines" style="crudlabel"  size="30" property ="noReturnLines" />
+	<Element label = "Last_Sold_on"  type = "UILabel" Id = "txtlastDold" style="crudlabel"  size="30" property ="lastSaleOn" />
 	
 </Element> 
 

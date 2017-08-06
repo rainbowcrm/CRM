@@ -17,12 +17,14 @@ import java.util.Set;
 
 
 
+
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 
 
 
@@ -113,11 +115,31 @@ public class SalesService extends AbstractionTransactionService implements ISale
 		return salesDao.getSalesLinesforItem(context.getLoggedinCompany(), item.getId(), from, to);
 	}
 
+	
+	
+	@Override
+	public Date getLastSaleDateForCustomer(Customer customer,
+			CRMContext context, boolean isReturn, Date from, Date to) {
+		SalesDAO salesDao = (SalesDAO) getDAO();
+		return salesDao.getLastSaleDateforCustomer(context.getLoggedinCompany(), customer.getId(), from,to,isReturn);
+	}
+
+
+
+	@Override
+	public Double getSalesAmountForCustomer(Customer customer,
+			CRMContext context, boolean isReturn, Date from, Date to) {
+		SalesDAO salesDao = (SalesDAO) getDAO();
+		return salesDao.getTotalSalesAmountforCustomer(context.getLoggedinCompany(), customer.getId(), from, to,isReturn);
+	}
+
+
+
 	@Override
 	public List<SalesLine> getSalesForCustomer(Customer customer,
-			CRMContext context, boolean returns, Date from, Date to) {
+			CRMContext context, boolean isReturn, Date from, Date to) {
 		SalesDAO salesDao = (SalesDAO) getDAO();
-		return salesDao.getSalesLinesforCustomer(context.getLoggedinCompany(), customer.getId(), from, to);
+		return salesDao.getSalesLinesforCustomer(context.getLoggedinCompany(), customer.getId(), from, to,isReturn);
 	}
 
 

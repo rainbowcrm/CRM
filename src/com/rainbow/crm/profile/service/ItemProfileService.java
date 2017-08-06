@@ -158,8 +158,21 @@ public class ItemProfileService implements IItemProfileService{
 		custProfile.setOpenWishes(wishesList);
 		
 		ISalesService  salesService =(ISalesService) SpringObjectFactory.INSTANCE.getInstance("ISalesService");
+		
 		List<SalesLine> sales = salesService.getSalesForCustomer(customer, context, false, fromDate, new java.util.Date());
 		custProfile.setPastSales(sales);
+		if(sales != null)
+			custProfile.setNoSalesLines(sales.size());
+		
+		List<SalesLine> returns = salesService.getSalesForCustomer(customer, context, true, fromDate, new java.util.Date());
+		if(returns != null)
+			  custProfile.setNoReturnLines(returns.size());
+		
+		Double salesAmount = salesService.getSalesAmountForCustomer(customer, context, false, fromDate, new java.util.Date());
+		custProfile.setTotalSales(salesAmount);
+		
+		Date lastDate = salesService.getLastSaleDateForCustomer(customer, context, false, fromDate,toDate);
+		custProfile.setLastSaleOn(lastDate);
 		
 		ISalesLeadService  salesLeadService =(ISalesLeadService) SpringObjectFactory.INSTANCE.getInstance("ISalesLeadService");
 		List<SalesLeadLine> salesLeadLines =  salesLeadService.getSalesLeadLinesforCustomer(customer, context, fromDate, toDate);
@@ -167,6 +180,10 @@ public class ItemProfileService implements IItemProfileService{
 		
 		GaugeChartData data = getCustomerSatisfactionIndex(customer, fromDate, toDate, context);
 		custProfile.setSatisfactionIndex(data);
+
+		
+		
+		
 		return custProfile;
 		
 	}
