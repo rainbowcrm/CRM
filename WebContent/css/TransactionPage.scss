@@ -41,6 +41,12 @@ overflow:auto;
 height: 42%;
 }
 
+div.detailCRUDStyleForPage {
+position:relative;
+overflow:auto;
+height: 85%;
+}
+
 thead.listPageTitle {
     background: $additional-info-color;
     color: $light;
@@ -98,6 +104,15 @@ span{
     min-width: 150px;
     display: inline-block;
    }
+
+span.crudlabel{
+     color: $span-default;
+    font-size: 15px;
+    font-weight:bold;
+    min-width: 150px;
+    display: inline-block;
+   }
+
    
 span.bigTitle {
 	color: $light;
@@ -197,6 +212,13 @@ dialog.fullpagepopup  {
 }
 
 iframe.quickcustaddstyle {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    border-radius: 5px;
+}
+
+iframe.fullPageFrameStyle {
     width: 100%;
     height: 100%;
     margin: auto;

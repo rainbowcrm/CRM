@@ -133,8 +133,13 @@ public class FeedBackService extends AbstractionTransactionService implements IF
 	}
 
 
-
-
+	@Override
+	public List<FeedBackLine> getLinesforCustomer(Customer customer,
+			CRMContext context, Date fromDate, Date toDate) {
+		FeedBackDAO dao =(FeedBackDAO) getDAO();
+		List<FeedBackLine> feedBackLines= dao.getByCustomer(customer.getId(), context.getLoggedinCompany(), fromDate, toDate);
+		return feedBackLines;
+	}
 
 
 	@Override
@@ -143,10 +148,6 @@ public class FeedBackService extends AbstractionTransactionService implements IF
 		return dao.getBySalesBill(docNo, context.getLoggedinCompany());
 	}
 
-
-	
-	
-	
 
 	@Override
 	public BarChartData getFeedBackValue(Division division, Date fromDate,
@@ -202,7 +203,7 @@ public class FeedBackService extends AbstractionTransactionService implements IF
 		String benchMark =ConfigurationManager.getConfig(ConfigurationManager.FEEDBACK_RATING_BENCHMARK, context);
 		double avgRating = FeedbackSQLs.getAverageRatingIndex(Utils.getSQLDate(fromDate), Utils.getSQLDate(toDate), context.getLoggedinCompany(), division.getId(),
 				feedBackOn.getCode());
-		//chartData.setTitle("Customer Satisfaction Index");
+		chartData.setTitle("Customer Satisfaction Index");
 		chartData.setLabel("CSI");
 		chartData.setMaxValue(100);
 		chartData.setGraphValue((int)(avgRating * 10));

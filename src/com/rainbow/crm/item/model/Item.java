@@ -2,6 +2,8 @@ package com.rainbow.crm.item.model;
 
 import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
 import com.rainbow.crm.brand.model.Brand;
+import com.rainbow.crm.common.finitevalue.FiniteValue;
+import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.product.model.Product;
 import com.rainbow.crm.uom.model.UOM;
 import com.techtrade.rads.framework.annotations.RadsPropertySet;
@@ -148,6 +150,10 @@ public class Item extends CRMBusinessModelObject{
 		this.itemClass = itemClass;
 	}
 	public String getItemClassDesc() {
+		if(Utils.isNullString(itemClassDesc)) {
+			FiniteValue fvalue= GeneralSQLs.getFiniteValue(itemClass);
+			itemClassDesc = fvalue!=null?fvalue.getDescription():"";
+		}
 		return itemClassDesc;
 	}
 	public void setItemClassDesc(String itemClassDesc) {

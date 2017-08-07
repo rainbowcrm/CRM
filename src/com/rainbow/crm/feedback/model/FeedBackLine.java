@@ -4,6 +4,7 @@ import java.util.Date;
 
 import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
 import com.rainbow.crm.abstratcs.model.CRMItemLine;
+import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.item.model.Sku;
@@ -84,6 +85,17 @@ public class FeedBackLine extends CRMBusinessModelObject{
 	public void setFeedBackObject(String feedBackObject) {
 		this.feedBackObject = feedBackObject;
 	}
+	
+	public String getFeedBackBusinessObject() {
+		if (CRMConstants.FEEDBACK_ON.SALES_LINE.equals(feedBackObjectType.getCode())) {
+			return sku.getName();
+		} else if (CRMConstants.FEEDBACK_ON.SALES_ASSOCIATE.equals(feedBackObjectType.getCode())) {
+			return associate.getUserId() ;
+		}else
+			 return "";
+			
+	}
+	
 	public int getRating() {
 		return rating;
 	}

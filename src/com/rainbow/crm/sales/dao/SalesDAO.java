@@ -37,12 +37,42 @@ public class SalesDAO  extends SpringHibernateDAO{
 		return lst;
 	}
 	
+	public Long getUnitsSoldforItem(int company , int item, boolean isReturn, Date fromDate, Date toDate)
+	{
+		Session session = openSession(false);
+		Query query = session.createQuery("select sum(qty) from SalesLine where company.id = :company  and sku.item.id = :item   and salesDoc.salesDate <= :toDate and  " +
+		 " salesDoc.salesDate >= :fromDate  and salesDoc.return =  :isReturn and voided  =false  and salesDoc.voided = false  " ) ;
+		query.setParameter("company", company);
+		query.setParameter("fromDate", fromDate);
+		query.setParameter("toDate", toDate);
+		query.setParameter("item", item);
+		query.setParameter("isReturn", isReturn);
+		List<Long> lst = query.list();
+		closeSession(session, false);
+		return lst.get(0);
+	}
+	
+	
+	public Double getTotalAmountSalesLinesforItem(int company , int item, Date fromDate, Date toDate)
+	{
+		Session session = openSession(false);
+		Query query = session.createQuery("select sum(lineTotal) from SalesLine where company.id = :company  and sku.item.id = :item   and salesDoc.salesDate <= :toDate and  " +
+		 " salesDoc.salesDate >= :fromDate and voided  =false  and salesDoc.voided = false  " ) ;
+		query.setParameter("company", company);
+		query.setParameter("fromDate", fromDate);
+		query.setParameter("toDate", toDate);
+		query.setParameter("item", item);
+		List<Double> lst = query.list();
+		closeSession(session, false);
+		return lst.get(0);
+	}
+	
 
 	public List<SalesLine> getSalesLinesforItem(int company , int item, Date fromDate, Date toDate)
 	{
 		Session session = openSession(false);
 		Query query = session.createQuery(" from SalesLine where company.id = :company  and sku.item.id = :item   and salesDoc.salesDate <= :toDate and  " +
-		 " salesDoc.salesDate >= :fromDate and voided  =false  and salesDoc.voided = true  " ) ;
+		 " salesDoc.salesDate >= :fromDate and voided  =false  and salesDoc.voided = false  " ) ;
 		query.setParameter("company", company);
 		query.setParameter("fromDate", fromDate);
 		query.setParameter("toDate", toDate);
@@ -50,6 +80,51 @@ public class SalesDAO  extends SpringHibernateDAO{
 		List<SalesLine> lst = query.list();
 		closeSession(session, false);
 		return lst;
+	}
+	
+	public List<SalesLine> getSalesLinesforCustomer(int company , int customer, Date fromDate, Date toDate,boolean isReturn)
+	{
+		Session session = openSession(false);
+		Query query = session.createQuery(" from SalesLine where company.id = :company  and salesDoc.customer.id = :customer   and salesDoc.salesDate <= :toDate and  " +
+		 " salesDoc.salesDate >= :fromDate and voided  =false and salesDoc.return= :isReturn and salesDoc.voided = false  " ) ;
+		query.setParameter("company", company);
+		query.setParameter("fromDate", fromDate);
+		query.setParameter("toDate", toDate);
+		query.setParameter("customer", customer);
+		query.setParameter("isReturn", isReturn);
+		List<SalesLine> lst = query.list();
+		closeSession(session, false);
+		return lst;
+	}
+	
+	public Date getLastSaleDateforCustomer(int company , int customer, Date fromDate, Date toDate,boolean isReturn)
+	{
+		Session session = openSession(false);
+		Query query = session.createQuery("select max(salesDate) from Sales where company.id = :company  and customer.id = :customer   and salesDate <= :toDate and  " +
+		 " salesDate >= :fromDate and voided  =false  and return =:isReturn " ) ;
+		query.setParameter("company", company);
+		query.setParameter("fromDate", fromDate);
+		query.setParameter("toDate", toDate);
+		query.setParameter("customer", customer);
+		query.setParameter("isReturn", isReturn);
+		List<Date> lst = query.list();
+		closeSession(session, false);
+		return lst.get(0);
+	}
+	
+	public Double getTotalSalesAmountforCustomer(int company , int customer, Date fromDate, Date toDate,boolean isReturn)
+	{
+		Session session = openSession(false);
+		Query query = session.createQuery("select sum(netAmount) from Sales where company.id = :company  and customer.id = :customer   and salesDate <= :toDate and  " +
+		 " salesDate >= :fromDate and voided  =false  and return =:isReturn " ) ;
+		query.setParameter("company", company);
+		query.setParameter("fromDate", fromDate);
+		query.setParameter("toDate", toDate);
+		query.setParameter("customer", customer);
+		query.setParameter("isReturn", isReturn);
+		List<Double> lst = query.list();
+		closeSession(session, false);
+		return lst.get(0);
 	}
 	
 	public Sales getByBillNumberandDivision(Division division, String billNumber)

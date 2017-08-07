@@ -5,6 +5,7 @@
 </ExternalizeFacade>
 <Properties>
 <appURL>http://localhost:8080/</appURL>
+<settings>com.rainbow.crm.common.CRMDefaultSettings</settings>
 <portalPrefix></portalPrefix>
 <!-- AWS entry <appURL>http://ec2-35-154-225-199.ap-south-1.compute.amazonaws.com:8080/</appURL>
 <portalPrefix>primuscrm</portalPrefix>  -->
@@ -172,8 +173,11 @@
 </Page>
 <Page id = "productfaqs" definition ="/resources/pages/products/productFAQs.xml"  accessCode ="MERCH:PRODFAQ" modelclass = "com.rainbow.crm.product.model.ProductFAQSet" >
 </Page>
-<Page id = "itemprofile" definition ="/resources/pages/item/itemprofile.xml"  accessCode ="MERCH:ITEMPROF" modelclass = "com.rainbow.crm.profile.model.ItemProfile" >
+<Page id = "itemprofile" definition ="/resources/pages/profiles/itemprofile.xml"  accessCode ="MERCH:ITEMPROF" modelclass = "com.rainbow.crm.profile.model.ItemProfile" >
 </Page>
+<Page id = "customerprofile" definition ="/resources/pages/profiles/customerprofile.xml"  modelclass = "com.rainbow.crm.profile.model.CustomerProfile" >
+</Page>
+
 <Page id = "skucomplete" definition ="/resources/pages/item/skucomplete.xml" modelclass = "com.rainbow.crm.item.model.SkuComplete" >
 </Page>
 <Page id = "setup" definition ="/resources/pages/datasetup/datasetup.xml" accessCode ="ADMIN:DATASETUP" modelclass = "com.rainbow.framework.setup.model.DataLoader" >
@@ -352,18 +356,20 @@
  	<Element label = "" type = "UIMenu" Id = "menu111" style="menustyle" title="Categories" link = "rdscontroller?page=categories"  iconStyle="fa fa-fw fa-dashboard" />
  	<Element label = "" type = "UIMenu" Id = "menu112" style="menustyle" title="Products" link = "rdscontroller?page=products"  iconStyle="fa fa-fw fa-dashboard" />
  	<Element label = "" type = "UIMenu" Id = "menu116" style="menustyle" title="Product_FAQ" link = "rdscontroller?page=productfaqs" iconStyle="fa fa-fw fa-dashboard"  />
- 	<Element label = "" type = "UIMenu" Id = "menu117" style="menustyle" title="Item_Profile" link = "rdscontroller?page=itemprofile" iconStyle="fa fa-fw fa-dashboard"  />
+ 	
  	<!-- TBD
  	 <Element label = "" type = "UIMenu" Id = "menu13" style="menustyle" title="UOMs" link = "rdscontroller?page=uoms"   />
  	 -->
- 	<Element label = "" type = "UIMenu" Id = "menu13" style="menustyle" title="Items" link = "rdscontroller?page=items"  iconStyle="fa fa-fw fa-dashboard" />
- 	<Element label = "" type = "UIMenu" Id = "menu14" style="menustyle" title="SKU" link = "rdscontroller?page=skus" iconStyle="fa fa-fw fa-dashboard"  />
- 	<Element label = "" type = "UIMenu" Id = "menu15" style="menustyle" title="Item Images" link = "rdscontroller?page=itemimages"  iconStyle="fa fa-fw fa-dashboard" />
+ 	<Element label = "" type = "UIMenu" Id = "menu113" style="menustyle" title="Items" link = "rdscontroller?page=items"  iconStyle="fa fa-fw fa-dashboard" />
+ 	<Element label = "" type = "UIMenu" Id = "menu114" style="menustyle" title="SKU" link = "rdscontroller?page=skus" iconStyle="fa fa-fw fa-dashboard"  />
+ 	<Element label = "" type = "UIMenu" Id = "menu115" style="menustyle" title="Item Images" link = "rdscontroller?page=itemimages"  iconStyle="fa fa-fw fa-dashboard" />
+ 	<Element label = "" type = "UIMenu" Id = "menu117" style="menustyle" title="Item_Profile" link = "rdscontroller?page=itemprofile" iconStyle="fa fa-fw fa-dashboard"  />s
  </Element>
  <Element label = "" type = "UIMenu" Id = "menu20" style="menustyleParent" title="Customer_Management" groupId= "menuGRP003"  >
  	<Element label = "" type = "UIMenu" Id = "menu05" style="menustyle" title="Customers" link = "rdscontroller?page=customers"  iconStyle="fa fa-fw fa-dashboard" />
 	<Element label = "" type = "UIMenu" Id = "menu05" style="menustyle" title="Loyalty" link = "rdscontroller?page=loyatylist"  iconStyle="fa fa-fw fa-dashboard" />
 	<Element label = "" type = "UIMenu" Id = "menu05" style="menustyle" title="Wish_List" link = "rdscontroller?page=wishlist" iconStyle="fa fa-fw fa-dashboard"  />
+	<Element label = "" type = "UIMenu" Id = "menu117" style="menustyle" title="Customer_Profile" link = "rdscontroller?page=customerprofile" iconStyle="fa fa-fw fa-dashboard"  />s
  </Element>
  <Element label = "" type = "UIMenu" Id = "menu600" style="menustyleParent" title="Corporate_WorkBench" groupId= "menuGRP0060"  >
     <Element label = "" type = "UIMenu" Id = "menu601" style="menustyle" title="Corp_Sales_Period" link = "rdscontroller?page=corpsalesperiodlist"   />

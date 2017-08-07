@@ -304,7 +304,7 @@ div.detailCRUDStyle {
 
 div.childSectionStyle {
   position: relative;
-  overflow: auto;
+  overflow: scroll;
   background-color: white; }
 
 div.summaryStyle {

@@ -55,6 +55,8 @@ public class SalesLeadValidator extends CRMValidator {
 					errors.add(getErrorforCode(CommonErrorCodes.SHOULD_BE_GREATER_THAN,externalize.externalize(context, "Qty") + line.getSku().getCode(),"0") ) ;
 				}else if (line.getPrice() <=0 ) {
 					errors.add(getErrorforCode(CommonErrorCodes.SHOULD_BE_GREATER_THAN,externalize.externalize(context, "Price") + line.getSku().getCode(),"0") ) ;
+				}else if (line.getNegotiatedPrice() <=0 ) {
+					line.setNegotiatedPrice(line.getPrice());
 				}
 			}
 		}

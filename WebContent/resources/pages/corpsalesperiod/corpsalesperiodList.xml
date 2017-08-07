@@ -65,8 +65,8 @@ Controller = "com.rainbow.crm.corpsalesperiod.controller.CorpSalesPeriodListCont
 </ListSection>
 </CoreSection>
 <Section type ="summary">
-<Element caption = "Add"  type = "UIButton"    Id = "btnAdd"  style="button" fixedAction ="FixedAction.ACTION_PAGEFORWARD" fixedActionParam =  "NEW" />
-<Element caption = "Edit"  type = "UIButton"    Id = "btnEdit"  style="button" fixedAction ="FixedAction.ACTION_GOEDITMODE"  fixedActionParam =  "EDIT"  />
+<Element caption = "Add"  type = "UIButton"    Id = "btnAdd"  style="btn btn-primary" fixedAction ="FixedAction.ACTION_PAGEFORWARD" fixedActionParam =  "NEW" />
+<Element caption = "Edit"  type = "UIButton"    Id = "btnEdit"  style="btn btn-warning"  fixedAction ="FixedAction.ACTION_GOEDITMODE"  fixedActionParam =  "EDIT"  />
 <Element type= "Panel" key= "NavPanel"  style = "sameline" ></Element>
 </Section>
 <Section type ="copyRightSection"/>

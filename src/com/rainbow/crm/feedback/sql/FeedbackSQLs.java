@@ -109,6 +109,69 @@ public class FeedbackSQLs {
 		
 	}
 	
+	public static double getItemRatingIndex ( Date startDate, Date endDate, int company, int item)
+	{
+		double ans =0;
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		try {
+			connection = ConnectionCreater.getConnection();
+			String sql =  " SELECT AVG(FEEDBACK_LINES.RATING) FROM FEEDBACKS,FEEDBACK_LINES,REASON_CODES,SKUS WHERE   " +
+			" FEEDBACKS.ID= FEEDBACK_LINES.FEEDBACK_ID AND FEEDBACK_LINES.REASON_CODE_ID = REASON_CODES.ID AND  FEEDBACK_LINES.SKU_ID = SKUS.ID " +
+			 " AND FEEDBACKS.FDBACK_DATE >= ? AND  FEEDBACKS.FDBACK_DATE <= ?  AND FEEDBACKS.COMPANY_ID =?   " +
+			 "   AND SKUS.ITEM_ID = ?  "  +
+			"  AND FEEDBACKS.IS_DELETED = FALSE AND FEEDBACK_LINES.IS_DELETED=FALSE  ";
+			statement = connection.prepareStatement(sql);
+			statement.setDate(1, startDate);
+			statement.setDate(2, endDate);
+			statement.setInt(3, company);
+			statement.setInt(4, item);
+			rs = statement.executeQuery();
+			while (rs.next()) {
+				ans = rs.getDouble(1);
+			}
+		}catch (SQLException ex) {
+			Logwriter.INSTANCE.error(ex);
+		} finally {
+			ConnectionCreater.close(connection, statement, rs);
+		}
+		return ans  ;
+		
+}
+	
+	public static double getCustSatisfactionRatingIndex ( Date startDate, Date endDate, int company, int customer)
+			{
+				double ans =0;
+				Connection connection = null;
+				PreparedStatement statement = null;
+				ResultSet rs = null;
+				try {
+					connection = ConnectionCreater.getConnection();
+					String sql =  " SELECT AVG(FEEDBACK_LINES.RATING) FROM FEEDBACKS,FEEDBACK_LINES,REASON_CODES WHERE   " +
+					" FEEDBACKS.ID= FEEDBACK_LINES.FEEDBACK_ID AND FEEDBACK_LINES.REASON_CODE_ID = REASON_CODES.ID AND   " +
+					 " FEEDBACKS.FDBACK_DATE >= ? AND  FEEDBACKS.FDBACK_DATE <= ?  AND FEEDBACKS.COMPANY_ID =?   " +
+					 "   AND FEEDBACKS.CUSTOMER_ID = ?  "  +
+					"  AND FEEDBACKS.IS_DELETED = FALSE AND FEEDBACK_LINES.IS_DELETED=FALSE  ";
+					statement = connection.prepareStatement(sql);
+					statement.setDate(1, startDate);
+					statement.setDate(2, endDate);
+					statement.setInt(3, company);
+					statement.setInt(4, customer);
+					rs = statement.executeQuery();
+					while (rs.next()) {
+						ans = rs.getDouble(1);
+					}
+				}catch (SQLException ex) {
+					Logwriter.INSTANCE.error(ex);
+				} finally {
+					ConnectionCreater.close(connection, statement, rs);
+				}
+				return ans  ;
+				
+	}
+	
+	
 	public static Map<String, Integer> getFeedBackReason(  Date startDate, Date endDate, int company, int division, 
 			int minRating, int MaxRating, String FeedBackOn )
 	{

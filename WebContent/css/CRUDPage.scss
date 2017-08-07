@@ -121,6 +121,13 @@ span {
 	display: inline-block;
     min-width: 150px;
 }
+span.crudlabel{
+     color: $span-default;
+    font-size: 15px;
+    font-weight:bold;
+    min-width: 150px;
+    display: inline-block;
+   }
 
 span.fullpage {
 	color: $span-default;

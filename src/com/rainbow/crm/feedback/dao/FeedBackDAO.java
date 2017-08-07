@@ -70,6 +70,21 @@ public class FeedBackDAO  extends SpringHibernateDAO{
 		
 	}
 	
+
+	public List<FeedBackLine> getByCustomer( int customer , int company , Date fromDate, Date toDate)
+	{
+		Session session = openSession(false);
+		Query query = session.createQuery("  from FeedBackLine FeedBackLine where FeedBackLine.feedBackDoc.customer.id = :customer   " +
+				"  and     FeedBackLine.feedBackDoc.feedBackDate >= :fromDate and  FeedBackLine.feedBackDoc.feedBackDate <=  :toDate  and FeedBackLine.deleted= false and FeedBackLine.feedBackDoc.deleted = false " ) ;
+		query.setParameter("customer", customer);
+		query.setParameter("fromDate", fromDate);
+		query.setParameter("toDate", toDate);
+		
+		List<FeedBackLine> lst = query.list();
+		closeSession(session, false);
+		return lst;
+		
+	}
 	
 	
 }

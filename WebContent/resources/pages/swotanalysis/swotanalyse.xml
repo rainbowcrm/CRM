@@ -41,7 +41,7 @@ Controller = "com.rainbow.crm.swot.controller.SWOTAnalysisController">
 	 <xStart>0</xStart>
 	  <yStart>20</yStart>
 	  <rangeHeight>300</rangeHeight>
-	  <rangeWidth>500</rangeWidth>
+	  <rangeWidth>600</rangeWidth>
 	  <marginWidth>30</marginWidth>
 	  <barWidth>30</barWidth>
 	  <noYAxisDivisions>6</noYAxisDivisions>
@@ -51,7 +51,7 @@ Controller = "com.rainbow.crm.swot.controller.SWOTAnalysisController">
 	 <xStart>600</xStart>
 	  <yStart>20</yStart>
 	  <rangeHeight>300</rangeHeight>
-	  <rangeWidth>500</rangeWidth>
+	  <rangeWidth>600</rangeWidth>
 	  <marginWidth>30</marginWidth>
 	  <barWidth>30</barWidth>
 	  <noYAxisDivisions>6</noYAxisDivisions>
@@ -61,7 +61,7 @@ Controller = "com.rainbow.crm.swot.controller.SWOTAnalysisController">
 	 <xStart>0</xStart>
 	  <yStart>350</yStart>
 	  <rangeHeight>300</rangeHeight>
-	  <rangeWidth>500</rangeWidth>
+	  <rangeWidth>600</rangeWidth>
 	  <marginWidth>30</marginWidth>
 	  <barWidth>30</barWidth>
 	  <noYAxisDivisions>6</noYAxisDivisions>
@@ -71,7 +71,7 @@ Controller = "com.rainbow.crm.swot.controller.SWOTAnalysisController">
 	 <xStart>600</xStart>
 	  <yStart>350</yStart>
 	  <rangeHeight>300</rangeHeight>
-	  <rangeWidth>500</rangeWidth>
+	  <rangeWidth>600</rangeWidth>
 	  <marginWidth>30</marginWidth>
 	  <barWidth>30</barWidth>
 	  <noYAxisDivisions>6</noYAxisDivisions>
