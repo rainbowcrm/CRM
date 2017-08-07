@@ -54,20 +54,20 @@ Controller = "com.rainbow.crm.promotion.controller.PromotionController">
 	<Element label = ""  type = "UILabel" Id = "txtBoolExpired" rendered ="isActive" value ="isActive" />
 </Section>
 <Section type ="brk1"/>
-<Section type ="detail">
+<Section type ="detailForSale">
 <Element label = ""  type = "UILabel" Id = "lblLineitTitle"  style="bigTitle" value ="Promotion_Items" />
-<Element type = "UITable" rows = "1" cols = "7" style = "listPageTitle" applyStyleonChildren ="true" Id  ="tblTrans" property ="promotionLines[]" >
-<Element type = "UITableHead">
+<Element type = "UITable" rows = "1" cols = "7" style = "grid" applyStyleonChildren ="true" Id  ="tblTrans" property ="promotionLines[]" >
+<Element type = "UITableHead" style ="listPageTitle" >
  <Element type = "UITableRow">
 
 <Element type ="UITableCol" width = "10%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Master_Type" /></Element>
 <Element type ="UITableCol" width = "25%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Master_Value" /></Element>
-<Element type ="UITableCol" width = "8%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Required_Qty" /></Element>
-<Element type ="UITableCol" width = "8%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Required_Amount" /></Element>
-<Element type ="UITableCol" width = "10%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Incentive_Type" /></Element>
+<Element type ="UITableCol" width = "15%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Required_Qty" /></Element>
+<Element type ="UITableCol" width = "15%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Required_Amount" /></Element>
+<Element type ="UITableCol" width = "15%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Incentive_Type" /></Element>
 <Element type ="UITableCol" width = "25%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Incentive_Value" /></Element>
-<Element type ="UITableCol" width = "8%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Promoted_Qty" /></Element>
-<Element type ="UITableCol" width = "8%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Promoted_Disc" /></Element>
+<Element type ="UITableCol" width = "15%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Promoted_Qty" /></Element>
+<Element type ="UITableCol" width = "15%"><Element label = ""  type = "UILabel" Id = "lblCode" value ="Promoted_Disc" /></Element>
 <Element type ="UITableCol" width = "10%"> </Element>
 </Element>  
  </Element>
@@ -111,7 +111,7 @@ Controller = "com.rainbow.crm.promotion.controller.PromotionController">
 <Element type ="UITableCol" width = "8%"><Element label = ""  type = "UIText" Id = "txtLinepromotedDisc"  property ="promotedDiscPercent" size = "5" />  </Element>
 <Element type ="UITableCol" width = "10%">
 	<Element caption = "" style="btn btn-primary" iconStyle="glyphicon glyphicon-plus"  type = "UIButton" Id = "btnAddRow"    fixedAction ="FixedAction.ACTION_ADDTABLEROW"  fixedActionParam =  "this"/>
-	<Element caption = "" style="btn btn-danger"   type = "UIButton" Id = "btnDelRow"    fixedAction ="FixedAction.ACTION_DELETETABLEROW"  fixedActionParam =  "this"/>
+	<Element caption = "" style="btn btn-danger"  iconStyle="glyphicon glyphicon-minus"  type = "UIButton" Id = "btnDelRow"    fixedAction ="FixedAction.ACTION_DELETETABLEROW"  fixedActionParam =  "this"/>
 </Element>
 </Element>
 </Element>
