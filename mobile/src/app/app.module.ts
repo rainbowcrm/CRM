@@ -13,6 +13,7 @@ import { SalesLeadModule } from '../pages/sales-lead/sales-lead.module';
 import { DiscussionModule } from '../pages/discussions/discussion.module';
 import { ExpenseModule } from '../pages/expenses/expenses.module';
 import { FollowUpModule } from '../pages/follow-up/follow-up.module';
+import { EnquiryModule } from '../pages/enquiry/enquiry.module';
 
 import { Loader,HTTPService, SharedService, ReasonCodeProvider, FilterProvider, PromptService, CommonHelper } from '../providers/';
 import { ContactService, PushService, SecureStorageService } from '../plugins/';
@@ -39,6 +40,7 @@ import { IonicStorageModule } from '@ionic/storage';
     AlertsModule,
     ExpenseModule,
     FollowUpModule,
+    EnquiryModule,
     IonicImageLoader.forRoot(),
     IonicStorageModule.forRoot()
   ],
