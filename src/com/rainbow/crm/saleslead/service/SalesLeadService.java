@@ -19,8 +19,16 @@ import java.util.Set;
 
 
 
+
+
+
+
+
+import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
 import javax.mail.BodyPart;
 import javax.mail.Message;
+import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -29,6 +37,10 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 
 
+
+
+
+import javax.mail.internet.MimeMultipart;
 
 import net.sf.jasperreports.engine.JRExporter;
 import net.sf.jasperreports.engine.JRExporterParameter;
@@ -44,6 +56,11 @@ import net.sf.jasperreports.view.JasperViewer;
 
 
 
+
+
+
+
+
 import org.apache.commons.io.IOUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
@@ -52,6 +69,11 @@ import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+
+
+
+
 
 
 
@@ -463,6 +485,9 @@ public class SalesLeadService extends AbstractionTransactionService implements I
 		return errors;
 
 	}
+	
+	
+	
 
 */	@Override
 	public List<RadsError> sendEmail(SalesLead salesLead,CRMContext context,String realPath) {
@@ -500,11 +525,11 @@ public class SalesLeadService extends AbstractionTransactionService implements I
 	         /**
 	          * 
 	          */
-	         FileOutputStream fos =new FileOutputStream(realPath +"\\test.html");
+	/*         FileOutputStream fos =new FileOutputStream(realPath +"\\test.html");
 	         fos.write("<HTML><BODY>".getBytes());
 	         fos.write(msg.getBytes());
 	         fos.write("</BODY></HTML>".getBytes());
-	         fos.close(); 
+	         fos.close();*/ 
 	         message.setContent(msg, "text/html; charset=utf-8");
 	         Transport t = session.getTransport("smtps");
 	         t.connect(host,authuser, authpwd);
@@ -514,11 +539,63 @@ public class SalesLeadService extends AbstractionTransactionService implements I
 			errors.add(new RadsError(String.valueOf(CommonErrorCodes.COULDNOT_SENDEMAIL),"Could not send email"));
 		}
 		return errors;
-
 	}
 	
 
- 	private void loadImages(SalesLead salesLead,CRMContext context,String realPath) {
+ 	@Override
+public List<RadsError> sendEmailWithQuote(SalesLead salesLead,
+		CRMContext context, String realPath,FileDataSource dataSource) {
+ 		List<RadsError> errors = new ArrayList<RadsError>();
+		try {
+		
+			String to = salesLead.getCustomer().getEmail();
+			String from  = "noresponse@primussol.com";
+			String host = CRMAppConfig.INSTANCE.getProperty("smtp_provider");
+			String port =CRMAppConfig.INSTANCE.getProperty("smtp_port");
+			String authuser =CRMAppConfig.INSTANCE.getProperty("smtp_authuser");
+			String authpwd =CRMAppConfig.INSTANCE.getProperty("smtp_password");
+			Properties properties = System.getProperties();
+			properties.put("mail.transport.protocol", "smtp");
+			properties.put("mail.smtp.auth", "true");
+			properties.put("mail.smtp.starttls.enable", "true");
+			properties.put("mail.smtp.host", host);
+			properties.put("mail.smtp.port", port);
+			
+			Session session = Session.getInstance(properties,
+			        new javax.mail.Authenticator() {
+				
+			            protected PasswordAuthentication getPasswordAuthentication() {
+			                return new PasswordAuthentication(authuser, authpwd);
+			            }
+			        });
+			 MimeMessage message = new MimeMessage(session);
+			 BodyPart messageBodyPart = new MimeBodyPart();
+			 messageBodyPart.setContent("<img>", "text/html");
+		     message.setFrom(new InternetAddress(from));
+		     message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+	         message.setSubject("Quotation for Sales Order : Ref - " + salesLead.getDocNumber());
+	         String msg = getMessage(salesLead, context);
+	         
+	         Multipart multipart = new MimeMultipart();
+	         multipart.addBodyPart(messageBodyPart);
+	         messageBodyPart = new MimeBodyPart();
+	         messageBodyPart.setDataHandler(new DataHandler(dataSource));
+	         messageBodyPart.setFileName(salesLead.getDocNumber() + "_quote.pdf");
+	         multipart.addBodyPart(messageBodyPart);
+	         
+	         message.setContent(multipart);
+	      //   message.setContent(msg, "text/html; charset=utf-8");
+	         Transport t = session.getTransport("smtps");
+	         t.connect(host,authuser, authpwd);
+	         t.sendMessage(message, message.getAllRecipients());
+		}catch(Exception ex){
+			Logwriter.INSTANCE.error(ex);
+			errors.add(new RadsError(String.valueOf(CommonErrorCodes.COULDNOT_SENDEMAIL),"Could not send email"));
+		}
+		return errors;
+}
+
+	private void loadImages(SalesLead salesLead,CRMContext context,String realPath) {
  		try {
  		for (SalesLeadLine line : salesLead.getSalesLeadLines() ) {
  			ItemImage image1 = ItemImageSQL.getItemImage(line.getSku().getId(), 'a');
