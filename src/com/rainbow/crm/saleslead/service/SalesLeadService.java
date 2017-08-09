@@ -17,6 +17,8 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
+
+
 import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
@@ -25,6 +27,8 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+
+
 
 import net.sf.jasperreports.engine.JRExporter;
 import net.sf.jasperreports.engine.JRExporterParameter;
@@ -38,6 +42,8 @@ import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
+
+
 import org.apache.commons.io.IOUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
@@ -46,6 +52,8 @@ import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+
 
 import com.rainbow.crm.abstratcs.model.CRMItemLine;
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
@@ -60,6 +68,7 @@ import com.rainbow.crm.common.CRMValidator;
 import com.rainbow.crm.common.CommonErrorCodes;
 import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.Externalize;
+import com.rainbow.crm.common.ItemUtil;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.common.messaging.CRMMessageSender;
@@ -87,6 +96,9 @@ import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.product.validator.ProductValidator;
 import com.rainbow.crm.reasoncode.model.ReasonCode;
 import com.rainbow.crm.reasoncode.service.IReasonCodeService;
+import com.rainbow.crm.sales.model.Sales;
+import com.rainbow.crm.sales.model.SalesLine;
+import com.rainbow.crm.sales.service.ISalesService;
 import com.rainbow.crm.saleslead.dao.SalesLeadDAO;
 import com.rainbow.crm.saleslead.model.SalesLead;
 import com.rainbow.crm.saleslead.model.SalesLeadExtended;
@@ -113,6 +125,38 @@ public class SalesLeadService extends AbstractionTransactionService implements I
 
 	
 	
+	
+
+	@Override
+	public TransactionResult generateSalesOrder(SalesLead lead, CRMContext context) {
+		Sales sales = new Sales();
+		IUserService userService = (IUserService)SpringObjectFactory.INSTANCE.getInstance("IUserService");
+		User user = (User)userService.getById(lead.getSalesAssociate());
+		sales.setSalesMan(user);
+		sales.setDivision(lead.getDivision());
+		
+		sales.setSalesDate(lead.getClosureDate());
+		sales.setCompany(lead.getCompany()) ;
+		sales.setCustomer(lead.getCustomer());
+		sales.setSalesRef(lead.getDocNumber());
+		lead.getSalesLeadLines().forEach( leadLine ->  { 
+			SalesLine line = new SalesLine ();
+			line.setSku(leadLine.getSku());
+			line.setQty(leadLine.getQty());
+			if (leadLine.getNegotiatedPrice() > 0 ) {
+				line.setUnitPrice(leadLine.getNegotiatedPrice());
+				line.setLineTotal(leadLine.getNegotiatedPrice() *  leadLine.getQty());
+			}else {
+				Double retailPrice = ItemUtil.getRetailPrice(leadLine.getSku());
+				line.setUnitPrice(retailPrice);
+				line.setLineTotal(leadLine.getNegotiatedPrice() *  leadLine.getQty());
+			}
+			sales.addSalesLine(line);
+		} );
+		
+		ISalesService salesService = (ISalesService)SpringObjectFactory.INSTANCE.getInstance("ISalesService");
+		return salesService.createFromScratch(sales, context);
+	}
 
 	@Override
 	public List<SalesLeadLine> getSalesLeadLinesforCustomer(Customer customer,

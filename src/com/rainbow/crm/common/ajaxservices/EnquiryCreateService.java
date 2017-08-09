@@ -14,6 +14,7 @@ import com.rainbow.crm.enquiry.service.IEnquiryService;
 import com.rainbow.crm.logger.Logwriter;
 import com.techtrade.rads.framework.context.IRadsContext;
 import com.techtrade.rads.framework.controller.abstracts.IAjaxUpdateService;
+import com.techtrade.rads.framework.model.transaction.TransactionResult;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
 
 public class EnquiryCreateService implements  IAjaxUpdateService {
@@ -32,7 +33,7 @@ public class EnquiryCreateService implements  IAjaxUpdateService {
 			enquiry.setCompany(company);
 			((CRMContext)ctx).setLoggedinCompany(company.getId());
 			IEnquiryService enquiryService = (IEnquiryService) SpringObjectFactory.INSTANCE.getInstance("IEnquiryService");
-			PageResult result  = (PageResult)enquiryService.createFromScratch(enquiry, ((CRMContext)ctx));
+			TransactionResult result  = (TransactionResult)enquiryService.createFromScratch(enquiry, ((CRMContext)ctx));
 			enquiry = (Enquiry)result.getObject() ;
 		return enquiry.toJSON() ;
 		
