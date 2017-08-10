@@ -36,5 +36,29 @@ public class SalesLeadExtended extends SalesLead {
 		documents.add(document);
 	}
 
-	
+	public static  SalesLeadExtended create (SalesLead lead)
+	{
+		SalesLeadExtended extended = new SalesLeadExtended();
+		extended.setId(lead.getId());
+		extended.setDocNumber(lead.getDocNumber());
+		extended.setCompany(lead.getCompany());
+		extended.setDivision(lead.getDivision());
+		extended.setCustomer(lead.getCustomer());
+		extended.setClosureDate(lead.getClosureDate());
+		extended.setReleasedDate(lead.getReleasedDate());
+		extended.setRefDate(lead.getRefDate());
+		extended.setComments(lead.getComments());
+		extended.setSales(lead.getSales());
+		extended.setDocNumber(lead.getDocNumber());
+		extended.setMgrReason(lead.getMgrReason());
+		extended.setSalesAssReason(lead.getSalesAssReason());
+		extended.setSalesAssociate(lead.getSalesAssociate());
+		extended.setRefNo(lead.getRefNo());
+		extended.setReferall(lead.getReferall());
+		extended.setSalesLeadLines(lead.getSalesLeadLines());
+		extended.setStatus(lead.getStatus());
+		extended.setAlerted(lead.isAlerted());
+		extended.setSalesWon(lead.isSalesWon());
+		return extended;
+	}
 }

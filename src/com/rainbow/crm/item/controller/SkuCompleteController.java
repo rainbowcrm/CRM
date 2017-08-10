@@ -1,6 +1,7 @@
 package com.rainbow.crm.item.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.jasypt.commons.CommonUtils;
@@ -10,9 +11,12 @@ import com.rainbow.crm.common.CRMAppConfig;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.SpringObjectFactory;
+import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.config.service.ConfigurationManager;
 import com.rainbow.crm.document.model.Document;
 import com.rainbow.crm.document.service.IDocumentService;
+import com.rainbow.crm.feedback.model.FeedBackLine;
+import com.rainbow.crm.feedback.service.IFeedBackService;
 import com.rainbow.crm.inventory.model.Inventory;
 import com.rainbow.crm.inventory.service.IInventoryService;
 import com.rainbow.crm.item.dao.ItemImageSQL;
@@ -56,8 +60,14 @@ public class SkuCompleteController  extends SkuController{
 		IDocumentService docService = (IDocumentService)SpringObjectFactory.INSTANCE.getInstance("IDocumentService");
 		List<Document> documents = docService.findAllByItem(((Sku) thisObject).getItem());
 		itemComplete.setDocuments(documents);
-		setObject(itemComplete);
 		
+		String profDataHist = ConfigurationManager.getConfig(ConfigurationManager.PROF_DATAHISTORY, context);
+		Date fromDate = CommonUtil.getRelativeDate(new FiniteValue(profDataHist));
+		IFeedBackService feedBackService =(IFeedBackService)SpringObjectFactory.INSTANCE.getInstance("IFeedBackService");
+		List<FeedBackLine> feedBackLines =feedBackService.getLinesforItem(itemComplete.getItem(), context, fromDate, new java.util.Date());
+		itemComplete.setFeedBackLines(feedBackLines);
+		
+		setObject(itemComplete);
 		}catch(Exception ex) {
 			Logwriter.INSTANCE.error(ex);
 		}

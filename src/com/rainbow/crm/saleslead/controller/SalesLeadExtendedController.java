@@ -88,6 +88,12 @@ public class SalesLeadExtendedController extends CRMTransactionController{
 				result.setResult(Result.FAILURE);
 				return result;
 			}
+			if (lead.getStatus() ==null  || !lead.getStatus().equals(CRMConstants.SALESCYCLE_STATUS.CLOSED)){
+				result.addError(CRMValidator.getErrorforCode(context.getLocale(), SalesLeadErrorCodes.SALESLEAD_NOTCLOSED));
+				result.setResult(Result.FAILURE);
+				return result;
+				
+			}
 			TransactionResult transResult= service.generateSalesOrder(lead,context );
 			if(!transResult.hasErrors()) {
 				lead.setSales((Sales)transResult.getObject());

@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.document.model.Document;
+import com.rainbow.crm.feedback.model.FeedBack;
+import com.rainbow.crm.feedback.model.FeedBackLine;
 import com.rainbow.crm.inventory.model.Inventory;
 
 public class SkuComplete  extends Sku{
@@ -14,6 +16,7 @@ public class SkuComplete  extends Sku{
 	
 	List<Inventory> inventory;
 	List<Document> documents;
+	List<FeedBackLine> feedBackLines;
 	
 	public String getImage1URL() {
 		return image1URL;
@@ -71,6 +74,12 @@ public class SkuComplete  extends Sku{
 	}
 	public void setDocuments(List<Document> documents) {
 		this.documents = documents;
+	}
+	public List<FeedBackLine> getFeedBackLines() {
+		return feedBackLines;
+	}
+	public void setFeedBackLines(List<FeedBackLine> feedBackLines) {
+		this.feedBackLines = feedBackLines;
 	}
 	
 	

@@ -701,12 +701,13 @@ public List<RadsError> sendEmailWithQuote(SalesLead salesLead,
 	@Override
 	public SalesLeadExtended getSalesLeadWithExtension(int leadId,CRMContext context) {
 		SalesLead lead = (SalesLead)getById(leadId);
-		String leadJSON = lead.toJSON();
+		/*String leadJSON = lead.toJSON();
 		SalesLeadExtended extenstion  = (SalesLeadExtended) SalesLeadExtended.instantiateObjectfromJSON(leadJSON, 
 				"com.rainbow.crm.saleslead.model.SalesLeadExtended", context);
 		extenstion.setCustomer(lead.getCustomer());
 		extenstion.setCompany(lead.getCompany());
-		extenstion.setDivision(lead.getDivision());
+		extenstion.setDivision(lead.getDivision());*/
+		SalesLeadExtended extenstion  = SalesLeadExtended.create(lead) ;
 		IFollowupService followUpService  = (IFollowupService)SpringObjectFactory.INSTANCE.getInstance("IFollowupService");
 		List<Followup> followups = followUpService.findBySalesLead(lead);
 		extenstion.setFollowups(followups);	
