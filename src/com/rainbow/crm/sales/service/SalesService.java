@@ -296,7 +296,8 @@ public class SalesService extends AbstractionTransactionService implements ISale
 		ICompanyService compService = (ICompanyService) SpringObjectFactory.INSTANCE.getInstance("ICompanyService");
 		Company company = (Company)compService.getById(context.getLoggedinCompany());
 		object.setCompany(company);
-				
+		double netAmount = 0 ;		
+		double grossAmount = 0;
 		List<RadsError> ans = new ArrayList<RadsError>();
 		Externalize externalize = new Externalize(); ;
 		if(object.getSalesMan() != null ){
@@ -363,8 +364,27 @@ public class SalesService extends AbstractionTransactionService implements ISale
 					}
 					line.setUser(user);
 				}
+				if (line.getDiscPercent() > 0) {
+					double lineDiscAmt = ( line.getQty() * line.getUnitPrice() ) *  line.getDiscPercent() /100 ;
+					line.setLineTotalDisc(lineDiscAmt);
+				}
+				double lineTotal =(line.getQty() * line.getUnitPrice()) - line.getLineTotalDisc(); 
+				line.setLineTotal( lineTotal );
+				grossAmount += lineTotal;
 			}
 		}
+	   
+		if(object.getDiscPercent() > 0 ) {
+			double discAmot = (grossAmount * object.getDiscPercent() ) /100;
+			object.setDiscAmount(discAmot);
+		}
+		if ( object.getTaxPerc() > 0) {
+		   double taxAmt = (grossAmount * object.getTaxPerc() ) /100;
+		   object.setTaxAmount(taxAmt);
+	   }
+	    
+	   netAmount =grossAmount  + object.getTaxAmount() - object.getDiscAmount() ;
+	   object.setNetAmount(netAmount);
 		if(object.getDeliveryAddress() != null  && !object.getDeliveryAddress().isNullContent()) {
 			IAddressService addService = (IAddressService)SpringObjectFactory.INSTANCE.getInstance("IAddressService");
 			Address delivery =(Address) addService.getByBusinessKey(object.getDeliveryAddress(), context);

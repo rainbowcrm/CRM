@@ -21,6 +21,7 @@ import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.database.LoginSQLs;
 import com.rainbow.crm.enquiry.validator.EnquiryErrorCodes;
 import com.rainbow.crm.logger.Logwriter;
+import com.rainbow.crm.sales.model.Sales;
 import com.rainbow.crm.saleslead.model.SalesLead;
 import com.rainbow.crm.saleslead.model.SalesLeadExtended;
 import com.rainbow.crm.saleslead.service.ISalesLeadService;
@@ -88,11 +89,17 @@ public class SalesLeadExtendedController extends CRMTransactionController{
 				return result;
 			}
 			TransactionResult transResult= service.generateSalesOrder(lead,context );
-			//if(transResult.get)
-			PageResult  pageResult = new PageResult(transResult) ;
-			return pageResult;
+			if(!transResult.hasErrors()) {
+				lead.setSales((Sales)transResult.getObject());
+				context.setReFetchAfterWrite(false);
+				service.update(lead, context);
+			}else {
+				PageResult  pageResult = new PageResult(transResult) ;
+				return pageResult;
+			}
 		}else if("closelead".equalsIgnoreCase(actionParam)) {
-			if (lead.getStatus().equals(CRMConstants.SALESCYCLE_STATUS.CLOSED)  || lead.getStatus().equals(CRMConstants.SALESCYCLE_STATUS.FAILED)  ) {
+			if (lead.getStatus() !=null  &&
+					(lead.getStatus().equals(CRMConstants.SALESCYCLE_STATUS.CLOSED)  || lead.getStatus().equals(CRMConstants.SALESCYCLE_STATUS.FAILED))  ) {
 				result.addError(CRMValidator.getErrorforCode(context.getLocale(), SalesLeadErrorCodes.SALESLEAD_ALREADY_COMPLETED));
 				result.setResult(Result.FAILURE);
 				return result;
@@ -102,7 +109,8 @@ public class SalesLeadExtendedController extends CRMTransactionController{
 			lead.setStatus(new FiniteValue (CRMConstants.SALESCYCLE_STATUS.CLOSED));
 			service.update(lead, (CRMContext) getContext());
 		}else if("renounce".equalsIgnoreCase(actionParam)) {
-			if (lead.getStatus().equals(CRMConstants.SALESCYCLE_STATUS.CLOSED)  || lead.getStatus().equals(CRMConstants.SALESCYCLE_STATUS.FAILED)  ) {
+			if(lead.getStatus() !=null  &&
+					(lead.getStatus().equals(CRMConstants.SALESCYCLE_STATUS.CLOSED)  || lead.getStatus().equals(CRMConstants.SALESCYCLE_STATUS.FAILED))  ) {
 				result.addError(CRMValidator.getErrorforCode(context.getLocale(), SalesLeadErrorCodes.SALESLEAD_ALREADY_COMPLETED));
 				result.setResult(Result.FAILURE);
 				return result;

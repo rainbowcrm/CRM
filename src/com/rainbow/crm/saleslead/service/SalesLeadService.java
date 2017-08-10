@@ -156,8 +156,10 @@ public class SalesLeadService extends AbstractionTransactionService implements I
 		User user = (User)userService.getById(lead.getSalesAssociate());
 		sales.setSalesMan(user);
 		sales.setDivision(lead.getDivision());
-		
-		sales.setSalesDate(lead.getClosureDate());
+		if( lead.getClosureDate() != null )
+			sales.setSalesDate(lead.getClosureDate());
+		else
+			sales.setSalesDate(new java.util.Date());
 		sales.setCompany(lead.getCompany()) ;
 		sales.setCustomer(lead.getCustomer());
 		sales.setSalesRef(lead.getDocNumber());
@@ -177,6 +179,7 @@ public class SalesLeadService extends AbstractionTransactionService implements I
 		} );
 		
 		ISalesService salesService = (ISalesService)SpringObjectFactory.INSTANCE.getInstance("ISalesService");
+		context.setReFetchAfterWrite(true);
 		return salesService.createFromScratch(sales, context);
 	}
 
@@ -525,11 +528,11 @@ public class SalesLeadService extends AbstractionTransactionService implements I
 	         /**
 	          * 
 	          */
-	/*         FileOutputStream fos =new FileOutputStream(realPath +"\\test.html");
+	         FileOutputStream fos =new FileOutputStream(realPath +"\\test.html");
 	         fos.write("<HTML><BODY>".getBytes());
 	         fos.write(msg.getBytes());
 	         fos.write("</BODY></HTML>".getBytes());
-	         fos.close();*/ 
+	         fos.close();
 	         message.setContent(msg, "text/html; charset=utf-8");
 	         Transport t = session.getTransport("smtps");
 	         t.connect(host,authuser, authpwd);
@@ -574,15 +577,15 @@ public List<RadsError> sendEmailWithQuote(SalesLead salesLead,
 		     message.setFrom(new InternetAddress(from));
 		     message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 	         message.setSubject("Quotation for Sales Order : Ref - " + salesLead.getDocNumber());
-	         String msg = getMessage(salesLead, context);
-	         
+	         String msg = getQuoteMessage(salesLead, context);
+	         messageBodyPart.setText(msg);
 	         Multipart multipart = new MimeMultipart();
 	         multipart.addBodyPart(messageBodyPart);
 	         messageBodyPart = new MimeBodyPart();
 	         messageBodyPart.setDataHandler(new DataHandler(dataSource));
 	         messageBodyPart.setFileName(salesLead.getDocNumber() + "_quote.pdf");
 	         multipart.addBodyPart(messageBodyPart);
-	         
+	     //    multipart.addBodyPart(part);
 	         message.setContent(multipart);
 	      //   message.setContent(msg, "text/html; charset=utf-8");
 	         Transport t = session.getTransport("smtps");
@@ -652,6 +655,38 @@ public List<RadsError> sendEmailWithQuote(SalesLead salesLead,
         velocityContext.put("pin", salesLead.getDivision().getZipCode());
         velocityContext.put("storephone", salesLead.getDivision().getPhone());
         velocityContext.put("salesphone", user.getPhone());
+
+        StringWriter writer = new StringWriter();
+        t.merge( velocityContext, writer );
+        return writer.toString();
+        }catch(Exception ex){
+        	Logwriter.INSTANCE.error(ex);
+        }
+        return "";
+
+	}
+	
+	private String  getQuoteMessage (SalesLead salesLead,CRMContext context) {
+		VelocityEngine ve = new VelocityEngine();
+        try {
+        IUserService userService = (IUserService)SpringObjectFactory.INSTANCE.getInstance("IUserService");
+        User user = (User)userService.getById(context.getUser());
+        String path = CRMAppConfig.INSTANCE.getProperty("VelocityTemplatePath");
+        ve.setProperty("file.resource.loader.path", path);
+        ve.init();
+        Template t = ve.getTemplate("salesQuotel.vm" );
+        VelocityContext velocityContext = new VelocityContext();
+        velocityContext.put("customerName", salesLead.getCustomer().getFirstName());
+        velocityContext.put("companyName", salesLead.getCompany().getName());
+        velocityContext.put("lines", salesLead.getSalesLeadLines());
+        velocityContext.put("address1", salesLead.getDivision().getAddress1());
+        velocityContext.put("address2", salesLead.getDivision().getAddress2());
+        velocityContext.put("city", salesLead.getDivision().getCity());
+        velocityContext.put("pin", salesLead.getDivision().getZipCode());
+        velocityContext.put("storephone", salesLead.getDivision().getPhone());
+        velocityContext.put("salesphone", user.getPhone());
+        velocityContext.put("docNo", salesLead.getDocNumber());
+        velocityContext.put("docdate", Utils.dateToString(salesLead.getReleasedDate(), "dd-mm-yyyy"));
 
         StringWriter writer = new StringWriter();
         t.merge( velocityContext, writer );

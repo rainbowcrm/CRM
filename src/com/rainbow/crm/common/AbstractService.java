@@ -89,6 +89,13 @@ public abstract class AbstractService implements IBusinessService{
 			object.setCreatedDate(new java.sql.Timestamp(new java.util.Date().getTime()));
 			object.setCreatedUser(context.getUser());
 			getDAO().create(object);
+			if (context.isReFetchAfterWrite()) {
+				CRMModelObject modelObject =getByBusinessKey(object, context);
+				TransactionResult transResult = new TransactionResult();
+				transResult.setResult(result);
+				transResult.setObject(modelObject);
+				return transResult;
+			}
 		}catch(DatabaseException ex) {
 			RadsError error = CRMValidator.getErrorforCode(context.getLocale(),CRMDBException.ERROR_UNABLE_TO_CREATE);
 			errors.add(error);

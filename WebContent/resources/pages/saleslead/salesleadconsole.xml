@@ -63,7 +63,7 @@ Controller = "com.rainbow.crm.saleslead.controller.SalesLeadExtendedController">
 
 	<Element label = "Doc_No"  type = "UIText" Id = "txtDocNo"  readonly="true" property ="docNumber" />
 	<Element label = "Date"  type = "UIDate" Id = "txtwishListDate" readonly="true"  property ="releasedDate" />
-	<Element label = "Sales_Bill"  type = "UIText" Id = "txtSale"   property ="Sale.BillNumber" />
+	<Element label = "Sales_Bill"  type = "UIText" Id = "txtSale"   property ="sales.BillNumber" />
 	<Element label = "Status"  type = "UIText" Id = "txtStatus"  readonly="true"  property ="Status.description" />
 	<Element label = "Ref_No"  type = "UIText" Id = "txtRefNo"    readonly="true" property ="refNo" />
 	<Element label = "Ref_Date"  type = "UIDate" Id = "txtREfDate" readonly="true"  property ="refDate" />
