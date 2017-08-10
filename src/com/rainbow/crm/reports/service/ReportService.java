@@ -39,6 +39,8 @@ public class ReportService  implements IReportService{
 				resource = this.getClass().getResource("/jaspertemplates/Daily_Item_Sale.jrxml");
 			else if ("DailyProductSales".equalsIgnoreCase(report.getReportType()))  
 				resource = this.getClass().getResource("/jaspertemplates/Daily_Product_Sale.jrxml");
+			else if ("DailyCategorySales".equalsIgnoreCase(report.getReportType()))  
+				resource = this.getClass().getResource("/jaspertemplates/Daily_Category_Sale.jrxml");
 			else if ("DailyBrandSales".equalsIgnoreCase(report.getReportType()))  
 				resource = this.getClass().getResource("/jaspertemplates/Daily_Brand_Sale.jrxml");
 			else if ("DailyAssociateSales".equalsIgnoreCase(report.getReportType()))  
@@ -53,6 +55,8 @@ public class ReportService  implements IReportService{
 				resource = this.getClass().getResource("/jaspertemplates/Daily_Division_Item_Sale.jrxml");
 			else if ("DailyProductSales".equalsIgnoreCase(report.getReportType()))  
 				resource = this.getClass().getResource("/jaspertemplates/Daily_Division_Product_Sale.jrxml");
+			else if ("DailyCategorySales".equalsIgnoreCase(report.getReportType()))  
+				resource = this.getClass().getResource("/jaspertemplates/Daily_Division_Category_Sale.jrxml");
 			else if ("DailyBrandSales".equalsIgnoreCase(report.getReportType()))  
 				resource = this.getClass().getResource("/jaspertemplates/Daily_Division_Brand_Sale.jrxml");
 			else if ("DailyAssociateSales".equalsIgnoreCase(report.getReportType()))  

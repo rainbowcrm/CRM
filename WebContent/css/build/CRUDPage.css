@@ -466,6 +466,9 @@ table.uitabstyle {
 th.uitabstyle {
   background-color: white; }
 
+table.halftable {
+  width: 50%; }
+
 table, tr {
   width: 100%;
   text-align: left; }
