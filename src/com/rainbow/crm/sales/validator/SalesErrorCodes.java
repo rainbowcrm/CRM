@@ -12,6 +12,8 @@ public class SalesErrorCodes extends CommonErrorCodes{
 	public static final int INVENTORY_NOT_AVLBLE = 2000306;
 	public static final int MGR_CAN_EDIT_LINES = 2000307;
 	public static final int NOT_ALLOWED_TODO_RETURNS = 2000308 ;
+	public static final int CUSTOMER_REQUIRED_FOREMAIL   =2000309;
+	public static final int EMAIL_FAILED   =2000310;
 
 
 }

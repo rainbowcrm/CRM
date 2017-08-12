@@ -24,6 +24,7 @@ import java.util.Set;
 
 
 
+
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
 import javax.mail.BodyPart;
@@ -61,6 +62,7 @@ import net.sf.jasperreports.view.JasperViewer;
 
 
 
+
 import org.apache.commons.io.IOUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
@@ -69,6 +71,7 @@ import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 
 
 
@@ -134,6 +137,7 @@ import com.rainbow.crm.user.service.IUserService;
 import com.rainbow.crm.vendor.model.Vendor;
 import com.rainbow.crm.vendor.service.IVendorService;
 import com.rainbow.framework.nextup.NextUpGenerator;
+import com.rainbow.framework.utils.EmailComponent;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.model.graphdata.BarChartData;
@@ -498,29 +502,12 @@ public class SalesLeadService extends AbstractionTransactionService implements I
 		try {
 		
 			String to = salesLead.getCustomer().getEmail();
-			String from  = "noresponse@primussol.com";
-			String host = CRMAppConfig.INSTANCE.getProperty("smtp_provider");
-			String port =CRMAppConfig.INSTANCE.getProperty("smtp_port");
-			String authuser =CRMAppConfig.INSTANCE.getProperty("smtp_authuser");
-			String authpwd =CRMAppConfig.INSTANCE.getProperty("smtp_password");
-			Properties properties = System.getProperties();
-			properties.put("mail.transport.protocol", "smtp");
-			properties.put("mail.smtp.auth", "true");
-			properties.put("mail.smtp.starttls.enable", "true");
-			properties.put("mail.smtp.host", host);
-			properties.put("mail.smtp.port", port);
+			EmailComponent component = CommonUtil.getEmailSession(to) ;
 			
-			Session session = Session.getInstance(properties,
-			        new javax.mail.Authenticator() {
-				
-			            protected PasswordAuthentication getPasswordAuthentication() {
-			                return new PasswordAuthentication(authuser, authpwd);
-			            }
-			        });
-			 MimeMessage message = new MimeMessage(session);
+			 MimeMessage message = new MimeMessage(component.getSession());
 			 BodyPart messageBodyPart = new MimeBodyPart();
 			 messageBodyPart.setContent("<img>", "text/html");
-		     message.setFrom(new InternetAddress(from));
+		     message.setFrom(new InternetAddress(component.getFrom()));
 		     message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 	         message.setSubject("Sale!!! Items you were looking for");
 	         loadImages(salesLead, context,realPath);
@@ -534,8 +521,8 @@ public class SalesLeadService extends AbstractionTransactionService implements I
 	         fos.write("</BODY></HTML>".getBytes());
 	         fos.close();
 	         message.setContent(msg, "text/html; charset=utf-8");
-	         Transport t = session.getTransport("smtps");
-	         t.connect(host,authuser, authpwd);
+	         Transport t = component.getSession().getTransport("smtps");
+	         t.connect(component.getHost(),component.getAuthUser(), component.getAuthPassword());
 	         t.sendMessage(message, message.getAllRecipients());
 		}catch(Exception ex){
 			Logwriter.INSTANCE.error(ex);
@@ -552,29 +539,11 @@ public List<RadsError> sendEmailWithQuote(SalesLead salesLead,
 		try {
 		
 			String to = salesLead.getCustomer().getEmail();
-			String from  = "noresponse@primussol.com";
-			String host = CRMAppConfig.INSTANCE.getProperty("smtp_provider");
-			String port =CRMAppConfig.INSTANCE.getProperty("smtp_port");
-			String authuser =CRMAppConfig.INSTANCE.getProperty("smtp_authuser");
-			String authpwd =CRMAppConfig.INSTANCE.getProperty("smtp_password");
-			Properties properties = System.getProperties();
-			properties.put("mail.transport.protocol", "smtp");
-			properties.put("mail.smtp.auth", "true");
-			properties.put("mail.smtp.starttls.enable", "true");
-			properties.put("mail.smtp.host", host);
-			properties.put("mail.smtp.port", port);
-			
-			Session session = Session.getInstance(properties,
-			        new javax.mail.Authenticator() {
-				
-			            protected PasswordAuthentication getPasswordAuthentication() {
-			                return new PasswordAuthentication(authuser, authpwd);
-			            }
-			        });
-			 MimeMessage message = new MimeMessage(session);
+			 EmailComponent component = CommonUtil.getEmailSession(to) ;
+			 MimeMessage message = new MimeMessage(component.getSession());
 			 BodyPart messageBodyPart = new MimeBodyPart();
 			 messageBodyPart.setContent("<img>", "text/html");
-		     message.setFrom(new InternetAddress(from));
+		     message.setFrom(new InternetAddress(component.getFrom()));
 		     message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 	         message.setSubject("Quotation for Sales Order : Ref - " + salesLead.getDocNumber());
 	         String msg = getQuoteMessage(salesLead, context);
@@ -588,8 +557,8 @@ public List<RadsError> sendEmailWithQuote(SalesLead salesLead,
 	     //    multipart.addBodyPart(part);
 	         message.setContent(multipart);
 	      //   message.setContent(msg, "text/html; charset=utf-8");
-	         Transport t = session.getTransport("smtps");
-	         t.connect(host,authuser, authpwd);
+	         Transport t = component.getSession().getTransport("smtps");
+	         t.connect(component.getHost(),component.getAuthUser(), component.getAuthPassword());
 	         t.sendMessage(message, message.getAllRecipients());
 		}catch(Exception ex){
 			Logwriter.INSTANCE.error(ex);

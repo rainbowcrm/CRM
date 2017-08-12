@@ -232,7 +232,9 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 <Section type ="summary">
 <Element caption = "Get_Loyalty_Discount"  type = "UIButton"    Id = "btnInvoice"  style="btn btn-primary"  fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="getLoayltyDiscount"   />
 <Element caption = "Apply_Promotions"  type = "UIButton"    Id = "btnApplyPromotion"  style="btn btn-primary"  fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="applyPromotion"   />
-<Element caption = "Print_Invoice"  type = "UIButton"    Id = "btnInvoice"  style="btn btn-primary" iconStyle="glyphicon glyphicon-print" onClickJS = "showPrintDialog('newprintpop','SalesInvoice');"  rendered = "Controller.isUpdateMode" />
+<!-- <Element caption = "Print_Invoice"  type = "UIButton"    Id = "btnInvoice"  style="btn btn-primary" iconStyle="glyphicon glyphicon-print" onClickJS = "showPrintDialog('newprintpop','SalesInvoice');"  rendered = "Controller.isUpdateMode" />  -->
+<Element caption = "Print_Invoice"  type = "UIButton"    Id = "btnInvoice"  style="btn btn-primary" iconStyle="glyphicon glyphicon-print" fixedAction ="FixedAction.ACTION_PRINT" fixedActionParam ="printInvoice"   rendered = "Controller.isUpdateMode" />
+<Element caption = "Email_Invoice"  type = "UIButton"    Id = "btnemailInvoice"  style="btn btn-primary" rendered = "Controller.isUpdateMode" fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="emailInvoice"   />
 <Element caption = "Create_DO"  type = "UIButton"    Id = "btnInvoice"  style="btn btn-primary" rendered = "Controller.isUpdateMode" fixedAction ="FixedAction.ACTION_PLAINSUBMIT" fixedActionParam ="createDO"   />
 </Section>
 <Section type ="copyRightSection"/>

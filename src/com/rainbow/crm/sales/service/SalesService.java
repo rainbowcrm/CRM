@@ -1,6 +1,10 @@
 package com.rainbow.crm.sales.service;
 
+import java.io.File;
+import java.io.OutputStream;
 import java.io.StringWriter;
+import java.net.URL;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -20,12 +24,43 @@ import java.util.Set;
 
 
 
+
+
+
+
+
+
+import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.Multipart;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+
+
+
+
+
 
 
 
@@ -62,6 +97,7 @@ import com.rainbow.crm.company.service.ICompanyService;
 import com.rainbow.crm.config.service.ConfigurationManager;
 import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.customer.service.ICustomerService;
+import com.rainbow.crm.database.ConnectionCreater;
 import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.division.service.IDivisionService;
@@ -84,6 +120,7 @@ import com.rainbow.crm.sales.model.SalesLine;
 import com.rainbow.crm.sales.validator.SalesErrorCodes;
 import com.rainbow.crm.sales.validator.SalesReturnValidator;
 import com.rainbow.crm.sales.validator.SalesValidator;
+import com.rainbow.crm.saleslead.model.SalesLead;
 import com.rainbow.crm.territory.model.Territory;
 import com.rainbow.crm.territory.service.ITerritoryService;
 import com.rainbow.crm.user.model.User;
@@ -91,6 +128,7 @@ import com.rainbow.crm.user.service.IUserService;
 import com.rainbow.crm.vendor.model.Vendor;
 import com.rainbow.crm.vendor.service.IVendorService;
 import com.rainbow.framework.nextup.NextUpGenerator;
+import com.rainbow.framework.utils.EmailComponent;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.model.transaction.TransactionResult;
@@ -594,10 +632,83 @@ public class SalesService extends AbstractionTransactionService implements ISale
 		return GeneralSQLs.getCategorySoldQty(categoryId, from, to, (division!=null)?division.getId():-1);
 	}
 
+	
+	
+	
+	@Override
+	public TransactionResult emailInvoice(Sales sales, CRMContext context) {
+		TransactionResult result = new TransactionResult();
+		try {
+		if(sales.getCustomer() == null || Utils.isNullString(sales.getCustomer().getEmail()))
+		{
+			
+		}
+		String to = sales.getCustomer().getEmail();
+		byte [] bytes = printInvoice(sales, context);
+		EmailComponent component = CommonUtil.getEmailSession(to) ;
+		 MimeMessage message = new MimeMessage(component.getSession());
+		 BodyPart messageBodyPart = new MimeBodyPart();
+		 messageBodyPart.setContent("<img>", "text/html");
+	     message.setFrom(new InternetAddress(component.getFrom()));
+	     message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+         message.setSubject("Quotation for Sales Order : Ref - " + sales.getBillNumber());
+         String msg =  " Please find the receipt for your purchased in the attachment";
+         messageBodyPart.setText(msg);
+         Multipart multipart = new MimeMultipart();
+         multipart.addBodyPart(messageBodyPart);
+         messageBodyPart = new MimeBodyPart();
+         FileDataSource source = new FileDataSource(new File(sales.getBillNumber() +"+_receipt.pdf"));
+			OutputStream sourceOS = source.getOutputStream();
+			sourceOS.write(bytes);
+			sourceOS.close();
+         messageBodyPart.setDataHandler(new DataHandler(source));
+         messageBodyPart.setFileName(sales.getBillNumber() +"+_receipt.pdf");
+         multipart.addBodyPart(messageBodyPart);
+     //    multipart.addBodyPart(part);
+         message.setContent(multipart);
+      //   message.setContent(msg, "text/html; charset=utf-8");
+         Transport t = component.getSession().getTransport("smtps");
+         t.connect(component.getHost(),component.getAuthUser(), component.getAuthPassword());
+         t.sendMessage(message, message.getAllRecipients());
+		
+		}catch(Exception ex)  {
+			
+		}
+		return result;
+	}
+
+
+
+	@Override
+	public byte[] printInvoice(Sales sales,CRMContext context) {
+		try { 
+			Map<String, Object> parameters = new HashMap<String, Object>();
+			parameters.put("TermsAndCond"," Goods once sold would not be taken back");
+			parameters.put("FooterNote","Thank you for your purchase");
+			parameters.put("HeaderNote","Sales Invoice");
+			parameters.put("LeadId", sales.getId());
+			Connection connection  = ConnectionCreater.getConnection() ;
+			URL resource = this.getClass().getResource("/jaspertemplates/InvoiceFormat_1.jrxml");
+			
+			JasperDesign jasperDesign = JRXmlLoader.load(resource.getPath());
+	        JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign); 
+	        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, connection);
+	        byte[] output = JasperExportManager.exportReportToPdf(jasperPrint); 
+	      // JasperViewer.viewReport(jasperPrint); 
+	        return output; 
+	        
+			
+
+		}catch(Exception ex) {
+			Logwriter.INSTANCE.error(ex);
+		}
+		return null;
+	}
+	
 	@Override
 	public String generateInvoice(Sales sales,CRMContext context) {
 		Externalize externalize = new Externalize();
-        try {
+        try{
         IUserService userService = (IUserService)SpringObjectFactory.INSTANCE.getInstance("IUserService");
         User user = (User)userService.getById(context.getUser());
         VelocityEngine ve = CommonUtil.getVelocityEngine();

@@ -32,6 +32,7 @@ import com.rainbow.crm.promotion.engines.PromotionEngine;
 import com.rainbow.crm.sales.model.Sales;
 import com.rainbow.crm.sales.service.ISalesService;
 import com.rainbow.crm.sales.validator.SalesErrorCodes;
+import com.rainbow.crm.saleslead.model.SalesLead;
 import com.rainbow.crm.user.model.User;
 import com.rainbow.crm.user.service.IUserService;
 import com.techtrade.rads.framework.context.IRadsContext;
@@ -91,7 +92,10 @@ public class SalesController extends CRMTransactionController{
 				result.setErrors(errors);
 			result.setObject(sales);
 			return result;
-		}else if ( "getLoayltyDiscount".equals(actionParam)  ) {
+		}else if ( "emailInvoice".equals(actionParam)  ) { 
+			PageResult result = new PageResult();
+			return result;
+		} else if ( "getLoayltyDiscount".equals(actionParam)  ) {
 			 Sales sales = (Sales) object ;
 			 if(sales.getLoyaltyRedeemed() != null && sales.getLoyaltyRedeemed().doubleValue() > 0 ) {
 				 PageResult result =new PageResult();
@@ -162,14 +166,24 @@ public class SalesController extends CRMTransactionController{
 		PageResult result  = new PageResult();
 		try {
 		ISalesService salesService = getService();
-		String htmlData = salesService.generateInvoice((Sales) object,(CRMContext)getContext());
+		
+		byte[] byteArray = salesService.printInvoice((Sales) object,(CRMContext) getContext()) ;
+		resp.setContentType("application/xls");
+		resp.setHeader("Content-Disposition","attachment; filename=receipt.pdf" );
+		OutputStream responseOutputStream = resp.getOutputStream();
+		responseOutputStream.write(byteArray);
+		responseOutputStream.close();
+		result.setResponseAction(PageResult.ResponseAction.FILEDOWNLOAD);
+		return result;
+		
+	/*	String htmlData = salesService.generateInvoice((Sales) object,(CRMContext)getContext());
         OutputStream responseOutputStream = resp.getOutputStream();
         
         resp.setContentType("application/html");
 		resp.setHeader("Content-Disposition","attachment; filename=inv.html" );
         responseOutputStream.write(htmlData.getBytes());
         responseOutputStream.close();
-        result.setResponseAction(PageResult.ResponseAction.FILEDOWNLOAD);
+        result.setResponseAction(PageResult.ResponseAction.FILEDOWNLOAD);*/
 		}catch(Exception ex) {
 			Logwriter.INSTANCE.error(ex);
 		}
