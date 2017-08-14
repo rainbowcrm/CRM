@@ -157,7 +157,7 @@ public class ProductFAQService extends AbstractionTransactionService implements 
 				if (productPriceRange.getMaxPrice() == null && !CRMConstants.ITEM_CLASS.TOP_END.equals(value.getCode())) 
 				{
 					errors.add(CRMValidator.getErrorforCode(ProductErrorCodes.MAX_NULL_FORTOPEND)) ;
-				}
+				} 
 				if (productPriceRange.getMinPrice() == null && !CRMConstants.ITEM_CLASS.ECONOMIC.equals(value.getCode())) 
 				{
 					errors.add(CRMValidator.getErrorforCode(ProductErrorCodes.MIN_NULL_FORECON)) ;
@@ -171,15 +171,24 @@ public class ProductFAQService extends AbstractionTransactionService implements 
 			{
 				errors.add(CRMValidator.getErrorforCode(ProductErrorCodes.MIN_SHOULDNOTEXCEED_MAX,externalize.externalize(context,"Lower_Medium"),
 						externalize.externalize(context,"Economic"))) ;
+			}else if (econ.getMaxPrice() < lowMed.getMinPrice() -1  ){
+				errors.add(CRMValidator.getErrorforCode(ProductErrorCodes.GAP_BETWEEN_CLASSES,externalize.externalize(context,"Lower_Medium"),
+						externalize.externalize(context,"Economic"))) ;
 			}
-			if(upMed != null  && lowMed != null && upMed.getMinPrice() < lowMed.getMaxPrice()) 
+			if(upMed != null  && lowMed != null && lowMed.getMinPrice() < lowMed.getMaxPrice()) 
 			{
 				errors.add(CRMValidator.getErrorforCode(ProductErrorCodes.MIN_SHOULDNOTEXCEED_MAX,externalize.externalize(context,"Upper_Medium"),
+						externalize.externalize(context,"Lower_Medium"))) ;
+			}else if (lowMed.getMaxPrice() < upMed.getMinPrice() -1  ){
+				errors.add(CRMValidator.getErrorforCode(ProductErrorCodes.GAP_BETWEEN_CLASSES,externalize.externalize(context,"Upper_Medium"),
 						externalize.externalize(context,"Lower_Medium"))) ;
 			}
 			if(upMed != null  && topEnd != null && topEnd.getMinPrice() < upMed.getMaxPrice()) 
 			{
 				errors.add(CRMValidator.getErrorforCode(ProductErrorCodes.MIN_SHOULDNOTEXCEED_MAX,externalize.externalize(context,"Top_End"),
+						externalize.externalize(context,"Upper_Medium"))) ;
+			}else if (upMed.getMaxPrice() < topEnd.getMinPrice() -1  ){
+				errors.add(CRMValidator.getErrorforCode(ProductErrorCodes.GAP_BETWEEN_CLASSES,externalize.externalize(context,"Top_End"),
 						externalize.externalize(context,"Upper_Medium"))) ;
 			}
 		}
