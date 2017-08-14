@@ -1,4 +1,4 @@
-package com.rainbow.crm.product.dao;
+package com.rainbow.crm.item.dao;
 
 import java.util.List;
 
@@ -8,27 +8,28 @@ import org.hibernate.Session;
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.DatabaseException;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
+import com.rainbow.crm.item.model.ItemAttribute;
 import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.product.model.ProductAttribute;
 import com.rainbow.crm.product.model.ProductPriceRange;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 
-public class ProductAttributeDAO extends SpringHibernateDAO{
+public class ItemAttributeDAO  extends SpringHibernateDAO {
 
 	@Override
 	public Object getById(Object PK) {
-		int product = Integer.parseInt(String.valueOf(PK));
+		int item = Integer.parseInt(String.valueOf(PK));
 		Session session = openSession(false);
-		Object obj = session.get(ProductAttribute.class, product);
+		Object obj = session.get(ItemAttribute.class, item);
 		closeSession(session,false);
 		return obj;
 	}
 
 	
-	public List<ProductAttribute> getByProductId(int product) {
+	public List<ProductAttribute> getByProductId(int item) {
 		Session session = openSession(false);
-		Query query = session.createQuery(" from ProductAttribute where product.id = :product and deleted= false " ) ;
-		query.setParameter("product", product);
+		Query query = session.createQuery(" from ItemAttribute where item.id = :item and deleted= false " ) ;
+		query.setParameter("item", item);
 		List<ProductAttribute> lst = query.list();
 		closeSession(session, false);
 		return lst;
@@ -51,6 +52,4 @@ public class ProductAttributeDAO extends SpringHibernateDAO{
 		}
 	}
 
-	
-	
 }

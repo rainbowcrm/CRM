@@ -25,6 +25,7 @@ import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.item.model.SkuComplete;
 import com.rainbow.crm.logger.Logwriter;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
+import com.techtrade.rads.framework.ui.abstracts.PageResult;
 import com.techtrade.rads.framework.utils.Utils;
 
 public class SkuCompleteController  extends SkuController{
@@ -72,4 +73,13 @@ public class SkuCompleteController  extends SkuController{
 			Logwriter.INSTANCE.error(ex);
 		}
 	}
+
+	@Override
+	public PageResult submit(ModelObject object, String actionParam) {
+		// TODO Auto-generated method stub
+		return super.submit(object, actionParam);
+	}
+	
+	
+	
 }

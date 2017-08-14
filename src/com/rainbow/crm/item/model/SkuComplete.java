@@ -17,6 +17,8 @@ public class SkuComplete  extends Sku{
 	List<Inventory> inventory;
 	List<Document> documents;
 	List<FeedBackLine> feedBackLines;
+	List<ItemAttribute> itemAttributes;
+	
 	
 	public String getImage1URL() {
 		return image1URL;
@@ -80,6 +82,12 @@ public class SkuComplete  extends Sku{
 	}
 	public void setFeedBackLines(List<FeedBackLine> feedBackLines) {
 		this.feedBackLines = feedBackLines;
+	}
+	public List<ItemAttribute> getItemAttributes() {
+		return itemAttributes;
+	}
+	public void setItemAttributes(List<ItemAttribute> itemAttributes) {
+		this.itemAttributes = itemAttributes;
 	}
 	
 	
