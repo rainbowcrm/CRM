@@ -11,6 +11,8 @@ import java.util.List;
 
 
 
+
+
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.AbstractionTransactionService;
 import com.rainbow.crm.common.CRMConstants;
@@ -27,10 +29,12 @@ import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.hibernate.ORMDAO;
+import com.rainbow.crm.product.dao.ProductAttributeDAO;
 import com.rainbow.crm.product.dao.ProductDAO;
 import com.rainbow.crm.product.dao.ProductFAQDAO;
 import com.rainbow.crm.product.dao.ProductPriceRangeDAO;
 import com.rainbow.crm.product.model.Product;
+import com.rainbow.crm.product.model.ProductAttribute;
 import com.rainbow.crm.product.model.ProductFAQ;
 import com.rainbow.crm.product.model.ProductFAQSet;
 import com.rainbow.crm.product.model.ProductPriceRange;
@@ -88,6 +92,9 @@ public class ProductFAQService extends AbstractionTransactionService implements 
 		}else {
 			faqSet.setProductPriceRanges(priceRanges);
 		}
+		
+		List<ProductAttribute> productAttributes =  getProductAttributeDAO().getByProductId(product.getId()) ;
+		faqSet.setProductAttributes(productAttributes);
 		return faqSet;
 	}
 
@@ -106,6 +113,11 @@ public class ProductFAQService extends AbstractionTransactionService implements 
 		return (ProductPriceRangeDAO) SpringObjectFactory.INSTANCE.getInstance("ProductPriceRangeDAO");
 	}
 
+	private ProductAttributeDAO  getProductAttributeDAO() 
+	{
+		return (ProductAttributeDAO) SpringObjectFactory.INSTANCE.getInstance("ProductAttributeDAO");
+	}
+	
 	@Override
 	public List<RadsError> adaptfromUI(CRMContext context, ModelObject object) {
 		List<RadsError> errors= new ArrayList<RadsError> ();
@@ -126,6 +138,24 @@ public class ProductFAQService extends AbstractionTransactionService implements 
 				productFAQ.setAuthor(user);
 			
 		}  );
+		
+		productFAQSet.getProductAttributes().forEach(productAttribute ->   {   
+			productAttribute.setCompany(CommonUtil.getCompany(context.getLoggedinCompany()));
+			if (product == null) {
+				errors.add(CRMValidator.getErrorforCode(CommonErrorCodes.FIELD_NOT_VALID,externalize.externalize(context, "Product"))) ;
+			}else 
+				productAttribute.setProduct(product);
+			if (Utils.isNullString(productAttribute.getAttribute())) {
+				errors.add(CRMValidator.getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Attribute"))) ;
+			}
+			
+			FiniteValue value = GeneralSQLs.getFiniteValue(productAttribute.getValueType().getCode());
+			if (value == null)  {
+				errors.add(CRMValidator.getErrorforCode(CommonErrorCodes.FIELD_NOT_VALID,externalize.externalize(context, "Value_Type"))) ;
+			}else
+				productAttribute.setValueType(value);
+			
+		} );
 		
 		ProductPriceRange econ =null ;
 		ProductPriceRange topEnd = null ;
@@ -175,7 +205,7 @@ public class ProductFAQService extends AbstractionTransactionService implements 
 				errors.add(CRMValidator.getErrorforCode(ProductErrorCodes.GAP_BETWEEN_CLASSES,externalize.externalize(context,"Lower_Medium"),
 						externalize.externalize(context,"Economic"))) ;
 			}
-			if(upMed != null  && lowMed != null && lowMed.getMinPrice() < lowMed.getMaxPrice()) 
+			if(upMed != null  && lowMed != null && upMed.getMinPrice() < lowMed.getMaxPrice()) 
 			{
 				errors.add(CRMValidator.getErrorforCode(ProductErrorCodes.MIN_SHOULDNOTEXCEED_MAX,externalize.externalize(context,"Upper_Medium"),
 						externalize.externalize(context,"Lower_Medium"))) ;
@@ -242,6 +272,7 @@ public class ProductFAQService extends AbstractionTransactionService implements 
 		 //batchUpdateFAQS( (fset.getProductFAQs()),context);
 		 updateFAQ(oldObject,(fset.getProductFAQs()),context);
 	  	 batchUpdatePriceRange(oldObject,(fset.getProductPriceRanges()), context);
+	     batchUpdateProductAttributes(oldObject,(fset.getProductAttributes()), context);
 	  	 object = getByProduct(fset.getProduct(), context);
 	  	 TransactionResult result = new TransactionResult();
 	  	 result.setResult(Result.SUCCESS);
@@ -307,6 +338,61 @@ public class ProductFAQService extends AbstractionTransactionService implements 
 		
 	}
 	
+	public TransactionResult batchUpdateProductAttributes(ProductFAQSet oldObject ,List<ProductAttribute> objects,
+			CRMContext context) {
+		List<RadsError> errors  = new ArrayList<RadsError>(); 
+		TransactionResult.Result result = TransactionResult.Result.SUCCESS;
+		int lineNo = 1 ; 
+		try {
+			if(oldObject == null ||  Utils.isNullList(oldObject.getProductAttributes())) {
+				for (CRMModelObject object : objects ) {
+					int id = GeneralSQLs.getNextPKValue( "Product_Attributes") ;
+					((ProductAttribute)object).setId(id);
+					object.setLastUpdateDate(new java.sql.Timestamp(new java.util.Date().getTime()));
+					object.setLastUpdateUser(context.getUser());
+				}
+				getPriceRangeDAO().batchUpdate(objects);
+			}else {
+				for(ProductAttribute prodAttribute : oldObject.getProductAttributes() ) {
+					ProductAttribute newLine = null;
+					for  (ProductAttribute enteredRange : objects ) {
+						if(enteredRange.getAttribute().equalsIgnoreCase(prodAttribute.getAttribute())) {
+							if (prodAttribute.getId() <= 0 ) {
+								int id = GeneralSQLs.getNextPKValue( "Product_Attributes") ;
+								prodAttribute.setId(id);
+								prodAttribute.setProduct(oldObject.getProduct());
+							}
+							newLine = enteredRange ;
+							prodAttribute.setComments(enteredRange.getComments());
+							prodAttribute.setValueType(enteredRange.getValueType());
+							objects.remove(enteredRange);
+							break ;
+						}
+					}
+					if (newLine == null)
+						prodAttribute.setDeleted(true);
+					
+					prodAttribute.setLastUpdateDate(new java.sql.Timestamp(new java.util.Date().getTime()));
+					prodAttribute.setLastUpdateUser(context.getUser());
+				}
+				for (CRMModelObject object : objects ) {
+					int id = GeneralSQLs.getNextPKValue( "Product_Attributes") ;
+					((ProductAttribute)object).setId(id);
+					object.setLastUpdateDate(new java.sql.Timestamp(new java.util.Date().getTime()));
+					object.setLastUpdateUser(context.getUser());
+					oldObject.addProductAttribute((ProductAttribute)object);
+				}
+				getProductAttributeDAO().batchUpdate(oldObject.getProductAttributes());
+			}
+			
+		}catch(DatabaseException ex) {
+			RadsError error = CRMValidator.getErrorforCode(context.getLocale(),CRMDBException.ERROR_DIRTY_READ);
+			errors.add(error);
+			result = TransactionResult.Result.FAILURE ;
+			throw new CRMDBException(error) ;
+		}
+		return new TransactionResult(result,errors);
+	}
 	
 	public TransactionResult batchUpdatePriceRange(ProductFAQSet oldObject ,List<ProductPriceRange> objects,
 			CRMContext context) {

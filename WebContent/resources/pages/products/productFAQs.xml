@@ -94,12 +94,38 @@ Controller = "com.rainbow.crm.product.controller.ProductFAQController">
 <Element type ="UITableCol" width = "10%"><Element label = ""  type = "UIText" Id = "txtPrcmaxVal"  property = "maxPrice" /></Element>
 </Element>
 
-
 </Element>  <!--  Table Price Range ends  -->
 
+</Element> <!--  tab price range ends -->
 
-
+<Element type ="UITab" Id= "idTabAttributes" title = "Attributes" showinTable = "false" >
+<Element type = "UITable" rows = "1" cols = "3" style = "listPageTitle halftable" applyStyleonChildren ="true"  Id  ="tblTransProdAttr"
+    property ="productAttributes[]" >
+<Element type = "UITableHead">
+<Element type = "UITableRow">
+<Element type ="UITableCol" width = "30%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Attribute" /></Element>
+<Element type ="UITableCol" width = "10%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Type" /></Element>
+<Element type ="UITableCol" width = "10%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="" /></Element>
 </Element>
+</Element>  <!--  Table Head  -->
+
+<Element type = "UITableRow"  dataType = "com.rainbow.crm.product.model.ProductAttribute" rendered = "!Object.isDeleted">
+<Element type ="UITableCol" width = "30%"><Element label = ""  type = "UIText" Id = "txtAttrName"  property = "attribute" /></Element>
+<Element type ="UITableCol" width = "10%"><Element label = ""  type = "UIList" Id = "txtAttrType"  property = "valueType.code" >
+  <options populator =  "getAllDataTypes"> 
+	</options>
+  </Element></Element>
+ <Element type ="UITableCol" width = "5%">
+	<Element caption = "+"  type = "UIButton" Id = "btnAddRow"    fixedAction ="FixedAction.ACTION_ADDTABLEROW"  fixedActionParam =  "this"/>
+	<Element caption = "-"  type = "UIButton" Id = "btnDelRow"    fixedAction ="FixedAction.ACTION_DELETETABLEROW"  fixedActionParam =  "this"/>
+</Element>
+</Element>
+
+
+
+</Element> <!--  Table for Attributes end -->
+</Element>  <!--  Tab ends -->
+
 
 
 </Element>

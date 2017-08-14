@@ -2,11 +2,14 @@
 package com.rainbow.crm.product.controller;
 
 import java.util.List;
+import java.util.Map;
 
+import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMTransactionController;
 import com.rainbow.crm.common.ITransactionService;
 import com.rainbow.crm.common.SpringObjectFactory;
+import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.product.model.ProductFAQSet;
 import com.rainbow.crm.product.model.ProductPriceRange;
 import com.rainbow.crm.product.service.IProductFAQService;
@@ -26,6 +29,11 @@ public class ProductFAQController extends CRMTransactionController {
 		return super.submit(object, actionParam);
 	}
 
+	public Map<String,String> getAllDataTypes()
+	{
+		return GeneralSQLs.getFiniteValues(CRMConstants.FV_CONFVALTYPE);
+	}
+	
 	@Override
 	public ITransactionService getService() {
 		IProductFAQService faqService = (IProductFAQService)SpringObjectFactory.INSTANCE.getInstance("IProductFAQService");
