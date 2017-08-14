@@ -9,27 +9,27 @@ import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.DatabaseException;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.rainbow.crm.logger.Logwriter;
-import com.rainbow.crm.product.model.Product;
 import com.rainbow.crm.product.model.ProductFAQ;
+import com.rainbow.crm.product.model.ProductPriceRange;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 
-public class ProductFAQDAO extends SpringHibernateDAO{
-
+public class ProductPriceRangeDAO extends SpringHibernateDAO{
+	
 	@Override
 	public Object getById(Object PK) {
 		int product = Integer.parseInt(String.valueOf(PK));
 		Session session = openSession(false);
-		Object obj = session.get(ProductFAQ.class, product);
+		Object obj = session.get(ProductPriceRange.class, product);
 		closeSession(session,false);
 		return obj;
 	}
 
 	
-	public List<ProductFAQ> getByProductId(int product) {
+	public List<ProductPriceRange> getByProductId(int product) {
 		Session session = openSession(false);
-		Query query = session.createQuery(" from ProductFAQ where product.id = :product and deleted= false " ) ;
+		Query query = session.createQuery(" from ProductPriceRange where product.id = :product and deleted= false " ) ;
 		query.setParameter("product", product);
-		List<ProductFAQ> lst = query.list();
+		List<ProductPriceRange> lst = query.list();
 		closeSession(session, false);
 		return lst;
 	}
@@ -51,6 +51,5 @@ public class ProductFAQDAO extends SpringHibernateDAO{
 		}
 	}
 
-	
-	
+
 }

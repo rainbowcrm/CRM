@@ -30,6 +30,7 @@ import java.util.Set;
 
 
 
+
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
 import javax.mail.BodyPart;
@@ -55,6 +56,7 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 
 
 
@@ -121,6 +123,7 @@ import com.rainbow.crm.sales.validator.SalesErrorCodes;
 import com.rainbow.crm.sales.validator.SalesReturnValidator;
 import com.rainbow.crm.sales.validator.SalesValidator;
 import com.rainbow.crm.saleslead.model.SalesLead;
+import com.rainbow.crm.saleslead.validator.SalesLeadErrorCodes;
 import com.rainbow.crm.territory.model.Territory;
 import com.rainbow.crm.territory.service.ITerritoryService;
 import com.rainbow.crm.user.model.User;
@@ -132,6 +135,7 @@ import com.rainbow.framework.utils.EmailComponent;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.model.transaction.TransactionResult;
+import com.techtrade.rads.framework.model.transaction.TransactionResult.Result;
 import com.techtrade.rads.framework.ui.components.SortCriteria;
 import com.techtrade.rads.framework.utils.Utils;
 
@@ -474,6 +478,10 @@ public class SalesService extends AbstractionTransactionService implements ISale
 			}
 		}
 		TransactionResult result= super.create(object, context);
+		String autoEmail = ConfigurationManager.getConfig(ConfigurationManager.AUTO_EMAIL_RECIEPTS, context);
+		if("true".equalsIgnoreCase(autoEmail)) {
+			emailInvoice(sales, context);
+		}
 		String trackString = ConfigurationManager.getConfig(ConfigurationManager.TRACK_INVENTORY, context);
 		Boolean track = Utils.getBooleanValue(trackString) ;
 		if (track != false ) {
@@ -641,6 +649,9 @@ public class SalesService extends AbstractionTransactionService implements ISale
 		try {
 		if(sales.getCustomer() == null || Utils.isNullString(sales.getCustomer().getEmail()))
 		{
+			result.addError(CRMValidator.getErrorforCode(context.getLocale(), SalesErrorCodes.CUSTOMER_REQUIRED_FOREMAIL));
+			result.setResult(Result.FAILURE);
+			return result;
 			
 		}
 		String to = sales.getCustomer().getEmail();
@@ -651,7 +662,7 @@ public class SalesService extends AbstractionTransactionService implements ISale
 		 messageBodyPart.setContent("<img>", "text/html");
 	     message.setFrom(new InternetAddress(component.getFrom()));
 	     message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-         message.setSubject("Quotation for Sales Order : Ref - " + sales.getBillNumber());
+         message.setSubject("Receipt for Sales Order : Ref - " + sales.getBillNumber());
          String msg =  " Please find the receipt for your purchased in the attachment";
          messageBodyPart.setText(msg);
          Multipart multipart = new MimeMultipart();
@@ -672,7 +683,10 @@ public class SalesService extends AbstractionTransactionService implements ISale
          t.sendMessage(message, message.getAllRecipients());
 		
 		}catch(Exception ex)  {
-			
+			Logwriter.INSTANCE.error(ex);
+			result.addError(CRMValidator.getErrorforCode(context.getLocale(), SalesErrorCodes.EMAIL_FAILED));
+			result.setResult(Result.FAILURE);
+			return result;
 		}
 		return result;
 	}

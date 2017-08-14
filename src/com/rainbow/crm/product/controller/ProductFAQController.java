@@ -1,10 +1,14 @@
+
 package com.rainbow.crm.product.controller;
+
+import java.util.List;
 
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMTransactionController;
 import com.rainbow.crm.common.ITransactionService;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.product.model.ProductFAQSet;
+import com.rainbow.crm.product.model.ProductPriceRange;
 import com.rainbow.crm.product.service.IProductFAQService;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
@@ -37,6 +41,7 @@ public class ProductFAQController extends CRMTransactionController {
 			fset = faqService.getByProduct(fset.getProduct(), (CRMContext)getContext() );
 			setObject(fset);
 			result.setObject(fset);
+			
 		}
 		return result;
 	}

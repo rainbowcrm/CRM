@@ -381,6 +381,9 @@ span.highlighted {
   font-size: 20px;
   color: "Black"; }
 
+table.halftable {
+  width: 50%; }
+
 table.errorStyle {
   text-align: left; }
 

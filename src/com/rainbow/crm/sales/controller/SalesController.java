@@ -39,6 +39,7 @@ import com.techtrade.rads.framework.context.IRadsContext;
 import com.techtrade.rads.framework.controller.abstracts.TransactionController;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
+import com.techtrade.rads.framework.model.transaction.TransactionResult;
 import com.techtrade.rads.framework.model.transaction.TransactionResult.Result;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
 import com.techtrade.rads.framework.ui.abstracts.UIPage;
@@ -94,6 +95,11 @@ public class SalesController extends CRMTransactionController{
 			return result;
 		}else if ( "emailInvoice".equals(actionParam)  ) { 
 			PageResult result = new PageResult();
+			ISalesService  salesService = (ISalesService) getService();
+			TransactionResult transResult = salesService.emailInvoice((Sales) object, (CRMContext) getContext());
+			result.setResult(transResult.getResult());
+			result.setErrors(transResult.getErrors());
+			result.setObject((Sales) object);
 			return result;
 		} else if ( "getLoayltyDiscount".equals(actionParam)  ) {
 			 Sales sales = (Sales) object ;

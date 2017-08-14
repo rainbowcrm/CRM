@@ -9,7 +9,18 @@ public class ProductFAQSet extends CRMBusinessModelObject{
 	
 	List<ProductFAQ> productFAQs;
 	Product product ;
+	List<ProductPriceRange> productPriceRanges;
 	
+	
+	
+	public List<ProductPriceRange> getProductPriceRanges() {
+		return productPriceRanges;
+	}
+
+	public void setProductPriceRanges(List<ProductPriceRange> productPriceRanges) {
+		this.productPriceRanges = productPriceRanges;
+	}
+
 	public List<ProductFAQ> getProductFAQs() {
 		return productFAQs;
 	}
@@ -26,12 +37,21 @@ public class ProductFAQSet extends CRMBusinessModelObject{
 		
 	}
 	
+	public void addProductPriceRange(ProductPriceRange productPriceRange)
+	{
+		if(productPriceRanges == null)
+			productPriceRanges =new ArrayList<ProductPriceRange> ();
+		productPriceRanges.add(productPriceRange);
+		
+	}
+	
 	public Product getProduct() {
 		return product;
 	}
 	public void setProduct(Product product) {
 		this.product = product;
 	}
+	
 	
 
 }
