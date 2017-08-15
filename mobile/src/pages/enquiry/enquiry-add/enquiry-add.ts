@@ -35,7 +35,7 @@ export class EnquiryAddPage {
 
   updateReasonCodes(reasonCodes){
      this.enquiryTypes =  reasonCodes.ENQTYPE;
-     this.enquirySources =  reasonCodes.ENQTYPE;
+     this.enquirySources =  reasonCodes.ENQSRC;
   }
 
   ionViewDidEnter() {
@@ -52,7 +52,6 @@ export class EnquiryAddPage {
   
   addEnquiry():void{
        this.errorMessage = null;
-       this.model.EnquirySource.Code = 'ENQWBS';
        this.model.EnqDate = this.datePipe.transform(new Date(),"yyyy-MM-dd");
        this.newEnquiryObject.Enquiry = this.model;
        this.http.processCustomUrlServerRequest("ajxService=createEnquiry","post",this.newEnquiryObject, false, false).subscribe(

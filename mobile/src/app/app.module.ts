@@ -14,6 +14,7 @@ import { DiscussionModule } from '../pages/discussions/discussion.module';
 import { ExpenseModule } from '../pages/expenses/expenses.module';
 import { FollowUpModule } from '../pages/follow-up/follow-up.module';
 import { EnquiryModule } from '../pages/enquiry/enquiry.module';
+import { ProductsFAQModule } from '../pages/products-faq/products-faq.module';
 
 import { Loader,HTTPService, SharedService, ReasonCodeProvider, FilterProvider, PromptService, CommonHelper } from '../providers/';
 import { ContactService, PushService, SecureStorageService } from '../plugins/';
@@ -41,6 +42,7 @@ import { IonicStorageModule } from '@ionic/storage';
     ExpenseModule,
     FollowUpModule,
     EnquiryModule,
+    ProductsFAQModule,
     IonicImageLoader.forRoot(),
     IonicStorageModule.forRoot()
   ],
