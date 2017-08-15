@@ -8,10 +8,16 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.StringTokenizer;
 
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+
+
 
 
 
@@ -69,6 +75,7 @@ import com.rainbow.crm.user.model.User;
 import com.rainbow.crm.user.service.IUserService;
 import com.rainbow.framework.setup.model.Metadata;
 import com.rainbow.framework.setup.sql.MetadataSQL;
+import com.rainbow.framework.utils.EmailComponent;
 import com.techtrade.rads.framework.context.IRadsContext;
 import com.techtrade.rads.framework.ui.abstracts.UIPage;
 import com.techtrade.rads.framework.utils.Utils;
@@ -100,6 +107,40 @@ public class CommonUtil {
 	public static String getSessionfromToken(String token)
 	{
 		return token;
+	}
+
+	public static EmailComponent getEmailSession(String to) throws Exception 
+	{
+		EmailComponent emailComponent = new EmailComponent();
+		String from  = "noresponse@primussol.com";
+		String host = CRMAppConfig.INSTANCE.getProperty("smtp_provider");
+		String port =CRMAppConfig.INSTANCE.getProperty("smtp_port");
+		String authuser =CRMAppConfig.INSTANCE.getProperty("smtp_authuser");
+		String authpwd =CRMAppConfig.INSTANCE.getProperty("smtp_password");
+		Properties properties = System.getProperties();
+		properties.put("mail.transport.protocol", "smtp");
+		properties.put("mail.smtp.auth", "true");
+		properties.put("mail.smtp.starttls.enable", "true");
+		properties.put("mail.smtp.host", host);
+		properties.put("mail.smtp.port", port);
+		
+		Session session = Session.getInstance(properties,
+		        new javax.mail.Authenticator() {
+			
+		            protected PasswordAuthentication getPasswordAuthentication() {
+		                return new PasswordAuthentication(authuser, authpwd);
+		            }
+		        });
+		emailComponent.setSession(session);
+		emailComponent.setPort(port);
+		emailComponent.setHost(host);
+		emailComponent.setAuthUser(authuser);
+		emailComponent.setAuthPassword(authpwd);
+		emailComponent.setProperties(properties);
+		emailComponent.setFrom(from);
+		emailComponent.setTo(to);
+		
+		return emailComponent;
 	}
 	
 	private static boolean changeFolder(FTPClient ftpClient, String companyCode, String subFolder) throws Exception

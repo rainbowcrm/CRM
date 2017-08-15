@@ -6,19 +6,30 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 
+import javax.activation.FileDataSource;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.rainbow.crm.common.CRMConstants;
+import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMTransactionController;
+import com.rainbow.crm.common.CRMValidator;
 import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.SpringObjectFactory;
+import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.database.LoginSQLs;
+import com.rainbow.crm.enquiry.validator.EnquiryErrorCodes;
 import com.rainbow.crm.logger.Logwriter;
+import com.rainbow.crm.sales.model.Sales;
 import com.rainbow.crm.saleslead.model.SalesLead;
+import com.rainbow.crm.saleslead.model.SalesLeadExtended;
 import com.rainbow.crm.saleslead.service.ISalesLeadService;
+import com.rainbow.crm.saleslead.validator.SalesLeadErrorCodes;
 import com.techtrade.rads.framework.context.IRadsContext;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
+import com.techtrade.rads.framework.model.transaction.TransactionResult;
+import com.techtrade.rads.framework.model.transaction.TransactionResult.Result;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
 import com.techtrade.rads.framework.ui.abstracts.UIPage;
 
@@ -40,9 +51,13 @@ public class SalesLeadExtendedController extends CRMTransactionController{
 
 	@Override
 	public PageResult submit(ModelObject object, String actionParam) {
+		ISalesLeadService service= getService();
+		SalesLeadExtended leadExtended = (SalesLeadExtended) object;
+		SalesLead lead =  (SalesLead) service.getById(leadExtended.getId());
+		PageResult result = new PageResult();
+		CRMContext context =(CRMContext) getContext();
 		if("printquote".equals(actionParam)) {
 			try {
-			ISalesLeadService service= getService();
 			byte[] byteArray = service.printQuotation((SalesLead) object) ;
 			resp.setContentType("application/xls");
 			resp.setHeader("Content-Disposition","attachment; filename=quote.pdf" );
@@ -50,15 +65,71 @@ public class SalesLeadExtendedController extends CRMTransactionController{
 			OutputStream responseOutputStream = resp.getOutputStream();
 			responseOutputStream.write(byteArray);
 			responseOutputStream.close();
-			PageResult result = new PageResult();
 			result.setResponseAction(PageResult.ResponseAction.FILEDOWNLOAD);
 			return result;
 			}catch(Exception ex)
 			{
 				Logwriter.INSTANCE.error(ex);
 			}
+		}else if ("emailQuote".equalsIgnoreCase(actionParam)) {
+			try { 
+			byte[] byteArray = service.printQuotation((SalesLead) object) ;
+			FileDataSource source = new FileDataSource(new File(lead.getDocNumber() +"+_quote.pdf"));
+			OutputStream sourceOS = source.getOutputStream();
+			sourceOS.write(byteArray);
+			sourceOS.close();
+			service.sendEmailWithQuote(lead, context, ".", source);
+			}catch(Exception ex) {
+				Logwriter.INSTANCE.error(ex);
+			}
+		}else if("gensales".equalsIgnoreCase(actionParam)) {
+			if (lead.getSales() != null  ) {
+				result.addError(CRMValidator.getErrorforCode(context.getLocale(), SalesLeadErrorCodes.SALES_ALREADY_GENERATED));
+				result.setResult(Result.FAILURE);
+				return result;
+			}
+			if (lead.getStatus() ==null  || !lead.getStatus().equals(CRMConstants.SALESCYCLE_STATUS.CLOSED)){
+				result.addError(CRMValidator.getErrorforCode(context.getLocale(), SalesLeadErrorCodes.SALESLEAD_NOTCLOSED));
+				result.setResult(Result.FAILURE);
+				return result;
+				
+			}
+			TransactionResult transResult= service.generateSalesOrder(lead,context );
+			if(!transResult.hasErrors()) {
+				lead.setSales((Sales)transResult.getObject());
+				context.setReFetchAfterWrite(false);
+				service.update(lead, context);
+			}else {
+				PageResult  pageResult = new PageResult(transResult) ;
+				return pageResult;
+			}
+		}else if("closelead".equalsIgnoreCase(actionParam)) {
+			if (lead.getStatus() !=null  &&
+					(lead.getStatus().equals(CRMConstants.SALESCYCLE_STATUS.CLOSED)  || lead.getStatus().equals(CRMConstants.SALESCYCLE_STATUS.FAILED))  ) {
+				result.addError(CRMValidator.getErrorforCode(context.getLocale(), SalesLeadErrorCodes.SALESLEAD_ALREADY_COMPLETED));
+				result.setResult(Result.FAILURE);
+				return result;
+			}
+			lead.setSalesWon(true);
+			lead.setClosureDate(new java.util.Date());
+			lead.setStatus(new FiniteValue (CRMConstants.SALESCYCLE_STATUS.CLOSED));
+			service.update(lead, (CRMContext) getContext());
+		}else if("renounce".equalsIgnoreCase(actionParam)) {
+			if(lead.getStatus() !=null  &&
+					(lead.getStatus().equals(CRMConstants.SALESCYCLE_STATUS.CLOSED)  || lead.getStatus().equals(CRMConstants.SALESCYCLE_STATUS.FAILED))  ) {
+				result.addError(CRMValidator.getErrorforCode(context.getLocale(), SalesLeadErrorCodes.SALESLEAD_ALREADY_COMPLETED));
+				result.setResult(Result.FAILURE);
+				return result;
+			}
+			lead.setSalesWon(false);
+			lead.setStatus(new FiniteValue (CRMConstants.SALESCYCLE_STATUS.FAILED));
+			service.update(lead, (CRMContext) getContext());
 		}
-		return super.submit(object, actionParam);
+		lead =  (SalesLead) service.getById(leadExtended.getId());
+		setObject(lead);
+		
+		result.setObject(lead);
+		return result;
 	}
 	
 	@Override

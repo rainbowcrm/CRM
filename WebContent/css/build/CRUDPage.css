@@ -51,9 +51,6 @@ body, div.topBar {
   height: 25px !important;
   padding: 3px !important; }
 
-textarea.form-control {
-	 height: 50px !important;
-}
 input[type=checkbox].form-control, input[type=radio].form-control {
   width: 25px; }
 
@@ -468,6 +465,9 @@ table.uitabstyle {
 
 th.uitabstyle {
   background-color: white; }
+
+table.halftable {
+  width: 50%; }
 
 table, tr {
   width: 100%;

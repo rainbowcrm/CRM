@@ -14,7 +14,7 @@ Controller = "com.rainbow.framework.setup.controller.DataSetupController">
 <Section type= "mainSection">
 <Element type ="UIHidden" Id = "hdnAction" value ="" property ="action"></Element>
 <Element type ="UITabset" Id = "impexp" style = "uitabstyle" selectedTabStyle= "titleStyleSelected active nav-link" unSelectedTabStyle ="titleStyleUnSelected nav-link" >
-<Element type ="UITab" Id= "idFin" title = "Data_Import" showinTable = "true" cols = "1"  >
+<Element type ="UITab" Id= "idFin" title = "Data_Import" showinTable = "true" cols = "2"  >
   <Element label = "Object"  type = "UIList" Id = "lstObjs" property= "importMetadataClasss"     externalise= "true">
 	<options populator =  "getAllMetaData"> 
 	</options>
@@ -25,7 +25,7 @@ Controller = "com.rainbow.framework.setup.controller.DataSetupController">
   </Element>
 <Element label = "File" type = "UIFileUpload" Id = "txtPhoto1"   property =  "importData" fileNameProperty="importFile"
    maxSize = "16793604" multiple ="false"  accept= ".xls, .json, .xml" />
- <Element label = ""  type = "UICheckBox" Id = "idChkImpOptions"   property ="deleteOtherEntries" >  
+ <Element label = " "  type = "UICheckBox" Id = "idChkImpOptions"   property ="deleteOtherEntries" >  
 	<options> 
 	  <option key ="true"> Delete Non existing entries </option>
 	 </options>

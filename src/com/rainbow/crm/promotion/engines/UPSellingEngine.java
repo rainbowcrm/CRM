@@ -32,24 +32,28 @@ public class UPSellingEngine extends AbstractPromotionEngine{
 					line.getSku().getItem().getItemClass().equals(promotion.getItemClass()) &&
 					line.getSku().getItem().getBrand().getId() ==  Integer.parseInt(promoLine.getMasterPortFolioKey())) {
 				line.setPromotion(promotion);
+				line.setIsMasterLine(true);
 				return true;
 			}
 			if(promoLine.getMasterPortFolioType().equals(CRMConstants.SALESPFTYPE.PRODUCT) &&
 					line.getSku().getItem().getItemClass().equals(promotion.getItemClass().getCode()) &&
 					line.getSku().getItem().getProduct().getId() ==  Integer.parseInt(promoLine.getMasterPortFolioKey())) {
 				line.setPromotion(promotion);
+				line.setIsMasterLine(true);
 				return true;
 			}
 			if(promoLine.getMasterPortFolioType().equals(CRMConstants.SALESPFTYPE.CATEGORY) &&
 					line.getSku().getItem().getItemClass().equals(promotion.getItemClass()) &&
 					line.getSku().getItem().getProduct().getCategory().getId() ==  Integer.parseInt(promoLine.getMasterPortFolioKey())) {
 				line.setPromotion(promotion);
+				line.setIsMasterLine(true);
 				return true;
 			}
 			if(promoLine.getMasterPortFolioType().equals(CRMConstants.SALESPFTYPE.ITEM) &&
 					line.getSku().getItem().getItemClass().equals(promotion.getItemClass()) &&
 					line.getSku().getItem().getId() ==  Integer.parseInt(promoLine.getMasterPortFolioKey())) {
 				line.setPromotion(promotion);
+				line.setIsMasterLine(true);
 				return true;
 			}
 		}

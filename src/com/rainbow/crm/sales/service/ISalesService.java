@@ -18,8 +18,14 @@ import com.rainbow.crm.sales.model.Sales;
 import com.rainbow.crm.sales.model.SalesLine;
 import com.rainbow.crm.user.model.User;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
+import com.techtrade.rads.framework.model.transaction.TransactionResult;
+import com.techtrade.rads.framework.ui.abstracts.PageResult;
 
 public interface ISalesService extends ITransactionService{
+	
+	public TransactionResult  emailInvoice(Sales sales,CRMContext context) ;
+	
+	public byte[] printInvoice(Sales sales,CRMContext context) ;
 	
 	public int getItemSaleQuantity(Item item, Date from, Date to,Division division ) ;
 	

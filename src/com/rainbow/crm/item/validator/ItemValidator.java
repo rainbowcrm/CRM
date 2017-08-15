@@ -5,7 +5,9 @@ import com.rainbow.crm.brand.service.IBrandService;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMValidator;
 import com.rainbow.crm.common.CommonErrorCodes;
+import com.rainbow.crm.common.ItemUtil;
 import com.rainbow.crm.common.SpringObjectFactory;
+import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.division.model.Division;
 import com.rainbow.crm.division.validator.DivisionErrorCodes;
 import com.rainbow.crm.item.model.Item;
@@ -89,6 +91,12 @@ public class ItemValidator extends CRMValidator{
 		}
 		if (item.getRetailPrice() != null && item.getRetailPrice() <0 ){
 			errors.add(getErrorforCode(CommonErrorCodes.SHOULD_NOT_NEGATIVE,externalize.externalize(context, "Retail_Price"))) ;
+		}else {
+			FiniteValue itemClass=  ItemUtil.getItemClass(context, item.getProduct(), item.getRetailPrice());
+			if (itemClass != null ) {
+				item.setItemClass(itemClass.getCode());
+				item.setItemClassDesc(itemClass.getDescription());
+			}
 		}
 		if (item.getMaxPrice() != null && item.getMaxPrice() <0 ){
 			errors.add(getErrorforCode(CommonErrorCodes.SHOULD_NOT_NEGATIVE,externalize.externalize(context, "Max_Price"))) ;

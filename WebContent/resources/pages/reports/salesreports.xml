@@ -12,7 +12,7 @@ Controller = "com.rainbow.crm.reports.controller.SalesReportController">
 <ErrorSection>
 </ErrorSection>
 <Section type= "mainSection">
-<Element type = "UITable" rows = "1" cols = "5"  style = "outlinedTable">
+<Element type = "UITable" rows = "1" cols = "5"  style = "halftable">
 	<Element type = "UITableRow">
 	<Element type ="UITableCol">
 	<Element label = "Division"  type = "UIList" Id = "lstDivision"    property ="division.Id"  >

@@ -25,6 +25,7 @@ public class CRMContext implements IRadsContext,Serializable{
 	boolean fetchDeletedToo;
 	boolean backgroundProcess; 
 	boolean guestLogin;
+	boolean reFetchAfterWrite; 
 	
 	boolean mobileLogin;
     Map<String, String> properties;
@@ -182,6 +183,14 @@ public class CRMContext implements IRadsContext,Serializable{
 
 	public void setPageAccessCode(String pageAccessCode) {
 		this.pageAccessCode = pageAccessCode;
+	}
+
+	public boolean isReFetchAfterWrite() {
+		return reFetchAfterWrite;
+	}
+
+	public void setReFetchAfterWrite(boolean reFetchAfterWrite) {
+		this.reFetchAfterWrite = reFetchAfterWrite;
 	}
 	
 	

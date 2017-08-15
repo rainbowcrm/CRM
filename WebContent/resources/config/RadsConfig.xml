@@ -426,6 +426,7 @@
  <Element label = "" type = "UIMenu" Id = "menu51" style="menustyle" title="Daily_Sales_Report" link = "rdscontroller?page=salesreport"  iconStyle="fa fa-fw fa-dashboard" />
  <Element label = "" type = "UIMenu" Id = "menu52" style="menustyle" title="Sales_Item_Report" link = "rdscontroller?page=salesreport&amp;reportType=DailyItemSales"  iconStyle="fa fa-fw fa-dashboard" />
  <Element label = "" type = "UIMenu" Id = "menu53" style="menustyle" title="Sales_Product_Report" link = "rdscontroller?page=salesreport&amp;reportType=DailyProductSales"   iconStyle="fa fa-fw fa-dashboard"/>
+ <Element label = "" type = "UIMenu" Id = "menu53" style="menustyle" title="Sales_Category_Report" link = "rdscontroller?page=salesreport&amp;reportType=DailyCategorySales"   iconStyle="fa fa-fw fa-dashboard"/>
  <Element label = "" type = "UIMenu" Id = "menu54" style="menustyle" title="Sales_Brand_Report" link = "rdscontroller?page=salesreport&amp;reportType=DailyBrandSales"  iconStyle="fa fa-fw fa-dashboard" />
  <Element label = "" type = "UIMenu" Id = "menu55" style="menustyle" title="Sales_Associate_Report" link = "rdscontroller?page=salesreport&amp;reportType=DailyAssociateSales"  iconStyle="fa fa-fw fa-dashboard" />
  <!-- <Element label = "" type = "UIMenu" Id = "menu52" style="menustyle" title="Sales_Category_Report" link = "rdscontroller?page=report"   />

@@ -23,6 +23,7 @@ public class ConfigurationManager {
 	public static final String IMAGE_SERVER_URL = "IMGSRVURL";
 	
 	public static final String SLS_AMOUNT_UNIT_LOYALTY = "LOYALTY";
+	public static final String AUTO_EMAIL_RECIEPTS = "AUTOEMAILREC";
 	public static final String REDEEM_LOYALTY = "RDMLOYALTY";
 	public static final String TOLERANCE_WISHLIST_SALESLEAD = "TOLWSHSLSLEAD";
 	public static final String REDUCE_LOYALTY_RETURNS = "RDCLYLTRT";
@@ -44,6 +45,7 @@ public class ConfigurationManager {
 	public static final String MANAGER_ACC_ALLDIV = "ALLDIVACCGMR";
 	public static final String FEEDBACK_INTERVAL ="FDBKDAY";
 	public static final String FEEDBACK_OWNER ="FDBKOWNR";
+	public static final String RAISE_ALERT_FORDISC = "ALERFORDISC";
 	
 	
 	public static String  getConfig(String key , CRMContext context) {

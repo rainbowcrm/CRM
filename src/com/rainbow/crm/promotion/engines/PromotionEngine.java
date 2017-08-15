@@ -23,6 +23,7 @@ public class PromotionEngine {
 		List<AbstractPromotionEngine> engines = new ArrayList<AbstractPromotionEngine>();
 		engines.add( new UPSellingEngine());
 		engines.add( new DiscountEngine());
+		engines.add( new CrossSellingEngine());
 		return engines;
 		
 	}

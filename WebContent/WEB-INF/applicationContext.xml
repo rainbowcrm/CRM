@@ -144,7 +144,15 @@
     <bean id="ProductFAQDAO" class="com.rainbow.crm.product.dao.ProductFAQDAO">
     <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>    
-    
+    <bean id="ProductPriceRangeDAO" class="com.rainbow.crm.product.dao.ProductPriceRangeDAO">
+    <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean> 
+    <bean id="ProductAttributeDAO" class="com.rainbow.crm.product.dao.ProductAttributeDAO">
+    <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean> 
+    <bean id="ItemAttributeDAO" class="com.rainbow.crm.item.dao.ItemAttributeDAO">
+    <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
      <bean id="SkuDAO" class="com.rainbow.crm.item.dao.SkuDAO">
     <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>    
@@ -265,9 +273,12 @@
         <value>com/rainbow/crm/inventory/model/Inventory.hbm.xml</value>
         <value>com/rainbow/crm/product/model/Product.hbm.xml</value>
         <value>com/rainbow/crm/product/model/ProductFAQ.hbm.xml</value>
+        <value>com/rainbow/crm/product/model/ProductPriceRange.hbm.xml</value>
+        <value>com/rainbow/crm/product/model/ProductAttribute.hbm.xml</value>
         <value>com/rainbow/crm/uom/model/UOM.hbm.xml</value>
         <value>com/rainbow/crm/item/model/Sku.hbm.xml</value>
         <value>com/rainbow/crm/item/model/Item.hbm.xml</value>
+        <value>com/rainbow/crm/item/model/ItemAttribute.hbm.xml</value>
         <value>com/rainbow/crm/vendor/model/Vendor.hbm.xml</value>
         <value>com/rainbow/crm/carrier/model/Carrier.hbm.xml</value>
         <value>com/rainbow/crm/customer/model/Customer.hbm.xml</value>

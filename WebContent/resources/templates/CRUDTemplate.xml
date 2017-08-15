@@ -48,7 +48,7 @@
   </Section>
  <Section Id ="detail" showinTable = "true"  style= "detailCRUDStyle"  tabStyle ="CRUDtableContainer">
   <noRows>-1</noRows>
-  <noCols>2</noCols>
+  <noCols>3</noCols>
  </Section>
  </CoreSection>
  <Section Id ="summary" showinTable = "true"  style= "summaryStyle" >

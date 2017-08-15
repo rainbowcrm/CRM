@@ -17,14 +17,31 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
+
+
+
+
+
+
+
+
+import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
 import javax.mail.BodyPart;
 import javax.mail.Message;
+import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+
+
+
+
+
+import javax.mail.internet.MimeMultipart;
 
 import net.sf.jasperreports.engine.JRExporter;
 import net.sf.jasperreports.engine.JRExporterParameter;
@@ -38,6 +55,14 @@ import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
+
+
+
+
+
+
+
+
 import org.apache.commons.io.IOUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
@@ -46,6 +71,14 @@ import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+
+
+
+
+
+
+
 
 import com.rainbow.crm.abstratcs.model.CRMItemLine;
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
@@ -60,6 +93,7 @@ import com.rainbow.crm.common.CRMValidator;
 import com.rainbow.crm.common.CommonErrorCodes;
 import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.Externalize;
+import com.rainbow.crm.common.ItemUtil;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.rainbow.crm.common.messaging.CRMMessageSender;
@@ -87,6 +121,9 @@ import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.product.validator.ProductValidator;
 import com.rainbow.crm.reasoncode.model.ReasonCode;
 import com.rainbow.crm.reasoncode.service.IReasonCodeService;
+import com.rainbow.crm.sales.model.Sales;
+import com.rainbow.crm.sales.model.SalesLine;
+import com.rainbow.crm.sales.service.ISalesService;
 import com.rainbow.crm.saleslead.dao.SalesLeadDAO;
 import com.rainbow.crm.saleslead.model.SalesLead;
 import com.rainbow.crm.saleslead.model.SalesLeadExtended;
@@ -100,6 +137,7 @@ import com.rainbow.crm.user.service.IUserService;
 import com.rainbow.crm.vendor.model.Vendor;
 import com.rainbow.crm.vendor.service.IVendorService;
 import com.rainbow.framework.nextup.NextUpGenerator;
+import com.rainbow.framework.utils.EmailComponent;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.model.graphdata.BarChartData;
@@ -113,6 +151,41 @@ public class SalesLeadService extends AbstractionTransactionService implements I
 
 	
 	
+	
+
+	@Override
+	public TransactionResult generateSalesOrder(SalesLead lead, CRMContext context) {
+		Sales sales = new Sales();
+		IUserService userService = (IUserService)SpringObjectFactory.INSTANCE.getInstance("IUserService");
+		User user = (User)userService.getById(lead.getSalesAssociate());
+		sales.setSalesMan(user);
+		sales.setDivision(lead.getDivision());
+		if( lead.getClosureDate() != null )
+			sales.setSalesDate(lead.getClosureDate());
+		else
+			sales.setSalesDate(new java.util.Date());
+		sales.setCompany(lead.getCompany()) ;
+		sales.setCustomer(lead.getCustomer());
+		sales.setSalesRef(lead.getDocNumber());
+		lead.getSalesLeadLines().forEach( leadLine ->  { 
+			SalesLine line = new SalesLine ();
+			line.setSku(leadLine.getSku());
+			line.setQty(leadLine.getQty());
+			if (leadLine.getNegotiatedPrice() > 0 ) {
+				line.setUnitPrice(leadLine.getNegotiatedPrice());
+				line.setLineTotal(leadLine.getNegotiatedPrice() *  leadLine.getQty());
+			}else {
+				Double retailPrice = ItemUtil.getRetailPrice(leadLine.getSku());
+				line.setUnitPrice(retailPrice);
+				line.setLineTotal(leadLine.getNegotiatedPrice() *  leadLine.getQty());
+			}
+			sales.addSalesLine(line);
+		} );
+		
+		ISalesService salesService = (ISalesService)SpringObjectFactory.INSTANCE.getInstance("ISalesService");
+		context.setReFetchAfterWrite(true);
+		return salesService.createFromScratch(sales, context);
+	}
 
 	@Override
 	public List<SalesLeadLine> getSalesLeadLinesforCustomer(Customer customer,
@@ -419,6 +492,9 @@ public class SalesLeadService extends AbstractionTransactionService implements I
 		return errors;
 
 	}
+	
+	
+	
 
 */	@Override
 	public List<RadsError> sendEmail(SalesLead salesLead,CRMContext context,String realPath) {
@@ -426,29 +502,12 @@ public class SalesLeadService extends AbstractionTransactionService implements I
 		try {
 		
 			String to = salesLead.getCustomer().getEmail();
-			String from  = "noresponse@primussol.com";
-			String host = CRMAppConfig.INSTANCE.getProperty("smtp_provider");
-			String port =CRMAppConfig.INSTANCE.getProperty("smtp_port");
-			String authuser =CRMAppConfig.INSTANCE.getProperty("smtp_authuser");
-			String authpwd =CRMAppConfig.INSTANCE.getProperty("smtp_password");
-			Properties properties = System.getProperties();
-			properties.put("mail.transport.protocol", "smtp");
-			properties.put("mail.smtp.auth", "true");
-			properties.put("mail.smtp.starttls.enable", "true");
-			properties.put("mail.smtp.host", host);
-			properties.put("mail.smtp.port", port);
+			EmailComponent component = CommonUtil.getEmailSession(to) ;
 			
-			Session session = Session.getInstance(properties,
-			        new javax.mail.Authenticator() {
-				
-			            protected PasswordAuthentication getPasswordAuthentication() {
-			                return new PasswordAuthentication(authuser, authpwd);
-			            }
-			        });
-			 MimeMessage message = new MimeMessage(session);
+			 MimeMessage message = new MimeMessage(component.getSession());
 			 BodyPart messageBodyPart = new MimeBodyPart();
 			 messageBodyPart.setContent("<img>", "text/html");
-		     message.setFrom(new InternetAddress(from));
+		     message.setFrom(new InternetAddress(component.getFrom()));
 		     message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 	         message.setSubject("Sale!!! Items you were looking for");
 	         loadImages(salesLead, context,realPath);
@@ -460,21 +519,55 @@ public class SalesLeadService extends AbstractionTransactionService implements I
 	         fos.write("<HTML><BODY>".getBytes());
 	         fos.write(msg.getBytes());
 	         fos.write("</BODY></HTML>".getBytes());
-	         fos.close(); 
+	         fos.close();
 	         message.setContent(msg, "text/html; charset=utf-8");
-	         Transport t = session.getTransport("smtps");
-	         t.connect(host,authuser, authpwd);
+	         Transport t = component.getSession().getTransport("smtps");
+	         t.connect(component.getHost(),component.getAuthUser(), component.getAuthPassword());
 	         t.sendMessage(message, message.getAllRecipients());
 		}catch(Exception ex){
 			Logwriter.INSTANCE.error(ex);
 			errors.add(new RadsError(String.valueOf(CommonErrorCodes.COULDNOT_SENDEMAIL),"Could not send email"));
 		}
 		return errors;
-
 	}
 	
 
- 	private void loadImages(SalesLead salesLead,CRMContext context,String realPath) {
+ 	@Override
+public List<RadsError> sendEmailWithQuote(SalesLead salesLead,
+		CRMContext context, String realPath,FileDataSource dataSource) {
+ 		List<RadsError> errors = new ArrayList<RadsError>();
+		try {
+		
+			String to = salesLead.getCustomer().getEmail();
+			 EmailComponent component = CommonUtil.getEmailSession(to) ;
+			 MimeMessage message = new MimeMessage(component.getSession());
+			 BodyPart messageBodyPart = new MimeBodyPart();
+			 messageBodyPart.setContent("<img>", "text/html");
+		     message.setFrom(new InternetAddress(component.getFrom()));
+		     message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+	         message.setSubject("Quotation for Sales Order : Ref - " + salesLead.getDocNumber());
+	         String msg = getQuoteMessage(salesLead, context);
+	         messageBodyPart.setText(msg);
+	         Multipart multipart = new MimeMultipart();
+	         multipart.addBodyPart(messageBodyPart);
+	         messageBodyPart = new MimeBodyPart();
+	         messageBodyPart.setDataHandler(new DataHandler(dataSource));
+	         messageBodyPart.setFileName(salesLead.getDocNumber() + "_quote.pdf");
+	         multipart.addBodyPart(messageBodyPart);
+	     //    multipart.addBodyPart(part);
+	         message.setContent(multipart);
+	      //   message.setContent(msg, "text/html; charset=utf-8");
+	         Transport t = component.getSession().getTransport("smtps");
+	         t.connect(component.getHost(),component.getAuthUser(), component.getAuthPassword());
+	         t.sendMessage(message, message.getAllRecipients());
+		}catch(Exception ex){
+			Logwriter.INSTANCE.error(ex);
+			errors.add(new RadsError(String.valueOf(CommonErrorCodes.COULDNOT_SENDEMAIL),"Could not send email"));
+		}
+		return errors;
+}
+
+	private void loadImages(SalesLead salesLead,CRMContext context,String realPath) {
  		try {
  		for (SalesLeadLine line : salesLead.getSalesLeadLines() ) {
  			ItemImage image1 = ItemImageSQL.getItemImage(line.getSku().getId(), 'a');
@@ -541,16 +634,49 @@ public class SalesLeadService extends AbstractionTransactionService implements I
         return "";
 
 	}
+	
+	private String  getQuoteMessage (SalesLead salesLead,CRMContext context) {
+		VelocityEngine ve = new VelocityEngine();
+        try {
+        IUserService userService = (IUserService)SpringObjectFactory.INSTANCE.getInstance("IUserService");
+        User user = (User)userService.getById(context.getUser());
+        String path = CRMAppConfig.INSTANCE.getProperty("VelocityTemplatePath");
+        ve.setProperty("file.resource.loader.path", path);
+        ve.init();
+        Template t = ve.getTemplate("salesQuotel.vm" );
+        VelocityContext velocityContext = new VelocityContext();
+        velocityContext.put("customerName", salesLead.getCustomer().getFirstName());
+        velocityContext.put("companyName", salesLead.getCompany().getName());
+        velocityContext.put("lines", salesLead.getSalesLeadLines());
+        velocityContext.put("address1", salesLead.getDivision().getAddress1());
+        velocityContext.put("address2", salesLead.getDivision().getAddress2());
+        velocityContext.put("city", salesLead.getDivision().getCity());
+        velocityContext.put("pin", salesLead.getDivision().getZipCode());
+        velocityContext.put("storephone", salesLead.getDivision().getPhone());
+        velocityContext.put("salesphone", user.getPhone());
+        velocityContext.put("docNo", salesLead.getDocNumber());
+        velocityContext.put("docdate", Utils.dateToString(salesLead.getReleasedDate(), "dd-mm-yyyy"));
+
+        StringWriter writer = new StringWriter();
+        t.merge( velocityContext, writer );
+        return writer.toString();
+        }catch(Exception ex){
+        	Logwriter.INSTANCE.error(ex);
+        }
+        return "";
+
+	}
 
 	@Override
 	public SalesLeadExtended getSalesLeadWithExtension(int leadId,CRMContext context) {
 		SalesLead lead = (SalesLead)getById(leadId);
-		String leadJSON = lead.toJSON();
+		/*String leadJSON = lead.toJSON();
 		SalesLeadExtended extenstion  = (SalesLeadExtended) SalesLeadExtended.instantiateObjectfromJSON(leadJSON, 
 				"com.rainbow.crm.saleslead.model.SalesLeadExtended", context);
 		extenstion.setCustomer(lead.getCustomer());
 		extenstion.setCompany(lead.getCompany());
-		extenstion.setDivision(lead.getDivision());
+		extenstion.setDivision(lead.getDivision());*/
+		SalesLeadExtended extenstion  = SalesLeadExtended.create(lead) ;
 		IFollowupService followUpService  = (IFollowupService)SpringObjectFactory.INSTANCE.getInstance("IFollowupService");
 		List<Followup> followups = followUpService.findBySalesLead(lead);
 		extenstion.setFollowups(followups);	
