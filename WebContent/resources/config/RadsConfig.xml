@@ -173,6 +173,8 @@
 </Page>
 <Page id = "productfaqs" definition ="/resources/pages/products/productFAQs.xml"  accessCode ="MERCH:PRODFAQ" modelclass = "com.rainbow.crm.product.model.ProductFAQSet" >
 </Page>
+<Page id = "itemattributes" definition ="/resources/pages/item/itemAttributes.xml"  accessCode ="MERCH:ITEMATTR" modelclass = "com.rainbow.crm.item.model.ItemAttributeSet" >
+</Page>
 <Page id = "itemprofile" definition ="/resources/pages/profiles/itemprofile.xml"  accessCode ="MERCH:ITEMPROF" modelclass = "com.rainbow.crm.profile.model.ItemProfile" >
 </Page>
 <Page id = "customerprofile" definition ="/resources/pages/profiles/customerprofile.xml"  modelclass = "com.rainbow.crm.profile.model.CustomerProfile" >

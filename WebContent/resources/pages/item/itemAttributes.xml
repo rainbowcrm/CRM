@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Page id = "itemattributes" showinFrame ="true"  title ="Item Attributes| Rainbow CRM" Object = "com.rainbow.crm.item.model.ItemAttributeSet" 
+Controller = "com.rainbow.crm.item.controller.ItemAttributeController">
+<Template type= "Transaction"  name = "TransactionTemplate"></Template>
+<Forwards>
+<Forward key ="CANCEL">rdscontroller?page=itemattributes</Forward>
+<Forward key ="SAVE">itemattributes</Forward>
+</Forwards>
+ <IncludeJS>./scripts/CRMGeneral.js</IncludeJS>
+<AjaxGroups>
+</AjaxGroups>
+<Elements>
+<UIForm Id ="cust" method = "POST" enctype="multipart/form-data" >
+<Section type ="topBar"></Section> 
+<Section type ="leftsideBarApp"></Section>
+<Section type ="shortCutBar"></Section>
+<CoreSection>
+<ErrorSection>
+</ErrorSection>
+<Section type= "header">
+	<Element label = "Code"  type = "UIText"  Id = "txtItemCode"  property ="item.code" readonly ="true"/>
+	<Element label = "Item"  type = "UIText"  Id = "txtItem"  property ="item.Name" readonly ="true"/>
+	
+	<Element caption = "Fetch"  type = "UIButton" Id = "btnFetchAll"  style="button" fixedAction ="FixedAction.ACTION_READ"   />	
+	
+</Section>
+<Section type ="detailCRUDStyleForPage">
+<Element type ="UITabset" Id = "impexp" style = "uitabstyle" selectedTabStyle= "titleStyleSelected active nav-link" unSelectedTabStyle ="titleStyleUnSelected nav-link" >
+<Element type ="UITab" Id= "idLine" title = "Attributes" showinTable = "false" >
+
+
+<Element type = "UITable" rows = "1" cols = "7" style = "listPageTitle halftable" applyStyleonChildren ="true" Id  ="tblTrans" property ="productFAQs[]" >
+<Element type = "UITableHead">
+ <Element type = "UITableRow">
+
+<Element type ="UITableCol" width = "20%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Attribute" /></Element>
+<Element type ="UITableCol" width = "20%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Value" /></Element>
+<Element type ="UITableCol" width = "10%"> </Element>
+</Element>  <!--  Table Row End -->
+ </Element> <!--  Table Head End  -->
+ 
+ <Element type = "UITableRow"  dataType = "com.rainbow.crm.item.model.ItemAttribute" rendered = "!Object.isDeleted">
+ 
+ <Element type ="UITableCol" width = "20%"><Element label = ""  type = "UIList" Id = "txtQuestion"  property ="attribute.id" > 
+ <options populator =  "getAttributes"> 
+	</options>
+ </Element></Element>
+ <Element type ="UITableCol" width = "20%"><Element label = ""  type = "UIText" Id = "txtAnswer" size  = "10" property ="value" >
+ </Element></Element>
+ <Element type ="UITableCol" width = "10%">
+	<Element caption = "+"  type = "UIButton" Id = "btnAddRow"    fixedAction ="FixedAction.ACTION_ADDTABLEROW"  fixedActionParam =  "this"/>
+	<Element caption = "-"  type = "UIButton" Id = "btnDelRow"    fixedAction ="FixedAction.ACTION_DELETETABLEROW"  fixedActionParam =  "this"/>
+</Element>
+ 
+ </Element>
+
+ </Element> <!--  Table Ends -->
+
+</Element>  <!--  Tab Ends -->
+
+
+
+</Element> 
+
+</Section>
+</CoreSection>
+<Section type= "optionalsummary">
+
+<Element caption = "Submit"  type = "UIButton" Id = "btfilterSave"  style="button" fixedAction ="FixedAction.ACTION_UPDATE"   />
+<Element caption = "Clear"  type = "UIButton" Id = "btnFilterClear"  style="button" onClickJS ="clearAll();"  />
+</Section> 
+<Section type ="copyRightSection"/>
+</UIForm>
+</Elements>
+</Page>

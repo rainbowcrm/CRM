@@ -59,6 +59,8 @@ Controller = "com.rainbow.crm.item.controller.ItemController">
 </Section>
 </CoreSection>
 <Section type ="summary">
+<Element caption = "Variants"  type = "UIButton" Id = "btnVariants"   style="btn btn-primary" iconStyle="glyphicon glyphicon-tags"  rendered = "Controller.isUpdateMode"  
+  fixedAction ="FixedAction.ACTION_PLAINSUBMIT"  fixedActionParam =  "Variants"  />
 </Section>
 <Section type ="copyRightSection"/>
 
