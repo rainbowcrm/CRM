@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { ItemSearch, ItemSearchResult, ItemDetails } from './';
+import { ItemSearch, ItemSearchResult, ItemDetails, ItemReview } from './';
 import { IonicModule } from 'ionic-angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule }   from '@angular/forms';
@@ -14,7 +14,8 @@ import { FileTransfer } from '@ionic-native/file-transfer';
   declarations: [
     ItemSearch,
     ItemSearchResult,
-    ItemDetails
+    ItemDetails,
+    ItemReview
   ],
   imports: [
     IonicModule,
@@ -26,7 +27,8 @@ import { FileTransfer } from '@ionic-native/file-transfer';
   entryComponents: [
     ItemSearch,
     ItemSearchResult,
-    ItemDetails
+    ItemDetails,
+    ItemReview
   ],
   providers: [BarcodeScanner, FileOpener, FileTransfer]
 })

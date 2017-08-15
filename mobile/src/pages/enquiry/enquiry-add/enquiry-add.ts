@@ -58,7 +58,7 @@ export class EnquiryAddPage {
                      res =>  {
                        this.expenseAddSuccess(res);
                       },
-                     error =>  {});
+                     error =>  {this.expenseAddSuccess(error)});
   }
 
   expenseAddSuccess(response):void{
@@ -66,9 +66,7 @@ export class EnquiryAddPage {
        this.errorMessage = "Failed to create enquiry"; 
        return ;
     }
-    this.model = new Enquiry();
-    this.model.EnquirySource = new Code();
-    this.model.EnquiryType = new Code();
+    this.goHome();
     this.showSuccessToast();
     
   }

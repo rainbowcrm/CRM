@@ -4,13 +4,15 @@ import { CommonModule } from '@angular/common';
 import { IonicImageLoader } from 'ionic-image-loader';
 import {ErrorPartial} from './error-partial/error-partial'
 import {SortPopOverPage} from './sort-helper/sort-popover'
+import { IonRating }   from './ion-rating/ion-rating';
 
 
 
 @NgModule({
   declarations: [
     ErrorPartial,
-    SortPopOverPage
+    SortPopOverPage,
+    IonRating
   ],
   imports: [
     IonicModule,
@@ -19,11 +21,12 @@ import {SortPopOverPage} from './sort-helper/sort-popover'
   ],
   exports:[
     ErrorPartial,
-    SortPopOverPage
+    SortPopOverPage,
+    IonRating
   ],
   entryComponents: [
     ErrorPartial,
-    SortPopOverPage  ],
+    SortPopOverPage,IonRating ],
   providers: []
 })
 export class CommonPSModule {}
