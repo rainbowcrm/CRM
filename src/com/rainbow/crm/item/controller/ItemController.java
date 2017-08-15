@@ -11,7 +11,13 @@ import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.IBusinessService;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.database.GeneralSQLs;
+import com.rainbow.crm.item.model.Item;
+import com.rainbow.crm.item.model.ItemAttributeSet;
 import com.rainbow.crm.item.service.IItemService;
+import com.techtrade.rads.framework.model.abstracts.ModelObject;
+import com.techtrade.rads.framework.model.transaction.TransactionResult.Result;
+import com.techtrade.rads.framework.ui.abstracts.PageResult;
+import com.techtrade.rads.framework.ui.abstracts.PageResult.ResponseAction;
 
 public class ItemController extends CRMCRUDController{
 
@@ -35,4 +41,24 @@ public class ItemController extends CRMCRUDController{
 		});
 		return map;
 	}
+
+
+	@Override
+	public PageResult submit(ModelObject object, String actionParam) {
+		if("Variants".equalsIgnoreCase(actionParam)) {
+			PageResult result = new PageResult ();
+			Item item = (Item) object;
+			ItemAttributeSet itrSet = new ItemAttributeSet();
+			itrSet.setCompany(item.getCompany());
+			itrSet.setItem(item);
+			result.setNextPageKey("itemattributes");
+			result.setObject(itrSet);
+			result.setResult(Result.SUCCESS);
+			result.setResponseAction(ResponseAction.NEWPAGE);
+			return result;
+		}
+		return super.submit(object, actionParam);
+	}
+	
+	
 }

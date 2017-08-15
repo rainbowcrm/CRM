@@ -27,7 +27,7 @@ Controller = "com.rainbow.crm.product.controller.ProductFAQController">
 	<Element caption = "Fetch"  type = "UIButton" Id = "btnFetchAll"  style="button" fixedAction ="FixedAction.ACTION_READ"   />	
 	
 </Section>
-<Section type ="detail">
+<Section type ="detailCRUDStyleForPage">
 <!-- 
 <Element type = "UIDiv" style="detail"> -->
 <Element type ="UITabset" Id = "impexp" style = "uitabstyle" selectedTabStyle= "titleStyleSelected active nav-link" unSelectedTabStyle ="titleStyleUnSelected nav-link" >

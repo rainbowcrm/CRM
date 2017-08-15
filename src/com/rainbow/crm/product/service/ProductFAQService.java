@@ -51,6 +51,14 @@ public class ProductFAQService extends AbstractionTransactionService implements 
 
 	
 	
+	
+	@Override
+	public List<ProductAttribute> getAllAttributes(Product product,
+			CRMContext context) {
+		List<ProductAttribute> productAttributes =  getProductAttributeDAO().getByProductId(product.getId()) ;
+		return productAttributes;
+	}
+
 	@Override
 	public ProductFAQSet getByProduct(Product product, CRMContext context) {
 		ProductFAQDAO  dao = (ProductFAQDAO) getDAO();
