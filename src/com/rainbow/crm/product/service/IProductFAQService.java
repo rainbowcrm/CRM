@@ -13,5 +13,7 @@ public interface IProductFAQService extends ITransactionService{
 	public ProductFAQSet getByProduct(Product product, CRMContext context);
 	
 	public List<ProductAttribute> getAllAttributes(Product product, CRMContext context);
+	
+	public ProductAttribute getAttribute (ProductAttribute prodAttribute, CRMContext context );
 
 }

@@ -48,6 +48,8 @@
     </bean>
     <bean id="IItemService" class="com.rainbow.crm.item.service.ItemService">
     </bean>
+    <bean id="IItemAttributeService" class="com.rainbow.crm.item.service.ItemAttributeService">
+    </bean>
     <bean id="IInventoryService" class="com.rainbow.crm.inventory.service.InventoryService">
     </bean>  
     <bean id="IDivisionService" class="com.rainbow.crm.division.service.DivisionService">

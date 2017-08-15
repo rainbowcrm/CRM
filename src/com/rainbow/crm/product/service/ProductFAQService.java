@@ -52,6 +52,18 @@ public class ProductFAQService extends AbstractionTransactionService implements 
 	
 	
 	
+	
+	@Override
+	public ProductAttribute getAttribute(ProductAttribute prodAttribute,
+			CRMContext context) {
+		if  (prodAttribute != null && prodAttribute.getId() > 0 ) {
+			return (ProductAttribute) getProductAttributeDAO().getById(prodAttribute.getId());
+		} else if (prodAttribute != null &&  Utils.isNullString(prodAttribute.getAttribute() )) {
+			return (ProductAttribute) getByBusinessKey(prodAttribute, context);
+		}
+		return null;
+	}
+
 	@Override
 	public List<ProductAttribute> getAllAttributes(Product product,
 			CRMContext context) {

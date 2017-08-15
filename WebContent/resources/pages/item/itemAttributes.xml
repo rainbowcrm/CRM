@@ -29,7 +29,7 @@ Controller = "com.rainbow.crm.item.controller.ItemAttributeController">
 <Element type ="UITab" Id= "idLine" title = "Attributes" showinTable = "false" >
 
 
-<Element type = "UITable" rows = "1" cols = "7" style = "listPageTitle halftable" applyStyleonChildren ="true" Id  ="tblTrans" property ="productFAQs[]" >
+<Element type = "UITable" rows = "1" cols = "7" style = "listPageTitle halftable" applyStyleonChildren ="true" Id  ="tblTrans" property ="attributes[]" >
 <Element type = "UITableHead">
  <Element type = "UITableRow">
 

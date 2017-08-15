@@ -19,9 +19,11 @@ public class ProductAttribute extends  CRMBusinessModelObject
 	public void setProduct(Product product) {
 		this.product = product;
 	}
+	@RadsPropertySet(isBK =true)
 	public String getAttribute() {
 		return attribute;
 	}
+	@RadsPropertySet(isBK =true)
 	public void setAttribute(String attribute) {
 		this.attribute = attribute;
 	}

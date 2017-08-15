@@ -11,6 +11,7 @@ import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.item.model.ItemAttribute;
 import com.rainbow.crm.item.model.ItemAttributeSet;
+import com.rainbow.crm.item.service.IItemAttributeService;
 import com.rainbow.crm.item.service.IItemService;
 import com.rainbow.crm.product.model.ProductAttribute;
 import com.rainbow.crm.product.service.IProductFAQService;
@@ -23,7 +24,8 @@ public class ItemAttributeController extends CRMTransactionController {
 
 	@Override
 	public ITransactionService getService() {
-		return null;
+		IItemAttributeService itemAttributeService  =(IItemAttributeService) SpringObjectFactory.INSTANCE.getInstance("IItemAttributeService");
+		return itemAttributeService;
 	}
 
 	public Map<String,String> getAttributes() {
@@ -48,9 +50,18 @@ public class ItemAttributeController extends CRMTransactionController {
 	public PageResult read() {
 		PageResult result = new PageResult();
 		ItemAttributeSet attributeSet =  (ItemAttributeSet)getObject();
-		IItemService itemService = (IItemService)SpringObjectFactory.INSTANCE.getInstance("IItemService");
-		List<ItemAttribute> attributes = itemService.getAllItemAttributes(attributeSet.getItem(), (CRMContext) getContext());
-		attributeSet.setAttributes(attributes);
+		/*IItemService itemService = (IItemService)SpringObjectFactory.INSTANCE.getInstance("IItemService");
+		Item item = itemService.getByName(((CRMContext) getContext()).getLoggedinCompany(), attributeSet.getItem().getName()) ;
+		if (item !=null) {
+			List<ItemAttribute> attributes = itemService.getAllItemAttributes(item, (CRMContext) getContext());
+			attributeSet.setAttributes(attributes);
+			attributeSet.setCompany(item.getCompany());
+			setObject(attributeSet);
+			result.setResult(Result.SUCCESS);
+			result.setObject(attributeSet);
+		}*/
+		IItemAttributeService itemService = (IItemAttributeService)SpringObjectFactory.INSTANCE.getInstance("IItemAttributeService");
+		attributeSet = itemService.getByItem(attributeSet.getItem(), (CRMContext) getContext());
 		setObject(attributeSet);
 		result.setResult(Result.SUCCESS);
 		result.setObject(attributeSet);
