@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavParams, Slides, ToastController, NavController } from 'ionic-angular';
-import { ItemWithDetails, Inventory} from '../';
+import { ItemWithDetails, Inventory, Rating, ItemReview} from '../';
 import { Storage } from '@ionic/storage';
 import { CommonHelper } from '../../../providers';
 import { FileOpener } from '@ionic-native/file-opener';
@@ -23,6 +23,7 @@ export class ItemDetails {
   private inventory: Inventory;
   private slideImg: Array<String>=[];
   private isAssociateItems:Boolean;
+  private itemRating: Rating;
    @ViewChild(Slides) slides: Slides;
   
 
@@ -34,6 +35,7 @@ export class ItemDetails {
       this.inventory = this.item.Inventory[0];
     this.isAssociateItems = this.params.get('isAssociateItems');
     this.processImageUrl();
+    this.processRating();
   }
 
   addToCart(){
@@ -59,6 +61,19 @@ export class ItemDetails {
       if(image){
          this.slideImg.push(image);
       }
+    }
+  }
+
+  processRating(){
+    var feedbacks = this.item.FeedBackLines;
+    if(feedbacks && feedbacks.length > 0){
+        this.itemRating = new Rating();
+        this.itemRating.count = feedbacks.length;
+        let totalRating = 0.0;
+        for(let i=0; i<feedbacks.length; i++){
+           totalRating += parseFloat(feedbacks[i].Rating);
+        }
+        this.itemRating.rating = (totalRating/this.itemRating.count)/2+"";
     }
   }
 
@@ -96,6 +111,10 @@ export class ItemDetails {
       position: 'top'
      });
     toast.present();
+  }
+
+  getAllViews(): void{
+     this.navCtrl.push(ItemReview, {feedbacks: this.item.FeedBackLines})
   }
 
 

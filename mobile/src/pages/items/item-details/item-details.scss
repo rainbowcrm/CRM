@@ -7,11 +7,33 @@ ps-item-details {
           height: auto;
       }
   }
+  .rating-container{
+      width: 35%;
+      margin: auto;
+      ion-rating{
+         float: left;
+      }
+  }
   ion-card{
       padding: 10px;
       .item-description{
           text-align: center;
           line-height: 1.5em;
+          div{
+              display: inline-block;
+              width: 60%;
+          }
+          div:first-child{
+              background: #aaa;
+              width: 70%;
+              border-bottom-left-radius: 10px;
+              border-bottom-right-radius: 10px;
+          }
+        border: 1px solid #999;
+        border-width: 1px 1px 0px 1px;
+      }
+      .item-description:last-child{
+          border-bottom-width: 1px;
       }
   }
   .variants ion-select{

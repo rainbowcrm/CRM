@@ -13,6 +13,8 @@ import { SalesLeadSearch } from '../sales-lead';
 import { DiscussionsList } from '../discussions';
 import { ExpensesAddPage } from '../expenses';
 import { FollowUpAddPage } from '../follow-up';
+import { EnquiryAddPage } from '../enquiry';
+import { ProductsList } from '../products-faq';
 import { RegTokenRequest, LogoutRequest, Token } from './home.model';
 import { Storage } from '@ionic/storage';
 
@@ -31,7 +33,7 @@ export class HomePage {
   private rootTitle = "Menu";
   private isRoot;
   private rootMenus = ["Item Search","Customer Management","Contacts","Alerts", "Wishlist", "Sales Leads",
-                       "Discussions", "Expense Vouchers", "Follow Up"];
+                       "Discussions", "Expense Vouchers", "Follow Up", "Enquiry", "Products FAQ"];
   private submenuList;
   private menuTitle = "Menu";
   private subMenus = {
@@ -43,7 +45,9 @@ export class HomePage {
                     "Discussions": DiscussionsList,
                     "Alerts": AlertsHomePage,
                     "Expense Vouchers": ExpensesAddPage,
-                    "Follow Up": FollowUpAddPage 
+                    "Follow Up": FollowUpAddPage,
+                    "Enquiry": EnquiryAddPage,
+                    "Products FAQ": ProductsList
                    };
   constructor(public navCtrl: NavController, private pushService: PushService
                 , private http: HTTPService, private storage: Storage,

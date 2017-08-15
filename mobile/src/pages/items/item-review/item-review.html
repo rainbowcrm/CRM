@@ -1,0 +1,34 @@
+<!--
+  Generated template for the ItemSearch page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>Reviews</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card *ngFor="let feedback of feedbacks" >
+
+  <ion-card-header>
+    {{feedback.ReasonCode.Reason}}
+    <div class="rating-container">
+      <ion-rating
+       [numStars]="5"
+       [readOnly]="true"
+       [value]="getRating(feedback.Rating)">
+    </ion-rating>
+    </div>
+  </ion-card-header>
+
+  <ion-card-content>
+    {{feedback.Comments}}
+  </ion-card-content>
+
+</ion-card>
+</ion-content>

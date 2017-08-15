@@ -1,7 +1,7 @@
 <!--
   Generated template for the ItemSearch page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  See http//ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 -->
 <ion-header>
@@ -20,29 +20,62 @@
 
 <ion-content padding>
   <ion-slides pager *ngIf="slideImg && slideImg.length>0">
-  <ion-slide *ngFor="let img of slideImg">
-    <img-loader src="{{img}}" fallback="assets/img/no_image.png" useImg></img-loader>
-  </ion-slide>
-</ion-slides>
-<div class="variants" *ngIf="item.Inventory && item.Inventory.length>0">
+    <ion-slide *ngFor="let img of slideImg">
+      <img-loader src="{{img}}" fallback="assets/img/no_image.png" useImg></img-loader>
+    </ion-slide>
+  </ion-slides>
+  <div class="rating-container" *ngIf="item.FeedBackLines && item.FeedBackLines.length > 0">
+     <ion-rating
+       [numStars]="5"
+       [readOnly]="true"
+       [value]="itemRating.rating" *ngIf="itemRating" >
+    </ion-rating>
+    ({{itemRating.count}})
+  </div>
+  <div class="variants" *ngIf="item.Inventory && item.Inventory.length>0">
     <ion-select #newSelect (change)="inventoryChanged(newSelect.value)">
       <ion-option *ngFor="let inventory of item.Inventory; let i=index;" [value]="i" [selected]="i == 0">{{inventory.Division.Name}}</ion-option>
     </ion-select>
 </div>
+<ion-card *ngIf="item.FeedBackLines && item.FeedBackLines.length > 0" >
+    <button ion-item *ngIf="item.FeedBackLines.length == 1" (click)="getAllViews()">
+         1 Review
+    </button>
+     <button ion-item *ngIf="item.FeedBackLines.length > 1" (click)="getAllViews()">
+         {{item.FeedBackLines.length}} Reviews
+    </button>
+</ion-card>
+
 <ion-card>
-    <div class="item-description"><strong>Class:</strong>{{item.ItemClass}}</div>
-    <div class="item-description" *ngIf="item.RetailPrice" ><strong>Price:</strong>{{item.RetailPrice}}</div>
-    <div class="item-description" *ngIf="item.Size"><strong>Size:</strong>{{item.Size}}</div>
-    <div class="item-description" *ngIf="item.Color"><strong>Color:</strong>{{item.Color}}</div>
-    <div class="item-description" *ngIf="item.Product.Name"><strong>Product:</strong>{{item.Product.Name}}</div>
-    <div class="item-description" *ngIf="item.Description"><strong>Description:</strong>{{item.Description}}</div>
-    <div class="item-description" *ngIf="inventory && inventory.CurrentQty>0">
-      <strong>Stock:</strong>
-      <span class="good">{{inventory.CurrentQty}} Quantity</span>
-    </div>
-    <div class="item-description" *ngIf="inventory && inventory.CurrentQty<=0">
-      <strong class="bad">Out of stock</strong>
-    </div>
+    <ion-card-header>
+     Features
+    </ion-card-header>
+    <ion-card-content>
+      <div class="item-description"><div>Class</div><div>{{item.ItemClassDesc}}</div></div>
+      <div class="item-description" *ngIf="item.RetailPrice" ><div>Price</div><div>{{item.RetailPrice}}</div></div>
+      <div class="item-description" *ngIf="item.Size"><div>Size</div><div>{{item.Size}}</div></div>
+      <div class="item-description" *ngIf="item.Color"><div>Color</div><div>{{item.Color}}</div></div>
+      <div class="item-description" *ngIf="item.Product.Name"><div>Product</div><div>{{item.Product.Name}}</div></div>
+      <div class="item-description" *ngIf="item.Description"><div>Description</div><div>{{item.Description}}</div></div>
+      <div class="item-description" *ngIf="inventory && inventory.CurrentQty>0">
+        <div>Stock</div>
+        <div><span class="good">{{inventory.CurrentQty}} Quantity</span></div>
+      </div>
+      <div class="item-description" *ngIf="inventory && inventory.CurrentQty<=0">
+        <div class="bad">Out of stock</div>
+      </div>
+    </ion-card-content>   
+</ion-card>
+<ion-card *ngIf="item.ItemAttributes && item.ItemAttributes.length > 0">
+    <ion-card-header>
+     Specifications
+    </ion-card-header>
+    <ion-card-content>
+      <div class="item-description" *ngFor="let attribute of item.ItemAttributes" >
+        <div>{{attribute.Attribute.Attribute}}</div>
+        <div>{{attribute.Value}}</div>
+      </div>
+    </ion-card-content>   
 </ion-card>
 <ion-badge *ngFor="let document of item.Documents" (click)="download(document.FileWithLink, document.DocName)">{{document.DocName}}</ion-badge>
 </ion-content>

@@ -39,10 +39,13 @@ export class HTTPService {
     }
     
   }
-  processCustomUrlServerRequest (url:string, restType:string,data:any,auth?:boolean): Observable<any[]> {
+  processCustomUrlServerRequest (url:string, restType:string,data:any,auth?:boolean, isSilent?:boolean): Observable<any[]> {
     var newUrl = this.url+"?"+url;
     if(auth){
       data.authToken = this.authToken;
+    }
+    if(!isSilent){
+      this.loader.presentLoader();
     }
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });

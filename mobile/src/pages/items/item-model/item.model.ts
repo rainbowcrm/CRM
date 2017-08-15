@@ -36,6 +36,53 @@ export class Item{
     Image3URL: string;
     FilterName: string;
     Documents: Array<Document>;
+    ItemAttributes: Array<ItemAttributes>;
+    FeedBackLines: Array<FeedBackLine>;
+}
+
+export class Rating{
+    rating: string;
+    count: number;
+}
+
+export class FeedBackLine{
+    Associate: string;
+    Comments: string;
+    Deleted: string;
+    FeedBackBusinessObject: string;
+    FeedBackObject: string;
+    FeedBackObjectType: FeedBackObjectType;
+    Id: string;
+    ObjectVersion: string;
+    Rating: string;
+    ReasonCode: ReasonCode;
+    LineNumber: string;
+    Sku: ItemSku
+}
+
+export class FeedBackObjectType{
+    Code: string;
+}
+
+export class ReasonCode{
+    Reason: string;
+}
+
+
+export class ItemAttributes{
+   Attribute: Attribute;
+   Comments: string;
+   Deleted: string;
+   Id: string;
+   ObjectVersion: string;
+   Value: string;
+}
+
+export class Attribute{
+  Attribute: string;
+  Comments: string;
+  Id: string;
+  ObjectVersion: string;
 }
 
 export class ItemWithDetails extends Item{

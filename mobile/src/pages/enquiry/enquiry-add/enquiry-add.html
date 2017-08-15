@@ -1,0 +1,114 @@
+<!--
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+   <ion-navbar>
+     <ion-buttons start>
+      <button ion-button icon-only (click)="goHome()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+     </ion-buttons>
+    <ion-title>New Enquiry</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+ <ps-error [message]="errorMessage" [type]="'error'"></ps-error>
+  <form #enquiryAddForm="ngForm">
+    <ion-grid>
+     <ion-row>
+       <ion-col>
+         <ion-item>
+           <ion-label floating>Enquiry Type</ion-label>
+           <ion-select [(ngModel)]="model.EnquiryType.Code" name="enquiryType" #enquiryType="ngModel" required>
+                  <ion-option *ngFor="let et of enquiryTypes" value="{{et.Code}}">{{et.Description}}</ion-option>
+            </ion-select>
+         </ion-item>
+       </ion-col>
+       <ion-col>
+         <ion-item>
+           <ion-label floating>Enquiry Source</ion-label>
+           <ion-select [(ngModel)]="model.EnquirySource.Code" name="enquirySource" #enquirySource="ngModel" required>
+                  <ion-option *ngFor="let es of enquirySources" value="{{es.Code}}">{{es.Description}}</ion-option>
+            </ion-select>
+         </ion-item>
+       </ion-col>
+     </ion-row>
+      <ion-row>
+       <ion-col>
+         <ion-item>
+           <ion-label floating>First Name</ion-label>
+           <ion-input type="text" [(ngModel)]="model.FirstName" name="firstName" #firstName="ngModel" required></ion-input>
+         </ion-item>
+       </ion-col>
+       <ion-col>
+         <ion-item>
+           <ion-label floating>Last Name</ion-label>
+           <ion-input type="text" [(ngModel)]="model.LastName" name="lastName" #lastName="ngModel" required></ion-input>
+         </ion-item>
+      </ion-col>
+     </ion-row>
+     <ion-row>
+       <ion-col>
+         <ion-item>
+           <ion-label floating>Email</ion-label>
+           <ion-input type="email" [(ngModel)]="model.Email" name="email" #email="ngModel"></ion-input>
+         </ion-item>
+       </ion-col>
+       <ion-col>
+         <ion-item>
+           <ion-label floating>Phone</ion-label>
+           <ion-input type="text" [(ngModel)]="model.Phone" name="phone" #phone="ngModel" required></ion-input>
+         </ion-item>
+      </ion-col>
+     </ion-row>
+      <ion-row>
+       <ion-col>
+         <ion-item>
+           <ion-label floating>Address 1</ion-label>
+           <ion-input type="text" [(ngModel)]="model.Address1" name="address1" #address1="ngModel"></ion-input>
+         </ion-item>
+       </ion-col>
+       <ion-col>
+         <ion-item>
+           <ion-label floating>Address 2</ion-label>
+           <ion-input type="text" [(ngModel)]="model.Address2" name="address2" #address2="ngModel"></ion-input>
+         </ion-item>
+      </ion-col>
+     </ion-row>
+     <ion-row>
+       <ion-col>
+         <ion-item>
+           <ion-label floating>Zip Code</ion-label>
+           <ion-input type="text" [(ngModel)]="model.Zipcode" name="zipcode" #zipcode="ngModel" required></ion-input>
+         </ion-item>
+       </ion-col>
+       <ion-col>
+         <ion-item>
+           <ion-label floating>City</ion-label>
+           <ion-input type="text" [(ngModel)]="model.City" name="city" #city="ngModel" required></ion-input>
+         </ion-item>
+      </ion-col>
+     </ion-row>
+     <ion-row>
+       <ion-col>
+         <ion-item>
+          <ion-textarea [(ngModel)]="model.Enquiry" name="enquiry" #enquiry="ngModel" placeholder="Please enter your query">
+           
+          </ion-textarea>
+         </ion-item>
+       </ion-col>
+     </ion-row>
+    </ion-grid>
+      
+  </form>
+  <div class="button-container">
+  <button ion-button [disabled]="!enquiryAddForm.form.valid && model.Enquiry.length==0" (click)="addEnquiry()">Submit</button>
+</div>
+ 
+</ion-content>
