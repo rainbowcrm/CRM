@@ -26,11 +26,11 @@ public class ItemAttributeDAO  extends SpringHibernateDAO {
 	}
 
 	
-	public List<ProductAttribute> getByProductId(int item) {
+	public List<ItemAttribute> getByItemId(int item) {
 		Session session = openSession(false);
 		Query query = session.createQuery(" from ItemAttribute where item.id = :item and deleted= false " ) ;
 		query.setParameter("item", item);
-		List<ProductAttribute> lst = query.list();
+		List<ItemAttribute> lst = query.list();
 		closeSession(session, false);
 		return lst;
 	}

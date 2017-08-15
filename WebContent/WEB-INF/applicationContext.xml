@@ -150,7 +150,9 @@
     <bean id="ProductAttributeDAO" class="com.rainbow.crm.product.dao.ProductAttributeDAO">
     <property name="sessionFactory" ref="sessionFactory"></property>
     </bean> 
-    
+    <bean id="ItemAttributeDAO" class="com.rainbow.crm.item.dao.ItemAttributeDAO">
+    <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
      <bean id="SkuDAO" class="com.rainbow.crm.item.dao.SkuDAO">
     <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>    

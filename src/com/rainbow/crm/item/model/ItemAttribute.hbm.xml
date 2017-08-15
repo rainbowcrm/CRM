@@ -3,7 +3,7 @@
  "-//Hibernate/Hibernate Mapping DTD//EN"
  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
  <hibernate-mapping>
- <class name="com.rainbow.crm.product.model.ProductAttribute" table="ITEM_ATTRIBUTES">
+ <class name="com.rainbow.crm.item.model.ItemAttribute" table="ITEM_ATTRIBUTES">
       <meta attribute="class-description">
          This class contains the item Atributes
       </meta>

@@ -15,8 +15,10 @@ import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.company.service.ICompanyService;
 import com.rainbow.crm.hibernate.ORMDAO;
 import com.rainbow.crm.inventory.model.InventoryUpdateObject;
+import com.rainbow.crm.item.dao.ItemAttributeDAO;
 import com.rainbow.crm.item.dao.ItemDAO;
 import com.rainbow.crm.item.model.Item;
+import com.rainbow.crm.item.model.ItemAttribute;
 import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.item.validator.ItemValidator;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
@@ -29,8 +31,21 @@ public class ItemService extends AbstractService implements IItemService{
 	protected String getTableName() {
 		return "Item";
 	}
+
 	
 	
+	
+	@Override
+	public List<ItemAttribute> getAllItemAttributes(Item item,
+			CRMContext conteext) {
+		// TODO Auto-generated method stub
+		List<ItemAttribute> itemAttributes = getItemAttributeDAO().getByItemId(item.getId());
+		return itemAttributes;
+	}
+
+
+
+
 	@Override
 	public Object getById(Object PK) {
 		return getDAO().getById(PK);
@@ -75,6 +90,10 @@ public class ItemService extends AbstractService implements IItemService{
 		return ((ItemDAO)getDAO()).findByName(company, name);
 	}
 
+	private ItemAttributeDAO  getItemAttributeDAO()
+	{
+		return (ItemAttributeDAO) SpringObjectFactory.INSTANCE.getInstance("ItemAttributeDAO");
+	}
 	@Override
 	protected ORMDAO getDAO() {
 		return (ItemDAO) SpringObjectFactory.INSTANCE.getInstance("ItemDAO");

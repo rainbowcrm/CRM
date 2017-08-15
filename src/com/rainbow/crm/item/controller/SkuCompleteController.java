@@ -21,8 +21,10 @@ import com.rainbow.crm.inventory.model.Inventory;
 import com.rainbow.crm.inventory.service.IInventoryService;
 import com.rainbow.crm.item.dao.ItemImageSQL;
 import com.rainbow.crm.item.model.Item;
+import com.rainbow.crm.item.model.ItemAttribute;
 import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.item.model.SkuComplete;
+import com.rainbow.crm.item.service.IItemService;
 import com.rainbow.crm.logger.Logwriter;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
@@ -67,6 +69,10 @@ public class SkuCompleteController  extends SkuController{
 		IFeedBackService feedBackService =(IFeedBackService)SpringObjectFactory.INSTANCE.getInstance("IFeedBackService");
 		List<FeedBackLine> feedBackLines =feedBackService.getLinesforItem(itemComplete.getItem(), context, fromDate, new java.util.Date());
 		itemComplete.setFeedBackLines(feedBackLines);
+		
+		IItemService itemService = (IItemService)SpringObjectFactory.INSTANCE.getInstance("IItemService");
+		List<ItemAttribute> itemAttributes = itemService.getAllItemAttributes(((Sku) thisObject).getItem(), context);
+		itemComplete.setItemAttributes(itemAttributes);
 		
 		setObject(itemComplete);
 		}catch(Exception ex) {
