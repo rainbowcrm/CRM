@@ -10,6 +10,7 @@ import com.rainbow.crm.document.model.Document;
 import com.rainbow.crm.feedback.model.FeedBackLine;
 import com.rainbow.crm.inventory.model.Inventory;
 import com.rainbow.crm.item.model.Item;
+import com.rainbow.crm.item.model.ItemAttribute;
 import com.rainbow.crm.sales.model.SalesLine;
 import com.rainbow.crm.wishlist.model.WishListLine;
 import com.techtrade.rads.framework.annotations.RadsPropertySet;
@@ -26,6 +27,7 @@ public class ItemProfile extends CRMModelObject{
 	List<Inventory> inventory;
 	List<Document> documents;
 	List<WishListLine> wishList;
+	List<ItemAttribute> itemAttributes;
 	
 	GaugeChartData satisfactionIndex;
 	
@@ -119,6 +121,15 @@ public class ItemProfile extends CRMModelObject{
 	}
 	public void setWishList(List<WishListLine> wishList) {
 		this.wishList = wishList;
+	}
+	
+	
+	
+	public List<ItemAttribute> getItemAttributes() {
+		return itemAttributes;
+	}
+	public void setItemAttributes(List<ItemAttribute> itemAttributes) {
+		this.itemAttributes = itemAttributes;
 	}
 	public void addCustomerFeedBack(FeedBackLine document) {
 		if (customerFeedBacks == null)

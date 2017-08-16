@@ -59,6 +59,7 @@ public class ItemAttributeService extends AbstractService implements IItemAttrib
 			itemAttribute.setCompany(company);
 			ProductAttribute attribute = productFAQService.getAttribute(itemAttribute.getAttribute(), context);
 			itemAttribute.setAttribute(attribute);
+			itemAttribute.setItem(item);
 			if (Utils.isNullString(itemAttribute.getValue())) {
 				errors.add(CRMValidator.getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Attribute"))) ;
 			}
@@ -73,10 +74,10 @@ public class ItemAttributeService extends AbstractService implements IItemAttrib
 		Set<Integer> prodAttributes = new LinkedHashSet<Integer> ();
 		for  (ItemAttribute  itemAttribute : itemAttributes)
 		{
-			if(prodAttributes.contains(itemAttribute.getId())) {
+			if(prodAttributes.contains(itemAttribute.getAttribute().getId())) {
 				errors.add(CRMValidator.getErrorforCode(ItemAttributeErrorCodes.REPEATING_ATTRIBUTES,itemAttribute.getAttribute().getAttribute())) ;
 			} else {
-				prodAttributes.add(itemAttribute.getId());
+				prodAttributes.add(itemAttribute.getAttribute().getId());
 			}
 			if  ( "NUMER".equals(itemAttribute.getAttribute().getValueType().getCode())){
 				if(!StringUtils.isNumeric(itemAttribute.getValue()))

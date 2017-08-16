@@ -12,16 +12,19 @@ import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMDBException;
 import com.rainbow.crm.common.CRMDataSheetController;
+import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.IBusinessService;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.product.model.Product;
 import com.rainbow.crm.product.service.IProductService;
+import com.techtrade.rads.framework.context.IRadsContext;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.model.abstracts.RadsError;
 import com.techtrade.rads.framework.model.transaction.TransactionResult;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
+import com.techtrade.rads.framework.ui.abstracts.UIPage;
 import com.techtrade.rads.framework.utils.Utils;
 
 public class ProductController extends CRMDataSheetController{
@@ -34,6 +37,16 @@ public class ProductController extends CRMDataSheetController{
 	public Object getPrimaryKeyValue(ModelObject object) {
 		Product category = (Product) object;
 		return category.getId();
+	}
+	
+	
+
+	@Override
+	public IRadsContext generateContext(String authToken, UIPage page) {
+		CRMContext ctx = (CRMContext)CommonUtil.generateContext(authToken,page);
+		if(ctx.isMobileLogin())
+			ctx.setAuthorized(true);
+		return ctx;
 	}
 
 	@Override

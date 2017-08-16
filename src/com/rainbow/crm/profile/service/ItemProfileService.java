@@ -21,8 +21,10 @@ import com.rainbow.crm.inventory.model.Inventory;
 import com.rainbow.crm.inventory.service.IInventoryService;
 import com.rainbow.crm.item.dao.ItemImageSQL;
 import com.rainbow.crm.item.model.Item;
+import com.rainbow.crm.item.model.ItemAttributeSet;
 import com.rainbow.crm.item.model.ItemImage;
 import com.rainbow.crm.item.model.Sku;
+import com.rainbow.crm.item.service.IItemAttributeService;
 import com.rainbow.crm.item.service.ISkuService;
 import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.profile.model.CustomerProfile;
@@ -180,8 +182,6 @@ public class ItemProfileService implements IItemProfileService{
 		
 		GaugeChartData data = getCustomerSatisfactionIndex(customer, fromDate, toDate, context);
 		custProfile.setSatisfactionIndex(data);
-
-		
 		
 		
 		return custProfile;
@@ -246,7 +246,11 @@ public class ItemProfileService implements IItemProfileService{
 		
 		GaugeChartData data = getItemRatingIndex(item, fromDate, new java.util.Date(), context);
 		itemProfile.setSatisfactionIndex(data);
-				
+		
+		IItemAttributeService attributeService = (IItemAttributeService)SpringObjectFactory.INSTANCE.getInstance("IItemAttributeService");
+		ItemAttributeSet  attrSet = attributeService.getByItem(item, context) ;
+		itemProfile.setItemAttributes(attrSet.getAttributes());	
+		
 		return itemProfile;
 	}
 

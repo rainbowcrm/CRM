@@ -146,7 +146,28 @@ Controller = "com.rainbow.crm.profile.controller.ItemProfileController">
  
 </Element>
 </Element>
-</Element>   <!--  End Wishlst -->
+</Element>   <!--  End Wishlst - Start Attributes -->
+
+<Element type ="UITab" Id= "idAtts" title = "Attributes" showinTable = "false" >
+
+<Element type = "UITable" rows = "1" cols = "4" style = "grid" applyStyleonChildren ="true" Id  ="tblItAttr" property ="itemAttributes[]" >
+<Element type = "UITableHead" style ="listPageTitle">
+ <Element type = "UITableRow">
+ <Element type ="UITableCol" width = "30%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Attribute" /></Element>
+ <Element type ="UITableCol" width = "20%" ><Element label = ""  type = "UILabel" Id = "lblCode" value ="Value" /></Element>
+ 
+ </Element>
+ </Element>
+
+ <Element type = "UITableRow"  dataType = "com.rainbow.crm.item.model.ItemAttribute" >
+ 
+ <Element type ="UITableCol" width = "30%" ><Element label = ""  type = "UILabel" Id = "lblCode" property ="attribute.attribute" /></Element>
+ <Element type ="UITableCol" width = "20%" ><Element label = ""  type = "UILabel" Id = "lblCode" property ="value" /></Element>
+ 
+</Element>
+</Element>
+
+</Element> <!--  End Attributes -->
 
 <Element type ="UITab" Id= "idDocss" title = "Documents" showinTable = "false" >
 
