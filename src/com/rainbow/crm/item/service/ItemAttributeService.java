@@ -1,6 +1,7 @@
 package com.rainbow.crm.item.service;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 
@@ -8,6 +9,10 @@ import java.util.List;
 
 
 
+
+import java.util.Set;
+
+import org.apache.commons.lang.StringUtils;
 
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.common.AbstractService;
@@ -28,6 +33,7 @@ import com.rainbow.crm.item.dao.ItemDAO;
 import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.item.model.ItemAttribute;
 import com.rainbow.crm.item.model.ItemAttributeSet;
+import com.rainbow.crm.item.validator.ItemAttributeErrorCodes;
 import com.rainbow.crm.product.model.ProductAttribute;
 import com.rainbow.crm.product.model.ProductFAQ;
 import com.rainbow.crm.product.service.IProductFAQService;
@@ -58,9 +64,32 @@ public class ItemAttributeService extends AbstractService implements IItemAttrib
 			}
 			
 		});
-		return null;
+		validate(itemAttributeSet.getAttributes(),context,errors, externalize);
+		return errors;
 	}
 
+	private void  validate(List<ItemAttribute> itemAttributes,CRMContext context,List<RadsError> errors , Externalize externalize)
+	{
+		Set<Integer> prodAttributes = new LinkedHashSet<Integer> ();
+		for  (ItemAttribute  itemAttribute : itemAttributes)
+		{
+			if(prodAttributes.contains(itemAttribute.getId())) {
+				errors.add(CRMValidator.getErrorforCode(ItemAttributeErrorCodes.REPEATING_ATTRIBUTES,itemAttribute.getAttribute().getAttribute())) ;
+			} else {
+				prodAttributes.add(itemAttribute.getId());
+			}
+			if  ( "NUMER".equals(itemAttribute.getAttribute().getValueType().getCode())){
+				if(!StringUtils.isNumeric(itemAttribute.getValue()))
+					errors.add(CRMValidator.getErrorforCode(ItemAttributeErrorCodes.VALUE_MISMATCH,
+							itemAttribute.getAttribute().getAttribute(), externalize.externalize(context, "Numeric"))) ;
+			} else if  ( "BOOL".equals(itemAttribute.getAttribute().getValueType().getCode())){
+				if(!("true".equalsIgnoreCase(itemAttribute.getValue()) || "false".equalsIgnoreCase(itemAttribute.getValue()))) 
+						errors.add(CRMValidator.getErrorforCode(ItemAttributeErrorCodes.VALUE_MISMATCH,
+								itemAttribute.getAttribute().getAttribute(), externalize.externalize(context, "Boolean"))) ;
+			}
+		}
+	}
+	
 	@Override
 	public List<RadsError> adaptToUI(CRMContext context, ModelObject object) {
 		// TODO Auto-generated method stub
