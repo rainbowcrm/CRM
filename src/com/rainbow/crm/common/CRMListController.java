@@ -45,7 +45,7 @@ public abstract class CRMListController  extends ListController{
 				}
 			}
 		}
-		return whereCondition.toString();
+		return whereCondition.toString().replace('*', '%');
 	}
 	
 	
@@ -82,7 +82,11 @@ public abstract class CRMListController  extends ListController{
 	
 	protected static String getOperator(FilterNode node) {
 		if (node.getOperater() == null || node.getOperater() == FilterNode.Operator.EQUALS) {
-			return "=";
+			if (node.getValue() != null && node.getValue().toString().contains("*")) {
+				//node.setValue(node.getValue().toString().replace('*', '%'));
+				return " like " ;
+			}else
+				return "=";
 		} else if (node.getOperater() == FilterNode.Operator.GREATER_THAN_EQUAL) {
 			return ">=";
 		}else if (node.getOperater() == FilterNode.Operator.GREATER_THAN) {
