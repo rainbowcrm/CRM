@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, PopoverController } from 'ionic-angular';
-import { Product, GetProductsRequest } from '../';
+import { NavController, PopoverController, ToastController } from 'ionic-angular';
+import { Product, GetProductsRequest, GetProductDetailsRequest, ProductsDetailsList } from '../';
 import { HTTPService } from '../../../providers/';
 import { HomePage } from '../../home/home';
 import { Storage } from '@ionic/storage';
@@ -16,7 +16,7 @@ import { SortPopOverPage }   from '../../../common/sort-helper/sort-popover';
   templateUrl: 'products-faq-home.html'
 })
 export class ProductsList {
-  private products:Array<Product>;
+  private products:Array<Product> = [];
   private request: GetProductsRequest;
   private pageNumber: number;
   private fetchedResults: number;
@@ -24,7 +24,7 @@ export class ProductsList {
   private sortCondition: any;
 
   constructor(private http:HTTPService,
-              private navCtrl: NavController, private popoverCtrl: PopoverController) {
+              private navCtrl: NavController, private popoverCtrl: PopoverController, private toastCtrl: ToastController) {
     this.pageNumber = -1;
     this.fetchedResults = 0;
     this.numberOfResults = 1;
@@ -82,7 +82,6 @@ export class ProductsList {
   }
 
   getProductsSuccess(response, infiniteScroll):void{
-    debugger
     if(response.result == "failure"){
        infiniteScroll.complete();
        return ;
@@ -93,7 +92,7 @@ export class ProductsList {
     }
     this.products = this.products.concat(response.dataObject);
     this.fetchedResults += response.fetchedRecords;
-    this.numberOfResults = response.numberOfResults;
+    this.numberOfResults = response.availableRecords;
     infiniteScroll.complete();
     
   }
@@ -104,8 +103,39 @@ export class ProductsList {
   }
 
   itemSelected(product: Product){
-    debugger
-    //this.navCtrl.push(DiscussionTopicList, {topic: topic, user: this.user});
+    this.getProductDetails(product);
+  }
+
+  getProductDetails(product: Product) {
+      let detailsRequest = new GetProductDetailsRequest();
+      detailsRequest.currentmode = 'READ';
+      detailsRequest.fixedAction = "FixedAction.ACTION_READ";
+      detailsRequest.pageID = "productfaqs";
+      detailsRequest.dataObject = {Product: {Name:product.Name}};
+      this.http.processServerRequest("post",detailsRequest, true).subscribe(
+                     res => this.getProductDetailsSuccess(res),
+                     error =>  this.getProductDetailsError(error));
+  }
+
+  getProductDetailsSuccess(response):void{
+    if(response.dataObject.ProductFAQs.length == 0){
+      this.showToast("No FAQ's found");
+      return;
+    }
+   this.navCtrl.push(ProductsDetailsList, {productDetails: response.dataObject}); 
+  }
+
+  getProductDetailsError(error){
+    this.showToast("Failed to fetch product details");
+  }
+
+  showToast(message: string):any{
+     let toast = this.toastCtrl.create({
+      message: message,
+      duration: 2000,
+      position: 'top'
+     });
+    toast.present();
   }
 
 }

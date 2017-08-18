@@ -3,7 +3,7 @@ import { IonicModule } from 'ionic-angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule }   from '@angular/forms';
 import { CommonPSModule }   from '../../common/common-ps.module';
-import { ProductsList }   from './';
+import { ProductsList, ProductsDetailsList }   from './';
 
 
 
@@ -11,7 +11,8 @@ import { ProductsList }   from './';
 
 @NgModule({
   declarations: [
-   ProductsList
+   ProductsList,
+   ProductsDetailsList
   ],
   imports: [
     IonicModule,
@@ -20,7 +21,8 @@ import { ProductsList }   from './';
     CommonPSModule
   ],
   entryComponents: [
-   ProductsList
+   ProductsList,
+   ProductsDetailsList
   ],
   providers: []
 })
