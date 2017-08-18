@@ -89,7 +89,10 @@ export class FilterProvider {
 
   filterSaveSuccess(response):void{
     this.showToast("Filter saved");
-    this.filtersSave.next();
+    setTimeout(function(){
+      this.filtersSave.next();
+    }, 1000)
+    
   }
  
 
