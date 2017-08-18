@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, ToastController, NavParams } from 'ionic-angular';
-import { Item, Product, ItemSearchRequest, ItemSearchResponse} from '../';
+import { Item, Product, ItemSearchRequest, ItemSearchResponse, ItemBrand} from '../';
 import { HTTPService, FilterProvider, AllFilter, FilterDetails, PromptService } from '../../../providers/';
 import { HomePage } from '../../home/home';
 import { ItemSearchResult } from '../';
@@ -32,6 +32,7 @@ export class ItemSearch {
   ,  private toastCtrl: ToastController, private barcodeScanner: BarcodeScanner,
   private params: NavParams, private filter: FilterProvider, private promptCtrl: PromptService) {
     this.model.Product = new Product();
+    this.model.Item = new ItemBrand();
     this.filter.filtersForPage$.subscribe(res => {this.updateFilters(res)});
     this.filter.filtersDetails$.subscribe(res => {this.updateFilterValues(res)});
     this.filter.filtersSave$.subscribe(res => {this.updateFilterAfterSave()});
@@ -191,6 +192,7 @@ export class ItemSearch {
   fetchFilterValues(){
     this.model = new Item();
     this.model.Product = new Product();
+    this.model.Item = new ItemBrand();
     if(this.filterName && this.filterName != "0"){
       this.filter.getFilterDetails("com.rainbow.crm.item.controller.SkuCompleteListController", this.filterName);
     }
@@ -199,6 +201,7 @@ export class ItemSearch {
   onReset(){
     this.model = new Item();
     this.model.Product = new Product();
+    this.model.Item = new ItemBrand();
     this.filterName = "0";
   }
 
