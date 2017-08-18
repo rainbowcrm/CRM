@@ -1,6 +1,7 @@
 export class Login{
     username:string;
-    password:string
+    password:string;
+    mobileLogin: boolean;
 }
 
 export class LoginRequest{

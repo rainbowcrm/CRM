@@ -23,6 +23,7 @@ export class LoginPage {
     private loader:Loader, private storage: Storage) {
       this.model.password="abc123";
       this.model.username="manager@atstar";
+      this.model.mobileLogin = true;
     }
 
   ionViewDidLoad() {
