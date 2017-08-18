@@ -30,19 +30,20 @@ public class LoginSQLs {
 		}
 	}
 	
-	public static void registerFirstLogin(String user, String token, String session){
+	public static void registerFirstLogin(String user, String token, String session,boolean isMobile){
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet rs  = null ;
 		try {
 			deleteSessionforOtherUsers(session,user);
 			connection  = ConnectionCreater.getConnection() ;
-			String sql = " INSERT INTO LOGIN_RECORDS (TOKEN_ID,USER_ID,SESSION_ID,LOGGED_IN_TIME) VALUES (?,?,?,?)" ;
+			String sql = " INSERT INTO LOGIN_RECORDS (TOKEN_ID,USER_ID,SESSION_ID,LOGGED_IN_TIME,IS_MOBILE_LOGIN) VALUES (?,?,?,?,?)" ;
 			statement = connection.prepareStatement(sql) ;
 			statement.setString(1,session);
 			statement.setString(2,user);
 			statement.setString(3,session);
 			statement.setTimestamp(4,new Timestamp(new java.util.Date().getTime()));
+			statement.setBoolean(5, isMobile);
 			statement.executeUpdate() ;
 			Logwriter.INSTANCE.debug("First Login Reg for user" + user);
 		}catch(SQLException ex) {
@@ -72,7 +73,7 @@ public class LoginSQLs {
 			ConnectionCreater.close(connection, statement, rs);	
 		}
 	}
-	public static void updateLogin(String user, String token, String session){
+	public static void updateLogin(String user, String token, String session,boolean isMobileLogin){
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet rs  = null ;
@@ -80,12 +81,13 @@ public class LoginSQLs {
 			connection  = ConnectionCreater.getConnection() ;
 			deleteSessionforOtherUsers(session,user);
 			String sql = " UPDATE LOGIN_RECORDS SET TOKEN_ID = ? ,  SESSION_ID = ? , LOGGED_IN_TIME = ? , "  + 
-			" LOGGED_OFF_TIME = null, EXPIRED_TIME = null, IS_MOBILE_LOGIN=false  WHERE USER_ID = ? " ;
+			" LOGGED_OFF_TIME = null, EXPIRED_TIME = null, IS_MOBILE_LOGIN=?   WHERE USER_ID = ? " ;
 			statement = connection.prepareStatement(sql) ;
 			statement.setString(1,session);
 			statement.setString(2,session);
 			statement.setTimestamp(3,new Timestamp(new java.util.Date().getTime()));
-			statement.setString(4,user);
+			statement.setBoolean(4, isMobileLogin);
+			statement.setString(5,user);
 			statement.executeUpdate() ;
 			Logwriter.INSTANCE.debug("Subsequent Login Reg for user" + user);
 		}catch(SQLException ex) {
@@ -115,6 +117,7 @@ public class LoginSQLs {
 	}
 	
 	
+	
 	public static void registerLogin (CRMContext context) {
 		Connection connection = null;
 		PreparedStatement statement = null;
@@ -126,9 +129,9 @@ public class LoginSQLs {
 			statement.setString(1, context.getUser());
 			rs = statement.executeQuery() ;
 			if (rs.next()) {
-				updateLogin(context.getUser(), context.getAuthenticationToken(), context.getAuthenticationToken());
+				updateLogin(context.getUser(), context.getAuthenticationToken(), context.getAuthenticationToken(),context.isMobileLogin());
 			} else {
-				registerFirstLogin(context.getUser(), context.getAuthenticationToken(), context.getAuthenticationToken());
+				registerFirstLogin(context.getUser(), context.getAuthenticationToken(), context.getAuthenticationToken(),context.isMobileLogin());
 			}
 		}catch(SQLException ex) {
 			Logwriter.INSTANCE.error(ex);

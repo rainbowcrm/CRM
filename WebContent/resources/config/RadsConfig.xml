@@ -169,7 +169,7 @@
 </Page>
 <Page id = "skucompletelist" definition ="/resources/pages/item/skucompletelist.xml" modelclass = "com.rainbow.crm.item.model.SkuComplete" >
 </Page>
-<Page id = "itemimages" definition ="/resources/pages/item/itemimages.xml"  accessCode ="MERCH:ITEMIMAGES" modelclass = "com.rainbow.crm.item.model.ItemImageSet" >
+<Page id = "itemimages" definition ="/resources/pages/item/itemImages.xml"  accessCode ="MERCH:ITEMIMAGES" modelclass = "com.rainbow.crm.item.model.ItemImageSet" >
 </Page>
 <Page id = "productfaqs" definition ="/resources/pages/products/productFAQs.xml"  accessCode ="MERCH:PRODFAQ" modelclass = "com.rainbow.crm.product.model.ProductFAQSet" >
 </Page>

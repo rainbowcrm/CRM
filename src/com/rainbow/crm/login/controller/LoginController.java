@@ -42,11 +42,12 @@ public class LoginController extends  GeneralController{
 		return LoginSQLs.loggedInUser(authToken);
 	}
 
-	public void generateLoginRecord(String user) {
+	public void generateLoginRecord(String user,boolean isMobileLogin) {
 		CRMContext context = new CRMContext();
 		context.setUser(user);
 		context.setAuthenticated(true);
 		context.setAuthenticationToken(sessionId);
+		context.setMobileLogin(isMobileLogin);
 		setContext(context);
 		LoginSQLs.registerLogin(context);
 	}
@@ -111,7 +112,7 @@ public class LoginController extends  GeneralController{
 					res.setNextPageKey("sysadmin"); // newdivision
 				else
 					res.setNextPageKey("alerts"); // newdivision
-				generateLoginRecord(user.getUserId());
+				generateLoginRecord(user.getUserId(),login.isMobileLogin());
 			}else {
 				Logwriter.INSTANCE.debug("Wrong password");
 				RadsError error=  new RadsError("102","Wrong password");
