@@ -22,6 +22,8 @@ public class SalesLeadLine extends CRMItemLine{
 	double negotiatedPrice ;
 	
 	SalesLead salesLeadDoc;
+	
+	
 
 
 	public SalesLeadLine() {
@@ -94,5 +96,8 @@ public class SalesLeadLine extends CRMItemLine{
 	public void setReasonCode(String reasonCode) {
 		this.reasonCode = reasonCode;
 	}
+
+	
+	
 
 }
