@@ -265,8 +265,16 @@ public class SalesLeadService extends AbstractionTransactionService implements I
 	public List<CRMModelObject> listData(int from, int to,
 			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
 		 String additionalCondition = getAdditionalCondition(whereCondition, context);
-		
-		return super.listData("SalesLead", from, to, additionalCondition, context,sortCriteria);
+		 List<CRMModelObject> objects = super.listData("SalesLead", from, to, additionalCondition, context,sortCriteria);
+		 String workableleads = context.getProperty("workableleads");
+		 if("true".equalsIgnoreCase(workableleads) && !Utils.isNullList(objects)) {
+			 objects.forEach( object ->   {
+				 SalesLead lead = (SalesLead) object ;
+				 adaptToUI(context, lead);
+			 } );
+			 
+		 }
+		return objects;
 	}
 
 	@Override
