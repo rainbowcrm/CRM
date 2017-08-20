@@ -84,4 +84,9 @@ public class PromotionController extends CRMTransactionController{
 		return ans;
 	}
 	
+	public Map <String, String > getAllBundlePricigOptions(){
+		Map<String, String> ans = GeneralSQLs.getFiniteValuesWithSelect(CRMConstants.FV_BUNDLEPRICING);
+		return ans;
+	}
+	
 }

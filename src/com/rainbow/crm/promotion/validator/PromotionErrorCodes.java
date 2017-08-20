@@ -9,5 +9,7 @@ public class PromotionErrorCodes extends CommonErrorCodes{
 	public static final int SHOULD_NOT_BEENTERED = 20000603 ;
 	public static final int ITEMCLASS_FOR_UPSELLING = 20000604 ;
 	public static final int ITEMCLASS_NOTFOR_UPSELLING = 20000605 ;
+	public static final int BUNDLING_PRICING_ONLYFORBUNDLING = 20000606 ;
+	public static final int BUNDLE_PRICE_ONLYFORFIXEDBUNDLING = 20000607 ;
 
 }

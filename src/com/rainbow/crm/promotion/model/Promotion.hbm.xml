@@ -24,6 +24,8 @@
       <property name="isActive" column="IS_ACTIVE" type="boolean"/>
       <property name="comments" column="comments" type="string"/>
       <many-to-one name="itemClass" column ="ITEM_CLASS" not-null="false" lazy="false" ></many-to-one>
+      <many-to-one name="bundlePricing" column ="BUNDLE_PRICING" not-null="false" lazy="false" ></many-to-one>
+      <property name="bundlePrice" column="BUNDLE_PRICE" type="double"/>
       <property name="deleted" column="is_deleted" type="boolean"/>
       <property name="createdDate" column="created_date" type="timestamp" update="false"/>
       <property name="lastUpdateDate" column="last_updated_date" type="timestamp"/>

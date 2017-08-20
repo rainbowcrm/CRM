@@ -127,6 +127,24 @@ public class Promotion extends CRMBusinessModelObject{
 	public void setItemClass(FiniteValue itemClass) {
 		this.itemClass = itemClass;
 	}
+
+	public FiniteValue getBundlePricing() {
+		return bundlePricing;
+	}
+
+	public void setBundlePricing(FiniteValue bundlePricing) {
+		this.bundlePricing = bundlePricing;
+	}
+
+	public Double getBundlePrice() {
+		return bundlePrice;
+	}
+
+	public void setBundlePrice(Double bundlePrice) {
+		this.bundlePrice = bundlePrice;
+	}
+	
+	
 		
 
 }
