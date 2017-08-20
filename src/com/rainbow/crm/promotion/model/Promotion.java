@@ -24,6 +24,9 @@ public class Promotion extends CRMBusinessModelObject{
 	Date startDt;
 	Date endDt;
 	FiniteValue itemClass;
+	FiniteValue bundlePricing;
+	Double bundlePrice; 
+	
 	
 	Set<PromotionLine> promotionLines;
 	
