@@ -1,5 +1,6 @@
 package com.rainbow.crm.promotion.engines;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -82,6 +83,7 @@ public class BundlingEngine extends AbstractPromotionEngine{
 	
 	private void applyPromotion(PromotionLine promoLine ,List<SalesLine> lines ) 
 	{
+		DecimalFormat df = new DecimalFormat("#.###");
 		Promotion promotion =  promoLine.getPromotion();
 		double totalPrice = 0;
 		for (SalesLine line : lines) {  
@@ -93,7 +95,7 @@ public class BundlingEngine extends AbstractPromotionEngine{
 			double totalPricePer = (100  * fixedPrice) / totalPrice ;
 			double indDiscPer = (100 - totalPricePer) ;
 			lines.forEach( line ->   {  
-					line.setDiscPercent(indDiscPer);
+					line.setDiscPercent(Double.valueOf(df.format(indDiscPer)));
 			} );
 		}
 	}
