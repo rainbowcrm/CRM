@@ -279,9 +279,8 @@ body {
   font-family: 'Roboto', sans-serif; }
 
 body.miniPage {
-  overflow: hidden; 
-  padding:0px;
-  }
+  padding: 0;
+  overflow: hidden; }
 
 form > p {
   margin: 0px; }
