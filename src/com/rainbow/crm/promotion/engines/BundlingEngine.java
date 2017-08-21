@@ -83,12 +83,17 @@ public class BundlingEngine extends AbstractPromotionEngine{
 	private void applyPromotion(PromotionLine promoLine ,List<SalesLine> lines ) 
 	{
 		Promotion promotion =  promoLine.getPromotion();
+		double totalPrice = 0;
+		for (SalesLine line : lines) {  
+			totalPrice += line.getUnitPrice();
+		} 
+		
 		if(promotion.getBundlePricing().equals(CRMConstants.BUNDLE_PRICING.FIXED_PRICE))  {
 			double fixedPrice = promotion.getBundlePrice();
-			int indPrice =  (int)fixedPrice / lines.size() ;
+			double totalPricePer = (100  * fixedPrice) / totalPrice ;
+			double indDiscPer = (100 - totalPricePer) ;
 			lines.forEach( line ->   {  
-					double indPricePerc = (100 * indPrice) /line.getUnitPrice();
-					line.setDiscPercent(100-indPricePerc);
+					line.setDiscPercent(indDiscPer);
 			} );
 		}
 	}

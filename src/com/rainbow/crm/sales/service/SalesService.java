@@ -5,6 +5,7 @@ import java.io.OutputStream;
 import java.io.StringWriter;
 import java.net.URL;
 import java.sql.Connection;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -13,6 +14,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 
 
 
@@ -56,6 +58,7 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 
 
 
@@ -238,17 +241,19 @@ public class SalesService extends AbstractionTransactionService implements ISale
 	@Override
 	public void reCalculateTotal(Sales sales, CRMContext contex) {
 		double grossTotal = 0  ,netTotal = 0 ;
+		DecimalFormat df = new DecimalFormat("#.##");
 		if(sales != null &&  !Utils.isNullSet(sales.getSalesLines())) {
 			for (SalesLine  line : sales.getSalesLines()) {
 				if(!line.isDeleted())  {
+					  
 					
 					if(line.getDiscPercent() > 0 ) {
 						double lineDiscount =  line.getUnitPrice() * line.getQty() * line.getDiscPercent()  /100;
-						line.setLineTotalDisc(lineDiscount);
+						line.setLineTotalDisc(Double.valueOf(df.format(lineDiscount)));
 					}
 					if (line.getLineTotalDisc() > 0 ){
 						double lineTotal = line.getUnitPrice() * line.getQty()- line.getLineTotalDisc();
-						line.setLineTotal(lineTotal);
+						line.setLineTotal(Double.valueOf(df.format(lineTotal)));
 					}else {
 						line.setLineTotal(line.getUnitPrice() * line.getQty());
 					}
@@ -256,14 +261,14 @@ public class SalesService extends AbstractionTransactionService implements ISale
 					
 				}
 			}
-			sales.setGrossAmount(grossTotal);
+			sales.setGrossAmount(Double.valueOf(df.format(grossTotal)));
 			if(sales.getDiscPercent() > 0 ) {
 				double transactionDisc = sales.getGrossAmount() * sales.getDiscPercent() /100;
-				sales.setDiscAmount(transactionDisc);
+				sales.setDiscAmount(Double.valueOf(df.format(transactionDisc)) );
 			}
 			if(sales.getTaxPerc() > 0 ) {
 				double taxAmount = sales.getGrossAmount() * sales.getTaxPerc() /100;
-				sales.setTaxAmount(taxAmount);
+				sales.setTaxAmount(Double.valueOf(df.format(taxAmount)) );
 			}
 			
 			
