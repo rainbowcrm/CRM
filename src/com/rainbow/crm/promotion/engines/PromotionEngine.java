@@ -24,6 +24,7 @@ public class PromotionEngine {
 		engines.add( new UPSellingEngine());
 		engines.add( new DiscountEngine());
 		engines.add( new CrossSellingEngine());
+		engines.add( new BundlingEngine());
 		return engines;
 		
 	}
