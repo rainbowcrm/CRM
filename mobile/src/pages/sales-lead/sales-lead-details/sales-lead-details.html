@@ -25,7 +25,8 @@
   <ion-item>
     <h2>{{lead.DocNumber}}</h2>
     <p>{{lead.ReleasedDate}}</p>
-    <p *ngIf="lead.Status.Description"><strong>Status:</strong> {{lead.Status.Description}}</p>
+    <p *ngIf="lead.Status.Description"><strong>Status:</strong>{{lead.Status.Description}}</p>
+    <p *ngIf="lead.Customer.FullName"><strong>Customer Name:</strong>{{lead.Customer.FullName}}</p>
     <p *ngIf="lead.Customer.Phone"><strong>Phone:</strong><a href="tel:{{lead.Customer.Phone}}"> {{lead.Customer.Phone}}</a></p>
   </ion-item>
   <div class="clearfix">
