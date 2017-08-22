@@ -38,6 +38,13 @@ public class CRMConstants {
 	public final static String FV_FEEDBACK_ON =  "FDBACKON";
 	public final static String FV_ORIENTATION= "BUSORIEN";
 	public final static String FV_PRICESOURCE= "PRICSRC";
+	public final static String FV_BUNDLEPRICING= "BUNDPRC";
+	
+
+	public final static class BUNDLE_PRICING {
+		public final static String FIXED_PRICE ="FIXBDPRC";
+		public final static String MASTER_PRICE ="MSTBDPRC";
+	}
 	
 	public final static class PRICE_SOURCES {
 		public final static String ITEM ="ITEMPRC";

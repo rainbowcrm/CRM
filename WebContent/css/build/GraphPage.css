@@ -278,6 +278,10 @@ body {
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif; }
 
+body.miniPage {
+  padding: 0;
+  overflow: hidden; }
+
 form > p {
   margin: 0px; }
 
@@ -288,6 +292,10 @@ div.pagestyle {
   top: 13%;
   left: 15%;
   height: 83%; }
+
+div.dashboardcompstyle {
+  position: absolute;
+  overflow: auto; }
 
 div.detailCRUDStyle {
   position: relative;

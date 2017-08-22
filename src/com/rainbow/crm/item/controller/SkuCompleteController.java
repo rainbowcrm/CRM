@@ -41,11 +41,12 @@ public class SkuCompleteController  extends SkuController{
 		List<String > imageURLs = ItemImageSQL.getAllItemImages(itemComplete.getId());
 		if(!Utils.isNullList(imageURLs)) {
 			String path = CRMAppConfig.INSTANCE.getProperty("doc_server");
-			itemComplete.setImage1URL(path + "/" + imageURLs.get(0).toString());
+			String companyCode = ((CRMContext)getContext()).getLoggedinCompanyCode();
+			itemComplete.setImage1URL(path +"/" + companyCode+ "/" + "itemimages/"  + imageURLs.get(0).toString());
 			if(imageURLs.size() > 1) 
-				itemComplete.setImage2URL(path + "/" + imageURLs.get(1).toString());
+				itemComplete.setImage2URL(path +"/" + companyCode+ "/" + "itemimages/"  + imageURLs.get(1).toString());
 			if(imageURLs.size() > 2) 
-				itemComplete.setImage3URL(path + "/" + imageURLs.get(2).toString());
+				itemComplete.setImage3URL(path +"/" + companyCode+ "/" + "itemimages/"  + imageURLs.get(2).toString());
 		}
 		IInventoryService inventoryService =(IInventoryService) SpringObjectFactory.INSTANCE.getInstance("IInventoryService");
 		CRMContext context =(CRMContext)getContext();

@@ -47,11 +47,18 @@ Controller = "com.rainbow.crm.promotion.controller.PromotionController">
 	 <height>300</height>
 	 <width>290</width>
 </Element>
-    <Element label = "Al_Items"  type = "UIBooleanCheckBox" Id = "txtBoolAllitems" hiddenControlId= "hdnAll"   property ="forAll" />
+	<Element label = "Bundling_Pricing"  type = "UIList" Id = "lstBundlePricinggCode"   property ="bundlePricing.code" >
+	<options populator =  "getAllBundlePricigOptions"> 
+	</options>
+	</Element>
+	<Element label = "Bundle_Fixed_Price"  type = "UIText" Id = "ttxtfixedbdlprice"   isNumeric="true" property ="bundlePrice" />
+
+    
     <Element label = "Required_Amount"  type = "UIText" Id = "txtAllReqAmt"   property ="requiredAmount" />
     <Element label = "Discount_Percent"  type = "UIText" Id = "txtAllDiscPerce"   property ="promotedDiscPercent" /> 	
 	<Element label = "Comments"  type = "UIText" Id = "txtDesc" isMandatory="true"  size  = "40"  property ="comments" />
-	<Element label = ""  type = "UILabel" Id = "txtBoolExpired" rendered ="isActive" value ="isActive" />
+<!-- 	<Element label = ""  type = "UILabel" Id = "txtBoolExpired" rendered ="isActive" value ="isActive" />
+ -->	<Element label = "Al_Items"  type = "UIBooleanCheckBox" Id = "txtBoolAllitems" hiddenControlId= "hdnAll"   property ="forAll" />
 </Section>
 <Section type ="brk1"/>
 <Section type ="detailForSale">

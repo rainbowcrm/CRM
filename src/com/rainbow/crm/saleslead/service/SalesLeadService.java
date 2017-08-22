@@ -25,6 +25,8 @@ import java.util.Set;
 
 
 
+
+
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
 import javax.mail.BodyPart;
@@ -63,6 +65,8 @@ import net.sf.jasperreports.view.JasperViewer;
 
 
 
+
+
 import org.apache.commons.io.IOUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
@@ -71,6 +75,8 @@ import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+
 
 
 
@@ -114,6 +120,7 @@ import com.rainbow.crm.followup.service.IFollowupService;
 import com.rainbow.crm.hibernate.ORMDAO;
 import com.rainbow.crm.inventory.model.InventoryUpdateObject;
 import com.rainbow.crm.item.dao.ItemImageSQL;
+import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.item.model.ItemImage;
 import com.rainbow.crm.item.service.ISkuService;
@@ -258,8 +265,16 @@ public class SalesLeadService extends AbstractionTransactionService implements I
 	public List<CRMModelObject> listData(int from, int to,
 			String whereCondition, CRMContext context, SortCriteria sortCriteria) {
 		 String additionalCondition = getAdditionalCondition(whereCondition, context);
-		
-		return super.listData("SalesLead", from, to, additionalCondition, context,sortCriteria);
+		 List<CRMModelObject> objects = super.listData("SalesLead", from, to, additionalCondition, context,sortCriteria);
+		 String workableleads = context.getProperty("workableleads");
+		 if("true".equalsIgnoreCase(workableleads) && !Utils.isNullList(objects)) {
+			 objects.forEach( object ->   {
+				 SalesLead lead = (SalesLead) object ;
+				 adaptToUI(context, lead);
+			 } );
+			 
+		 }
+		return objects;
 	}
 
 	@Override
@@ -290,6 +305,31 @@ public class SalesLeadService extends AbstractionTransactionService implements I
 
 	
 	
+	@Override
+	public List<RadsError> adaptToUI(CRMContext context, ModelObject object) {
+		try  { 
+			String path = CRMAppConfig.INSTANCE.getProperty("doc_server");
+			String companyCode = ((CRMContext)context).getLoggedinCompanyCode();
+			SalesLead salesLead = (SalesLead) object;
+			if(!Utils.isNullSet(salesLead.getSalesLeadLines())){
+				for (SalesLeadLine line: salesLead.getSalesLeadLines()) {
+					Item itemComplete = line.getSku().getItem();
+					List<String > imageURLs = ItemImageSQL.getAllItemImages(itemComplete.getId());
+					if(!Utils.isNullList(imageURLs)) {
+						line.setImage1URL(path +"/" + companyCode+ "/" + "itemimages/"  + imageURLs.get(0).toString());
+					if(imageURLs.size() > 1) 
+						line.setImage2URL(path +"/" + companyCode+ "/" + "itemimages/"  + imageURLs.get(1).toString());
+					if(imageURLs.size() > 2) 
+						line.setImage3URL(path +"/" + companyCode+ "/" + "itemimages/"  + imageURLs.get(2).toString());	
+					}
+				}
+			}
+		}catch(Exception ex) {
+			Logwriter.INSTANCE.error(ex);
+		}
+		return null;
+	}
+
 	@Override
 	public List<RadsError> adaptfromUI(CRMContext context,ModelObject obj) {
 		SalesLead object = (SalesLead) obj;

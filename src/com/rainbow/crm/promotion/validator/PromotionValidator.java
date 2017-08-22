@@ -61,6 +61,15 @@ public class PromotionValidator extends CRMValidator {
 		if(!promotion.getPromoType().equals(CRMConstants.PROMOTYPE.PLAINDISCOUNT) ) {
 			errors.add( getErrorforCode(PromotionErrorCodes.INVALID_PROMO_FOR_ALLITEMS));
 		}
+		if(!promotion.getPromoType().equals(CRMConstants.PROMOTYPE.BUNDLING) ) {
+			if (promotion.getBundlePricing() != null ) {
+				errors.add( getErrorforCode(PromotionErrorCodes.BUNDLING_PRICING_ONLYFORBUNDLING));
+			}
+			if(promotion.getBundlePrice() > 0 && ! CRMConstants.BUNDLE_PRICING.FIXED_PRICE.equals(promotion.getPromoType()))
+			{
+				errors.add( getErrorforCode(PromotionErrorCodes.BUNDLE_PRICE_ONLYFORFIXEDBUNDLING));
+			}
+		}
 		if(promotion.getPromoType().equals(CRMConstants.PROMOTYPE.BUNDLING))
 		{
 			validateBundlingConditions() ;
@@ -98,7 +107,7 @@ public class PromotionValidator extends CRMValidator {
 				 errors.add( getErrorforCode(PromotionErrorCodes.CANNOT_BE_BLANK_FOR,"Incentive_Value","Bundling"));
 			 }
 			 if (promotionLine.getRequiredQty() == 0 &&  promotionLine.getRequiredAmount() == 0 ) {
-				 errors.add( getErrorforCode(PromotionErrorCodes.CANNOT_BE_BLANK_FOR,"Required_Amount","Bundling"));
+				 errors.add( getErrorforCode(PromotionErrorCodes.CANNOT_BE_BLANK_FOR,"Required_Qty","Bundling"));
 			 }
 		 } );
 	}

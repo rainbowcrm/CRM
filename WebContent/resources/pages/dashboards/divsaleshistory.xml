@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Page id = "divsaleshistorypage" showinFrame ="true"  title ="Sales Dashboard| Rainbow CRM" Object = "com.rainbow.crm.dashboard.model.SalesDashbBard" 
 Controller = "com.rainbow.crm.dashboard.controller.SalesDashBoardController">
-<Template type= "General"  name = "GraphTemplate"></Template>
+<Template type= "General"  name = "miniGraphTemplate"></Template>
 
 <Elements>
 <UIForm Id ="cust" method = "POST" enctype="multipart/form-data" >
@@ -11,9 +11,9 @@ Controller = "com.rainbow.crm.dashboard.controller.SalesDashBoardController">
 	  <xStart>0</xStart>
 	  <yStart>0</yStart>
 	  <canvasHeight>300</canvasHeight>
-	  <canvasWidth>500</canvasWidth>
+	  <canvasWidth>600</canvasWidth>
 	  <rangeHeight>300</rangeHeight>
-	  <rangeWidth>500</rangeWidth>
+	  <rangeWidth>600</rangeWidth>
 	  <marginWidth>30</marginWidth>
 	  <marginHeight>30</marginHeight>
 	  <noYAxisDivisions>6</noYAxisDivisions>

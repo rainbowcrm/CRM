@@ -7,14 +7,17 @@ import java.util.Map;
 import com.rainbow.crm.common.CRMConstants;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.common.CRMTransactionController;
+import com.rainbow.crm.common.CommonUtil;
 import com.rainbow.crm.common.ITransactionService;
 import com.rainbow.crm.common.SpringObjectFactory;
 import com.rainbow.crm.database.GeneralSQLs;
 import com.rainbow.crm.product.model.ProductFAQSet;
 import com.rainbow.crm.product.model.ProductPriceRange;
 import com.rainbow.crm.product.service.IProductFAQService;
+import com.techtrade.rads.framework.context.IRadsContext;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.ui.abstracts.PageResult;
+import com.techtrade.rads.framework.ui.abstracts.UIPage;
 import com.techtrade.rads.framework.utils.Utils;
 
 public class ProductFAQController extends CRMTransactionController {
@@ -24,6 +27,14 @@ public class ProductFAQController extends CRMTransactionController {
 		return null;
 	}
 
+	@Override
+	public IRadsContext generateContext(String authToken, UIPage page) {
+		CRMContext ctx = (CRMContext)CommonUtil.generateContext(authToken,page);
+		if(ctx.isMobileLogin())
+			ctx.setAuthorized(true);
+		return ctx;
+	}
+	
 	@Override
 	public PageResult submit(ModelObject object, String actionParam) {
 		return super.submit(object, actionParam);

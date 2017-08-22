@@ -114,11 +114,9 @@ public class SalesLead extends CRMBusinessModelObject{
 	public void setMgrReason(ReasonCode mgrReason) {
 		this.mgrReason = mgrReason;
 	}
-	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
 	public Customer getCustomer() {
 		return customer;
 	}
-	@RadsPropertySet(useBKForJSON=true, useBKForXML=true,useBKForMap=true)
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
