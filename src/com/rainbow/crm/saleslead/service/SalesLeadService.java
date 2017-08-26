@@ -550,8 +550,8 @@ public class SalesLeadService extends AbstractionTransactionService implements I
 		     message.setFrom(new InternetAddress(component.getFrom()));
 		     message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 	         message.setSubject("Sale!!! Items you were looking for");
-	         loadImages(salesLead, context,realPath);
-	         String msg = getMessage(salesLead, context);
+	         int imageCt = loadImages(salesLead, context,realPath);
+	         String msg = getMessage(salesLead, context,imageCt);
 	         /**
 	          * 
 	          */
@@ -607,45 +607,51 @@ public List<RadsError> sendEmailWithQuote(SalesLead salesLead,
 		return errors;
 }
 
-	private void loadImages(SalesLead salesLead,CRMContext context,String realPath) {
+	private int loadImages(SalesLead salesLead,CRMContext context,String realPath) {
  		try {
+ 			int ct = 0 ;
  		for (SalesLeadLine line : salesLead.getSalesLeadLines() ) {
  			ItemImage image1 = ItemImageSQL.getItemImage(line.getSku().getId(), 'a');
  			ItemImage image2 = ItemImageSQL.getItemImage(line.getSku().getId(), 'b');
  			ItemImage image3 = ItemImageSQL.getItemImage(line.getSku().getId(), 'c');
  			String filePath = CRMAppConfig.INSTANCE.getProperty("doc_server");
 			String code = context.getLoggedinCompanyCode();
-			if (image1 != null && image1.getFileName() != null  ) {
+			if (image1 != null && image1.getFileName() != null &&  !Utils.isNullString(CommonUtil.getFileExtn(image1.getFileName())) ) {
 				String fname1 =  filePath + "/" +  code  + "/itemimages/" + image1.getFileName();
 				line.setImage1URL( fname1 );
+				ct ++ ;
 				/*FileInputStream fis  = new FileInputStream(fname1);
 				byte[] array1 = IOUtils.toByteArray(fis);
 				line.setImgBytes1(array1);*/
 				
 			}
-			if (image2 != null && image2.getFileName() != null  ) {
+			if (image2 != null && image2.getFileName() != null &&  !Utils.isNullString(CommonUtil.getFileExtn(image2.getFileName())) ) {
 				String fname2 = filePath + "/" +  code  + "/itemimages/" + image2.getFileName();
 				line.setImage2URL(  fname2);
+				ct ++ ;
 				/*FileInputStream fis  = new FileInputStream(fname2);
 				byte[] array = IOUtils.toByteArray(fis);
 				line.setImgBytes2(array);*/
 				
 			}
-			if (image3 != null && image3.getFileName() != null  ) {
+			if (image3 != null && image3.getFileName() != null  &&  !Utils.isNullString(CommonUtil.getFileExtn(image3.getFileName())) ) {
 				String fname3 = filePath + "/" +  code  + "/itemimages/" + image3.getFileName();
 				line.setImage3URL(  fname3);
+				ct ++;
 			/*	FileInputStream fis  = new FileInputStream(fname3);
 				byte[] array = IOUtils.toByteArray(fis);
 				line.setImgBytes3(array);*/
 			}
 			
+			return ct; 
  		}
  		}catch(Exception ex) {
  			Logwriter.INSTANCE.error(ex);
  		}
+ 		return -1;
  	}
 	
-	private String  getMessage (SalesLead salesLead,CRMContext context) {
+	private String  getMessage (SalesLead salesLead,CRMContext context, int imageCt) {
 		VelocityEngine ve = new VelocityEngine();
         try {
         IUserService userService = (IUserService)SpringObjectFactory.INSTANCE.getInstance("IUserService");
@@ -653,7 +659,13 @@ public List<RadsError> sendEmailWithQuote(SalesLead salesLead,
         String path = CRMAppConfig.INSTANCE.getProperty("VelocityTemplatePath");
         ve.setProperty("file.resource.loader.path", path);
         ve.init();
-        Template t = ve.getTemplate("salesLeadEmail.vm" );
+        Template t  =null ;
+        if(imageCt ==  3)
+        	t = ve.getTemplate("salesLeadEmail.vm" );
+        else if(imageCt ==  2)
+        	t = ve.getTemplate("salesLeadEmail2img.vm" );
+        else
+        	t = ve.getTemplate("salesLeadEmail1img.vm" );
         VelocityContext velocityContext = new VelocityContext();
         velocityContext.put("customerName", salesLead.getCustomer().getFirstName());
         velocityContext.put("companyName", salesLead.getCompany().getName());

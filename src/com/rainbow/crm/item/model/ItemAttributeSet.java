@@ -10,6 +10,23 @@ public class ItemAttributeSet extends CRMBusinessModelObject
 
 	Item item ;
 	List<ItemAttribute> attributes;
+	List<Sku> skuVariants;
+	
+
+	public List<Sku> getSkuVariants() {
+		return skuVariants;
+	}
+
+	public void setSkuVariants(List<Sku> skuVariants) {
+		this.skuVariants = skuVariants;
+	}
+	
+	public void addSkuVariant(Sku skuVariant) {
+		if(skuVariants == null)
+			skuVariants = new ArrayList<Sku> ();
+		
+		this.skuVariants.add(skuVariant);
+	}
 
 	public List<ItemAttribute> getAttributes() {
 		return attributes;
