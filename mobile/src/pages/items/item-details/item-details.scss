@@ -7,6 +7,14 @@ ps-item-details {
           height: auto;
       }
   }
+  .item-cover{
+    width: initial;
+    height: initial;
+  }
+  .item-name{
+    font-weight: 600;
+    text-align: center;
+  }
   .rating-container{
       width: 35%;
       margin: auto;

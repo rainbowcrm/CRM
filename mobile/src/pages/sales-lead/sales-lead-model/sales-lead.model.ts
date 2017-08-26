@@ -58,6 +58,9 @@ export class Status{
 
 export class Customer{
     Phone: string;
+    FirstName: string;
+    LastName: string;
+    FullName: string;
 }
 
 export class Division{

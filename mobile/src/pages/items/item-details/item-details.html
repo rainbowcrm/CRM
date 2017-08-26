@@ -24,6 +24,9 @@
       <img-loader src="{{img}}" fallback="assets/img/no_image.png" useImg></img-loader>
     </ion-slide>
   </ion-slides>
+  <div class="item-name">
+    {{item.Name}}
+  </div>
   <div class="rating-container" *ngIf="item.FeedBackLines && item.FeedBackLines.length > 0">
      <ion-rating
        [numStars]="5"

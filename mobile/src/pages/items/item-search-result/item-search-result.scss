@@ -21,7 +21,7 @@ ps-item-search-result {
     }
 
     ion-card.card {
-        height: 210px;
+        height: 230px;
         width: 42%;
         float: left;
         margin: 10px;
@@ -29,11 +29,17 @@ ps-item-search-result {
             max-height: 150px;
             width: auto;
             margin: auto;
+            height: 150px;
         }
         ion-card-title.card-title{
             font-size: 11px !important;
             font-weight: bold;
             text-align: center;
+            max-height: 60px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical !important;
         }
     } 
 
