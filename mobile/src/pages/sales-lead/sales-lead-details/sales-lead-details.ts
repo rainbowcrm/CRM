@@ -29,7 +29,6 @@ export class SalesLeadDetails {
   sendMail(){
       this.request = new SalesLeadEmailRequest();
       this.request.currentmode = 'READ';
-      this.request.fixedAction = "FixedAction.NAV_FIRSTPAGE";
       this.request.hdnPage = 0;
       this.request.pageID = "saleslead";
       this.request.submitAction = "sendemail";
