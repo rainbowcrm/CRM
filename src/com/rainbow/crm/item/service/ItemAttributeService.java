@@ -33,6 +33,7 @@ import com.rainbow.crm.item.dao.ItemDAO;
 import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.item.model.ItemAttribute;
 import com.rainbow.crm.item.model.ItemAttributeSet;
+import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.item.validator.ItemAttributeErrorCodes;
 import com.rainbow.crm.product.model.ProductAttribute;
 import com.rainbow.crm.product.model.ProductFAQ;
@@ -129,6 +130,59 @@ public class ItemAttributeService extends AbstractService implements IItemAttrib
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	private TransactionResult updateSkus(ItemAttributeSet oldObject , ItemAttributeSet newObject,CRMContext context )
+	{
+		List<RadsError> errors  = new ArrayList<RadsError>(); 
+		TransactionResult.Result result = TransactionResult.Result.SUCCESS;
+		ISkuService skuService  = (ISkuService)SpringObjectFactory.INSTANCE.getInstance("ISkuService");
+		try {
+			if(oldObject == null ||  Utils.isNullList(oldObject.getSkuVariants())) {
+				for (CRMModelObject object : newObject.getSkuVariants() ) {
+					Sku newSku = (Sku) object;
+					newSku.setItem(newObject.getItem());
+					newSku.setCompany(newObject.getCompany());
+					skuService.create(newSku, context);
+				}
+				//getDAO().batchUpdate(objects);
+			}else {
+				for (Sku object : oldObject.getSkuVariants() ) {
+					Sku newLine = null ;
+					for  ( Sku enteredLine : newObject.getSkuVariants() )  {
+						if (enteredLine.getId() == object.getId()) {
+							newLine = enteredLine;
+							newObject.getSkuVariants().remove(enteredLine);
+							break ;
+						}
+					}
+					if (newLine == null)
+						object.setDeleted(true);
+					
+					object.setLastUpdateDate(new java.sql.Timestamp(new java.util.Date().getTime()));
+					object.setLastUpdateUser(context.getUser());
+					skuService.update(object, context);
+					
+				}
+				for (CRMModelObject object : newObject.getSkuVariants() ) {
+					object.setLastUpdateDate(new java.sql.Timestamp(new java.util.Date().getTime()));
+					object.setLastUpdateUser(context.getUser());
+					skuService.update(object, context);
+					//oldObject.addAttribute((ItemAttribute)object);
+				}
+				
+				//getDAO().batchUpdate(oldObject.getAttributes());
+			}
+		}catch(DatabaseException ex) {
+			RadsError error = CRMValidator.getErrorforCode(context.getLocale(),CRMDBException.ERROR_DIRTY_READ);
+			errors.add(error);
+			result = TransactionResult.Result.FAILURE ;
+			throw new CRMDBException(error) ;
+		}
+		return new TransactionResult(result,errors);
+		
+	}
+
+	
 	
 	private TransactionResult updateAttributes(ItemAttributeSet oldObject , List<ItemAttribute> objects,CRMContext context )
 	{
@@ -196,6 +250,11 @@ public class ItemAttributeService extends AbstractService implements IItemAttrib
 			attributeSet.setItem(item);
 			attributeSet.setCompany(item.getCompany());
 		}
+		
+		ISkuService skuService = (ISkuService)SpringObjectFactory.INSTANCE.getInstance("ISkuService");
+		List<Sku> skuVariants = skuService.getAllByItem(item.getCompany().getId(), item.getId());
+		attributeSet.setSkuVariants(skuVariants);
+		
 		return attributeSet ;
 	}
 
