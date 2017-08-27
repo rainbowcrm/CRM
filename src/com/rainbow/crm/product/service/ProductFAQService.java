@@ -144,38 +144,49 @@ public class ProductFAQService extends AbstractionTransactionService implements 
 		Externalize externalize = new Externalize();
 		ProductFAQSet productFAQSet = (ProductFAQSet) object ;
 		Product product = ItemUtil.getProduct(context, productFAQSet.getProduct());
-		productFAQSet.getProductFAQs().forEach(productFAQ ->  {
-			productFAQ.setCompany(CommonUtil.getCompany(context.getLoggedinCompany()));
-			if (product == null) {
-				errors.add(CRMValidator.getErrorforCode(CommonErrorCodes.FIELD_NOT_VALID,externalize.externalize(context, "Product"))) ;
-			}else 
-				productFAQ.setProduct(product);
-			
-			User user = CommonUtil.getUser(context, productFAQ.getAuthor());
-			if (user == null) {
-				errors.add(CRMValidator.getErrorforCode(CommonErrorCodes.FIELD_NOT_VALID,externalize.externalize(context, "Product"))) ;
-			}else
-				productFAQ.setAuthor(user);
-			
-		}  );
+		if (!Utils.isNullList(productFAQSet.getProductFAQs()) ) {
+			productFAQSet.getProductFAQs().forEach(productFAQ ->  {
+				if (!productFAQ.isNullContent()) {
+				productFAQ.setCompany(CommonUtil.getCompany(context.getLoggedinCompany()));
+				if (product == null) {
+					errors.add(CRMValidator.getErrorforCode(CommonErrorCodes.FIELD_NOT_VALID,externalize.externalize(context, "Product"))) ;
+				}else 
+					productFAQ.setProduct(product);
+				
+				User user = CommonUtil.getUser(context, productFAQ.getAuthor());
+				if (user == null) {
+					errors.add(CRMValidator.getErrorforCode(CommonErrorCodes.FIELD_NOT_VALID,externalize.externalize(context, "Author"))) ;
+				}else
+					productFAQ.setAuthor(user);
+				}else  {
+					productFAQSet.setProductFAQs(null);
+				}
+			}  );
+		}
 		
-		productFAQSet.getProductAttributes().forEach(productAttribute ->   {   
-			productAttribute.setCompany(CommonUtil.getCompany(context.getLoggedinCompany()));
-			if (product == null) {
-				errors.add(CRMValidator.getErrorforCode(CommonErrorCodes.FIELD_NOT_VALID,externalize.externalize(context, "Product"))) ;
-			}else 
-				productAttribute.setProduct(product);
-			if (Utils.isNullString(productAttribute.getAttribute())) {
-				errors.add(CRMValidator.getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Attribute"))) ;
-			}
-			
-			FiniteValue value = GeneralSQLs.getFiniteValue(productAttribute.getValueType().getCode());
-			if (value == null)  {
-				errors.add(CRMValidator.getErrorforCode(CommonErrorCodes.FIELD_NOT_VALID,externalize.externalize(context, "Value_Type"))) ;
-			}else
-				productAttribute.setValueType(value);
-			
-		} );
+		if (!Utils.isNullList(productFAQSet.getProductAttributes()) ) {
+			productFAQSet.getProductAttributes().forEach(productAttribute ->   {
+				if (!productAttribute.isNullContent() ) {
+					productAttribute.setCompany(CommonUtil.getCompany(context.getLoggedinCompany()));
+					if (product == null) {
+						errors.add(CRMValidator.getErrorforCode(CommonErrorCodes.FIELD_NOT_VALID,externalize.externalize(context, "Product"))) ;
+					}else 
+						productAttribute.setProduct(product);
+					if (Utils.isNullString(productAttribute.getAttribute())) {
+						errors.add(CRMValidator.getErrorforCode(CommonErrorCodes.FIELD_EMPTY,externalize.externalize(context, "Attribute"))) ;
+					}
+					
+					FiniteValue value = GeneralSQLs.getFiniteValue(productAttribute.getValueType().getCode());
+					if (value == null)  {
+						errors.add(CRMValidator.getErrorforCode(CommonErrorCodes.FIELD_NOT_VALID,externalize.externalize(context, "Value_Type"))) ;
+					}else
+						productAttribute.setValueType(value);
+				}else {
+					productFAQSet.setProductAttributes(null);
+				}
+				
+			} );
+		}
 		
 		ProductPriceRange econ =null ;
 		ProductPriceRange topEnd = null ;
@@ -307,43 +318,48 @@ public class ProductFAQService extends AbstractionTransactionService implements 
 		int lineNo = 1 ; 
 		try {
 			if(oldObject == null ||  Utils.isNullList(oldObject.getProductFAQs())) {
-				for (CRMModelObject object : objects ) {
-					int id = GeneralSQLs.getNextPKValue( "Product_FAQs") ;
-					((ProductFAQ)object).setId(id);
-					((ProductFAQ)object).setLineNumber(lineNo ++ );
-					object.setLastUpdateDate(new java.sql.Timestamp(new java.util.Date().getTime()));
-					object.setLastUpdateUser(context.getUser());
+				if(!Utils.isNullList(objects)) {
+					for (CRMModelObject object : objects ) {
+						int id = GeneralSQLs.getNextPKValue( "Product_FAQs") ;
+						((ProductFAQ)object).setId(id);
+						((ProductFAQ)object).setLineNumber(lineNo ++ );
+						object.setLastUpdateDate(new java.sql.Timestamp(new java.util.Date().getTime()));
+						object.setLastUpdateUser(context.getUser());
+					}
+					getDAO().batchUpdate(objects);
 				}
-				getDAO().batchUpdate(objects);
 			}else {
 				for (ProductFAQ object : oldObject.getProductFAQs() ) {
 					ProductFAQ newLine = null ;
-					for  ( ProductFAQ enteredLine : objects )  {
-						if (enteredLine.getQuestion().equalsIgnoreCase(object.getQuestion())) {
-							newLine = enteredLine;
-							object.setAnswer(enteredLine.getAnswer());
-							object.setAuthor(enteredLine.getAuthor());
-							object.setComments(enteredLine.getComments());
-							object.setLineNumber(lineNo ++ );
-							objects.remove(enteredLine);
-							break ;
+					if(!Utils.isNullList(objects)) {
+						for  ( ProductFAQ enteredLine : objects )  {
+							if (enteredLine.getQuestion().equalsIgnoreCase(object.getQuestion())) {
+								newLine = enteredLine;
+								object.setAnswer(enteredLine.getAnswer());
+								object.setAuthor(enteredLine.getAuthor());
+								object.setComments(enteredLine.getComments());
+								object.setLineNumber(lineNo ++ );
+								objects.remove(enteredLine);
+								break ;
+							}
 						}
+						if (newLine == null)
+							object.setDeleted(true);
+						
+						((ProductFAQ)object).setLineNumber(lineNo ++ );
+						object.setLastUpdateDate(new java.sql.Timestamp(new java.util.Date().getTime()));
+						object.setLastUpdateUser(context.getUser());
 					}
-					if (newLine == null)
-						object.setDeleted(true);
-					
-					((ProductFAQ)object).setLineNumber(lineNo ++ );
-					object.setLastUpdateDate(new java.sql.Timestamp(new java.util.Date().getTime()));
-					object.setLastUpdateUser(context.getUser());
-					
 				}
-				for (CRMModelObject object : objects ) {
-					int id = GeneralSQLs.getNextPKValue( "Product_FAQs") ;
-					((ProductFAQ)object).setId(id);
-					((ProductFAQ)object).setLineNumber(lineNo ++ );
-					object.setLastUpdateDate(new java.sql.Timestamp(new java.util.Date().getTime()));
-					object.setLastUpdateUser(context.getUser());
-					oldObject.addProductFAQ((ProductFAQ)object);
+				if(!Utils.isNullList(objects)) {
+					for (CRMModelObject object : objects ) {
+						int id = GeneralSQLs.getNextPKValue( "Product_FAQs") ;
+						((ProductFAQ)object).setId(id);
+						((ProductFAQ)object).setLineNumber(lineNo ++ );
+						object.setLastUpdateDate(new java.sql.Timestamp(new java.util.Date().getTime()));
+						object.setLastUpdateUser(context.getUser());
+						oldObject.addProductFAQ((ProductFAQ)object);
+					}
 				}
 				
 				getDAO().batchUpdate(oldObject.getProductFAQs());
@@ -365,28 +381,32 @@ public class ProductFAQService extends AbstractionTransactionService implements 
 		int lineNo = 1 ; 
 		try {
 			if(oldObject == null ||  Utils.isNullList(oldObject.getProductAttributes())) {
-				for (CRMModelObject object : objects ) {
-					int id = GeneralSQLs.getNextPKValue( "Product_Attributes") ;
-					((ProductAttribute)object).setId(id);
-					object.setLastUpdateDate(new java.sql.Timestamp(new java.util.Date().getTime()));
-					object.setLastUpdateUser(context.getUser());
+				if(!Utils.isNullList(objects)) {
+					for (CRMModelObject object : objects ) {
+						int id = GeneralSQLs.getNextPKValue( "Product_Attributes") ;
+						((ProductAttribute)object).setId(id);
+						object.setLastUpdateDate(new java.sql.Timestamp(new java.util.Date().getTime()));
+						object.setLastUpdateUser(context.getUser());
+					}
+					getPriceRangeDAO().batchUpdate(objects);
 				}
-				getPriceRangeDAO().batchUpdate(objects);
 			}else {
 				for(ProductAttribute prodAttribute : oldObject.getProductAttributes() ) {
 					ProductAttribute newLine = null;
-					for  (ProductAttribute enteredRange : objects ) {
-						if(enteredRange.getAttribute().equalsIgnoreCase(prodAttribute.getAttribute())) {
-							if (prodAttribute.getId() <= 0 ) {
-								int id = GeneralSQLs.getNextPKValue( "Product_Attributes") ;
-								prodAttribute.setId(id);
-								prodAttribute.setProduct(oldObject.getProduct());
+					if(!Utils.isNullList(objects)) {
+						for  (ProductAttribute enteredRange : objects ) {
+							if(enteredRange.getAttribute().equalsIgnoreCase(prodAttribute.getAttribute())) {
+								if (prodAttribute.getId() <= 0 ) {
+									int id = GeneralSQLs.getNextPKValue( "Product_Attributes") ;
+									prodAttribute.setId(id);
+									prodAttribute.setProduct(oldObject.getProduct());
+								}
+								newLine = enteredRange ;
+								prodAttribute.setComments(enteredRange.getComments());
+								prodAttribute.setValueType(enteredRange.getValueType());
+								objects.remove(enteredRange);
+								break ;
 							}
-							newLine = enteredRange ;
-							prodAttribute.setComments(enteredRange.getComments());
-							prodAttribute.setValueType(enteredRange.getValueType());
-							objects.remove(enteredRange);
-							break ;
 						}
 					}
 					if (newLine == null)
@@ -395,12 +415,14 @@ public class ProductFAQService extends AbstractionTransactionService implements 
 					prodAttribute.setLastUpdateDate(new java.sql.Timestamp(new java.util.Date().getTime()));
 					prodAttribute.setLastUpdateUser(context.getUser());
 				}
-				for (CRMModelObject object : objects ) {
-					int id = GeneralSQLs.getNextPKValue( "Product_Attributes") ;
-					((ProductAttribute)object).setId(id);
-					object.setLastUpdateDate(new java.sql.Timestamp(new java.util.Date().getTime()));
-					object.setLastUpdateUser(context.getUser());
-					oldObject.addProductAttribute((ProductAttribute)object);
+				if(!Utils.isNullList(objects)) {
+					for (CRMModelObject object : objects ) {
+						int id = GeneralSQLs.getNextPKValue( "Product_Attributes") ;
+						((ProductAttribute)object).setId(id);
+						object.setLastUpdateDate(new java.sql.Timestamp(new java.util.Date().getTime()));
+						object.setLastUpdateUser(context.getUser());
+						oldObject.addProductAttribute((ProductAttribute)object);
+					}
 				}
 				getProductAttributeDAO().batchUpdate(oldObject.getProductAttributes());
 			}

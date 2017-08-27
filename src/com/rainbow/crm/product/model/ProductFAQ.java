@@ -53,6 +53,10 @@ public class ProductFAQ extends CRMBusinessModelObject{
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
+	@Override
+	public boolean isNullContent() {
+		return (question == null && answer == null );
+	}
 	
 	
 	

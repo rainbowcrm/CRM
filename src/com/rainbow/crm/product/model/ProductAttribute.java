@@ -39,6 +39,10 @@ public class ProductAttribute extends  CRMBusinessModelObject
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
+	@Override
+	public boolean isNullContent() {
+		return (attribute == null);
+	}
 	
 	
 	

@@ -85,7 +85,8 @@ public class CommonUtil {
 	private static Map <String,Metadata> metadataMap = new HashMap<String,Metadata> ();
 
 	private static String [] colors = { "Red","Blue" ,"Green" , "Violet" , "Indigo" , "Majenta" ,"Brown" ,"Yellow" , "Orange", 
-			"Salmon","Gray","SandyBrown","Ivory","CadetBlue","OrangeRed","SeaGreen"} ;
+			"Salmon","Gray","SandyBrown","Ivory","CadetBlue","OrangeRed","SeaGreen","rosy brown","chocolate","lemon chiffon","wheat","deep pink","orchid",
+			"purple","medium purple"} ;
 	
 	public static String [] getGraphColors() {
 		return colors;

@@ -44,7 +44,7 @@ Controller = "com.rainbow.crm.item.controller.SkuListController">
    	<Element label = "Item_Code"  type = "UIText" Id = "txtCode"  property ="Code" />
  </FilterNode>
  <FilterNode>
-   	<Element label = "Item_Class"  type = "UIList" Id = "txtitemClass"  property ="itemClass" >
+   	<Element label = "Item_Class"  type = "UIList" Id = "txtitemClass"  property ="item.itemClass" >
    	<options populator =  "getItemClasses"> 
 	</options>
 	</Element>
@@ -88,7 +88,7 @@ Controller = "com.rainbow.crm.item.controller.SkuListController">
   <Element label = ""  type = "UINote" Id = "idProdNote"  property ="Product.Name" />
  </Column>
  <Column title ="Item_Class" sortField="item_class" width ="15%" >
-  <Element label = ""  type = "UINote" Id = "iditClsNote"  property ="itemClassDesc" />
+  <Element label = ""  type = "UINote" Id = "iditClsNote"  property ="item.itemClassDesc" />
  </Column>
   <Column title ="Manufacturer"  sortField="manufacturer" width ="15%" >
   <Element label = ""  type = "UINote" Id = "manufacturer"  property ="Manufacturer" />

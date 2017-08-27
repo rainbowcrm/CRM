@@ -37,9 +37,8 @@ Controller = "com.rainbow.crm.item.controller.SkuController">
 	<Element label = "Color"  type = "UIText" Id = "txtColor"   size="20" property ="Color" />
 	<Element label = "Size"  type = "UIText" Id = "txtSize"   size="20" property ="Size" />
 	<Element label = "Manufacturer"  type = "UIText" Id = "txtManu"   size="30" property ="Manufacturer" />
-	<Element label = "Item_Class"  type = "UIList" Id = "lstClass"   property ="ItemClass"  externalise= "true">
-	<options populator =  "getItemClassTypes"> 
-	</options>
+	<Element label = "Item_Class"  type = "UIText" Id = "lstClass"  readonly ="true" property ="item.ItemClassDesc"  externalise= "true">
+	
    </Element>
 	<Element label = "UOM"  type = "UIList" Id = "lstUOM"    isMandatory="true" property ="UomId" externalise= "true" >
 		<options populator =  "getUOMs"> 
