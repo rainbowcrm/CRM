@@ -5,12 +5,13 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import com.rainbow.crm.hibernate.HibernateDAO;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.rainbow.crm.alert.model.Alert;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.techtrade.rads.framework.utils.Utils;
 
-public class AlertDAO extends SpringHibernateDAO {
+public class AlertDAO extends HibernateDAO {
 
 	@Override
 	public Object getById(Object PK) {

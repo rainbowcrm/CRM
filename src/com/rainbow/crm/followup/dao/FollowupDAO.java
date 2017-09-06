@@ -7,12 +7,13 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import com.rainbow.crm.hibernate.HibernateDAO;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.rainbow.crm.salesperiod.model.SalesPeriod;
 import com.rainbow.crm.followup.model.Followup;
 import com.techtrade.rads.framework.utils.Utils;
 
-public class FollowupDAO extends SpringHibernateDAO {
+public class FollowupDAO extends HibernateDAO {
 
 	@Override
 	public Object getById(Object PK) {

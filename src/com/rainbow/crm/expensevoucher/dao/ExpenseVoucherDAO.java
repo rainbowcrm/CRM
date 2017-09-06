@@ -6,12 +6,13 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import com.rainbow.crm.hibernate.HibernateDAO;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.expensevoucher.model.ExpenseVoucher;
 import com.techtrade.rads.framework.utils.Utils;
 
-public class ExpenseVoucherDAO  extends SpringHibernateDAO{
+public class ExpenseVoucherDAO  extends HibernateDAO{
 
 	@Override
 	public Object getById(Object PK) {

@@ -7,11 +7,12 @@ import org.hibernate.Session;
 
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.category.model.Category;
+import com.rainbow.crm.hibernate.HibernateDAO;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.rainbow.crm.item.model.Sku;
 import com.techtrade.rads.framework.utils.Utils;
 
-public class SkuDAO extends SpringHibernateDAO {
+public class SkuDAO extends HibernateDAO {
 
 	@Override
 	public Object getById(Object PK) {

@@ -5,11 +5,12 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import com.rainbow.crm.hibernate.HibernateDAO;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.rainbow.crm.contact.model.Contact;
 import com.techtrade.rads.framework.utils.Utils;
 
-public class ContactDAO extends SpringHibernateDAO {
+public class ContactDAO extends HibernateDAO {
 
 	@Override
 	public Object getById(Object PK) {

@@ -8,10 +8,11 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import com.rainbow.crm.filter.model.CRMFilter;
+import com.rainbow.crm.hibernate.HibernateDAO;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.rainbow.crm.salesportfolio.model.SalesPortfolio;
 
-public class SalesPortfolioDAO  extends SpringHibernateDAO{
+public class SalesPortfolioDAO  extends HibernateDAO{
 
 	@Override
 	public Object getById(Object PK) {

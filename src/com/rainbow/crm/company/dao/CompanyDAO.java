@@ -8,11 +8,12 @@ import org.hibernate.Session;
 import com.rainbow.crm.common.CRMContext;
 import com.rainbow.crm.company.model.Company;
 import com.rainbow.crm.filter.model.CRMFilter;
+import com.rainbow.crm.hibernate.HibernateDAO;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.techtrade.rads.framework.utils.Utils;
 
 
-public class CompanyDAO extends SpringHibernateDAO{
+public class CompanyDAO extends HibernateDAO{
 	
 	public static CompanyDAO  INSTANCE  = new CompanyDAO();
 

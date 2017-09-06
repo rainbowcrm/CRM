@@ -12,7 +12,7 @@ import com.rainbow.crm.user.model.User;
 import com.techtrade.rads.framework.utils.Utils;
 
 
-public class UserDAO extends SpringHibernateDAO {
+public class UserDAO extends HibernateDAO {
 	
 	private void UserDAO() {
 		

@@ -3,10 +3,11 @@ package com.rainbow.crm.address.dao;
 
 import org.hibernate.Session;
 
+import com.rainbow.crm.hibernate.HibernateDAO;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.rainbow.crm.address.model.Address;
 
-public class AddressDAO extends SpringHibernateDAO {
+public class AddressDAO extends HibernateDAO {
 
 	@Override
 	public Object getById(Object PK) {

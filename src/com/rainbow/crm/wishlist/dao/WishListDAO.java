@@ -8,6 +8,7 @@ import org.hibernate.Session;
 
 import com.rainbow.crm.customer.model.Customer;
 import com.rainbow.crm.division.model.Division;
+import com.rainbow.crm.hibernate.HibernateDAO;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.rainbow.crm.item.model.Item;
 import com.rainbow.crm.item.model.Sku;
@@ -15,7 +16,7 @@ import com.rainbow.crm.wishlist.model.WishList;
 import com.rainbow.crm.wishlist.model.WishListLine;
 import com.techtrade.rads.framework.utils.Utils;
 
-public class WishListDAO  extends SpringHibernateDAO{
+public class WishListDAO  extends HibernateDAO{
 
 	@Override
 	public Object getById(Object PK) {

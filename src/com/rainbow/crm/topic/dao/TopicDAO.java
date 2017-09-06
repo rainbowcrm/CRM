@@ -8,11 +8,12 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import com.rainbow.crm.filter.model.CRMFilter;
+import com.rainbow.crm.hibernate.HibernateDAO;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.rainbow.crm.topic.model.Topic;
 import com.rainbow.crm.topic.model.TopicLine;
 
-public class TopicDAO  extends SpringHibernateDAO{
+public class TopicDAO  extends HibernateDAO{
 
 	@Override
 	public Object getById(Object PK) {

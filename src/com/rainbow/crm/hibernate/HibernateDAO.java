@@ -83,6 +83,18 @@ public  abstract class HibernateDAO  extends ORMDAO{
 	
     private static SessionFactory sessionFactory = null;
 
+    public  SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+    
+    public static SessionFactory getHibernateSessionFactory() 
+    {
+    	return sessionFactory;
+    }
+
+	public  void setSessionFactory(SessionFactory sessionFactory) {
+		//this.sessionFactory = sessionFactory;
+	}
     
     protected void closeSession(Session session,boolean commitTransaction) {
     	if (commitTransaction && session.getTransaction() !=null ) {

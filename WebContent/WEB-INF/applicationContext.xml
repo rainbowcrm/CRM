@@ -141,7 +141,7 @@
     </bean> 
   
    <bean id="ProductDAO" class="com.rainbow.crm.product.dao.ProductDAO">
-    <property name="sessionFactory" ref="sessionFactory"></property>
+   <!--  <property name="sessionFactory" ref="sessionFactory"></property> -->
     </bean>
     <bean id="ProductFAQDAO" class="com.rainbow.crm.product.dao.ProductFAQDAO">
     <property name="sessionFactory" ref="sessionFactory"></property>

@@ -7,6 +7,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import com.rainbow.crm.division.model.Division;
+import com.rainbow.crm.hibernate.HibernateDAO;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.sales.model.Sales;
@@ -14,7 +15,7 @@ import com.rainbow.crm.sales.model.SalesLine;
 import com.rainbow.crm.salesperiod.model.SalesPeriod;
 import com.techtrade.rads.framework.utils.Utils;
 
-public class SalesDAO  extends SpringHibernateDAO{
+public class SalesDAO  extends HibernateDAO{
 
 	@Override
 	public Object getById(Object PK) {

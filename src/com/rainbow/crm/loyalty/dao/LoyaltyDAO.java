@@ -5,12 +5,13 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import com.rainbow.crm.hibernate.HibernateDAO;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.rainbow.crm.loyalty.model.Loyalty;
 import com.rainbow.crm.common.finitevalue.FiniteValue;
 import com.techtrade.rads.framework.utils.Utils;
 
-public class LoyaltyDAO extends SpringHibernateDAO {
+public class LoyaltyDAO extends HibernateDAO {
 
 	@Override
 	public Object getById(Object PK) {

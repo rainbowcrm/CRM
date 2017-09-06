@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import com.rainbow.crm.hibernate.HibernateDAO;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.sales.model.Sales;
@@ -14,7 +15,7 @@ import com.rainbow.crm.feedback.model.FeedBack;
 import com.rainbow.crm.feedback.model.FeedBackLine;
 import com.techtrade.rads.framework.utils.Utils;
 
-public class FeedBackDAO  extends SpringHibernateDAO{
+public class FeedBackDAO  extends HibernateDAO{
 
 	@Override
 	public Object getById(Object PK) {

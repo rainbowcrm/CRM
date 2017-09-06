@@ -5,11 +5,12 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import com.rainbow.crm.hibernate.HibernateDAO;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.rainbow.crm.customer.model.Customer;
 import com.techtrade.rads.framework.utils.Utils;
 
-public class CustomerDAO extends SpringHibernateDAO {
+public class CustomerDAO extends HibernateDAO {
 
 	@Override
 	public Object getById(Object PK) {

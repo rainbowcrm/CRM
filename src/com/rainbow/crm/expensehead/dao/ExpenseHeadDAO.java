@@ -9,12 +9,13 @@ import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.expensehead.model.ExpenseHead;
 import com.rainbow.crm.common.DatabaseException;
 import com.rainbow.crm.company.model.Company;
+import com.rainbow.crm.hibernate.HibernateDAO;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.rainbow.crm.logger.Logwriter;
 import com.techtrade.rads.framework.model.abstracts.ModelObject;
 import com.techtrade.rads.framework.utils.Utils;
 
-public class ExpenseHeadDAO extends SpringHibernateDAO{
+public class ExpenseHeadDAO extends HibernateDAO{
 
 	@Override
 	public Object getById(Object PK) {

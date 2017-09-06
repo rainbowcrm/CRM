@@ -7,6 +7,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import com.rainbow.crm.hibernate.HibernateDAO;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.salesperiod.model.SalesPeriod;
@@ -16,7 +17,7 @@ import com.rainbow.crm.promotion.model.Promotion;
 import com.rainbow.crm.customer.model.Customer;
 import com.techtrade.rads.framework.utils.Utils;
 
-public class PromotionDAO extends SpringHibernateDAO {
+public class PromotionDAO extends HibernateDAO {
 
 	@Override
 	public Object getById(Object PK) {

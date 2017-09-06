@@ -7,13 +7,14 @@ import java.util.Set;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import com.rainbow.crm.hibernate.HibernateDAO;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.distributionorder.model.DistributionOrder;
 import com.rainbow.crm.distributionorder.model.DistributionOrderLine;
 import com.techtrade.rads.framework.utils.Utils;
 
-public class DistributionOrderDAO  extends SpringHibernateDAO{
+public class DistributionOrderDAO  extends HibernateDAO{
 
 	@Override
 	public Object getById(Object PK) {

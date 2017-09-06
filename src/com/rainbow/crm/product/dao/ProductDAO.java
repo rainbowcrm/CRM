@@ -8,11 +8,12 @@ import org.hibernate.Session;
 import com.rainbow.crm.abstratcs.model.CRMModelObject;
 import com.rainbow.crm.category.model.Category;
 import com.rainbow.crm.common.DatabaseException;
+import com.rainbow.crm.hibernate.HibernateDAO;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.rainbow.crm.product.model.Product;
 import com.techtrade.rads.framework.utils.Utils;
 
-public class ProductDAO extends SpringHibernateDAO{
+public class ProductDAO extends HibernateDAO{
 
 	@Override
 	public Object getById(Object PK) {

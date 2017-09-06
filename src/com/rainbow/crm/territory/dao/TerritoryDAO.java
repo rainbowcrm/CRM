@@ -7,12 +7,13 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import com.rainbow.crm.division.model.Division;
+import com.rainbow.crm.hibernate.HibernateDAO;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.rainbow.crm.item.model.Sku;
 import com.rainbow.crm.territory.model.Territory;
 import com.techtrade.rads.framework.utils.Utils;
 
-public class TerritoryDAO  extends SpringHibernateDAO{
+public class TerritoryDAO  extends HibernateDAO{
 
 	@Override
 	public Object getById(Object PK) {

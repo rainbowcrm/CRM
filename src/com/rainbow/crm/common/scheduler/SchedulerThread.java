@@ -7,6 +7,7 @@ import java.util.List;
 
 
 
+
 import com.rainbow.crm.abstratcs.model.CRMBusinessModelObject;
 import com.rainbow.crm.alert.model.Alert;
 import com.rainbow.crm.alert.service.IAlertService;
@@ -21,6 +22,7 @@ import com.rainbow.crm.company.service.ICompanyService;
 import com.rainbow.crm.config.service.ConfigurationManager;
 import com.rainbow.crm.followup.model.Followup;
 import com.rainbow.crm.followup.service.IFollowupService;
+import com.rainbow.crm.hibernate.HibernateDAO;
 import com.rainbow.crm.sales.model.Sales;
 import com.rainbow.crm.sales.service.ISalesService;
 import com.rainbow.crm.salesperiod.model.SalesPeriod;
@@ -91,10 +93,12 @@ public class SchedulerThread extends Thread{
 	{
 		try {
 		for (; ; ) {
-		raiseSalesPeriodAlerts();
-		raiseFollowupAlerts();
-		expireSalesPortFolios();
-		raiseSalesFeedBackAlerts();
+				if (HibernateDAO.getHibernateSessionFactory() != null) {
+					raiseSalesPeriodAlerts();
+					raiseFollowupAlerts();
+					expireSalesPortFolios();
+					raiseSalesFeedBackAlerts();
+				}
 		Thread.sleep(interval);
 		}
 		}catch(Exception ex) {

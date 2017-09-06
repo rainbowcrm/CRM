@@ -365,13 +365,13 @@
  	<Element label = "" type = "UIMenu" Id = "menu113" style="menustyle" title="Items" link = "rdscontroller?page=items"  iconStyle="fa fa-fw fa-dashboard" />
  	<Element label = "" type = "UIMenu" Id = "menu114" style="menustyle" title="SKU" link = "rdscontroller?page=skus" iconStyle="fa fa-fw fa-dashboard"  />
  	<Element label = "" type = "UIMenu" Id = "menu115" style="menustyle" title="Item Images" link = "rdscontroller?page=itemimages"  iconStyle="fa fa-fw fa-dashboard" />
- 	<Element label = "" type = "UIMenu" Id = "menu117" style="menustyle" title="Item_Profile" link = "rdscontroller?page=itemprofile" iconStyle="fa fa-fw fa-dashboard"  />s
+ 	<Element label = "" type = "UIMenu" Id = "menu117" style="menustyle" title="Item_Profile" link = "rdscontroller?page=itemprofile" iconStyle="fa fa-fw fa-dashboard"  />
  </Element>
  <Element label = "" type = "UIMenu" Id = "menu20" style="menustyleParent" title="Customer_Management" groupId= "menuGRP003"  >
- 	<Element label = "" type = "UIMenu" Id = "menu05" style="menustyle" title="Customers" link = "rdscontroller?page=customers"  iconStyle="fa fa-fw fa-dashboard" />
-	<Element label = "" type = "UIMenu" Id = "menu05" style="menustyle" title="Loyalty" link = "rdscontroller?page=loyatylist"  iconStyle="fa fa-fw fa-dashboard" />
-	<Element label = "" type = "UIMenu" Id = "menu05" style="menustyle" title="Wish_List" link = "rdscontroller?page=wishlist" iconStyle="fa fa-fw fa-dashboard"  />
-	<Element label = "" type = "UIMenu" Id = "menu117" style="menustyle" title="Customer_Profile" link = "rdscontroller?page=customerprofile" iconStyle="fa fa-fw fa-dashboard"  />s
+ 	<Element label = "" type = "UIMenu" Id = "menu05" style="menustyle" title="Customers" link = "rdscontroller?page=customers"  iconStyle="fa fa-fw fa-female" />
+	<Element label = "" type = "UIMenu" Id = "menu05" style="menustyle" title="Loyalty" link = "rdscontroller?page=loyatylist"  iconStyle="fa fa-fw fa-magnet" />
+	<Element label = "" type = "UIMenu" Id = "menu05" style="menustyle" title="Wish_List" link = "rdscontroller?page=wishlist" iconStyle="fa fa-fw fa-magic"  />
+	<Element label = "" type = "UIMenu" Id = "menu117" style="menustyle" title="Customer_Profile" link = "rdscontroller?page=customerprofile" iconStyle="fa fa-fw fa-user"  />
  </Element>
  <Element label = "" type = "UIMenu" Id = "menu600" style="menustyleParent" title="Corporate_WorkBench" groupId= "menuGRP0060"  >
     <Element label = "" type = "UIMenu" Id = "menu601" style="menustyle" title="Corp_Sales_Period" link = "rdscontroller?page=corpsalesperiodlist"   />
@@ -387,15 +387,15 @@
 	<Element label = "" type = "UIMenu" Id = "menu303" style="menustyle" title="Expense_Heads" link = "rdscontroller?page=expenseheads"  iconStyle="fa fa-fw fa-dashboard" />
  </Element>
  <Element label = "" type = "UIMenu" Id = "menu30" style="menustyleParent" title="Salesforce_WorkBench" groupId= "menuGRP004"  >
- 	<Element label = "" type = "UIMenu" Id = "menu301" style="menustyle" title="Alerts" link = "rdscontroller?page=alerts"  iconStyle="fa fa-fw fa-dashboard" />
- 	<Element label = "" type = "UIMenu" Id = "menu3011" style="menustyle" title="Discussions" link = "rdscontroller?page=topic"  iconStyle="fa fa-fw fa-dashboard" />
- 	<Element label = "" type = "UIMenu" Id = "menu302" style="menustyle" title="Documents" link = "rdscontroller?page=documents"  iconStyle="fa fa-fw fa-dashboard" />
-	<Element label = "" type = "UIMenu" Id = "menu34" style="menustyle" title="Sales_Leads" link = "rdscontroller?page=saleslead" iconStyle="fa fa-fw fa-dashboard"  />
-	<Element label = "" type = "UIMenu" Id = "menu35" style="menustyle" title="Followups" link = "rdscontroller?page=followups"  iconStyle="fa fa-fw fa-dashboard" />
-	<Element label = "" type = "UIMenu" Id = "menu36" style="menustyle" title="Expense_Vouchers" link = "rdscontroller?page=expensevouchers"  iconStyle="fa fa-fw fa-dashboard" />
-	<Element label = "" type = "UIMenu" Id = "menu36" style="menustyle" title="Enquiries" link = "rdscontroller?page=enquiries"  iconStyle="fa fa-fw fa-dashboard" />
-	<Element label = "" type = "UIMenu" Id = "menu36" style="menustyle" title="Sales_Pitches" link = "rdscontroller?page=salespitches"  iconStyle="fa fa-fw fa-dashboard" />
-	<Element label = "" type = "UIMenu" Id = "menu361" style="menustyle" title="Feedbacks" link = "rdscontroller?page=feedbacks"  iconStyle="fa fa-fw fa-dashboard" />
+ 	<Element label = "" type = "UIMenu" Id = "menu301" style="menustyle" title="Alerts" link = "rdscontroller?page=alerts"  iconStyle="fa fa-fw fa-bullhorn" />
+ 	<Element label = "" type = "UIMenu" Id = "menu3011" style="menustyle" title="Discussions" link = "rdscontroller?page=topic"  iconStyle="fa fa-fw fa-comment" />
+ 	<Element label = "" type = "UIMenu" Id = "menu302" style="menustyle" title="Documents" link = "rdscontroller?page=documents"  iconStyle="fa fa-fw fa-clone" />
+	<Element label = "" type = "UIMenu" Id = "menu34" style="menustyle" title="Sales_Leads" link = "rdscontroller?page=saleslead" iconStyle="fa fa-fw fa-eye"  />
+	<Element label = "" type = "UIMenu" Id = "menu35" style="menustyle" title="Followups" link = "rdscontroller?page=followups"  iconStyle="fa fa-fw fa-exchange" />
+	<Element label = "" type = "UIMenu" Id = "menu36" style="menustyle" title="Expense_Vouchers" link = "rdscontroller?page=expensevouchers"  iconStyle="fa fa-fw fa-cutlery" />
+	<Element label = "" type = "UIMenu" Id = "menu36" style="menustyle" title="Enquiries" link = "rdscontroller?page=enquiries"  iconStyle="fa fa-fw fa-envelope" />
+	<Element label = "" type = "UIMenu" Id = "menu36" style="menustyle" title="Sales_Pitches" link = "rdscontroller?page=salespitches"  iconStyle="fa fa-fw fa-gift" />
+	<Element label = "" type = "UIMenu" Id = "menu361" style="menustyle" title="Feedbacks" link = "rdscontroller?page=feedbacks"  iconStyle="fa fa-fw fa-history" />
 	<Element label = "" type = "UIMenu" Id = "menu367" style="menustyle" title="Dashboard" link = "rdscontroller?page=dashboard"  iconStyle="fa fa-fw fa-dashboard" />
  </Element>
  <Element label = "" type = "UIMenu" Id = "menu70" style="menustyleParent" title="Manager_Workbench" groupId= "menuGRP005"  >

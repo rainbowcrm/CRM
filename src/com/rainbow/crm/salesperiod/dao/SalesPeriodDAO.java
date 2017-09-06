@@ -7,13 +7,14 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import com.rainbow.crm.filter.model.CRMFilter;
+import com.rainbow.crm.hibernate.HibernateDAO;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.salesperiod.model.SalesPeriod;
 import com.rainbow.crm.salesperiod.model.SalesPeriodAssociate;
 import com.techtrade.rads.framework.utils.Utils;
 
-public class SalesPeriodDAO  extends SpringHibernateDAO{
+public class SalesPeriodDAO  extends HibernateDAO{
 
 	@Override
 	public Object getById(Object PK) {

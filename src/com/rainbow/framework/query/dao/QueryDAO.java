@@ -8,13 +8,14 @@ import org.hibernate.Session;
 
 import com.rainbow.crm.common.DatabaseException;
 import com.rainbow.crm.customer.model.Customer;
+import com.rainbow.crm.hibernate.HibernateDAO;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.rainbow.crm.logger.Logwriter;
 import com.rainbow.crm.sales.model.Sales;
 import com.rainbow.framework.query.model.QueryReport;
 import com.techtrade.rads.framework.utils.Utils;
 
-public class QueryDAO  extends SpringHibernateDAO{
+public class QueryDAO  extends HibernateDAO{
 
 	@Override
 	public Object getById(Object PK) {

@@ -2,10 +2,11 @@ package com.rainbow.crm.purchase.dao;
 
 import org.hibernate.Session;
 
+import com.rainbow.crm.hibernate.HibernateDAO;
 import com.rainbow.crm.hibernate.SpringHibernateDAO;
 import com.rainbow.crm.purchase.model.Purchase;
 
-public class PurchaseDAO  extends SpringHibernateDAO{
+public class PurchaseDAO  extends HibernateDAO{
 
 	@Override
 	public Object getById(Object PK) {
