@@ -74,17 +74,19 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 		</options>
 	</Element>
 	
-	<!-- <Element label = "Associate"  type = "UIList" Id = "lstHeaderAssociate"   property ="salesMan.userId"  rendered = "Controller.isAssociateHeaderLevel"   externalise= "true">
+	<Element label = "Associate"  type = "UIDataList" Id = "lstHeaderAssociate"  textId="txthdrAss"  property ="salesMan.userId"  rendered = "Controller.isAssociateHeaderLevel"   externalise= "true">
 		<options populator =  "getAssociates"> 
 		</options>
-	</Element> -->
+	</Element> 
 	
-	<Element label = "Associate"  type = "UILookupText"  Id = "lstHeaderAssociate"  property ="salesMan.userId"  rendered = "Controller.isAssociateHeaderLevel" showLookupAsDialog="true" dialogId="dlghdrSalesMan"
+	
+	
+<!-- 	<Element label = "Associate"  type = "UILookupText"  Id = "lstHeaderAssociate"  property ="salesMan.userId"  rendered = "Controller.isAssociateHeaderLevel" showLookupAsDialog="true" dialogId="dlghdrSalesMan"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" additionalInputControl = "lstInvDivision">
 	 <lookupType>user</lookupType>
 	 <height>300</height>
 	 <width>290</width>
-    </Element>
+    </Element> -->
 	
 	<Element label = ""  type = "UILabel" Id = "lblFree4"  rendered = "!Controller.isAssociateHeaderLevel"  showInPrevCol="true" style="bigTitle" value ="" />
 	<!--  <Element label = ""  type = "UILabel" Id = "lblCustTitle"   value ="" />  --> 
