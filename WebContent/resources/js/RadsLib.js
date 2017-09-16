@@ -174,6 +174,25 @@ function showLookupDialogWithAdditionalFields(id,curControl,additionalControl,ad
 	
  }
 
+function getLookupWithAjax(lookupType, currentCtrl)
+{
+	var srValue = currentCtrl.value ;
+	console.log(currentCtrl);
+	if(srValue.length  > 2) {
+	var requestStr = appURL + "rdscontroller?page=Lookup&returnAsJSON=true&lookupType=" + lookupType + "&searchString="+srValue+"*" ;
+	var index  = getCurrentObjectIndex(currentCtrl);
+	console.log( "index" + index) ;
+	
+
+	var reqObject = new XMLHttpRequest();
+	reqObject.open("GET",requestStr,false);
+	reqObject.send();
+	console.log("Resp" + reqObject.responseText);
+	}
+
+
+}
+
 function fireAjaxRequest (service, requestCtrls, responseCtrls, currentCtrl) {
 	var requestStr = appURL + "rdscontroller?ajxService=" + service;
 	var index  = getCurrentObjectIndex(currentCtrl);
