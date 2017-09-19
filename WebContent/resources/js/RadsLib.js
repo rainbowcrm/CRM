@@ -174,12 +174,13 @@ function showLookupDialogWithAdditionalFields(id,curControl,additionalControl,ad
 	
  }
 
-function getLookupWithAjax(lookupType, currentCtrl)
+function getLookupWithAjax(lookupType, currentCtrl,dataListCtrlName,additionalFields)
 {
 	var srValue = currentCtrl.value ;
-	console.log(currentCtrl);
+	console.log('additionalFields=' + additionalFields);
+	
 	if(srValue.length  > 2) {
-	var requestStr = appURL + "rdscontroller?page=Lookup&returnAsJSON=true&lookupType=" + lookupType + "&searchString="+srValue+"*" ;
+	var requestStr = appURL + "rdscontroller?page=Lookup&returnAsJSON=true&lookupType=" + lookupType + "&additionalFields=" + additionalFields +  "&searchString="+srValue+"*" ;
 	var index  = getCurrentObjectIndex(currentCtrl);
 	console.log( "index" + index) ;
 	
@@ -188,6 +189,21 @@ function getLookupWithAjax(lookupType, currentCtrl)
 	reqObject.open("GET",requestStr,false);
 	reqObject.send();
 	console.log("Resp" + reqObject.responseText);
+	
+	var elem = document.getElementsByName(dataListCtrlName)[0];
+	console.log ('before' + elem.innerHTML) ;
+ 	elem.innerHTML='';
+	 var options = '';
+	var jsonResponse =  JSON.parse(reqObject.responseText) ;
+	var propArray =jsonResponse['lookupValues'] ;
+	for (var i in propArray) {
+		  var jsonElment = propArray[i];
+		  var value = jsonElment['value'];
+		  var key = jsonElment['key'];
+		  options += '<option key = "' + key +  '" value="'+value+'" />';
+	}
+	elem.innerHTML=  options;
+	console.log ('after' + elem.innerHTML) ;
 	}
 
 

@@ -30,20 +30,20 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 <responseElement key = "territories">txtTerritory</responseElement>
 </responseElements>
 </AjaxGroup>
-<AjaxGroup service ="skuSearch">
+ <AjaxGroup service ="skuSearch">
 <requestElements event = "">
 <requestElement key = "Name">txtItName</requestElement>
 <requestElement key = "Code">txtCode</requestElement>
 <requestElement key = "Division">lstInvDivision</requestElement>
 </requestElements>
 <responseElements>
-<!-- <responseElement key = "Name" >txtItem</responseElement>  -->
+
 <responseElement key = "Code">txtCode</responseElement>
 <responseElement key = "Name">txtItName</responseElement>
 <responseElement key = "RetailPrice">txtPrice</responseElement>
 <responseElement key = "SalesAssociates">lstAssociate</responseElement>
 </responseElements>
-</AjaxGroup>
+</AjaxGroup> 
 
 </AjaxGroups>
 
@@ -74,19 +74,19 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 		</options>
 	</Element>
 	
-	<Element label = "Associate"  type = "UIDataList" Id = "lstHeaderAssociate"  textId="txthdrAss"  property ="salesMan.userId"  rendered = "Controller.isAssociateHeaderLevel"   externalise= "true">
+	<!-- <Element label = "Associate"  type = "UIDataList" Id = "lstHeaderAssociate"  textId="txthdrAss"  property ="salesMan.userId"  rendered = "Controller.isAssociateHeaderLevel"   externalise= "true">
 		<options populator =  "getAssociates"> 
 		</options>
-	</Element> 
+	</Element>  -->
 	
 	
 	
-<!-- 	<Element label = "Associate"  type = "UILookupText"  Id = "lstHeaderAssociate"  property ="salesMan.userId"  rendered = "Controller.isAssociateHeaderLevel" showLookupAsDialog="true" dialogId="dlghdrSalesMan"
+	<Element label = "Associate"  type = "UILookupText"  Id = "lstHeaderAssociate"  property ="salesMan.userId"  rendered = "Controller.isAssociateHeaderLevel" showLookupAsDialog="true" dialogId="dlghdrSalesMan"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" additionalInputControl = "lstInvDivision">
 	 <lookupType>user</lookupType>
 	 <height>300</height>
 	 <width>290</width>
-    </Element> -->
+    </Element>
 	
 	<Element label = ""  type = "UILabel" Id = "lblFree4"  rendered = "!Controller.isAssociateHeaderLevel"  showInPrevCol="true" style="bigTitle" value ="" />
 	<!--  <Element label = ""  type = "UILabel" Id = "lblCustTitle"   value ="" />  --> 
@@ -95,6 +95,20 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 
 	<Element label = "Name"  type = "UILookupDataList"  Id = "dtlistCustName"  textId="txtCustomerName"  isMandatory="true" property ="Customer.FullName"  >
 	 <lookupType>customer</lookupType>
+	 <SupplementaryFields>
+	     <Field>
+	        <property>phone</property>
+	        <control>txtPhone</control>
+	     </Field>
+	     <Field>
+	        <property>email</property>
+	        <control>txtEmail</control>
+	     </Field>
+	      <Field>
+	        <property>loyaltyPoint</property>
+	        <control>txtavailLoyaty</control>
+	     </Field>
+	 </SupplementaryFields>
 	 </Element>
 <!-- 	 <Element label = "Name"  type = "UILookupText"  Id = "txtCustomerName"  isMandatory="true" property ="Customer.FullName" showLookupAsDialog="true" dialogId="dlgComp"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
@@ -155,7 +169,8 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 <Element type = "UITableRow"  dataType = "com.rainbow.crm.sales.model.SalesLine" rendered = "!Object.getVoided">
 
 <Element type ="UITableCol" width = "10%"><Element label = ""  type = "UIText" Id = "txtCode" size  = "10" property ="Sku.Code" /> </Element>
-<Element type ="UITableCol" width = "20%"><Element label = ""  type = "UILookupText"  Id = "txtItName"  size  = "30" property ="Sku.Name" showLookupAsDialog="true" dialogId="dlgIt"
+<Element type ="UITableCol" width = "20%">
+<!-- <Element label = ""  type = "UILookupText"  Id = "txtItName"  size  = "30" property ="Sku.Name" showLookupAsDialog="true" dialogId="dlgIt"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>sku</lookupType>
 	 <height>300</height>
@@ -166,7 +181,18 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 	        <control>txtCode</control>
 	     </Field>
 	 </SupplementaryFields> 
+</Element> -->
+
+<Element label = ""  type = "UILookupDataList"  Id = "dtlListItName"  textId="txtItName"  isMandatory="true" property ="Sku.Name"  >
+	 <lookupType>sku</lookupType>
+	 <SupplementaryFields>
+	     <Field>
+	        <property>code</property>
+	        <control>txtCode</control>
+	     </Field>
+	 </SupplementaryFields> 
 </Element>
+
  </Element>
  <Element type ="UITableCol" rendered = "Controller.isAssociateLineLevel"  width = "16%">
  <Element label = ""  type = "UIList" Id = "lstAssociate"  property ="User.userId"  externalise= "true">
