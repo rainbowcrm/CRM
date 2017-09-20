@@ -52,7 +52,7 @@ body, div.topBar {
   padding: 3px !important; }
 
 input[type=checkbox].form-control, input[type=radio].form-control {
-  width: 25px; }
+  width: 15px; }
 
 thead {
   background-color: #282828;

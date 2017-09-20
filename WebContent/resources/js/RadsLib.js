@@ -173,14 +173,54 @@ function showLookupDialogWithAdditionalFields(id,curControl,additionalControl,ad
 	dialog.showModal();
 	
  }
+function populatesupplimentary (looupType,currentCtrl,dataListCtrlName,additionalDisplayFields)
+ {
+	var clkCell = getCurrentObjectIndex(currentCtrl);
+	var val = currentCtrl.value;
+	var opts = document.getElementById(dataListCtrlName).childNodes;
+	for (var i = 0; i < opts.length; i++) {
+		if (opts[i].value === val) {
+			var selectedValue = opts[i].innerHTML;
+			var splittedValue = selectedValue.split('|');
+			console.log(additionalDisplayFields);
+			var splittedControls = additionalDisplayFields;
+			if (currentCtrl.value != '') {
+				if (clkCell <= 0) {
+					//currentCtrl.value = splittedValue[0];
+					for (var i = 0; i < splittedControls.length; i++) {
+						document.getElementById(splittedControls[i]).value = splittedValue[i + 1];
+					}
 
-function getLookupWithAjax(lookupType, currentCtrl,dataListCtrlName,additionalFields)
+				} else {
+					//currentCtrl.value = splittedValue[0];
+					for (var i = 0; i < splittedControls.length; i++) {
+						console.log('splittedControls[i]='
+								+ splittedControls[i] + ':clkCell=' + clkCell);
+						document.getElementsByName(splittedControls[i])[clkCell].value = splittedValue[i + 1];
+					}
+
+				}
+				break;
+			}
+		}
+
+	}
+
+}
+function getLookupWithAjax(lookupType, currentCtrl,dataListCtrlName,additionalFields,additionalInputControl)
 {
 	var srValue = currentCtrl.value ;
-	console.log('additionalFields=' + additionalFields);
+	
 	
 	if(srValue.length  > 2) {
-	var requestStr = appURL + "rdscontroller?page=Lookup&returnAsJSON=true&lookupType=" + lookupType + "&additionalFields=" + additionalFields +  "&searchString="+srValue+"*" ;
+	var additionalInputVal = '';
+	if (additionalInputControl != 'null' &&  additionalInputControl != '') {
+		additionalInputVal = document.getElementById(additionalInputControl).value;
+		console.log('additionalInputVal=' + additionalInputVal);
+	}	
+		
+	var requestStr = appURL + "rdscontroller?page=Lookup&returnAsJSON=true&lookupType=" + lookupType 
+	+ "&additionalFields=" + additionalFields +  "&additionalParam=" + additionalInputVal   + "&searchString=*"+srValue+"*" ;
 	var index  = getCurrentObjectIndex(currentCtrl);
 	console.log( "index" + index) ;
 	
@@ -200,7 +240,7 @@ function getLookupWithAjax(lookupType, currentCtrl,dataListCtrlName,additionalFi
 		  var jsonElment = propArray[i];
 		  var value = jsonElment['value'];
 		  var key = jsonElment['key'];
-		  options += '<option key = "' + key +  '" value="'+value+'" />';
+		  options += '<option  value="'+value+'" />' + key + '</option>';
 	}
 	elem.innerHTML=  options;
 	console.log ('after' + elem.innerHTML) ;

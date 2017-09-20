@@ -33,7 +33,7 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
  <AjaxGroup service ="skuSearch">
 <requestElements event = "">
 <requestElement key = "Name">txtItName</requestElement>
-<requestElement key = "Code">txtCode</requestElement>
+ <requestElement key = "Code">txtCode</requestElement>
 <requestElement key = "Division">lstInvDivision</requestElement>
 </requestElements>
 <responseElements>
@@ -74,26 +74,26 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 		</options>
 	</Element>
 	
-	<!-- <Element label = "Associate"  type = "UIDataList" Id = "lstHeaderAssociate"  textId="txthdrAss"  property ="salesMan.userId"  rendered = "Controller.isAssociateHeaderLevel"   externalise= "true">
-		<options populator =  "getAssociates"> 
-		</options>
-	</Element>  -->
+	<Element label = "Associate"  type = "UILookupDataList" Id = "txtHeaderAssociate"  listId="lsthdrAss"  property ="salesMan.userId" 
+	 rendered = "Controller.isAssociateHeaderLevel" additionalInputControl = "lstInvDivision"  externalise= "true">
+		 <lookupType>user</lookupType>
+	</Element>  
 	
 	
 	
-	<Element label = "Associate"  type = "UILookupText"  Id = "lstHeaderAssociate"  property ="salesMan.userId"  rendered = "Controller.isAssociateHeaderLevel" showLookupAsDialog="true" dialogId="dlghdrSalesMan"
+<!-- 	<Element label = "Associate"  type = "UILookupText"  Id = "lstHeaderAssociate"  property ="salesMan.userId"  rendered = "Controller.isAssociateHeaderLevel" showLookupAsDialog="true" dialogId="dlghdrSalesMan"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" additionalInputControl = "lstInvDivision">
 	 <lookupType>user</lookupType>
 	 <height>300</height>
 	 <width>290</width>
     </Element>
-	
+	 -->
 	<Element label = ""  type = "UILabel" Id = "lblFree4"  rendered = "!Controller.isAssociateHeaderLevel"  showInPrevCol="true" style="bigTitle" value ="" />
 	<!--  <Element label = ""  type = "UILabel" Id = "lblCustTitle"   value ="" />  --> 
 	<Element label = "Customer_Phone"  type = "UIText" Id = "txtPhone"     property ="Customer.Phone" />
 	<Element label = "Email"  type = "UIText" Id = "txtEmail"   property ="Customer.Email" />
 
-	<Element label = "Name"  type = "UILookupDataList"  Id = "dtlistCustName"  textId="txtCustomerName"  isMandatory="true" property ="Customer.FullName"  >
+	<Element label = "Name"  type = "UILookupDataList"  Id = "txtCustomerName"  listId="lstlookCustomerName"  isMandatory="true" property ="Customer.FullName"  >
 	 <lookupType>customer</lookupType>
 	 <SupplementaryFields>
 	     <Field>
@@ -133,13 +133,13 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 	
 	
 	<Element caption = "New_Customer"  type = "UIButton" style="btn btn-primary" iconStyle="glyphicon glyphicon-plus"    Id = "btnNewCustomer" showInPrevCol ="true"  onClickJS = "createNewCustomer('newcustDL',this);"  />
+	
+	<Element label = "Ask_For_Feedback"  type = "UIBooleanCheckBox" Id = "txtBoolAskFeedBack" hiddenControlId= "hdnReferencible"   property ="referencible" />	
+
 	<Element type ="UIDialog" Id = "newcustDL" style= "widepopup" >
 	<Element type = "UIIFrame" src ="./rdscontroller?page=quickcustomeradd" style ="fullPageFrameStyle">
 	</Element>
 	</Element>
-	<Element label = "Ask_For_Feedback"  type = "UIBooleanCheckBox" Id = "txtBoolAskFeedBack" hiddenControlId= "hdnReferencible"   property ="referencible" />	
-
-	
 </Section>
 
 <Section type ="detailForSale">
@@ -183,7 +183,7 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 	 </SupplementaryFields> 
 </Element> -->
 
-<Element label = ""  type = "UILookupDataList"  Id = "dtlListItName"  textId="txtItName"  isMandatory="true" property ="Sku.Name"  >
+<Element label = ""  type = "UILookupDataList"  Id = "txtItName"  listId="dtlistItName"  isMandatory="true" property ="Sku.Name"  >
 	 <lookupType>sku</lookupType>
 	 <SupplementaryFields>
 	     <Field>
