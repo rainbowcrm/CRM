@@ -8,9 +8,16 @@ Controller = "com.rainbow.crm.user.controller.UserController">
 </Forwards>
 <IncludeJS>./scripts/user/User.js</IncludeJS>
 <AjaxGroups>
-
+<AjaxGroup service ="companySearchUsrCreate">
+<requestElements>
+<requestElement key = "companyName">txtCompany</requestElement>
+</requestElements>
+<responseElements>
+<responseElement key = "userNameSuffix" >lblsuffix</responseElement>
+</responseElements>
+</AjaxGroup>
 </AjaxGroups>
-
+<IncludeJS>./scripts/CRMGeneral.js</IncludeJS>
 <Elements>
 <UIForm Id ="cust" method = "POST" >
 <Section type ="topBar"></Section>
@@ -30,8 +37,7 @@ Controller = "com.rainbow.crm.user.controller.UserController">
 	<If check  = "Controller.isUpdateMode" >
 	<Element label = "User_Id"  type = "UILabel" Id = "txtCode" style ="bolded"   size="10" property ="UserId" />
 	</If>
-	<Element label = "Division"  type = "UILookupText"  Id = "txtDivis"  property ="Division.Name" showLookupAsDialog="true" dialogId="dlgComp"
-     dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
+	<Element label = "Division"  type = "UILookupDataList"  Id = "txtDivis"  listId="lsthdrAss" property ="Division.Name" showLookupAsDialog="true"  >
 	 <lookupType>division</lookupType>
 	 <height>300</height>
 	 <width>290</width>

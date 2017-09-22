@@ -17,7 +17,7 @@ Controller = "com.rainbow.crm.user.controller.UserController">
 </responseElements>
 </AjaxGroup>
 </AjaxGroups>
-
+<IncludeJS>./scripts/CRMGeneral.js</IncludeJS>
 <Elements>
 <UIForm Id ="cust" method = "POST" >
 <Section type ="topBar"></Section>

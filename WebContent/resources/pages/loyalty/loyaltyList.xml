@@ -35,11 +35,8 @@ Controller = "com.rainbow.crm.loyalty.controller.LoyaltyListController">
 <FilterNode>
    	<Element label = "Filter_Name"  type = "UIText" Id = "txtFilterName"  property ="FilterName" />
  </FilterNode>
-<Element label = "Division"  type = "UILookupText"  Id = "lstDivision"  property ="Division.Name" showLookupAsDialog="true" dialogId="dlgCompDiv"
-  dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
+<Element label = "Division"  type = "UILookupDataList"  Id = "lstDivision"  listId="lstlookupdvns" property ="Division.Name"   >
 	 <lookupType>division</lookupType>
-	 <height>300</height>
-	 <width>290</width>
 </Element>
 <FilterNode>
    	<Element label = "Customer"  type = "UIText" Id = "txtCustomer"  property ="customer.fullName" />

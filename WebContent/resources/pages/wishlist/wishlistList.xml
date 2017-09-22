@@ -44,11 +44,8 @@ Controller = "com.rainbow.crm.wishlist.controller.WishListListController">
    	<Element label = "Bill_No"  type = "UIText" Id = "txtBillNo"  property ="billNumber" />
 </FilterNode>
 <FilterNode>
-<Element label = "Division"  type = "UILookupText"  Id = "txtDivision"  property ="Division.Name" showLookupAsDialog="true" dialogId="dlgComp"
-  dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
+<Element label = "Division"  type = "UILookupDataList"  Id = "lstDivision"  listId="lstlookupdvns" property ="Division.Name"   >
 	 <lookupType>division</lookupType>
-	 <height>300</height>
-	 <width>290</width>
 </Element>
 </FilterNode>
 <FilterNode>

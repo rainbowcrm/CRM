@@ -93,7 +93,7 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 	<Element label = "Customer_Phone"  type = "UIText" Id = "txtPhone"     property ="Customer.Phone" />
 	<Element label = "Email"  type = "UIText" Id = "txtEmail"   property ="Customer.Email" />
 
-	<Element label = "Name"  type = "UILookupDataList"  Id = "txtCustomerName"  listId="lstlookCustomerName"  isMandatory="true" property ="Customer.FullName"  >
+<!-- 	<Element label = "Name"  type = "UILookupDataList"  Id = "txtCustomerName"  listId="lstlookCustomerName"  isMandatory="true" property ="Customer.FullName"  >
 	 <lookupType>customer</lookupType>
 	 <SupplementaryFields>
 	     <Field>
@@ -109,8 +109,8 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 	        <control>txtavailLoyaty</control>
 	     </Field>
 	 </SupplementaryFields>
-	 </Element>
-<!-- 	 <Element label = "Name"  type = "UILookupText"  Id = "txtCustomerName"  isMandatory="true" property ="Customer.FullName" showLookupAsDialog="true" dialogId="dlgComp"
+	 </Element> -->
+	 <Element label = "Name"  type = "UILookupText"  Id = "txtCustomerName"  isMandatory="true" property ="Customer.FullName" showLookupAsDialog="true" dialogId="dlgComp"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>customer</lookupType>
 	 <height>300</height>
@@ -129,7 +129,7 @@ Controller = "com.rainbow.crm.sales.controller.SalesController">
 	        <control>txtavailLoyaty</control>
 	     </Field>
 	 </SupplementaryFields>
-	</Element> -->
+	</Element>
 	
 	
 	<Element caption = "New_Customer"  type = "UIButton" style="btn btn-primary" iconStyle="glyphicon glyphicon-plus"    Id = "btnNewCustomer" showInPrevCol ="true"  onClickJS = "createNewCustomer('newcustDL',this);"  />

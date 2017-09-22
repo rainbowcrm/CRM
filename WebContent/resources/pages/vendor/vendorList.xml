@@ -44,7 +44,7 @@ Controller = "com.rainbow.crm.vendor.controller.VendorListController">
    	<Element label = "Code"  type = "UIText" Id = "txtUserID"  property ="Code" />
  </FilterNode>
 <FilterNode>
-   	<Element label = "Name"  type = "UILookupText"  Id = "txtName"  property ="Name" showLookupAsDialog="true" dialogId="dlgComp"
+   	<Element label = "Name"  type = "UILookupDataList"  Id = "txtName"  listId="lsthdrAss"   property ="Name" showLookupAsDialog="true" dialogId="dlgComp"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>vendor</lookupType>
 	 <height>300</height>

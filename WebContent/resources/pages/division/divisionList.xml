@@ -44,11 +44,8 @@ Controller = "com.rainbow.crm.division.controller.DivisionListController">
    	<Element label = "Division_Code"  type = "UIText" Id = "txtCode"  property ="Code" />
  </FilterNode>
 <FilterNode>
-<Element label = "Division"  type = "UILookupText"  Id = "txtDivis"  property ="Name" showLookupAsDialog="true" dialogId="dlgComp"
-  dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
+<Element label = "Division"  type = "UILookupDataList"  Id = "lstDivision"  listId="lstlookupdvns" property ="Division.Name"   >
 	 <lookupType>division</lookupType>
-	 <height>300</height>
-	 <width>290</width>
 </Element>
 </FilterNode>
  <FilterNode>
