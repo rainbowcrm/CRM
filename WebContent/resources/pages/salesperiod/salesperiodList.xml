@@ -38,7 +38,7 @@ Controller = "com.rainbow.crm.salesperiod.controller.SalesPeriodListController">
    	<Element label = "Filter_Name"  type = "UIText" Id = "txtFilterName"  property ="FilterName" />
 </FilterNode>
 <FilterNode>
-<Element label = "Division"  type = "UILookupText"  Id = "txtDivision"  property ="Division.Name" showLookupAsDialog="true" dialogId="dlgComp"
+<Element label = "Division"   type = "UILookupDataList" listId="lsthdrDvi"  Id = "txtDivision"  property ="Division.Name" showLookupAsDialog="true" dialogId="dlgComp"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>division</lookupType>
 	 <height>300</height>

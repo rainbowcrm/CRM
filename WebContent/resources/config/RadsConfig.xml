@@ -279,7 +279,7 @@
   <Element type = "UITable" rows = "1" cols = "3">
   <Element type = "UITableRow">
   <Element type = "UITableCol" width ="13%"> <Element label="" type= "UIImage" height = "35" width ="180" src= "./resources/images/logo1.gif" /> </Element>
-  <Element type = "UITableCol" width ="25%"> <Element label="" type= "UILabel"  width ="33%" generatedValue="Controller.getCompanyName" style="topBar"/> </Element>
+  <Element type = "UITableCol" width ="25%"> <Element label="" type= "UILabel"  width ="33%" Id="compnamespan" generatedValue="Controller.getCompanyName" style="topBar"/> </Element>
   <Element type = "UITableCol" width ="50%" align ="center"></Element>
   <Element type = "UITableCol" width ="25%" align="right"> <Element label="" type= "UIButton" caption ="Logout" style="btn" iconStyle="glyphicon glyphicon-off"   width ="33%" onClickJS="logout();"/> </Element>
   </Element>

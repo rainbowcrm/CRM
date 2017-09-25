@@ -41,11 +41,9 @@ Controller = "com.rainbow.crm.territory.controller.TerritoryListController">
    	<Element label = "Territory"  type = "UIText" Id = "txtTerritory"  property ="billNumber" />
 </FilterNode>
 <FilterNode>
-<Element label = "Division"  type = "UILookupText"  Id = "txtDivision"  property ="Division.Name" showLookupAsDialog="true" dialogId="dlgComp"
-  dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
+<Element label = "Division"  type = "UILookupDataList"  Id = "txtDivision"  property ="Division.Name" listId="lstdivNames"  >
 	 <lookupType>division</lookupType>
-	 <height>300</height>
-	 <width>290</width>
+
 </Element>
 </FilterNode>
 </FilterSection>

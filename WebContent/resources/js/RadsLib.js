@@ -217,7 +217,8 @@ function getLookupWithAjax(lookupType, currentCtrl,dataListCtrlName,additionalFi
 	if (additionalInputControl != 'null' &&  additionalInputControl != '') {
 		additionalInputVal = document.getElementById(additionalInputControl).value;
 		console.log('additionalInputVal=' + additionalInputVal);
-	}	
+	}
+	currentCtrl.autocomplete ="on";
 		
 	var requestStr = appURL + "rdscontroller?page=Lookup&returnAsJSON=true&lookupType=" + lookupType 
 	+ "&additionalFields=" + additionalFields +  "&additionalParam=" + additionalInputVal   + "&searchString=*"+srValue+"*" ;
@@ -236,11 +237,16 @@ function getLookupWithAjax(lookupType, currentCtrl,dataListCtrlName,additionalFi
 	 var options = '';
 	var jsonResponse =  JSON.parse(reqObject.responseText) ;
 	var propArray =jsonResponse['lookupValues'] ;
+	var found = false; 
 	for (var i in propArray) {
 		  var jsonElment = propArray[i];
 		  var value = jsonElment['value'];
 		  var key = jsonElment['key'];
 		  options += '<option  value="'+value+'" />' + key + '</option>';
+		  found =true ;
+	}
+	if (found == false) {
+		currentCtrl.autocomplete ="off";
 	}
 	elem.innerHTML=  options;
 	console.log ('after' + elem.innerHTML) ;

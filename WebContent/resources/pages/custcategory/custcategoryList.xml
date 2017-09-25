@@ -42,11 +42,8 @@ Controller = "com.rainbow.crm.custcategory.controller.CustCategoryListController
    	<Element label = "Name"  type = "UIText" Id = "txtCategory"  property ="Name" />
  </FilterNode>
 <FilterNode>
-<Element label = "Division"  type = "UILookupText"  Id = "txtDivision"  property ="Division.Name" showLookupAsDialog="true" dialogId="dlgComp"
-  dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
+<Element label = "Division"  type = "UILookupDataList"  Id = "txtDivision"  property ="Division.Name" >
 	 <lookupType>division</lookupType>
-	 <height>300</height>
-	 <width>290</width>
 </Element>
 </FilterNode>
 </FilterSection>

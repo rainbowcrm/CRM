@@ -22,14 +22,13 @@ Controller = "com.rainbow.crm.item.controller.SkuController">
 	<Element label = "Sku_Code"  type = "UIText" Id = "txtCode"  isMandatory="true" size="10" property ="Code" />
 	<Element label = "Barcode"  type = "UIText" Id = "txtBarcode"  isMandatory="true" size="25" property ="Barcode" />
 	<Element label = "Sku_Name"  type = "UIText" Id = "txtName"  isMandatory="true" size="30" property ="Name" />
-	<Element label = "Product"  type = "UILookupText"  Id = "txtProduct" isMandatory="true"  property ="Product.Name" showLookupAsDialog="true" dialogId="dlgProd"
- 	 dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
+	<Element label = "Product"  type = "UILookupDataList"  Id = "txtProduct" isMandatory="true"  property ="Product.Name"  listId="lstprodnames" >
 	 <lookupType>product</lookupType>
 	 <height>300</height>
 	 <width>290</width>
 	</Element>
-	<Element label = "Item"  type = "UILookupText"  Id = "txtItNM" isMandatory="true"  property ="Item.Name" showLookupAsDialog="true" dialogId="dlgitPNM"
- 	 dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
+	
+	<Element label = "Item"  type = "UILookupDataList"  Id = "txtItNM" isMandatory="true"  property ="Item.Name" listId="lstitemnames"  >
 	 <lookupType>item</lookupType>
 	 <height>300</height>
 	 <width>290</width>

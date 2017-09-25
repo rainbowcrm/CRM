@@ -39,7 +39,7 @@ Controller = "com.rainbow.crm.salesportfolio.controller.SalesPortfolioListContro
    	<Element label = "Filter_Name"  type = "UIText" Id = "txtFilterName"  property ="FilterName" />
 </FilterNode>
 <FilterNode>
-<Element label = "Division"  type = "UILookupText"  Id = "txtDivision"  property ="Division.Name" showLookupAsDialog="true" dialogId="dlgComp"
+<Element label = "Division"  type = "UILookupDataList"  listId="lstDivlkps"  Id = "txtDivision"  property ="Division.Name" showLookupAsDialog="true" dialogId="dlgComp"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>division</lookupType>
 	 <height>300</height>
@@ -47,7 +47,7 @@ Controller = "com.rainbow.crm.salesportfolio.controller.SalesPortfolioListContro
 </Element>
 </FilterNode>
 <FilterNode>
-<Element label = "Associate"  type = "UILookupText"  Id = "txtUser"  size  = "40" property ="User.id" showLookupAsDialog="true" dialogId="dlgIt"
+<Element label = "Associate"  type = "UILookupDataList"  listId="lstDivusrs"   Id = "txtUser"  size  = "40" property ="User.id" showLookupAsDialog="true" dialogId="dlgIt"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>user</lookupType>
 	 <height>300</height>

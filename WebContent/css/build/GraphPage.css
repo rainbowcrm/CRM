@@ -54,6 +54,9 @@ body, div.topBar {
 input[type=checkbox].form-control, input[type=radio].form-control {
   width: 15px; }
 
+input.fiftyper {
+  width: 50%; }
+
 thead {
   background-color: #282828;
   color: white;
