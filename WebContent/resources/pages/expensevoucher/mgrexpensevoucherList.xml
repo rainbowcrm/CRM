@@ -44,7 +44,7 @@ Controller = "com.rainbow.crm.expensevoucher.controller.MgrExpenseVoucherListCon
    	<Element label = "Voucher_No"  type = "UIText" Id = "txtBillNo"  property ="billNumber" />
 </FilterNode>
 <FilterNode>
-<Element label = "Division"  type = "UILookupText"  Id = "txtDivision"  property ="Division.Name" showLookupAsDialog="true" dialogId="dlgComp"
+<Element label = "Division"  type = "UILookupDataList" listId="lsDivList"  Id = "txtDivision"  property ="Division.Name" showLookupAsDialog="true" dialogId="dlgComp"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>division</lookupType>
 	 <height>300</height>
@@ -52,7 +52,7 @@ Controller = "com.rainbow.crm.expensevoucher.controller.MgrExpenseVoucherListCon
 </Element>
 </FilterNode>
 <FilterNode>
-   	<Element label = "User"  type = "UILookupText"  Id = "txtFilSalesAsso"  property ="salesAssoicate.userId" showLookupAsDialog="true" dialogId="dlgUser"
+   	<Element label = "User"  type = "UILookupDataList" listId="lstAssocLkpList"  Id = "txtFilSalesAsso"  property ="salesAssoicate.userId" showLookupAsDialog="true" dialogId="dlgUser"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>user</lookupType>
 	 <height>300</height>

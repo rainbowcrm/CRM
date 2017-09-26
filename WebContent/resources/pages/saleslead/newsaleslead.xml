@@ -67,7 +67,7 @@ Controller = "com.rainbow.crm.saleslead.controller.SalesLeadController">
 
 	<Element label = "Doc_No"  type = "UIText" Id = "txtDocNo"  isMandatory="true"  readonly="true" property ="docNumber" />
 	<Element label = "Date"  type = "UIDate" Id = "txtwishListDate" isMandatory="true"  property ="releasedDate" />
-	<Element label = "Sales Associate"  type = "UILookupText"  Id = "txtUser"  property ="salesAssociate" showLookupAsDialog="true" dialogId="dlgIt"
+	<Element label = "Sales Associate"   type = "UILookupDataList" listId="lsthdrAss"   Id = "txtUser"  property ="salesAssociate" showLookupAsDialog="true" dialogId="dlgIt"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" additionalInputControl = "lstInvDivision">
 	 <lookupType>user</lookupType>
 	 <height>300</height>
@@ -75,7 +75,7 @@ Controller = "com.rainbow.crm.saleslead.controller.SalesLeadController">
 	</Element>
 	<Element label = "Ref_No"  type = "UIText" Id = "txtRefNo"   property ="refNo" />
 	<Element label = "Ref_Date"  type = "UIDate" Id = "txtrefDate"   property ="refDate" />
-	<Element label = "Referred_By"  type = "UILookupText"  Id = "txtRefera"  property ="referall.identifierName" showLookupAsDialog="true" dialogId="dlgREFerral"
+	<Element label = "Referred_By"   type = "UILookupDataList" listId="lsthdrReferences"  Id = "txtRefera"  property ="referall.identifierName" showLookupAsDialog="true" dialogId="dlgREFerral"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" additionalInputControl = "lstInvDivision">
 	 <lookupType>contact</lookupType>
 	 <height>300</height>
@@ -138,7 +138,7 @@ Controller = "com.rainbow.crm.saleslead.controller.SalesLeadController">
 <Element type = "UITableRow"  dataType = "com.rainbow.crm.saleslead.model.SalesLeadLine" rendered = "!Object.getVoided">
 
 <Element type ="UITableCol" width = "10%"><Element label = ""  type = "UIText" Id = "txtCode" size  = "10" property ="Sku.Code" /> </Element>
-<Element type ="UITableCol" width = "23%"><Element label = ""  type = "UILookupText"  Id = "txtItName"  size  = "30" property ="Sku.Name" showLookupAsDialog="true" dialogId="dlgItSKU"
+<Element type ="UITableCol" width = "23%"><Element label = ""   type = "UILookupDataList" listId="lsthdrItem"   Id = "txtItName"  size  = "30" property ="Sku.Name" showLookupAsDialog="true" dialogId="dlgItSKU"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>sku</lookupType>
 	 <height>300</height>

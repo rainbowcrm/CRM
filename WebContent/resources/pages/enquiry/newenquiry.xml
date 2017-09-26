@@ -123,7 +123,7 @@ Controller = "com.rainbow.crm.enquiry.controller.EnquiryController">
 <Element type = "UITableRow"  dataType = "com.rainbow.crm.enquiry.model.EnquiryLine" rendered = "!Object.isDeleted">
 
 <Element type ="UITableCol" width = "10%"><Element label = ""  type = "UIText" Id = "txtCode" size  = "10" property ="Sku.Code" /> </Element>
-<Element type ="UITableCol" width = "25%"><Element label = ""  type = "UILookupText"  Id = "txtItName"  size  = "30" property ="Sku.Name" showLookupAsDialog="true" dialogId="dlgItSKU"
+<Element type ="UITableCol" width = "25%"><Element label = ""   type = "UILookupDataList" listId="lstitemlkps"  Id = "txtItName"  size  = "30" property ="Sku.Name" showLookupAsDialog="true" dialogId="dlgItSKU"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>sku</lookupType>
 	 <height>300</height>
@@ -151,7 +151,7 @@ Controller = "com.rainbow.crm.enquiry.controller.EnquiryController">
 <Section type ="footer">
 <Element label = "Contact_Phone"  type = "UIText" Id = "txtContactPhone"   property ="contact.Phone" />
 	<Element label = "Contact_Email"  type = "UIText" Id = "txtContactEmail"   property ="contact.Email" />
-	 <Element label = "Contact_Name"  type = "UILookupText"  Id = "txtContactName"  property ="contact.FullName" showLookupAsDialog="true" dialogId="dlgContact"
+	 <Element label = "Contact_Name"   type = "UILookupDataList" listId="lsthdrcontacts"  Id = "txtContactName"  property ="contact.FullName" showLookupAsDialog="true" dialogId="dlgContact"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>contact</lookupType>
 	 <height>300</height>
@@ -168,7 +168,7 @@ Controller = "com.rainbow.crm.enquiry.controller.EnquiryController">
 	 </SupplementaryFields>
 	</Element>
 	
-	<Element label = "Sales_Associate"  type = "UILookupText" Id = "txtLName"  size="30" property ="salesAssociate.userId"  showLookupAsDialog="true" dialogId="dlgUser"
+	<Element label = "Sales_Associate"  type = "UILookupDataList" listId="lsthdrAss"  Id = "txtLName"  size="30" property ="salesAssociate.userId"  showLookupAsDialog="true" dialogId="dlgUser"
  	dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" additionalInputControl = "lstInvDivision" >
  	<lookupType>user</lookupType>
 	 <height>300</height>

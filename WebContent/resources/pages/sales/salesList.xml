@@ -44,7 +44,7 @@ Controller = "com.rainbow.crm.sales.controller.SalesListController">
    	<Element label = "Bill_No"  type = "UIText" Id = "txtBillNo"  property ="billNumber" />
 </FilterNode>
 <FilterNode>
-<Element label = "Division"  type = "UILookupText"  Id = "txtDivision"  property ="Division.Name" showLookupAsDialog="true" dialogId="dlgComp"
+<Element label = "Division"  type = "UILookupDataList" listId="lsDivList" Id = "txtDivision"  property ="Division.Name" showLookupAsDialog="true" dialogId="dlgComp"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>division</lookupType>
 	 <height>300</height>

@@ -41,7 +41,7 @@ Controller = "com.rainbow.crm.promotion.controller.PromotionController">
 	</options>
 	</Element>
 	
-	<Element label = "Customer_Category"  type = "UILookupText"  Id = "txtCustCategory"  property ="custCategory.name" showLookupAsDialog="true" dialogId="dlgIt"
+	<Element label = "Customer_Category"  type = "UILookupDataList" listId="lstcustCatglkps"  Id = "txtCustCategory"  property ="custCategory.name" showLookupAsDialog="true" dialogId="dlgIt"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" additionalInputControl = "lstInvDivision">
 	 <lookupType>custcategory</lookupType>
 	 <height>300</height>

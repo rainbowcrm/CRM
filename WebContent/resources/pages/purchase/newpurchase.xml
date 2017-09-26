@@ -45,7 +45,7 @@ Controller = "com.rainbow.crm.purchase.controller.PurchaseController">
 	<Element label = "Bill_No"  type = "UIText" Id = "txtBillNo"  isMandatory="true"  property ="billNumber" />
 	<Element label = "Doc_No"  type = "UIText" Id = "txtDocNo" isMandatory="true" readonly="true"  property ="docNumber" />
 	<Element label = "Date"  type = "UIDate" Id = "txtDate" isMandatory="true"  property ="purchaseDate" />
-	 <Element label = "Vendor"  type = "UILookupText"  Id = "txtVendorName"  isMandatory="true" property ="Vendor.Name" showLookupAsDialog="true" dialogId="dlgComp"
+	 <Element label = "Vendor"  type = "UILookupDataList" listId="lstvendlkps"  Id = "txtVendorName"  isMandatory="true" property ="Vendor.Name" showLookupAsDialog="true" dialogId="dlgComp"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>vendor</lookupType>
 	 <height>300</height>
@@ -72,7 +72,7 @@ Controller = "com.rainbow.crm.purchase.controller.PurchaseController">
 <Element type = "UITableRow"  dataType = "com.rainbow.crm.purchase.model.PurchaseLine" rendered = "!Object.getVoided">
 
 <Element type ="UITableCol" width = "10%"><Element label = ""  type = "UIText" Id = "txtCode" size  = "10" property ="Sku.Code" /> </Element>
-<Element type ="UITableCol" width = "25%"><Element label = ""  type = "UILookupText"  Id = "txtItName"  size  = "40" property ="Sku.Name" showLookupAsDialog="true" dialogId="dlgIt"
+<Element type ="UITableCol" width = "25%"><Element label = ""  type = "UILookupDataList" listId="lstItNames"   Id = "txtItName"  size  = "40" property ="Sku.Name" showLookupAsDialog="true" dialogId="dlgIt"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>sku</lookupType>
 	 <height>300</height>

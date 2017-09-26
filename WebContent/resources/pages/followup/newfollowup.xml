@@ -23,7 +23,7 @@ Controller = "com.rainbow.crm.followup.controller.FollowupController">
 	<options populator =  "getAllDivisions"> 
 	</options>
 	</Element>
-	<Element label = "Sales_Lead"  type = "UILookupText" Id = "txtName"  isMandatory="true" size="30" property ="Lead.docNumber" showLookupAsDialog="true" dialogId="dlgComp"
+	<Element label = "Sales_Lead"   type = "UILookupDataList" listId="lsthSalesLead" Id = "txtName"  isMandatory="true" size="30" property ="Lead.docNumber" showLookupAsDialog="true" dialogId="dlgComp"
  	dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" additionalInputControl = "lstInvDivision" >
   	<lookupType>saleslead</lookupType>
 	 <height>300</height>
@@ -35,7 +35,7 @@ Controller = "com.rainbow.crm.followup.controller.FollowupController">
 	     </Field>
 	 </SupplementaryFields>
   	</Element>
-	<Element label = "Sales_Associate"  type = "UILookupText" Id = "txtLName"  isMandatory="true" size="30" property ="salesAssociate"  showLookupAsDialog="true" dialogId="dlgUser"
+	<Element label = "Sales_Associate"   type = "UILookupDataList" listId="lsthdrAss" Id = "txtLName"  isMandatory="true" size="30" property ="salesAssociate"  showLookupAsDialog="true" dialogId="dlgUser"
  	dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
  	<lookupType>user</lookupType>
 	 <height>300</height>

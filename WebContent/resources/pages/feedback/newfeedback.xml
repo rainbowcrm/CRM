@@ -46,7 +46,7 @@ Controller = "com.rainbow.crm.feedback.controller.FeedBackController">
 	</Element>
 	<Element label = "Doc_No"  type = "UIText" Id = "txtDocNo"  isMandatory="true"  readonly="true" property ="docNumber" />
 	<Element label = "Date"  type = "UIDate" Id = "txtwishListDate" isMandatory="true"  property ="feedBackDate" />
-	<Element label = "Captured_By"  type = "UILookupText"  Id = "txtCaptUser"  property ="capturedBy.userId" showLookupAsDialog="true" dialogId="dlgIt"
+	<Element label = "Captured_By"   type = "UILookupDataList" listId="lsthdrAss"  Id = "txtCaptUser"  property ="capturedBy.userId" showLookupAsDialog="true" dialogId="dlgIt"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" additionalInputControl = "lstInvDivision">
 	 <lookupType>user</lookupType>
 	 <height>300</height>
@@ -57,7 +57,7 @@ Controller = "com.rainbow.crm.feedback.controller.FeedBackController">
 	</options>
 	</Element>
 	
-	<Element label = "Sales_Bill"  type = "UILookupText"  Id = "txtSale"  isMandatory="true" property ="Sales.BillNumber" showLookupAsDialog="true" dialogId="dlgComp"
+	<Element label = "Sales_Bill"   type = "UILookupDataList" listId="lsthdrSalesBilld"  Id = "txtSale"  isMandatory="true" property ="Sales.BillNumber" showLookupAsDialog="true" dialogId="dlgComp"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" additionalInputControl = "lstInvDivision" >
 	 <lookupType>sales</lookupType>
 	 <height>300</height>

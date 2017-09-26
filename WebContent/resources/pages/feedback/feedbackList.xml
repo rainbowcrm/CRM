@@ -48,7 +48,7 @@ Controller = "com.rainbow.crm.feedback.controller.FeedBackListController">
    	<Element label = "Sales_Bill"  type = "UIText" Id = "txtSalesBill"  property ="Sales.billNumber" />
 </FilterNode>
 <FilterNode>
-<Element label = "Division"  type = "UILookupText"  Id = "txtDivision"  property ="Division.Name" showLookupAsDialog="true" dialogId="dlgComp"
+<Element label = "Division"   type = "UILookupDataList" listId="lsthdrDivlist"   Id = "txtDivision"  property ="Division.Name" showLookupAsDialog="true" dialogId="dlgComp"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>division</lookupType>
 	 <height>300</height>

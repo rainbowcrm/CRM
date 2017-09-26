@@ -24,7 +24,7 @@ Controller = "com.rainbow.crm.sales.controller.SalesTrendController">
 	 </Element>
 	 </Element>
 	  <Element type ="UITableCol">
-	 <Element label = "Product"  type = "UILookupText"  Id = "txtProduct" isMandatory="true"  property ="Product.Name" showLookupAsDialog="true" dialogId="dlgProd"
+	 <Element label = "Product"  type = "UILookupDataList" listId="lstProdList"   Id = "txtProduct" isMandatory="true"  property ="Product.Name" showLookupAsDialog="true" dialogId="dlgProd"
  	 dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>product</lookupType>
 	 <height>300</height>

@@ -67,7 +67,7 @@ Controller = "com.rainbow.crm.corpsalesperiod.controller.CorpSalesPeriodControll
 <Element type = "UITableRow"  dataType = "com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriodLine" rendered = "!Object.getVoided">
 
 <Element type ="UITableCol" width = "10%"><Element label = ""  type = "UIText" Id = "txtCode" size  = "10" property ="Item.Code" /> </Element>
-<Element type ="UITableCol" width = "25%"><Element label = ""  type = "UILookupText"  Id = "txtItName"  size  = "35" property ="Item.Name" showLookupAsDialog="true" dialogId="dlgIt"
+<Element type ="UITableCol" width = "25%"><Element label = ""  type = "UILookupDataList" listId="lsthdritemslp"  Id = "txtItName"  size  = "35" property ="Item.Name" showLookupAsDialog="true" dialogId="dlgIt"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>item</lookupType>
 	 <height>300</height>
@@ -104,7 +104,7 @@ Controller = "com.rainbow.crm.corpsalesperiod.controller.CorpSalesPeriodControll
 <Element type = "UITableRow"  dataType = "com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriodDivision" rendered = "!Object.isVoided">
 
 <Element type ="UITableCol" width = "25%">
-<Element label = ""  type = "UILookupText"  Id = "txtDivisionName"  size  = "35" property ="Division.Name" showLookupAsDialog="true" dialogId="dlgBrandIt"
+<Element label = "" type = "UILookupDataList" listId="lsthDivNamelkps"  Id = "txtDivisionName"  size  = "35" property ="Division.Name" showLookupAsDialog="true" dialogId="dlgBrandIt"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>division</lookupType>
 	 <height>300</height>
@@ -143,7 +143,7 @@ Controller = "com.rainbow.crm.corpsalesperiod.controller.CorpSalesPeriodControll
 <Element type = "UITableRow"  dataType = "com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriodBrand" rendered = "!Object.isVoided">
 
 <Element type ="UITableCol" width = "25%">
-<Element label = ""  type = "UILookupText"  Id = "txtBrandName"  size  = "35" property ="Brand.Name" showLookupAsDialog="true" dialogId="dlgBrandIt"
+<Element label = ""  type = "UILookupDataList" listId="lsthdrBrandlkps"   Id = "txtBrandName"  size  = "35" property ="Brand.Name" showLookupAsDialog="true" dialogId="dlgBrandIt"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>brand</lookupType>
 	 <height>300</height>
@@ -182,7 +182,7 @@ Controller = "com.rainbow.crm.corpsalesperiod.controller.CorpSalesPeriodControll
 <Element type = "UITableRow"  dataType = "com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriodCategory" rendered = "!Object.isVoided">
 
 <Element type ="UITableCol" width = "25%">
-<Element label = ""  type = "UILookupText"  Id = "txtCategoryName"  size  = "35" property ="Category.Name" showLookupAsDialog="true" dialogId="dlgCategIt"
+<Element label = ""  type = "UILookupDataList" listId="lsthdrCatgNames"  Id = "txtCategoryName"  size  = "35" property ="Category.Name" showLookupAsDialog="true" dialogId="dlgCategIt"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>category</lookupType>
 	 <height>300</height>
@@ -219,7 +219,7 @@ Controller = "com.rainbow.crm.corpsalesperiod.controller.CorpSalesPeriodControll
 <Element type = "UITableRow"  dataType = "com.rainbow.crm.corpsalesperiod.model.CorpSalesPeriodProduct" rendered = "!Object.isVoided">
 
 <Element type ="UITableCol" width = "25%">
-<Element label = ""  type = "UILookupText"  Id = "txtProdName"  size  = "35" property ="Product.Name" showLookupAsDialog="true" dialogId="dlgProdIt"
+<Element label = ""  type = "UILookupDataList" listId="lsthdrPrdctNames"  Id = "txtProdName"  size  = "35" property ="Product.Name" showLookupAsDialog="true" dialogId="dlgProdIt"
   dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" >
 	 <lookupType>product</lookupType>
 	 <height>300</height>

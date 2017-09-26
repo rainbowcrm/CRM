@@ -26,7 +26,7 @@ Controller = "com.rainbow.crm.expensevoucher.controller.ExpenseVoucherController
 	<options populator =  "getAllDivisions"> 
 	</options>
 	</Element>
-	<Element label = "Associate"  type = "UILookupText"  Id = "txtAssociate"  size  = "20" property ="salesAssoicate.userId" showLookupAsDialog="true" dialogId="dlgslsAss"
+	<Element label = "Associate"   type = "UILookupDataList" listId="lsthdrAss"  Id = "txtAssociate"  size  = "20" property ="salesAssoicate.userId" showLookupAsDialog="true" dialogId="dlgslsAss"
 	  dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle"  additionalInputControl = "lstInvDivision" >
 		 <lookupType>user</lookupType>
 		 <height>300</height>

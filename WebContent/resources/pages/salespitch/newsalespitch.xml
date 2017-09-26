@@ -33,7 +33,7 @@ Controller = "com.rainbow.crm.salespitch.controller.SalespitchController">
 	<options populator =  "getAllDivisions"> 
 	</options>
 	</Element>
-	<Element label = "Sales_Associate"  type = "UILookupText" Id = "txtLName"  isMandatory="true" size="30" property ="salesAssociate.userId"  showLookupAsDialog="true" dialogId="dlgUser"
+	<Element label = "Sales_Associate"   type = "UILookupDataList" listId="lsthdrAss" Id = "txtLName"  isMandatory="true" size="30" property ="salesAssociate.userId"  showLookupAsDialog="true" dialogId="dlgUser"
  	dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle" additionalInputControl = "lstInvDivision" >
  	<lookupType>user</lookupType>
 	 <height>300</height>
@@ -48,7 +48,7 @@ Controller = "com.rainbow.crm.salespitch.controller.SalespitchController">
 		</options>
 	</Element>
 	<Element label = "Date"  type = "UIDate" Id = "txtDT"   property ="pitchDate" />
-	<Element label = "Item"  type = "UILookupText" Id = "txtITNearLName"   size="30" property ="Item.name"  showLookupAsDialog="true" dialogId="dlgNearItem"
+	<Element label = "Item"   type = "UILookupDataList" listId="lsthdritemlps"  Id = "txtITNearLName"   size="30" property ="Item.name"  showLookupAsDialog="true" dialogId="dlgNearItem"
  	dialogStyle ="dialogStyle" frameStyle="lookupFrameStyle"  >
  	<lookupType>item</lookupType>
 	 <height>300</height>
