@@ -15,6 +15,7 @@ import { ExpensesAddPage } from '../expenses';
 import { FollowUpAddPage } from '../follow-up';
 import { EnquiryAddPage } from '../enquiry';
 import { ProductsList } from '../products-faq';
+import { AppointemntHomePage } from '../appointments';
 import { RegTokenRequest, LogoutRequest, Token } from './home.model';
 import { Storage } from '@ionic/storage';
 
@@ -32,12 +33,13 @@ import { Storage } from '@ionic/storage';
 export class HomePage {
   private rootTitle = "Menu";
   private isRoot;
-  private rootMenus = ["Item Search","Customer Management","Contacts","Alerts", "Wishlist", "Sales Leads",
+  private rootMenus = ["Item Search", "Appointments","Customer Management","Contacts","Alerts", "Wishlist", "Sales Leads",
                        "Discussions", "Expense Vouchers", "Follow Up", "Enquiry", "Products FAQ"];
   private submenuList;
   private menuTitle = "Menu";
   private subMenus = {
                     "Item Search":ItemSearch,
+                    "Appointments": AppointemntHomePage,
                     "Customer Management":CustomerHomePage,
                     "Contacts":ContactHomePage,
                     "Wishlist": WishListPage,

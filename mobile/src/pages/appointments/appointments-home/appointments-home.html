@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+     <ion-buttons start>
+      <button ion-button icon-only (click)="goHome()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+     </ion-buttons>
+    <ion-title>Appointments</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+ <ion-card *ngFor="let appointment of appointments" (click)="navigateToDetails(appointment)">
+
+  <ion-item>
+    <h2>{{appointment.PartyNameWithType}}</h2>
+    <p *ngIf="appointment.Deleted=='true'">Deleted</p>
+    <p>{{appointment.Description}}</p>
+  </ion-item>
+
+
+  <ion-card-content>
+    <div><strong>Doc Number:</strong>{{appointment.DocNo}}</div>
+    <div *ngIf="appointment.Template"><strong>Template:</strong>{{appointment.Template}}</div>
+    <div><strong>Date:</strong>{{appointment.ApptDate}}</div>
+    <div><strong>Status:</strong>{{getApptStatus(appointment.Status.Code)}}</div>
+  </ion-card-content>
+
+</ion-card>
+ <ion-infinite-scroll (ionInfinite)="doSearchMoreAppointments($event)" *ngIf="fetchedResults < numberOfResults" >
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
+</ion-content>

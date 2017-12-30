@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from "@angular/common/http";
 
 import { PSApp } from './app.component';
 import { LoginModule } from '../pages/login/login.module';
@@ -14,6 +16,7 @@ import { DiscussionModule } from '../pages/discussions/discussion.module';
 import { ExpenseModule } from '../pages/expenses/expenses.module';
 import { FollowUpModule } from '../pages/follow-up/follow-up.module';
 import { EnquiryModule } from '../pages/enquiry/enquiry.module';
+import { AppointmentsModule } from '../pages/appointments/appointments.module';
 import { ProductsFAQModule } from '../pages/products-faq/products-faq.module';
 
 import { Loader,HTTPService, SharedService, ReasonCodeProvider, FilterProvider, PromptService, CommonHelper } from '../providers/';
@@ -30,6 +33,8 @@ import { IonicStorageModule } from '@ionic/storage';
     HomePage
   ],
   imports: [
+    BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(PSApp),
     LoginModule,
     CustomerMgmtModule,
@@ -43,6 +48,7 @@ import { IonicStorageModule } from '@ionic/storage';
     FollowUpModule,
     EnquiryModule,
     ProductsFAQModule,
+    AppointmentsModule,
     IonicImageLoader.forRoot(),
     IonicStorageModule.forRoot()
   ],

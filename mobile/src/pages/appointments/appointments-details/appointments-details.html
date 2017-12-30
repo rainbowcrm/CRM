@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Appointment</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addToCalendar()">
+        <ion-icon name="calendar"></ion-icon>
+      </button>
+    </ion-buttons>
+ </ion-navbar>
+  
+
+</ion-header>
+
+
+<ion-content padding>
+
+<ion-card>
+    <ion-card-header>
+     {{appointment.DocNo}}
+    </ion-card-header>
+    <ion-card-content>
+      <div class="item-description"><div>Visit To</div><div>{{visitType}}</div></div>
+      <div class="item-description" *ngIf="appointment.Template" ><div>Template</div><div>{{appointment.Template}}</div></div>
+      <div class="item-description" *ngIf="appointment.Location.Name"><div>Location</div><div>{{appointment.Location.Name}}</div></div>
+      <div class="item-description" *ngIf="appointment.PartyNameWithType"><div>Visiting</div><div>{{appointment.PartyNameWithType}}</div></div>
+      <div class="item-description" *ngIf="appointment.Manager.UserId"><div>Manager</div><div>{{appointment.Manager.UserId}}</div></div>
+      <div class="item-description"><div>Status</div><div>{{status}}</div></div>
+      <div class="item-description" *ngIf="appointment.Agent.UserId"><div>Agent</div><div>{{appointment.Agent.UserId}}</div></div>
+    </ion-card-content>   
+</ion-card>
+<ion-card>
+
+  <ion-item>
+    <h2>Last Visit</h2>
+    <p>{{appointment.Description}}</p>
+  </ion-item>
+
+
+  <ion-card-content>
+    <div><strong>Last Visited:</strong>{{appointment.LastUpdateDate}}</div>
+    <div><strong>Last Feedback:</strong>{{appointment.FeedBack}}</div>
+    <div><strong>Last Agent Remark:</strong>{{appointment.AgentRemarks}}</div>
+    <div><strong>Last Manager Remark:</strong>{{appointment.ManagerRemarks}}</div>
+    
+  </ion-card-content>
+
+</ion-card>
+</ion-content>

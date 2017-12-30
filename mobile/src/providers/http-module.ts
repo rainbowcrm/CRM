@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Loader } from './';
-import { Http, Response,Headers, RequestOptions } from '@angular/http';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { Observable }     from 'rxjs/Observable';
@@ -15,11 +15,12 @@ import { Observable }     from 'rxjs/Observable';
 export class HTTPService {
   private url; 
   private authToken;
-  constructor(public http: Http, private loader: Loader) {
+  constructor(public http: HttpClient, private loader: Loader) {
     //this.url = 'http://119.18.52.32:8080/primuscrm/rdscontroller';
-    this.url = 'http://localhost:8080/rdscontroller';
+    //this.url = 'http://10.0.2.2:10210/controller';
+    this.url = 'http://localhost:10210/controller';
   }
-  processServerRequest (restType:string,data:any,auth?:boolean, isSilent?:boolean): Observable<any[]> {
+  processServerRequest (restType:string,data:any,auth?:boolean, isSilent?:boolean): Observable<any> {
     if(!isSilent){
       this.loader.presentLoader();
     }
@@ -27,19 +28,18 @@ export class HTTPService {
       data.authToken = this.authToken;
       data.AuthToken = this.authToken;
     }
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
     switch(restType){
       case "get": return this.http.get(this.url)
                     .map(this.extractData.bind(this))
                     .catch(this.handleError.bind(this));
-      case "post": return this.http.post(this.url, data, options)
+      case "post": return this.http.post(this.url, data, {headers})
                     .map(this.extractData.bind(this))
                     .catch(this.handleError.bind(this));
     }
     
   }
-  processCustomUrlServerRequest (url:string, restType:string,data:any,auth?:boolean, isSilent?:boolean): Observable<any[]> {
+  processCustomUrlServerRequest (url:string, restType:string,data:any,auth?:boolean, isSilent?:boolean): Observable<any> {
     var newUrl = this.url+"?"+url;
     if(auth){
       data.authToken = this.authToken;
@@ -47,13 +47,12 @@ export class HTTPService {
     if(!isSilent){
       this.loader.presentLoader();
     }
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
     switch(restType){
       case "get": return this.http.get(newUrl)
                     .map(this.extractData.bind(this))
                     .catch(this.handleError.bind(this));
-      case "post": return this.http.post(newUrl, data, options)
+      case "post": return this.http.post(newUrl, data, {headers})
                     .map(this.extractData.bind(this))
                     .catch(this.handleError.bind(this));
     }
@@ -67,7 +66,7 @@ export class HTTPService {
   }
   private extractData(res: any) {
     this.loader.dismissLoader();
-    return JSON.parse(res._body) || { };
+    return res || { };
   }
   private handleError (error: any) {
     // In a real world app, we might use a remote logging infrastructure

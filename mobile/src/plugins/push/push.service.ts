@@ -21,7 +21,6 @@ export class PushService {
   init(){
     const options: PushOptions = {
        android: {
-         senderID: '81761108581'
        },
        ios: {
          alert: 'true',
