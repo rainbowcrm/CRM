@@ -133,4 +133,8 @@ export class AppointemntHomePage {
     this.navCtrl.push(AppointemntDetailsPage, {"appointment": appt});
   }
 
+  newAppointment(){
+    
+  }
+
 }

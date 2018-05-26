@@ -43,10 +43,6 @@ export class SalesLeadDetails {
        this.emailFailed();
        return ;
     }
-    if(response.dataObject.length == 0){
-       this.emailFailed();
-       return ;
-    }
     let toast = this.toastCtrl.create({
       message: 'Email sent',
       duration: 2000,

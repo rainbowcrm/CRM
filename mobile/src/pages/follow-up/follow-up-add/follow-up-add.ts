@@ -28,13 +28,14 @@ export class FollowUpAddPage {
     private params: NavParams, private rcp: ReasonCodeProvider, private sharedData: SharedService,
     private storage: Storage, private datePipe: DatePipe) {
       this.model = new FollowUp();
+      this.model.NextFollwup = "";
       this.model.ResultReason = new ResultReason();
       this.model.Result = new Result();
       this.model.Lead = new Lead();
       this.model.ConfidenceLevel = new ConfidenceLevel();
       this.model.CommunicationMode = new CommunicationMode();
       this.rcp.finiteValueSource$.subscribe(res => {this.updateFiniteValues(res)});
-      this.rcp.getFiniteValues();
+      this.rcp.getFiniteValues(true);
       this.rcp.reasonCodeSource$.subscribe(res => {this.updateReasonCodes(res)});
       this.rcp.getReasonCodes("SLSLDREAS");
     }

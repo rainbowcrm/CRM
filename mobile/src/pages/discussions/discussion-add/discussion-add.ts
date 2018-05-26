@@ -25,7 +25,7 @@ export class DiscussionAddPage {
       this.model.NewTopic = new Topic();
       this.model.NewTopic.PortfolioType = new PortFolioType();
       this.rcp.finiteValueSource$.subscribe(res => {this.updateReasonCodes(res)});
-      this.rcp.getFiniteValues();
+      this.rcp.getFiniteValues(true);
     }
 
   updateReasonCodes(reasonCodes){

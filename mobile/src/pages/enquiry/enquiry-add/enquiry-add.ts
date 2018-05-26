@@ -30,7 +30,7 @@ export class EnquiryAddPage {
       this.model.EnquiryType = new Code();
       this.newEnquiryObject = new NewEnquiry();
       this.rcp.finiteValueSource$.subscribe(res => {this.updateReasonCodes(res)});
-      this.rcp.getFiniteValues();
+      this.rcp.getFiniteValues(true);
     }
 
   updateReasonCodes(reasonCodes){

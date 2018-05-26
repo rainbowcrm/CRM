@@ -61,8 +61,8 @@ export class AppointemntDetailsPage {
   addToCalendar():void{
      var appDate = new Date(this.appointment.ApptDate+" "+this.appointment.Hh+":"+this.appointment.Mm);
      var appEndDate = new Date(this.appointment.ApptDate+" "+this.appointment.Hh+":"+this.appointment.Mm);
-     //need to check if its a full day event???
-     appEndDate.setMinutes(appEndDate.getMinutes() + 60);
+     var duration = parseFloat(this.appointment.Duration);
+     appEndDate.setMinutes(appEndDate.getMinutes() + duration);
      appEndDate = new Date(appEndDate);
      this.calendar.createEventInteractivelyWithOptions(this.appointment.DocNo, null, 'Appointment with '+this.appointment.PartyNameWithType+' at '+this.appointment.Location.Name, 
                                                         appDate, appEndDate);

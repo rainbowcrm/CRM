@@ -22,7 +22,7 @@ export class ReasonCodeItemPopOverPage {
     this.model = new ReasonCodeItem();
     this.item = this.navParam.get("item");
     this.rcp.finiteValueSource$.subscribe(res => {this.updateReasonCodes(res)});
-    this.rcp.getFiniteValues();
+    this.rcp.getFiniteValues(true);
   }
 
    updateReasonCodes(reasonCodes){

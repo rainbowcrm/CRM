@@ -22,7 +22,7 @@ export class LoginPage {
   constructor(public navCtrl: NavController,private http:HTTPService,
     private loader:Loader, private storage: Storage) {
       this.model.password="abc123";
-      this.model.username="chaitra@OMEGA";
+      this.model.username="manager@atstar";
       this.model.mobileLogin = true;
     }
 
@@ -31,7 +31,6 @@ export class LoginPage {
   }
 
   login():void{
-    //this.loader.presentLoader();
     this.errorMessage = null;
     let loginRequest = new LoginRequest();
     loginRequest.pageID = 'login';
@@ -42,7 +41,6 @@ export class LoginPage {
   }
 
   loginSuccess(response):void{
-    this.loader.dismissLoader();
     if(Object.keys(response).length == 0){
        this.errorMessage = "Username or password is incorrect"; 
        return ;
@@ -57,7 +55,6 @@ export class LoginPage {
 
   loginError(error){
     this.http.setAuthToken(null);
-    //this.loader.dismissLoader();
     this.errorMessage = "Username or password is incorrect";
   }
  

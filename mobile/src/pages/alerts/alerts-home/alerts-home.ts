@@ -30,7 +30,7 @@ export class AlertsHomePage {
      this.model = new Alert();
      this.model.Owner = new Owner();
      this.rcp.finiteValueSource$.subscribe(res => {this.updateReasonCodes(res)});
-     this.rcp.getFiniteValues();
+     this.rcp.getFiniteValues(true);
      this.filter.filtersForPage$.subscribe(res => {this.updateFilters(res)});
      this.filter.filtersDetails$.subscribe(res => {this.updateFilterValues(res)});
      this.filter.filtersSave$.subscribe(res => {this.updateFilterAfterSave()});

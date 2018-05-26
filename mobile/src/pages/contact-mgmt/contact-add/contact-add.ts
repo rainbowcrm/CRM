@@ -24,7 +24,7 @@ export class ContactAddPage {
       this.model = new Contact();
       this.model.ContactType = new ContactType();
       this.rcp.finiteValueSource$.subscribe(res => {this.updateReasonCodes(res)});
-      this.rcp.getFiniteValues();
+      this.rcp.getFiniteValues(true);
     }
 
   updateReasonCodes(reasonCodes){
